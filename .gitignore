@@ -330,4 +330,5 @@ ASALocalRun/
 .mfractor/
 
 # Custom
-dump.rdb
+*.rdb
+storage_engine/redis 3.2.100/loesoft_games_database__log
