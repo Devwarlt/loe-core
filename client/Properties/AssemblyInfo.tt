@@ -34,7 +34,7 @@
 		revision = defaultRevision;
 	}
 	
-	File.WriteAllText("../../../../Version.json", "{" + "\"major\":" + major + ", \"minor\":" + minor + ", \"build\":" + build + ", \"revision\":" + revision + "}");
+	File.WriteAllText("../../../../Version.json", "{ " + "\"major\":" + major + ", \"minor\":" + minor + ", \"build\":" + build + ", \"revision\":" + revision + " }");
 #>
 using System.Reflection;
 using System.Runtime.InteropServices;
