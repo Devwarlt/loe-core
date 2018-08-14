@@ -32,15 +32,11 @@ namespace LoESoft.Server.Properties
 
 	bool setDefault = false;
 
-    string output = File.ReadAllText(this.Host.ResolvePath("AssemblyInfo.cs"));
+	string path = "../../Version.json";
     
-	Regex pattern = new Regex("AssemblyVersion\\(\"(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<revision>\\d+)\\.(?<build>\\d+)\"\\)");
-    
-	MatchCollection matches = pattern.Matches(output);
-    
-	if(matches.Count == 1)
+	if(File.Exists(path) && !setDefault)
     {
-		string[] versionData = File.ReadAllText("../../Version.json").Replace("{", null).Replace("}", null).Replace(" ", null).Split(',');
+		string[] versionData = Regex.Replace(File.ReadAllText(path).Replace("{", null).Replace("}", null).Replace(" ", null), @"\r\n?|\n", string.Empty).Split(',');
 		
 		major = int.Parse(versionData[0].Split(':')[1]);
 		minor = int.Parse(versionData[1].Split(':')[1]);
@@ -52,8 +48,7 @@ namespace LoESoft.Server.Properties
 
 		revision++;
     }
-	
-	if (setDefault)
+	else
 	{
 		major = defaultMajor;
 		minor = defaultMinor;
@@ -61,7 +56,7 @@ namespace LoESoft.Server.Properties
 		revision = defaultRevision;
 	}
 	
-	File.WriteAllText("../../Version.json", "{ " + "\"major\":" + major + ", \"minor\":" + minor + ", \"build\":" + build + ", \"revision\":" + revision + " }");
+	File.WriteAllText(path, "{\n" + "\t\"major\": " + major + ",\n\t\"minor\":" + minor + ",\n\t\"build\": " + build + ",\n\t\"revision\": " + revision + "\n}");
 
             
             #line default
@@ -82,56 +77,56 @@ using System.Resources;
 [assembly: Guid(""728a3882-9a81-4556-862d-c5f356679289"")]
 [assembly: AssemblyVersion(""");
             
-            #line 53 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+            #line 48 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.major));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 53 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+            #line 48 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.minor));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 53 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+            #line 48 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.build));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 53 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+            #line 48 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.revision));
             
             #line default
             #line hidden
             this.Write("\")]\r\n[assembly: AssemblyFileVersion(\"");
             
-            #line 54 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+            #line 49 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.major));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 54 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+            #line 49 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.minor));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 54 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+            #line 49 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.build));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 54 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+            #line 49 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.revision));
             
             #line default
@@ -155,7 +150,7 @@ using System.Resources;
             }
         }
         
-        #line 56 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
+        #line 51 "C:\LoESoft\Github\loe-core\server\Properties\AssemblyInfo.tt"
 
     int major = 0;
     int minor = 0;
