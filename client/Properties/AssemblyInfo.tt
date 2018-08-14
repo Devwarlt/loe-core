@@ -3,7 +3,7 @@
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Text.RegularExpressions" #>
 <#
-	bool setDefault = true;
+	bool setDefault = false;
 
 	string path = "../../../../Version.json";
     
