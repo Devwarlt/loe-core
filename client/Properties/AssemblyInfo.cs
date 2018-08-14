@@ -2,16 +2,16 @@
 using System.Runtime.InteropServices;
 using System.Resources;
 
-[assembly: AssemblyTitle("LoESoft - GameServer")]
-[assembly: AssemblyProduct("GameServer")]
+[assembly: AssemblyTitle("LoE Realm")]
+[assembly: AssemblyProduct("GameClient")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyDescription("A LoE Realm game server application.")]
+[assembly: AssemblyDescription("A LoE Realm game client application.")]
 [assembly: AssemblyCompany("LoESoft Games")]
 [assembly: AssemblyCopyright("Copyright © LoESoft Games 2018")]
 [assembly: AssemblyTrademark("LoE Realm")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("728a3882-9a81-4556-862d-c5f356679289")]
+[assembly: Guid("72f9a18e-783d-427e-be60-264a25f83d72")]
 [assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyFileVersion("0.0.0.0")]
 [assembly: NeutralResourcesLanguage( "en-US" )]

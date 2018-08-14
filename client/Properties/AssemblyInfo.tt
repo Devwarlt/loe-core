@@ -3,23 +3,40 @@
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Text.RegularExpressions" #>
 <#
+	bool setDefault = false;
+
     string output = File.ReadAllText(this.Host.ResolvePath("AssemblyInfo.cs"));
-    Regex pattern = new Regex("AssemblyVersion\\(\"(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<revision>\\d+)\\.(?<build>\\d+)\"\\)");
-    MatchCollection matches = pattern.Matches(output);
-    if( matches.Count == 1 )
+    
+	Regex pattern = new Regex("AssemblyVersion\\(\"(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<revision>\\d+)\\.(?<build>\\d+)\"\\)");
+    
+	MatchCollection matches = pattern.Matches(output);
+    
+	if(matches.Count == 1)
     {
-        major = Convert.ToInt32(matches[0].Groups["major"].Value);
-        minor = Convert.ToInt32(matches[0].Groups["minor"].Value);
-        build = Convert.ToInt32(matches[0].Groups["build"].Value);
-        revision = Convert.ToInt32(matches[0].Groups["revision"].Value + 1);
+		string[] versionData = File.ReadAllText("../../../../Version.json").Replace("{", null).Replace("}", null).Replace(" ", null).Split(',');
+		
+		major = int.Parse(versionData[0].Split(':')[1]);
+		minor = int.Parse(versionData[1].Split(':')[1]);
+		build = int.Parse(versionData[2].Split(':')[1]);
+		revision = int.Parse(versionData[3].Split(':')[1]);
 
-        if( this.Host.ResolveParameterValue("-","-","BuildConfiguration") == "Release")
-            build++;
+        if(this.Host.ResolveParameterValue("-","-","BuildConfiguration") == "Release")
+			minor++;
+
+		revision++;
     }
+	
+	if (setDefault)
+	{
+		major = defaultMajor;
+		minor = defaultMinor;
+		build = defaultBuild;
+		revision = defaultRevision;
+	}
+	
+	File.WriteAllText("../../../../Version.json", "{" + "\"major\":" + major + ", \"minor\":" + minor + ", \"build\":" + build + ", \"revision\":" + revision + "}");
 #>
-
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Resources;
 
@@ -33,13 +50,17 @@ using System.Resources;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("72f9a18e-783d-427e-be60-264a25f83d72")]
-[assembly: AssemblyVersion("<#= this.major #>.<#= this.minor #>.<#= this.revision #>.<#= this.build #>")]
-[assembly: AssemblyFileVersion("<#= this.major #>.<#= this.minor #>.<#= this.revision #>.<#= this.build #>")]
-[assembly: NeutralResourcesLanguageAttribute( "en-US" )]
-
+[assembly: AssemblyVersion("<#= this.major #>.<#= this.minor #>.<#= this.build #>.<#= this.revision #>")]
+[assembly: AssemblyFileVersion("<#= this.major #>.<#= this.minor #>.<#= this.build #>.<#= this.revision #>")]
+[assembly: NeutralResourcesLanguage( "en-US" )]
 <#+
     int major = 0;
-    int minor = 1;
-    int build = 1;
+    int minor = 0;
+    int build = 0;
     int revision = 0;
+
+	int defaultMajor = 0;
+	int defaultMinor = 1;
+	int defaultBuild = 1;
+	int defaultRevision = 0;
 #>
