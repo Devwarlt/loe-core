@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Server", "server\LoESoft.Server.csproj", "{728A3882-9A81-4556-862D-C5F356679289}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Client", "client\LoESoft.Client.csproj", "{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{728A3882-9A81-4556-862D-C5F356679289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{728A3882-9A81-4556-862D-C5F356679289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728A3882-9A81-4556-862D-C5F356679289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{728A3882-9A81-4556-862D-C5F356679289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {445CE6CE-D91B-424F-AB5D-762D42A09D86}
+	EndGlobalSection
+EndGlobal
