@@ -66,18 +66,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="client\Client.cs" />
     <Compile Include="GameServer.cs" />
+    <Compile Include="networking\IPacket.cs" />
+    <Compile Include="networking\NetworkHandler.cs" />
     <Compile Include="networking\NetworkManager.cs" />
+    <Compile Include="networking\packet\client\ClientPacket.cs" />
+    <Compile Include="networking\packet\client\packets\Ping.cs" />
+    <Compile Include="networking\packet\Packet.cs" />
+    <Compile Include="networking\packet\PacketHandler.cs" />
+    <Compile Include="networking\packet\PacketID.cs" />
+    <Compile Include="networking\packet\PacketData.cs" />
+    <Compile Include="networking\packet\server\packets\Pong.cs" />
+    <Compile Include="networking\packet\server\ServerPacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
+    <Compile Include="settings\Settings.cs" />
+    <Compile Include="utils\IO.cs" />
+    <Compile Include="utils\TCPServerSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Version.json" />
+    <Content Include="Version.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="loesoft.ico" />

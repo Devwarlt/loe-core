@@ -1,6 +1,10 @@
 ﻿using LoESoft.Log;
+using LoESoft.Server.networking;
+using LoESoft.Server.settings;
+using LoESoft.Server.utils;
 using System;
 using System.Reflection;
+using System.Threading;
 
 namespace LoESoft.Server
 {
@@ -9,19 +13,46 @@ namespace LoESoft.Server
         // Assembly's Data
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
         public static string _version => $"{Assembly.GetExecutingAssembly().GetName().Version}";
-        
+
         // Log's Type
         public static Info _info => new Info(_name);
         public static Warn _warn => new Warn(_name);
         public static Error _error => new Error(_name);
 
+        // Settings
+        public static Settings _settings => IO.Import<Settings>("../../", "Settings");
+
+        // Networking
+        private static NetworkManager _networkManager { get; set; }
+
         public static void Main(string[] args)
         {
-            Console.Title = $"{_name} - Build: {_version}";
+            try
+            {
+                Console.Title = $"{_name} - Build: {_version}";
 
-            while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
+                _info.Write("Game Server is loading...");
 
-            Environment.Exit(0);
+                _networkManager = new NetworkManager(_settings._tcpServer);
+                _networkManager.Start();
+
+                _info.Write("Game Server is loading... OK!");
+
+                while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
+
+                _networkManager.Stop();
+
+                _info.Write("Game Server has been stopped.");
+
+                Thread.Sleep(2 * 1000);
+
+                Environment.Exit(0);
+            }
+            catch (Exception e)
+            {
+                _error.Write(e.ToString());
+                _error.Export();
+            }
         }
     }
 }

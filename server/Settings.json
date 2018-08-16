@@ -1,0 +1,6 @@
+{
+  "_tcpServer": {
+    "_port": 7171,
+    "_maxClients": 100
+  }
+}
