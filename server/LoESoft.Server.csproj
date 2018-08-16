@@ -79,11 +79,7 @@
     <Compile Include="networking\packet\PacketData.cs" />
     <Compile Include="networking\packet\server\packets\Pong.cs" />
     <Compile Include="networking\packet\server\ServerPacket.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AssemblyInfo.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="settings\Settings.cs" />
     <Compile Include="utils\IO.cs" />
     <Compile Include="utils\TCPServerSettings.cs" />
@@ -103,12 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Properties\AssemblyInfo.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

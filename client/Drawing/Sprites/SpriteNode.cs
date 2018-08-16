@@ -10,7 +10,7 @@ namespace LoESoft.Client.Drawing.Sprites
     {
         public List<SpriteNode> ChildList { get; private set; }
         public Dictionary<Event, EventHandler> EventDictionary { get; private set; }
-        
+
         public SpriteNode ParentSprite { get; set; }
 
         public Rectangle SpriteRectangle
@@ -18,18 +18,18 @@ namespace LoESoft.Client.Drawing.Sprites
             get { return new Rectangle(StageX, StageY, Width, Height); }
         }
 
-        public int X { get;  set; }
-        public int Y { get;  set; }
+        public int X { get; set; }
+        public int Y { get; set; }
         public int StageX
         {
             get { return (ParentSprite != null) ? ParentSprite.X + X : X; }
         }
         public int StageY
         {
-            get { return (ParentSprite != null) ?ParentSprite.Y + Y : Y; }
+            get { return (ParentSprite != null) ? ParentSprite.Y + Y : Y; }
         }
 
-        public int Width { get;  set; }
+        public int Width { get; set; }
         public int Height { get; set; }
 
         public int Index { get; set; }
@@ -56,13 +56,14 @@ namespace LoESoft.Client.Drawing.Sprites
             foreach (var i in ChildList.ToArray())
                 i.Update(gameTime);
 
-            foreach(var i in EventDictionary)
+            foreach (var i in EventDictionary)
             {
                 if (_eventsHandler.Handle(this, i.Key) && IsInvokable)
                 {
                     i.Value?.Invoke(this, new EventArgs());
                     SetInvokables(false);
-                } else
+                }
+                else
                 {
                     SetInvokables(true);
                 }

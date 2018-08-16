@@ -12,7 +12,7 @@ namespace LoESoft.Client.Drawing.Events
 
             if (!(currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed))
                 return false;
-            
+
             return true;
         }
 

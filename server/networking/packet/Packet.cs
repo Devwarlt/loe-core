@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LoESoft.Server.networking.packet
 {
-    public abstract class Packet
+    internal abstract class Packet
     {
         public static Dictionary<PacketID, Packet> ClientMessages = new Dictionary<PacketID, Packet>();
         public static Dictionary<PacketID, IPacket> ClientPacketHandlers = new Dictionary<PacketID, IPacket>();

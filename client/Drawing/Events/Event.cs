@@ -17,7 +17,7 @@ namespace LoESoft.Client.Drawing.Events
         MouseState previousMouse;
         MouseState currentMouse;
         public static Rectangle MouseRectangle { get; private set; }
-        
+
         public bool Handle(SpriteNode node, Event e)
         {
             previousMouse = currentMouse;

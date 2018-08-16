@@ -1,4 +1,4 @@
 ﻿namespace LoESoft.Server.networking.packet.client
 {
-    public abstract class ClientPacket : Packet { }
+    internal abstract class ClientPacket : Packet { }
 }

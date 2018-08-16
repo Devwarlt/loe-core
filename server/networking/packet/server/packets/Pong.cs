@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Server.networking.packet.server.packets
 {
-    public class Pong : ServerPacket
+    internal class Pong : ServerPacket
     {
         public int Value { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace LoESoft.Server.networking.packet.client.packets
 {
-    public class Ping : ClientPacket
+    internal class Ping : ClientPacket
     {
         public int Value { get; set; }
 
