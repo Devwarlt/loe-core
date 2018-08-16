@@ -35,6 +35,8 @@ namespace LoESoft.Client.Drawing.Sprites
         public int Width { get;  set; }
         public int Height { get; set; }
 
+        public int Index { get; set; }
+
         public bool Visible = true;
         public bool IsInvokable = true;
 
@@ -62,18 +64,22 @@ namespace LoESoft.Client.Drawing.Sprites
                 if (_eventsHandler.Handle(this, i.Key) && IsInvokable)
                 {
                     i.Value?.Invoke(this, new EventArgs());
-                    SetParentInvokable(false);
+                    SetInvokables(false);
                 } else
                 {
-                    SetParentInvokable(true);
+                    SetInvokables(true);
                 }
             }
         }
 
-        protected void SetParentInvokable(bool val)
+        protected void SetInvokables(bool val)
         {
             if (ParentSprite != null && ParentSprite.IsInvokable != val)
                 ParentSprite.IsInvokable = val;
+
+            foreach (var i in ParentSprite.ChildList)
+                if (i.Index < Index)
+                    i.IsInvokable = val;
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -89,6 +95,7 @@ namespace LoESoft.Client.Drawing.Sprites
         public void AddChild(SpriteNode child)
         {
             child.ParentSprite = this;
+            child.Index = ChildList.Count + 1;
             ChildList.Add(child);
         }
 

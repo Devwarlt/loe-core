@@ -32,6 +32,9 @@ namespace LoESoft.Client.Drawing.Events
             switch (e)
             {
                 case Event.CLICKLEFT: return HandleMouseClickLeft(node);
+                case Event.CLICKRIGT: return HandleMouseClickRight(node);
+                case Event.MOUSEOVER: return HandleMouseOver(node);
+                case Event.MOUSEOUT: return HandleMouseOut(node);
                 default: return false;
             }
         }
