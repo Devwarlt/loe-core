@@ -32,7 +32,11 @@ namespace LoESoft.Log
             Console.ResetColor();
         }
 
-        public void Export() => File.WriteAllLines($"{_type}/[{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year} at {_time[1].Replace(":", ".")}] {_type}.txt", _data);
+        public void Export()
+        {
+            Directory.CreateDirectory(_type);
+            File.WriteAllLines($"{_type}/[{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year} at {_time[1].Replace(":", ".")}] {_type}.txt", _data);
+        }
     }
 
     public class Error : Log
