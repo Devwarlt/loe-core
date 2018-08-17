@@ -1,4 +1,4 @@
-﻿using LoESoft.Server.networking.packet.server;
+﻿using LoESoft.Server.networking.packet.client;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -18,12 +18,10 @@ namespace LoESoft.Server.networking.packet
         static Packet()
         {
             foreach (var i in typeof(Packet).Assembly.GetTypes())
-                if (typeof(Packet).IsAssignableFrom(i) && !i.IsAbstract)
+                if (typeof(Packet).IsAssignableFrom(i) && !i.IsAbstract && typeof(IClientPacket).IsAssignableFrom(i))
                 {
                     Packet packet = (Packet)Activator.CreateInstance(i);
-
-                    if (!(packet is ServerPacket))
-                        ClientMessages.Add(packet.ID, packet);
+                    ClientMessages.Add(packet.ID, packet);
                 }
         }
 

@@ -14,7 +14,7 @@ namespace LoESoft.Server.networking
         public static Warn _warn => new Warn(nameof(NetworkManager));
         public static Error _error => new Error(nameof(NetworkManager));
 
-        public static ConcurrentBag<Client> _connections = new ConcurrentBag<Client>();
+        internal static ConcurrentBag<Client> _connections = new ConcurrentBag<Client>();
 
         private TCPServerSettings _tcpServerSettings { get; set; }
         private Socket _socket { get; set; }
@@ -40,16 +40,25 @@ namespace LoESoft.Server.networking
         {
             _info.Write("Network Manager has been stopped.");
 
+            foreach (var connection in _connections)
+                connection.Dispose();
+
+            _socket.Dispose();
             _socket.Close();
         }
 
         private void AcceptCallback(IAsyncResult asyncResult)
         {
-            Socket socket = _socket.EndAccept(asyncResult);
+            Socket socket = null;
 
-            _connections.Add(new Client(socket));
-
-            _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+            try {
+                socket = _socket.EndAccept(asyncResult);
+                _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+            }
+            catch (ObjectDisposedException) { }
+            
+            if (socket != null)
+                _connections.Add(new Client(socket));
         }
     }
 }
