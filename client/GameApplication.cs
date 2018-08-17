@@ -1,5 +1,7 @@
-﻿using LoESoft.Client.Drawing.Events;
+﻿using LoESoft.Client.gameuser;
+using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites;
+using LoESoft.Log;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,20 +11,27 @@ namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static Info _info => new Info(nameof(GameApplication));
+        public static Warn _warn => new Warn(nameof(GameApplication));
+        public static Error _error => new Error(nameof(GameApplication));
+        public static int WIDTH => 600;
+        public static int HEIGHT => 600;
 
-        Sprite testSprite;
-        Sprite testSprite1;
+        public GameUser _gameUser { get; set; }
+
+        GraphicsDeviceManager _graphics;
+        SpriteBatch _spriteBatch;
+        Sprite _testSprite;
+        Sprite _testSprite1;
 
         public GameApplication()
         {
-            graphics = new GraphicsDeviceManager(this);
-
-            graphics.PreferredBackBufferHeight = 600;
-            graphics.PreferredBackBufferWidth = 600;
+            _graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferHeight = WIDTH,
+                PreferredBackBufferWidth = HEIGHT
+            };
             IsMouseVisible = true;
-
             Content.RootDirectory = "Content";
         }
 
@@ -30,17 +39,16 @@ namespace LoESoft.Client
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            testSprite = new Sprite(10, 10, 100, 100);
-            testSprite1 = new Sprite(10, 10, 100, 100);
+            _testSprite = new Sprite(10, 10, 100, 100);
+            _testSprite1 = new Sprite(10, 10, 100, 100);
 
-            testSprite1.AddEventListener(Event.CLICKLEFT, Click1);
-            testSprite.AddEventListener(Event.CLICKLEFT, Click);
+            _testSprite1.AddEventListener(Event.CLICKLEFT, Click1);
+            _testSprite.AddEventListener(Event.CLICKLEFT, Click);
 
-            testSprite.AddChild(testSprite1);
+            _testSprite.AddChild(_testSprite1);
         }
-
         private void Click(object o, EventArgs e)
         {
             Console.WriteLine("Clicked");
@@ -49,6 +57,7 @@ namespace LoESoft.Client
         private void Click1(object o, EventArgs e)
         {
             Console.WriteLine("Clicked1");
+            _info.Write("Dispatching 'PING' packet to the server!");
         }
 
         protected override void UnloadContent() { }
@@ -58,7 +67,7 @@ namespace LoESoft.Client
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            testSprite.Update(gameTime);
+            _testSprite.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -67,9 +76,9 @@ namespace LoESoft.Client
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            testSprite.Draw(spriteBatch);
-            spriteBatch.End();
+            _spriteBatch.Begin();
+            _testSprite.Draw(_spriteBatch);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
