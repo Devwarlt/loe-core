@@ -1,6 +1,7 @@
 ﻿using LoESoft.Log;
 using System;
 using System.Reflection;
+using System.Threading;
 
 namespace LoESoft.Client
 {
@@ -30,7 +31,8 @@ namespace LoESoft.Client
                 _info.Write("An error occurred!");
 
                 _error.Write(e.ToString());
-                _error.Export();
+
+                Thread.Sleep(100);
 
                 _warn.Write("Press 'ESC' to close...");
 
