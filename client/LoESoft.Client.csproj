@@ -47,6 +47,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetReader.cs" />
+    <Compile Include="Assets\XmlReader.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />
