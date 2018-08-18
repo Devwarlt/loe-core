@@ -72,12 +72,15 @@ namespace LoESoft.Client.Drawing.Sprites
 
         protected void SetInvokables(bool val)
         {
-            if (ParentSprite != null && ParentSprite.IsInvokable != val)
-                ParentSprite.IsInvokable = val;
+            if (ParentSprite != null)
+            {
+                if (ParentSprite.IsInvokable != val)
+                    ParentSprite.IsInvokable = val;
 
-            foreach (var i in ParentSprite.ChildList)
-                if (i.Index < Index)
-                    i.IsInvokable = val;
+                foreach (var i in ParentSprite.ChildList.ToArray())
+                    if (i.Index < Index)
+                        i.IsInvokable = val;
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

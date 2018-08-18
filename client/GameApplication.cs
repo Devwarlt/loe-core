@@ -1,11 +1,10 @@
-﻿using LoESoft.Client.gameuser;
-using LoESoft.Client.Drawing.Events;
-using LoESoft.Client.Drawing.Sprites;
-using LoESoft.Log;
+﻿using LoESoft.Log;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
+using LoESoft.Client.Assets;
+using LoESoft.Client.Core.game;
+using LoESoft.Client.Core.networking.gameuser;
 
 namespace LoESoft.Client
 {
@@ -21,8 +20,6 @@ namespace LoESoft.Client
 
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
-        Sprite _testSprite;
-        Sprite _testSprite1;
 
         public GameApplication()
         {
@@ -40,24 +37,12 @@ namespace LoESoft.Client
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            AssetReader.Load(Content);
 
-            _testSprite = new Sprite(10, 10, 100, 100);
-            _testSprite1 = new Sprite(10, 10, 100, 100);
-
-            _testSprite1.AddEventListener(Event.CLICKLEFT, Click1);
-            _testSprite.AddEventListener(Event.CLICKLEFT, Click);
-
-            _testSprite.AddChild(_testSprite1);
-        }
-        private void Click(object o, EventArgs e)
-        {
-            Console.WriteLine("Clicked");
-        }
-
-        private void Click1(object o, EventArgs e)
-        {
-            Console.WriteLine("Clicked1");
-            _info.Write("Dispatching 'PING' packet to the server!");
+            
+            //ScreenManager.Init should be loaded last
+            ScreenManager.Init();
         }
 
         protected override void UnloadContent() { }
@@ -67,7 +52,7 @@ namespace LoESoft.Client
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _testSprite.Update(gameTime);
+            ScreenManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -76,9 +61,7 @@ namespace LoESoft.Client
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin();
-            _testSprite.Draw(_spriteBatch);
-            _spriteBatch.End();
+            ScreenManager.Draw(_spriteBatch);
 
             base.Draw(gameTime);
         }

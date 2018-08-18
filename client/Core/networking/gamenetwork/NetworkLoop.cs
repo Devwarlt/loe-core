@@ -1,6 +1,6 @@
-﻿using LoESoft.Client.gameuser;
+﻿using LoESoft.Client.Core.networking.gameuser;
 
-namespace LoESoft.Client.gamenetwork
+namespace LoESoft.Client.Core.networking.gamenetwork
 {
     public class NetworkLoop
     {
