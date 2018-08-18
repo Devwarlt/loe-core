@@ -48,7 +48,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\AssetReader.cs" />
+    <Compile Include="Assets\AssetUtility.cs" />
     <Compile Include="Assets\XmlReader.cs" />
+    <Compile Include="Assets\XmlUtility.cs" />
     <Compile Include="Core\game\Screens.cs" />
     <Compile Include="Core\game\screens\TitleScreen.cs" />
     <Compile Include="Core\game\screens\WorldScreen.cs" />
@@ -103,9 +105,7 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </MonoGameContentReference>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

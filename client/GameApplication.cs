@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game;
 using LoESoft.Client.Core.networking.gameuser;
+using System;
 
 namespace LoESoft.Client
 {
@@ -35,8 +36,7 @@ namespace LoESoft.Client
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             
             AssetReader.Load(Content);
-            
-            //ScreenManager.Init should be loaded last
+            XmlReader.Load(Content);
             ScreenManager.Init();
         }
 
