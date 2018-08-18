@@ -5,14 +5,12 @@ using Microsoft.Xna.Framework.Input;
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game;
 using LoESoft.Client.Core.networking.gameuser;
+using System;
 
 namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        public static Info _info => new Info(nameof(GameApplication));
-        public static Warn _warn => new Warn(nameof(GameApplication));
-        public static Error _error => new Error(nameof(GameApplication));
         public static int WIDTH => 600;
         public static int HEIGHT => 600;
 
@@ -39,7 +37,7 @@ namespace LoESoft.Client
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             
             AssetReader.Load(Content);
-
+            XmlReader.Load(Content);
             
             //ScreenManager.Init should be loaded last
             ScreenManager.Init();

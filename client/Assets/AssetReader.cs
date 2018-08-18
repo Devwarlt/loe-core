@@ -11,11 +11,11 @@ namespace LoESoft.Client.Assets
 {
     public static class AssetReader
     {
-        public static Dictionary<string, ImageSet> _images;
+        public static Dictionary<string, ImageSet> Images;
 
         static AssetReader()
         {
-            _images = new Dictionary<string, ImageSet>();
+            Images = new Dictionary<string, ImageSet>();
         }
 
         public static void Load(ContentManager contentManager)
@@ -24,7 +24,7 @@ namespace LoESoft.Client.Assets
 
             //AddImageSet(contentManager, name, width of each individual sprite, height of individual sprite)
 
-            Console.WriteLine("Finished Loading Assets...");
+            Console.WriteLine("Assets Loaded!");
         }
 
         private static void AddImageSet(ContentManager contentManager, string filename, int w, int h)
@@ -32,7 +32,7 @@ namespace LoESoft.Client.Assets
             ImageSet imageSet = new ImageSet();
             imageSet.AddFromTexture(contentManager.Load<Texture2D>($"Sprites_Assets/{filename}"), w, h);
 
-            _images.Add(filename, imageSet);
+            Images.Add(filename, imageSet);
         }
 
         public static Texture2D Crop(this Texture2D texture, int x, int y, int width, int height)
@@ -53,20 +53,20 @@ namespace LoESoft.Client.Assets
 
     public class ImageSet
     {
-        private List<Texture2D> Images;
+        public Dictionary<KeyValuePair<int, int>, Texture2D> Images { get; private set; }
         
         public ImageSet()
         {
-            Images = new List<Texture2D>();
+            Images = new Dictionary<KeyValuePair<int, int>, Texture2D>();
         }
 
-        private void AddImage(Texture2D image) => Images.Add(image);
+        private void AddImage(int x, int y, Texture2D image) => Images.Add(new KeyValuePair<int, int>(x, y), image);
 
         public void AddFromTexture(Texture2D texture, int width, int height)
         {
             for (var y = 0; y < (texture.Height / height); y++)
                 for (var x = 0; x < (texture.Width / width); x++)
-                    AddImage(texture.Crop(x * width, y * height, width, height));
+                    AddImage(x, y, texture.Crop(x * width, y * height, width, height));
         }
     }
 }
