@@ -1,4 +1,8 @@
-﻿using System;
+﻿using NLog;
+using NLog.Config;
+using NLog.Targets;
+using System;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 
@@ -10,14 +14,36 @@ namespace LoESoft.Client
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
         public static string _version => $"{Assembly.GetExecutingAssembly().GetName().Version}";
 
-        public static Logger _log = LogManager.GetLogger("NLog");
+        // Log
+        public static Logger _log { get; } = LogManager.GetLogger(_name);
 
         [STAThread]
         static void Main()
         {
             Console.Title = $"{_name} Console - Build: {_version}";
 
-            LogManager.Configuration = new XmlLoggingConfiguration("NLog.config");
+            var time = DateTime.Now.ToString().Split(' ')[1];
+            var config = new LoggingConfiguration();
+            var developerLog = new ColoredConsoleTarget()
+            {
+                Name = "developer",
+                Layout = "[${var:time}] ${level} ${message} ${exception}"
+            };
+            var developerFile = new FileTarget()
+            {
+                Name = "developer-file",
+                FileName = "../../../../../logs/client/Build ${assembly-version}/${level}/${var:encoded-path}.txt",
+                Layout = "[${var:time}] ${level} ${message} ${exception}"
+            };
+            config.AddTarget(developerLog);
+            config.AddTarget(developerFile);
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, developerFile);
+            config.AddRuleForAllLevels(developerLog);
+            config.Variables["time"] = time;
+            config.Variables["encoded-path"] = DateTime.Now.ToString("G").Replace("/", "-").Replace(":", ".");
+
+            LogManager.Configuration = config;
+
             _log.Info("Game Client is loading...");
 
             try
@@ -30,6 +56,7 @@ namespace LoESoft.Client
             catch (Exception e)
             {
                 _log.Info("An error occurred!");
+
                 _log.Error(e.ToString());
 
                 Thread.Sleep(100);
