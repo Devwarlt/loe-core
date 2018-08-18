@@ -50,8 +50,19 @@ namespace LoESoft.Server
             }
             catch (Exception e)
             {
+                _info.Write("An error occurred!");
+                
                 _error.Write(e.ToString());
+
+                Thread.Sleep(100);
+
                 _error.Export();
+
+                _warn.Write("Press 'ESC' to close...");
+
+                while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
+
+                Environment.Exit(0);
             }
         }
     }

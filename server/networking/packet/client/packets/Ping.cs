@@ -1,4 +1,6 @@
 ﻿using LoESoft.Server.client;
+using LoESoft.Server.networking.packet.server.packets;
+using System;
 
 namespace LoESoft.Server.networking.packet.client.packets
 {
@@ -17,7 +19,10 @@ namespace LoESoft.Server.networking.packet.client.packets
 
         protected override void HandlePacket(Client client, Ping packet)
         {
-            throw new System.NotImplementedException();
+            client.SendPacket(new Pong()
+            {
+                Value = new Random().Next(0, 100)
+            });
         }
     }
 }

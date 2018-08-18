@@ -4,41 +4,42 @@ using LoESoft.Server.networking.packet;
 using LoESoft.Server.networking.packet.client;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Concurrent;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
 namespace LoESoft.Server.networking
 {
-    public class NetworkHandler
+    internal class NetworkHandler
     {
         public static Info _info => new Info(nameof(NetworkHandler));
         public static Warn _warn => new Warn(nameof(NetworkHandler));
         public static Error _error => new Error(nameof(NetworkHandler));
+        public static byte[] _buffer => new byte[1024];
 
         private Client _client { get; set; }
-        private ConcurrentBag<ClientPacket> _pendingPacket { get; set; }
         private Thread _packetProcessing { get; set; }
-
-        private byte[] _buffer => new byte[1024];
 
         public NetworkHandler(Client client)
         {
             _client = client;
-            _pendingPacket = new ConcurrentBag<ClientPacket>();
             _packetProcessing = new Thread(() =>
             {
-                while (_client._socket.Connected)
+                while (_client._socket != null)
                 {
-                    if (_pendingPacket.Count != 0)
-                        foreach (var i in _pendingPacket)
-                        {
-                            _pendingPacket.TryTake(out ClientPacket clientPacket);
-                            Packet.ClientPacketHandlers[clientPacket.ID].Handle(_client, clientPacket);
-                        }
+                    if (_client._socket.Connected)
+                    {
+                        if (_client._pendingPacket.Count != 0)
+                            foreach (var i in _client._pendingPacket)
+                            {
+                                _client._pendingPacket.TryDequeue(out ClientPacket clientPacket);
+                                Packet.ClientPacketHandlers[clientPacket.ID].Handle(_client, clientPacket);
+                            }
+                        else
+                            Thread.Sleep(100);
+                    }
                     else
-                        Thread.Sleep(100);
+                        break;
                 }
             });
         }
@@ -51,7 +52,13 @@ namespace LoESoft.Server.networking
             _packetProcessing.Start();
         }
 
-        private void ReceiveCallback(IAsyncResult asyncResult)
+        public void SendCallback(IAsyncResult asyncResult)
+        {
+            Socket socket = (Socket)asyncResult.AsyncState;
+            socket.EndSend(asyncResult);
+        }
+
+        public void ReceiveCallback(IAsyncResult asyncResult)
         {
             int received = ((Socket)asyncResult.AsyncState).EndReceive(asyncResult);
             byte[] dataBuff = new byte[received];
@@ -64,12 +71,12 @@ namespace LoESoft.Server.networking
             {
                 try
                 {
-                    // TODO: enqueue client packet to network pending messages.
                     PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
                     Packet packet = Packet.ClientMessages[packetData.PacketID];
                     packet.CreateInstance();
 
                     _info.Write($"New message received!\n{packet.ToString()}");
+                    _client._pendingPacket.Enqueue(packet as ClientPacket);
                 }
                 catch (Exception e)
                 {

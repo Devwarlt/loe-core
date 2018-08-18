@@ -47,17 +47,25 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Assets\AssetReader.cs" />
     <Compile Include="Assets\XmlReader.cs" />
+=======
+    <Compile Include="gameuser\GameUser.cs" />
+>>>>>>> 9c323483fb0c2f31e0f6a7a29a6e38669a6673a3
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />
     <Compile Include="Drawing\Sprites\Sprite.cs" />
     <Compile Include="GameApplication.cs" />
     <Compile Include="GameClient.cs" />
+    <Compile Include="gamenetwork\NetworkLoop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="LoESoft.Log">
+      <HintPath>..\dlls\LoESoft.Log.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TextTemplating.15.0, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.VisualStudio.TextTemplating.15.0.15.7.27703\lib\net45\Microsoft.VisualStudio.TextTemplating.15.0.dll</HintPath>
       <Private>True</Private>
