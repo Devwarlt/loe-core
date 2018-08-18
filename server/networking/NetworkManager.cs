@@ -1,5 +1,4 @@
-﻿using LoESoft.Log;
-using LoESoft.Server.client;
+﻿using LoESoft.Server.client;
 using LoESoft.Server.utils;
 using System;
 using System.Collections.Concurrent;
@@ -10,10 +9,6 @@ namespace LoESoft.Server.networking
 {
     public class NetworkManager
     {
-        public static Info _info => new Info(nameof(NetworkManager));
-        public static Warn _warn => new Warn(nameof(NetworkManager));
-        public static Error _error => new Error(nameof(NetworkManager));
-
         internal static ConcurrentBag<Client> _connections = new ConcurrentBag<Client>();
 
         private TCPServerSettings _tcpServerSettings { get; set; }
@@ -27,18 +22,18 @@ namespace LoESoft.Server.networking
 
         public void Start()
         {
-            _info.Write("Network Manager is loading...");
+            GameServer._log.Info("Network Manager is loading...");
 
             _socket.Bind(new IPEndPoint(IPAddress.Any, _tcpServerSettings._port));
             _socket.Listen(_tcpServerSettings._maxClients);
             _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
 
-            _info.Write("Network Manager is loading... OK!");
+            GameServer._log.Info("Network Manager is loading... OK!");
         }
 
         public void Stop()
         {
-            _info.Write("Network Manager has been stopped.");
+            GameServer._log.Info("Network Manager has been stopped.");
 
             foreach (var connection in _connections)
                 connection.Dispose();

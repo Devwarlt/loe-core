@@ -1,5 +1,4 @@
-﻿using LoESoft.Log;
-using LoESoft.Server.client;
+﻿using LoESoft.Server.client;
 using LoESoft.Server.networking.packet;
 using LoESoft.Server.networking.packet.client;
 using Newtonsoft.Json;
@@ -12,9 +11,6 @@ namespace LoESoft.Server.networking
 {
     internal class NetworkHandler
     {
-        public static Info _info => new Info(nameof(NetworkHandler));
-        public static Warn _warn => new Warn(nameof(NetworkHandler));
-        public static Error _error => new Error(nameof(NetworkHandler));
         public static byte[] _buffer => new byte[1024];
 
         private Client _client { get; set; }
@@ -75,14 +71,11 @@ namespace LoESoft.Server.networking
                     Packet packet = Packet.ClientMessages[packetData.PacketID];
                     packet.CreateInstance();
 
-                    _info.Write($"New message received!\n{packet.ToString()}");
+                    GameServer._log.Info($"New message received!\n{packet.ToString()}");
+
                     _client._pendingPacket.Enqueue(packet as ClientPacket);
                 }
-                catch (Exception e)
-                {
-                    _error.Write($"Data: {data}\n{e}");
-                    _error.Export();
-                }
+                catch (Exception e) { GameServer._log.Error($"Data: {data}\n{e}"); }
             }
         }
     }

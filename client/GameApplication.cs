@@ -1,7 +1,6 @@
 ﻿using LoESoft.Client.gameuser;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites;
-using LoESoft.Log;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,9 +10,6 @@ namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        public static Info _info => new Info(nameof(GameApplication));
-        public static Warn _warn => new Warn(nameof(GameApplication));
-        public static Error _error => new Error(nameof(GameApplication));
         public static int WIDTH => 600;
         public static int HEIGHT => 600;
 
@@ -51,13 +47,12 @@ namespace LoESoft.Client
         }
         private void Click(object o, EventArgs e)
         {
-            Console.WriteLine("Clicked");
+            GameClient._log.Info("Clicked");
         }
 
         private void Click1(object o, EventArgs e)
         {
-            Console.WriteLine("Clicked1");
-            _info.Write("Dispatching 'PING' packet to the server!");
+            GameClient._log.Info("Dispatching 'PING' packet to the server!");
         }
 
         protected override void UnloadContent() { }
