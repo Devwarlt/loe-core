@@ -1,6 +1,4 @@
-﻿using NLog;
-using NLog.Config;
-using System;
+﻿using System;
 using System.Reflection;
 using System.Threading;
 

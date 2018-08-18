@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace LoESoft.Client.gameuser
+namespace LoESoft.Client.Core.networking.gameuser
 {
     public class GameUser
     {

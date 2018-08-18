@@ -1,7 +1,6 @@
 ﻿using LoESoft.Server.networking;
 using LoESoft.Server.settings;
 using LoESoft.Server.utils;
-using NLog;
 using System;
 using System.Reflection;
 using System.Threading;
