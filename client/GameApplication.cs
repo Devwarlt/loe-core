@@ -5,6 +5,7 @@ using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game;
 using LoESoft.Client.Core.networking.gameuser;
 using System;
+using LoESoft.Client.Drawing.Sprites.TextDisplay;
 
 namespace LoESoft.Client
 {
@@ -37,6 +38,7 @@ namespace LoESoft.Client
             
             AssetReader.Load(Content);
             XmlReader.Load(Content);
+            TextDisplay.LoadSpriteFont(Content);
             ScreenManager.Init();
         }
 

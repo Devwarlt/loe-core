@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 
 namespace LoESoft.Client.Drawing.Sprites
 {
@@ -25,8 +24,6 @@ namespace LoESoft.Client.Drawing.Sprites
 
             if (SpriteTexture != null)
                 spriteBatch.Draw(SpriteTexture, SpriteRectangle, SpriteColor);
-            else
-                spriteBatch.DrawRectangle(SpriteRectangle, SpriteColor);
         }
     }
 }

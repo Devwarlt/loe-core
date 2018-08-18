@@ -59,6 +59,7 @@
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />
     <Compile Include="Drawing\Sprites\Sprite.cs" />
+    <Compile Include="Drawing\Sprites\Text\TextDisplay.cs" />
     <Compile Include="GameApplication.cs" />
     <Compile Include="GameClient.cs" />
     <Compile Include="Core\networking\gamenetwork\NetworkLoop.cs" />
