@@ -1,5 +1,4 @@
-﻿using LoESoft.Log;
-using LoESoft.Server.client;
+﻿using LoESoft.Server.client;
 using LoESoft.Server.networking.packet.client;
 using System;
 using System.Reflection;
@@ -9,8 +8,6 @@ namespace LoESoft.Server.networking.packet
 {
     internal abstract class PacketHandler<T> : IPacket where T : ClientPacket
     {
-        public static Info _info => new Info(nameof(PacketHandler<T>));
-
         public abstract PacketID ID { get; }
 
         protected abstract void HandlePacket(Client client, T packet);

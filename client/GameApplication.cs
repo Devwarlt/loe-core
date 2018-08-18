@@ -1,4 +1,3 @@
-﻿using LoESoft.Log;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -38,8 +37,6 @@ namespace LoESoft.Client
             
             AssetReader.Load(Content);
             XmlReader.Load(Content);
-            
-            //ScreenManager.Init should be loaded last
             ScreenManager.Init();
         }
 

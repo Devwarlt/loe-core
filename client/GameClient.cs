@@ -1,5 +1,4 @@
-﻿using LoESoft.Log;
-using System;
+﻿using System;
 using System.Reflection;
 using System.Threading;
 
@@ -11,30 +10,31 @@ namespace LoESoft.Client
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
         public static string _version => $"{Assembly.GetExecutingAssembly().GetName().Version}";
 
-        // Log's Type
-        public static Info _info => new Info(_name);
-        public static Warn _warn => new Warn(_name);
-        public static Error _error => new Error(_name);
+        public static Logger _log = LogManager.GetLogger("NLog");
 
         [STAThread]
         static void Main()
         {
+            Console.Title = $"{_name} Console - Build: {_version}";
+
+            LogManager.Configuration = new XmlLoggingConfiguration("NLog.config");
+            _log.Info("Game Client is loading...");
+
             try
             {
-                Console.Title = $"{_name} Console - Build: {_version}";
-
                 using (var game = new GameApplication())
                     game.Run();
+
+                _log.Info("Game Client is loading... OK!");
             }
             catch (Exception e)
             {
-                _info.Write("An error occurred!");
-
-                _error.Write(e.ToString());
+                _log.Info("An error occurred!");
+                _log.Error(e.ToString());
 
                 Thread.Sleep(100);
 
-                _warn.Write("Press 'ESC' to close...");
+                _log.Warn("Press 'ESC' to close...");
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
