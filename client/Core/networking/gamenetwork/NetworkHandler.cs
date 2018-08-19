@@ -28,11 +28,13 @@ namespace LoESoft.Client.Core.networking.gamenetwork
 
         public static void BeginConnect()
         {
+            NetworkManager._networkManagerDisposeSemaphore.WaitOne();
+
             _networkHandlerSemaphore.WaitOne();
 
             GameClient._log.Info("Connecting to the game server...");
 
-            while (!_socket.Connected)
+            while (!_socket.Connected && !NetworkManager._dispose)
             {
                 if (_socket == null)
                     break;
@@ -61,16 +63,25 @@ namespace LoESoft.Client.Core.networking.gamenetwork
                 catch (ObjectDisposedException) { }
                 catch (SocketException e)
                 {
-                    if (e.SocketErrorCode == SocketError.TimedOut)
-                        GameClient._log.Warn($"[Attempts: {_connectionAttempts}] Connection timeout. Retrying...");
-                    else
-                        GameClient._log.Warn($"[Attempts: {_connectionAttempts}] Connection failed. Retrying...");
+                    if (!NetworkManager._dispose)
+                    {
+                        if (e.SocketErrorCode == SocketError.TimedOut)
+                            GameClient._log.Warn($"[Attempts: {_connectionAttempts}] Connection timeout. Retrying...");
+                        else
+                            GameClient._log.Warn($"[Attempts: {_connectionAttempts}] Connection failed. Retrying...");
+                    }
                 }
             }
 
-            GameClient._log.Warn($"[Attempts: {_connectionAttempts}] The game client has been connected to IP '{_server._dns}' via port '{_server._port}'!");
+            if (!NetworkManager._dispose)
+            {
+                GameClient._log.Warn($"[Attempts: {_connectionAttempts}] The game client has been connected to IP '{_server._dns}' via port '{_server._port}'!");
+                GameClient._log.Info("Connecting to the game server... OK!");
 
-            _networkHandlerSemaphore.Release();
+                _networkHandlerSemaphore.Release();
+
+                NetworkManager._networkManagerDisposeSemaphore.Release();
+            }
         }
     }
 }

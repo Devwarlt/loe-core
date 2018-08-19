@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Vocations>
+  <Vocation id="0" name="Apprentice">
+    <Class>Vocation</Class>
+    <Description>Sample vocation description text.</Description>
+    <Texture type="animated">
+      <File>vocation</File>
+      <Index>0</Index>
+    </Texture>
+  </Vocation>
+</Vocations>

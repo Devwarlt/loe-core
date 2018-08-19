@@ -50,7 +50,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\AssetReader.cs" />
+    <Compile Include="Assets\Serialization\AssetSerialization.cs" />
     <Compile Include="Assets\AssetUtility.cs" />
+    <Compile Include="Assets\Serialization\AssetType.cs" />
+    <Compile Include="Assets\Serialization\AssetTypes\Utils\Utils.cs" />
+    <Compile Include="Assets\Serialization\AssetTypes\Vocation.cs" />
     <Compile Include="Assets\XmlReader.cs" />
     <Compile Include="Assets\XmlUtility.cs" />
     <Compile Include="Core\game\Screens.cs" />
@@ -122,7 +126,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Xmls\Players.xml" />
+    <Content Include="Assets\Xmls\Vocations.xml" />
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>

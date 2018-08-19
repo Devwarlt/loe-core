@@ -6,6 +6,9 @@ namespace LoESoft.Client.Core.networking.gamenetwork
 {
     public class NetworkManager : IDisposable
     {
+        public static bool _dispose { get; private set; } = false;
+        public static Semaphore _networkManagerDisposeSemaphore { get; set; } = new Semaphore(1, 1);
+
         public Server _server { get; set; } = Server.GetServers["Test Server"];
         public NetworkHandler _networkHandler { get; private set; }
 
@@ -37,6 +40,8 @@ namespace LoESoft.Client.Core.networking.gamenetwork
 
         public void Dispose()
         {
+            _dispose = true;
+
             GameClient._log.Info("Network Manager has been stopped.");
 
             _socket.Close();

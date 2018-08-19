@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LoESoft.Client.Drawing.Events;
-using LoESoft.Client.Drawing.Sprites.Text;
+﻿using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,8 +8,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
     {
         public TextDisplay NameText { get; set; }
 
-        public Button(int x, int y, int width, int height, string name) 
-            : base (x, y, width, height, DrawingSettings.GetTexture("btnImage"))
+        public Button(int x, int y, int width, int height, string name)
+            : base(x, y, width, height, DrawingSettings.GetTexture("btnImage"))
         {
 
             int textwidth = (int)TextDisplay.Font.MeasureString(name).X;

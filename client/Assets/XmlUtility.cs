@@ -4,9 +4,9 @@ namespace LoESoft.Client.Assets
 {
     public class XmlUtility
     {
-        public static Texture2D GetTextureFromType(ushort type)
+        public static Texture2D GetTextureFromId(int id)
         {
-            var elem = XmlReader.XmlsDictionary[type];
+            var elem = XmlReader.XmlsDictionary[id];
             Texture2D texture = null;
 
             foreach (var i in elem.Elements("Texture"))
