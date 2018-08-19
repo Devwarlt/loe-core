@@ -3,8 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game;
-using LoESoft.Client.Core.networking.gameuser;
-using System;
 
 namespace LoESoft.Client
 {
@@ -12,8 +10,6 @@ namespace LoESoft.Client
     {
         public static int WIDTH => 600;
         public static int HEIGHT => 600;
-
-        public GameUser _gameUser { get; set; }
 
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
@@ -45,11 +41,18 @@ namespace LoESoft.Client
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+                ExitGame();
 
             ScreenManager.Update(gameTime);
 
             base.Update(gameTime);
+        }
+
+        private void ExitGame()
+        {
+            GameClient._networkHandler.Dispose();
+
+            Exit();
         }
 
         protected override void Draw(GameTime gameTime)

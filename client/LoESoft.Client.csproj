@@ -54,14 +54,14 @@
     <Compile Include="Core\game\Screens.cs" />
     <Compile Include="Core\game\screens\TitleScreen.cs" />
     <Compile Include="Core\game\screens\WorldScreen.cs" />
-    <Compile Include="Core\networking\gameuser\GameUser.cs" />
+    <Compile Include="Core\networking\Server.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />
     <Compile Include="Drawing\Sprites\Sprite.cs" />
     <Compile Include="GameApplication.cs" />
     <Compile Include="GameClient.cs" />
-    <Compile Include="Core\networking\gamenetwork\NetworkLoop.cs" />
+    <Compile Include="Core\networking\gamenetwork\NetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

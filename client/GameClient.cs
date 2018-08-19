@@ -1,8 +1,8 @@
-﻿using NLog;
+﻿using LoESoft.Client.Core.networking.gamenetwork;
+using NLog;
 using NLog.Config;
 using NLog.Targets;
 using System;
-using System.IO;
 using System.Reflection;
 using System.Threading;
 
@@ -16,6 +16,9 @@ namespace LoESoft.Client
 
         // Log
         public static Logger _log { get; } = LogManager.GetLogger(_name);
+
+        // Network
+        public static NetworkManager _networkHandler { get; private set; }
 
         [STAThread]
         static void Main()
@@ -48,6 +51,13 @@ namespace LoESoft.Client
 
             try
             {
+                _log.Info("Network Manager is loading...");
+
+                _networkHandler = new NetworkManager();
+                _networkHandler.Start();
+
+                _log.Info("Network Manager is loading... OK!");
+
                 using (var game = new GameApplication())
                     game.Run();
 
