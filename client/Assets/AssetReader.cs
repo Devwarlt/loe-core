@@ -51,7 +51,7 @@ namespace LoESoft.Client.Assets
     public class ImageSet
     {
         public Dictionary<KeyValuePair<int, int>, Texture2D> Images { get; private set; }
-        
+
         public ImageSet()
         {
             Images = new Dictionary<KeyValuePair<int, int>, Texture2D>();

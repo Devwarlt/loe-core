@@ -9,7 +9,7 @@ namespace LoESoft.Client.Assets
             var elem = XmlReader.XmlsDictionary[type];
             Texture2D texture = null;
 
-            foreach(var i in elem.Elements("Texture"))
+            foreach (var i in elem.Elements("Texture"))
             {
                 string imagefile = i.Element("File").Value;
                 string index = i.Element("Index").Value;

@@ -46,12 +46,13 @@ namespace LoESoft.Server.networking
         {
             Socket socket = null;
 
-            try {
+            try
+            {
                 socket = _socket.EndAccept(asyncResult);
                 _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
             }
             catch (ObjectDisposedException) { }
-            
+
             if (socket != null)
                 _connections.Add(new Client(socket));
         }

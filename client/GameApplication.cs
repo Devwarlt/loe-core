@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game;
+using LoESoft.Client.Drawing.Sprites.TextDisplay;
 
 namespace LoESoft.Client
 {
@@ -30,9 +31,10 @@ namespace LoESoft.Client
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
             AssetReader.Load(Content);
             XmlReader.Load(Content);
+            TextDisplay.LoadSpriteFont(Content);
             ScreenManager.Init();
         }
 

@@ -11,7 +11,7 @@ namespace LoESoft.Client.Assets
         {
             var set = GetImageSet(name);
             var pos = position.Substring(2);
-            
+
             int key1 = pos[0];
             int key2 = pos[1];
 
