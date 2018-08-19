@@ -1,4 +1,4 @@
-using LoESoft.Client.Drawing.Sprites.TextDisplay;
+using LoESoft.Client.Drawing.Sprites.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,22 +8,23 @@ namespace LoESoft.Client.Core.game.screens
     {
         public ScreenType ScreenType => ScreenType.TitleScreen;
 
-        TextDisplay textDisplay;
+        Button button;
 
         public TitleScreen()
         {
-            textDisplay = new TextDisplay(10, 10, "Test", 8);
+            button = new Button(10, 10, 100, 40, "Click me!");
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            button.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            textDisplay.Draw(spriteBatch);
+            button.Draw(spriteBatch);
             spriteBatch.End();
-        }
-
-        public void Update(GameTime gameTime)
-        {
         }
     }
 }

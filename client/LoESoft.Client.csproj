@@ -58,8 +58,12 @@
     <Compile Include="Core\game\screens\WorldScreen.cs" />
     <Compile Include="Core\networking\gamenetwork\NetworkHandler.cs" />
     <Compile Include="Core\networking\Server.cs" />
+    <Compile Include="Drawing\DrawingSettings.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
+    <Compile Include="Drawing\RGBColor.cs" />
+    <Compile Include="Drawing\Sprites\Forms\Button.cs" />
+    <Compile Include="Drawing\Sprites\Forms\Panel.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />
     <Compile Include="Drawing\Sprites\Sprite.cs" />
     <Compile Include="Drawing\Sprites\Text\TextDisplay.cs" />

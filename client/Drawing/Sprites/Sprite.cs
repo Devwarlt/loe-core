@@ -9,11 +9,15 @@ namespace LoESoft.Client.Drawing.Sprites
         public Color SpriteColor { get; private set; }
 
         public Sprite(int x, int y, int width, int height,
-            Texture2D texture = null, uint color = 0xFFFFFF, int alpha = 1)
+            Texture2D texture = null, RGBColor color = null, int alpha = 1)
             : base(x, y, width, height)
         {
             SpriteTexture = texture;
-            SpriteColor = new Color(new Color(color), 1);
+
+            if (color == null)
+                color = new RGBColor(135, 135, 135);
+
+            SpriteColor = new Color(color.R, color.G, color.B, alpha);
         }
 
         public override void Update(GameTime gameTime) => base.Update(gameTime);
