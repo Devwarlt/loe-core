@@ -33,7 +33,7 @@ namespace LoESoft.Client
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             AssetReader.Load(Content);
-            // TODO: XmlReader.Load(Content);
+            XmlReader.Load(Content);
             TextDisplay.LoadSpriteFont(Content);
             ScreenManager.Init();
         }

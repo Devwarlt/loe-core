@@ -7,11 +7,9 @@ namespace LoESoft.Client.Drawing.Sprites.TextDisplay
     public class TextDisplay : Sprite
     {
         public static SpriteFont Font { get; private set; }
-        public static void LoadSpriteFont(ContentManager contentManager)
-        {
+        public static void LoadSpriteFont(ContentManager contentManager) =>
             Font = contentManager.Load<SpriteFont>("fonts/font");
-        }
-
+        
         public string Text { get; set; }
         public float Size { get; set; }
         public bool Bold { get; set; } //unhandled
@@ -23,7 +21,7 @@ namespace LoESoft.Client.Drawing.Sprites.TextDisplay
             Size = size;
             Bold = bold;
         }
-
+       
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

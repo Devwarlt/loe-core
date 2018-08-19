@@ -2,10 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using LoESoft.Client.Properties;
 
 namespace LoESoft.Client.Assets
 {
@@ -22,14 +21,8 @@ namespace LoESoft.Client.Assets
         {
             Console.WriteLine("Loading Xmls...");
 
-            string path = $"{contentManager.RootDirectory}/Xmls_Folder/";
-
-            string[] xmls = Directory.EnumerateFiles(path, "*.xml", SearchOption.AllDirectories).ToArray();
-
-            foreach (var i in xmls)
-                using (var r = File.OpenRead(i))
-                    ProcessXmls(XElement.Load(r));
-
+            ProcessXmls(XElement.Parse(Resources.Players));
+            
             Console.WriteLine("Xmls Loaded!");
         }
 
@@ -39,7 +32,7 @@ namespace LoESoft.Client.Assets
             {
                 var type = (ushort)Int32.Parse(i.Attribute("type").Value.Substring(2), NumberStyles.HexNumber);
 
-                XmlsDictionary.Add((ushort)type, i);
+                XmlsDictionary.Add(type, i);
             }
         }
     }
