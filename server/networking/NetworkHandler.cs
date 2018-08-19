@@ -42,8 +42,6 @@ namespace LoESoft.Server.networking
 
         public void Start()
         {
-            _client._socket.NoDelay = true;
-            _client._socket.UseOnlyOverlappedIO = true;
             _client._socket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), _client._socket);
             _packetProcessing.Start();
         }

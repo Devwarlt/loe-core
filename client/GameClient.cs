@@ -25,25 +25,22 @@ namespace LoESoft.Client
         {
             Console.Title = $"{_name} Console - Build: {_version}";
 
-            var time = DateTime.Now.ToString().Split(' ')[1];
             var config = new LoggingConfiguration();
             var developerLog = new ColoredConsoleTarget()
             {
                 Name = "developer",
-                Layout = "[${var:time}] ${level} ${message} ${exception}"
+                Layout = @"[${date:format=HH\:mm\:ss}] ${level} ${message} ${exception}"
             };
             var developerFile = new FileTarget()
             {
                 Name = "developer-file",
-                FileName = "../../../../../logs/client/Build ${assembly-version}/${level}/${var:encoded-path}.txt",
-                Layout = "[${var:time}] ${level} ${message} ${exception}"
+                FileName = "../../../../../logs/client/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
+                Layout = @"[${date:format=HH\:mm\:ss}] ${level} ${message} ${exception}"
             };
             config.AddTarget(developerLog);
             config.AddTarget(developerFile);
             config.AddRule(LogLevel.Info, LogLevel.Fatal, developerFile);
             config.AddRuleForAllLevels(developerLog);
-            config.Variables["time"] = time;
-            config.Variables["encoded-path"] = DateTime.Now.ToString("G").Replace("/", "-").Replace(":", ".");
 
             LogManager.Configuration = config;
 
@@ -57,11 +54,10 @@ namespace LoESoft.Client
                 _networkHandler.Start();
 
                 _log.Info("Network Manager is loading... OK!");
+                _log.Info("Game Client is loading... OK!");
 
                 using (var game = new GameApplication())
                     game.Run();
-
-                _log.Info("Game Client is loading... OK!");
             }
             catch (Exception e)
             {

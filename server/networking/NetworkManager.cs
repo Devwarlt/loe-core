@@ -17,7 +17,15 @@ namespace LoESoft.Server.networking
         public NetworkManager(TCPServerSettings tcpServerSettings)
         {
             _tcpServerSettings = tcpServerSettings;
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            {
+                NoDelay = true,
+                UseOnlyOverlappedIO = true,
+                ExclusiveAddressUse = true,
+                SendTimeout = 1000,
+                ReceiveTimeout = 1000,
+                Ttl = 112
+            };
         }
 
         public void Start()

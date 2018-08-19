@@ -19,6 +19,11 @@ namespace LoESoft.Server.client
         public Client(Socket socket)
         {
             _socket = socket;
+            _socket.NoDelay = true;
+            _socket.UseOnlyOverlappedIO = true;
+            _socket.SendTimeout = 1000;
+            _socket.ReceiveTimeout = 1000;
+            _socket.Ttl = 112;
             _pendingPacket = new ConcurrentQueue<ClientPacket>();
             _networkHandler = new NetworkHandler(this);
             _networkHandler.Start();

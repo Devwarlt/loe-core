@@ -29,25 +29,22 @@ namespace LoESoft.Server
         {
             Console.Title = $"{_name} - Build: {_version}";
 
-            var time = DateTime.Now.ToString().Split(' ')[1];
             var config = new LoggingConfiguration();
             var developerLog = new ColoredConsoleTarget()
             {
                 Name = "developer",
-                Layout = "[${var:time}] ${level} ${message} ${exception}"
+                Layout = @"[${date:format=HH\:mm\:ss}] ${level} ${message} ${exception}"
             };
             var developerFile = new FileTarget()
             {
                 Name = "developer-file",
-                FileName = "../../../logs/server/Build ${assembly-version}/${level}/${var:encoded-path}.txt",
-                Layout = "[${var:time}] ${level} ${message} ${exception}"
+                FileName = "../../../logs/server/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
+                Layout = @"[${date:format=HH\:mm\:ss}] ${level} ${message} ${exception}"
             };
             config.AddTarget(developerLog);
             config.AddTarget(developerFile);
             config.AddRule(LogLevel.Info, LogLevel.Fatal, developerFile);
             config.AddRuleForAllLevels(developerLog);
-            config.Variables["time"] = time;
-            config.Variables["encoded-path"] = DateTime.Now.ToString("G").Replace("/", "-").Replace(":", ".");
 
             LogManager.Configuration = config;
 

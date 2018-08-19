@@ -54,6 +54,7 @@
     <Compile Include="Core\game\Screens.cs" />
     <Compile Include="Core\game\screens\TitleScreen.cs" />
     <Compile Include="Core\game\screens\WorldScreen.cs" />
+    <Compile Include="Core\networking\gamenetwork\NetworkHandler.cs" />
     <Compile Include="Core\networking\Server.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
