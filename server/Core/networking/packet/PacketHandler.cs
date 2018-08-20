@@ -1,29 +1,29 @@
-﻿using LoESoft.Server.networking.packet.client;
+﻿using LoESoft.Server.Core.client;
+using LoESoft.Server.Core.networking.packet.client;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace LoESoft.Server.networking.packet
+namespace LoESoft.Server.Core.networking.packet
 {
-    internal abstract class Packet
+    internal abstract class PacketHandler<T> : IPacket where T : ClientPacket
     {
-        public static Dictionary<PacketID, Packet> ClientMessages = new Dictionary<PacketID, Packet>();
-        public static Dictionary<PacketID, IPacket> ClientPacketHandlers = new Dictionary<PacketID, IPacket>();
-
         public abstract PacketID ID { get; }
 
-        public abstract Packet CreateInstance();
+        protected abstract void HandlePacket(Client client, T packet);
 
-        static Packet()
+        static PacketHandler()
         {
             foreach (var i in typeof(Packet).Assembly.GetTypes())
-                if (typeof(Packet).IsAssignableFrom(i) && !i.IsAbstract && typeof(IClientPacket).IsAssignableFrom(i))
+                if (typeof(IPacket).IsAssignableFrom(i) && !i.IsAbstract)
                 {
-                    Packet packet = (Packet)Activator.CreateInstance(i);
-                    ClientMessages.Add(packet.ID, packet);
+                    IPacket packet = (IPacket)Activator.CreateInstance(i);
+                    Packet.ClientPacketHandlers.Add(packet.ID, packet);
                 }
         }
+
+        public void Handle(Client client, ClientPacket clientPacket)
+            => HandlePacket(client, (T)clientPacket);
 
         public override string ToString()
         {

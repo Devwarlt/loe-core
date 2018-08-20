@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Threading;
 
-namespace LoESoft.Client.Core.networking.gamenetwork
+namespace LoESoft.Client.Core.networking
 {
     public class NetworkManager : IDisposable
     {

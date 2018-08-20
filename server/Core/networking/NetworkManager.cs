@@ -1,4 +1,4 @@
-﻿using LoESoft.Server.client;
+﻿using LoESoft.Server.Core.client;
 using LoESoft.Server.utils;
 using System;
 using System.Collections.Concurrent;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace LoESoft.Server.networking
+namespace LoESoft.Server.Core.networking
 {
     public class NetworkManager : IDisposable
     {

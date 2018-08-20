@@ -1,8 +1,8 @@
-﻿using LoESoft.Server.client;
-using LoESoft.Server.networking.packet.server.packets;
+﻿using LoESoft.Server.Core.client;
+using LoESoft.Server.Core.networking.packet.server.packets;
 using System;
 
-namespace LoESoft.Server.networking.packet.client.packets
+namespace LoESoft.Server.Core.networking.packet.client.packets
 {
     internal class Ping : ClientPacket
     {

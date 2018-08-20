@@ -1,4 +1,4 @@
-﻿namespace LoESoft.Server.networking.packet.server.packets
+﻿namespace LoESoft.Server.Core.networking.packet.server.packets
 {
     internal class Pong : ServerPacket
     {

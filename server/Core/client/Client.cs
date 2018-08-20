@@ -1,6 +1,6 @@
-﻿using LoESoft.Server.networking;
-using LoESoft.Server.networking.packet;
-using LoESoft.Server.networking.packet.client;
+﻿using LoESoft.Server.Core.networking;
+using LoESoft.Server.Core.networking.packet;
+using LoESoft.Server.Core.networking.packet.client;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace LoESoft.Server.client
+namespace LoESoft.Server.Core.client
 {
     internal class Client : IDisposable
     {

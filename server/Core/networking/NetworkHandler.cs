@@ -1,13 +1,13 @@
-﻿using LoESoft.Server.client;
-using LoESoft.Server.networking.packet;
-using LoESoft.Server.networking.packet.client;
+﻿using LoESoft.Server.Core.client;
+using LoESoft.Server.Core.networking.packet;
+using LoESoft.Server.Core.networking.packet.client;
 using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace LoESoft.Server.networking
+namespace LoESoft.Server.Core.networking
 {
     internal class NetworkHandler
     {
