@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 
 namespace LoESoft.Client.Assets
@@ -17,11 +16,7 @@ namespace LoESoft.Client.Assets
 
         public static void Load(ContentManager contentManager)
         {
-            Console.WriteLine("Loading Assets...");
-
             //AddImageSet(contentManager, name, width of each individual sprite, height of individual sprite)
-
-            Console.WriteLine("Assets Loaded!");
         }
 
         private static void AddImageSet(ContentManager contentManager, string filename, int w, int h)

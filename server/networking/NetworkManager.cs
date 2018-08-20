@@ -4,28 +4,34 @@ using System;
 using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace LoESoft.Server.networking
 {
-    public class NetworkManager
+    public class NetworkManager : IDisposable
     {
         internal static ConcurrentBag<Client> _connections = new ConcurrentBag<Client>();
 
+        public static bool _dispose { get; private set; } = false;
+
         private TCPServerSettings _tcpServerSettings { get; set; }
-        private Socket _socket { get; set; }
+        private static Socket _socket { get; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+        {
+            NoDelay = true,
+            UseOnlyOverlappedIO = true,
+            SendTimeout = 1000,
+            ReceiveTimeout = 1000,
+            Ttl = 112
+        };
 
         public NetworkManager(TCPServerSettings tcpServerSettings)
         {
             _tcpServerSettings = tcpServerSettings;
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            Thread networkBackgroundThread = new Thread(NetworkMonitor)
             {
-                NoDelay = true,
-                UseOnlyOverlappedIO = true,
-                ExclusiveAddressUse = true,
-                SendTimeout = 1000,
-                ReceiveTimeout = 1000,
-                Ttl = 112
+                IsBackground = true
             };
+            networkBackgroundThread.Start();
         }
 
         public void Start()
@@ -37,17 +43,6 @@ namespace LoESoft.Server.networking
             _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
 
             GameServer._log.Info("Network Manager is loading... OK!");
-        }
-
-        public void Stop()
-        {
-            GameServer._log.Info("Network Manager has been stopped.");
-
-            foreach (var connection in _connections)
-                connection.Dispose();
-
-            _socket.Dispose();
-            _socket.Close();
         }
 
         private void AcceptCallback(IAsyncResult asyncResult)
@@ -63,6 +58,53 @@ namespace LoESoft.Server.networking
 
             if (socket != null)
                 _connections.Add(new Client(socket));
+        }
+
+        private static void NetworkMonitor()
+        {
+            while (_socket != null && !_dispose)
+            {
+                foreach (var connection in _connections)
+                {
+                    if (_dispose)
+                        break;
+
+                    try
+                    {
+                        if (!connection._socket.Connected)
+                            DisposeClient();
+                    }
+                    catch (SocketException)
+                    {
+                        DisposeClient();
+                        continue;
+                    }
+
+                    Thread.Sleep(10);
+                }
+            }
+        }
+
+        private static void DisposeClient()
+        {
+            _connections.TryTake(out Client client);
+
+            GameServer._log.Warn($"Client with IP '{client._ip}' dropped connection, disposing...");
+
+            client.Dispose();
+        }
+
+        public void Dispose()
+        {
+            _dispose = true;
+
+            GameServer._log.Info("Network Manager has been stopped.");
+
+            foreach (var connection in _connections)
+                connection.Dispose();
+
+            _socket.Close();
+            _socket.Dispose();
         }
     }
 }

@@ -37,7 +37,8 @@ namespace LoESoft.Server.networking
                     else
                         break;
                 }
-            });
+            })
+            { IsBackground = true };
         }
 
         public void Start()
@@ -54,27 +55,31 @@ namespace LoESoft.Server.networking
 
         public void ReceiveCallback(IAsyncResult asyncResult)
         {
-            int received = ((Socket)asyncResult.AsyncState).EndReceive(asyncResult);
-            byte[] dataBuff = new byte[received];
-
-            Array.Copy(_buffer, dataBuff, received);
-
-            string data = Encoding.UTF8.GetString(dataBuff);
-
-            if (!string.IsNullOrEmpty(data))
+            try
             {
-                try
+                int received = ((Socket)asyncResult.AsyncState).EndReceive(asyncResult);
+                byte[] dataBuff = new byte[received];
+
+                Array.Copy(_buffer, dataBuff, received);
+
+                string data = Encoding.UTF8.GetString(dataBuff);
+
+                if (!string.IsNullOrEmpty(data))
                 {
-                    PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
-                    Packet packet = Packet.ClientMessages[packetData.PacketID];
-                    packet.CreateInstance();
+                    try
+                    {
+                        PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                        Packet packet = Packet.ClientMessages[packetData.PacketID];
+                        packet.CreateInstance();
 
-                    GameServer._log.Info($"New message received!\n{packet.ToString()}");
+                        GameServer._log.Info($"New message received!\n{packet.ToString()}");
 
-                    _client._pendingPacket.Enqueue(packet as ClientPacket);
+                        _client._pendingPacket.Enqueue(packet as ClientPacket);
+                    }
+                    catch (Exception e) { GameServer._log.Error($"Data: {data}\n{e}"); }
                 }
-                catch (Exception e) { GameServer._log.Error($"Data: {data}\n{e}"); }
             }
+            catch (ObjectDisposedException) { }
         }
     }
 }

@@ -59,11 +59,9 @@ namespace LoESoft.Server
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
-                _networkManager.Stop();
+                _networkManager.Dispose();
 
                 _log.Info("Game Server has been stopped.");
-
-                Thread.Sleep(2 * 1000);
 
                 Environment.Exit(0);
             }

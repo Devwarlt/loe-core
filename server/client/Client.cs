@@ -13,6 +13,7 @@ namespace LoESoft.Server.client
     internal class Client : IDisposable
     {
         public Socket _socket { get; private set; }
+        public string _ip { get; private set; }
         public ConcurrentQueue<ClientPacket> _pendingPacket { get; private set; }
         public NetworkHandler _networkHandler { get; internal set; }
 
@@ -24,6 +25,10 @@ namespace LoESoft.Server.client
             _socket.SendTimeout = 1000;
             _socket.ReceiveTimeout = 1000;
             _socket.Ttl = 112;
+            _ip = socket.RemoteEndPoint.ToString().Split(':')[0];
+
+            GameServer._log.Warn($"New client with IP '{_ip}' has been connected!");
+
             _pendingPacket = new ConcurrentQueue<ClientPacket>();
             _networkHandler = new NetworkHandler(this);
             _networkHandler.Start();
@@ -44,7 +49,8 @@ namespace LoESoft.Server.client
 
         public void Dispose()
         {
-            _socket = null;
+            _socket.Close();
+            _socket.Dispose();
         }
     }
 }

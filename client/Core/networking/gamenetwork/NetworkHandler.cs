@@ -79,7 +79,7 @@ namespace LoESoft.Client.Core.networking.gamenetwork
                 GameClient._log.Info("Connecting to the game server... OK!");
 
                 _networkHandlerSemaphore.Release();
-
+                
                 NetworkManager._networkManagerDisposeSemaphore.Release();
             }
         }

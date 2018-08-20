@@ -6,13 +6,14 @@ namespace LoESoft.Client.Core.networking.gamenetwork
 {
     public class NetworkManager : IDisposable
     {
+        public static bool _firstRun { get; private set; } = true;
         public static bool _dispose { get; private set; } = false;
         public static Semaphore _networkManagerDisposeSemaphore { get; set; } = new Semaphore(1, 1);
 
-        public Server _server { get; set; } = Server.GetServers["Test Server"];
+        public Server _server { get; set; } = Server.GetServers["Local Server"];
         public NetworkHandler _networkHandler { get; private set; }
 
-        private Socket _socket { get; set; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        private static Socket _socket { get; set; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         public NetworkManager()
         {
@@ -31,8 +32,10 @@ namespace LoESoft.Client.Core.networking.gamenetwork
             networkBackgroundThread.Start();
         }
 
-        public void Reconnect()
+        private static void Reconnect()
         {
+            GameClient._log.Warn($"Client dropped connection to the server, retrying...");
+
             NetworkHandler._connectionAttempts = 0;
 
             Connect();
@@ -45,6 +48,7 @@ namespace LoESoft.Client.Core.networking.gamenetwork
             GameClient._log.Info("Network Manager has been stopped.");
 
             _socket.Close();
+            _socket.Dispose();
         }
     }
 }
