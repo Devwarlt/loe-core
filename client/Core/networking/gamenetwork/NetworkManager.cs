@@ -6,7 +6,6 @@ namespace LoESoft.Client.Core.networking.gamenetwork
 {
     public class NetworkManager : IDisposable
     {
-        public static bool _firstRun { get; private set; } = true;
         public static bool _dispose { get; private set; } = false;
         public static Semaphore _networkManagerDisposeSemaphore { get; set; } = new Semaphore(1, 1);
 
