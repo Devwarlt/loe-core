@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoESoft.Client.Core.client;
+using System;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -8,15 +9,14 @@ namespace LoESoft.Client.Core.networking
     {
         public static bool _dispose { get; private set; } = false;
         public static Semaphore _networkManagerDisposeSemaphore { get; set; } = new Semaphore(1, 1);
+        public static Socket _socket { get; set; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         public Server _server { get; set; } = Server.GetServers["Local Server"];
-        public NetworkHandler _networkHandler { get; private set; }
-
-        private static Socket _socket { get; set; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        public GameUser _gameUser { get; private set; }
 
         public NetworkManager()
         {
-            _networkHandler = new NetworkHandler(_socket, _server);
+            _gameUser = new GameUser(_socket, _server);
         }
 
         public void Start()

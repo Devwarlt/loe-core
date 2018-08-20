@@ -1,11 +1,16 @@
-﻿using System;
+﻿using LoESoft.Client.Core.client;
+using LoESoft.Client.Core.networking.packets;
+using Newtonsoft.Json;
+using System;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 
 namespace LoESoft.Client.Core.networking
 {
     public class NetworkHandler
     {
+        public static byte[] _buffer { get; } = new byte[1024];
         public static int _connectionTimeout { get; } = 3000;
         public static int _connectionAttempts { get; set; } = 0;
         public static Semaphore _networkHandlerSemaphore { get; } = new Semaphore(1, 1);
@@ -14,9 +19,9 @@ namespace LoESoft.Client.Core.networking
         private static Socket _socket { get; set; }
         private static Server _server { get; set; }
 
-        public NetworkHandler(Socket socket, Server server)
+        public NetworkHandler(GameUser gameUser, Server server)
         {
-            _socket = socket;
+            _socket = gameUser._socket;
             _socket.NoDelay = true;
             _socket.UseOnlyOverlappedIO = true;
             _socket.SendTimeout = 1000;
@@ -24,6 +29,22 @@ namespace LoESoft.Client.Core.networking
             _socket.Ttl = 112;
 
             _server = server;
+        }
+
+        public void HandlePacket()
+        {
+            int received = _socket.Receive(_buffer);
+            byte[] dataBuff = new byte[received];
+
+            Array.Copy(_buffer, dataBuff, received);
+
+            string data = Encoding.UTF8.GetString(dataBuff);
+
+            if (!string.IsNullOrEmpty(data))
+            {
+                // TODO: implement packet handler here.
+                GameClient._log.Info($"New packet received!\n{data}");
+            }
         }
 
         public static void BeginConnect()

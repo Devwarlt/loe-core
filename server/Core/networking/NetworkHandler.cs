@@ -72,7 +72,7 @@ namespace LoESoft.Server.Core.networking
                         Packet packet = Packet.ClientMessages[packetData.PacketID];
                         packet.CreateInstance();
 
-                        GameServer._log.Info($"New message received!\n{packet.ToString()}");
+                        GameServer._log.Info($"New packet received!\n{packet.ToString()}");
 
                         _client._pendingPacket.Enqueue(packet as ClientPacket);
                     }

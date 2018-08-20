@@ -57,13 +57,16 @@
     <Compile Include="Assets\Serialization\AssetTypes\Vocation.cs" />
     <Compile Include="Assets\XmlReader.cs" />
     <Compile Include="Assets\XmlUtility.cs" />
+    <Compile Include="Core\client\Client.cs" />
     <Compile Include="Core\game\Screens.cs" />
     <Compile Include="Core\game\screens\TitleScreen.cs" />
     <Compile Include="Core\game\screens\WorldScreen.cs" />
     <Compile Include="Core\networking\NetworkHandler.cs" />
     <Compile Include="Core\networking\packets\Packet.cs" />
+    <Compile Include="Core\networking\packets\PacketData.cs" />
     <Compile Include="Core\networking\packets\PacketID.cs" />
     <Compile Include="Core\networking\Server.cs" />
+    <Compile Include="Core\utils\IO.cs" />
     <Compile Include="Drawing\DrawingSettings.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />

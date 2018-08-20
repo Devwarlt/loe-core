@@ -1,6 +1,7 @@
 ﻿using LoESoft.Server.Core.networking;
 using LoESoft.Server.Core.networking.packet;
 using LoESoft.Server.Core.networking.packet.client;
+using LoESoft.Server.utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -36,7 +37,11 @@ namespace LoESoft.Server.Core.client
 
         public void SendPacket(Packet packet)
         {
-            byte[] dataBuff = Encoding.UTF8.GetBytes(Regex.Replace(packet.ToString(), @"\r\n?|\n", string.Empty));
+            byte[] dataBuff = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
+            {
+                PacketID = packet.ID,
+                Content = Regex.Replace(packet.ToString(), @"\r\n?|\n", string.Empty)
+            }));
             _socket.BeginSend(dataBuff, 0, dataBuff.Length, SocketFlags.None, new AsyncCallback(_networkHandler.SendCallback), _socket);
             _socket.BeginReceive(NetworkHandler._buffer, 0, NetworkHandler._buffer.Length, SocketFlags.None, new AsyncCallback(_networkHandler.ReceiveCallback), _socket);
         }
