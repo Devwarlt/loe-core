@@ -4,7 +4,7 @@
     <Class>Vocation</Class>
     <Description>Sample vocation description text.</Description>
     <Texture type="animated">
-      <File>vocation</File>
+      <File>playersEmbed</File>
       <Index>0</Index>
     </Texture>
   </Vocation>

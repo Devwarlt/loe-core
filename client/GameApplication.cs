@@ -62,7 +62,7 @@ namespace LoESoft.Client
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(125, 0, 0, 1));
 
             ScreenManager.Draw(_spriteBatch);
 

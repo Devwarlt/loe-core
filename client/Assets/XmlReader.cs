@@ -15,15 +15,6 @@ namespace LoESoft.Client.Assets
             { AssetType.Vocation, new Tuple<string, string>(Resources.Vocations, "//Vocation") }
         };
 
-        private static int _playersAmount { get; set; } = 0;
-
-        public static Dictionary<int, XElement> XmlsDictionary { get; private set; }
-
-        static XmlReader()
-        {
-            XmlsDictionary = new Dictionary<int, XElement>();
-        }
-
         public static void Load(ContentManager contentManager)
         {
             string message = $"Loading {_assets.Count} asset{(_assets.Count > 1 ? "s" : "")}...";

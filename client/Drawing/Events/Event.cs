@@ -1,6 +1,7 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -10,6 +11,9 @@ namespace LoESoft.Client.Drawing.Events
         CLICKRIGT = 1,
         MOUSEOVER = 2,
         MOUSEOUT = 3,
+        GETPRESSEDKEYS = 4,
+        GETPRESSEDKEYSHOLDABLE = 5,
+        HANDLEBACKSPACE = 6
     }
 
     public partial class EventsHandler
@@ -18,7 +22,7 @@ namespace LoESoft.Client.Drawing.Events
         MouseState currentMouse;
         public static Rectangle MouseRectangle { get; private set; }
 
-        public bool Handle(SpriteNode node, Event e)
+        public bool HandleMouse(SpriteNode node, Event e)
         {
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();
@@ -31,6 +35,22 @@ namespace LoESoft.Client.Drawing.Events
                 case Event.MOUSEOVER: return HandleMouseOver(node);
                 case Event.MOUSEOUT: return HandleMouseOut(node);
                 default: return false;
+            }
+        }
+
+        KeyboardState previousKeyBoard;
+        KeyboardState currentKeyBoard;
+
+        public List<char> HandleKeyBoard(Event e)
+        {
+            previousKeyBoard = currentKeyBoard;
+            currentKeyBoard = Keyboard.GetState();
+
+            switch (e)
+            {
+                case Event.GETPRESSEDKEYS: return GetPressedKeys();
+                //case Event.GETPRESSEDKEYSHOLDABLE: return GetPressedKeysHoldable();
+                default: return null;
             }
         }
     }

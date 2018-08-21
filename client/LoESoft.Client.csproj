@@ -61,6 +61,8 @@
     <Compile Include="Core\game\Screens.cs" />
     <Compile Include="Core\game\screens\TitleScreen.cs" />
     <Compile Include="Core\game\screens\WorldScreen.cs" />
+    <Compile Include="Core\game\ui\titlescreen\LoginPanel.cs" />
+    <Compile Include="Core\game\ui\titlescreen\RegisterPanel.cs" />
     <Compile Include="Core\networking\NetworkHandler.cs" />
     <Compile Include="Core\networking\packets\Packet.cs" />
     <Compile Include="Core\networking\packets\PacketData.cs" />
@@ -69,9 +71,13 @@
     <Compile Include="Core\utils\IO.cs" />
     <Compile Include="Drawing\DrawingSettings.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
+    <Compile Include="Drawing\Events\EventsHandler.KeyBoard.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
     <Compile Include="Drawing\RGBColor.cs" />
     <Compile Include="Drawing\Sprites\Forms\Button.cs" />
+    <Compile Include="Drawing\Sprites\Forms\Complex\ExitButton.cs" />
+    <Compile Include="Drawing\Sprites\Forms\Complex\TextBox.cs" />
+    <Compile Include="Drawing\Sprites\Forms\FilledRectangle.cs" />
     <Compile Include="Drawing\Sprites\Forms\Panel.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />
     <Compile Include="Drawing\Sprites\Sprite.cs" />

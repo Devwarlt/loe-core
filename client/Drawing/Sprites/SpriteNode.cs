@@ -22,11 +22,11 @@ namespace LoESoft.Client.Drawing.Sprites
         public int Y { get; set; }
         public int StageX
         {
-            get { return (ParentSprite != null) ? ParentSprite.X + X : X; }
+            get { return (ParentSprite != null) ? ParentSprite.StageX + X : X; }
         }
         public int StageY
         {
-            get { return (ParentSprite != null) ? ParentSprite.Y + Y : Y; }
+            get { return (ParentSprite != null) ? ParentSprite.StageY + Y : Y; }
         }
 
         public int Width { get; set; }
@@ -58,7 +58,7 @@ namespace LoESoft.Client.Drawing.Sprites
 
             foreach (var i in EventDictionary)
             {
-                if (_eventsHandler.Handle(this, i.Key) && IsInvokable)
+                if (_eventsHandler.HandleMouse(this, i.Key) && IsInvokable)
                 {
                     i.Value?.Invoke(this, new EventArgs());
                     SetInvokables(false);

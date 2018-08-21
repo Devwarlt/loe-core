@@ -16,7 +16,9 @@ namespace LoESoft.Client.Assets
 
         public static void Load(ContentManager contentManager)
         {
+            GameClient._log.Info("Loading Sprite Images...");
             //AddImageSet(contentManager, name, width of each individual sprite, height of individual sprite)
+            GameClient._log.Info("Loading Sprite Images... OK!");
         }
 
         private static void AddImageSet(ContentManager contentManager, string filename, int w, int h)

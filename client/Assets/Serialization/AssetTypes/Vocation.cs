@@ -21,8 +21,6 @@ namespace LoESoft.Client.Assets.Serialization.AssetTypes
             {
                 int id = int.Parse(i.Attribute("id").Value);
 
-                XmlReader.XmlsDictionary[id] = i;
-
                 XElement assetTexture = i.Element("Texture");
 
                 _assets[id] = new Vocation()

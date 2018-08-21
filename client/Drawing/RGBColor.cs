@@ -6,40 +6,28 @@
         public int R
         {
             get { return _r; }
-            set
-            {
-                _r = (value > 225) ? 225 : value;
-            }
+            set { _r = (value > 255) ? 255 : value; }
         }
         int _g;
         public int G
         {
             get { return _g; }
-            set
-            {
-                _g = (value > 225) ? 225 : value;
-            }
+            set { _g = (value > 255) ? 255 : value; }
         }
         int _b;
         public int B
         {
             get { return _b; }
-            set
-            {
-                _b = (value > 225) ? 225 : value;
-            }
+            set { _b = (value > 255) ? 255 : value; }
         }
 
         public RGBColor(int r, int g, int b)
         {
-            _r = r;
-            _g = g;
-            _b = b;
+            R = r;
+            G = g;
+            B = b;
         }
 
-        public static RGBColor Default
-        {
-            get { return new RGBColor(135, 135, 135); }
-        }
+        public static RGBColor Default() => new RGBColor(255, 255, 255);
     }
 }

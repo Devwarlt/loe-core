@@ -8,12 +8,16 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
     {
         public TextDisplay NameText { get; set; }
 
-        public Button(int x, int y, int width, int height, string name)
-            : base(x, y, width, height, DrawingSettings.GetTexture("btnImage"))
+        public Button(int x, int y, string name, RGBColor color = null, float alpha = 1)
+            : base(x, y, 0, 0, DrawingSettings.GetTexture("btnImage"), color, alpha)
         {
+            NameText = new TextDisplay(5, 5, name);
 
-            int textwidth = (int)TextDisplay.Font.MeasureString(name).X;
-            NameText = new TextDisplay((width / 2 - textwidth / 2), 2, name, 12, new RGBColor(100, 100, 100), false);
+            int textwidth = (int)TextDisplay.MeasureString(name).X;
+            int textheight = (int)TextDisplay.MeasureString(name).Y;
+            
+            Width = textwidth + 10;
+            Height = textheight + 10;
 
             AddChild(NameText);
         }

@@ -9,25 +9,27 @@ namespace LoESoft.Client.Drawing.Sprites
         public Color SpriteColor { get; private set; }
 
         public Sprite(int x, int y, int width, int height,
-            Texture2D texture = null, RGBColor color = null, int alpha = 1)
+            Texture2D texture = null, RGBColor color = null, float alpha = 1)
             : base(x, y, width, height)
         {
             SpriteTexture = texture;
 
-            if (color == null)
-                color = new RGBColor(135, 135, 135);
+            byte opacity = (byte)(255 * alpha);
 
-            SpriteColor = new Color(color.R, color.G, color.B, alpha);
+            if (color == null)
+                color = RGBColor.Default();
+
+            SpriteColor = new Color(color.R, color.G, color.B, opacity);
         }
 
         public override void Update(GameTime gameTime) => base.Update(gameTime);
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
-
             if (SpriteTexture != null)
                 spriteBatch.Draw(SpriteTexture, SpriteRectangle, SpriteColor);
+
+            base.Draw(spriteBatch);
         }
     }
 }

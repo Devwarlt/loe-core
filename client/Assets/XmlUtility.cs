@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using LoESoft.Client.Assets.Serialization.AssetTypes;
+using Microsoft.Xna.Framework.Graphics;
+using static LoESoft.Client.Assets.Serialization.AssetTypes.Utils.Utils;
 
 namespace LoESoft.Client.Assets
 {
@@ -6,20 +8,10 @@ namespace LoESoft.Client.Assets
     {
         public static Texture2D GetTextureFromId(int id)
         {
-            var elem = XmlReader.XmlsDictionary[id];
-            Texture2D texture = null;
+            var voc = Vocation._assets[id];
 
-            foreach (var i in elem.Elements("Texture"))
-            {
-                string imagefile = i.Element("File").Value;
-                string index = i.Element("Index").Value;
-
-                texture = AssetUtility.GetImageFromSet(imagefile, index);
-            }
-
-            return texture;
+            return AssetUtility.GetImageFromSet(voc.AssetTexture._file, (int)voc.AssetTexture._index
+                , voc.AssetTexture._textureType);
         }
-
-
     }
 }
