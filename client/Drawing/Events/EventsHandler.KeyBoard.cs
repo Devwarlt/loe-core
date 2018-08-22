@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using LoESoft.Client.Drawing.Sprites.Forms.Complex;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,6 @@ namespace LoESoft.Client.Drawing.Events
 {
     public partial class EventsHandler
     {
-
-
         protected List<char> GetPressedKeys()
         {
             List<KeyValuePair<bool, Keys>> pressedKeys = new List<KeyValuePair<bool, Keys>>();
@@ -18,23 +17,32 @@ namespace LoESoft.Client.Drawing.Events
             Keys[] oldPressedKeys = previousKeyBoard.GetPressedKeys();
 
             for (var i = 0; i < oldPressedKeys.Length; i++)
-                if (currentKeyBoard.IsKeyDown(oldPressedKeys[i]))
-                    pressedKeys.Add(new KeyValuePair<bool, Keys>((previousKeyBoard.CapsLock), oldPressedKeys[i]));
+                if (currentKeyBoard.IsKeyUp(oldPressedKeys[i]))
+                    pressedKeys.Add(new KeyValuePair<bool, Keys>((DetectCaps()), oldPressedKeys[i]));
 
             List<char> keys = new List<char>();
 
             foreach (var i in pressedKeys)
-                keys.Add(HandleCaps(i.Key, i.Value));
-
+                if (i.Value.ToString().Length <= 2 || TextBox.ValidKeys.Contains(i.Value))
+                    keys.Add(KeysToChar(i.Value, i.Key));
+            
             return keys;
+        }
+
+        protected bool DetectCaps()
+        {
+            if (currentKeyBoard.CapsLock || ((previousKeyBoard.IsKeyDown(Keys.LeftShift) 
+                && currentKeyBoard.IsKeyDown(Keys.LeftShift)) ||
+                (previousKeyBoard.IsKeyDown(Keys.RightShift) && currentKeyBoard.IsKeyDown(Keys.RightShift))))
+                return true;
+
+            return false;
         }
 
         //protected List<char> GetPressedKeysHoldable()
         //{
 
         //}
-
-        protected char HandleCaps(bool caps, Keys key) => KeysToChar(key, caps);
         #region KeysTable
         public char KeysToChar(Keys key, bool shift)
         {

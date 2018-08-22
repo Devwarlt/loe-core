@@ -51,11 +51,13 @@ namespace LoESoft.Client.Drawing.Sprites
 
         protected EventsHandler _eventsHandler;
 
+        float _timer = 0f;
         public virtual void Update(GameTime gameTime)
         {
             foreach (var i in ChildList.ToArray())
                 i.Update(gameTime);
 
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             foreach (var i in EventDictionary)
             {
                 if (_eventsHandler.HandleMouse(this, i.Key) && IsInvokable)
@@ -63,9 +65,10 @@ namespace LoESoft.Client.Drawing.Sprites
                     i.Value?.Invoke(this, new EventArgs());
                     SetInvokables(false);
                 }
-                else
+                else if (_timer > 0.5f)
                 {
                     SetInvokables(true);
+                    _timer = 0f;
                 }
             }
         }
@@ -78,18 +81,16 @@ namespace LoESoft.Client.Drawing.Sprites
                     ParentSprite.IsInvokable = val;
 
                 foreach (var i in ParentSprite.ChildList.ToArray())
-                    if (i.Index < Index)
+                    if (i.Index < Index && (val != true && i.SpriteRectangle.Intersects(SpriteRectangle)))
                         i.IsInvokable = val;
             }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (!Visible)
-                return;
-
-            foreach (var i in ChildList.ToArray())
-                i.Draw(spriteBatch);
+            if (Visible)
+                foreach (var i in ChildList.ToArray())
+                    i.Draw(spriteBatch);
         }
 
         #region ChildEvents

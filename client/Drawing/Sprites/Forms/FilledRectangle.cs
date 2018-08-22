@@ -18,7 +18,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.FillRectangle(SpriteRectangle, SpriteColor);
+            if (Visible)
+                spriteBatch.FillRectangle(SpriteRectangle, SpriteColor);
 
             base.Draw(spriteBatch);
         }

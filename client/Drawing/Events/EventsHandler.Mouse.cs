@@ -1,5 +1,6 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -22,6 +23,17 @@ namespace LoESoft.Client.Drawing.Events
                 return false;
 
             if (!(currentMouse.RightButton == ButtonState.Released && previousMouse.RightButton == ButtonState.Pressed))
+                return false;
+
+            return true;
+        }
+
+        protected bool HandleClickOutLeft(SpriteNode node)
+        {
+            if (!node.Visible || node.SpriteRectangle.Intersects(MouseRectangle))
+                return false;
+
+            if (!(currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed))
                 return false;
 
             return true;

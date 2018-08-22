@@ -13,7 +13,8 @@ namespace LoESoft.Client.Drawing.Events
         MOUSEOUT = 3,
         GETPRESSEDKEYS = 4,
         GETPRESSEDKEYSHOLDABLE = 5,
-        HANDLEBACKSPACE = 6
+        HANDLEBACKSPACE = 6,
+        CLICKOUTLEFT = 7
     }
 
     public partial class EventsHandler
@@ -34,6 +35,7 @@ namespace LoESoft.Client.Drawing.Events
                 case Event.CLICKRIGT: return HandleMouseClickRight(node);
                 case Event.MOUSEOVER: return HandleMouseOver(node);
                 case Event.MOUSEOUT: return HandleMouseOut(node);
+                case Event.CLICKOUTLEFT: return HandleClickOutLeft(node);
                 default: return false;
             }
         }
