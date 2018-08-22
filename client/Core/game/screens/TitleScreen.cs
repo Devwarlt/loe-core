@@ -15,7 +15,8 @@ namespace LoESoft.Client.Core.game.screens
 
         Button registerBtn;
         Button loginBtn;
-        Button exitButton;
+        Button exitBtn;
+        Button playBtn;
 
         RegisterPanel registerPanel;
         LoginPanel loginPanel;
@@ -27,17 +28,25 @@ namespace LoESoft.Client.Core.game.screens
             backGround = new FilledRectangle(0, 0, 600, 600, new RGBColor(0, 0, 0));
             registerBtn = new Button(10, 10, "Register", new RGBColor(0, 0, 255));
             loginBtn = new Button(10, 40, "Login", new RGBColor(0, 0, 255));
-            exitButton = new Button(10, 70, "Close", new RGBColor(0, 0, 255));
+            playBtn = new Button(10, 70, "Play", new RGBColor(0, 0, 255));
+            exitBtn = new Button(10, 100, "Close", new RGBColor(0, 0, 255));
             registerPanel = new RegisterPanel(100, 100);
             loginPanel = new LoginPanel(100, 100);
 
             registerBtn.AddEventListener(Event.CLICKLEFT, btnRegisterClicked);
             loginBtn.AddEventListener(Event.CLICKLEFT, btnLoginClicked);
-            exitButton.AddEventListener(Event.CLICKLEFT, btnExit);
+            playBtn.AddEventListener(Event.CLICKLEFT, onPlay);
+            exitBtn.AddEventListener(Event.CLICKLEFT, btnExit);
 
             backGround.AddChild(registerBtn);
             backGround.AddChild(loginBtn);
-            backGround.AddChild(exitButton);
+            backGround.AddChild(playBtn);
+            backGround.AddChild(exitBtn);
+        }
+
+        private void onPlay(object sender, EventArgs e)
+        {
+            ScreenManager.ChangeScreen(ScreenType.WorldScreen);
         }
 
         private void btnLoginClicked(object sender, EventArgs e)

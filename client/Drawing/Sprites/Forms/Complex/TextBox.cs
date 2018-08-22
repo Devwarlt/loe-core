@@ -106,6 +106,12 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             return text.ToString();
         }
 
+        public void Clear()
+        {
+            Text.Clear();
+            TextField.Text = string.Empty;
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);

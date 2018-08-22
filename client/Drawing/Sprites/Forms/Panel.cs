@@ -9,7 +9,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
     {
         public TextDisplay Title { get; private set; }
 
-        private ExitButton _exitBtn;
+        protected ExitButton _exitBtn;
 
         public Panel(int x, int y, string title, int width = 400, int height = 400, RGBColor color = null)
             : base(x, y, width, height, color)

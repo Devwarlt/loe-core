@@ -10,7 +10,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public static void LoadSpriteFont(ContentManager contentManager) =>
             Font = contentManager.Load<SpriteFont>("fonts/font");
 
-        public static int GetHeight(int size) => (int)MeasureString("T", size).Y;
+        public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
         public static Vector2 MeasureString(string text, int size = 12)
         {
             float scale = size / 100f;

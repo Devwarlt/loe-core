@@ -3,10 +3,6 @@ using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.game.ui.titlescreen
 {
@@ -30,10 +26,19 @@ namespace LoESoft.Client.Core.game.ui.titlescreen
             mailTextBox.AddEventListener(Event.CLICKLEFT, onMailClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
             btnLogin.AddEventListener(Event.CLICKLEFT, onLogin);
+            _exitBtn.Exit += onClose;
 
             AddChild(mailTextBox);
             AddChild(passTextBox);
             AddChild(btnLogin);
+        }
+
+        private void onClose()
+        {
+            mailTextBox.Clear();
+            passTextBox.Clear();
+            mailTextBox.Selected = false;
+            passTextBox.Selected = false;
         }
 
         private void onLogin(object sender, EventArgs e)

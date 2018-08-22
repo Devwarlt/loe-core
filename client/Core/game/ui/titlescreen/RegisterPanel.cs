@@ -2,12 +2,7 @@
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Forms.Complex;
-using LoESoft.Client.Drawing.Sprites.Text;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.game.ui.titlescreen
 {
@@ -39,6 +34,17 @@ namespace LoESoft.Client.Core.game.ui.titlescreen
             userTextBox.AddEventListener(Event.CLICKLEFT, onUserClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
             btnRegister.AddEventListener(Event.CLICKLEFT, onRegister);
+            _exitBtn.Exit += onClose;
+        }
+
+        private void onClose()
+        {
+            mailTextBox.Clear();
+            userTextBox.Clear();
+            passTextBox.Clear();
+            mailTextBox.Selected = false;
+            userTextBox.Selected = false;
+            passTextBox.Selected = false;
         }
 
         private void onRegister(object sender, EventArgs e)
