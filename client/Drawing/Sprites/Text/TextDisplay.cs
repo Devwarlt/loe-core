@@ -37,8 +37,8 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         {
             base.Update(gameTime);
 
-            Width = (int)Font.MeasureString(Text).X;
-            Height = (int)Font.MeasureString(Text).Y;
+            Width = (int)MeasureString(Text, (int)Size).X;
+            Height = (int)MeasureString(Text, (int)Size).Y;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

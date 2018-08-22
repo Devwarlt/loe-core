@@ -53,6 +53,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
             _selectedMarket = new FilledRectangle(1, 1, 2, Height - 2, new RGBColor(0, 0, 0));
 
+            _selectedMarket.Visible = false;
+
             AddChild(_selectedMarket);
             AddChild(TitleText);
             AddChild(TextField);
@@ -63,29 +65,45 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
         {
             base.Update(gameTime);
 
+            if (!Selected)
+            {
+                _selectedMarket.Visible = false;
+                return;
+            }
+
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             char[] pressedKeys = _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray();
 
             foreach (var i in pressedKeys)
-            {
                 if (Text.Length <= Limit && Selected)
-                {
-                    Text.Append((Encoded) ? "*" : i.ToString());
+                    Text.Append(i.ToString());
 
-                    TextField.Text = Text.ToString();
-                }
-            }
+            if (_keyEvents.HandleBackSpace(gameTime))
+                if (Text.Length > 0)
+                    Text.Length--;
+
+
+            TextField.Text = (Encoded) ? GetEncodedString(Text.ToString()) 
+                : Text.ToString();
 
             if (Selected && _timer > 0.5f)
             {
                 _selectedMarket.Visible = !_selectedMarket.Visible;
                 _timer = 0f;
-            } 
-            else
-                _selectedMarket.Visible = (Selected);
+            }
 
-            _selectedMarket.X = (int)TextDisplay.MeasureString(TextField.Text).X + 3;
+            _selectedMarket.X = TextField.Width + 3;
+        }
+
+        private string GetEncodedString(string value)
+        {
+            StringBuilder text = new StringBuilder();
+
+            for (var i = 0; i < value.Length; i++)
+                text.Append("*");
+
+            return text.ToString();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

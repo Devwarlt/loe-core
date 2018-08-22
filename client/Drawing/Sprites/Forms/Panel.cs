@@ -26,11 +26,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            int height = 4;
-            foreach(var i in ChildList.ToArray())
-                height += i.Height;
-            Height = height;
         }
     }
 }

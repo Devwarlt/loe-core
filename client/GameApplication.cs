@@ -5,6 +5,7 @@ using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Text;
+using System;
 
 namespace LoESoft.Client
 {
@@ -39,18 +40,7 @@ namespace LoESoft.Client
             XmlReader.Load(Content);
             TextDisplay.LoadSpriteFont(Content);
             ScreenManager.Init();
-        }
-
-        protected override void UnloadContent() { }
-
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                ExitGame();
-
-            ScreenManager.Update(gameTime);
-
-            base.Update(gameTime);
+            ScreenManager.OnGameClose += ExitGame;
         }
 
         private void ExitGame()
@@ -58,6 +48,15 @@ namespace LoESoft.Client
             GameClient._networkHandler.Dispose();
 
             Exit();
+        }
+
+        protected override void UnloadContent() { }
+
+        protected override void Update(GameTime gameTime)
+        {
+            ScreenManager.Update(gameTime);
+
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

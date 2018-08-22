@@ -2,6 +2,7 @@ using System;
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game.ui.titlescreen;
 using LoESoft.Client.Drawing;
+using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,31 +13,54 @@ namespace LoESoft.Client.Core.game.screens
     {
         public ScreenType ScreenType => ScreenType.TitleScreen;
 
-        Button button;
-        RegisterPanel panel;
+        Button registerBtn;
+        Button loginBtn;
+        Button exitButton;
 
+        RegisterPanel registerPanel;
+        LoginPanel loginPanel;
+
+        FilledRectangle backGround;
+        
         public TitleScreen()
         {
-            button = new Button(10, 10, "Basic Button", new RGBColor(0, 0, 255));
-            panel = new RegisterPanel(100, 100);
+            backGround = new FilledRectangle(0, 0, 600, 600, new RGBColor(0, 0, 0));
+            registerBtn = new Button(10, 10, "Register", new RGBColor(0, 0, 255));
+            loginBtn = new Button(10, 40, "Login", new RGBColor(0, 0, 255));
+            exitButton = new Button(10, 70, "Close", new RGBColor(0, 0, 255));
+            registerPanel = new RegisterPanel(100, 100);
+            loginPanel = new LoginPanel(100, 100);
 
-            button.AddEventListener(Drawing.Events.Event.CLICKLEFT, btnClicked);
+            registerBtn.AddEventListener(Event.CLICKLEFT, btnRegisterClicked);
+            loginBtn.AddEventListener(Event.CLICKLEFT, btnLoginClicked);
+            exitButton.AddEventListener(Event.CLICKLEFT, btnExit);
+
+            backGround.AddChild(registerBtn);
+            backGround.AddChild(loginBtn);
+            backGround.AddChild(exitButton);
         }
 
-        private void btnClicked(object sender, EventArgs e)
+        private void btnLoginClicked(object sender, EventArgs e)
         {
-            button.AddChild(panel);
+            backGround.AddChild(loginPanel);
+        }
+
+        private void btnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
+
+        private void btnRegisterClicked(object sender, EventArgs e)
+        {
+            backGround.AddChild(registerPanel);
         }
 
         public void Update(GameTime gameTime)
         {
-            button.Update(gameTime);
+            backGround.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            button.Draw(spriteBatch);
+            backGround.Draw(spriteBatch);
             spriteBatch.End();
         }
     }
