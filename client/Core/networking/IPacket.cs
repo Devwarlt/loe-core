@@ -1,8 +1,8 @@
-﻿using LoESoft.Client.Core.client;
-using LoESoft.Client.Core.networking.packet;
-using LoESoft.Client.Core.networking.packet.server;
+﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Networking.Packets;
+using LoESoft.Client.Core.Networking.Packets.Server;
 
-namespace LoESoft.Client.Core.networking
+namespace LoESoft.Client.Core.Networking
 {
     public interface IPacket
     {

@@ -1,14 +1,14 @@
-﻿using LoESoft.Client.Core.networking;
-using LoESoft.Client.Core.networking.packet;
-using LoESoft.Client.Core.networking.packet.server;
-using LoESoft.Client.Core.utils;
+﻿using LoESoft.Client.Core.Networking;
+using LoESoft.Client.Core.Networking.Packets;
+using LoESoft.Client.Core.Networking.Packets.Server;
+using LoESoft.Client.Core.Utils;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace LoESoft.Client.Core.client
+namespace LoESoft.Client.Core.Client
 {
     public class GameUser
     {

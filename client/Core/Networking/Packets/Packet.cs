@@ -1,10 +1,10 @@
-﻿using LoESoft.Client.Core.networking.packet.server;
+﻿using LoESoft.Client.Core.Networking.Packets.Server;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace LoESoft.Client.Core.networking.packet
+namespace LoESoft.Client.Core.Networking.Packets
 {
     public abstract class Packet
     {

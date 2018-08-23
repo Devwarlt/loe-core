@@ -1,9 +1,9 @@
-﻿using LoESoft.Client.Core.client;
+﻿using LoESoft.Client.Core.Client;
 using System;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace LoESoft.Client.Core.networking
+namespace LoESoft.Client.Core.Networking
 {
     public class NetworkManager : IDisposable
     {

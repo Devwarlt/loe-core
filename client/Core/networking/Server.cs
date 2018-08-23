@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LoESoft.Client.Core.networking
+namespace LoESoft.Client.Core.Networking
 {
     public class Server
     {

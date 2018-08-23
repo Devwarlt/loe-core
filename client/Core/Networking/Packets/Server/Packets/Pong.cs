@@ -1,8 +1,8 @@
-﻿using LoESoft.Client.Core.client;
-using LoESoft.Client.Core.networking.packet.client.packets;
+﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Networking.Packets.Client.Packets;
 using System;
 
-namespace LoESoft.Client.Core.networking.packet.server.packets
+namespace LoESoft.Client.Core.Networking.Packets.Server.Packets
 {
     internal class Pong : ServerPacket
     {

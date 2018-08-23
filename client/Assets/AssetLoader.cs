@@ -2,7 +2,7 @@
 
 namespace LoESoft.Client.Assets
 {
-    public class AssetLoader
+    public sealed class AssetLoader
     {
         private static ContentManager Content { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using LoESoft.Client.Core.networking;
+﻿using LoESoft.Client.Core.Networking;
 using NLog;
 using NLog.Config;
 using NLog.Targets;

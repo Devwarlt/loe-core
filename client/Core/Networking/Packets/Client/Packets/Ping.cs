@@ -1,4 +1,4 @@
-﻿namespace LoESoft.Client.Core.networking.packet.client.packets
+﻿namespace LoESoft.Client.Core.Networking.Packets.Client.Packets
 {
     internal class Ping : ClientPacket
     {

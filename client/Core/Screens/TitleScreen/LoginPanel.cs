@@ -4,7 +4,7 @@ using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using System;
 
-namespace LoESoft.Client.Core.game.ui.titlescreen
+namespace LoESoft.Client.Core.Screens
 {
     class LoginPanel : Panel
     {

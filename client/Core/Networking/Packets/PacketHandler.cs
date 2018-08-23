@@ -1,10 +1,10 @@
-﻿using LoESoft.Client.Core.client;
-using LoESoft.Client.Core.networking.packet.server;
+﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Networking.Packets.Server;
 using System;
 using System.Reflection;
 using System.Text;
 
-namespace LoESoft.Client.Core.networking.packet
+namespace LoESoft.Client.Core.Networking.Packets
 {
     internal abstract class PacketHandler<T> : IPacket where T : ServerPacket
     {

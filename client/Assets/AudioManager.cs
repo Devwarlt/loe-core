@@ -1,11 +1,10 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Assets
 {
-    public class AudioManager
+    public sealed class AudioManager
     {
         private static Dictionary<string, SoundEffect> SoundEffects { get; set; }
         private static Dictionary<string, Song> Music { get; set; }

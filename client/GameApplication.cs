@@ -1,5 +1,6 @@
 using LoESoft.Client.Assets;
-using LoESoft.Client.Core.game;
+using LoESoft.Client.Core.Screens;
+using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,38 +12,43 @@ namespace LoESoft.Client
         public static int WIDTH => 600;
         public static int HEIGHT => 600;
 
-        GraphicsDeviceManager _graphics;
-        SpriteBatch _spriteBatch;
+        protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
+        protected SpriteBatch SpriteBatch { get; set; }
 
         public GameApplication()
         {
-            _graphics = new GraphicsDeviceManager(this)
+            GraphicsDeviceManager = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferHeight = WIDTH,
-                PreferredBackBufferWidth = HEIGHT
+                PreferredBackBufferWidth = WIDTH,
+                PreferredBackBufferHeight = HEIGHT
             };
 
             IsMouseVisible = true;
             Content.RootDirectory = "Content";
         }
 
-        protected override void Initialize() { base.Initialize(); }
+        protected override void Initialize() {
+
+            base.Initialize();
+
+            DrawHelper.Setup(GraphicsDevice, SpriteBatch);
+
+            ScreenManager.DispatchScreen(new TitleScreen());
+            //ScreenManager.OnGameClose += ExitGame;
+        }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             AssetLoader.Init(Content);
             AudioManager.Init();
             TextDisplay.LoadSpriteFont(Content);
-            ScreenManager.Init();
-            ScreenManager.OnGameClose += ExitGame;
         }
 
         private void ExitGame()
         {
             GameClient._networkHandler.Dispose();
-
             Exit();
         }
 
@@ -57,9 +63,9 @@ namespace LoESoft.Client
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(new Color(125, 0, 0, 1));
+            SpriteBatch.ClearColor(125, 0, 0, 1);
 
-            ScreenManager.Draw(_spriteBatch);
+            ScreenManager.Draw(SpriteBatch);
 
             base.Draw(gameTime);
         }
