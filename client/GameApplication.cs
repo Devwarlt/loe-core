@@ -1,11 +1,8 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game;
-using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Text;
-using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LoESoft.Client
 {
@@ -35,9 +32,8 @@ namespace LoESoft.Client
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            DrawingSettings.Load(Content);
-            AssetReader.Load(Content);
-            XmlReader.Load(Content);
+            AssetLoader.Init(Content);
+            AudioManager.Init();
             TextDisplay.LoadSpriteFont(Content);
             ScreenManager.Init();
             ScreenManager.OnGameClose += ExitGame;

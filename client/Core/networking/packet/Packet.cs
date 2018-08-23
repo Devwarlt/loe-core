@@ -1,15 +1,15 @@
-﻿using LoESoft.Server.Core.networking.packet.client;
+﻿using LoESoft.Client.Core.networking.packet.server;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace LoESoft.Server.Core.networking.packet
+namespace LoESoft.Client.Core.networking.packet
 {
-    internal abstract class Packet
+    public abstract class Packet
     {
-        public static Dictionary<PacketID, Packet> ClientPackets = new Dictionary<PacketID, Packet>();
-        public static Dictionary<PacketID, IPacket> ClientPacketHandlers = new Dictionary<PacketID, IPacket>();
+        public static Dictionary<PacketID, Packet> ServerPackets = new Dictionary<PacketID, Packet>();
+        public static Dictionary<PacketID, IPacket> ServerPacketHandlers = new Dictionary<PacketID, IPacket>();
 
         public abstract PacketID ID { get; }
 
@@ -18,10 +18,10 @@ namespace LoESoft.Server.Core.networking.packet
         static Packet()
         {
             foreach (var i in typeof(Packet).Assembly.GetTypes())
-                if (typeof(Packet).IsAssignableFrom(i) && !i.IsAbstract && typeof(IClientPacket).IsAssignableFrom(i))
+                if (typeof(Packet).IsAssignableFrom(i) && !i.IsAbstract && typeof(IServerPacket).IsAssignableFrom(i))
                 {
                     Packet packet = (Packet)Activator.CreateInstance(i);
-                    ClientPackets.Add(packet.ID, packet);
+                    ServerPackets.Add(packet.ID, packet);
                 }
         }
 

@@ -19,8 +19,7 @@ namespace LoESoft.Client.Core.networking
             _gameUser = new GameUser(_socket, _server);
         }
 
-        public void Start()
-            => Connect();
+        public void Start() => Connect();
 
         private static void Connect()
         {

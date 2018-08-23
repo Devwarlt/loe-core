@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LoESoft.Client.Assets;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,8 +8,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
     public class TextDisplay : Sprite
     {
         public static SpriteFont Font { get; private set; }
-        public static void LoadSpriteFont(ContentManager contentManager) =>
-            Font = contentManager.Load<SpriteFont>("fonts/font");
+        public static void LoadSpriteFont(ContentManager contentManager) => Font = AssetLoader.LoadAsset<SpriteFont>("fonts/font");
 
         public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
         public static Vector2 MeasureString(string text, int size = 12)
@@ -17,7 +17,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
             float x = Font.MeasureString(text).X * scale;
             float y = Font.MeasureString(text).Y * scale;
-            
+
             return new Vector2(x, y);
         }
 
@@ -25,7 +25,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public float Size { get; set; }
         public bool Bold { get; set; } //unhandled
 
-        public TextDisplay(int x, int y, string text, float size = 12, RGBColor color = null, float alpha = 1,bool bold = false)
+        public TextDisplay(int x, int y, string text, float size = 12, RGBColor color = null, float alpha = 1, bool bold = false)
             : base(x, y, 0, 0, null, color, alpha)
         {
             Text = text;
@@ -47,7 +47,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
             spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f,
                 Vector2.Zero, scale, SpriteEffects.None, 0f);
-            
+
             base.Draw(spriteBatch);
         }
     }

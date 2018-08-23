@@ -3,11 +3,8 @@ using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 {
@@ -84,7 +81,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
                     Text.Length--;
 
 
-            TextField.Text = (Encoded) ? GetEncodedString(Text.ToString()) 
+            TextField.Text = (Encoded) ? GetEncodedString(Text.ToString())
                 : Text.ToString();
 
             if (Selected && _timer > 0.5f)
