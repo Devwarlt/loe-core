@@ -1,6 +1,8 @@
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Screens;
+using LoESoft.Client.Core.Screens.TitleScreen;
 using LoESoft.Client.Drawing;
+using LoESoft.Client.Drawing.Sprites;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,8 +11,8 @@ namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        public static int WIDTH => 600;
-        public static int HEIGHT => 600;
+        public static int WIDTH => 1280;
+        public static int HEIGHT => 720;
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
@@ -32,9 +34,8 @@ namespace LoESoft.Client
             base.Initialize();
 
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
-
+            
             ScreenManager.DispatchScreen(new TitleScreen());
-            //ScreenManager.OnGameClose += ExitGame;
         }
 
         protected override void LoadContent()
@@ -44,18 +45,19 @@ namespace LoESoft.Client
             AssetLoader.Init(Content);
             AudioManager.Init();
             TextDisplay.LoadSpriteFont(Content);
+            ScreenManager.OnGameClose += ExitGame;
         }
 
         private void ExitGame()
         {
-            GameClient._networkHandler.Dispose();
+            //GameClient._networkHandler.Dispose();
             Exit();
         }
 
         protected override void UnloadContent() { }
 
         protected override void Update(GameTime gameTime)
-        {
+        { 
             ScreenManager.Update(gameTime);
 
             base.Update(gameTime);

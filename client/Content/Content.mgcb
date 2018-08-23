@@ -13,13 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin fonts/font.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/font.spritefont
-
 #begin images/btnImage.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -67,4 +60,11 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:music/titleScreen.mp3
+
+#begin fonts/font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/font.spritefont
 

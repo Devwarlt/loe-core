@@ -22,8 +22,6 @@ namespace LoESoft.Client.Drawing.Sprites
             SpriteColor = new Color(color.R, color.G, color.B, opacity);
         }
 
-        public override void Update(GameTime gameTime) => base.Update(gameTime);
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (SpriteTexture != null)

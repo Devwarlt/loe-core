@@ -4,9 +4,9 @@ using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using System;
 
-namespace LoESoft.Client.Core.Screens
+namespace LoESoft.Client.Core.Screens.TitleScreen
 {
-    class LoginPanel : Panel
+    public class LoginPanel : Panel
     {
         TextBox mailTextBox;
         TextBox passTextBox;
@@ -21,12 +21,11 @@ namespace LoESoft.Client.Core.Screens
 
             btnLogin = new Button(0, 140, "Login", new RGBColor(255, 0, 0));
             btnLogin.X = (Width / 2 - btnLogin.Width / 2);
-
-            AddEventListener(Event.CLICKLEFT, onClick);
+            
             mailTextBox.AddEventListener(Event.CLICKLEFT, onMailClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
             btnLogin.AddEventListener(Event.CLICKLEFT, onLogin);
-            _exitBtn.Exit += OnExit;
+            AddEventListener(Event.CLICKLEFT, onClick);
 
             AddChild(mailTextBox);
             AddChild(passTextBox);
@@ -35,7 +34,6 @@ namespace LoESoft.Client.Core.Screens
 
         public override void OnExit()
         {
-            base.OnExit();
             mailTextBox.Selected = false;
             passTextBox.Selected = false;
             mailTextBox.Clear();
