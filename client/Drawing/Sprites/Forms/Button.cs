@@ -15,7 +15,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
 
             int textwidth = (int)TextDisplay.MeasureString(name).X;
             int textheight = (int)TextDisplay.MeasureString(name).Y;
-            
+
             Width = textwidth + 10;
             Height = textheight + 10;
 

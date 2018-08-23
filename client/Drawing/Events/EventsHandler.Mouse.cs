@@ -1,6 +1,5 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace LoESoft.Client.Drawing.Events
 {

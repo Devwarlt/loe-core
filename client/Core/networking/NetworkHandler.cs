@@ -1,35 +1,64 @@
 ﻿using LoESoft.Client.Core.client;
-using LoESoft.Client.Core.networking.packets;
+using LoESoft.Client.Core.networking.packet;
+using LoESoft.Client.Core.networking.packet.server;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
 namespace LoESoft.Client.Core.networking
 {
-    public class NetworkHandler
+    internal class NetworkHandler
     {
-        public static byte[] _buffer { get; } = new byte[1024];
-        public static int _connectionTimeout { get; } = 3000;
+        public static byte[] _buffer => new byte[1024];
+        public static int _connectionTimeout => 3000;
         public static int _connectionAttempts { get; set; } = 0;
-        public static Semaphore _networkHandlerSemaphore { get; } = new Semaphore(1, 1);
-        public static Semaphore _connectionThreadSemaphore { get; } = new Semaphore(1, 1);
+        public static Semaphore _networkHandlerSemaphore => new Semaphore(1, 1);
+        public static Semaphore _connectionThreadSemaphore => new Semaphore(1, 1);
 
         private static Socket _socket { get; set; }
         private static Server _server { get; set; }
 
+        private GameUser _gameUser { get; set; }
+        private Thread _packetProcessing { get; set; }
+
         public NetworkHandler(GameUser gameUser, Server server)
         {
-            _socket = gameUser._socket;
+            _gameUser = gameUser;
+            _packetProcessing = new Thread(() =>
+            {
+                while (_gameUser._socket != null)
+                {
+                    if (_gameUser._socket.Connected)
+                    {
+                        if (_gameUser._pendingPacket.Count != 0)
+                            foreach (var i in _gameUser._pendingPacket)
+                            {
+                                _gameUser._pendingPacket.TryDequeue(out ServerPacket serverPacket);
+                                try { Packet.ServerPacketHandlers[serverPacket.ID].Handle(_gameUser, serverPacket); }
+                                catch (KeyNotFoundException) { }
+                            }
+                        else
+                            Thread.Sleep(100);
+                    }
+                    else
+                        break;
+                }
+            })
+            { IsBackground = true };
+            _socket = _gameUser._socket;
             _socket.NoDelay = true;
             _socket.UseOnlyOverlappedIO = true;
             _socket.SendTimeout = 1000;
             _socket.ReceiveTimeout = 1000;
             _socket.Ttl = 112;
-
             _server = server;
         }
+
+        public void Start()
+            => _packetProcessing.Start();
 
         public void HandlePacket()
         {
@@ -42,8 +71,17 @@ namespace LoESoft.Client.Core.networking
 
             if (!string.IsNullOrEmpty(data))
             {
-                // TODO: implement packet handler here.
-                GameClient._log.Info($"New packet received!\n{data}");
+                try
+                {
+                    PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                    Packet packet = Packet.ServerPackets[packetData.PacketID];
+                    packet.CreateInstance();
+
+                    GameClient._log.Info($"New packet received!\n{packet.ToString()}");
+
+                    _gameUser._pendingPacket.Enqueue(packet as ServerPacket);
+                }
+                catch (Exception e) { GameClient._log.Error($"Data: {data}\n{e}"); }
             }
         }
 

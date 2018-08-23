@@ -63,10 +63,18 @@
     <Compile Include="Core\game\screens\WorldScreen.cs" />
     <Compile Include="Core\game\ui\titlescreen\LoginPanel.cs" />
     <Compile Include="Core\game\ui\titlescreen\RegisterPanel.cs" />
+    <Compile Include="Core\networking\IPacket.cs" />
     <Compile Include="Core\networking\NetworkHandler.cs" />
-    <Compile Include="Core\networking\packets\Packet.cs" />
-    <Compile Include="Core\networking\packets\PacketData.cs" />
-    <Compile Include="Core\networking\packets\PacketID.cs" />
+    <Compile Include="Core\networking\packet\client\ClientPacket.cs" />
+    <Compile Include="Core\networking\packet\client\IClientPacket.cs" />
+    <Compile Include="Core\networking\packet\client\packets\Ping.cs" />
+    <Compile Include="Core\networking\packet\Packet.cs" />
+    <Compile Include="Core\networking\packet\PacketData.cs" />
+    <Compile Include="Core\networking\packet\PacketHandler.cs" />
+    <Compile Include="Core\networking\packet\PacketID.cs" />
+    <Compile Include="Core\networking\packet\server\IServerPacket.cs" />
+    <Compile Include="Core\networking\packet\server\packets\Pong.cs" />
+    <Compile Include="Core\networking\packet\server\ServerPacket.cs" />
     <Compile Include="Core\networking\Server.cs" />
     <Compile Include="Core\utils\IO.cs" />
     <Compile Include="Drawing\DrawingSettings.cs" />
@@ -196,10 +204,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\networking\packets\client\" />
-    <Folder Include="Core\networking\packets\server\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <PropertyGroup>

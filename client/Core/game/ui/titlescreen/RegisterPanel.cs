@@ -13,7 +13,7 @@ namespace LoESoft.Client.Core.game.ui.titlescreen
         TextBox passTextBox;
 
         Button btnRegister;
-        
+
         public RegisterPanel(int x, int y)
             : base(x, y, "Register", color: new RGBColor(85, 85, 88), height: 250)
         {
@@ -22,7 +22,7 @@ namespace LoESoft.Client.Core.game.ui.titlescreen
             passTextBox = new TextBox(10, 150, 380, "Password:", encoded: true);
 
             btnRegister = new Button(0, 190, "Register", new RGBColor(255, 0, 0));
-            btnRegister.X = (Width/2 - btnRegister.Width/2);
+            btnRegister.X = (Width / 2 - btnRegister.Width / 2);
 
             AddChild(mailTextBox);
             AddChild(userTextBox);

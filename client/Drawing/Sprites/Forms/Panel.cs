@@ -1,7 +1,6 @@
 ﻿using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms
 {
@@ -18,7 +17,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
             Title = new TextDisplay((width / 2 - (int)textpos.X / 2), 5, title);
 
             _exitBtn = new ExitButton(width - 23, 3, 20, 20);
-            
+
             AddChild(Title);
             AddChild(_exitBtn);
         }

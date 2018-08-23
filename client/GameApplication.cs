@@ -1,11 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Text;
-using System;
 
 namespace LoESoft.Client
 {

@@ -1,5 +1,4 @@
 using System;
-using LoESoft.Client.Assets;
 using LoESoft.Client.Core.game.ui.titlescreen;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
@@ -22,7 +21,7 @@ namespace LoESoft.Client.Core.game.screens
         LoginPanel loginPanel;
 
         FilledRectangle backGround;
-        
+
         public TitleScreen()
         {
             backGround = new FilledRectangle(0, 0, 600, 600, new RGBColor(0, 0, 0));

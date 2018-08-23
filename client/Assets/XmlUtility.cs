@@ -1,6 +1,5 @@
 ﻿using LoESoft.Client.Assets.Serialization.AssetTypes;
 using Microsoft.Xna.Framework.Graphics;
-using static LoESoft.Client.Assets.Serialization.AssetTypes.Utils.Utils;
 
 namespace LoESoft.Client.Assets
 {

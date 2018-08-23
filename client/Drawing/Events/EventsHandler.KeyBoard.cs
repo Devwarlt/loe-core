@@ -1,10 +1,6 @@
 ﻿using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -25,13 +21,13 @@ namespace LoESoft.Client.Drawing.Events
             foreach (var i in pressedKeys)
                 if (i.Value.ToString().Length <= 2 || TextBox.ValidKeys.Contains(i.Value))
                     keys.Add(KeysToChar(i.Value, i.Key));
-            
+
             return keys;
         }
 
         protected bool DetectCaps()
         {
-            if (currentKeyBoard.CapsLock || ((previousKeyBoard.IsKeyDown(Keys.LeftShift) 
+            if (currentKeyBoard.CapsLock || ((previousKeyBoard.IsKeyDown(Keys.LeftShift)
                 && currentKeyBoard.IsKeyDown(Keys.LeftShift)) ||
                 (previousKeyBoard.IsKeyDown(Keys.RightShift) && currentKeyBoard.IsKeyDown(Keys.RightShift))))
                 return true;
@@ -115,6 +111,6 @@ namespace LoESoft.Client.Drawing.Events
             }
             return '\0';
         }
-#endregion
+        #endregion
     }
 }

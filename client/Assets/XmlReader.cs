@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using LoESoft.Client.Properties;
 using LoESoft.Client.Assets.Serialization;
 using System;

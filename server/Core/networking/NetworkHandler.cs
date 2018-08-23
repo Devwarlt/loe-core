@@ -3,6 +3,7 @@ using LoESoft.Server.Core.networking.packet;
 using LoESoft.Server.Core.networking.packet.client;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -29,7 +30,8 @@ namespace LoESoft.Server.Core.networking
                             foreach (var i in _client._pendingPacket)
                             {
                                 _client._pendingPacket.TryDequeue(out ClientPacket clientPacket);
-                                Packet.ClientPacketHandlers[clientPacket.ID].Handle(_client, clientPacket);
+                                try { Packet.ClientPacketHandlers[clientPacket.ID].Handle(_client, clientPacket); }
+                                catch (KeyNotFoundException) { }
                             }
                         else
                             Thread.Sleep(100);
@@ -69,7 +71,7 @@ namespace LoESoft.Server.Core.networking
                     try
                     {
                         PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
-                        Packet packet = Packet.ClientMessages[packetData.PacketID];
+                        Packet packet = Packet.ClientPackets[packetData.PacketID];
                         packet.CreateInstance();
 
                         GameServer._log.Info($"New packet received!\n{packet.ToString()}");
