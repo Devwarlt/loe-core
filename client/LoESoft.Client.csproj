@@ -78,6 +78,7 @@
     <Compile Include="Drawing\Sprites\Forms\Complex\ExitButton.cs" />
     <Compile Include="Drawing\Sprites\Forms\Complex\TextBox.cs" />
     <Compile Include="Drawing\Sprites\Forms\FilledRectangle.cs" />
+    <Compile Include="Drawing\Sprites\Forms\Mask.cs" />
     <Compile Include="Drawing\Sprites\Forms\Panel.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />
     <Compile Include="Drawing\Sprites\Sprite.cs" />

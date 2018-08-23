@@ -26,19 +26,20 @@ namespace LoESoft.Client.Core.game.ui.titlescreen
             mailTextBox.AddEventListener(Event.CLICKLEFT, onMailClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
             btnLogin.AddEventListener(Event.CLICKLEFT, onLogin);
-            _exitBtn.Exit += onClose;
+            _exitBtn.Exit += OnExit;
 
             AddChild(mailTextBox);
             AddChild(passTextBox);
             AddChild(btnLogin);
         }
 
-        private void onClose()
+        public override void OnExit()
         {
-            mailTextBox.Clear();
-            passTextBox.Clear();
+            base.OnExit();
             mailTextBox.Selected = false;
             passTextBox.Selected = false;
+            mailTextBox.Clear();
+            passTextBox.Clear();
         }
 
         private void onLogin(object sender, EventArgs e)
