@@ -34,17 +34,7 @@ namespace LoESoft.Client.Core.game.ui.titlescreen
             userTextBox.AddEventListener(Event.CLICKLEFT, onUserClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
             btnRegister.AddEventListener(Event.CLICKLEFT, onRegister);
-            _exitBtn.Exit += onClose;
-        }
-
-        private void onClose()
-        {
-            mailTextBox.Clear();
-            userTextBox.Clear();
-            passTextBox.Clear();
-            mailTextBox.Selected = false;
-            userTextBox.Selected = false;
-            passTextBox.Selected = false;
+            _exitBtn.Exit += OnExit;
         }
 
         private void onRegister(object sender, EventArgs e)
@@ -75,6 +65,17 @@ namespace LoESoft.Client.Core.game.ui.titlescreen
 
         private void onClick(object sender, EventArgs e)
         {
+            mailTextBox.Selected = false;
+            userTextBox.Selected = false;
+            passTextBox.Selected = false;
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            mailTextBox.Clear();
+            userTextBox.Clear();
+            passTextBox.Clear();
             mailTextBox.Selected = false;
             userTextBox.Selected = false;
             passTextBox.Selected = false;

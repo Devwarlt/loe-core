@@ -18,15 +18,17 @@ namespace LoESoft.Client.Drawing.Sprites
             get { return new Rectangle(StageX, StageY, Width, Height); }
         }
 
+        public bool IsZeroApplicaple = false;
+
         public int X { get; set; }
         public int Y { get; set; }
         public int StageX
         {
-            get { return (ParentSprite != null) ? ParentSprite.StageX + X : X; }
+            get { return (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X; }
         }
         public int StageY
         {
-            get { return (ParentSprite != null) ? ParentSprite.StageY + Y : Y; }
+            get { return (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y; }
         }
 
         public int Width { get; set; }
@@ -60,30 +62,38 @@ namespace LoESoft.Client.Drawing.Sprites
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             foreach (var i in EventDictionary)
             {
-                if (_eventsHandler.HandleMouse(this, i.Key) && IsInvokable)
+                if (_eventsHandler.HandleMouse(this, i.Key) && IsInvokable == true)
                 {
+                    SetInvokable(false);
+                    Console.WriteLine(ParentSprite.IsInvokable);
                     i.Value?.Invoke(this, new EventArgs());
-                    SetInvokables(false);
                 }
-                else if (_timer > 0.5f)
+                else if (!SpriteRectangle.Intersects(EventsHandler.MouseRectangle))
                 {
-                    SetInvokables(true);
-                    _timer = 0f;
+                    //SetInvokable(true);
+                    //Console.ReadLine();
                 }
             }
         }
 
-        protected void SetInvokables(bool val)
+        public void SetInvokable(bool val)
         {
-            if (ParentSprite != null)
-            {
-                if (ParentSprite.IsInvokable != val)
-                    ParentSprite.IsInvokable = val;
+            if (ParentSprite == null)
+                return;
 
-                foreach (var i in ParentSprite.ChildList.ToArray())
-                    if (i.Index < Index && (val != true && i.SpriteRectangle.Intersects(SpriteRectangle)))
-                        i.IsInvokable = val;
-            }
+            ParentSprite.IsInvokable = val;
+
+            foreach (var i in ParentSprite.ChildList)
+                if (i.Index < Index)
+                {
+                    i.SetInvokable(val);
+                    i.IsInvokable = val;
+                    Console.WriteLine("Values Changes!");
+                }
+
+            ParentSprite?.SetInvokable(val);
+
+            Console.WriteLine("Your gay mum!");
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
