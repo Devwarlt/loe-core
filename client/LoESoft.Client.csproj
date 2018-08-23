@@ -49,14 +49,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\AssetReader.cs" />
-    <Compile Include="Assets\Serialization\AssetSerialization.cs" />
-    <Compile Include="Assets\AssetUtility.cs" />
-    <Compile Include="Assets\Serialization\AssetType.cs" />
-    <Compile Include="Assets\Serialization\AssetTypes\Utils\Utils.cs" />
-    <Compile Include="Assets\Serialization\AssetTypes\Vocation.cs" />
-    <Compile Include="Assets\XmlReader.cs" />
-    <Compile Include="Assets\XmlUtility.cs" />
+    <Compile Include="Assets\AssetLoader.cs" />
     <Compile Include="Core\client\Client.cs" />
     <Compile Include="Core\game\Screens.cs" />
     <Compile Include="Core\game\screens\TitleScreen.cs" />
@@ -77,7 +70,6 @@
     <Compile Include="Core\networking\packet\server\ServerPacket.cs" />
     <Compile Include="Core\networking\Server.cs" />
     <Compile Include="Core\utils\IO.cs" />
-    <Compile Include="Drawing\DrawingSettings.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.KeyBoard.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
@@ -94,11 +86,7 @@
     <Compile Include="GameClient.cs" />
     <Compile Include="Core\networking\NetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Assets\AudioManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -139,13 +127,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Xmls\Vocations.xml" />
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>

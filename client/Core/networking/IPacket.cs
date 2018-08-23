@@ -4,7 +4,7 @@ using LoESoft.Client.Core.networking.packet.server;
 
 namespace LoESoft.Client.Core.networking
 {
-    interface IPacket
+    public interface IPacket
     {
         PacketID ID { get; }
         void Handle(GameUser gameUser, ServerPacket serverPacket);

@@ -1,4 +1,4 @@
 ﻿namespace LoESoft.Client.Core.networking.packet.server
 {
-    internal abstract class ServerPacket : Packet, IServerPacket { }
+    public abstract class ServerPacket : Packet, IServerPacket { }
 }

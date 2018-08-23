@@ -48,12 +48,13 @@ namespace LoESoft.Client
 
             try
             {
-                _log.Info("Network Manager is loading...");
+                /* There is a problem with the _connectionThreadSemaphore.Release();
+                //_log.Info("Network Manager is loading...");
 
-                _networkHandler = new NetworkManager();
-                _networkHandler.Start();
+                //_networkHandler = new NetworkManager();
+                //_networkHandler.Start();
 
-                _log.Info("Network Manager is loading... OK!");
+                //_log.Info("Network Manager is loading... OK!");*/
                 _log.Info("Game Client is loading... OK!");
 
                 using (var game = new GameApplication())

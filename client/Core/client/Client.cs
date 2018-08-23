@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace LoESoft.Client.Core.client
 {
-    internal class GameUser
+    public class GameUser
     {
         public Socket _socket { get; private set; }
         public ConcurrentQueue<ServerPacket> _pendingPacket { get; private set; }
