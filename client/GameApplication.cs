@@ -9,8 +9,8 @@ namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        public static int WIDTH => 600;
-        public static int HEIGHT => 600;
+        public static int WIDTH => 1280;
+        public static int HEIGHT => 720;
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
@@ -33,7 +33,7 @@ namespace LoESoft.Client
 
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
 
-            ScreenManager.DispatchScreen(new TitleScreen());
+            ScreenManager.DispatchScreen(new SplashScreen());
             //ScreenManager.OnGameClose += ExitGame;
         }
 
