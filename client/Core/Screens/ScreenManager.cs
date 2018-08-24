@@ -30,16 +30,17 @@ namespace LoESoft.Client.Core.Screens
         }
 
         private static Action DoCloseGame { get; set; }
+
         public static void CloseGame()
         {
             ActiveScreen = null;
             DoCloseGame?.Invoke();
         }
-
+        
         public static event Action OnGameClose
         {
-            add { OnGameClose += value; }
-            remove { OnGameClose -= value; }
+            add { DoCloseGame += value; }
+            remove { DoCloseGame -= value; }
         }
     }
 }

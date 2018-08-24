@@ -29,7 +29,6 @@ namespace LoESoft.Client
 
         protected override void Initialize()
         {
-
             base.Initialize();
 
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
