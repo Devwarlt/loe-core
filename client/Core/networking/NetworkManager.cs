@@ -24,9 +24,7 @@ namespace LoESoft.Client.Core.Networking
         private static void Connect()
         {
             Thread networkBackgroundThread = new Thread(NetworkHandler.BeginConnect)
-            {
-                IsBackground = true
-            };
+            { IsBackground = true };
             networkBackgroundThread.Start();
         }
 

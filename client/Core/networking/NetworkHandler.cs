@@ -15,8 +15,8 @@ namespace LoESoft.Client.Core.Networking
         public static byte[] _buffer => new byte[1024];
         public static int _connectionTimeout => 3000;
         public static int _connectionAttempts { get; set; } = 0;
-        public static Semaphore _networkHandlerSemaphore => new Semaphore(1, 1);
-        public static Semaphore _connectionThreadSemaphore => new Semaphore(1, 1);
+        public static Semaphore _networkHandlerSemaphore = new Semaphore(1, 1);
+        public static Semaphore _connectionThreadSemaphore = new Semaphore(1, 1);
 
         private static Socket _socket { get; set; }
         private static Server _server { get; set; }
@@ -57,8 +57,7 @@ namespace LoESoft.Client.Core.Networking
             _server = server;
         }
 
-        public void Start()
-            => _packetProcessing.Start();
+        public void Start() => _packetProcessing.Start();
 
         public void HandlePacket()
         {
@@ -102,18 +101,11 @@ namespace LoESoft.Client.Core.Networking
                 {
                     _connectionAttempts++;
 
-                    Thread connectionThread = new Thread(() =>
-                    {
-                        _connectionThreadSemaphore.WaitOne();
+                    _connectionThreadSemaphore.WaitOne();
 
-                        try { _socket.Connect(_server._dns, _server._port); }
-                        catch (ObjectDisposedException) { }
-                        catch (SocketException) { }
-                        finally { _connectionThreadSemaphore.Release(); }
-                    })
-                    { IsBackground = true };
-                    connectionThread.Start();
-                    connectionThread.Join(_connectionTimeout);
+                    _socket.BeginConnect(_server._dns, _server._port, null, null).AsyncWaitHandle.WaitOne(_connectionTimeout, true);
+
+                    _connectionThreadSemaphore.Release();
 
                     if (!_socket.Connected)
                         throw new SocketException((int)SocketError.TimedOut);
