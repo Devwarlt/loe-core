@@ -13,7 +13,7 @@ namespace LoESoft.Client.Core.Networking
     internal class NetworkHandler
     {
         public static byte[] _buffer => new byte[1024];
-        public static int _connectionTimeout => 3000;
+        public static int _connectionTimeout => 1000;
         public static int _connectionAttempts { get; set; } = 0;
         public static Semaphore _networkHandlerSemaphore = new Semaphore(1, 1);
         public static Semaphore _connectionThreadSemaphore = new Semaphore(1, 1);
@@ -48,6 +48,7 @@ namespace LoESoft.Client.Core.Networking
                 }
             })
             { IsBackground = true };
+
             _socket = _gameUser._socket;
             _socket.NoDelay = true;
             _socket.UseOnlyOverlappedIO = true;
@@ -90,35 +91,25 @@ namespace LoESoft.Client.Core.Networking
 
             _networkHandlerSemaphore.WaitOne();
 
-            GameClient.Info("Connecting to the game server...");
+            GameClient.Info("Attempting to connect to the game server...");
 
             while (!_socket.Connected && !NetworkManager._dispose)
             {
-                if (_socket == null)
-                    break;
+                _connectionThreadSemaphore.WaitOne();
 
-                try
+                _connectionAttempts++;
+
+                var asyncResult = _socket.BeginConnect(_server._dns, _server._port, null, null);
+                if (!asyncResult.AsyncWaitHandle.WaitOne(_connectionTimeout, true))
                 {
-                    _connectionAttempts++;
-
-                    _connectionThreadSemaphore.WaitOne();
-
-                    _socket.BeginConnect(_server._dns, _server._port, null, null).AsyncWaitHandle.WaitOne(_connectionTimeout, true);
-
-                    _connectionThreadSemaphore.Release();
-
-                    if (!_socket.Connected)
-                        throw new SocketException((int)SocketError.TimedOut);
-                }
-                catch (ObjectDisposedException) { }
-                catch (SocketException e)
-                {
-                    if (!NetworkManager._dispose)
+                    try
                     {
-                        if (e.SocketErrorCode == SocketError.TimedOut)
-                            GameClient.Warn($"[Attempts: {_connectionAttempts}] Connection timeout. Retrying...");
-                        else
-                            GameClient.Warn($"[Attempts: {_connectionAttempts}] Connection failed. Retrying...");
+                        _socket.EndConnect(asyncResult);
+                    }
+                    catch
+                    {
+                        GameClient.Warn($"[Attempts: {_connectionAttempts}] Connection failed. Retrying...");
+                        _connectionThreadSemaphore.Release();
                     }
                 }
             }
@@ -131,6 +122,18 @@ namespace LoESoft.Client.Core.Networking
                 _networkHandlerSemaphore.Release();
 
                 NetworkManager._networkManagerDisposeSemaphore.Release();
+            }
+        }
+
+        private static void OnConnect(IAsyncResult asyncResult)
+        {
+            try
+            {
+                //_socket.EndConnect(asyncResult);
+            }
+            catch
+            {
+                _connectionThreadSemaphore.Release();
             }
         }
     }
