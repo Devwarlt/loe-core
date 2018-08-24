@@ -77,11 +77,11 @@ namespace LoESoft.Client.Core.Networking
                     Packet packet = Packet.ServerPackets[packetData.PacketID];
                     packet.CreateInstance();
 
-                    GameClient._log.Info($"New packet received!\n{packet.ToString()}");
+                    GameClient.Info($"New packet received!\n{packet.ToString()}");
 
                     _gameUser._pendingPacket.Enqueue(packet as ServerPacket);
                 }
-                catch (Exception e) { GameClient._log.Error($"Data: {data}\n{e}"); }
+                catch (Exception e) { GameClient.Error(e, $"Data: {data}"); }
             }
         }
 
@@ -91,7 +91,7 @@ namespace LoESoft.Client.Core.Networking
 
             _networkHandlerSemaphore.WaitOne();
 
-            GameClient._log.Info("Connecting to the game server...");
+            GameClient.Info("Connecting to the game server...");
 
             while (!_socket.Connected && !NetworkManager._dispose)
             {
@@ -109,8 +109,7 @@ namespace LoESoft.Client.Core.Networking
                         try { _socket.Connect(_server._dns, _server._port); }
                         catch (ObjectDisposedException) { }
                         catch (SocketException) { }
-
-                        _connectionThreadSemaphore.Release();
+                        finally { _connectionThreadSemaphore.Release(); }
                     })
                     { IsBackground = true };
                     connectionThread.Start();
@@ -125,17 +124,17 @@ namespace LoESoft.Client.Core.Networking
                     if (!NetworkManager._dispose)
                     {
                         if (e.SocketErrorCode == SocketError.TimedOut)
-                            GameClient._log.Warn($"[Attempts: {_connectionAttempts}] Connection timeout. Retrying...");
+                            GameClient.Warn($"[Attempts: {_connectionAttempts}] Connection timeout. Retrying...");
                         else
-                            GameClient._log.Warn($"[Attempts: {_connectionAttempts}] Connection failed. Retrying...");
+                            GameClient.Warn($"[Attempts: {_connectionAttempts}] Connection failed. Retrying...");
                     }
                 }
             }
 
             if (!NetworkManager._dispose)
             {
-                GameClient._log.Warn($"[Attempts: {_connectionAttempts}] The game client has been connected to IP '{_server._dns}' via port '{_server._port}'!");
-                GameClient._log.Info("Connecting to the game server... OK!");
+                GameClient.Warn($"[Attempts: {_connectionAttempts}] The game client has been connected to IP '{_server._dns}' via port '{_server._port}'!");
+                GameClient.Info("Connecting to the game server... OK!");
 
                 _networkHandlerSemaphore.Release();
 

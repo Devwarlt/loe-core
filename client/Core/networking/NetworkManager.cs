@@ -32,7 +32,7 @@ namespace LoESoft.Client.Core.Networking
 
         private static void Reconnect()
         {
-            GameClient._log.Warn($"Client dropped connection to the server, retrying...");
+            GameClient.Warn($"Client dropped connection to the server, retrying...");
 
             NetworkHandler._connectionAttempts = 0;
 
@@ -43,7 +43,7 @@ namespace LoESoft.Client.Core.Networking
         {
             _dispose = true;
 
-            GameClient._log.Info("Network Manager has been stopped.");
+            GameClient.Info("Network Manager has been stopped.");
 
             _socket.Close();
             _socket.Dispose();

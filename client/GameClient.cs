@@ -2,6 +2,7 @@
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using Rollbar;
 using System;
 using System.Reflection;
 using System.Threading;
@@ -15,10 +16,11 @@ namespace LoESoft.Client
         public static string _version => $"{Assembly.GetExecutingAssembly().GetName().Version}";
 
         // Log
-        public static Logger _log { get; } = LogManager.GetLogger(_name);
+        private static Logger _log => LogManager.GetLogger(_name);
+        private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
         // Network
-        public static NetworkManager _networkHandler { get; private set; }
+        public static NetworkManager _networkManager { get; private set; }
 
         [STAThread]
         static void Main()
@@ -44,36 +46,51 @@ namespace LoESoft.Client
 
             LogManager.Configuration = config;
 
-            _log.Info("Game Client is loading...");
+            RollbarLocator.RollbarInstance.Configure(new RollbarConfig(_rollbarId));
+
+            Info("Game Client is loading...");
 
             try
             {
-                /* There is a problem with the _connectionThreadSemaphore.Release();
-                _log.Info("Network Manager is loading...");
+                Info("Network Manager is loading...");
 
-                _networkHandler = new NetworkManager();
-                _networkHandler.Start();
+                _networkManager = new NetworkManager();
+                _networkManager.Start();
 
-                _log.Info("Network Manager is loading... OK!");*/
-                _log.Info("Game Client is loading... OK!");
+                Info("Network Manager is loading... OK!");
+                Info("Game Client is loading... OK!");
 
                 using (var game = new GameApplication())
                     game.Run();
             }
             catch (Exception e)
             {
-                _log.Info("An error occurred!");
+                Info("An error occurred!");
 
-                _log.Error(e.ToString());
+                Error(e);
 
                 Thread.Sleep(100);
 
-                _log.Warn("Press 'ESC' to close...");
+                Warn("Press 'ESC' to close...");
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
                 Environment.Exit(0);
             }
+        }
+
+        public static void Info(string data) => _log.Info(data);
+
+        public static void Warn(string data) => _log.Warn(data);
+
+        public static void Error(Exception e, string data = null)
+        {
+            _log.Error($"{data}{(data == null ? "" : "\n")}{e.ToString()}");
+
+#if DEBUG
+            // Rollbar error analytics for developers only.
+            RollbarLocator.RollbarInstance.Error(e);
+#endif
         }
     }
 }

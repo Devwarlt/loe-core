@@ -29,41 +29,41 @@ namespace LoESoft.Client.Core.Screens
             AddChild(passTextBox);
             AddChild(btnRegister);
 
-            mailTextBox.AddEventListener(Event.CLICKLEFT, onMailClick);
-            userTextBox.AddEventListener(Event.CLICKLEFT, onUserClick);
-            passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
-            btnRegister.AddEventListener(Event.CLICKLEFT, onRegister);
+            mailTextBox.AddEventListener(Event.CLICKLEFT, OnMailClick);
+            userTextBox.AddEventListener(Event.CLICKLEFT, OnUserClick);
+            passTextBox.AddEventListener(Event.CLICKLEFT, OnPassClick);
+            btnRegister.AddEventListener(Event.CLICKLEFT, OnRegister);
 
-            AddEventListener(Event.CLICKLEFT, onClick);
+            AddEventListener(Event.CLICKLEFT, OnClick);
         }
 
-        private void onRegister(object sender, EventArgs e)
+        private void OnRegister(object sender, EventArgs e)
         {
-            GameClient._log.Info($"Mail: {mailTextBox.Text.ToString()},Username: {userTextBox.Text.ToString()}, Password: {passTextBox.Text.ToString()}");
+            GameClient.Info($"Mail: {mailTextBox.Text.ToString()},Username: {userTextBox.Text.ToString()}, Password: {passTextBox.Text.ToString()}");
         }
 
-        private void onPassClick(object sender, EventArgs e)
+        private void OnPassClick(object sender, EventArgs e)
         {
             mailTextBox.Selected = false;
             userTextBox.Selected = false;
             passTextBox.Selected = true;
         }
 
-        private void onUserClick(object sender, EventArgs e)
+        private void OnUserClick(object sender, EventArgs e)
         {
             mailTextBox.Selected = false;
             userTextBox.Selected = true;
             passTextBox.Selected = false;
         }
 
-        private void onMailClick(object sender, EventArgs e)
+        private void OnMailClick(object sender, EventArgs e)
         {
             mailTextBox.Selected = true;
             userTextBox.Selected = false;
             passTextBox.Selected = false;
         }
 
-        private void onClick(object sender, EventArgs e)
+        private void OnClick(object sender, EventArgs e)
         {
             mailTextBox.Selected = false;
             userTextBox.Selected = false;

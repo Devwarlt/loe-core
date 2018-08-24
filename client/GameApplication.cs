@@ -47,7 +47,7 @@ namespace LoESoft.Client
 
         private void ExitGame()
         {
-            //GameClient._networkHandler.Dispose();
+            GameClient._networkManager.Dispose();
             Exit();
         }
 

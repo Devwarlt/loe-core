@@ -28,7 +28,7 @@ namespace LoESoft.Server.Core.client
             _socket.Ttl = 112;
             _ip = socket.RemoteEndPoint.ToString().Split(':')[0];
 
-            GameServer._log.Warn($"New client with IP '{_ip}' has been connected!");
+            GameServer.Warn($"New client with IP '{_ip}' has been connected!");
 
             _pendingPacket = new ConcurrentQueue<ClientPacket>();
             _networkHandler = new NetworkHandler(this);

@@ -36,13 +36,13 @@ namespace LoESoft.Server.Core.networking
 
         public void Start()
         {
-            GameServer._log.Info("Network Manager is loading...");
+            GameServer.Info("Network Manager is loading...");
 
             _socket.Bind(new IPEndPoint(IPAddress.Any, _tcpServerSettings._port));
             _socket.Listen(_tcpServerSettings._maxClients);
             _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
 
-            GameServer._log.Info("Network Manager is loading... OK!");
+            GameServer.Info("Network Manager is loading... OK!");
         }
 
         private void AcceptCallback(IAsyncResult asyncResult)
@@ -89,7 +89,7 @@ namespace LoESoft.Server.Core.networking
         {
             _connections.TryTake(out Client client);
 
-            GameServer._log.Warn($"Client with IP '{client._ip}' dropped connection, disposing...");
+            GameServer.Warn($"Client with IP '{client._ip}' dropped connection, disposing...");
 
             client.Dispose();
         }
@@ -98,7 +98,7 @@ namespace LoESoft.Server.Core.networking
         {
             _dispose = true;
 
-            GameServer._log.Info("Network Manager has been stopped.");
+            GameServer.Info("Network Manager has been stopped.");
 
             foreach (var connection in _connections)
                 connection.Dispose();

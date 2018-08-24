@@ -74,11 +74,11 @@ namespace LoESoft.Server.Core.networking
                         Packet packet = Packet.ClientPackets[packetData.PacketID];
                         packet.CreateInstance();
 
-                        GameServer._log.Info($"New packet received!\n{packet.ToString()}");
+                        GameServer.Info($"New packet received!\n{packet.ToString()}");
 
                         _client._pendingPacket.Enqueue(packet as ClientPacket);
                     }
-                    catch (Exception e) { GameServer._log.Error($"Data: {data}\n{e}"); }
+                    catch (Exception e) { GameServer.Error(e, $"Data: {data}"); }
                 }
             }
             catch (ObjectDisposedException) { }
