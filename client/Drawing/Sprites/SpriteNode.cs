@@ -58,7 +58,7 @@ namespace LoESoft.Client.Drawing.Sprites
         {
             for (var i = (ChildList.ToArray().Length - 1); i >= 0; i--)
                 ChildList[i].Update(gameTime);
-            
+
 
             foreach (var i in EventDictionary)
                 if (_eventsHandler.HandleMouse(this, i.Key) && !EventsManager.IsEventActive)
@@ -85,7 +85,7 @@ namespace LoESoft.Client.Drawing.Sprites
         }
 
         public void RemoveChild(SpriteNode child)
-        { 
+        {
             ChildList.Remove(child);
         }
 

@@ -28,12 +28,12 @@ namespace LoESoft.Client.Core.Screens
             AddChild(userTextBox);
             AddChild(passTextBox);
             AddChild(btnRegister);
-            
+
             mailTextBox.AddEventListener(Event.CLICKLEFT, onMailClick);
             userTextBox.AddEventListener(Event.CLICKLEFT, onUserClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
             btnRegister.AddEventListener(Event.CLICKLEFT, onRegister);
-            
+
             AddEventListener(Event.CLICKLEFT, onClick);
         }
 

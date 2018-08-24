@@ -27,7 +27,8 @@ namespace LoESoft.Client
             Content.RootDirectory = "Content";
         }
 
-        protected override void Initialize() {
+        protected override void Initialize()
+        {
 
             base.Initialize();
 
@@ -54,7 +55,7 @@ namespace LoESoft.Client
         protected override void UnloadContent() { }
 
         protected override void Update(GameTime gameTime)
-        { 
+        {
             ScreenManager.Update(gameTime);
 
             base.Update(gameTime);

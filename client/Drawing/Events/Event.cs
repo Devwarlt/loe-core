@@ -48,7 +48,7 @@ namespace LoESoft.Client.Drawing.Events
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();
             MouseRectangle = new Rectangle(currentMouse.X, currentMouse.Y, 3, 3);
-            
+
             switch (e)
             {
                 case Event.CLICKLEFT: return HandleMouseClickLeft(node);

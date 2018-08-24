@@ -29,13 +29,13 @@ namespace LoESoft.Client
             var developerLog = new ColoredConsoleTarget()
             {
                 Name = "developer",
-                Layout = @"[${date:format=HH\:mm\:ss}] ${level} ${message} ${exception}"
+                Layout = @"[${date:format=HH\:mm\:ss}] [${level}] ${message} ${exception}"
             };
             var developerFile = new FileTarget()
             {
                 Name = "developer-file",
                 FileName = "../../../../../logs/client/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
-                Layout = @"[${date:format=HH\:mm\:ss}] ${level} ${message} ${exception}"
+                Layout = @"[${date:format=HH\:mm\:ss}] [${level}] ${message} ${exception}"
             };
             config.AddTarget(developerLog);
             config.AddTarget(developerFile);

@@ -21,7 +21,7 @@ namespace LoESoft.Client.Core.Screens
 
             btnLogin = new Button(0, 140, "Login", new RGBColor(255, 0, 0));
             btnLogin.X = (Width / 2 - btnLogin.Width / 2);
-            
+
             mailTextBox.AddEventListener(Event.CLICKLEFT, onMailClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
             btnLogin.AddEventListener(Event.CLICKLEFT, onLogin);

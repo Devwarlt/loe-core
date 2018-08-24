@@ -16,7 +16,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
             remove { maskClicked -= value; }
         }
 
-        public Mask(RGBColor color, float alpha = 0.5f) : 
+        public Mask(RGBColor color, float alpha = 0.5f) :
             base(0, 0, 600, 600, color, alpha)
         {
             IsZeroApplicaple = true;

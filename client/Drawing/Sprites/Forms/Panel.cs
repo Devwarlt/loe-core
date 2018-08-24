@@ -19,7 +19,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
             Title = new TextDisplay((width / 2 - (int)textpos.X / 2), 5, title);
             _exitBtn = new ExitButton(width - 23, 3, 20, 20);
             _exitBtn.Exit += OnExit;
-            
+
             AddChild(Title);
             AddChild(_exitBtn);
         }

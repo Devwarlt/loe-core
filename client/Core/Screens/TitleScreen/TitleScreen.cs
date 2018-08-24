@@ -43,7 +43,7 @@ namespace LoESoft.Client.Core.Screens
         private void OnPlay(object sender, EventArgs e) => ScreenManager.DispatchScreen(new GameScreen());
 
         private void BtnLoginClicked(object sender, EventArgs e) => BackGround.AddChild(LoginPanel);
-        
+
 
         private void BtnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
 

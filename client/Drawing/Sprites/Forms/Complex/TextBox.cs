@@ -61,17 +61,17 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            
+
             if (!Selected)
             {
                 _selectedMarket.Visible = false;
                 return;
             }
-            
+
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             char[] pressedKeys = _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray();
-            
+
 
             foreach (var i in pressedKeys)
                 if (Text.Length <= Limit && Selected)

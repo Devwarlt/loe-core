@@ -27,10 +27,10 @@ namespace LoESoft.Client.Core.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if(CurrentTime > 0)
+            if (CurrentTime > 0)
                 CurrentTime -= gameTime.ElapsedGameTime.Milliseconds;
 
-            if(CurrentTime <= 0 && FadedOut)
+            if (CurrentTime <= 0 && FadedOut)
             {
                 TextureToDraw = null;
                 if (TexturesToDisplay.Count == 0)
@@ -66,7 +66,7 @@ namespace LoESoft.Client.Core.Screens
             else
             {
                 TextureToDrawAlpha -= 0.02f;
-                if(!FadedOut && TextureToDrawAlpha <= 0)
+                if (!FadedOut && TextureToDrawAlpha <= 0)
                     FadedOut = true;
             }
 
