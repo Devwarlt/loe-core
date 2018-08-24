@@ -20,7 +20,7 @@ namespace LoESoft.Client.Core.Screens
         public override void OnScreenCreate()
         {
             TexturesToDisplay = new Queue<Texture2D>();
-            TexturesToDisplay.Enqueue(Assets.AssetLoader.LoadAsset<Texture2D>("splash/LoeLogo"));
+            TexturesToDisplay.Enqueue(Assets.AssetLoader.LoadAsset<Texture2D>("splash/LoELogo"));
         }
 
         public override void OnScreenDispatch() { }

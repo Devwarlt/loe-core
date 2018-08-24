@@ -1,7 +1,9 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -17,6 +19,24 @@ namespace LoESoft.Client.Drawing.Events
         CLICKOUTLEFT = 7
     }
 
+    public static class EventsManager
+    {
+        public static bool IsEventActive = false;
+
+        public static void SetUnactive()
+        {
+            Timer timer = new Timer(100);
+            timer.Elapsed += StopTimer;
+            timer.Enabled = true;
+
+            void StopTimer(object o, ElapsedEventArgs e)
+            {
+                IsEventActive = false;
+                timer.Stop();
+            }
+        }
+    }
+
     public partial class EventsHandler
     {
         MouseState previousMouse;
@@ -28,7 +48,7 @@ namespace LoESoft.Client.Drawing.Events
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();
             MouseRectangle = new Rectangle(currentMouse.X, currentMouse.Y, 3, 3);
-
+            
             switch (e)
             {
                 case Event.CLICKLEFT: return HandleMouseClickLeft(node);

@@ -3,6 +3,7 @@ using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -49,7 +50,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             TextField = new TextDisplay(2, 2, "", color: new RGBColor(10, 10, 10));
 
             _selectedMarket = new FilledRectangle(1, 1, 2, Height - 2, new RGBColor(0, 0, 0));
-
             _selectedMarket.Visible = false;
 
             AddChild(_selectedMarket);
@@ -61,16 +61,17 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
+            
             if (!Selected)
             {
                 _selectedMarket.Visible = false;
                 return;
             }
-
+            
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             char[] pressedKeys = _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray();
+            
 
             foreach (var i in pressedKeys)
                 if (Text.Length <= Limit && Selected)
@@ -79,7 +80,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             if (_keyEvents.HandleBackSpace(gameTime))
                 if (Text.Length > 0)
                     Text.Length--;
-
 
             TextField.Text = (Encoded) ? GetEncodedString(Text.ToString())
                 : Text.ToString();
@@ -107,11 +107,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
         {
             Text.Clear();
             TextField.Text = string.Empty;
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
         }
     }
 }

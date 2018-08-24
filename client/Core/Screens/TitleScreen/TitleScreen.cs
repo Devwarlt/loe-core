@@ -21,7 +21,7 @@ namespace LoESoft.Client.Core.Screens
 
         public TitleScreen()
         {
-            BackGround = new FilledRectangle(0, 0, 600, 600, new RGBColor(0, 0, 0));
+            BackGround = new FilledRectangle(0, 0, GameApplication.WIDTH, GameApplication.HEIGHT, new RGBColor(0, 0, 0));
             RegisterBtn = new Button(10, 10, "Register", new RGBColor(0, 0, 255));
             LoginBtn = new Button(10, 40, "Login", new RGBColor(0, 0, 255));
             PlayBtn = new Button(10, 70, "Play", new RGBColor(0, 0, 255));
@@ -43,19 +43,16 @@ namespace LoESoft.Client.Core.Screens
         private void OnPlay(object sender, EventArgs e) => ScreenManager.DispatchScreen(new GameScreen());
 
         private void BtnLoginClicked(object sender, EventArgs e) => BackGround.AddChild(LoginPanel);
+        
 
-        private void BtnExit(object sender, EventArgs e) { }
-        //=> ScreenManager.CloseGame();
+        private void BtnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
 
         private void BtnRegisterClicked(object sender, EventArgs e) => BackGround.AddChild(RegisterPanel);
 
         public override void OnScreenCreate() { }
         public override void OnScreenDispatch() { }
 
-        public override void Update(GameTime gameTime)
-        {
-            BackGround.Update(gameTime);
-        }
+        public override void Update(GameTime gameTime) => BackGround.Update(gameTime);
 
         public override void Draw(SpriteBatch spriteBatch)
         {

@@ -32,9 +32,7 @@ namespace LoESoft.Client
             base.Initialize();
 
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
-
             ScreenManager.DispatchScreen(new SplashScreen());
-            //ScreenManager.OnGameClose += ExitGame;
         }
 
         protected override void LoadContent()
@@ -44,18 +42,19 @@ namespace LoESoft.Client
             AssetLoader.Init(Content);
             AudioManager.Init();
             TextDisplay.LoadSpriteFont(Content);
+            ScreenManager.OnGameClose += ExitGame;
         }
 
         private void ExitGame()
         {
-            GameClient._networkHandler.Dispose();
+            //GameClient._networkHandler.Dispose();
             Exit();
         }
 
         protected override void UnloadContent() { }
 
         protected override void Update(GameTime gameTime)
-        {
+        { 
             ScreenManager.Update(gameTime);
 
             base.Update(gameTime);

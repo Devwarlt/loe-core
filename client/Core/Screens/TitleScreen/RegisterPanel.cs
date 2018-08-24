@@ -28,13 +28,13 @@ namespace LoESoft.Client.Core.Screens
             AddChild(userTextBox);
             AddChild(passTextBox);
             AddChild(btnRegister);
-
-            AddEventListener(Event.CLICKLEFT, onClick);
+            
             mailTextBox.AddEventListener(Event.CLICKLEFT, onMailClick);
             userTextBox.AddEventListener(Event.CLICKLEFT, onUserClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, onPassClick);
             btnRegister.AddEventListener(Event.CLICKLEFT, onRegister);
-            _exitBtn.Exit += OnExit;
+            
+            AddEventListener(Event.CLICKLEFT, onClick);
         }
 
         private void onRegister(object sender, EventArgs e)
@@ -72,7 +72,6 @@ namespace LoESoft.Client.Core.Screens
 
         public override void OnExit()
         {
-            base.OnExit();
             mailTextBox.Clear();
             userTextBox.Clear();
             passTextBox.Clear();

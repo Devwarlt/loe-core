@@ -1,6 +1,7 @@
 ﻿using LoESoft.Client.Drawing.Events;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
@@ -37,7 +38,6 @@ namespace LoESoft.Client.Drawing.Sprites
         public int Index { get; set; }
 
         public bool Visible = true;
-        public bool IsInvokable = true;
 
         public SpriteNode(int x, int y, int width, int height)
         {
@@ -52,48 +52,21 @@ namespace LoESoft.Client.Drawing.Sprites
         }
 
         protected EventsHandler _eventsHandler;
+        public bool IsInvoked = false;
 
-        float _timer = 0f;
         public virtual void Update(GameTime gameTime)
         {
-            foreach (var i in ChildList.ToArray())
-                i.Update(gameTime);
+            for (var i = (ChildList.ToArray().Length - 1); i >= 0; i--)
+                ChildList[i].Update(gameTime);
+            
 
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             foreach (var i in EventDictionary)
-            {
-                if (_eventsHandler.HandleMouse(this, i.Key) && IsInvokable == true)
+                if (_eventsHandler.HandleMouse(this, i.Key) && !EventsManager.IsEventActive)
                 {
-                    SetInvokable(false);
-                    Console.WriteLine(ParentSprite.IsInvokable);
+                    EventsManager.IsEventActive = true;
                     i.Value?.Invoke(this, new EventArgs());
+                    EventsManager.SetUnactive();
                 }
-                else if (!SpriteRectangle.Intersects(EventsHandler.MouseRectangle))
-                {
-                    //SetInvokable(true);
-                    //Console.ReadLine();
-                }
-            }
-        }
-
-        public void SetInvokable(bool val)
-        {
-            if (ParentSprite == null)
-                return;
-
-            ParentSprite.IsInvokable = val;
-
-            foreach (var i in ParentSprite.ChildList)
-                if (i.Index < Index)
-                {
-                    i.SetInvokable(val);
-                    i.IsInvokable = val;
-                    Console.WriteLine("Values Changes!");
-                }
-
-            ParentSprite?.SetInvokable(val);
-
-            Console.WriteLine("Your gay mum!");
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -107,13 +80,19 @@ namespace LoESoft.Client.Drawing.Sprites
         public void AddChild(SpriteNode child)
         {
             child.ParentSprite = this;
-            child.Index = ChildList.Count + 1;
+            child.Index = ChildList.Count;
             ChildList.Add(child);
         }
 
-        public void RemoveChild(SpriteNode child) => ChildList.Remove(child);
+        public void RemoveChild(SpriteNode child)
+        { 
+            ChildList.Remove(child);
+        }
 
-        public void RemoveAllChild() => ChildList.Clear();
+        public void RemoveAllChild()
+        {
+            ChildList.Clear();
+        }
         #endregion
 
         #region EventListener

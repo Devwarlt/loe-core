@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace LoESoft.Client.Core.Screens
 {
@@ -26,6 +27,19 @@ namespace LoESoft.Client.Core.Screens
             if (ActiveScreen == null || !ActiveScreen.Visible)
                 return;
             ActiveScreen.Draw(spriteBatch);
+        }
+
+        private static Action DoCloseGame { get; set; }
+        public static void CloseGame()
+        {
+            ActiveScreen = null;
+            DoCloseGame?.Invoke();
+        }
+
+        public static event Action OnGameClose
+        {
+            add { OnGameClose += value; }
+            remove { OnGameClose -= value; }
         }
     }
 }
