@@ -4,6 +4,7 @@ using LoESoft.Client.Core.Networking.Packets.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -13,10 +14,10 @@ namespace LoESoft.Client.Core.Networking
     internal class NetworkHandler
     {
         public static byte[] _buffer => new byte[1024];
-        public static int _connectionTimeout => 1000;
+        public static int _connectionRetryMS => 2 * 000;
         public static int _connectionAttempts { get; set; } = 0;
         public static Semaphore _networkHandlerSemaphore = new Semaphore(1, 1);
-        public static Semaphore _connectionThreadSemaphore = new Semaphore(1, 1);
+        public static AutoResetEvent _connectionEvent = new AutoResetEvent(false);
 
         private static Socket _socket { get; set; }
         private static Server _server { get; set; }
@@ -95,23 +96,12 @@ namespace LoESoft.Client.Core.Networking
 
             while (!_socket.Connected && !NetworkManager._dispose)
             {
-                _connectionThreadSemaphore.WaitOne();
-
                 _connectionAttempts++;
+                
+                try { _socket.Connect(_server._dns, _server._port); }
+                catch { GameClient.Warn($"[Attempts: {_connectionAttempts}] Connection failed. Retrying..."); }
 
-                var asyncResult = _socket.BeginConnect(_server._dns, _server._port, null, null);
-                if (!asyncResult.AsyncWaitHandle.WaitOne(_connectionTimeout, true))
-                {
-                    try
-                    {
-                        _socket.EndConnect(asyncResult);
-                    }
-                    catch
-                    {
-                        GameClient.Warn($"[Attempts: {_connectionAttempts}] Connection failed. Retrying...");
-                        _connectionThreadSemaphore.Release();
-                    }
-                }
+                Thread.Sleep(_connectionRetryMS);
             }
 
             if (!NetworkManager._dispose)
@@ -122,18 +112,6 @@ namespace LoESoft.Client.Core.Networking
                 _networkHandlerSemaphore.Release();
 
                 NetworkManager._networkManagerDisposeSemaphore.Release();
-            }
-        }
-
-        private static void OnConnect(IAsyncResult asyncResult)
-        {
-            try
-            {
-                //_socket.EndConnect(asyncResult);
-            }
-            catch
-            {
-                _connectionThreadSemaphore.Release();
             }
         }
     }
