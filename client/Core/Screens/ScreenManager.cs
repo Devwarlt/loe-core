@@ -36,7 +36,7 @@ namespace LoESoft.Client.Core.Screens
             ActiveScreen = null;
             DoCloseGame?.Invoke();
         }
-        
+
         public static event Action OnGameClose
         {
             add { DoCloseGame += value; }
