@@ -25,7 +25,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public float Size { get; set; }
         public bool Bold { get; set; } //unhandled
         public int PerLineWidth { get; set; }
-        public bool Outline { get; set; }
+        public bool Outline { get; set; } // Test End
 
         public TextDisplay(int x, int y, string text, float size = 12, RGBColor color = null, float alpha = 1, bool bold = false)
             : base(x, y, 0, 0, null, color, alpha)
@@ -56,26 +56,26 @@ namespace LoESoft.Client.Drawing.Sprites.Text
                 var offset = 0;
                 foreach (var i in DetectPerLine())
                 {
-                    if (Outline)
+                    if (Outline) // Test
                     {
                         spriteBatch.DrawString(Font, i, new Vector2(StageX - scale, StageY + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                         spriteBatch.DrawString(Font, i, new Vector2(StageX + scale, StageY + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                         spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY - scale + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                         spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + scale + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-                    }
+                    } // Test End
                     spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + offset), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                     offset += GetHeight((int)Size) + 2;
                 }
             }
             else
             {
-                if (Outline)
+                if (Outline) // Test
                 {
                     spriteBatch.DrawString(Font, Text, new Vector2(StageX - scale, StageY), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                     spriteBatch.DrawString(Font, Text, new Vector2(StageX + scale, StageY), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                     spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY - scale), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                     spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY + scale), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-                }
+                } // Test End
                 spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             }
             base.Draw(spriteBatch);

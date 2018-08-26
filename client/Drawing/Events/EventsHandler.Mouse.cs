@@ -42,7 +42,6 @@ namespace LoESoft.Client.Drawing.Events
         {
             if (!node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle))
                 return false;
-
             return true;
         }
 
@@ -50,7 +49,6 @@ namespace LoESoft.Client.Drawing.Events
         {
             if (node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle))
                 return false;
-
             return true;
         }
     }

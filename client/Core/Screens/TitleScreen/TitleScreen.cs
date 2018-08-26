@@ -13,7 +13,7 @@ namespace LoESoft.Client.Core.Screens
     {
         private TextDisplay Title { get; set; }
         private TextButton PlayButton { get; set; }
-        private TextButton OptionButton { get; set; }
+        private TextButton OptionsButton { get; set; }
         private TextButton ExitButton { get; set; }
 
         private Texture2D BackgroundImage { get; set; }
@@ -33,18 +33,24 @@ namespace LoESoft.Client.Core.Screens
             PlayButton.Y = ((GameApplication.HEIGHT - PlayButton.Height) / 2);
             PlayButton.TextDisplay.Outline = true;
 
-            OptionButton = new TextButton("Options", 30);
-            OptionButton.X = (GameApplication.WIDTH - OptionButton.Width) / 2;
-            OptionButton.Y = PlayButton.Y + PlayButton.Height + buttonGap;
-            OptionButton.TextDisplay.Outline = true;
+            OptionsButton = new TextButton("Options", 30);
+            OptionsButton.X = (GameApplication.WIDTH - OptionsButton.Width) / 2;
+            OptionsButton.Y = PlayButton.Y + PlayButton.Height + buttonGap;
+            OptionsButton.TextDisplay.Outline = true;
 
             ExitButton = new TextButton("Exit", 30);
             ExitButton.X = (GameApplication.WIDTH - ExitButton.Width) / 2;
-            ExitButton.Y = OptionButton.Y + OptionButton.Height + buttonGap;
+            ExitButton.Y = OptionsButton.Y + OptionsButton.Height + buttonGap;
             ExitButton.TextDisplay.Outline = true;
 
             PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
+            //PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
+            //PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
+            //OptionsButton.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
+            //OptionsButton.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
             ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
+            //ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
+            //ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
 
             BackgroundImage = AssetLoader.LoadAsset<Texture2D>("images/exampleTitleBackground");
 
@@ -52,9 +58,18 @@ namespace LoESoft.Client.Core.Screens
 
             Background.AddChild(Title);
             Background.AddChild(PlayButton);
-            Background.AddChild(OptionButton);
+            Background.AddChild(OptionsButton);
             Background.AddChild(ExitButton);
         }
+
+        //private void OnPlayButtonOver(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.Yellow;
+        //private void OnPlayButtonOut(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.White;
+
+        //private void OnOptionsButtonOver(object sender, EventArgs e) => OptionsButton.TextDisplay.SpriteColor = Color.Yellow;
+        //private void OnOptionsButtonOut(object sender, EventArgs e) => OptionsButton.TextDisplay.SpriteColor = Color.White;
+
+        //private void OnExitButtonOver(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.Yellow;
+        //private void OnExitButtonOut(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.White;
 
         private void OnPlay(object sender, EventArgs e) => ScreenManager.DispatchScreen(new GameScreen());
         private void OnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
