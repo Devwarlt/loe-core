@@ -1,0 +1,39 @@
+accounts
+    id
+    world
+    email
+    password
+    rank
+    vipStartAt
+    vipEndAt
+    creation
+characters
+    id
+    accountId
+    name
+    townId
+    vocation
+    hitPoints
+    maxHitPoints
+    manaPoints
+    maxManaPoints
+    level
+    levelExperience
+    magic
+    magicExperience
+    speed
+    attack
+    attackExperience
+    defense
+    defenseExperience
+    items
+    worldId
+    worldX
+    worldY
+    guildId
+    guildRank
+    creation
+depot
+    id
+    characterId
+    items
