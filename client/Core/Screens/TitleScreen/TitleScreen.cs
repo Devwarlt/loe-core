@@ -1,6 +1,7 @@
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
+using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -19,6 +20,8 @@ namespace LoESoft.Client.Core.Screens
 
         private FilledRectangle BackGround { get; set; }
 
+        TextDisplay textDisplay;
+
         public TitleScreen()
         {
             BackGround = new FilledRectangle(0, 0, GameApplication.WIDTH, GameApplication.HEIGHT, new RGBColor(0, 0, 0));
@@ -28,6 +31,8 @@ namespace LoESoft.Client.Core.Screens
             ExitBtn = new Button(10, 100, "Close", new RGBColor(0, 0, 255));
             RegisterPanel = new RegisterPanel(100, 100);
             LoginPanel = new LoginPanel(100, 100);
+            textDisplay = new TextDisplay(100, 100, "This is the most random text you'll ever see");
+            textDisplay.PerLineWidth = 200;
 
             RegisterBtn.AddEventListener(Event.CLICKLEFT, BtnRegisterClicked);
             LoginBtn.AddEventListener(Event.CLICKLEFT, BtnLoginClicked);
@@ -38,6 +43,7 @@ namespace LoESoft.Client.Core.Screens
             BackGround.AddChild(LoginBtn);
             BackGround.AddChild(PlayBtn);
             BackGround.AddChild(ExitBtn);
+            BackGround.AddChild(textDisplay);
         }
 
         private void OnPlay(object sender, EventArgs e) => ScreenManager.DispatchScreen(new GameScreen());

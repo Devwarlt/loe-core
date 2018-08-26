@@ -55,7 +55,7 @@ namespace LoESoft.Client
                 Info("Network Manager is loading...");
 
                 _networkManager = new NetworkManager();
-                _networkManager.Start();
+                //_networkManager.Start();
 
                 Info("Network Manager is loading... OK!");
                 Info("Game Client is loading... OK!");

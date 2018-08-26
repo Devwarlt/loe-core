@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LoESoft.Client.Drawing.Sprites.Text
 {
@@ -24,12 +26,14 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public string Text { get; set; }
         public float Size { get; set; }
         public bool Bold { get; set; } //unhandled
+        public int PerLineWidth { get; set; }
 
         public TextDisplay(int x, int y, string text, float size = 12, RGBColor color = null, float alpha = 1, bool bold = false)
             : base(x, y, 0, 0, null, color, alpha)
         {
             Text = text;
             Size = size;
+            PerLineWidth = 0;
             Bold = bold;
         }
 
@@ -44,11 +48,46 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public override void Draw(SpriteBatch spriteBatch)
         {
             float scale = Size / 100f;
-
-            spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f,
-                Vector2.Zero, scale, SpriteEffects.None, 0f);
-
+            
+            if (PerLineWidth != 0)
+            {
+                int offset = 0;
+                foreach (var i in DetectPerLine())
+                {
+                    spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + offset), SpriteColor, 0f,
+                        Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    offset += GetHeight((int)Size) + 2;
+                }
+            } else
+                spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f,
+                        Vector2.Zero, scale, SpriteEffects.None, 0f);
+            
             base.Draw(spriteBatch);
+        }
+
+        private List<string> DetectPerLine()
+        {
+            if (PerLineWidth == 0)
+                return null;
+
+            int cWidth = 0;
+            int cSize = 0;
+
+            foreach(var i in Text)
+            {
+                cWidth += (int)MeasureString(i.ToString(), (int)Size).X;
+                if (cWidth >= PerLineWidth)
+                    break;
+                cSize++;
+            }
+            
+            return Split(Text, cSize).ToList();
+        }
+
+        static IEnumerable<string> Split(string str, int chunkSize)
+        {
+            return Enumerable.Range(0, str.Length / chunkSize)
+                .Select(i => str.Substring(i * chunkSize, chunkSize));
         }
     }
 }
