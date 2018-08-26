@@ -1,4 +1,4 @@
-﻿namespace LoESoft.Server.Core.networking.packet
+﻿namespace LoESoft.Server.Core.Networking.Packets
 {
     public class PacketData
     {

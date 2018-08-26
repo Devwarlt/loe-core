@@ -51,24 +51,18 @@
   <ItemGroup>
     <Compile Include="Assets\AssetLoader.cs" />
     <Compile Include="Core\Client\GameUser.cs" />
-    <Compile Include="Core\Networking\NetworkMonitor.cs" />
+    <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />
     <Compile Include="Core\Screens\SplashScreen\SplashScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\TitleScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\LoginPanel.cs" />
     <Compile Include="Core\Screens\TitleScreen\RegisterPanel.cs" />
-    <Compile Include="Core\Networking\IPacket.cs" />
-    <Compile Include="Core\Networking\NetworkHandler.cs" />
-    <Compile Include="Core\Networking\Packets\Client\ClientPacket.cs" />
-    <Compile Include="Core\Networking\Packets\Client\IClientPacket.cs" />
-    <Compile Include="Core\Networking\Packets\Client\Packets\Ping.cs" />
-    <Compile Include="Core\Networking\Packets\Packet.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\OutgoingPacket.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\PongPacket.cs" />
+    <Compile Include="Core\Networking\Packets\PacketBase.cs" />
     <Compile Include="Core\Networking\Packets\PacketData.cs" />
-    <Compile Include="Core\Networking\Packets\PacketHandler.cs" />
-    <Compile Include="Core\Networking\Packets\PacketID.cs" />
-    <Compile Include="Core\Networking\Packets\Server\IServerPacket.cs" />
-    <Compile Include="Core\Networking\Packets\Server\Packets\Pong.cs" />
-    <Compile Include="Core\Networking\Packets\Server\ServerPacket.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\PingPacket.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\IncomingPacket.cs" />
     <Compile Include="Core\Networking\Server.cs" />
     <Compile Include="Core\Screens\Screen.cs" />
     <Compile Include="Core\Screens\ScreenManager.cs" />
@@ -90,7 +84,6 @@
     <Compile Include="Drawing\Sprites\Text\TextDisplay.cs" />
     <Compile Include="GameApplication.cs" />
     <Compile Include="GameClient.cs" />
-    <Compile Include="Core\Networking\NetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\AudioManager.cs" />
   </ItemGroup>

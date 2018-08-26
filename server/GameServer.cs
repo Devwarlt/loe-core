@@ -1,4 +1,4 @@
-﻿using LoESoft.Server.Core.networking;
+﻿using LoESoft.Server.Core.Networking;
 using LoESoft.Server.settings;
 using LoESoft.Server.utils;
 using NLog;
@@ -23,9 +23,6 @@ namespace LoESoft.Server
 
         // Settings
         public static Settings _settings => IO.Import<Settings>("../../", "Settings");
-
-        // Networking
-        private static NetworkManager _networkManager { get; set; }
 
         public static void Main(string[] args)
         {
@@ -56,14 +53,14 @@ namespace LoESoft.Server
 
             try
             {
-                _networkManager = new NetworkManager(_settings._tcpServer);
-                _networkManager.Start();
+                var connectionListener = new ConnectionListener();
+                connectionListener.StartAccept();
 
                 Info("Game Server is loading... OK!");
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
-                _networkManager.Dispose();
+                connectionListener.EndAccept();
 
                 Info("Game Server has been stopped.");
 

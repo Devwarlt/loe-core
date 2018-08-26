@@ -1,55 +1,23 @@
 ﻿using LoESoft.Client.Core.Networking;
-using LoESoft.Client.Core.Networking.Packets;
-using LoESoft.Client.Core.Networking.Packets.Client.Packets;
-using LoESoft.Client.Core.Networking.Packets.Server;
-using LoESoft.Client.Core.Utils;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Net.Sockets;
-using System.Text;
-using System.Text.RegularExpressions;
+using LoESoft.Client.Core.Networking.Packets.Outgoing;
 
 namespace LoESoft.Client.Core.Client
 {
     public class GameUser
     {
-        public Socket _socket { get; private set; }
-        public Server _server { get; private set; }
-        public ConcurrentQueue<ServerPacket> _pendingPacket { get; private set; }
+        public Server Server { get; set; }
+        public NetworkControl NetworkControl { get; set; }
 
-        internal NetworkHandler _networkHandler { get; private set; }
-
-        private NetworkMonitor _networkMonitor { get; set; }
-
-        public GameUser(Socket socket, Server server)
+        public GameUser(Server server)
         {
-            _socket = socket;
-            _server = server;
-            _pendingPacket = new ConcurrentQueue<ServerPacket>();
-            _networkHandler = new NetworkHandler(this);
-            _networkHandler.Start();
-            _networkMonitor = new NetworkMonitor(this);
-            _networkMonitor._socketEventHandler += _networkHandler.OnConnectionLost;
-            _networkMonitor.Start();
+            Server = server;
+            NetworkControl = new NetworkControl(this);
         }
 
-        public void PingServer() => SendPacket(new Ping() { Value = new Random().Next(0, 100) });
+        public void SendPacket(OutgoingPacket outgoingPacket) => NetworkControl.SendPacket(outgoingPacket);
+        public void SendPackets(OutgoingPacket[] outgoingPackets) => NetworkControl.SendPackets(outgoingPackets);
 
-        public void SendPacket(Packet packet)
-        {
-            _socket.Send(Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
-            {
-                PacketID = packet.ID,
-                Content = Regex.Replace(packet.ToString(), @"\r\n?|\n", string.Empty)
-            })));
-            _networkHandler.HandlePacket();
-        }
-
-        public void SendPackets(IEnumerable<Packet> packets)
-        {
-            foreach (var packet in packets)
-                SendPacket(packet);
-        }
+        public void Connect() => NetworkControl.Connect(Server);
+        public void Disconnect() => NetworkControl.Disconnect();
     }
 }
