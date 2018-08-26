@@ -2,23 +2,23 @@
 {
     public class RGBColor
     {
-        int _r;
+        private int _r;
         public int R
         {
-            get { return _r; }
-            set { _r = (value > 255) ? 255 : value; }
+            get => _r;
+            set => _r = (value > 255) ? 255 : value;
         }
-        int _g;
+        private int _g;
         public int G
         {
-            get { return _g; }
-            set { _g = (value > 255) ? 255 : value; }
+            get => _g;
+            set => _g = (value > 255) ? 255 : value;
         }
-        int _b;
+        private int _b;
         public int B
         {
-            get { return _b; }
-            set { _b = (value > 255) ? 255 : value; }
+            get => _b;
+            set => _b = (value > 255) ? 255 : value;
         }
 
         public RGBColor(int r, int g, int b)
@@ -28,6 +28,7 @@
             B = b;
         }
 
-        public static RGBColor Default() => new RGBColor(255, 255, 255);
+        public static RGBColor Default => new RGBColor(255, 255, 255);
+        public static RGBColor Empty => new RGBColor(0, 0, 0);
     }
 }

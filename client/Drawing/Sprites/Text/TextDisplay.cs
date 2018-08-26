@@ -15,11 +15,9 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
         public static Vector2 MeasureString(string text, int size = 12)
         {
-            float scale = size / 100f;
-
-            float x = Font.MeasureString(text).X * scale;
-            float y = Font.MeasureString(text).Y * scale;
-
+            var scale = size / 100f;
+            var x = Font.MeasureString(text).X * scale;
+            var y = Font.MeasureString(text).Y * scale;
             return new Vector2(x, y);
         }
 
@@ -27,6 +25,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public float Size { get; set; }
         public bool Bold { get; set; } //unhandled
         public int PerLineWidth { get; set; }
+        public bool Outline { get; set; }
 
         public TextDisplay(int x, int y, string text, float size = 12, RGBColor color = null, float alpha = 1, bool bold = false)
             : base(x, y, 0, 0, null, color, alpha)
@@ -35,6 +34,9 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             Size = size;
             PerLineWidth = 0;
             Bold = bold;
+
+            Width = (int)MeasureString(Text, (int)Size).X;
+            Height = (int)MeasureString(Text, (int)Size).Y;
         }
 
         public override void Update(GameTime gameTime)
@@ -54,13 +56,28 @@ namespace LoESoft.Client.Drawing.Sprites.Text
                 var offset = 0;
                 foreach (var i in DetectPerLine())
                 {
+                    if (Outline)
+                    {
+                        spriteBatch.DrawString(Font, i, new Vector2(StageX - scale, StageY + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                        spriteBatch.DrawString(Font, i, new Vector2(StageX + scale, StageY + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                        spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY - scale + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                        spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + scale + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    }
                     spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + offset), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                     offset += GetHeight((int)Size) + 2;
                 }
             }
             else
+            {
+                if (Outline)
+                {
+                    spriteBatch.DrawString(Font, Text, new Vector2(StageX - scale, StageY), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, Text, new Vector2(StageX + scale, StageY), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY - scale), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY + scale), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                }
                 spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-
+            }
             base.Draw(spriteBatch);
         }
 

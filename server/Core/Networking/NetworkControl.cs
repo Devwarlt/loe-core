@@ -1,7 +1,7 @@
 ﻿using LoESoft.Server.Core.Networking.Packets;
 using LoESoft.Server.Core.Networking.Packets.Incoming;
 using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using LoESoft.Server.utils;
+using LoESoft.Server.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

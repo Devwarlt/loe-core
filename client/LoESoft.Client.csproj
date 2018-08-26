@@ -81,6 +81,7 @@
     <Compile Include="Drawing\Sprites\Forms\Panel.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />
     <Compile Include="Drawing\Sprites\Sprite.cs" />
+    <Compile Include="Drawing\Sprites\Text\TextButton.cs" />
     <Compile Include="Drawing\Sprites\Text\TextDisplay.cs" />
     <Compile Include="GameApplication.cs" />
     <Compile Include="GameClient.cs" />

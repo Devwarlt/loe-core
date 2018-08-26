@@ -1,6 +1,6 @@
 ﻿using LoESoft.Server.Core.Networking;
-using LoESoft.Server.settings;
-using LoESoft.Server.utils;
+using LoESoft.Server.Settings;
+using LoESoft.Server.Utils;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -22,7 +22,7 @@ namespace LoESoft.Server
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
         // Settings
-        public static Settings _settings => IO.Import<Settings>("../../", "Settings");
+        public static ServerSettings _settings => IO.Import<ServerSettings>("../../", "Settings");
 
         public static void Main(string[] args)
         {

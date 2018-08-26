@@ -1,3 +1,4 @@
+using LoESoft.Client.Assets;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
@@ -10,61 +11,63 @@ namespace LoESoft.Client.Core.Screens
 {
     public class TitleScreen : Screen
     {
-        private Button RegisterBtn { get; set; }
-        private Button LoginBtn { get; set; }
-        private Button ExitBtn { get; set; }
-        private Button PlayBtn { get; set; }
+        private TextDisplay Title { get; set; }
+        private TextButton PlayButton { get; set; }
+        private TextButton OptionButton { get; set; }
+        private TextButton ExitButton { get; set; }
 
-        private RegisterPanel RegisterPanel { get; set; }
-        private LoginPanel LoginPanel { get; set; }
-
-        private FilledRectangle BackGround { get; set; }
-
-        TextDisplay textDisplay;
+        private Texture2D BackgroundImage { get; set; }
+        private FilledRectangle Background { get; set; }
 
         public TitleScreen()
         {
-            BackGround = new FilledRectangle(0, 0, GameApplication.WIDTH, GameApplication.HEIGHT, new RGBColor(0, 0, 0));
-            RegisterBtn = new Button(10, 10, "Register", new RGBColor(0, 0, 255));
-            LoginBtn = new Button(10, 40, "Login", new RGBColor(0, 0, 255));
-            PlayBtn = new Button(10, 70, "Play", new RGBColor(0, 0, 255));
-            ExitBtn = new Button(10, 100, "Close", new RGBColor(0, 0, 255));
-            RegisterPanel = new RegisterPanel(DrawHelper.CenteredPosition(GameApplication.WIDTH,
-                400), 100);
-            LoginPanel = new LoginPanel(DrawHelper.CenteredPosition(GameApplication.WIDTH,
-                400), 100);
-            textDisplay = new TextDisplay(100, 100, "This is the most random text you'll ever see");
-            textDisplay.PerLineWidth = 200;
+            var buttonGap = 6;
 
-            RegisterBtn.AddEventListener(Event.CLICKLEFT, BtnRegisterClicked);
-            LoginBtn.AddEventListener(Event.CLICKLEFT, BtnLoginClicked);
-            PlayBtn.AddEventListener(Event.CLICKLEFT, OnPlay);
-            ExitBtn.AddEventListener(Event.CLICKLEFT, BtnExit);
+            Title = new TextDisplay(0, 0, "LoeSoft", 30, new RGBColor(255, 0, 0));
+            Title.X = (GameApplication.WIDTH - Title.Width) / 2;
+            Title.Y = Title.Height * 3;
+            Title.Outline = true;
 
-            BackGround.AddChild(RegisterBtn);
-            BackGround.AddChild(LoginBtn);
-            BackGround.AddChild(PlayBtn);
-            BackGround.AddChild(ExitBtn);
-            BackGround.AddChild(textDisplay);
+            PlayButton = new TextButton("Play", 30);
+            PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
+            PlayButton.Y = ((GameApplication.HEIGHT - PlayButton.Height) / 2);
+            PlayButton.TextDisplay.Outline = true;
+
+            OptionButton = new TextButton("Options", 30);
+            OptionButton.X = (GameApplication.WIDTH - OptionButton.Width) / 2;
+            OptionButton.Y = PlayButton.Y + PlayButton.Height + buttonGap;
+            OptionButton.TextDisplay.Outline = true;
+
+            ExitButton = new TextButton("Exit", 30);
+            ExitButton.X = (GameApplication.WIDTH - ExitButton.Width) / 2;
+            ExitButton.Y = OptionButton.Y + OptionButton.Height + buttonGap;
+            ExitButton.TextDisplay.Outline = true;
+
+            PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
+            ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
+
+            BackgroundImage = AssetLoader.LoadAsset<Texture2D>("images/exampleTitleBackground");
+
+            Background = new FilledRectangle(BackgroundImage);
+
+            Background.AddChild(Title);
+            Background.AddChild(PlayButton);
+            Background.AddChild(OptionButton);
+            Background.AddChild(ExitButton);
         }
 
         private void OnPlay(object sender, EventArgs e) => ScreenManager.DispatchScreen(new GameScreen());
-
-        private void BtnLoginClicked(object sender, EventArgs e) => BackGround.AddChild(LoginPanel);
-
-        private void BtnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
-
-        private void BtnRegisterClicked(object sender, EventArgs e) => BackGround.AddChild(RegisterPanel);
+        private void OnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
 
         public override void OnScreenCreate() { }
         public override void OnScreenDispatch() { }
 
-        public override void Update(GameTime gameTime) => BackGround.Update(gameTime);
+        public override void Update(GameTime gameTime) => Background.Update(gameTime);
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            BackGround.Draw(spriteBatch);
+            Background.Draw(spriteBatch);
             spriteBatch.End();
         }
     }

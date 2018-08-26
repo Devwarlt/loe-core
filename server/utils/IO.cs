@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace LoESoft.Server.utils
+namespace LoESoft.Server.Utils
 {
     public class IO
     {
