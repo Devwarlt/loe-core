@@ -34,6 +34,7 @@ namespace LoESoft.Client.Core.Networking
         private byte[] SendBuffer { get; set; }
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
         private int ConnectionAttempt { get; set; }
+        private bool Disconnected { get; set; }
 
         public NetworkControl(GameUser gameUser)
         {
@@ -67,7 +68,7 @@ namespace LoESoft.Client.Core.Networking
                 if (ConnectionAttempt == MAX_CONNECTION_ATTEMPTS)
                 {
                     GameClient.Warn($"Unable to connect to {Server}");
-                    Socket.Close();
+                    Disconnect();
                     return;
                 }
                 GameClient.Warn($"Failed to connect to {Server} retrying");
@@ -165,7 +166,10 @@ namespace LoESoft.Client.Core.Networking
 
         public void Disconnect()
         {
-            ScreenManager.DispatchScreen(new TitleScreen());
+            if (Disconnected)
+                return;
+            Disconnected = true;
+            ScreenManager.DispatchScreen(new SplashScreen());
             Socket.Close();
         }
     }
