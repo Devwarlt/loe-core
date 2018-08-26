@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Networking;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Rollbar;
@@ -18,9 +17,6 @@ namespace LoESoft.Client
         // Log
         private static Logger _log => LogManager.GetLogger(_name);
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
-
-        // Network
-        public static NetworkManager _networkManager { get; private set; }
 
         [STAThread]
         static void Main()
@@ -49,19 +45,12 @@ namespace LoESoft.Client
             RollbarLocator.RollbarInstance.Configure(new RollbarConfig(_rollbarId));
 
             Info("Game Client is loading...");
-
             try
             {
-                Info("Network Manager is loading...");
-
-                _networkManager = new NetworkManager();
-                //_networkManager.Start();
-
-                Info("Network Manager is loading... OK!");
-                Info("Game Client is loading... OK!");
-
                 using (var game = new GameApplication())
                     game.Run();
+
+                Info("Game Client is loading... OK!");
             }
             catch (Exception e)
             {

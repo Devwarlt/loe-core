@@ -81,7 +81,7 @@ namespace LoESoft.Server
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
-                Environment.Exit(0);
+                Environment.Exit(-1);
             }
         }
 

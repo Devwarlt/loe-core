@@ -42,13 +42,7 @@ namespace LoESoft.Client
             AssetLoader.Init(Content);
             AudioManager.Init();
             TextDisplay.LoadSpriteFont(Content);
-            ScreenManager.OnGameClose += ExitGame;
-        }
-
-        private void ExitGame()
-        {
-            GameClient._networkManager.Dispose();
-            Exit();
+            ScreenManager.OnGameClose += () => Exit();
         }
 
         protected override void UnloadContent() { }

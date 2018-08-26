@@ -47,20 +47,19 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            float scale = Size / 100f;
+            var scale = Size / 100f;
             
             if (PerLineWidth != 0)
             {
-                int offset = 0;
+                var offset = 0;
                 foreach (var i in DetectPerLine())
                 {
-                    spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + offset), SpriteColor, 0f,
-                        Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + offset), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                     offset += GetHeight((int)Size) + 2;
                 }
-            } else
-                spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f,
-                        Vector2.Zero, scale, SpriteEffects.None, 0f);
+            }
+            else
+                spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             
             base.Draw(spriteBatch);
         }
@@ -70,9 +69,8 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             if (PerLineWidth == 0)
                 return null;
 
-            int cWidth = 0;
-            int cSize = 0;
-
+            var cWidth = 0;
+            var cSize = 0;
             foreach(var i in Text)
             {
                 cWidth += (int)MeasureString(i.ToString(), (int)Size).X;
@@ -84,10 +82,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             return Split(Text, cSize).ToList();
         }
 
-        static IEnumerable<string> Split(string str, int chunkSize)
-        {
-            return Enumerable.Range(0, str.Length / chunkSize)
-                .Select(i => str.Substring(i * chunkSize, chunkSize));
-        }
+        private static IEnumerable<string> Split(string str, int chunkSize) => Enumerable.Range(0, str.Length / chunkSize).Select(i => str.Substring(i * chunkSize, chunkSize));
     }
 }
