@@ -15,38 +15,18 @@ namespace LoESoft.Server.Core.networking
         public static byte[] _buffer => new byte[1024];
 
         private Client _client { get; set; }
-        private Thread _packetProcessing { get; set; }
+        private Thread _packetThread { get; set; }
 
         public NetworkHandler(Client client)
         {
             _client = client;
-            _packetProcessing = new Thread(() =>
-            {
-                while (_client._socket != null)
-                {
-                    if (_client._socket.Connected)
-                    {
-                        if (_client._pendingPacket.Count != 0)
-                            foreach (var i in _client._pendingPacket)
-                            {
-                                _client._pendingPacket.TryDequeue(out ClientPacket clientPacket);
-                                try { Packet.ClientPacketHandlers[clientPacket.ID].Handle(_client, clientPacket); }
-                                catch (KeyNotFoundException) { }
-                            }
-                        else
-                            Thread.Sleep(100);
-                    }
-                    else
-                        break;
-                }
-            })
-            { IsBackground = true };
+            _packetThread = new Thread(SendPendingPackets) { IsBackground = true };
         }
 
         public void Start()
         {
             _client._socket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), _client._socket);
-            _packetProcessing.Start();
+            _packetThread.Start();
         }
 
         public void SendCallback(IAsyncResult asyncResult)
@@ -82,6 +62,27 @@ namespace LoESoft.Server.Core.networking
                 }
             }
             catch (ObjectDisposedException) { }
+        }
+
+        private void SendPendingPackets()
+        {
+            while (_client._socket != null)
+            {
+                if (_client._socket.Connected)
+                {
+                    if (_client._pendingPacket.Count != 0)
+                        foreach (var i in _client._pendingPacket)
+                        {
+                            _client._pendingPacket.TryDequeue(out ClientPacket clientPacket);
+                            try { Packet.ClientPacketHandlers[clientPacket.ID].Handle(_client, clientPacket); }
+                            catch (KeyNotFoundException) { }
+                        }
+                    else
+                        Thread.Sleep(100);
+                }
+                else
+                    break;
+            }
         }
     }
 }

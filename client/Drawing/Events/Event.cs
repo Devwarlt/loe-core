@@ -1,7 +1,6 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
 using System.Timers;
 

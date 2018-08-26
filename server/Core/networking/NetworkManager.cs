@@ -14,7 +14,6 @@ namespace LoESoft.Server.Core.networking
 
         public static bool _dispose { get; private set; } = false;
 
-        private TCPServerSettings _tcpServerSettings { get; set; }
         private static Socket _socket { get; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
         {
             NoDelay = true,
@@ -24,14 +23,13 @@ namespace LoESoft.Server.Core.networking
             Ttl = 112
         };
 
+        private TCPServerSettings _tcpServerSettings { get; set; }
+        private Thread _connectionThread { get; set; }
+
         public NetworkManager(TCPServerSettings tcpServerSettings)
         {
             _tcpServerSettings = tcpServerSettings;
-            Thread networkBackgroundThread = new Thread(NetworkMonitor)
-            {
-                IsBackground = true
-            };
-            networkBackgroundThread.Start();
+            _connectionThread = new Thread(CheckConnections) { IsBackground = true };
         }
 
         public void Start()
@@ -41,26 +39,12 @@ namespace LoESoft.Server.Core.networking
             _socket.Bind(new IPEndPoint(IPAddress.Any, _tcpServerSettings._port));
             _socket.Listen(_tcpServerSettings._maxClients);
             _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+            _connectionThread.Start();
 
             GameServer.Info("Network Manager is loading... OK!");
         }
 
-        private void AcceptCallback(IAsyncResult asyncResult)
-        {
-            Socket socket = null;
-
-            try
-            {
-                socket = _socket.EndAccept(asyncResult);
-                _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
-            }
-            catch (ObjectDisposedException) { }
-
-            if (socket != null)
-                _connections.Add(new Client(socket));
-        }
-
-        private static void NetworkMonitor()
+        private void CheckConnections()
         {
             while (_socket != null && !_dispose)
             {
@@ -83,6 +67,21 @@ namespace LoESoft.Server.Core.networking
                     Thread.Sleep(10);
                 }
             }
+        }
+
+        private void AcceptCallback(IAsyncResult asyncResult)
+        {
+            Socket socket = null;
+
+            try
+            {
+                socket = _socket.EndAccept(asyncResult);
+                _socket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+            }
+            catch (ObjectDisposedException) { }
+
+            if (socket != null)
+                _connections.Add(new Client(socket));
         }
 
         private static void DisposeClient()

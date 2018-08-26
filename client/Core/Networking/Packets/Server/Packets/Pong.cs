@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Networking.Packets.Client.Packets;
+﻿using LoESoft.Client.Core.Networking.Packets.Client.Packets;
 using System;
 
 namespace LoESoft.Client.Core.Networking.Packets.Server.Packets
@@ -17,7 +16,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Server.Packets
     {
         public override PacketID ID => PacketID.PONG;
 
-        protected override void HandlePacket(GameUser gameUser, Pong packet)
+        protected override void HandlePacket(Core.Client.GameUser gameUser, Pong packet)
         {
             gameUser.SendPacket(new Ping()
             {

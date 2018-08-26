@@ -9,34 +9,23 @@ namespace LoESoft.Client.Core.Networking
     {
         public static bool _dispose { get; private set; } = false;
         public static Semaphore _networkManagerDisposeSemaphore { get; set; } = new Semaphore(1, 1);
-        public static Socket _socket { get; set; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-        public Server _server { get; set; } = Server.GetServers["Local Server"];
+        public Socket _socket { get; set; }
+        public Server _server { get; set; }
         public GameUser _gameUser { get; private set; }
 
-        public NetworkManager()
+        public void Start()
         {
-            _gameUser = new GameUser(_socket, _server);
-        }
-
-        public void Start() => Connect();
-
-        private static void Connect()
-        {
-            var networkBackgroundThread = new Thread(NetworkHandler.BeginConnect)
+            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
-                IsBackground = true
+                NoDelay = true,
+                UseOnlyOverlappedIO = true,
+                SendTimeout = 1000,
+                ReceiveTimeout = 1000,
+                Ttl = 112
             };
-            networkBackgroundThread.Start();
-        }
-
-        private static void Reconnect()
-        {
-            GameClient.Warn($"Client dropped connection to the server, retrying...");
-
-            NetworkHandler._connectionAttempts = 0;
-
-            Connect();
+            _server = Server.GetServers["Local Server"];
+            _gameUser = new GameUser(_socket, _server);
         }
 
         public void Dispose()

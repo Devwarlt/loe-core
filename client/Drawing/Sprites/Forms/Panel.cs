@@ -1,6 +1,5 @@
 ﻿using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using LoESoft.Client.Drawing.Sprites.Text;
-using Microsoft.Xna.Framework;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms
 {

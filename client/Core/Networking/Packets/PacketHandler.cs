@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Networking.Packets.Server;
+﻿using LoESoft.Client.Core.Networking.Packets.Server;
 using System;
 using System.Reflection;
 using System.Text;
@@ -10,7 +9,7 @@ namespace LoESoft.Client.Core.Networking.Packets
     {
         public abstract PacketID ID { get; }
 
-        protected abstract void HandlePacket(GameUser gameUser, T packet);
+        protected abstract void HandlePacket(Core.Client.GameUser gameUser, T packet);
 
         static PacketHandler()
         {
@@ -22,7 +21,7 @@ namespace LoESoft.Client.Core.Networking.Packets
                 }
         }
 
-        public void Handle(GameUser gameUser, ServerPacket serverPacket)
+        public void Handle(Core.Client.GameUser gameUser, ServerPacket serverPacket)
             => HandlePacket(gameUser, (T)serverPacket);
 
         public override string ToString()
