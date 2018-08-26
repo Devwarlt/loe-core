@@ -29,7 +29,7 @@ namespace LoESoft.Client.Core.Screens
             LoginBtn = new Button(10, 40, "Login", new RGBColor(0, 0, 255));
             PlayBtn = new Button(10, 70, "Play", new RGBColor(0, 0, 255));
             ExitBtn = new Button(10, 100, "Close", new RGBColor(0, 0, 255));
-            RegisterPanel = new RegisterPanel(DrawHelper.CenteredPosition(GameApplication.WIDTH, 
+            RegisterPanel = new RegisterPanel(DrawHelper.CenteredPosition(GameApplication.WIDTH,
                 400), 100);
             LoginPanel = new LoginPanel(DrawHelper.CenteredPosition(GameApplication.WIDTH,
                 400), 100);

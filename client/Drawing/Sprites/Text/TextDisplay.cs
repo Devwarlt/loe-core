@@ -48,7 +48,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public override void Draw(SpriteBatch spriteBatch)
         {
             var scale = Size / 100f;
-            
+
             if (PerLineWidth != 0)
             {
                 var offset = 0;
@@ -60,7 +60,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             }
             else
                 spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-            
+
             base.Draw(spriteBatch);
         }
 
@@ -71,14 +71,14 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
             var cWidth = 0;
             var cSize = 0;
-            foreach(var i in Text)
+            foreach (var i in Text)
             {
                 cWidth += (int)MeasureString(i.ToString(), (int)Size).X;
                 if (cWidth >= PerLineWidth)
                     break;
                 cSize++;
             }
-            
+
             return Split(Text, cSize).ToList();
         }
 

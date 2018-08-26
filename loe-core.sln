@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Server", "server\Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Client", "client\LoESoft.Client.csproj", "{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoeSoft.Launcher", "LoeSoft.Launcher\LoeSoft.Launcher.csproj", "{4FF98F6C-23A1-40A3-8C76-E4AB29BCAAB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Launcher", "launcher\LoESoft.Launcher.csproj", "{4FF98F6C-23A1-40A3-8C76-E4AB29BCAAB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
