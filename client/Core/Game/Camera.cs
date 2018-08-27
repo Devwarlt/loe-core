@@ -1,5 +1,6 @@
 ﻿using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace LoESoft.Client.Core.Game
 {
@@ -12,5 +13,7 @@ namespace LoESoft.Client.Core.Game
         public static void SetFocus(BasicObject focus) => Focus = focus;
 
         public static Matrix GetMatrix() => Matrix.CreateScale(SCALE); // todo implement center focus
+
+        //Monogames.Extended has a Camera2D Class 
     }
 }

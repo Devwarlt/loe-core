@@ -47,13 +47,13 @@ namespace LoESoft.Client.Core.Screens
             ExitButton.TextDisplay.Outline = true;
 
             PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
-            //PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
-            //PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
-            //OptionsButton.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
-            //OptionsButton.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
+            PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
+            PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
+            OptionsButton.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
+            OptionsButton.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
             ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
-            //ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
-            //ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
+            ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
+            ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
 
             BackgroundImage = AssetLoader.LoadAsset<Texture2D>("images/titleScreenBackground");
 
@@ -65,14 +65,14 @@ namespace LoESoft.Client.Core.Screens
             Background.AddChild(ExitButton);
         }
 
-        //private void OnPlayButtonOver(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.Yellow;
-        //private void OnPlayButtonOut(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.White;
+        private void OnPlayButtonOver(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.Yellow;
+        private void OnPlayButtonOut(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.White;
 
-        //private void OnOptionsButtonOver(object sender, EventArgs e) => OptionsButton.TextDisplay.SpriteColor = Color.Yellow;
-        //private void OnOptionsButtonOut(object sender, EventArgs e) => OptionsButton.TextDisplay.SpriteColor = Color.White;
+        private void OnOptionsButtonOver(object sender, EventArgs e) => OptionsButton.TextDisplay.SpriteColor = Color.Yellow;
+        private void OnOptionsButtonOut(object sender, EventArgs e) => OptionsButton.TextDisplay.SpriteColor = Color.White;
 
-        //private void OnExitButtonOver(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.Yellow;
-        //private void OnExitButtonOut(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.White;
+        private void OnExitButtonOver(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.Yellow;
+        private void OnExitButtonOut(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.White;
 
         private void OnPlay(object sender, EventArgs e) => ScreenManager.DispatchScreen(new GameScreen());
         private void OnExit(object sender, EventArgs e) => ScreenManager.CloseGame();

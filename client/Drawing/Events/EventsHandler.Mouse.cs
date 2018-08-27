@@ -47,7 +47,7 @@ namespace LoESoft.Client.Drawing.Events
 
         protected bool HandleMouseOut(SpriteNode node)
         {
-            if (node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle))
+            if (!node.Visible || node.SpriteRectangle.Intersects(MouseRectangle))
                 return false;
             return true;
         }
