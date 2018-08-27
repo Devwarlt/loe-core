@@ -15,12 +15,6 @@ using System.Text.RegularExpressions;
 
 namespace LoESoft.Client.Core.Networking
 {
-    internal class PacketData
-    {
-        public PacketID PacketID { get; set; }
-        public string Content { get; set; }
-    }
-
     public class NetworkControl
     {
         protected const int BUFFER_SIZE = ushort.MaxValue + 1;
@@ -39,13 +33,14 @@ namespace LoESoft.Client.Core.Networking
         public NetworkControl(GameUser gameUser)
         {
             GameUser = gameUser;
-            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream   , ProtocolType.Tcp);
-
-            Socket.NoDelay = true;
-            Socket.UseOnlyOverlappedIO = true;
-            Socket.SendTimeout = 1000;
-            Socket.ReceiveTimeout = 1000;
-            Socket.Ttl = 112;
+            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            {
+                NoDelay = true,
+                UseOnlyOverlappedIO = true,
+                SendTimeout = 1000,
+                ReceiveTimeout = 1000,
+                Ttl = 112
+            };
         }
 
         public void Connect(Server server)
