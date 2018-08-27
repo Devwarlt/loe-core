@@ -47,8 +47,10 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             TitleText = new TextDisplay(2, -20, name, color: new RGBColor(10, 10, 10));
             TextField = new TextDisplay(2, 2, "", color: new RGBColor(10, 10, 10));
 
-            _selectedMarket = new FilledRectangle(1, 1, 2, Height - 2, new RGBColor(0, 0, 0));
-            _selectedMarket.Visible = false;
+            _selectedMarket = new FilledRectangle(1, 1, 2, Height - 2, new RGBColor(0, 0, 0))
+            {
+                Visible = false
+            };
 
             AddChild(_selectedMarket);
             AddChild(TitleText);
@@ -69,7 +71,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             char[] pressedKeys = _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray();
-
 
             foreach (var i in pressedKeys)
                 if (Text.Length <= Limit && Selected)
