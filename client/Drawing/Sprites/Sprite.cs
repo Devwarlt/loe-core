@@ -8,7 +8,7 @@ namespace LoESoft.Client.Drawing.Sprites
         public Texture2D SpriteTexture { get; set; }
         public Color SpriteColor { get; set; }
 
-        public Sprite(int x, int y, int width, int height, Texture2D texture = null, RGBColor color = null, float alpha = 1) 
+        public Sprite(int x, int y, int width, int height, Texture2D texture = null, RGBColor color = null, float alpha = 1)
             : base(x, y, width, height)
         {
             SpriteTexture = texture;

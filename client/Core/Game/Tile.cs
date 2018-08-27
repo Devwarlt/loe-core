@@ -24,7 +24,7 @@ namespace LoESoft.Client.Core.Game
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(TileProperties.TileImage, new Vector2(X, Y), Color.White);
+            //spriteBatch.Draw(TileProperties, new Vector2(X, Y), Color.White);
             spriteBatch.End();
         }
     }

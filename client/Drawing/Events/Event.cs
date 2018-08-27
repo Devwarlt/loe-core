@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Timers;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -16,24 +15,6 @@ namespace LoESoft.Client.Drawing.Events
         GETPRESSEDKEYSHOLDABLE = 5,
         HANDLEBACKSPACE = 6,
         CLICKOUTLEFT = 7
-    }
-
-    public static class EventsManager
-    {
-        public static bool IsEventActive = false;
-
-        public static void SetUnactive()
-        {
-            Timer timer = new Timer(100);
-            timer.Elapsed += StopTimer;
-            timer.Enabled = true;
-
-            void StopTimer(object o, ElapsedEventArgs e)
-            {
-                IsEventActive = false;
-                timer.Stop();
-            }
-        }
     }
 
     public partial class EventsHandler

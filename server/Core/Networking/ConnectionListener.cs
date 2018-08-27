@@ -27,7 +27,7 @@ namespace LoESoft.Server.Core.Networking
         {
             var socket = Socket.EndAccept(asyncResult);
 
-            if(socket != null)
+            if (socket != null)
             {
                 var client = new Client(socket);
             }

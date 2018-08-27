@@ -32,6 +32,5 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         {
             base.Update(gameTime);
         }
-
     }
 }

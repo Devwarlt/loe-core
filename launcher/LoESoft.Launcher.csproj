@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4FF98F6C-23A1-40A3-8C76-E4AB29BCAAB1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>LoeSoft.Launcher</RootNamespace>
-    <AssemblyName>LoeSoft.Launcher</AssemblyName>
+    <RootNamespace>LoESoft.Launcher</RootNamespace>
+    <AssemblyName>Game Launcher</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

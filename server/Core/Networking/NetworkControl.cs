@@ -13,12 +13,6 @@ using System.Text.RegularExpressions;
 
 namespace LoESoft.Server.Core.Networking
 {
-    internal class PacketData
-    {
-        public PacketID PacketID { get; set; }
-        public string Content { get; set; }
-    }
-
     public class NetworkControl
     {
         protected const int BUFFER_SIZE = ushort.MaxValue + 1;
@@ -40,7 +34,7 @@ namespace LoESoft.Server.Core.Networking
 
         public void SendPacket(OutgoingPacket outgoingPacket)
         {
-            if(SendBuffer == null)
+            if (SendBuffer == null)
                 SendBuffer = new byte[BUFFER_SIZE];
 
             var buffer = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
@@ -55,7 +49,7 @@ namespace LoESoft.Server.Core.Networking
         public void SendPackets(OutgoingPacket[] outgoingPacket)
         {
             for (var i = 0; i < outgoingPacket.Length; i++)
-                SendPacket(outgoingPacket[i]);  
+                SendPacket(outgoingPacket[i]);
         }
 
         private void OnSend(IAsyncResult asyncResult)
@@ -72,7 +66,7 @@ namespace LoESoft.Server.Core.Networking
 
         public void ReceivePacket()
         {
-            if(ReceiveBuffer == null)
+            if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
             Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None, OnReceivePacket, null);
         }
