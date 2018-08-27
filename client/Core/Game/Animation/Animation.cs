@@ -12,18 +12,4 @@ namespace LoESoft.Client.Core.Game.Animation
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
     }
-    public class AnimationFrame
-    {
-        public Texture2D Texture;
-
-        public AnimationFrame(Texture2D texture)
-        {
-            Texture = texture;
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
-        }
-    }
 }

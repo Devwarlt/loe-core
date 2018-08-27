@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Drawing.Sprites;
-using System.Timers;
+﻿using System.Timers;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -29,10 +28,5 @@ namespace LoESoft.Client.Drawing.Events
                 timer.Stop();
             }
         }
-    }
-    public class ActiveSpriteNode
-    {
-        public bool IsActive;
-        public SpriteNode Node;
     }
 }

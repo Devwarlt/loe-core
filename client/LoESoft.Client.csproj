@@ -72,6 +72,7 @@
     <Compile Include="Assets\XmlLoader.cs" />
     <Compile Include="Core\Client\GameUser.cs" />
     <Compile Include="Core\Game\Animation\Animation.cs" />
+    <Compile Include="Core\Game\Animation\AnimationFrame.cs" />
     <Compile Include="Core\Game\Camera.cs" />
     <Compile Include="Core\Game\Objects\BasicObject.cs" />
     <Compile Include="Core\Game\Tile.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Core\Screens\ScreenManager.cs" />
     <Compile Include="Core\Utils\IO.cs" />
     <Compile Include="Drawing\DrawHelper.cs" />
+    <Compile Include="Drawing\Events\ActiveSpriteMode.cs" />
     <Compile Include="Drawing\Events\EventsManager.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.KeyBoard.cs" />

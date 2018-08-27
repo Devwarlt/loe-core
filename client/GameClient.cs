@@ -104,7 +104,6 @@ namespace LoESoft.Client
             }
         }
 
-
         public static void Info(string data) => _log.Info(data);
 
         public static void Warn(string data) => _log.Warn(data);
