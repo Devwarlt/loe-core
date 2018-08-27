@@ -42,7 +42,12 @@ namespace LoESoft.Client
             AssetLoader.Init(Content);
             AudioManager.Init();
             TextDisplay.LoadSpriteFont(Content);
-            ScreenManager.OnGameClose += () => Exit();
+            ScreenManager.OnGameClose += () => {
+                GameClient._discordRPC.ClearPresence();
+                GameClient._discordRPC.Dispose();
+
+                Exit();
+            };
         }
 
         protected override void UnloadContent() { }
