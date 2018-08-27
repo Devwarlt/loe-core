@@ -67,7 +67,6 @@
     <Compile Include="Core\Screens\Screen.cs" />
     <Compile Include="Core\Screens\ScreenManager.cs" />
     <Compile Include="Core\Utils\IO.cs" />
-    <Compile Include="Core\Utils\TextLabel.cs" />
     <Compile Include="Drawing\DrawHelper.cs" />
     <Compile Include="Drawing\EventManager.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
