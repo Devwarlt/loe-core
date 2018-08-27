@@ -69,6 +69,7 @@
     <Compile Include="Core\Utils\IO.cs" />
     <Compile Include="Core\Utils\TextLabel.cs" />
     <Compile Include="Drawing\DrawHelper.cs" />
+    <Compile Include="Drawing\EventManager.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.KeyBoard.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />

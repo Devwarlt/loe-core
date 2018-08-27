@@ -1,6 +1,4 @@
-﻿using LoESoft.Client.Drawing.Sprites.Text;
-
-namespace LoESoft.Client.Drawing.Sprites.Text
+﻿namespace LoESoft.Client.Drawing.Sprites.Text
 {
     public class TextButton : SpriteNode
     {

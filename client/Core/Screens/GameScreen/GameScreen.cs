@@ -1,6 +1,5 @@
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Networking;
-using LoESoft.Client.Core.Utils;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

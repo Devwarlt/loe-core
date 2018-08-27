@@ -1,6 +1,4 @@
-﻿using LoESoft.Server.Utils;
-
-namespace LoESoft.Server.Settings
+﻿namespace LoESoft.Server.Settings
 {
     public class ServerSettings
     {
