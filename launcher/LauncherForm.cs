@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LoESoft.Launcher
@@ -15,6 +9,16 @@ namespace LoESoft.Launcher
         public LauncherForm()
         {
             InitializeComponent();
+        }
+
+        private void ChangeButtonSelected(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            if (!button.Enabled)
+                return;
+
+            ButtonSelectedDisplay.Height = button.Height;
+            ButtonSelectedDisplay.Top = button.Top;
         }
     }
 }

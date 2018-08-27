@@ -19,7 +19,7 @@ namespace LoESoft.Client
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
         [STAThread]
-        static void Main()
+        public static void Main(string[] args)
         {
             Console.Title = $"{_name} Console - Build: {_version}";
 
