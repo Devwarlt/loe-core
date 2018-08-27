@@ -13,12 +13,6 @@ using System.Text.RegularExpressions;
 
 namespace LoESoft.Server.Core.Networking
 {
-    internal class PacketData
-    {
-        public PacketID PacketID { get; set; }
-        public string Content { get; set; }
-    }
-
     public class NetworkControl
     {
         protected const int BUFFER_SIZE = ushort.MaxValue + 1;
