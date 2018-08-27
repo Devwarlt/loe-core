@@ -85,8 +85,8 @@ namespace LoESoft.Client.Core.Screens
         {
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
-            TitleFlashSpeedR += dt;
-            Title.SpriteColor = Color.Lerp(Color.Black, Color.Red, (float)Math.Sin(TitleFlashSpeedR));
+            TitleFlashSpeedR += dt * 0.5f;
+            Title.SpriteColor = Color.Lerp(Color.Red, Color.Yellow, (float)Math.Sin(TitleFlashSpeedR));
 
             Background.Update(gameTime);
         }

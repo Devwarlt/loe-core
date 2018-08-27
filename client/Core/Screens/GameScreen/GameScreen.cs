@@ -29,7 +29,7 @@ namespace LoESoft.Client.Core.Screens
             Tiles = new List<Tile>();
             for (var i = 0; i < 160; i++)
                 for (var j = 0; j < 90; j++)
-                    Tiles.Add(new Tile(i, j, 1));
+                    Tiles.Add(new Tile(i, j, i % 5));
             BasicObject = new BasicObject();
         }
 
