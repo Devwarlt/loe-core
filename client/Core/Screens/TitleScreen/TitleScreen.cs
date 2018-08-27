@@ -26,7 +26,7 @@ namespace LoESoft.Client.Core.Screens
         {
             var buttonGap = 6;
 
-            Title = new TextDisplay(0, 0, "LoeSoft", 30, new RGBColor(255, 0, 0));
+            Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 0, 0));
             Title.X = (GameApplication.WIDTH - Title.Width) / 2;
             Title.Y = Title.Height * 3;
             Title.Outline = true;

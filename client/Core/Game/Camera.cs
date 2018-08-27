@@ -13,15 +13,15 @@ namespace LoESoft.Client.Core.Game
         public static float Y { get; set; }
         public static void SetFocus(BasicObject focus) => Focus = focus;
         
-        public static Matrix GetMatrix() => Matrix.CreateScale(SCALE);
+        //public static Matrix GetMatrix() => Matrix.CreateScale(SCALE);
 
         public static Matrix GetMatrix()
         {
             if (Focus == null)
                 return Matrix.Identity;
 
-            X = MathHelper.Lerp(X, Focus.DrawX, 0.1f);
-            Y = MathHelper.Lerp(Y, Focus.DrawY, 0.1f);
+            X = MathHelper.Lerp(X, Focus.DrawX, 0.25f);
+            Y = MathHelper.Lerp(Y, Focus.DrawY, 0.25f);
 
             return Matrix.CreateTranslation(-X - 4, -Y - 4, 0) *
             Matrix.CreateScale(SCALE) *

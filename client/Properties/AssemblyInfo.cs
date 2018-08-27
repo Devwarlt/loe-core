@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Resources;
 
-[assembly: AssemblyTitle("LoE Realm")]
+[assembly: AssemblyTitle("Baron's Ramerok")]
 [assembly: AssemblyProduct("GameClient")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("A LoE Realm game client application.")]
