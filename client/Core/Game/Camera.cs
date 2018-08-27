@@ -17,12 +17,12 @@ namespace LoESoft.Client.Core.Game
             if (Focus == null)
                 return Matrix.Identity;
 
-            X = MathHelper.Lerp(X, Focus.DrawX, 0.1f);
-            Y = MathHelper.Lerp(Y, Focus.DrawY, 0.1f);
+            X = MathHelper.Lerp(X, Focus.DrawX, 0.25f);
+            Y = MathHelper.Lerp(Y, Focus.DrawY, 0.25f);
 
             return Matrix.CreateTranslation(-X - 4, -Y - 4, 0) *
-            Matrix.CreateScale(SCALE) *
-            Matrix.CreateTranslation(GameApplication.WIDTH / 2, GameApplication.HEIGHT / 2, 0);
+                Matrix.CreateScale(SCALE) *
+                Matrix.CreateTranslation(GameApplication.WIDTH / 2, GameApplication.HEIGHT / 2, 0);
         }
     }
 }

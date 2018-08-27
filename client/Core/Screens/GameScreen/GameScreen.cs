@@ -20,7 +20,6 @@ namespace LoESoft.Client.Core.Screens
         public List<Tile> Tiles { get; set; }
 
         public BasicObject BasicObject { get; set; }
-        public BasicObject BasicObject2 { get; set; }
         public override void OnScreenCreate()
         {
 #if !TEMP_DISABLE
@@ -31,12 +30,7 @@ namespace LoESoft.Client.Core.Screens
             Tiles = new List<Tile>();
             for (var i = 0; i < 160; i++)
                 for (var j = 0; j < 90; j++)
-                    Tiles.Add(new Tile(i, j, random.Next(4)));
-
-            BasicObject2 = new BasicObject();
-            BasicObject2.X = -2;
-            BasicObject2.Y = -2;
-
+                    Tiles.Add(new Tile(i, j, 1));
             BasicObject = new BasicObject();
         }
 
@@ -47,11 +41,12 @@ namespace LoESoft.Client.Core.Screens
 #endif
         }
 
+        private float z;
         public override void Update(GameTime gameTime)
         {
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
-            var spd = 4 * dt;
+            var spd = 1 * dt;
 
             var keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.W))
@@ -62,19 +57,17 @@ namespace LoESoft.Client.Core.Screens
                 BasicObject.Y += spd;
             if (keyState.IsKeyDown(Keys.D))
                 BasicObject.X += spd;
-
             Camera.SetFocus(BasicObject);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.ClearColor(Color.Orange);
+            spriteBatch.Clear();
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetMatrix());
             for (var i = 0; i < Tiles.Count; i++)
                 Tiles[i].Draw(spriteBatch);
             BasicObject.Draw(spriteBatch);
-            BasicObject2.Draw(spriteBatch);
             spriteBatch.End();
         }
     }
