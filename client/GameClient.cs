@@ -5,6 +5,7 @@ using Rollbar;
 using System;
 using System.Reflection;
 using System.Threading;
+using DiscordRPC;
 
 namespace LoESoft.Client
 {
@@ -16,11 +17,27 @@ namespace LoESoft.Client
 
         // Log
         private static Logger _log => LogManager.GetLogger(_name);
+
+        // Unique IDs
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
+        private static string _brmeRpcId => "483698369559003156";
+
+        // Discord
+        public static DiscordClient _discordRPC { get; set; }
 
         [STAThread]
         public static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, arg) =>
+            {
+                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"AssemblyLoadingAndReflection.{new AssemblyName(arg.Name).Name}.dll"))
+                {
+                    Byte[] assemblyData = new Byte[stream.Length];
+                    stream.Read(assemblyData, 0, assemblyData.Length);
+                    return Assembly.Load(assemblyData);
+                }
+            };
+
             Console.Title = $"{_name} Console - Build: {_version}";
 
             var config = new LoggingConfiguration();
@@ -45,6 +62,22 @@ namespace LoESoft.Client
             RollbarLocator.RollbarInstance.Configure(new RollbarConfig(_rollbarId));
 
             Info("Game Client is loading...");
+
+            _discordRPC = new DiscordClient(_brmeRpcId);
+            _discordRPC.SetPresence(new RichPresence()
+            {
+                State = null,
+                Details = null,
+                Timestamps = new Timestamps() { Start = DateTime.Now },
+                Assets = new DiscordRPC.Assets()
+                {
+                    LargeImageKey = "brme",
+                    LargeImageText = "Baron Ramerok",
+                    SmallImageKey = "loesoft",
+                    SmallImageText = "LoESoft Games"
+                }
+            });
+
             try
             {
                 using (var game = new GameApplication())
@@ -59,6 +92,9 @@ namespace LoESoft.Client
                 Error(e);
 
                 Thread.Sleep(100);
+
+                _discordRPC.ClearPresence();
+                _discordRPC.Dispose();
 
                 Warn("Press 'ESC' to close...");
 

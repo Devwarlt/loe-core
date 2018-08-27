@@ -53,9 +53,14 @@ namespace LoESoft.Client.Drawing.Sprites
                 ChildList[i].Update(gameTime);
 
             foreach (var i in EventDictionary)
-                if (_eventsHandler.HandleMouse(this, i.Key) && !EventsManager.IsEventActive)
+                if (_eventsHandler.HandleMouse(this, i.Key) &&
+                    (!EventsManager.ActiveNode.IsActive && EventsManager.ActiveNode.Node != this))
                 {
-                    EventsManager.IsEventActive = true;
+                    if (i.Key != Event.MOUSEOUT)
+                    {
+                        EventsManager.ActiveNode.IsActive = true;
+                        EventsManager.ActiveNode.Node = this;
+                    }
                     i.Value?.Invoke(this, new EventArgs());
                     EventsManager.SetUnactive();
                 }

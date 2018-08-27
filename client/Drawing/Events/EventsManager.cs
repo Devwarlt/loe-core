@@ -4,17 +4,27 @@ namespace LoESoft.Client.Drawing.Events
 {
     public static class EventsManager
     {
-        public static bool IsEventActive = false;
+        public static ActiveSpriteNode ActiveNode;
+
+        static EventsManager()
+        {
+            ActiveNode = new ActiveSpriteNode()
+            {
+                IsActive = false,
+                Node = null
+            };
+        }
 
         public static void SetUnactive()
         {
-            Timer timer = new Timer(100);
+            Timer timer = new Timer(5);
             timer.Elapsed += StopTimer;
             timer.Enabled = true;
 
             void StopTimer(object o, ElapsedEventArgs e)
             {
-                IsEventActive = false;
+                ActiveNode.IsActive = false;
+                ActiveNode.Node = null;
                 timer.Stop();
             }
         }
