@@ -16,7 +16,7 @@
         private void InitializeComponent()
         {
             this.ButtonsPanel = new System.Windows.Forms.Panel();
-            this.TestCustomButton = new LoeSoft.Launcher.Controls.CustomButton();
+            this.TestCustomButton = new LoESoft.Launcher.Controls.CustomButton();
             this.ButtonsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@
         #endregion
 
         private System.Windows.Forms.Panel ButtonsPanel;
-        private LoeSoft.Launcher.Controls.CustomButton TestCustomButton;
+        private LoESoft.Launcher.Controls.CustomButton TestCustomButton;
     }
 }
 

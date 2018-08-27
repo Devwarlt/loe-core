@@ -1,13 +1,9 @@
 ﻿using System.Windows.Forms;
 
-namespace LoeSoft.Launcher.Controls
+namespace LoESoft.Launcher.Controls
 {
     public class CustomButton : Control
     {
-        public CustomButton()
-        {
-        }
-
-
+        public CustomButton() { }
     }
 }
