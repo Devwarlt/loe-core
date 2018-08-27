@@ -1,6 +1,4 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
-using System;
-using System.Collections.Generic;
 using System.Timers;
 
 namespace LoESoft.Client.Drawing.Events

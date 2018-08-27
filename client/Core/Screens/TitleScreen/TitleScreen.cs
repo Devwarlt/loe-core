@@ -20,7 +20,7 @@ namespace LoESoft.Client.Core.Screens
 
         private Texture2D BackgroundImage { get; set; }
         private FilledRectangle Background { get; set; }
-        
+
         public List<Tile> Tiles { get; set; }
         public TitleScreen()
         {

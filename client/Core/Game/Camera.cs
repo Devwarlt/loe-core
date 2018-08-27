@@ -1,6 +1,5 @@
 ﻿using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
 
 namespace LoESoft.Client.Core.Game
 {
@@ -12,7 +11,7 @@ namespace LoESoft.Client.Core.Game
         public static float X { get; set; }
         public static float Y { get; set; }
         public static void SetFocus(BasicObject focus) => Focus = focus;
-        
+
         public static Matrix GetMatrix() => Matrix.CreateScale(SCALE);
 
         public static Matrix GetMatrix()
