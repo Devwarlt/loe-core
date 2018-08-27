@@ -22,7 +22,7 @@ namespace LoESoft.Client.Core.Screens
             passTextBox = new TextBox(10, 150, 380, "Password:", encoded: true);
 
             btnRegister = new Button(0, 190, "Register", new RGBColor(255, 0, 0));
-            btnRegister.X = (Width / 2 - btnRegister.Width / 2);
+            btnRegister.X = ((Width / 2) - (btnRegister.Width / 2));
 
             AddChild(mailTextBox);
             AddChild(userTextBox);
