@@ -1,39 +1,42 @@
 accounts
-    id
-    world
-    email
-    password
+PK  id
+    * gameServerId
+    accountName
+    accountPassword
     rank
-    vipStartAt
-    vipEndAt
-    creation
+    * vipStartAt
+    * vipEndAt
+    creationDate
 characters
-    id
+PK  id
     accountId
     name
-    townId
+    * townId
     vocation
-    hitPoints
-    maxHitPoints
-    manaPoints
-    maxManaPoints
-    level
-    levelExperience
-    magic
-    magicExperience
-    speed
-    attack
-    attackExperience
-    defense
-    defenseExperience
-    items
+    * hitPoints
+    * maxHitPoints
+    * manaPoints
+    * maxManaPoints
+    * level
+    * levelExperience
+    * magic
+    * magicExperience
+    * speed
+    * attack
+    * attackExperience
+    * defense
+    * defenseExperience
+    * items
     worldId
-    worldX
-    worldY
-    guildId
-    guildRank
-    creation
-depot
-    id
+    positionX
+    positionY
+    * guildId
+    * guildRank
+    creationDate
+depots
+PK  id
     characterId
-    items
+    * items
+    
+(*): future implementation.
+(PK): primary key (unique value).
