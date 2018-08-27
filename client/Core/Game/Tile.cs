@@ -11,6 +11,8 @@ namespace LoESoft.Client.Core.Game
 
         public int X { get; set; }
         public int Y { get; set; }
+        public int DrawX => X * TILE_SIZE;
+        public int DrawY => Y * TILE_SIZE;
         public int TileType { get; set; }
         public TileProperties TileProperties { get; set; }
         public Texture2D Texture { get; set; }
@@ -29,12 +31,7 @@ namespace LoESoft.Client.Core.Game
             TextureOffsetX = (TileProperties.TextureIndex % TILE_SIZE) * TILE_SIZE;
             TextureOffsetY = (TileProperties.TextureIndex / TILE_SIZE) * TILE_SIZE;
         }
-        
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetMatrix());
-            spriteBatch.Draw(Texture, new Vector2(X * TILE_SIZE, Y * TILE_SIZE), new Rectangle(TextureOffsetX, TextureOffsetY, TILE_SIZE, TILE_SIZE), Color.White);
-            spriteBatch.End();
-        }
+
+        public void Draw(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, new Vector2(DrawX, DrawY), new Rectangle(TextureOffsetX, TextureOffsetY, TILE_SIZE, TILE_SIZE), Color.White);
     }
 }
