@@ -19,9 +19,7 @@ namespace LoESoft.Client.Core.Game.Objects
             if (Texture == null)
                 Texture = AssetLibrary.Images.Values.First();
 
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetMatrix());
-            spriteBatch.Draw(Texture, new Vector2(X, Y), new Rectangle(0, 0, 8, 8), Color.White);
-            spriteBatch.End();
+            spriteBatch.Draw(Texture, new Vector2(DrawX, DrawY), new Rectangle(0, 0, 8, 8), Color.White);
         }
     }
 }

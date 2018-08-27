@@ -9,11 +9,23 @@ namespace LoESoft.Client.Core.Game
         public const int SCALE = Tile.TILE_SIZE / 2;
 
         public static BasicObject Focus { get; set; }
-
+        public static float X { get; set; }
+        public static float Y { get; set; }
         public static void SetFocus(BasicObject focus) => Focus = focus;
+        
+        public static Matrix GetMatrix() => Matrix.CreateScale(SCALE);
 
-        public static Matrix GetMatrix() => Matrix.CreateScale(SCALE); // todo implement center focus
+        public static Matrix GetMatrix()
+        {
+            if (Focus == null)
+                return Matrix.Identity;
 
-        //Monogames.Extended has a Camera2D Class 
+            X = MathHelper.Lerp(X, Focus.DrawX, 0.1f);
+            Y = MathHelper.Lerp(Y, Focus.DrawY, 0.1f);
+
+            return Matrix.CreateTranslation(-X - 4, -Y - 4, 0) *
+            Matrix.CreateScale(SCALE) *
+            Matrix.CreateTranslation(GameApplication.WIDTH / 2, GameApplication.HEIGHT / 2, 0);
+        }
     }
 }
