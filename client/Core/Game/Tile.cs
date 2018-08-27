@@ -1,5 +1,4 @@
 ﻿using LoESoft.Client.Assets.Properties;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LoESoft.Client.Core.Game

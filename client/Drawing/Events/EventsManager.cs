@@ -1,6 +1,6 @@
 ﻿using System.Timers;
 
-namespace LoESoft.Client.Drawing
+namespace LoESoft.Client.Drawing.Events
 {
     public static class EventsManager
     {
