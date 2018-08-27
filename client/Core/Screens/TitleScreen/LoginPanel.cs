@@ -20,7 +20,7 @@ namespace LoESoft.Client.Core.Screens
             passTextBox = new TextBox(10, 100, 380, "Password:", encoded: true);
 
             btnLogin = new Button(0, 140, "Login", new RGBColor(255, 0, 0));
-            btnLogin.X = (Width / 2 - btnLogin.Width / 2);
+            btnLogin.X = ((Width / 2) - (btnLogin.Width / 2));
 
             mailTextBox.AddEventListener(Event.CLICKLEFT, OnMailClick);
             passTextBox.AddEventListener(Event.CLICKLEFT, OnPassClick);
