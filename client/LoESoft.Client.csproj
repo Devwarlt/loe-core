@@ -65,10 +65,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetLibrary.cs" />
     <Compile Include="Assets\AssetLoader.cs" />
     <Compile Include="Assets\Properties\TileLibrary.cs" />
     <Compile Include="Assets\Properties\TileProperties.cs" />
+    <Compile Include="Assets\XmlLoader.cs" />
     <Compile Include="Core\Client\GameUser.cs" />
+    <Compile Include="Core\Game\Animation\Animation.cs" />
+    <Compile Include="Core\Game\Camera.cs" />
+    <Compile Include="Core\Game\Objects\BasicObject.cs" />
     <Compile Include="Core\Game\Tile.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />
@@ -317,6 +322,7 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <EmbeddedResource Include="Assets\Embeds\Tiles.xml" />
     <None Include="packages.config" />
     <Content Include="Version.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

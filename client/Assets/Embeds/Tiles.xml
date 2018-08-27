@@ -1,0 +1,14 @@
+﻿<Tiles>
+  <Tile type="0" id="Dirt">
+    <Texture index="0">Tiles</Texture>
+  </Tile>
+  <Tile type="1" id="Grass">
+    <Texture index="1">Tiles</Texture>
+  </Tile>
+  <Tile type="2" id="Sand">
+    <Texture index="2">Tiles</Texture>
+  </Tile>
+  <Tile type="3" id="Water">
+    <Texture index="3">Tiles</Texture>
+  </Tile>
+</Tiles>

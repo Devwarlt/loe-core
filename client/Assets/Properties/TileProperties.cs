@@ -4,11 +4,14 @@ namespace LoESoft.Client.Assets.Properties
 {
     public class TileProperties
     {
-        public bool NotWalkbale { get; set; }
+        public int TextureIndex { get; set; }
+        public string TextureFile { get; set; }
 
         public TileProperties(XElement elem)
         {
-            NotWalkbale = elem.Element("NoWalk") != null;
+            var texture = elem.Element("Texture");
+            TextureIndex = int.Parse(texture.Attribute("index").Value);
+            TextureFile = texture.Value;
         }
     }
 }
