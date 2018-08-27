@@ -1,4 +1,5 @@
 using LoESoft.Client.Assets;
+using LoESoft.Client.Core.Game;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
@@ -6,6 +7,7 @@ using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Screens
 {
@@ -18,7 +20,8 @@ namespace LoESoft.Client.Core.Screens
 
         private Texture2D BackgroundImage { get; set; }
         private FilledRectangle Background { get; set; }
-
+        
+        public List<Tile> Tiles { get; set; }
         public TitleScreen()
         {
             var buttonGap = 6;
@@ -52,7 +55,7 @@ namespace LoESoft.Client.Core.Screens
             //ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
             //ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
 
-            BackgroundImage = AssetLoader.LoadAsset<Texture2D>("images/exampleTitleBackground");
+            BackgroundImage = AssetLoader.LoadAsset<Texture2D>("images/titleScreenBackground");
 
             Background = new FilledRectangle(BackgroundImage);
 
@@ -77,7 +80,16 @@ namespace LoESoft.Client.Core.Screens
         public override void OnScreenCreate() { }
         public override void OnScreenDispatch() { }
 
-        public override void Update(GameTime gameTime) => Background.Update(gameTime);
+        private float TitleFlashSpeedR = 0;
+        public override void Update(GameTime gameTime)
+        {
+            var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
+
+            TitleFlashSpeedR += dt;
+            Title.SpriteColor = Color.Lerp(Color.Black, Color.Red, (float)Math.Sin(TitleFlashSpeedR));
+
+            Background.Update(gameTime);
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {

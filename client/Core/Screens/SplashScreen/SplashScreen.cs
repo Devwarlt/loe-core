@@ -1,4 +1,6 @@
-﻿using LoESoft.Client.Drawing;
+﻿using LoESoft.Client.Assets;
+using LoESoft.Client.Assets.Properties;
+using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ namespace LoESoft.Client.Core.Screens
 {
     public class SplashScreen : Screen
     {
+        private static bool HasLoadedAssets { get; set; }
         private const int DELAY_BETWEEN_SPLASH = 3500;
 
         private int CurrentTime { get; set; } = DELAY_BETWEEN_SPLASH;
@@ -20,7 +23,14 @@ namespace LoESoft.Client.Core.Screens
         public override void OnScreenCreate()
         {
             TexturesToDisplay = new Queue<Texture2D>();
-            TexturesToDisplay.Enqueue(Assets.AssetLoader.LoadAsset<Texture2D>("splash/LoELogo"));
+            TexturesToDisplay.Enqueue(AssetLoader.LoadAsset<Texture2D>("splash/LoELogo"));
+
+            if (!HasLoadedAssets)
+            {
+                AssetLibrary.AddImage("Tiles", "images/Tiles");
+                TileLibrary.Load("Tiles");
+                HasLoadedAssets = true;
+            }
         }
 
         public override void OnScreenDispatch() { }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace LoESoft.Client.Assets.Properties
@@ -24,6 +20,18 @@ namespace LoESoft.Client.Assets.Properties
                 TypeToId = new Dictionary<int, string>();
             if (IdToType == null)
                 IdToType = new Dictionary<string, int>();
+
+            var elems = XmlLoader.LoadAsset(assetName);
+            foreach (var elem in elems.Elements())
+            {
+                var type = int.Parse(elem.Attribute("type").Value);
+                var id = elem.Attribute("id").Value;
+
+                XmlLibrary.Add(type, elem);
+                PropsLibrary.Add(type, new TileProperties(elem));
+                TypeToId.Add(type, id);
+                IdToType.Add(id, type);
+            }
         }
     }
 }
