@@ -47,11 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AccountDisplayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplayControl.Designer.cs">
+      <DependentUpon>AccountDisplayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExtendedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\HomeDisplayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\HomeDisplayControl.Designer.cs">
       <DependentUpon>HomeDisplayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OptionsDisplayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OptionsDisplayControl.Designer.cs">
+      <DependentUpon>OptionsDisplayControl.cs</DependentUpon>
     </Compile>
     <Compile Include="LauncherForm.cs">
       <SubType>Form</SubType>
@@ -61,8 +76,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\AccountDisplayControl.resx">
+      <DependentUpon>AccountDisplayControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\HomeDisplayControl.resx">
       <DependentUpon>HomeDisplayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OptionsDisplayControl.resx">
+      <DependentUpon>OptionsDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LauncherForm.resx">
       <DependentUpon>LauncherForm.cs</DependentUpon>
