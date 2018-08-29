@@ -22,13 +22,14 @@
             this.HomeButton = new System.Windows.Forms.Button();
             this.ButtonsPanelTitle = new System.Windows.Forms.Panel();
             this.ButtonPanelTitleLabel = new System.Windows.Forms.Label();
+            this.homeDisplayControl1 = new LoESoft.Launcher.Controls.HomeDisplayControl();
             this.ButtonsPanel.SuspendLayout();
             this.ButtonsPanelTitle.SuspendLayout();
             this.SuspendLayout();
             // 
             // ButtonsPanel
             // 
-            this.ButtonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.ButtonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.ButtonsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -115,12 +116,20 @@
             this.ButtonPanelTitleLabel.Text = "Something";
             this.ButtonPanelTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // homeDisplayControl1
+            // 
+            this.homeDisplayControl1.Location = new System.Drawing.Point(180, 0);
+            this.homeDisplayControl1.Name = "homeDisplayControl1";
+            this.homeDisplayControl1.Size = new System.Drawing.Size(1020, 600);
+            this.homeDisplayControl1.TabIndex = 1;
+            // 
             // LauncherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(1200, 600);
+            this.Controls.Add(this.homeDisplayControl1);
             this.Controls.Add(this.ButtonsPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "LauncherForm";
@@ -140,6 +149,7 @@
         private System.Windows.Forms.Panel ButtonSelectedDisplay;
         private System.Windows.Forms.Button AccountButton;
         private System.Windows.Forms.Button OptionsButton;
+        private Controls.HomeDisplayControl homeDisplayControl1;
     }
 }
 
