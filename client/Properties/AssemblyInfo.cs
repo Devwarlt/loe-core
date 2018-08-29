@@ -2,11 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Resources;
 
-<<<<<<< HEAD
 [assembly: AssemblyTitle("Baron's Ramerok")]
-=======
-[assembly: AssemblyTitle("BRME")]
->>>>>>> c1d0f182f791a8c113411507f8be96aa6cc952b4
 [assembly: AssemblyProduct("GameClient")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("A BRME game client application.")]

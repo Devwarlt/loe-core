@@ -16,6 +16,8 @@
         private void InitializeComponent()
         {
             this.ButtonsPanel = new System.Windows.Forms.Panel();
+            this.registerButton = new System.Windows.Forms.Button();
+            this.loginButton = new System.Windows.Forms.Button();
             this.ButtonSelectedDisplay = new System.Windows.Forms.Panel();
             this.OptionsButton = new System.Windows.Forms.Button();
             this.AccountButton = new System.Windows.Forms.Button();
@@ -28,10 +30,12 @@
             // 
             // ButtonsPanel
             // 
-            this.ButtonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.ButtonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.ButtonsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ButtonsPanel.Controls.Add(this.registerButton);
+            this.ButtonsPanel.Controls.Add(this.loginButton);
             this.ButtonsPanel.Controls.Add(this.ButtonSelectedDisplay);
             this.ButtonsPanel.Controls.Add(this.OptionsButton);
             this.ButtonsPanel.Controls.Add(this.AccountButton);
@@ -41,6 +45,32 @@
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.Size = new System.Drawing.Size(175, 600);
             this.ButtonsPanel.TabIndex = 0;
+            // 
+            // registerButton
+            // 
+            this.registerButton.FlatAppearance.BorderSize = 0;
+            this.registerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.registerButton.Font = new System.Drawing.Font("Marlett", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.registerButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.registerButton.Location = new System.Drawing.Point(78, 542);
+            this.registerButton.Name = "registerButton";
+            this.registerButton.Size = new System.Drawing.Size(96, 42);
+            this.registerButton.TabIndex = 3;
+            this.registerButton.Text = "Register";
+            this.registerButton.UseVisualStyleBackColor = false;
+            // 
+            // loginButton
+            // 
+            this.loginButton.FlatAppearance.BorderSize = 0;
+            this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginButton.Font = new System.Drawing.Font("Marlett", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.loginButton.Location = new System.Drawing.Point(-1, 542);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(73, 45);
+            this.loginButton.TabIndex = 2;
+            this.loginButton.Text = "Login";
+            this.loginButton.UseVisualStyleBackColor = false;
             // 
             // ButtonSelectedDisplay
             // 
@@ -60,7 +90,7 @@
             this.OptionsButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.OptionsButton.Location = new System.Drawing.Point(0, 225);
             this.OptionsButton.Name = "OptionsButton";
-            this.OptionsButton.Size = new System.Drawing.Size(175, 75);
+            this.OptionsButton.Size = new System.Drawing.Size(174, 75);
             this.OptionsButton.TabIndex = 0;
             this.OptionsButton.Text = "Options";
             this.OptionsButton.UseVisualStyleBackColor = false;
@@ -74,7 +104,7 @@
             this.AccountButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.AccountButton.Location = new System.Drawing.Point(0, 150);
             this.AccountButton.Name = "AccountButton";
-            this.AccountButton.Size = new System.Drawing.Size(175, 75);
+            this.AccountButton.Size = new System.Drawing.Size(174, 75);
             this.AccountButton.TabIndex = 0;
             this.AccountButton.Text = "Account";
             this.AccountButton.UseVisualStyleBackColor = false;
@@ -88,7 +118,7 @@
             this.HomeButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.HomeButton.Location = new System.Drawing.Point(0, 75);
             this.HomeButton.Name = "HomeButton";
-            this.HomeButton.Size = new System.Drawing.Size(175, 75);
+            this.HomeButton.Size = new System.Drawing.Size(174, 75);
             this.HomeButton.TabIndex = 0;
             this.HomeButton.Text = "Home";
             this.HomeButton.UseVisualStyleBackColor = false;
@@ -106,13 +136,13 @@
             // 
             // ButtonPanelTitleLabel
             // 
-            this.ButtonPanelTitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonPanelTitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonPanelTitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.ButtonPanelTitleLabel.Location = new System.Drawing.Point(0, 0);
             this.ButtonPanelTitleLabel.Name = "ButtonPanelTitleLabel";
-            this.ButtonPanelTitleLabel.Size = new System.Drawing.Size(175, 75);
+            this.ButtonPanelTitleLabel.Size = new System.Drawing.Size(173, 74);
             this.ButtonPanelTitleLabel.TabIndex = 0;
-            this.ButtonPanelTitleLabel.Text = "Something";
+            this.ButtonPanelTitleLabel.Text = "BRME";
             this.ButtonPanelTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LauncherForm
@@ -123,8 +153,11 @@
             this.ClientSize = new System.Drawing.Size(1200, 600);
             this.Controls.Add(this.ButtonsPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximumSize = new System.Drawing.Size(1220, 643);
+            this.MinimumSize = new System.Drawing.Size(1220, 643);
             this.Name = "LauncherForm";
             this.Text = " ";
+            this.Load += new System.EventHandler(this.LauncherForm_Load);
             this.ButtonsPanel.ResumeLayout(false);
             this.ButtonsPanelTitle.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -140,6 +173,8 @@
         private System.Windows.Forms.Panel ButtonSelectedDisplay;
         private System.Windows.Forms.Button AccountButton;
         private System.Windows.Forms.Button OptionsButton;
+        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.Button registerButton;
     }
 }
 
