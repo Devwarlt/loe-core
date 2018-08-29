@@ -13,6 +13,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public float DrawY => Y * 8;
         public Texture2D Texture { get; set; }
 
+        //need 2 implement a asset loader for the objects b4 the base class is done
         public void Update(GameTime gameTime) { }
         public void Draw(SpriteBatch spriteBatch)
         {
