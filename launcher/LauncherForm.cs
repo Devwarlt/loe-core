@@ -12,8 +12,6 @@ namespace LoESoft.Launcher
         public LauncherForm()
         {
             InitializeComponent();
-
-            SelectedDisplay = HomeButton;
         }
 
         private void ChangeButtonSelected(object sender, EventArgs e)
@@ -33,6 +31,14 @@ namespace LoESoft.Launcher
 
             ButtonSelectedDisplay.Height = button.Height;
             ButtonSelectedDisplay.Top = button.Top;
+        }
+
+        private void LauncherForm_FormClosed(object sender, FormClosedEventArgs e) => Account.UserAccount.SaveAccount();
+
+        private void LauncherForm_Load(object sender, EventArgs e)
+        {
+            SelectedDisplay = HomeButton;
+            Account.LoadAccount();
         }
     }
 }

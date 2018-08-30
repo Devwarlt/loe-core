@@ -8,5 +8,21 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
         {
             InitializeComponent();
         }
+
+        private void AccountDisplayControl_EnabledChanged(object sender, System.EventArgs e)
+        {
+            if (!Enabled)
+                return;
+
+            var account = Account.UserAccount;
+            if (!string.IsNullOrWhiteSpace(account.LoginToken))
+            {
+                AccountLoginDisplay.Enabled = false;
+                AccountLoginDisplay.Visible = false;
+                return;
+            }
+            AccountLoginDisplay.Enabled = true;
+            AccountLoginDisplay.Visible = true;
+        }
     }
 }

@@ -30,7 +30,7 @@
         {
             this.TitlePanelSeperator = new System.Windows.Forms.Panel();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.accountLoginDisplay1 = new LoESoft.Launcher.Controls.AccountDisplay.AccountLoginDisplay();
+            this.AccountLoginDisplay = new LoESoft.Launcher.Controls.AccountDisplay.AccountLoginDisplay();
             this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,23 +58,25 @@
             this.TitleLabel.Text = "Account Settings";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // accountLoginDisplay1
+            // AccountLoginDisplay
             // 
-            this.accountLoginDisplay1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.accountLoginDisplay1.Location = new System.Drawing.Point(336, 175);
-            this.accountLoginDisplay1.Name = "accountLoginDisplay1";
-            this.accountLoginDisplay1.Size = new System.Drawing.Size(350, 250);
-            this.accountLoginDisplay1.TabIndex = 1;
+            this.AccountLoginDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.AccountLoginDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AccountLoginDisplay.Location = new System.Drawing.Point(336, 175);
+            this.AccountLoginDisplay.Name = "AccountLoginDisplay";
+            this.AccountLoginDisplay.Size = new System.Drawing.Size(350, 250);
+            this.AccountLoginDisplay.TabIndex = 1;
             // 
             // AccountDisplayControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Controls.Add(this.accountLoginDisplay1);
+            this.Controls.Add(this.AccountLoginDisplay);
             this.Controls.Add(this.TitlePanelSeperator);
             this.Name = "AccountDisplayControl";
             this.Size = new System.Drawing.Size(1023, 600);
+            this.EnabledChanged += new System.EventHandler(this.AccountDisplayControl_EnabledChanged);
             this.TitlePanelSeperator.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -83,6 +85,6 @@
         #endregion
         private System.Windows.Forms.Panel TitlePanelSeperator;
         private System.Windows.Forms.Label TitleLabel;
-        private AccountLoginDisplay accountLoginDisplay1;
+        private AccountLoginDisplay AccountLoginDisplay;
     }
 }

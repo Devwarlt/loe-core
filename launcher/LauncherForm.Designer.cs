@@ -22,14 +22,14 @@ namespace LoESoft.Launcher
         {
             this.ButtonsPanel = new System.Windows.Forms.Panel();
             this.ButtonSelectedDisplay = new System.Windows.Forms.Panel();
-            this.OptionsButton = new LoESoft.Launcher.Controls.ExtendedButton();
-            this.OptionsDisplay = new LoESoft.Launcher.Controls.OptionsDisplay.OptionsDisplayControl();
-            this.AccountButton = new LoESoft.Launcher.Controls.ExtendedButton();
-            this.AccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.AccountDisplayControl();
-            this.HomeButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.ButtonsPanelTitle = new System.Windows.Forms.Panel();
             this.ButtonPanelTitleLabel = new System.Windows.Forms.Label();
             this.HomeDisplay = new LoESoft.Launcher.Controls.HomeDisplay.HomeDisplayControl();
+            this.OptionsDisplay = new LoESoft.Launcher.Controls.OptionsDisplay.OptionsDisplayControl();
+            this.AccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.AccountDisplayControl();
+            this.OptionsButton = new LoESoft.Launcher.Controls.ExtendedButton();
+            this.AccountButton = new LoESoft.Launcher.Controls.ExtendedButton();
+            this.HomeButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.ButtonsPanel.SuspendLayout();
             this.ButtonsPanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +60,61 @@ namespace LoESoft.Launcher
             this.ButtonSelectedDisplay.Size = new System.Drawing.Size(5, 75);
             this.ButtonSelectedDisplay.TabIndex = 1;
             // 
+            // ButtonsPanelTitle
+            // 
+            this.ButtonsPanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.ButtonsPanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ButtonsPanelTitle.Controls.Add(this.ButtonPanelTitleLabel);
+            this.ButtonsPanelTitle.Location = new System.Drawing.Point(0, 0);
+            this.ButtonsPanelTitle.Name = "ButtonsPanelTitle";
+            this.ButtonsPanelTitle.Size = new System.Drawing.Size(175, 75);
+            this.ButtonsPanelTitle.TabIndex = 1;
+            // 
+            // ButtonPanelTitleLabel
+            // 
+            this.ButtonPanelTitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonPanelTitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.ButtonPanelTitleLabel.Location = new System.Drawing.Point(0, 0);
+            this.ButtonPanelTitleLabel.Name = "ButtonPanelTitleLabel";
+            this.ButtonPanelTitleLabel.Size = new System.Drawing.Size(173, 74);
+            this.ButtonPanelTitleLabel.TabIndex = 0;
+            this.ButtonPanelTitleLabel.Text = "BRME";
+            this.ButtonPanelTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // HomeDisplay
+            // 
+            this.HomeDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HomeDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.HomeDisplay.Location = new System.Drawing.Point(177, 0);
+            this.HomeDisplay.Name = "HomeDisplay";
+            this.HomeDisplay.Size = new System.Drawing.Size(1023, 600);
+            this.HomeDisplay.TabIndex = 3;
+            // 
+            // OptionsDisplay
+            // 
+            this.OptionsDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.OptionsDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.OptionsDisplay.Enabled = false;
+            this.OptionsDisplay.Location = new System.Drawing.Point(177, 0);
+            this.OptionsDisplay.Name = "OptionsDisplay";
+            this.OptionsDisplay.Size = new System.Drawing.Size(1023, 600);
+            this.OptionsDisplay.TabIndex = 2;
+            this.OptionsDisplay.Visible = false;
+            // 
+            // AccountDisplay
+            // 
+            this.AccountDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AccountDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.AccountDisplay.Enabled = false;
+            this.AccountDisplay.Location = new System.Drawing.Point(177, 0);
+            this.AccountDisplay.Name = "AccountDisplay";
+            this.AccountDisplay.Size = new System.Drawing.Size(1023, 600);
+            this.AccountDisplay.TabIndex = 1;
+            this.AccountDisplay.Visible = false;
+            // 
             // OptionsButton
             // 
             this.OptionsButton.Display = this.OptionsDisplay;
@@ -76,18 +131,6 @@ namespace LoESoft.Launcher
             this.OptionsButton.UseVisualStyleBackColor = false;
             this.OptionsButton.Click += new System.EventHandler(this.ChangeButtonSelected);
             // 
-            // OptionsDisplay
-            // 
-            this.OptionsDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.OptionsDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.OptionsDisplay.Enabled = false;
-            this.OptionsDisplay.Location = new System.Drawing.Point(177, 0);
-            this.OptionsDisplay.Name = "OptionsDisplay";
-            this.OptionsDisplay.Size = new System.Drawing.Size(1023, 600);
-            this.OptionsDisplay.TabIndex = 2;
-            this.OptionsDisplay.Visible = false;
-            // 
             // AccountButton
             // 
             this.AccountButton.Display = this.AccountDisplay;
@@ -103,18 +146,6 @@ namespace LoESoft.Launcher
             this.AccountButton.Text = "Account";
             this.AccountButton.UseVisualStyleBackColor = false;
             this.AccountButton.Click += new System.EventHandler(this.ChangeButtonSelected);
-            // 
-            // AccountDisplay
-            // 
-            this.AccountDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AccountDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.AccountDisplay.Enabled = false;
-            this.AccountDisplay.Location = new System.Drawing.Point(177, 0);
-            this.AccountDisplay.Name = "AccountDisplay";
-            this.AccountDisplay.Size = new System.Drawing.Size(1023, 600);
-            this.AccountDisplay.TabIndex = 1;
-            this.AccountDisplay.Visible = false;
             // 
             // HomeButton
             // 
@@ -133,36 +164,6 @@ namespace LoESoft.Launcher
             this.HomeButton.UseVisualStyleBackColor = false;
             this.HomeButton.Click += new System.EventHandler(this.ChangeButtonSelected);
             // 
-            // ButtonsPanelTitle
-            // 
-            this.ButtonsPanelTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.ButtonsPanelTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ButtonsPanelTitle.Controls.Add(this.ButtonPanelTitleLabel);
-            this.ButtonsPanelTitle.Location = new System.Drawing.Point(0, 0);
-            this.ButtonsPanelTitle.Name = "ButtonsPanelTitle";
-            this.ButtonsPanelTitle.Size = new System.Drawing.Size(175, 75);
-            this.ButtonsPanelTitle.TabIndex = 1;
-            // 
-            // ButtonPanelTitleLabel
-            // 
-            this.ButtonPanelTitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonPanelTitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.ButtonPanelTitleLabel.Location = new System.Drawing.Point(0, 0);
-            this.ButtonPanelTitleLabel.Name = "ButtonPanelTitleLabel";
-            this.ButtonPanelTitleLabel.Size = new System.Drawing.Size(175, 75);
-            this.ButtonPanelTitleLabel.TabIndex = 0;
-            this.ButtonPanelTitleLabel.Text = "BRME";
-            this.ButtonPanelTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // HomeDisplay
-            // 
-            this.HomeDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.HomeDisplay.Location = new System.Drawing.Point(177, 0);
-            this.HomeDisplay.Name = "HomeDisplay";
-            this.HomeDisplay.Size = new System.Drawing.Size(1023, 600);
-            this.HomeDisplay.TabIndex = 3;
-            // 
             // LauncherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,7 +175,11 @@ namespace LoESoft.Launcher
             this.Controls.Add(this.AccountDisplay);
             this.Controls.Add(this.ButtonsPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximumSize = new System.Drawing.Size(1220, 643);
+            this.MinimumSize = new System.Drawing.Size(1220, 643);
             this.Name = "LauncherForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LauncherForm_FormClosed);
+            this.Load += new System.EventHandler(this.LauncherForm_Load);
             this.SizeChanged += new System.EventHandler(this.LauncherForm_SizeChanged);
             this.ButtonsPanel.ResumeLayout(false);
             this.ButtonsPanelTitle.ResumeLayout(false);

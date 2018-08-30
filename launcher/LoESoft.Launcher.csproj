@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="Controls\AccountDisplay\AccountLoginDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -80,6 +81,7 @@
     <Compile Include="LauncherForm.Designer.cs">
       <DependentUpon>LauncherForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MIsc\IniFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\AccountDisplay\AccountDisplayControl.resx">
@@ -119,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HttpEngine\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
