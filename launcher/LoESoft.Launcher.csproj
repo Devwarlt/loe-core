@@ -60,6 +60,12 @@
     <Compile Include="Controls\AccountDisplay\AccountLoginDisplay.Designer.cs">
       <DependentUpon>AccountLoginDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AccountDisplay\CurrentAcccountDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\CurrentAcccountDisplay.Designer.cs">
+      <DependentUpon>CurrentAcccountDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ExtendedButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -75,12 +81,14 @@
     <Compile Include="Controls\OptionsDisplay\OptionsDisplayControl.Designer.cs">
       <DependentUpon>OptionsDisplayControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Http\HttpEngine.cs" />
     <Compile Include="LauncherForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LauncherForm.Designer.cs">
       <DependentUpon>LauncherForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LauncherParameters.cs" />
     <Compile Include="MIsc\IniFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\AccountLoginDisplay.resx">
       <DependentUpon>AccountLoginDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\CurrentAcccountDisplay.resx">
+      <DependentUpon>CurrentAcccountDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\HomeDisplay\HomeDisplayControl.resx">
       <DependentUpon>HomeDisplayControl.cs</DependentUpon>
@@ -122,8 +133,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="HttpEngine\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

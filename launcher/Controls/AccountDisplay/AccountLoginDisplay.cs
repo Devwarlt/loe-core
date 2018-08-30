@@ -8,10 +8,5 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
         {
             InitializeComponent();
         }
-
-        private void AccountLoginDisplay_Load(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }

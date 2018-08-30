@@ -24,8 +24,16 @@ namespace LoESoft.Launcher
         public void SaveAccount()
         {
             var iniFile = new IniFile("config.ini");
-            iniFile.DeleteKey("Token");
-            iniFile.Write("Token", LoginToken);
+            if(UserAccount == null)
+            {
+                File.Delete(iniFile.Path);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(LoginToken))
+                iniFile.DeleteKey("Token");
+            else
+                iniFile.Write("Token", LoginToken);
         }
     }
 }

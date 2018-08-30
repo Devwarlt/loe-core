@@ -1,6 +1,6 @@
 using LoESoft.Launcher.Controls;
+using LoESoft.Launcher.Http;
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace LoESoft.Launcher
@@ -13,6 +13,8 @@ namespace LoESoft.Launcher
         {
             InitializeComponent();
         }
+
+        public void Reload() => ChangeButtonSelected(SelectedDisplay, new EventArgs());
 
         private void ChangeButtonSelected(object sender, EventArgs e)
         {
@@ -37,8 +39,16 @@ namespace LoESoft.Launcher
 
         private void LauncherForm_Load(object sender, EventArgs e)
         {
+            label1.Text = LauncherParameters.LAUNCHER_VERSION;
             SelectedDisplay = HomeButton;
             Account.LoadAccount();
+
+            //var httpEngine = new HttpEngine();
+            //httpEngine.OnError = _ =>
+            //{
+            //    Console.WriteLine($"Error: {_}");
+            //};
+            //httpEngine.SendRequest("testing");
         }
     }
 }

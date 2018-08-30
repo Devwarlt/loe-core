@@ -15,14 +15,13 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                 return;
 
             var account = Account.UserAccount;
-            if (!string.IsNullOrWhiteSpace(account.LoginToken))
-            {
-                AccountLoginDisplay.Enabled = false;
-                AccountLoginDisplay.Visible = false;
-                return;
-            }
-            AccountLoginDisplay.Enabled = true;
-            AccountLoginDisplay.Visible = true;
+
+            var isLoggedIn = !string.IsNullOrWhiteSpace(account.LoginToken);
+
+            CurrentAccountDisplay.Enabled = isLoggedIn;
+            CurrentAccountDisplay.Visible = isLoggedIn;
+            AccountLoginDisplay.Enabled = !isLoggedIn;
+            AccountLoginDisplay.Visible = !isLoggedIn;
         }
     }
 }
