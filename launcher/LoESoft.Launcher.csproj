@@ -47,25 +47,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AccountDisplayControl.cs">
+    <Compile Include="Controls\AccountDisplay\AccountLoginDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\AccountDisplayControl.Designer.cs">
+    <Compile Include="Controls\AccountDisplay\AccountDisplayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\AccountDisplayControl.Designer.cs">
       <DependentUpon>AccountDisplayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\AccountLoginDisplay.Designer.cs">
+      <DependentUpon>AccountLoginDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ExtendedButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\HomeDisplayControl.cs">
+    <Compile Include="Controls\HomeDisplay\HomeDisplayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\HomeDisplayControl.Designer.cs">
+    <Compile Include="Controls\HomeDisplay\HomeDisplayControl.Designer.cs">
       <DependentUpon>HomeDisplayControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OptionsDisplayControl.cs">
+    <Compile Include="Controls\OptionsDisplay\OptionsDisplayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OptionsDisplayControl.Designer.cs">
+    <Compile Include="Controls\OptionsDisplay\OptionsDisplayControl.Designer.cs">
       <DependentUpon>OptionsDisplayControl.cs</DependentUpon>
     </Compile>
     <Compile Include="LauncherForm.cs">
@@ -76,13 +82,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\AccountDisplayControl.resx">
+    <EmbeddedResource Include="Controls\AccountDisplay\AccountDisplayControl.resx">
       <DependentUpon>AccountDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\HomeDisplayControl.resx">
+    <EmbeddedResource Include="Controls\AccountDisplay\AccountLoginDisplay.resx">
+      <DependentUpon>AccountLoginDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\HomeDisplay\HomeDisplayControl.resx">
       <DependentUpon>HomeDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OptionsDisplayControl.resx">
+    <EmbeddedResource Include="Controls\OptionsDisplay\OptionsDisplayControl.resx">
       <DependentUpon>OptionsDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LauncherForm.resx">

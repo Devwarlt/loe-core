@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace LoESoft.Launcher.Controls
+namespace LoESoft.Launcher.Controls.AccountDisplay
 {
     public partial class AccountDisplayControl : UserControl
     {
