@@ -25,14 +25,9 @@ namespace LoESoft.Launcher
             this.ButtonSelectedDisplay = new System.Windows.Forms.Panel();
             this.ButtonsPanelTitle = new System.Windows.Forms.Panel();
             this.ButtonPanelTitleLabel = new System.Windows.Forms.Label();
-<<<<<<< HEAD
-            this.HomeDisplay = new LoESoft.Launcher.Controls.HomeDisplayControl();
-            this.OptionsDisplay = new LoESoft.Launcher.Controls.OptionsDisplayControl();
-            this.AccountDisplay = new LoESoft.Launcher.Controls.AccountDisplayControl();
             this.OptionsButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.AccountButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.HomeButton = new LoESoft.Launcher.Controls.ExtendedButton();
-=======
             this.HomeDisplay = new LoESoft.Launcher.Controls.HomeDisplay.HomeDisplayControl();
             this.OptionsDisplay = new LoESoft.Launcher.Controls.OptionsDisplay.OptionsDisplayControl();
             this.AccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.AccountDisplayControl();
@@ -40,7 +35,6 @@ namespace LoESoft.Launcher
             this.AccountButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.HomeButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.label1 = new System.Windows.Forms.Label();
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
             this.ButtonsPanel.SuspendLayout();
             this.ButtonsPanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -51,10 +45,7 @@ namespace LoESoft.Launcher
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.ButtonsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-<<<<<<< HEAD
-=======
             this.ButtonsPanel.Controls.Add(this.label1);
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
             this.ButtonsPanel.Controls.Add(this.ButtonSelectedDisplay);
             this.ButtonsPanel.Controls.Add(this.OptionsButton);
             this.ButtonsPanel.Controls.Add(this.AccountButton);
@@ -88,11 +79,8 @@ namespace LoESoft.Launcher
             // ButtonPanelTitleLabel
             // 
             this.ButtonPanelTitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
             this.ButtonPanelTitleLabel.ForeColor = System.Drawing.Color.GhostWhite;
-=======
             this.ButtonPanelTitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
             this.ButtonPanelTitleLabel.Location = new System.Drawing.Point(0, 0);
             this.ButtonPanelTitleLabel.Name = "ButtonPanelTitleLabel";
             this.ButtonPanelTitleLabel.Size = new System.Drawing.Size(173, 74);
@@ -102,15 +90,12 @@ namespace LoESoft.Launcher
             // 
             // HomeDisplay
             // 
-<<<<<<< HEAD
             this.HomeDisplay.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.HomeDisplay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HomeDisplay.BackgroundImage")));
             this.HomeDisplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-=======
             this.HomeDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.HomeDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
             this.HomeDisplay.Location = new System.Drawing.Point(177, 0);
             this.HomeDisplay.Name = "HomeDisplay";
             this.HomeDisplay.Size = new System.Drawing.Size(1023, 600);
@@ -118,14 +103,11 @@ namespace LoESoft.Launcher
             // 
             // OptionsDisplay
             // 
-<<<<<<< HEAD
             this.OptionsDisplay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OptionsDisplay.BackgroundImage")));
             this.OptionsDisplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-=======
             this.OptionsDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OptionsDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
             this.OptionsDisplay.Enabled = false;
             this.OptionsDisplay.Location = new System.Drawing.Point(177, 0);
             this.OptionsDisplay.Name = "OptionsDisplay";
@@ -135,14 +117,11 @@ namespace LoESoft.Launcher
             // 
             // AccountDisplay
             // 
-<<<<<<< HEAD
             this.AccountDisplay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AccountDisplay.BackgroundImage")));
             this.AccountDisplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-=======
             this.AccountDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AccountDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
             this.AccountDisplay.Enabled = false;
             this.AccountDisplay.Location = new System.Drawing.Point(177, 0);
             this.AccountDisplay.Name = "AccountDisplay";
@@ -199,8 +178,6 @@ namespace LoESoft.Launcher
             this.HomeButton.UseVisualStyleBackColor = false;
             this.HomeButton.Click += new System.EventHandler(this.ChangeButtonSelected);
             // 
-<<<<<<< HEAD
-=======
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft JhengHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -212,7 +189,6 @@ namespace LoESoft.Launcher
             this.label1.Text = "Version: ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
             // LauncherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,13 +203,10 @@ namespace LoESoft.Launcher
             this.MaximumSize = new System.Drawing.Size(1220, 643);
             this.MinimumSize = new System.Drawing.Size(1220, 643);
             this.Name = "LauncherForm";
-<<<<<<< HEAD
             this.Text = " ";
-=======
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LauncherForm_FormClosed);
             this.Load += new System.EventHandler(this.LauncherForm_Load);
             this.SizeChanged += new System.EventHandler(this.LauncherForm_SizeChanged);
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
             this.ButtonsPanel.ResumeLayout(false);
             this.ButtonsPanelTitle.ResumeLayout(false);
             this.ResumeLayout(false);
