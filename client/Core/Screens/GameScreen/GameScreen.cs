@@ -16,9 +16,9 @@ namespace LoESoft.Client.Core.Screens
     {
         public GameUser GameUser { get; set; }
 
-        public List<Tile> Tiles { get; set; }
+        public Tile[,] Tiles { get; set; }
 
-        public BasicPlayer BasicObject { get; set; }
+        public Player TempPlayer { get; set; }
         public override void OnScreenCreate()
         {
 #if !TEMP_DISABLE
@@ -26,11 +26,11 @@ namespace LoESoft.Client.Core.Screens
             GameUser.Connect();
 #endif
             var random = new Random();
-            Tiles = new List<Tile>();
-            for (var i = 0; i < 160; i++)
-                for (var j = 0; j < 90; j++)
-                    Tiles.Add(new Tile(i, j, i % 5));
-            BasicObject = new BasicPlayer();
+            Tiles = new Tile[160, 90];
+            for (var x = 0; x < 160; x++)
+                for (var y = 0; y < 90; y++)
+                    Tiles[x, y] = (new Tile(x, y, x % 5));
+            TempPlayer = new Player();
         }
 
         public override void OnScreenDispatch()
@@ -46,18 +46,18 @@ namespace LoESoft.Client.Core.Screens
 
             var spd = 1 * dt;
 
-            //var keyState = Keyboard.GetState();
-            //if (keyState.IsKeyDown(Keys.W))
-            //    BasicObject.Y -= spd;
-            //if (keyState.IsKeyDown(Keys.A))
-            //    BasicObject.X -= spd;
-            //if (keyState.IsKeyDown(Keys.S))
-            //    BasicObject.Y += spd;
-            //if (keyState.IsKeyDown(Keys.D))
-            //    BasicObject.X += spd;
+            var keyState = Keyboard.GetState();
+            if (keyState.IsKeyDown(Keys.W))
+                TempPlayer.Y -= spd;
+            if (keyState.IsKeyDown(Keys.A))
+                TempPlayer.X -= spd;
+            if (keyState.IsKeyDown(Keys.S))
+                TempPlayer.Y += spd;
+            if (keyState.IsKeyDown(Keys.D))
+                TempPlayer.X += spd;
 
-            BasicObject.Update(gameTime);
-            Camera.SetFocus(BasicObject);
+            TempPlayer.Update(gameTime);
+            Camera.SetFocus(TempPlayer);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -65,9 +65,22 @@ namespace LoESoft.Client.Core.Screens
             spriteBatch.Clear();
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetMatrix());
-            for (var i = 0; i < Tiles.Count; i++)
-                Tiles[i].Draw(spriteBatch);
-            BasicObject.Draw(spriteBatch);
+
+            var dx = 160 / 15;
+            var dy = 90 / 15;
+            for (var x = -dx; x <= dx; x++)
+                for (var y = -dy; y <= dy; y++)
+                    {
+                        var tx = (int)(TempPlayer.X + x);
+                        var ty = (int)(TempPlayer.Y + y);
+
+                        if (tx < 0 || ty < 0 || tx >= 160 || ty >= 90)
+                            continue;
+
+                        Tiles[tx, ty].Draw(spriteBatch);
+                    }
+
+            TempPlayer.Draw(spriteBatch);
             spriteBatch.End();
         }
     }

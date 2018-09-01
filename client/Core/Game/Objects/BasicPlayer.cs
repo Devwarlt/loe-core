@@ -10,27 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LoESoft.Client.Core.Game.Objects
 {
-    public partial class BasicPlayer : BasicObject
-    {
-
-        public BasicPlayer()
-            : base()
-        {
-
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            UpdateMovement(gameTime);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
-
-    }
-    public partial class BasicPlayer : BasicObject
+    public class Player : BasicObject
     {
         public enum Direction : int
         {
@@ -53,20 +33,18 @@ namespace LoESoft.Client.Core.Game.Objects
 
         //float speed = 0.5f;
         //float timer = 0f;
-        
-        public void UpdateMovement(GameTime gameTime)
+
+        public void UpdateMovement(float dt)
         {
-            previousKeyBoard = newKeyBoard;
             newKeyBoard = Keyboard.GetState();
-            var list = previousKeyBoard.GetPressedKeys().Select(_ => (_validKeysToDirection.ContainsKey(_)) ? _ : Keys.None).ToList();
 
-            var pressedKey = (list.Count > 0) ? list[0] : Keys.None;
-
-            var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
+            var keysPressed = previousKeyBoard.GetPressedKeys().Select(_ => (_validKeysToDirection.ContainsKey(_)) ? _ : Keys.None).ToList();
+            var pressedKey = (keysPressed.Count > 0) ? keysPressed[0] : Keys.None;
 
             var spd = 1 * dt;
-
             Move(pressedKey, spd);
+
+            previousKeyBoard = newKeyBoard;
 
             //if (newKeyBoard.IsKeyDown(pressedKey)) //toggle press
             //{
@@ -83,18 +61,17 @@ namespace LoESoft.Client.Core.Game.Objects
 
         protected void Move(Keys input, float spd)
         {
-            Direction direction = GetValidKey(input);
-
+            var direction = GetValidKey(input);
             if (direction == Direction.None)
                 return;
 
             switch (direction) //TODO: Animation Display + Move cooldown
             {
-                case Direction.Up: { Y -= spd; return; }
-                case Direction.Down: { Y += spd; return; }
-                case Direction.Left: { X -= spd; return; }
-                case Direction.Right: { X += spd; return; }
-                default: { return; }
+                case Direction.Up: { Y -= spd; break; }
+                case Direction.Down: { Y += spd; break; }
+                case Direction.Left: { X -= spd; break; }
+                case Direction.Right: { X += spd; break; }
+                default: break;
             }
         }
 
@@ -103,6 +80,18 @@ namespace LoESoft.Client.Core.Game.Objects
             if (_validKeysToDirection.ContainsKey(key))
                 return _validKeysToDirection[key];
             return Direction.None;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
+
+            UpdateMovement(dt);
+        }
+        
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
         }
     }
 }
