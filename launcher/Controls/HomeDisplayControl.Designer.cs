@@ -28,31 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnRun = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnRun
             // 
-            this.button1.Location = new System.Drawing.Point(683, 264);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRun.AutoSize = true;
+            this.btnRun.BackColor = System.Drawing.Color.Transparent;
+            this.btnRun.BackgroundImage = global::LoESoft.Launcher.Properties.Resources.btnImage;
+            this.btnRun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRun.Font = new System.Drawing.Font("Microsoft Tai Le", 24F, System.Drawing.FontStyle.Bold);
+            this.btnRun.Location = new System.Drawing.Point(437, 453);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(150, 51);
+            this.btnRun.TabIndex = 0;
+            this.btnRun.Text = "Run";
+            this.btnRun.UseVisualStyleBackColor = false;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // HomeDisplayControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.BackgroundImage = global::LoESoft.Launcher.Properties.Resources.background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.btnRun);
             this.Name = "HomeDisplayControl";
             this.Size = new System.Drawing.Size(1023, 600);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRun;
     }
 }

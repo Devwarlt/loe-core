@@ -17,7 +17,7 @@ namespace LoESoft.Client.Drawing.Events
 
         public static void SetUnactive()
         {
-            var timer = new Timer(5);
+            var timer = new Timer(1);
             timer.Elapsed += StopTimer;
             timer.Enabled = true;
 

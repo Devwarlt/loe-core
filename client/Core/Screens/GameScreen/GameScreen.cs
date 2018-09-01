@@ -18,7 +18,7 @@ namespace LoESoft.Client.Core.Screens
 
         public List<Tile> Tiles { get; set; }
 
-        public BasicObject BasicObject { get; set; }
+        public BasicPlayer BasicObject { get; set; }
         public override void OnScreenCreate()
         {
 #if !TEMP_DISABLE
@@ -30,7 +30,7 @@ namespace LoESoft.Client.Core.Screens
             for (var i = 0; i < 160; i++)
                 for (var j = 0; j < 90; j++)
                     Tiles.Add(new Tile(i, j, i % 5));
-            BasicObject = new BasicObject();
+            BasicObject = new BasicPlayer();
         }
 
         public override void OnScreenDispatch()
@@ -39,23 +39,24 @@ namespace LoESoft.Client.Core.Screens
             GameUser.Disconnect();
 #endif
         }
-
-        private float z;
+        
         public override void Update(GameTime gameTime)
         {
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
             var spd = 1 * dt;
 
-            var keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.W))
-                BasicObject.Y -= spd;
-            if (keyState.IsKeyDown(Keys.A))
-                BasicObject.X -= spd;
-            if (keyState.IsKeyDown(Keys.S))
-                BasicObject.Y += spd;
-            if (keyState.IsKeyDown(Keys.D))
-                BasicObject.X += spd;
+            //var keyState = Keyboard.GetState();
+            //if (keyState.IsKeyDown(Keys.W))
+            //    BasicObject.Y -= spd;
+            //if (keyState.IsKeyDown(Keys.A))
+            //    BasicObject.X -= spd;
+            //if (keyState.IsKeyDown(Keys.S))
+            //    BasicObject.Y += spd;
+            //if (keyState.IsKeyDown(Keys.D))
+            //    BasicObject.X += spd;
+
+            BasicObject.Update(gameTime);
             Camera.SetFocus(BasicObject);
         }
 
