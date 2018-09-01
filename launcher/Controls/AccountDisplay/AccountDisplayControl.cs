@@ -23,5 +23,13 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             AccountLoginDisplay.Enabled = !isLoggedIn;
             AccountLoginDisplay.Visible = !isLoggedIn;
         }
+
+        public void RegisterToggle()
+        {
+            LoginRegisterDisplay.Visible = !LoginRegisterDisplay.Visible;
+            LoginRegisterDisplay.Enabled = !LoginRegisterDisplay.Enabled;
+            AccountLoginDisplay.Visible = !AccountLoginDisplay.Visible;
+            AccountLoginDisplay.Enabled = !AccountLoginDisplay.Enabled;
+        }
     }
 }

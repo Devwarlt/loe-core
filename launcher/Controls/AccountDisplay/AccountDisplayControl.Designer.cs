@@ -30,8 +30,9 @@
         {
             this.TitlePanelSeperator = new System.Windows.Forms.Panel();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.CurrentAccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.CurrentAcccountDisplay();
             this.AccountLoginDisplay = new LoESoft.Launcher.Controls.AccountDisplay.AccountLoginDisplay();
+            this.CurrentAccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.CurrentAcccountDisplay();
+            this.LoginRegisterDisplay = new LoESoft.Launcher.Controls.AccountDisplay.LoginRegisterDisplay();
             this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,8 +60,21 @@
             this.TitleLabel.Text = "Account Settings";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // AccountLoginDisplay
+            // 
+            this.AccountLoginDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AccountLoginDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.AccountLoginDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AccountLoginDisplay.Location = new System.Drawing.Point(337, 216);
+            this.AccountLoginDisplay.Name = "AccountLoginDisplay";
+            this.AccountLoginDisplay.Size = new System.Drawing.Size(348, 168);
+            this.AccountLoginDisplay.TabIndex = 4;
+            // 
             // CurrentAccountDisplay
             // 
+            this.CurrentAccountDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CurrentAccountDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.CurrentAccountDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CurrentAccountDisplay.Location = new System.Drawing.Point(-1, 75);
@@ -68,14 +82,18 @@
             this.CurrentAccountDisplay.Size = new System.Drawing.Size(1025, 526);
             this.CurrentAccountDisplay.TabIndex = 2;
             // 
-            // AccountLoginDisplay
+            // LoginRegisterDisplay
             // 
-            this.AccountLoginDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.AccountLoginDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AccountLoginDisplay.Location = new System.Drawing.Point(337, 216);
-            this.AccountLoginDisplay.Name = "AccountLoginDisplay";
-            this.AccountLoginDisplay.Size = new System.Drawing.Size(348, 168);
-            this.AccountLoginDisplay.TabIndex = 4;
+            this.LoginRegisterDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoginRegisterDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.LoginRegisterDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LoginRegisterDisplay.Enabled = false;
+            this.LoginRegisterDisplay.Location = new System.Drawing.Point(256, 155);
+            this.LoginRegisterDisplay.Name = "LoginRegisterDisplay";
+            this.LoginRegisterDisplay.Size = new System.Drawing.Size(510, 290);
+            this.LoginRegisterDisplay.TabIndex = 7;
+            this.LoginRegisterDisplay.Visible = false;
             // 
             // AccountDisplayControl
             // 
@@ -84,6 +102,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Controls.Add(this.AccountLoginDisplay);
             this.Controls.Add(this.TitlePanelSeperator);
+            this.Controls.Add(this.LoginRegisterDisplay);
             this.Controls.Add(this.CurrentAccountDisplay);
             this.Name = "AccountDisplayControl";
             this.Size = new System.Drawing.Size(1023, 600);
@@ -96,7 +115,8 @@
         #endregion
         private System.Windows.Forms.Panel TitlePanelSeperator;
         private System.Windows.Forms.Label TitleLabel;
-        private CurrentAcccountDisplay CurrentAccountDisplay;
         private AccountLoginDisplay AccountLoginDisplay;
+        private LoginRegisterDisplay LoginRegisterDisplay;
+        private CurrentAcccountDisplay CurrentAccountDisplay;
     }
 }

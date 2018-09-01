@@ -1,39 +1,67 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Xml.Linq;
 
 namespace LoESoft.Launcher.Http
 {
+    public struct HttpEngineQuery
+    {
+        public int Length => Objects?.Count ?? 0;
+
+        public Dictionary<string, object> Objects { get; set; }
+
+        public object this[string query] => Objects[query];
+
+        public void AddQuery(string key, object value)
+        {
+            if (Objects == null)
+                Objects = new Dictionary<string, object>();
+            Objects.Add(key, value);
+        }
+    }
+
     public class HttpEngine
     {
-        public Action<string> OnSuccess { get; set; }
-        public Action<string> OnError { get; set; }
+        private WebClient WebClient { get; set; }
+        private string Request { get; set; }
 
-        public void SendRequest(string request)
+        private bool Downloaded { get; set; }
+
+        public static HttpEngine CreateRequest(string request)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{LauncherParameters.SERVER}/{request}");
+            var engine = new HttpEngine();
+            engine.WebClient = new WebClient();
+            engine.Request = request;
+            return engine;
+        }
 
-            var postData = "thing1=hello&thing2=world";
+        public void SendRequest(Action<string> success, Action<string> error, HttpEngineQuery query)
+        {
+            var sb = new StringBuilder();
 
-            var data = Encoding.ASCII.GetBytes(postData);
-            httpWebRequest.Method = "POST";
-            httpWebRequest.ContentType = "application/x-www-form-urlencoded";
-            httpWebRequest.ContentLength = data.Length;
+            var i = 0;
+            foreach (var q in query.Objects)
+            {
+                sb.Append($"{q.Key}={q.Value}{(i != query.Length - 1 ? "&" : "")}");
+                i++;
+            }
 
-            using (var stream = httpWebRequest.GetRequestStream())
-                stream.Write(data, 0, data.Length);
-
+            Console.WriteLine($"Sending Request https://{LauncherParameters.SERVER}{Request}?{sb.ToString()}");
             try
             {
-                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var rdr = new StreamReader(httpWebResponse.GetResponseStream()))
+                var data = WebClient.DownloadString($"https://{LauncherParameters.SERVER}{Request}?{sb.ToString()}");
+                if (data.Substring(0, 7) == "<Error>")
                 {
-                    OnSuccess?.Invoke(rdr.ReadToEnd());
+                    error?.Invoke(XElement.Parse(data).Value);
+                    return;
                 }
-            }catch(Exception e)
+                success?.Invoke(data);
+            }
+            catch
             {
-                OnError?.Invoke(e.StackTrace);
+                error?.Invoke("Unable to connect to server");
             }
         }
     }

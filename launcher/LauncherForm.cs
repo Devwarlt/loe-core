@@ -39,16 +39,21 @@ namespace LoESoft.Launcher
 
         private void LauncherForm_Load(object sender, EventArgs e)
         {
-            label1.Text = LauncherParameters.LAUNCHER_VERSION;
+            LauncherVersionLabel.Text = LauncherParameters.LAUNCHER_VERSION;
             SelectedDisplay = HomeButton;
-            Account.LoadAccount();
 
-            //var httpEngine = new HttpEngine();
-            //httpEngine.OnError = _ =>
-            //{
-            //    Console.WriteLine($"Error: {_}");
-            //};
-            //httpEngine.SendRequest("testing");
+            var account = Account.LoadAccount();
+            if (!string.IsNullOrWhiteSpace(account.LoginToken)) // if already logged in
+            {
+                var httpEngine = HttpEngine.CreateRequest("/account/relog");
+                var query = new HttpEngineQuery();
+                query.AddQuery("token", account.LoginToken);
+                httpEngine.SendRequest(null, error =>
+                {
+                    account.Invalidate();
+                    Console.WriteLine("Unable to relogin");
+                }, query);
+            }
         }
     }
 }

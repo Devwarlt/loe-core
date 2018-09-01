@@ -30,7 +30,7 @@ namespace LoESoft.Launcher
             this.OptionsButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.AccountButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.HomeButton = new LoESoft.Launcher.Controls.ExtendedButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LauncherVersionLabel = new System.Windows.Forms.Label();
             this.ButtonsPanel.SuspendLayout();
             this.ButtonsPanelTitle.SuspendLayout();
             this.SuspendLayout();
@@ -41,7 +41,7 @@ namespace LoESoft.Launcher
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.ButtonsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ButtonsPanel.Controls.Add(this.label1);
+            this.ButtonsPanel.Controls.Add(this.LauncherVersionLabel);
             this.ButtonsPanel.Controls.Add(this.ButtonSelectedDisplay);
             this.ButtonsPanel.Controls.Add(this.OptionsButton);
             this.ButtonsPanel.Controls.Add(this.AccountButton);
@@ -168,14 +168,14 @@ namespace LoESoft.Launcher
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(0, 523);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 74);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Version: ";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.LauncherVersionLabel.Font = new System.Drawing.Font("Microsoft JhengHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LauncherVersionLabel.ForeColor = System.Drawing.Color.Gray;
+            this.LauncherVersionLabel.Location = new System.Drawing.Point(0, 523);
+            this.LauncherVersionLabel.Name = "label1";
+            this.LauncherVersionLabel.Size = new System.Drawing.Size(173, 74);
+            this.LauncherVersionLabel.TabIndex = 3;
+            this.LauncherVersionLabel.Text = "Version: ";
+            this.LauncherVersionLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // LauncherForm
             // 
@@ -212,7 +212,7 @@ namespace LoESoft.Launcher
         private OptionsDisplayControl OptionsDisplay;
         private AccountDisplayControl AccountDisplay;
         private HomeDisplayControl HomeDisplay;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LauncherVersionLabel;
     }
 }
 

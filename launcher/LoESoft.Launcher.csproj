@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4FF98F6C-23A1-40A3-8C76-E4AB29BCAAB1}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>LoESoft.Launcher</RootNamespace>
     <AssemblyName>Game Launcher</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -32,6 +32,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,6 +68,12 @@
     </Compile>
     <Compile Include="Controls\AccountDisplay\CurrentAcccountDisplay.Designer.cs">
       <DependentUpon>CurrentAcccountDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\LoginRegisterDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\LoginRegisterDisplay.Designer.cs">
+      <DependentUpon>LoginRegisterDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ExtendedButton.cs">
       <SubType>Component</SubType>
@@ -100,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\CurrentAcccountDisplay.resx">
       <DependentUpon>CurrentAcccountDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\LoginRegisterDisplay.resx">
+      <DependentUpon>LoginRegisterDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\HomeDisplay\HomeDisplayControl.resx">
       <DependentUpon>HomeDisplayControl.cs</DependentUpon>

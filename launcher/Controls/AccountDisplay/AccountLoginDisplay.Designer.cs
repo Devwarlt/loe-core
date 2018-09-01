@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.TitlePanelSeperator = new System.Windows.Forms.Panel();
+            this.TitleLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
-            this.TitleLabel = new System.Windows.Forms.Label();
             this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +46,19 @@
             this.TitlePanelSeperator.Size = new System.Drawing.Size(352, 73);
             this.TitlePanelSeperator.TabIndex = 1;
             // 
+            // TitleLabel
+            // 
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.TitleLabel.Location = new System.Drawing.Point(24, 3);
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.Size = new System.Drawing.Size(302, 65);
+            this.TitleLabel.TabIndex = 9;
+            this.TitleLabel.Text = "Login";
+            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // LoginButton
             // 
             this.LoginButton.FlatAppearance.BorderSize = 0;
@@ -58,6 +71,7 @@
             this.LoginButton.TabIndex = 2;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // RegisterButton
             // 
@@ -71,19 +85,7 @@
             this.RegisterButton.TabIndex = 2;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = false;
-            // 
-            // TitleLabel
-            // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.TitleLabel.Location = new System.Drawing.Point(24, 3);
-            this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(302, 65);
-            this.TitleLabel.TabIndex = 9;
-            this.TitleLabel.Text = "Login";
-            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
             // AccountLoginDisplay
             // 

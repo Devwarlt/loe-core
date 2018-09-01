@@ -12,8 +12,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         private void LogOutButton_Click(object sender, EventArgs e)
         {
-            Account.UserAccount.LoginToken = null;
-            Account.UserAccount.SaveAccount();
+            Account.UserAccount.Invalidate();
             ((LauncherForm)((AccountDisplayControl)Parent).Parent).Reload();
         }
     }
