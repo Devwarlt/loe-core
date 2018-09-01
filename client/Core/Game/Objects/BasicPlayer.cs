@@ -51,8 +51,8 @@ namespace LoESoft.Client.Core.Game.Objects
         KeyboardState previousKeyBoard;
         KeyboardState newKeyBoard;
 
-        float speed = 0.5f;
-        float timer = 0f;
+        //float speed = 0.5f;
+        //float timer = 0f;
         
         public void UpdateMovement(GameTime gameTime)
         {
@@ -61,22 +61,27 @@ namespace LoESoft.Client.Core.Game.Objects
             var list = previousKeyBoard.GetPressedKeys().Select(_ => (_validKeysToDirection.ContainsKey(_)) ? _ : Keys.None).ToList();
 
             var pressedKey = (list.Count > 0) ? list[0] : Keys.None;
-            //var pressedKeysNew = newKeyBoard.GetPressedKeys().ToList();
 
-            if (newKeyBoard.IsKeyDown(pressedKey)) //toggle press
-            {
-                timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
-                if (timer >= speed)
-                    Move(pressedKey);
-            } else if (newKeyBoard.IsKeyUp(pressedKey)) //singular press
-            {
-                Move(pressedKey);
-                timer = 0f;
-            }
+            var spd = 1 * dt;
+
+            Move(pressedKey, spd);
+
+            //if (newKeyBoard.IsKeyDown(pressedKey)) //toggle press
+            //{
+            //    timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            //    if (timer >= speed)
+            //        Move(pressedKey);
+            //} else if (newKeyBoard.IsKeyUp(pressedKey)) //singular press
+            //{
+            //    Move(pressedKey);
+            //    timer = 0f;
+            //}
         }
 
-        protected void Move(Keys input)
+        protected void Move(Keys input, float spd)
         {
             Direction direction = GetValidKey(input);
 
@@ -85,10 +90,10 @@ namespace LoESoft.Client.Core.Game.Objects
 
             switch (direction) //TODO: Animation Display + Move cooldown
             {
-                case Direction.Up: { Y -= 1; return; }
-                case Direction.Down: { Y += 1; return; }
-                case Direction.Left: { X -= 1; return; }
-                case Direction.Right: { X += 1; return; }
+                case Direction.Up: { Y -= spd; return; }
+                case Direction.Down: { Y += spd; return; }
+                case Direction.Left: { X -= spd; return; }
+                case Direction.Right: { X += spd; return; }
                 default: { return; }
             }
         }

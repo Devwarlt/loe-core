@@ -133,15 +133,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <None Include="Resources\background.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\btnImage.png" />
   </ItemGroup>
-=======
   <ItemGroup />
->>>>>>> 51989a8f7f21c12812cd7b8d2b5ac07d36c8379f
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
