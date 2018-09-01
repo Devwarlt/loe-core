@@ -50,7 +50,7 @@ namespace LoESoft.Launcher
             this.ButtonsPanel.Location = new System.Drawing.Point(0, 0);
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.Size = new System.Drawing.Size(175, 600);
-            this.ButtonsPanel.TabIndex = 0;
+            this.ButtonsPanel.TabStop = false;
             // 
             // ButtonSelectedDisplay
             // 
@@ -60,7 +60,7 @@ namespace LoESoft.Launcher
             this.ButtonSelectedDisplay.Location = new System.Drawing.Point(0, 75);
             this.ButtonSelectedDisplay.Name = "ButtonSelectedDisplay";
             this.ButtonSelectedDisplay.Size = new System.Drawing.Size(5, 75);
-            this.ButtonSelectedDisplay.TabIndex = 1;
+            this.ButtonSelectedDisplay.TabStop = false;
             // 
             // ButtonsPanelTitle
             // 
@@ -70,7 +70,7 @@ namespace LoESoft.Launcher
             this.ButtonsPanelTitle.Location = new System.Drawing.Point(0, 0);
             this.ButtonsPanelTitle.Name = "ButtonsPanelTitle";
             this.ButtonsPanelTitle.Size = new System.Drawing.Size(175, 75);
-            this.ButtonsPanelTitle.TabIndex = 1;
+            this.ButtonsPanelTitle.TabStop = false;
             // 
             // ButtonPanelTitleLabel
             // 
@@ -79,7 +79,7 @@ namespace LoESoft.Launcher
             this.ButtonPanelTitleLabel.Location = new System.Drawing.Point(0, 0);
             this.ButtonPanelTitleLabel.Name = "ButtonPanelTitleLabel";
             this.ButtonPanelTitleLabel.Size = new System.Drawing.Size(173, 74);
-            this.ButtonPanelTitleLabel.TabIndex = 0;
+            this.ButtonPanelTitleLabel.TabStop = false;
             this.ButtonPanelTitleLabel.Text = "BRME";
             this.ButtonPanelTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -91,7 +91,7 @@ namespace LoESoft.Launcher
             this.HomeDisplay.Location = new System.Drawing.Point(177, 0);
             this.HomeDisplay.Name = "HomeDisplay";
             this.HomeDisplay.Size = new System.Drawing.Size(1023, 600);
-            this.HomeDisplay.TabIndex = 3;
+            this.HomeDisplay.TabStop = false;
             // 
             // OptionsDisplay
             // 
@@ -102,7 +102,7 @@ namespace LoESoft.Launcher
             this.OptionsDisplay.Location = new System.Drawing.Point(177, 0);
             this.OptionsDisplay.Name = "OptionsDisplay";
             this.OptionsDisplay.Size = new System.Drawing.Size(1023, 600);
-            this.OptionsDisplay.TabIndex = 2;
+            this.OptionsDisplay.TabStop = false;
             this.OptionsDisplay.Visible = false;
             // 
             // AccountDisplay
@@ -114,7 +114,7 @@ namespace LoESoft.Launcher
             this.AccountDisplay.Location = new System.Drawing.Point(177, 0);
             this.AccountDisplay.Name = "AccountDisplay";
             this.AccountDisplay.Size = new System.Drawing.Size(1023, 600);
-            this.AccountDisplay.TabIndex = 1;
+            this.AccountDisplay.TabStop = false;
             this.AccountDisplay.Visible = false;
             // 
             // OptionsButton
@@ -128,7 +128,7 @@ namespace LoESoft.Launcher
             this.OptionsButton.Name = "OptionsButton";
             this.OptionsButton.Selected = false;
             this.OptionsButton.Size = new System.Drawing.Size(174, 75);
-            this.OptionsButton.TabIndex = 0;
+            this.OptionsButton.TabStop = false;
             this.OptionsButton.Text = "Options";
             this.OptionsButton.UseVisualStyleBackColor = false;
             this.OptionsButton.Click += new System.EventHandler(this.ChangeButtonSelected);
@@ -144,7 +144,7 @@ namespace LoESoft.Launcher
             this.AccountButton.Name = "AccountButton";
             this.AccountButton.Selected = false;
             this.AccountButton.Size = new System.Drawing.Size(174, 75);
-            this.AccountButton.TabIndex = 0;
+            this.AccountButton.TabStop = false;
             this.AccountButton.Text = "Account";
             this.AccountButton.UseVisualStyleBackColor = false;
             this.AccountButton.Click += new System.EventHandler(this.ChangeButtonSelected);
@@ -161,7 +161,7 @@ namespace LoESoft.Launcher
             this.HomeButton.Name = "HomeButton";
             this.HomeButton.Selected = true;
             this.HomeButton.Size = new System.Drawing.Size(174, 75);
-            this.HomeButton.TabIndex = 0;
+            this.HomeButton.TabStop = false;
             this.HomeButton.Text = "Home";
             this.HomeButton.UseVisualStyleBackColor = false;
             this.HomeButton.Click += new System.EventHandler(this.ChangeButtonSelected);
@@ -173,7 +173,7 @@ namespace LoESoft.Launcher
             this.LauncherVersionLabel.Location = new System.Drawing.Point(0, 523);
             this.LauncherVersionLabel.Name = "label1";
             this.LauncherVersionLabel.Size = new System.Drawing.Size(173, 74);
-            this.LauncherVersionLabel.TabIndex = 3;
+            this.LauncherVersionLabel.TabStop = false;
             this.LauncherVersionLabel.Text = "Version: ";
             this.LauncherVersionLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 

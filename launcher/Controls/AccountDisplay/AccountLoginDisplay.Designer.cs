@@ -44,7 +44,7 @@
             this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, -1);
             this.TitlePanelSeperator.Name = "TitlePanelSeperator";
             this.TitlePanelSeperator.Size = new System.Drawing.Size(352, 73);
-            this.TitlePanelSeperator.TabIndex = 1;
+            this.TitlePanelSeperator.TabStop = false;
             // 
             // TitleLabel
             // 
@@ -55,7 +55,7 @@
             this.TitleLabel.Location = new System.Drawing.Point(24, 3);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(302, 65);
-            this.TitleLabel.TabIndex = 9;
+            this.TitleLabel.TabStop = false;
             this.TitleLabel.Text = "Login";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -68,7 +68,7 @@
             this.LoginButton.Location = new System.Drawing.Point(6, 82);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(160, 75);
-            this.LoginButton.TabIndex = 2;
+            this.LoginButton.TabStop = false;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
@@ -82,7 +82,7 @@
             this.RegisterButton.Location = new System.Drawing.Point(183, 82);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(160, 75);
-            this.RegisterButton.TabIndex = 2;
+            this.RegisterButton.TabStop = false;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = false;
             this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);

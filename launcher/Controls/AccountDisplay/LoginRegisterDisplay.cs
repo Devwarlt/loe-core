@@ -15,5 +15,12 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             // temp until implementing registering
             ((AccountDisplayControl)Parent).RegisterToggle();
         }
+
+        private void IsKeyDown(object sender, KeyEventArgs e)
+        {
+            var isCaps = IsKeyLocked(Keys.CapsLock);
+            CapsLockLabel.Enabled = isCaps;
+            CapsLockLabel.Visible = isCaps;
+        }
     }
 }

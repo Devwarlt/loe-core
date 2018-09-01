@@ -42,7 +42,7 @@
             this.TitleLabel.Location = new System.Drawing.Point(366, 0);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(291, 73);
-            this.TitleLabel.TabIndex = 3;
+            this.TitleLabel.TabStop = false;
             this.TitleLabel.Text = "Home";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -55,7 +55,7 @@
             this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, 1);
             this.TitlePanelSeperator.Name = "TitlePanelSeperator";
             this.TitlePanelSeperator.Size = new System.Drawing.Size(1025, 75);
-            this.TitlePanelSeperator.TabIndex = 1;
+            this.TitlePanelSeperator.TabStop = false;
             // 
             // HomeDisplayControl
             // 

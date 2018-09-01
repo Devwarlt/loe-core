@@ -31,13 +31,14 @@
         {
             this.TitlePanelSeperator = new System.Windows.Forms.Panel();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.EmailTextBox = new System.Windows.Forms.TextBox();
-            this.PasswordTextBox = new System.Windows.Forms.TextBox();
-            this.ConfirmPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.EmailTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
+            this.PasswordTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
+            this.ConfirmPasswordTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
             this.EmailLabel = new System.Windows.Forms.Label();
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.ConfirmPasswordLabel = new System.Windows.Forms.Label();
             this.RegisterButton = new System.Windows.Forms.Button();
+            this.CapsLockLabel = new System.Windows.Forms.Label();
             this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,7 @@
             this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, -1);
             this.TitlePanelSeperator.Name = "TitlePanelSeperator";
             this.TitlePanelSeperator.Size = new System.Drawing.Size(514, 73);
-            this.TitlePanelSeperator.TabIndex = 1;
+            this.TitlePanelSeperator.TabStop = false;
             // 
             // TitleLabel
             // 
@@ -61,7 +62,7 @@
             this.TitleLabel.Location = new System.Drawing.Point(24, 3);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(464, 65);
-            this.TitleLabel.TabIndex = 9;
+            this.TitleLabel.TabStop = false;
             this.TitleLabel.Text = "Account Register";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -72,10 +73,12 @@
             this.EmailTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.EmailTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EmailTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.EmailTextBox.Location = new System.Drawing.Point(26, 101);
             this.EmailTextBox.Name = "EmailTextBox";
             this.EmailTextBox.Size = new System.Drawing.Size(458, 31);
-            this.EmailTextBox.TabIndex = 3;
+            this.EmailTextBox.TabStop = false;
+            this.EmailTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PasswordTextBox
             // 
@@ -84,10 +87,15 @@
             this.PasswordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.PasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.PasswordTextBox.Location = new System.Drawing.Point(26, 156);
+            this.PasswordTextBox.MaxLength = 32;
             this.PasswordTextBox.Name = "PasswordTextBox";
+            this.PasswordTextBox.PasswordChar = '*';
             this.PasswordTextBox.Size = new System.Drawing.Size(458, 31);
-            this.PasswordTextBox.TabIndex = 4;
+            this.PasswordTextBox.TabStop = false;
+            this.PasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsKeyDown);
             // 
             // ConfirmPasswordTextBox
             // 
@@ -96,10 +104,15 @@
             this.ConfirmPasswordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.ConfirmPasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ConfirmPasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConfirmPasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.ConfirmPasswordTextBox.Location = new System.Drawing.Point(26, 211);
+            this.ConfirmPasswordTextBox.MaxLength = 32;
             this.ConfirmPasswordTextBox.Name = "ConfirmPasswordTextBox";
+            this.ConfirmPasswordTextBox.PasswordChar = '*';
             this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(458, 31);
-            this.ConfirmPasswordTextBox.TabIndex = 6;
+            this.ConfirmPasswordTextBox.TabStop = false;
+            this.ConfirmPasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ConfirmPasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsKeyDown);
             // 
             // EmailLabel
             // 
@@ -109,7 +122,7 @@
             this.EmailLabel.Location = new System.Drawing.Point(27, 82);
             this.EmailLabel.Name = "EmailLabel";
             this.EmailLabel.Size = new System.Drawing.Size(45, 16);
-            this.EmailLabel.TabIndex = 7;
+            this.EmailLabel.TabStop = false;
             this.EmailLabel.Text = "Email:";
             // 
             // PasswordLabel
@@ -120,7 +133,7 @@
             this.PasswordLabel.Location = new System.Drawing.Point(27, 137);
             this.PasswordLabel.Name = "PasswordLabel";
             this.PasswordLabel.Size = new System.Drawing.Size(71, 16);
-            this.PasswordLabel.TabIndex = 7;
+            this.PasswordLabel.TabStop = false;
             this.PasswordLabel.Text = "Password:";
             // 
             // ConfirmPasswordLabel
@@ -131,7 +144,7 @@
             this.ConfirmPasswordLabel.Location = new System.Drawing.Point(27, 192);
             this.ConfirmPasswordLabel.Name = "ConfirmPasswordLabel";
             this.ConfirmPasswordLabel.Size = new System.Drawing.Size(119, 16);
-            this.ConfirmPasswordLabel.TabIndex = 7;
+            this.ConfirmPasswordLabel.TabStop = false;
             this.ConfirmPasswordLabel.Text = "Confirm Password:";
             // 
             // RegisterButton
@@ -143,10 +156,23 @@
             this.RegisterButton.Location = new System.Drawing.Point(174, 245);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(160, 45);
-            this.RegisterButton.TabIndex = 9;
+            this.RegisterButton.TabStop = false;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = false;
             this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
+            // 
+            // CapsLockLabel
+            // 
+            this.CapsLockLabel.AutoSize = true;
+            this.CapsLockLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CapsLockLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.CapsLockLabel.Location = new System.Drawing.Point(215, 78);
+            this.CapsLockLabel.Name = "CapsLockLabel";
+            this.CapsLockLabel.Size = new System.Drawing.Size(72, 16);
+            this.CapsLockLabel.TabStop = false;
+            this.CapsLockLabel.Text = "Caps Lock";
+            this.CapsLockLabel.Enabled = false;
+            this.CapsLockLabel.Visible = false;
             // 
             // LoginRegisterDisplay
             // 
@@ -154,6 +180,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.CapsLockLabel);
             this.Controls.Add(this.RegisterButton);
             this.Controls.Add(this.ConfirmPasswordLabel);
             this.Controls.Add(this.PasswordLabel);
@@ -174,12 +201,13 @@
 
         private System.Windows.Forms.Panel TitlePanelSeperator;
         private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.TextBox EmailTextBox;
-        private System.Windows.Forms.TextBox PasswordTextBox;
-        private System.Windows.Forms.TextBox ConfirmPasswordTextBox;
+        private CustomTextBox EmailTextBox;
+        private CustomTextBox PasswordTextBox;
+        private CustomTextBox ConfirmPasswordTextBox;
         private System.Windows.Forms.Label EmailLabel;
         private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.Label ConfirmPasswordLabel;
         private System.Windows.Forms.Button RegisterButton;
+        private System.Windows.Forms.Label CapsLockLabel;
     }
 }

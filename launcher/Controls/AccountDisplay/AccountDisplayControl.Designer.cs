@@ -45,7 +45,7 @@
             this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, 1);
             this.TitlePanelSeperator.Name = "TitlePanelSeperator";
             this.TitlePanelSeperator.Size = new System.Drawing.Size(1025, 75);
-            this.TitlePanelSeperator.TabIndex = 0;
+            this.TitlePanelSeperator.TabStop = false;
             // 
             // TitleLabel
             // 
@@ -56,7 +56,7 @@
             this.TitleLabel.Location = new System.Drawing.Point(366, 0);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(291, 73);
-            this.TitleLabel.TabIndex = 4;
+            this.TitleLabel.TabStop = false;
             this.TitleLabel.Text = "Account Settings";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -69,7 +69,7 @@
             this.AccountLoginDisplay.Location = new System.Drawing.Point(337, 216);
             this.AccountLoginDisplay.Name = "AccountLoginDisplay";
             this.AccountLoginDisplay.Size = new System.Drawing.Size(348, 168);
-            this.AccountLoginDisplay.TabIndex = 4;
+            this.AccountLoginDisplay.TabStop = false;
             // 
             // CurrentAccountDisplay
             // 
@@ -80,7 +80,7 @@
             this.CurrentAccountDisplay.Location = new System.Drawing.Point(-1, 75);
             this.CurrentAccountDisplay.Name = "CurrentAccountDisplay";
             this.CurrentAccountDisplay.Size = new System.Drawing.Size(1025, 526);
-            this.CurrentAccountDisplay.TabIndex = 2;
+            this.CurrentAccountDisplay.TabStop = false;
             // 
             // LoginRegisterDisplay
             // 
@@ -92,7 +92,7 @@
             this.LoginRegisterDisplay.Location = new System.Drawing.Point(256, 155);
             this.LoginRegisterDisplay.Name = "LoginRegisterDisplay";
             this.LoginRegisterDisplay.Size = new System.Drawing.Size(510, 290);
-            this.LoginRegisterDisplay.TabIndex = 7;
+            this.LoginRegisterDisplay.TabStop = false;
             this.LoginRegisterDisplay.Visible = false;
             // 
             // AccountDisplayControl

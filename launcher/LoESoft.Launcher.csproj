@@ -75,6 +75,9 @@
     <Compile Include="Controls\AccountDisplay\LoginRegisterDisplay.Designer.cs">
       <DependentUpon>LoginRegisterDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ExtendedButton.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -41,7 +41,7 @@
             this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, -1);
             this.TitlePanelSeperator.Name = "TitlePanelSeperator";
             this.TitlePanelSeperator.Size = new System.Drawing.Size(1028, 73);
-            this.TitlePanelSeperator.TabIndex = 1;
+            this.TitlePanelSeperator.TabStop = false;
             // 
             // TitleLabel
             // 
@@ -52,7 +52,7 @@
             this.TitleLabel.Location = new System.Drawing.Point(24, 3);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(978, 65);
-            this.TitleLabel.TabIndex = 9;
+            this.TitleLabel.TabStop = false;
             this.TitleLabel.Text = "Account Information";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -65,7 +65,7 @@
             this.LogOutButton.Location = new System.Drawing.Point(874, 3);
             this.LogOutButton.Name = "LogOutButton";
             this.LogOutButton.Size = new System.Drawing.Size(148, 65);
-            this.LogOutButton.TabIndex = 3;
+            this.LogOutButton.TabStop = false;
             this.LogOutButton.Text = "Log Out";
             this.LogOutButton.UseVisualStyleBackColor = false;
             this.LogOutButton.Click += new System.EventHandler(this.LogOutButton_Click);
