@@ -75,6 +75,7 @@
     <Compile Include="Core\Game\Animation\AnimationFrame.cs" />
     <Compile Include="Core\Game\Camera.cs" />
     <Compile Include="Core\Game\Objects\BasicObject.cs" />
+    <Compile Include="Core\Game\Objects\BasicPlayer.cs" />
     <Compile Include="Core\Game\Tile.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />

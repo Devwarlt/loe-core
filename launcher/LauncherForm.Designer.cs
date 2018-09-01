@@ -20,10 +20,14 @@ namespace LoESoft.Launcher
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LauncherForm));
             this.ButtonsPanel = new System.Windows.Forms.Panel();
             this.ButtonSelectedDisplay = new System.Windows.Forms.Panel();
             this.ButtonsPanelTitle = new System.Windows.Forms.Panel();
             this.ButtonPanelTitleLabel = new System.Windows.Forms.Label();
+            this.OptionsButton = new LoESoft.Launcher.Controls.ExtendedButton();
+            this.AccountButton = new LoESoft.Launcher.Controls.ExtendedButton();
+            this.HomeButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.HomeDisplay = new LoESoft.Launcher.Controls.HomeDisplay.HomeDisplayControl();
             this.OptionsDisplay = new LoESoft.Launcher.Controls.OptionsDisplay.OptionsDisplayControl();
             this.AccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.AccountDisplayControl();
@@ -75,6 +79,7 @@ namespace LoESoft.Launcher
             // ButtonPanelTitleLabel
             // 
             this.ButtonPanelTitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonPanelTitleLabel.ForeColor = System.Drawing.Color.GhostWhite;
             this.ButtonPanelTitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.ButtonPanelTitleLabel.Location = new System.Drawing.Point(0, 0);
             this.ButtonPanelTitleLabel.Name = "ButtonPanelTitleLabel";
@@ -85,6 +90,9 @@ namespace LoESoft.Launcher
             // 
             // HomeDisplay
             // 
+            this.HomeDisplay.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.HomeDisplay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("HomeDisplay.BackgroundImage")));
+            this.HomeDisplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.HomeDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.HomeDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
@@ -95,6 +103,8 @@ namespace LoESoft.Launcher
             // 
             // OptionsDisplay
             // 
+            this.OptionsDisplay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OptionsDisplay.BackgroundImage")));
+            this.OptionsDisplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.OptionsDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OptionsDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
@@ -107,6 +117,8 @@ namespace LoESoft.Launcher
             // 
             // AccountDisplay
             // 
+            this.AccountDisplay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AccountDisplay.BackgroundImage")));
+            this.AccountDisplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AccountDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AccountDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
@@ -138,7 +150,7 @@ namespace LoESoft.Launcher
             this.AccountButton.Display = this.AccountDisplay;
             this.AccountButton.FlatAppearance.BorderSize = 0;
             this.AccountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AccountButton.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountButton.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.AccountButton.Location = new System.Drawing.Point(0, 150);
             this.AccountButton.Name = "AccountButton";
@@ -191,6 +203,7 @@ namespace LoESoft.Launcher
             this.MaximumSize = new System.Drawing.Size(1220, 643);
             this.MinimumSize = new System.Drawing.Size(1220, 643);
             this.Name = "LauncherForm";
+            this.Text = " ";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LauncherForm_FormClosed);
             this.Load += new System.EventHandler(this.LauncherForm_Load);
             this.SizeChanged += new System.EventHandler(this.LauncherForm_SizeChanged);

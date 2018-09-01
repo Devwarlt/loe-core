@@ -14,8 +14,8 @@ namespace LoESoft.Client.Core.Game.Objects
         public Texture2D Texture { get; set; }
 
         //need 2 implement a asset loader for the objects b4 the base class is done
-        public void Update(GameTime gameTime) { }
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Update(GameTime gameTime) { }
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (Texture == null)
                 Texture = AssetLibrary.Images.Values.First();
