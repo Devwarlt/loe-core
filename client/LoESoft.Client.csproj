@@ -73,6 +73,7 @@
     <Compile Include="Core\Client\GameUser.cs" />
     <Compile Include="Core\Game\Animation\Animation.cs" />
     <Compile Include="Core\Game\Animation\AnimationFrame.cs" />
+    <Compile Include="Core\Game\Animation\PlayerAnimation.cs" />
     <Compile Include="Core\Game\Camera.cs" />
     <Compile Include="Core\Game\Objects\BasicObject.cs" />
     <Compile Include="Core\Game\Objects\BasicPlayer.cs" />

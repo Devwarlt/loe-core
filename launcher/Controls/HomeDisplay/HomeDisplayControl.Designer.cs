@@ -45,6 +45,8 @@
             this.TitleLabel.TabStop = false;
             this.TitleLabel.Text = "Home";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            //
+            // Launch Btn
             // 
             // TitlePanelSeperator
             // 
@@ -72,6 +74,7 @@
 
         #endregion
 
+        private ExtendedButton LaunchButton;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Panel TitlePanelSeperator;
     }

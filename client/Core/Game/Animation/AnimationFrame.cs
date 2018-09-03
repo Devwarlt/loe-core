@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using LoESoft.Client.Core.Game.Objects;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LoESoft.Client.Core.Game.Animation
 {
@@ -11,6 +13,7 @@ namespace LoESoft.Client.Core.Game.Animation
             Texture = texture;
         }
 
-        public void Draw(SpriteBatch spriteBatch) { }
+        public void Draw(SpriteBatch spriteBatch, BasicObject obj)
+        => spriteBatch.Draw(Texture, new Vector2(obj.DrawX, obj.DrawY), new Rectangle(0, 0, obj.Size, obj.Size), Color.White);
     }
 }

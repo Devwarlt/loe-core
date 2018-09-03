@@ -11,6 +11,9 @@ namespace LoESoft.Client.Core.Game.Objects
         public float Y { get; set; }
         public float DrawX => X * 8;
         public float DrawY => Y * 8;
+
+        public int Size = 8;
+
         public Texture2D Texture { get; set; }
 
         //need 2 implement a asset loader for the objects b4 the base class is done
@@ -20,7 +23,7 @@ namespace LoESoft.Client.Core.Game.Objects
             if (Texture == null)
                 Texture = AssetLibrary.Images.Values.First();
 
-            spriteBatch.Draw(Texture, new Vector2(DrawX, DrawY), new Rectangle(0, 0, 8, 8), Color.White);
+            spriteBatch.Draw(Texture, new Vector2(DrawX, DrawY), new Rectangle(0, 0, Size, Size), Color.White);
         }
     }
 }

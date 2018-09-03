@@ -22,5 +22,10 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             CapsLockLabel.Enabled = isCaps;
             CapsLockLabel.Visible = isCaps;
         }
+
+        private void TitleLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
