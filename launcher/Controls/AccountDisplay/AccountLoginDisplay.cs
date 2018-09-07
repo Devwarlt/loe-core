@@ -9,10 +9,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, System.EventArgs e)
-        {
-
-        }
+        private void LoginButton_Click(object sender, System.EventArgs e) { }
 
         private void RegisterButton_Click(object sender, System.EventArgs e)
         {
