@@ -19,13 +19,11 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
         private void IsKeyDown(object sender, KeyEventArgs e)
         {
             var isCaps = IsKeyLocked(Keys.CapsLock);
+
             CapsLockLabel.Enabled = isCaps;
             CapsLockLabel.Visible = isCaps;
         }
 
-        private void TitleLabel_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void TitleLabel_Click(object sender, EventArgs e) { }
     }
 }
