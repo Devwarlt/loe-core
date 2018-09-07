@@ -28,8 +28,8 @@ namespace LoESoft.Client.Core.Game
             TileProperties = TileLibrary.PropsLibrary[type];
             Texture = AssetLibrary.Images[TileProperties.TextureFile];
 
-            TextureOffsetX = (TileProperties.TextureIndex % TILE_SIZE) * TILE_SIZE;
-            TextureOffsetY = (TileProperties.TextureIndex / TILE_SIZE) * TILE_SIZE;
+            TextureOffsetX = TileProperties.TextureIndex % TILE_SIZE * TILE_SIZE;
+            TextureOffsetY = TileProperties.TextureIndex / TILE_SIZE * TILE_SIZE;
         }
 
         public void Draw(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, new Vector2(DrawX, DrawY), new Rectangle(TextureOffsetX, TextureOffsetY, TILE_SIZE, TILE_SIZE), Color.White);

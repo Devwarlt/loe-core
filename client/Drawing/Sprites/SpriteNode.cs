@@ -49,12 +49,12 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public virtual void Update(GameTime gameTime)
         {
-            for (var i = (ChildList.ToArray().Length - 1); i >= 0; i--)
+            for (var i = ChildList.ToArray().Length - 1; i >= 0; i--)
                 ChildList[i].Update(gameTime);
 
             foreach (var i in EventDictionary)
                 if (_eventsHandler.HandleMouse(this, i.Key) &&
-                    (!EventsManager.ActiveNode.IsActive && EventsManager.ActiveNode.Node != this))
+                    !EventsManager.ActiveNode.IsActive && EventsManager.ActiveNode.Node != this)
                 {
                     if (i.Key != Event.MOUSEOUT)
                     {

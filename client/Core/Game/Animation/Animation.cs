@@ -24,11 +24,11 @@ namespace LoESoft.Client.Core.Game.Animation
         public virtual void Update(GameTime gameTime)
         {
             Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            
+
             if (Timer >= CoolDown)
             {
                 CurrentFrame++;
-                
+
                 if (CurrentFrame >= Frames.Count)
                     CurrentFrame = 0;
 

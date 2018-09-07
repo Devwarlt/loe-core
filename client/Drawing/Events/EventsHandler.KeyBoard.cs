@@ -14,7 +14,7 @@ namespace LoESoft.Client.Drawing.Events
 
             for (var i = 0; i < oldPressedKeys.Length; i++)
                 if (currentKeyBoard.IsKeyUp(oldPressedKeys[i]))
-                    pressedKeys.Add(new KeyValuePair<bool, Keys>((DetectCaps()), oldPressedKeys[i]));
+                    pressedKeys.Add(new KeyValuePair<bool, Keys>(DetectCaps(), oldPressedKeys[i]));
 
             List<char> keys = new List<char>();
 
@@ -27,9 +27,9 @@ namespace LoESoft.Client.Drawing.Events
 
         protected bool DetectCaps()
         {
-            if (currentKeyBoard.CapsLock || ((previousKeyBoard.IsKeyDown(Keys.LeftShift)
+            if (currentKeyBoard.CapsLock || (previousKeyBoard.IsKeyDown(Keys.LeftShift)
                 && currentKeyBoard.IsKeyDown(Keys.LeftShift)) ||
-                (previousKeyBoard.IsKeyDown(Keys.RightShift) && currentKeyBoard.IsKeyDown(Keys.RightShift))))
+                (previousKeyBoard.IsKeyDown(Keys.RightShift) && currentKeyBoard.IsKeyDown(Keys.RightShift)))
                 return true;
 
             return false;

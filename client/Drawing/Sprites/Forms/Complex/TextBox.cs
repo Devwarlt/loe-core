@@ -80,7 +80,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
                 if (Text.Length > 0)
                     Text.Length--;
 
-            TextField.Text = (Encoded) ? GetEncodedString(Text.ToString())
+            TextField.Text = Encoded ? GetEncodedString(Text.ToString())
                 : Text.ToString();
 
             if (Selected && _timer > 0.5f)

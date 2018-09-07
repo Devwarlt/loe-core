@@ -33,7 +33,7 @@ namespace LoESoft.Client.Core.Screens
 
             PlayButton = new TextButton("Play", 30);
             PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
-            PlayButton.Y = ((GameApplication.HEIGHT - PlayButton.Height) / 2);
+            PlayButton.Y = (GameApplication.HEIGHT - PlayButton.Height) / 2;
             PlayButton.TextDisplay.Outline = true;
 
             OptionsButton = new TextButton("Options", 30);

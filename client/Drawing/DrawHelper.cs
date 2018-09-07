@@ -19,7 +19,7 @@ namespace LoESoft.Client.Drawing
             TextureRect.SetData(new Color[] { Color.White });
         }
 
-        public static int CenteredPosition(int v1, int v2) => ((v1 / 2) - (v2 / 2));
+        public static int CenteredPosition(int v1, int v2) => (v1 / 2) - (v2 / 2);
 
         public static void Clear(this SpriteBatch spriteBatch) => ClearColor(spriteBatch, Color.Black);
         public static void ClearColor(this SpriteBatch spriteBatch, Color color) => GraphicsDevice.Clear(color);

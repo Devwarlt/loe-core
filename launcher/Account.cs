@@ -26,7 +26,7 @@ namespace LoESoft.Launcher
         public void SaveAccount()
         {
             var iniFile = new IniFile("config.ini");
-            if(UserAccount == null) // no longer needed
+            if (UserAccount == null) // no longer needed
             {
                 File.Delete(iniFile.Path);
                 return;

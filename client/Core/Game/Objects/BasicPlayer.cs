@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -27,7 +23,6 @@ namespace LoESoft.Client.Core.Game.Objects
                 { Keys.D, Direction.Right }
             };
 
-
         KeyboardState previousKeyBoard;
         KeyboardState newKeyBoard;
 
@@ -38,7 +33,7 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             newKeyBoard = Keyboard.GetState();
 
-            var keysPressed = previousKeyBoard.GetPressedKeys().Select(_ => (_validKeysToDirection.ContainsKey(_)) ? _ : Keys.None).ToList();
+            var keysPressed = previousKeyBoard.GetPressedKeys().Select(_ => _validKeysToDirection.ContainsKey(_) ? _ : Keys.None).ToList();
             var pressedKey = (keysPressed.Count > 0) ? keysPressed[0] : Keys.None;
 
             var spd = 1 * dt;
@@ -62,15 +57,17 @@ namespace LoESoft.Client.Core.Game.Objects
         protected void Move(Keys input, float spd)
         {
             var direction = GetValidKey(input);
+
             if (direction == Direction.None)
                 return;
 
-            switch (direction) //TODO: Animation Display + Move cooldown
+            //TODO: Animation Display + Move cooldown
+            switch (direction)
             {
-                case Direction.Up: { Y -= spd; break; }
-                case Direction.Down: { Y += spd; break; }
-                case Direction.Left: { X -= spd; break; }
-                case Direction.Right: { X += spd; break; }
+                case Direction.Up: Y -= spd; break;
+                case Direction.Down: Y += spd; break;
+                case Direction.Left: X -= spd; break;
+                case Direction.Right: X += spd; break;
                 default: break;
             }
         }
@@ -88,7 +85,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
             UpdateMovement(dt);
         }
-        
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
