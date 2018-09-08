@@ -10,10 +10,8 @@ namespace LoESoft.Client.Core.Game.Objects
     {
         public enum Direction : int
         {
-            Up = 0, Down = 1, Left = 2, Right = 3, None = 4
+            None = 0, Up = 1, Down = 2, Left = 3, Right = 4
         }
-
-        public Direction CurrentDirection = Direction.Up;
 
         Dictionary<Keys, Direction> _validKeysToDirection = new Dictionary<Keys, Direction>()
             {
@@ -23,11 +21,15 @@ namespace LoESoft.Client.Core.Game.Objects
                 { Keys.D, Direction.Right }
             };
 
+        public Direction CurrentDirection = Direction.Up;
+
         KeyboardState previousKeyBoard;
         KeyboardState newKeyBoard;
 
-        //float speed = 0.5f;
-        //float timer = 0f;
+        public Player()
+        {
+
+        }
 
         public void UpdateMovement(float dt)
         {
@@ -40,18 +42,6 @@ namespace LoESoft.Client.Core.Game.Objects
             Move(pressedKey, spd);
 
             previousKeyBoard = newKeyBoard;
-
-            //if (newKeyBoard.IsKeyDown(pressedKey)) //toggle press
-            //{
-            //    timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            //    if (timer >= speed)
-            //        Move(pressedKey);
-            //} else if (newKeyBoard.IsKeyUp(pressedKey)) //singular press
-            //{
-            //    Move(pressedKey);
-            //    timer = 0f;
-            //}
         }
 
         protected void Move(Keys input, float spd)
@@ -79,6 +69,7 @@ namespace LoESoft.Client.Core.Game.Objects
                 default:
                     break;
             }
+            CurrentDirection = direction;
         }
 
         private Direction GetValidKey(Keys key)

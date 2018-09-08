@@ -45,15 +45,15 @@ namespace LoESoft.Client.Core.Screens
 
             var spd = 1 * dt;
 
-            var keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.W))
-                TempPlayer.Y -= spd;
-            if (keyState.IsKeyDown(Keys.A))
-                TempPlayer.X -= spd;
-            if (keyState.IsKeyDown(Keys.S))
-                TempPlayer.Y += spd;
-            if (keyState.IsKeyDown(Keys.D))
-                TempPlayer.X += spd;
+            //var keyState = Keyboard.GetState();
+            //if (keyState.IsKeyDown(Keys.W))
+            //    TempPlayer.Y -= spd;
+            //if (keyState.IsKeyDown(Keys.A))
+            //    TempPlayer.X -= spd;
+            //if (keyState.IsKeyDown(Keys.S))
+            //    TempPlayer.Y += spd;
+            //if (keyState.IsKeyDown(Keys.D))
+            //    TempPlayer.X += spd;
 
             TempPlayer.Update(gameTime);
             Camera.SetFocus(TempPlayer);
