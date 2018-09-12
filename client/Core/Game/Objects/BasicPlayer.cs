@@ -52,23 +52,15 @@ namespace LoESoft.Client.Core.Game.Objects
                 return;
 
             //TODO: Animation Display + Move cooldown
-            switch (direction)
-            {
-                case Direction.Up:
-                    Y -= spd;
-                    break;
-                case Direction.Down:
-                    Y += spd;
-                    break;
-                case Direction.Left:
-                    X -= spd;
-                    break;
-                case Direction.Right:
-                    X += spd;
-                    break;
-                default:
-                    break;
-            }
+            if (direction == Direction.Up)
+                Y -= spd;
+            if (direction == Direction.Down)
+                Y += spd;
+            if (direction == Direction.Left)
+                X -= spd;
+            if (direction == Direction.Right)
+                X += spd;
+
             CurrentDirection = direction;
         }
 
