@@ -8,6 +8,14 @@ namespace LoESoft.Client.Assets
 
         public static void Init(ContentManager contentManager) => Content = contentManager;
 
-        public static T LoadAsset<T>(string assetName) => Content.Load<T>(assetName);
+        public static T LoadAsset<T>(string assetName)
+        {
+            T content = default(T);
+
+            if (Content != null)
+                content = Content.Load<T>(assetName);
+
+            return content;
+        }
     }
 }

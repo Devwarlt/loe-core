@@ -1,4 +1,6 @@
-﻿using LoESoft.Server.Core.Networking.Packets.Incoming;
+﻿using LoESoft.Server.Core.Networking.Packets;
+using LoESoft.Server.Core.Networking.Packets.Incoming;
+using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using System.Net.Sockets;
 
 namespace LoESoft.Server.Core.Networking
@@ -20,6 +22,8 @@ namespace LoESoft.Server.Core.Networking
 
             NetworkControl.SendPacket(new PingPacket(1500));
         }
+
+        public void SendPacket(OutgoingPacket pkt) => NetworkControl.SendPacket(pkt);
 
         public void Disconnect()
         {

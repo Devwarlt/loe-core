@@ -11,7 +11,8 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public override void Handle(GameUser gameUser)
         {
-            gameUser.SendPacket(new PongPacket(Value));
+            //gameUser.SendPacket(new PongPacket(Value));
+            GameClient.Info(Value.ToString());
         }
     }
 }

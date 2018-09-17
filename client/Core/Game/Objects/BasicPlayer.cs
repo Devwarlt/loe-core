@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Networking.Packets.Outgoing;
+using LoESoft.Client.Core.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -28,7 +31,6 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public Player()
         {
-
         }
 
         public void UpdateMovement(float dt)
@@ -76,6 +78,8 @@ namespace LoESoft.Client.Core.Game.Objects
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
             UpdateMovement(dt);
+            
+            //GameScreen.GameUser.SendPacket(new MovePacket((int)X));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

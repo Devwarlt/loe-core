@@ -6,7 +6,8 @@ namespace LoESoft.Server.Core.Networking.Packets
     public enum PacketID : int
     {
         PING = 0,
-        PONG = 1
+        PONG = 1,
+        MOVE = 2
     }
 
     public abstract class PacketBase

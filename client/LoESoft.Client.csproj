@@ -79,6 +79,7 @@
     <Compile Include="Core\Game\Objects\BasicPlayer.cs" />
     <Compile Include="Core\Game\Tile.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\MovePacket.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />
     <Compile Include="Core\Screens\SplashScreen\SplashScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\TitleScreen.cs" />

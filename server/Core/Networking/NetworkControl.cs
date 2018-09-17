@@ -68,6 +68,7 @@ namespace LoESoft.Server.Core.Networking
         {
             if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
+
             Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None, OnReceivePacket, null);
         }
 
