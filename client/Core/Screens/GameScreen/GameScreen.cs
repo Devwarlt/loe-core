@@ -8,7 +8,6 @@ using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace LoESoft.Client.Core.Screens

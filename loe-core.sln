@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Client", "client\Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Launcher", "launcher\LoESoft.Launcher.csproj", "{4FF98F6C-23A1-40A3-8C76-E4AB29BCAAB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.WebServer", "LoESoft.WebServer\LoESoft.WebServer.csproj", "{80B43BE5-185B-4403-8A69-E47CB9B5581E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.WebServer", "webServer\LoESoft.WebServer.csproj", "{80B43BE5-185B-4403-8A69-E47CB9B5581E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

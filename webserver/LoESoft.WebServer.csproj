@@ -7,7 +7,7 @@
     <ProjectGuid>{80B43BE5-185B-4403-8A69-E47CB9B5581E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>LoESoft.WebServer</RootNamespace>
-    <AssemblyName>LoESoft.WebServer</AssemblyName>
+    <AssemblyName>GameWebServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -171,6 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Networking\ConnectionListener.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\Pong.cs" />
+    <Compile Include="Core\Networking\Packets\PacketBase.cs" />
     <Compile Include="GameWebServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -181,5 +183,6 @@
   <ItemGroup>
     <EmbeddedResource Include="loesoft.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
