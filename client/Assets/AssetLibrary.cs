@@ -6,7 +6,6 @@ namespace LoESoft.Client.Assets
     public static class AssetLibrary
     {
         public static Dictionary<string, Texture2D> Images { get; set; }
-        public static Dictionary<string, Texture2D[]> ImageSets { get; set; }
 
         public static void AddImage(string name, string file)
         {
@@ -15,16 +14,6 @@ namespace LoESoft.Client.Assets
 
             var asset = AssetLoader.LoadAsset<Texture2D>(file);
             Images.Add(name, asset);
-        }
-
-        public static void AddImageSet(string name, string file)
-        {
-
-        }
-
-        public static Texture2D[] GetAnimationTexture(int objectType, int yoffset = 0, int xoffset = 0, int maxcount = 3)
-        {
-            return null;//TODO: Proper Sprites Loading
         }
     }
 }

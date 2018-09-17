@@ -4,7 +4,6 @@ using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
 using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Core.Networking;
-using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -40,12 +39,6 @@ namespace LoESoft.Client.Core.Screens
 
         public override void Update(GameTime gameTime)
         {
-            var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
-
-            var spd = 1 * dt;
-
-            GameUser.SendPacket(new MovePacket(1100));
-
             TempPlayer.Update(gameTime);
             Camera.SetFocus(TempPlayer);
         }

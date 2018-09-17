@@ -37,33 +37,28 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             newKeyBoard = Keyboard.GetState();
 
-            var keysPressed = previousKeyBoard.GetPressedKeys().Select(_ => _validKeysToDirection.ContainsKey(_) ? _ : Keys.None).ToList();
-            var pressedKey = (keysPressed.Count > 0) ? keysPressed[0] : Keys.None;
+            var keysPressed = previousKeyBoard.GetPressedKeys().Select(_ 
+                => _validKeysToDirection.ContainsKey(_) ? _ : Keys.None).ToList();
 
             var spd = 1 * dt;
-            Move(pressedKey, spd);
+
+            foreach (var i in keysPressed)
+            {
+                var direction = GetValidKey(i);
+
+                if (direction == Direction.Up)
+                    Y -= spd;
+                if (direction == Direction.Down)
+                    Y += spd;
+                if (direction == Direction.Left)
+                    X -= spd;
+                if (direction == Direction.Right)
+                    X += spd;
+                
+                CurrentDirection = direction;
+            }
 
             previousKeyBoard = newKeyBoard;
-        }
-
-        protected void Move(Keys input, float spd)
-        {
-            var direction = GetValidKey(input);
-
-            if (direction == Direction.None)
-                return;
-
-            //TODO: Animation Display + Move cooldown
-            if (direction == Direction.Up)
-                Y -= spd;
-            if (direction == Direction.Down)
-                Y += spd;
-            if (direction == Direction.Left)
-                X -= spd;
-            if (direction == Direction.Right)
-                X += spd;
-
-            CurrentDirection = direction;
         }
 
         private Direction GetValidKey(Keys key)
@@ -78,8 +73,6 @@ namespace LoESoft.Client.Core.Game.Objects
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
             UpdateMovement(dt);
-            
-            //GameScreen.GameUser.SendPacket(new MovePacket((int)X));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
