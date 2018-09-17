@@ -1,28 +1,6 @@
-                                               Hypertext Transfer Protocol (HTTP) Status Code Registry
-
-   Last Updated
-           2018-07-02
-
-   Available Formats
-           [IMG]
-           XML [IMG]
-           HTML [IMG]
-           Plain text
-
-   Registry included below
-
-     * HTTP Status Codes
+Hypertext Transfer Protocol (HTTP) Status Code Registry
 
 HTTP Status Codes
-
-   Registration Procedure(s)
-
- IETF Review
-
-   Reference
-           [RFC7231]
-
-   Note
 
  1xx: Informational - Request received, continuing process
  2xx: Success - The action was successfully received, understood, and accepted
@@ -30,12 +8,7 @@ HTTP Status Codes
  4xx: Client Error - The request contains bad syntax or cannot be fulfilled
  5xx: Server Error - The server failed to fulfill an apparently valid request
 
-
-   Available Formats
-           [IMG]
-           CSV
-
-    Value            Description                             Reference
+     Value Description                     Reference
      100   Continue                        [RFC7231, Section 6.2.1]
      101   Switching Protocols             [RFC7231, Section 6.2.2]
      102   Processing                      [RFC2518]
