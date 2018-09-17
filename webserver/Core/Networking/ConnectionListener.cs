@@ -5,7 +5,6 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 
@@ -14,12 +13,12 @@ namespace LoESoft.WebServer.Core.Networking
     public class ConnectionListener
     {
         private int _port => 7172;
-        private HttpListener _listener { get; set; }
-        private Queue<HttpListenerContext> _listenerContext { get; set; }
-        private ManualResetEvent _listenerEvent { get; set; }
-        private Thread[] _listenerThreads { get; set; }
-        private object _listenerLock { get; set; }
-        private bool _shutdown { get; set; }
+        private HttpListener _listener;
+        private Queue<HttpListenerContext> _listenerContext = new Queue<HttpListenerContext>();
+        private ManualResetEvent _listenerEvent = new ManualResetEvent(false);
+        private Thread[] _listenerThreads = new Thread[5];
+        private readonly object _listenerLock = new object();
+        private bool _shutdown = false;
 
         public void StartAccept()
         {
@@ -46,107 +45,18 @@ namespace LoESoft.WebServer.Core.Networking
             _listener.Prefixes.Add(url);
             _listener.Start();
 
-            _shutdown = false;
-            _listenerThreads = new Thread[5];
-            _listenerContext = new Queue<HttpListenerContext>();
-            _listenerEvent = new ManualResetEvent(false);
-            _listenerLock = new object();
-
-            var listenerThread = new Thread(() =>
-            {
-                try
-                {
-                    do
-                    {
-                        _listener.BeginGetContext((IAsyncResult asyncResult) =>
-                        {
-                            if (!_listener.IsListening)
-                                return;
-
-                            lock (_listenerLock)
-                            {
-                                _listenerContext.Enqueue(_listener.EndGetContext(asyncResult));
-                                _listenerEvent.Set();
-                            }
-                        }, null);
-                    } while (!_shutdown);
-                }
-                catch (Exception e) { GameWebServer.Error(e); }
-            })
-            {
-                Name = $"Listener Main Thread",
-                IsBackground = true
-            };
-            listenerThread.Start();
+            try { _listener.BeginGetContext(BeginCallback, null); }
+            catch (Exception e) { GameWebServer.Error(e); }
 
             for (int i = 0; i < _listenerThreads.Length; i++)
             {
-                _listenerThreads[i] = new Thread(() =>
-                {
-                    while (_listenerEvent.WaitOne())
-                    {
-                        if (_shutdown)
-                            break;
-
-                        HttpListenerContext queuedContext = null;
-
-                        lock (_listenerLock)
-                        {
-                            if (_listenerContext.Count > 0)
-                                queuedContext = _listenerContext.Dequeue();
-                            else
-                            {
-                                _listenerEvent.Reset();
-                                continue;
-                            }
-                        }
-
-                        if (queuedContext == null)
-                            continue;
-
-                        string path = queuedContext.Request.Url.LocalPath;
-
-                        if (path.IndexOf(".") == -1)
-                            continue;
-                        else
-                        {
-                            NameValueCollection query;
-
-                            using (var reader = new StreamReader(queuedContext.Request.InputStream))
-                                query = HttpUtility.ParseQueryString(reader.ReadToEnd());
-
-                            Match match = Regex.Match(query["PID"], @"\d+");
-
-                            if (match.Success)
-                            {
-                                PacketID packetID = Enum.IsDefined(typeof(PacketID), int.Parse(match.Value)) ? (PacketID)int.Parse(match.Value) : PacketID.UNKNOWN;
-
-                                if (!PacketBase.RequestLibrary.TryGetValue(packetID, out PacketBase packet))
-                                {
-                                    queuedContext.Response.StatusCode = 400;
-                                    queuedContext.Response.StatusDescription = "Invalid request to the web server.";
-
-                                    using (var writer = new StreamWriter(queuedContext.Response.OutputStream))
-                                        writer.Write("An invalid request has been suspended due missing data.");
-                                }
-                                else
-                                {
-                                    packet.Context = queuedContext;
-                                    packet.Query = query;
-                                    packet.Handle();
-                                }
-                            }
-                        }
-                    }
-                })
+                _listenerThreads[i] = new Thread(HandleContext)
                 {
                     Name = $"Listener Thread #{i}",
                     IsBackground = true
                 };
                 _listenerThreads[i].Start();
             }
-
-            Thread.CurrentThread.Join();
         }
 
         public void EndAccept()
@@ -161,6 +71,124 @@ namespace LoESoft.WebServer.Core.Networking
                 _listener.Stop();
             }
             catch (ObjectDisposedException) { }
+        }
+
+        private void BeginCallback(IAsyncResult asyncResult)
+        {
+            if (!_listener.IsListening)
+                return;
+
+            var getContext = _listener.EndGetContext(asyncResult);
+
+            _listener.BeginGetContext(BeginCallback, null);
+
+            lock (_listenerLock)
+            {
+                _listenerContext.Enqueue(getContext);
+                _listenerEvent.Set();
+            }
+        }
+
+        private void HandleContext()
+        {
+            do
+            {
+                if (_shutdown)
+                    break;
+
+                HttpListenerContext queuedContext = null;
+
+                lock (_listenerLock)
+                {
+                    if (_listenerContext.Count > 0)
+                        queuedContext = _listenerContext.Dequeue();
+                    else
+                    {
+                        _listenerEvent.Reset();
+                        continue;
+                    }
+                }
+
+                if (queuedContext == null)
+                    continue;
+
+                HandleRequest(queuedContext);
+            } while (_listenerEvent.WaitOne());
+        }
+
+        private void HandleRequest(HttpListenerContext context)
+        {
+            NameValueCollection query = new NameValueCollection();
+
+            using (var reader = new StreamReader(context.Request.InputStream))
+                query = HttpUtility.ParseQueryString(reader.ReadToEnd());
+
+            if (query.AllKeys.Length == 0)
+            {
+                string url = context.Request.RawUrl;
+                int urlParams = url.IndexOf('?');
+
+                if (urlParams >= 0)
+                    query = HttpUtility.ParseQueryString((urlParams < url.Length - 1) ? url.Substring(urlParams + 1) : string.Empty);
+            }
+
+            if (string.IsNullOrEmpty(query["PID"]))
+                BadRequest(context);
+            else
+            {
+                int pid = int.Parse(query["PID"]);
+
+                if (Enum.IsDefined(typeof(PacketID), pid))
+                {
+                    var packetID = (PacketID)pid;
+
+                    string message = $"[PID: {(int)packetID}] Request\t->\t{context.Request.Url.LocalPath}";
+
+                    if (!PacketBase.RequestLibrary.TryGetValue(packetID, out PacketBase packet))
+                        InvalidRequest(context, message);
+                    else
+                        GoodRequest(context, message, packet, query);
+                }
+                else
+                    InvalidRequest(context, $"PID '{pid}' isn't implemented yet.");
+            }
+        }
+
+        private void InvalidRequest(HttpListenerContext context, string message)
+        {
+            GameWebServer.Warn(message);
+
+            context.Response.StatusCode = 400;
+            context.Response.StatusDescription = "Invalid request to the web server.";
+
+            using (var writer = new StreamWriter(context.Response.OutputStream))
+                writer.Write("<h1>Error 400</h1><br>" +
+                    "An invalid request has been suspended due missing data." +
+                    "<br><br>" +
+                    "Kind regards,<br>" +
+                    "<b>LoESoft Games</b>");
+        }
+
+        private void GoodRequest(HttpListenerContext context, string message, PacketBase packet, NameValueCollection query)
+        {
+            GameWebServer.Info(message);
+
+            packet.Context = context;
+            packet.Query = query;
+            packet.Handle();
+        }
+
+        private void BadRequest(HttpListenerContext context)
+        {
+            context.Response.StatusCode = 404;
+            context.Response.StatusDescription = "Invalid PID request to the web server.";
+
+            using (var writer = new StreamWriter(context.Response.OutputStream))
+                writer.Write("<h1>Error 404</h1><br>" +
+                "Unknown request has been suspended due missing data." +
+                "<br><br>" +
+                "Kind regards,<br>" +
+                "<b>LoESoft Games</b>");
         }
     }
 }

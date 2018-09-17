@@ -8,9 +8,7 @@ namespace LoESoft.WebServer.Core.Networking.Packets
 {
     public enum PacketID : int
     {
-        UNKNOWN = -1,
-        PING = 1,
-        PONG = 2
+        PING = 1
     }
 
     public abstract class PacketBase
