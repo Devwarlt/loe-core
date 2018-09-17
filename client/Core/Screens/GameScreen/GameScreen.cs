@@ -6,7 +6,6 @@ using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace LoESoft.Client.Core.Screens
