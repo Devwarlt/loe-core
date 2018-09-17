@@ -9,10 +9,15 @@ namespace LoESoft.Client.Core.Game.Animation
         public PlayerAnimation(Player player)
             : base(0.5f)
         {
-            AddAnimation(AnimationType.Forward, AssetLibrary.GetAnimationTexture(1, 0));//1 is for test
-            AddAnimation(AnimationType.Backward, AssetLibrary.GetAnimationTexture(1, 1));
-            AddAnimation(AnimationType.Left, AssetLibrary.GetAnimationTexture(1, 2));
-            AddAnimation(AnimationType.Right, AssetLibrary.GetAnimationTexture(1, 3));
+            //temporary loading, til proper xml managing and proper player handling is added
+            AddAnimation(AnimationType.Forward, 
+                AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(0)); 
+            AddAnimation(AnimationType.Backward,
+               AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(1));
+            AddAnimation(AnimationType.Left,
+               AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(2));
+            AddAnimation(AnimationType.Right,
+               AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(3));
         }
 
         int curDirection = 0;

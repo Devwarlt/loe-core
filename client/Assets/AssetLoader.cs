@@ -41,6 +41,26 @@ namespace LoESoft.Client.Assets
         }
 
         public Texture2D GetSprite(int x, int y) => Textures[x, y];
+        public Texture2D[] GetSpritesByWidth(int y)
+        {
+            List<Texture2D> textures = new List<Texture2D>();
+
+            GameClient.Info(Textures.Length.ToString());
+
+            for (var x = 0; x < 16; x++)
+                textures.Add(Textures[x, y]);
+
+            return textures.ToArray();
+        }
+        public Texture2D[] GetSpritesByHeight(int x)
+        {
+            List<Texture2D> textures = new List<Texture2D>();
+
+            for (var y = 0; y < 16; y++)
+                textures.Add(Textures[x, y]);
+
+            return textures.ToArray();
+        }
 
         public void Initialize(string file)
         {

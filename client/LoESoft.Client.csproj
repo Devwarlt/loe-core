@@ -76,7 +76,7 @@
     <Compile Include="Core\Game\Animation\PlayerAnimation.cs" />
     <Compile Include="Core\Game\Camera.cs" />
     <Compile Include="Core\Game\Objects\BasicObject.cs" />
-    <Compile Include="Core\Game\Objects\BasicPlayer.cs" />
+    <Compile Include="Core\Game\Objects\Player.cs" />
     <Compile Include="Core\Game\Tile.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\MovePacket.cs" />

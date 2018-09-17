@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Game.Animation;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Core.Screens;
 using Microsoft.Xna.Framework;
@@ -26,11 +27,13 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public Direction CurrentDirection = Direction.Up;
 
+        PlayerAnimation _animation;
         KeyboardState previousKeyBoard;
         KeyboardState newKeyBoard;
 
         public Player()
         {
+            _animation = new PlayerAnimation(this);
         }
 
         public void UpdateMovement(float dt)
@@ -73,11 +76,12 @@ namespace LoESoft.Client.Core.Game.Objects
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
             UpdateMovement(dt);
+            _animation.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
+            _animation.Draw(spriteBatch, this);
         }
     }
 }
