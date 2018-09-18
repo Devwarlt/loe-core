@@ -8,7 +8,9 @@ namespace LoESoft.WebServer.Core.Networking.Packets
 {
     public enum PacketID : int
     {
-        PING = 1
+        PING = 1,
+        LOGIN = 2,
+        LOGIN_TOKEN = 3
     }
 
     public abstract class PacketBase
@@ -19,6 +21,11 @@ namespace LoESoft.WebServer.Core.Networking.Packets
         public static readonly Dictionary<PacketID, PacketBase> RequestLibrary = new Dictionary<PacketID, PacketBase>()
         {
             { PacketID.PING, new Pong() }
+            // TODO: Implement 'LOGIN' packet handler.
+            // Params: account number "accNumber" (int) and account password "accPass" (string).
+
+            // TODO: Implement 'LOGIN_TOKEN' packet handler.
+            // Params: account token "accToken" (string).
         };
 
         public abstract void Handle();

@@ -6,6 +6,13 @@ using System.Xml.Linq;
 
 namespace LoESoft.Launcher.Http
 {
+    public enum PacketID : int
+    {
+        PING = 1,
+        LOGIN = 2,
+        LOGIN_TOKEN = 3
+    }
+
     public struct HttpEngineQuery
     {
         public int Length => Objects?.Count ?? 0;
@@ -29,12 +36,12 @@ namespace LoESoft.Launcher.Http
 
         private bool Downloaded { get; set; }
 
-        public static HttpEngine CreateRequest(string request)
+        public static HttpEngine CreateRequest(PacketID packetID)
         {
             var engine = new HttpEngine
             {
                 WebClient = new WebClient(),
-                Request = request
+                Request = $"/?PID={packetID}"
             };
             return engine;
         }
@@ -50,11 +57,13 @@ namespace LoESoft.Launcher.Http
                 i++;
             }
 
-            GameLauncher.Info($"Sending Request https://{GameLauncherParameters.SERVER}{Request}?{sb.ToString()}");
+            string requestURI = $"https://{GameLauncherParameters.SERVER}{Request}&{sb.ToString()}";
+
+            GameLauncher.Info($"Sending Request {requestURI}");
 
             try
             {
-                var data = WebClient.DownloadString($"https://{GameLauncherParameters.SERVER}{Request}?{sb.ToString()}");
+                var data = WebClient.DownloadString(requestURI);
 
                 if (data.Substring(0, 7) == "<Error>")
                 {

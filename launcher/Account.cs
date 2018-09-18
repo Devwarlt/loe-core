@@ -13,6 +13,7 @@ namespace LoESoft.Launcher
             UserAccount = new Account();
 
             var iniFile = new IniFile("config.ini");
+
             if (!File.Exists(iniFile.Path))
             {
                 File.Create(iniFile.Path).Dispose();
@@ -20,12 +21,14 @@ namespace LoESoft.Launcher
             }
 
             UserAccount.LoginToken = iniFile.Read("Token");
+
             return UserAccount;
         }
 
         public void SaveAccount()
         {
             var iniFile = new IniFile("config.ini");
+
             if (UserAccount == null) // no longer needed
             {
                 File.Delete(iniFile.Path);

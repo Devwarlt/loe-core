@@ -13,7 +13,7 @@ namespace LoESoft.Launcher
         {
             InitializeComponent();
 
-            GameLauncher.Info("Game Web Server is loading... OK!");
+            GameLauncher.Info("Game Launcher is loading... OK!");
         }
 
         public void Reload() => ChangeButtonSelected(SelectedDisplay, new EventArgs());
@@ -48,9 +48,9 @@ namespace LoESoft.Launcher
 
             if (!string.IsNullOrWhiteSpace(account.LoginToken)) // if already logged in
             {
-                var httpEngine = HttpEngine.CreateRequest("/account/relog");
+                var httpEngine = HttpEngine.CreateRequest(PacketID.LOGIN_TOKEN);
                 var query = new HttpEngineQuery();
-                query.AddQuery("token", account.LoginToken);
+                query.AddQuery("accToken", account.LoginToken);
                 httpEngine.SendRequest(null, error =>
                 {
                     account.Invalidate();
