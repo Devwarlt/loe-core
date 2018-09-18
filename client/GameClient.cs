@@ -104,7 +104,7 @@ namespace LoESoft.Client
 
 #if DEBUG
             // Rollbar error analytics for developers only.
-            //RollbarLocator.RollbarInstance.Error(e);
+            RollbarLocator.RollbarInstance.Error(e);
 #endif
         }
     }
