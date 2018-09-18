@@ -1,4 +1,4 @@
-﻿using LoESoft.Launcher.MIsc;
+﻿using LoESoft.Launcher.Misc;
 using System.IO;
 
 namespace LoESoft.Launcher

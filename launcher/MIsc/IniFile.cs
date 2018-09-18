@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace LoESoft.Launcher.MIsc
+namespace LoESoft.Launcher.Misc
 {
     public class IniFile
     {
