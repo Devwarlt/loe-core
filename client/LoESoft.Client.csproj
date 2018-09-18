@@ -69,6 +69,7 @@
     <Compile Include="Assets\AssetLoader.cs" />
     <Compile Include="Assets\Properties\TileLibrary.cs" />
     <Compile Include="Assets\Properties\TileProperties.cs" />
+    <Compile Include="Assets\SpriteSet.cs" />
     <Compile Include="Assets\XmlLoader.cs" />
     <Compile Include="Core\Client\GameUser.cs" />
     <Compile Include="Core\Game\Animation\Animation.cs" />
