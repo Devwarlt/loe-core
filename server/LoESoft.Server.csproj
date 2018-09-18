@@ -206,9 +206,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <Content Include="Version.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

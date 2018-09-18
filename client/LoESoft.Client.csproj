@@ -329,9 +329,6 @@
     <None Include="app.manifest" />
     <EmbeddedResource Include="Assets\Embeds\Tiles.xml" />
     <None Include="packages.config" />
-    <Content Include="Version.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="loesoft.ico" />

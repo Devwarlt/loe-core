@@ -28,16 +28,6 @@ namespace LoESoft.Client
         [STAThread]
         public static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, arg) =>
-            {
-                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"AssemblyLoadingAndReflection.{new AssemblyName(arg.Name).Name}.dll"))
-                {
-                    Byte[] assemblyData = new Byte[stream.Length];
-                    stream.Read(assemblyData, 0, assemblyData.Length);
-                    return Assembly.Load(assemblyData);
-                }
-            };
-
             Console.Title = $"{_name} Console - Build: {_version}";
 
             var config = new LoggingConfiguration();
