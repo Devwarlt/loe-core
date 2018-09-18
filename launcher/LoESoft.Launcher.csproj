@@ -36,6 +36,9 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>loesoft.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
@@ -217,15 +220,15 @@
       <DependentUpon>OptionsDisplayControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Http\HttpEngine.cs" />
-    <Compile Include="LauncherForm.cs">
+    <Compile Include="GameLauncherForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LauncherForm.Designer.cs">
-      <DependentUpon>LauncherForm.cs</DependentUpon>
+    <Compile Include="GameLauncherForm.Designer.cs">
+      <DependentUpon>GameLauncherForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LauncherParameters.cs" />
+    <Compile Include="GameLauncherParameters.cs" />
     <Compile Include="Misc\IniFile.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="GameLauncher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\AccountDisplay\AccountDisplayControl.resx">
       <DependentUpon>AccountDisplayControl.cs</DependentUpon>
@@ -245,8 +248,8 @@
     <EmbeddedResource Include="Controls\OptionsDisplay\OptionsDisplayControl.resx">
       <DependentUpon>OptionsDisplayControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LauncherForm.resx">
-      <DependentUpon>LauncherForm.cs</DependentUpon>
+    <EmbeddedResource Include="GameLauncherForm.resx">
+      <DependentUpon>GameLauncherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -278,6 +281,8 @@
   <ItemGroup>
     <None Include="Resources\btnImage.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="loesoft.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
