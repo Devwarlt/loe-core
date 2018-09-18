@@ -13,7 +13,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
         private void LogOutButton_Click(object sender, EventArgs e)
         {
             Account.UserAccount.Invalidate();
-            ((LauncherForm)((AccountDisplayControl)Parent).Parent).Reload();
+            ((GameLauncherForm)((AccountDisplayControl)Parent).Parent).Reload();
         }
     }
 }

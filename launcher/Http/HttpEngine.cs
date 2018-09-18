@@ -31,32 +31,37 @@ namespace LoESoft.Launcher.Http
 
         public static HttpEngine CreateRequest(string request)
         {
-            var engine = new HttpEngine();
-            engine.WebClient = new WebClient();
-            engine.Request = request;
+            var engine = new HttpEngine
+            {
+                WebClient = new WebClient(),
+                Request = request
+            };
             return engine;
         }
 
         public void SendRequest(Action<string> success, Action<string> error, HttpEngineQuery query)
         {
             var sb = new StringBuilder();
-
             var i = 0;
+
             foreach (var q in query.Objects)
             {
                 sb.Append($"{q.Key}={q.Value}{(i != query.Length - 1 ? "&" : "")}");
                 i++;
             }
 
-            Console.WriteLine($"Sending Request https://{LauncherParameters.SERVER}{Request}?{sb.ToString()}");
+            GameLauncher.Info($"Sending Request https://{GameLauncherParameters.SERVER}{Request}?{sb.ToString()}");
+
             try
             {
-                var data = WebClient.DownloadString($"https://{LauncherParameters.SERVER}{Request}?{sb.ToString()}");
+                var data = WebClient.DownloadString($"https://{GameLauncherParameters.SERVER}{Request}?{sb.ToString()}");
+
                 if (data.Substring(0, 7) == "<Error>")
                 {
                     error?.Invoke(XElement.Parse(data).Value);
                     return;
                 }
+
                 success?.Invoke(data);
             }
             catch

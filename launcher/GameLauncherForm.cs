@@ -5,13 +5,15 @@ using System.Windows.Forms;
 
 namespace LoESoft.Launcher
 {
-    public partial class LauncherForm : Form
+    public partial class GameLauncherForm : Form
     {
         public ExtendedButton SelectedDisplay { get; set; }
 
-        public LauncherForm()
+        public GameLauncherForm()
         {
             InitializeComponent();
+
+            GameLauncher.Info("Game Web Server is loading... OK!");
         }
 
         public void Reload() => ChangeButtonSelected(SelectedDisplay, new EventArgs());
@@ -39,10 +41,11 @@ namespace LoESoft.Launcher
 
         private void LauncherForm_Load(object sender, EventArgs e)
         {
-            LauncherVersionLabel.Text = LauncherParameters.LAUNCHER_VERSION;
+            LauncherVersionLabel.Text = GameLauncherParameters.LAUNCHER_VERSION;
             SelectedDisplay = HomeButton;
 
             var account = Account.LoadAccount();
+
             if (!string.IsNullOrWhiteSpace(account.LoginToken)) // if already logged in
             {
                 var httpEngine = HttpEngine.CreateRequest("/account/relog");
@@ -51,7 +54,7 @@ namespace LoESoft.Launcher
                 httpEngine.SendRequest(null, error =>
                 {
                     account.Invalidate();
-                    Console.WriteLine("Unable to relogin");
+                    GameLauncher.Info("Unable to relogin");
                 }, query);
             }
         }

@@ -5,7 +5,7 @@ using LoESoft.Launcher.Controls.OptionsDisplay;
 
 namespace LoESoft.Launcher
 {
-    partial class LauncherForm
+    partial class GameLauncherForm
     {
         private System.ComponentModel.IContainer components = null;
 
