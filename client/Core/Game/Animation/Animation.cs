@@ -54,6 +54,6 @@ namespace LoESoft.Client.Core.Game.Animation
             }
         }
 
-        public abstract void Draw(SpriteBatch spriteBatch, BasicObject obj); //Draw should differentuate between types: Enemy, Player, Animated tiles / effects
+        public abstract void Draw(SpriteBatch spriteBatch, BasicObject basicObject); //Draw should differentuate between types: Enemy, Player, Animated tiles / effects
     }
 }

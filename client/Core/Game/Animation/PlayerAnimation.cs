@@ -6,18 +6,18 @@ namespace LoESoft.Client.Core.Game.Animation
 {
     public class PlayerAnimation : Animation
     {
-        public PlayerAnimation(Player player)
+        public PlayerAnimation()
             : base(0.5f)
         {
             //temporary loading, til proper xml managing and proper player handling is added
             AddAnimation(AnimationType.Forward,
-                AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(0));
+                AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(1));
             AddAnimation(AnimationType.Backward,
-               AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(1));
+               AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(0));
             AddAnimation(AnimationType.Left,
-               AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(2));
-            AddAnimation(AnimationType.Right,
                AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(3));
+            AddAnimation(AnimationType.Right,
+               AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(2));
         }
 
         int curDirection = 0;

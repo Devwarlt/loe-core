@@ -23,6 +23,7 @@ namespace LoESoft.Client.Core.Game.Objects
             };
 
         public Direction CurrentDirection = Direction.Up;
+        public bool IsMoving { get; set; }
 
         PlayerAnimation _animation;
         KeyboardState previousKeyBoard;
@@ -30,7 +31,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public Player()
         {
-            _animation = new PlayerAnimation(this);
+            _animation = new PlayerAnimation();
         }
 
         public void UpdateMovement(float dt)
@@ -42,6 +43,9 @@ namespace LoESoft.Client.Core.Game.Objects
 
             var spd = 1 * dt;
 
+            if (keysPressed.Count <= 0)
+                IsMoving = false;
+            
             foreach (var i in keysPressed)
             {
                 var direction = GetValidKey(i);
@@ -54,7 +58,7 @@ namespace LoESoft.Client.Core.Game.Objects
                     X -= spd;
                 if (direction == Direction.Right)
                     X += spd;
-
+                IsMoving = true;
                 CurrentDirection = direction;
             }
 
