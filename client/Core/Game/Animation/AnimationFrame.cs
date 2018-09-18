@@ -13,7 +13,7 @@ namespace LoESoft.Client.Core.Game.Animation
             Texture = texture;
         }
 
-        public void Draw(SpriteBatch spriteBatch, BasicObject obj) => 
+        public void Draw(SpriteBatch spriteBatch, BasicObject obj) =>
             spriteBatch.Draw(Texture, new Rectangle((int)obj.DrawX, (int)obj.DrawY, obj.Size, obj.Size), Color.White);
     }
 }

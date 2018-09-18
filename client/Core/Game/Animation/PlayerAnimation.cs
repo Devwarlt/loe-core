@@ -10,8 +10,8 @@ namespace LoESoft.Client.Core.Game.Animation
             : base(0.5f)
         {
             //temporary loading, til proper xml managing and proper player handling is added
-            AddAnimation(AnimationType.Forward, 
-                AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(0)); 
+            AddAnimation(AnimationType.Forward,
+                AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(0));
             AddAnimation(AnimationType.Backward,
                AssetLoader.LoadSpriteSet("playersEmbed").GetSpritesByWidth(1));
             AddAnimation(AnimationType.Left,

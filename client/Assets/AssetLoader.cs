@@ -28,7 +28,7 @@ namespace LoESoft.Client.Assets
 
             return set;
         }
-        
+
     }
 
     public class SpriteSet
@@ -67,7 +67,7 @@ namespace LoESoft.Client.Assets
             string path = $"sprites/{file}";
 
             var baseTexture = AssetLoader.LoadAsset<Texture2D>(path);
-            
+
             int width = baseTexture.Width;
             int height = baseTexture.Height;
 

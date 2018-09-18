@@ -1,5 +1,4 @@
-﻿using LoESoft.Server.Core.Networking.Packets;
-using LoESoft.Server.Core.Networking.Packets.Incoming;
+﻿using LoESoft.Server.Core.Networking.Packets.Incoming;
 using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using System.Net.Sockets;
 

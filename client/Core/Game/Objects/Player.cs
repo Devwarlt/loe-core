@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Animation;
-using LoESoft.Client.Core.Networking.Packets.Outgoing;
-using LoESoft.Client.Core.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -40,7 +37,7 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             newKeyBoard = Keyboard.GetState();
 
-            var keysPressed = previousKeyBoard.GetPressedKeys().Select(_ 
+            var keysPressed = previousKeyBoard.GetPressedKeys().Select(_
                 => _validKeysToDirection.ContainsKey(_) ? _ : Keys.None).ToList();
 
             var spd = 1 * dt;
@@ -57,7 +54,7 @@ namespace LoESoft.Client.Core.Game.Objects
                     X -= spd;
                 if (direction == Direction.Right)
                     X += spd;
-                
+
                 CurrentDirection = direction;
             }
 
