@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace LoESoft.Client.Assets
 {
-
     public class SpriteSet
     {
         public Texture2D[,] Textures;
