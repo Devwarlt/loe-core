@@ -58,7 +58,9 @@ namespace LoESoft.Client.Core.Game.Objects
                     X -= spd;
                 if (direction == Direction.Right)
                     X += spd;
-                IsMoving = true;
+
+                if (direction != Direction.None)
+                    IsMoving = true;
                 CurrentDirection = direction;
             }
 
