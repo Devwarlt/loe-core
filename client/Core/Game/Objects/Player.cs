@@ -77,7 +77,7 @@ namespace LoESoft.Client.Core.Game.Objects
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
             UpdateMovement(dt);
-            _animation.Update(gameTime);
+            _animation.Update(gameTime, this);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
