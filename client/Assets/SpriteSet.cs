@@ -6,7 +6,7 @@ namespace LoESoft.Client.Assets
 {
     public class SpriteSet
     {
-        public Texture2D[,] Textures;
+        public Texture2D[,] Textures { get; private set; }
         public readonly int MaxX;
         public readonly int MaxY;
 
