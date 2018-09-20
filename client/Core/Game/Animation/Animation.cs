@@ -20,7 +20,7 @@ namespace LoESoft.Client.Core.Game.Animation
         public float CoolDown { get; private set; }
 
         public Dictionary<AnimationType, List<AnimationFrame>> Frames { get; private set; }
-        
+
         public AnimationType TypeAnimation { get; set; }
 
         protected float Timer = 0f;
@@ -48,11 +48,11 @@ namespace LoESoft.Client.Core.Game.Animation
             CurrentFrame = 0;
             TypeAnimation = type;
         }
-        
+
         public virtual void Update(GameTime gameTime, BasicObject basicObject)
         {
             Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            
+
             if (Timer >= CoolDown)
             {
                 if (basicObject is Player && !(basicObject as Player).IsMoving)

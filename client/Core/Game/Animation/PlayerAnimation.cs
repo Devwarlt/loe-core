@@ -23,7 +23,7 @@ namespace LoESoft.Client.Core.Game.Animation
             AddAnimation(AnimationType.Right,
                tempSpriteSet.GetSpritesByWidth(2));
         }
-        
+
         int curDirection = 1;
         int preDirection = 1;
 
@@ -32,12 +32,12 @@ namespace LoESoft.Client.Core.Game.Animation
             var player = (Player)basicObject;
 
             preDirection = curDirection;
-            curDirection = (player.CurrentDirection != Player.Direction.None) ? 
+            curDirection = (player.CurrentDirection != Player.Direction.None) ?
                 (int)player.CurrentDirection : preDirection;
 
-           if (curDirection != preDirection)
+            if (curDirection != preDirection)
                 ChangeAnimationType((AnimationType)curDirection);
-            
+
             base.Update(gameTime, basicObject);
         }
 

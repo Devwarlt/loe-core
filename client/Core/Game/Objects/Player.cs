@@ -45,7 +45,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
             if (keysPressed.Count <= 0)
                 IsMoving = false;
-            
+
             foreach (var i in keysPressed)
             {
                 var direction = GetValidKey(i);

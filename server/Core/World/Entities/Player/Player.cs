@@ -1,9 +1,4 @@
 ﻿using LoESoft.Server.Core.Networking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
@@ -15,6 +10,5 @@ namespace LoESoft.Server.Core.World.Entities.Player
         {
             Client = client;
         }
-        
     }
 }
