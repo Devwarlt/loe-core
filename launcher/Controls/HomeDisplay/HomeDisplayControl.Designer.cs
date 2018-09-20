@@ -74,7 +74,7 @@
 
         #endregion
 
-        private ExtendedButton LaunchButton;
+        //private ExtendedButton LaunchButton;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Panel TitlePanelSeperator;
     }

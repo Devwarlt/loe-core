@@ -24,6 +24,7 @@ namespace LoESoft.Client
             };
 
             IsMouseVisible = true;
+
             Content.RootDirectory = "Content";
         }
 
@@ -32,6 +33,7 @@ namespace LoESoft.Client
             base.Initialize();
 
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
+
             ScreenManager.DispatchScreen(new SplashScreen());
 
             GameClient._discordPresence.State = "World: Chicago";
@@ -47,8 +49,11 @@ namespace LoESoft.Client
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             AssetLoader.Init(Content);
+
             AudioManager.Init();
+
             TextDisplay.LoadSpriteFont(Content);
+
             ScreenManager.OnGameClose += () =>
             {
                 GameClient._discordClient.ClearPresence();

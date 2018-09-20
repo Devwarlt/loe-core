@@ -18,6 +18,7 @@ namespace LoESoft.Client.Core.Networking
     public class NetworkControl
     {
         protected const int BUFFER_SIZE = ushort.MaxValue + 1;
+
         public const int MAX_CONNECTION_ATTEMPTS = 5;
 
         public Socket Socket { get; set; }
@@ -33,6 +34,7 @@ namespace LoESoft.Client.Core.Networking
         public NetworkControl(GameUser gameUser)
         {
             GameUser = gameUser;
+
             Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
                 NoDelay = true,
@@ -47,15 +49,18 @@ namespace LoESoft.Client.Core.Networking
         {
             if (Server == null)
                 Server = server;
+
             Socket.BeginConnect(server.RemoteEndPoint, OnConnect, null);
         }
 
         private void OnConnect(IAsyncResult asyncResult)
         {
             ConnectionAttempt++;
+
             try
             {
                 GameClient.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
+
                 Socket.EndConnect(asyncResult);
             }
             catch
@@ -63,14 +68,21 @@ namespace LoESoft.Client.Core.Networking
                 if (ConnectionAttempt == MAX_CONNECTION_ATTEMPTS)
                 {
                     GameClient.Warn($"Unable to connect to {Server}");
+
                     Disconnect();
+
                     return;
                 }
+
                 GameClient.Warn($"Failed to connect to {Server} retrying");
+
                 Connect(Server);
+
                 return;
             }
+
             GameClient.Warn($"Connected to {Server}");
+
             ReceivePacket();
         }
 
@@ -96,20 +108,15 @@ namespace LoESoft.Client.Core.Networking
 
         private void OnSend(IAsyncResult asyncResult)
         {
-            try
-            {
-                Socket.EndSend(asyncResult);
-            }
-            catch
-            {
-                Disconnect();
-            }
+            try { Socket.EndSend(asyncResult); }
+            catch { Disconnect(); }
         }
 
         public void ReceivePacket()
         {
             if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
+
             Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None, OnReceivePacket, null);
         }
 
@@ -132,18 +139,17 @@ namespace LoESoft.Client.Core.Networking
 
                 ReceivePacket();
             }
-            catch
-            {
-                Disconnect();
-            }
+            catch { Disconnect(); }
         }
 
         private void SetupIncomingPackets()
         {
             IncomingPackets = new Dictionary<PacketID, IncomingPacket>();
+
             foreach (var type in Assembly.GetAssembly(typeof(IncomingPacket)).GetTypes().Where(_ => _.IsClass && !_.IsAbstract && _.IsSubclassOf(typeof(IncomingPacket))))
             {
                 var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
+
                 IncomingPackets.Add(incomingMessage.PacketID, incomingMessage);
             }
         }
@@ -154,8 +160,10 @@ namespace LoESoft.Client.Core.Networking
 
             if (IncomingPackets == null)
                 SetupIncomingPackets();
+
             if (!IncomingPackets.ContainsKey(packetID))
                 throw new Exception($"Unknown IncomingPacket: {packetID}");
+
             return (IncomingPacket)JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
         }
 
@@ -163,8 +171,11 @@ namespace LoESoft.Client.Core.Networking
         {
             if (Disconnected)
                 return;
+
             Disconnected = true;
+
             ScreenManager.DispatchScreen(new SplashScreen());
+
             Socket.Close();
         }
     }
