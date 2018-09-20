@@ -23,7 +23,8 @@ namespace LoESoft.Client
         private static string _brmeRpcId => "483698369559003156";
 
         // Discord
-        public static DiscordClient _discordRPC { get; set; }
+        public static DiscordClient _discordClient { get; set; }
+        public static RichPresence _discordPresence { get; set; }
 
         [STAThread]
         public static void Main(string[] args)
@@ -53,11 +54,9 @@ namespace LoESoft.Client
 
             Info("Game Client is loading...");
 
-            _discordRPC = new DiscordClient(_brmeRpcId);
-            _discordRPC.SetPresence(new RichPresence()
+            _discordClient = new DiscordClient(_brmeRpcId);
+            _discordPresence = new RichPresence()
             {
-                State = null,
-                Details = null,
                 Timestamps = new Timestamps() { Start = DateTime.UtcNow },
                 Assets = new DiscordRPC.Assets()
                 {
@@ -66,14 +65,14 @@ namespace LoESoft.Client
                     SmallImageKey = "loesoft",
                     SmallImageText = "LoESoft Games"
                 }
-            });
+            };
 
             try
             {
+                _discordClient.SetPresence(_discordPresence);
+
                 using (var game = new GameApplication())
                     game.Run();
-
-                Info("Game Client is loading... OK!");
             }
             catch (Exception e)
             {
@@ -83,8 +82,8 @@ namespace LoESoft.Client
 
                 Thread.Sleep(100);
 
-                _discordRPC.ClearPresence();
-                _discordRPC.Dispose();
+                _discordClient.ClearPresence();
+                _discordClient.Dispose();
 
                 Warn("Press 'ESC' to close...");
 
@@ -93,6 +92,8 @@ namespace LoESoft.Client
                 Environment.Exit(0);
             }
         }
+
+        public static void UpdateRPC() => _discordClient.SetPresence(_discordPresence);
 
         public static void Info(string data) => _log.Info(data);
 

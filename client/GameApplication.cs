@@ -33,6 +33,13 @@ namespace LoESoft.Client
 
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
             ScreenManager.DispatchScreen(new SplashScreen());
+
+            GameClient._discordPresence.State = "World: Chicago";
+            GameClient._discordPresence.Details = "Isle of Saepphira";
+
+            GameClient.UpdateRPC();
+
+            GameClient.Info("Game Client is loading... OK!");
         }
 
         protected override void LoadContent()
@@ -44,8 +51,8 @@ namespace LoESoft.Client
             TextDisplay.LoadSpriteFont(Content);
             ScreenManager.OnGameClose += () =>
             {
-                GameClient._discordRPC.ClearPresence();
-                GameClient._discordRPC.Dispose();
+                GameClient._discordClient.ClearPresence();
+                GameClient._discordClient.Dispose();
 
                 Exit();
             };
