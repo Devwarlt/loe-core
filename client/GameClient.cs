@@ -28,7 +28,7 @@ namespace LoESoft.Client
         [STAThread]
         public static void Main(string[] args)
         {
-            Console.Title = $"{_name} Console - Build: {_version}";
+            Console.Title = $"{_name} - Build: {_version}";
 
             var config = new LoggingConfiguration();
             var developerLog = new ColoredConsoleTarget()
@@ -58,7 +58,7 @@ namespace LoESoft.Client
             {
                 State = null,
                 Details = null,
-                Timestamps = new Timestamps() { Start = DateTime.Now },
+                Timestamps = new Timestamps() { Start = DateTime.UtcNow },
                 Assets = new DiscordRPC.Assets()
                 {
                     LargeImageKey = "brme",
