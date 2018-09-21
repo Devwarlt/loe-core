@@ -1,4 +1,5 @@
-﻿using LoESoft.WebServer.Core.Networking;
+﻿using LoESoft.WebServer.Core.Database;
+using LoESoft.WebServer.Core.Networking;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -18,6 +19,9 @@ namespace LoESoft.WebServer
         // Log
         private static Logger _log => LogManager.GetLogger(_name);
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
+
+        // Database
+        public static Database _database { get; set; }
 
         public static void Main(string[] args)
         {
@@ -48,6 +52,9 @@ namespace LoESoft.WebServer
 
             try
             {
+                _database = new Database();
+                _database.Connect();
+
                 var connectionListener = new ConnectionListener();
                 connectionListener.StartAccept();
 
