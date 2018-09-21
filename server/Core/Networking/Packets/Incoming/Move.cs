@@ -7,6 +7,10 @@
 
         public override PacketID PacketID => PacketID.MOVE;
 
-        public override void Handle(Client client) => GameServer.Info($"X: {X} / Y: {Y}");
+        public override void Handle(Client client)
+        {
+            client.Player.UpdatePosition(X, Y);
+            GameServer.Info($"X: {X} / Y: {Y}");
+        }
     }
 }

@@ -76,10 +76,12 @@
     <Compile Include="Core\Game\Animation\AnimationFrame.cs" />
     <Compile Include="Core\Game\Animation\PlayerAnimation.cs" />
     <Compile Include="Core\Game\Camera.cs" />
+    <Compile Include="Core\Game\Map.cs" />
     <Compile Include="Core\Game\Objects\BasicObject.cs" />
     <Compile Include="Core\Game\Objects\Player.cs" />
     <Compile Include="Core\Game\Tile.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\Update.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Move.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />
     <Compile Include="Core\Screens\SplashScreen\SplashScreen.cs" />
