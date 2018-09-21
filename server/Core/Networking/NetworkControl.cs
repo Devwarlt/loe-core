@@ -28,8 +28,6 @@ namespace LoESoft.Server.Core.Networking
         {
             Socket = socket;
             Client = client;
-
-            GameServer.Warn($"Client with IP '{client.IpAddress}' has connected!");
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
@@ -54,14 +52,8 @@ namespace LoESoft.Server.Core.Networking
 
         private void OnSend(IAsyncResult asyncResult)
         {
-            try
-            {
-                Socket.EndSend(asyncResult);
-            }
-            catch
-            {
-                Disconnect();
-            }
+            try { Socket.EndSend(asyncResult); }
+            catch { Disconnect(); }
         }
 
         public void ReceivePacket()
@@ -77,29 +69,26 @@ namespace LoESoft.Server.Core.Networking
             try
             {
                 var len = Socket.EndReceive(asyncResult);
-
                 var buffer = new byte[len];
+
                 Array.Copy(ReceiveBuffer, buffer, len);
 
                 var data = Encoding.UTF8.GetString(buffer);
                 var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                var incomingPacket = GetIncomingPacket(packetData);
-                incomingPacket.Handle(Client);
+                GetIncomingPacket(packetData).Handle(Client);
 
-                GameServer.Warn($"New packet received!\n {packetData.PacketID}");
+                GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
 
                 ReceivePacket();
             }
-            catch
-            {
-                Disconnect();
-            }
+            catch { Disconnect(); }
         }
 
         private void SetupIncomingPackets()
         {
             IncomingPackets = new Dictionary<PacketID, IncomingPacket>();
+
             foreach (var type in Assembly.GetAssembly(typeof(IncomingPacket)).GetTypes().Where(_ => _.IsClass && !_.IsAbstract && _.IsSubclassOf(typeof(IncomingPacket))))
             {
                 var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
@@ -113,14 +102,17 @@ namespace LoESoft.Server.Core.Networking
 
             if (IncomingPackets == null)
                 SetupIncomingPackets();
+
             if (!IncomingPackets.ContainsKey(packetID))
                 throw new Exception($"Unknown IncomingPacket: {packetID}");
+
             return (IncomingPacket)JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
         }
 
         public void Disconnect()
         {
             GameServer.Warn($"Client disconnected {Client.IpAddress}");
+
             Client.Disconnect();
         }
     }

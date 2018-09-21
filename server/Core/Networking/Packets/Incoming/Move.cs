@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
-    public class MovePacket : IncomingPacket
+    public class Move : IncomingPacket
     {
         public override PacketID PacketID => PacketID.MOVE;
 

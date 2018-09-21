@@ -5,8 +5,8 @@ namespace LoESoft.Client.Core.Networking.Packets
 {
     public enum PacketID : int
     {
-        PING = 0,
-        PONG = 1,
+        PONG = 0,
+        PING = 1,
         MOVE = 2
     }
 

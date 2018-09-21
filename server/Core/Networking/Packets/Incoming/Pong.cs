@@ -8,9 +8,6 @@ namespace LoESoft.Server.Core.Networking.Packets.Outgoing
 
         public override PacketID PacketID => PacketID.PONG;
 
-        public override void Handle(Client client)
-        {
-            client.SendPacket(new PingPacket(Value));
-        }
+        public override void Handle(Client client) => GameServer.Info($"Client sent value '{Value}' via Ping packet.");
     }
 }

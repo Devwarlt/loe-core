@@ -14,10 +14,14 @@ namespace LoESoft.Client.Core.Client
             NetworkControl = new NetworkControl(this);
         }
 
+        public bool IsConnected => NetworkControl.IsConnected;
+
         public void SendPacket(OutgoingPacket outgoingPacket) => NetworkControl.SendPacket(outgoingPacket);
+
         public void SendPackets(OutgoingPacket[] outgoingPackets) => NetworkControl.SendPackets(outgoingPackets);
 
         public void Connect() => NetworkControl.Connect(Server);
+
         public void Disconnect() => NetworkControl.Disconnect();
     }
 }

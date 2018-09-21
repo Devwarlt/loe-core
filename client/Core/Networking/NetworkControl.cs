@@ -45,6 +45,8 @@ namespace LoESoft.Client.Core.Networking
             };
         }
 
+        public bool IsConnected => Socket.Connected;
+
         public void Connect(Server server)
         {
             if (Server == null)
@@ -67,21 +69,21 @@ namespace LoESoft.Client.Core.Networking
             {
                 if (ConnectionAttempt == MAX_CONNECTION_ATTEMPTS)
                 {
-                    GameClient.Warn($"Unable to connect to {Server}");
+                    GameClient.Warn($"Unable to connect to {Server} due max number of invalid attempts reached the limit.");
 
                     Disconnect();
 
                     return;
                 }
 
-                GameClient.Warn($"Failed to connect to {Server} retrying");
+                GameClient.Warn($"Failed to connect to {Server}. Retrying...");
 
                 Connect(Server);
 
                 return;
             }
 
-            GameClient.Warn($"Connected to {Server}");
+            GameClient.Info($"Connected to {Server}.");
 
             ReceivePacket();
         }
@@ -132,10 +134,9 @@ namespace LoESoft.Client.Core.Networking
                 var data = Encoding.UTF8.GetString(buffer);
                 var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                var incomingPacket = GetIncomingPacket(packetData);
-                incomingPacket.Handle(GameUser);
+                GetIncomingPacket(packetData).Handle(GameUser);
 
-                GameClient.Warn($"New packet received! {packetData.PacketID}");
+                GameClient.Warn($"New packet received! Packet: {packetData.PacketID}");
 
                 ReceivePacket();
             }

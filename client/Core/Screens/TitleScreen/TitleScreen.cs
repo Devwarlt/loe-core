@@ -49,8 +49,10 @@ namespace LoESoft.Client.Core.Screens
             PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
             PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
             PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
+
             OptionsButton.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
             OptionsButton.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
+
             ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
             ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
             ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
@@ -81,11 +83,13 @@ namespace LoESoft.Client.Core.Screens
         public override void OnScreenDispatch() { }
 
         private float TitleFlashSpeedR = 0;
+
         public override void Update(GameTime gameTime)
         {
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
             TitleFlashSpeedR += dt * 0.5f;
+
             Title.SpriteColor = Color.Lerp(Color.Red, Color.Yellow, (float)Math.Sin(TitleFlashSpeedR));
 
             Background.Update(gameTime);

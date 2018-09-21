@@ -23,8 +23,6 @@ namespace LoESoft.Client.Assets
         {
             List<Texture2D> textures = new List<Texture2D>();
 
-            GameClient.Info(Textures.Length.ToString());
-
             for (var x = 0; x < MaxX; x++)
                 textures.Add(Textures[x, y]);
 

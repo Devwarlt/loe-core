@@ -194,10 +194,10 @@
     <Compile Include="Core\Networking\Client.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\IncomingPacket.cs" />
-    <Compile Include="Core\Networking\Packets\Incoming\MovePacket.cs" />
-    <Compile Include="Core\Networking\Packets\Outgoing\PingPacket.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\Move.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\OutgoingPacket.cs" />
-    <Compile Include="Core\Networking\Packets\Incoming\PongPacket.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\Pong.cs" />
     <Compile Include="Core\Networking\Packets\PacketBase.cs" />
     <Compile Include="Core\Networking\Packets\PacketData.cs" />
     <Compile Include="Core\World\Entities\Entity.cs" />
