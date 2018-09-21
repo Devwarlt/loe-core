@@ -44,6 +44,8 @@ namespace LoESoft.Server.Core.Networking
             Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, OnSend, null);
         }
 
+        public bool IsConnected => Socket.Connected;
+
         public void SendPackets(OutgoingPacket[] outgoingPacket)
         {
             for (var i = 0; i < outgoingPacket.Length; i++)

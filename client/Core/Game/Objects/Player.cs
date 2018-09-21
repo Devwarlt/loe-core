@@ -11,16 +11,20 @@ namespace LoESoft.Client.Core.Game.Objects
     {
         public enum Direction : int
         {
-            None = 0, Up = 1, Down = 2, Left = 3, Right = 4
+            None = 0,
+            Up = 1,
+            Down = 2,
+            Left = 3,
+            Right = 4
         }
 
         Dictionary<Keys, Direction> _validKeysToDirection = new Dictionary<Keys, Direction>()
-            {
-                { Keys.W, Direction.Up },
-                { Keys.S, Direction.Down },
-                { Keys.A, Direction.Left },
-                { Keys.D, Direction.Right }
-            };
+        {
+            { Keys.W, Direction.Up },
+            { Keys.S, Direction.Down },
+            { Keys.A, Direction.Left },
+            { Keys.D, Direction.Right }
+        };
 
         public Direction CurrentDirection = Direction.Up;
         public bool IsMoving { get; set; }
@@ -61,6 +65,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
                 if (direction != Direction.None)
                     IsMoving = true;
+
                 CurrentDirection = direction;
             }
 
@@ -71,6 +76,7 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             if (_validKeysToDirection.ContainsKey(key))
                 return _validKeysToDirection[key];
+
             return Direction.None;
         }
 
@@ -79,12 +85,10 @@ namespace LoESoft.Client.Core.Game.Objects
             var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
 
             UpdateMovement(dt);
+
             _animation.Update(gameTime, this);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            _animation.Draw(spriteBatch, this);
-        }
+        public override void Draw(SpriteBatch spriteBatch) => _animation.Draw(spriteBatch, this);
     }
 }

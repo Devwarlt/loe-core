@@ -2,13 +2,11 @@
 {
     public class Move : IncomingPacket
     {
+        public int X { get; set; }
+        public int Y { get; set; }
+
         public override PacketID PacketID => PacketID.MOVE;
 
-        public int Value { get; set; }
-
-        public override void Handle(Client client)
-        {
-            GameServer.Info($"{Value}");
-        }
+        public override void Handle(Client client) => GameServer.Info($"X: {X} / Y: {Y}");
     }
 }

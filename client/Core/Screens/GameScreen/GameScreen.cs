@@ -10,17 +10,17 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.Screens
 {
     public class GameScreen : Screen
     {
         public static GameUser GameUser { get; set; }
-
         public Tile[,] Tiles { get; set; }
-
         public Player TempPlayer { get; set; }
+
+        private int X { get; set; } = 0;
+        private int Y { get; set; } = 0;
 
         public override void OnScreenCreate()
         {
@@ -35,24 +35,49 @@ namespace LoESoft.Client.Core.Screens
 
             TempPlayer = new Player();
 
-            UpdatePacketThread = new Thread(() =>
-            {
-                if (!UpdatePacketActivated)
-                    UpdatePacketActivated = true;
-
-                // The async method below is used to send sync packets using async wait handle.
-                ((IAsyncResult)Task.Run(() =>
+            UpdatePacketThread =
+                new Thread(() =>
                 {
-                    var value = new Random().Next();
+                    if (!UpdatePacketActivated)
+                        UpdatePacketActivated = true;
 
-                    GameClient.Info($"Client is sending value '{value}' via Ping packet.");
+                    try
+                    {
+                        do
+                        {
+                            // The async method below is used to send sync packets using async wait handle.
+                            if (!_sendPingOnce)
+                            {
+                                var value = new Random().Next();
 
-                    GameUser.SendPacket(new Ping() { Value = value });
+                                GameClient.Info($"Client is sending value '{value}' via Ping packet.");
 
-                    _sendPingOnce = true;
-                })).AsyncWaitHandle.WaitOne();
-            })
-            { IsBackground = true };
+                                GameUser.SendSyncPacket(new Ping() { Value = value });
+
+                                _sendPingOnce = true;
+                            }
+
+                            var playerX = (int)TempPlayer.X;
+                            var playerY = (int)TempPlayer.Y;
+
+                            if (X != playerX || Y != playerY)
+                            {
+                                X = playerX;
+                                Y = playerY;
+
+                                GameUser.SendPacket(new Move()
+                                {
+                                    X = playerX,
+                                    Y = playerY
+                                });
+                            }
+
+                            Thread.Sleep(100);
+                        } while (true);
+                    }
+                    catch (Exception e) { GameClient.Error(e); }
+                })
+                { IsBackground = true };
         }
 
         public override void OnScreenDispatch() => GameUser.Disconnect();
