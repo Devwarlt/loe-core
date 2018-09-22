@@ -9,6 +9,7 @@ namespace LoESoft.Client.Core.Game.Objects
     {
         public float X { get; set; }
         public float Y { get; set; }
+
         public float DrawX => X * 8;
         public float DrawY => Y * 8;
 

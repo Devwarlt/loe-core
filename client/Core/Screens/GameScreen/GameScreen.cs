@@ -53,20 +53,20 @@ namespace LoESoft.Client.Core.Screens
                                 _sendPingOnce = true;
                             }
 
-                            var playerX = (int)TempPlayer.X;
-                            var playerY = (int)TempPlayer.Y;
+                            //var playerX = (int)TempPlayer.X;
+                            //var playerY = (int)TempPlayer.Y;
 
-                            if (X != playerX || Y != playerY)
-                            {
-                                X = playerX;
-                                Y = playerY;
+                            //if (X != playerX || Y != playerY)
+                            //{
+                            //    X = playerX;
+                            //    Y = playerY;
 
-                                GameUser.SendPacket(new Move()
-                                {
-                                    X = playerX,
-                                    Y = playerY
-                                });
-                            }
+                            //    GameUser.SendPacket(new Move()
+                            //    {
+                            //        X = playerX,
+                            //        Y = playerY
+                            //    });
+                            //}
 
                             Thread.Sleep(100);
                         } while (true);
