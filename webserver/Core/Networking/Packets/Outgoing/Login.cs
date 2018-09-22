@@ -2,6 +2,20 @@
 {
     public class Login : PacketBase
     {
+        /// <summary>
+        /// Packet ID:
+        /// - (PacketID) LOGIN
+        /// Incoming:
+        /// - (string) name
+        /// - (string) password
+        /// Outgoing:
+        ///     On error:
+        ///     - (string) "Account name is invalid."
+        ///     - (string) "Account password is invalid."
+        ///     - (string) "Account not found."
+        ///     On success:
+        ///     - (string) "You are logged in."
+        /// </summary>
         public override void Handle()
         {
             string name = Query["name"];

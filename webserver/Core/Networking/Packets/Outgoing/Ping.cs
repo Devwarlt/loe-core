@@ -2,6 +2,17 @@
 {
     public class Ping : PacketBase
     {
+        /// <summary>
+        /// Packet ID:
+        /// - (PacketID) PING
+        /// Incoming:
+        /// - (int) value
+        /// Outgoing:
+        ///     On error:
+        ///     - (string) "Value is invalid."
+        ///     On success:
+        ///     - (string) "Client sent '<c>value</c>' value via Ping packet."
+        /// </summary>
         public override void Handle()
         {
             string value = Query["value"];

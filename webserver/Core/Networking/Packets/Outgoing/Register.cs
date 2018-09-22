@@ -2,6 +2,22 @@
 {
     public class Register : PacketBase
     {
+        /// <summary>
+        /// Packet ID:
+        /// - (PacketID) REGISTER
+        /// Incoming:
+        /// - (string) name
+        /// - (string) password
+        /// Outgoing:
+        ///     On error:
+        ///     - (string) "Account name is empty."
+        ///     - (string) "Account name minimum length is 6."
+        ///     - (string) "Account password is empty."
+        ///     - (string) "Account password minimum length is 8."
+        ///     - (string) "Account name already registered."
+        ///     On success:
+        ///     - (string) "Your token is: <c>token</c>"
+        /// </summary>
         public override void Handle()
         {
             string name = Query["name"];
