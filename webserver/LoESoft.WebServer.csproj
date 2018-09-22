@@ -198,6 +198,7 @@
     <Compile Include="Core\Networking\Packets\Outgoing\Login.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\LoginToken.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\Register.cs" />
     <Compile Include="Core\Networking\Packets\PacketBase.cs" />
     <Compile Include="Core\Utils\Crypt.cs" />
     <Compile Include="GameWebServer.cs" />

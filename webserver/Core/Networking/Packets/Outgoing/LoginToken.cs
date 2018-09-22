@@ -16,9 +16,11 @@
 
             if (account == null)
             {
-                OnError("Account credentials are not valid. Try again later.");
+                OnError("Account not found.");
                 return;
             }
+
+            OnSend("You are logged in.");
         }
     }
 }
