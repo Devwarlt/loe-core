@@ -195,8 +195,11 @@
     <Compile Include="Core\Database\Models\Character.cs" />
     <Compile Include="Core\Database\Database.cs" />
     <Compile Include="Core\Networking\ConnectionListener.cs" />
-    <Compile Include="Core\Networking\Packets\Outgoing\Pong.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\Login.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\LoginToken.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
     <Compile Include="Core\Networking\Packets\PacketBase.cs" />
+    <Compile Include="Core\Utils\Crypt.cs" />
     <Compile Include="GameWebServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

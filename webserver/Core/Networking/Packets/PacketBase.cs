@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace LoESoft.WebServer.Core.Networking.Packets
 {
@@ -20,7 +23,7 @@ namespace LoESoft.WebServer.Core.Networking.Packets
 
         public static readonly Dictionary<PacketID, PacketBase> RequestLibrary = new Dictionary<PacketID, PacketBase>()
         {
-            { PacketID.PING, new Pong() }
+            { PacketID.PING, new Ping() }
             // TODO: Implement 'LOGIN' packet handler.
             // Params: account number "accNumber" (int) and account password "accPass" (string).
 
@@ -30,10 +33,27 @@ namespace LoESoft.WebServer.Core.Networking.Packets
 
         public abstract void Handle();
 
-        public virtual void Write(string data)
+        public virtual void OnSend<T>(T data, bool isXML = false) => Write("Success", data, isXML);
+
+        public virtual void OnError<T>(T data, bool isXML = false) => Write("Error", data, isXML);
+
+        public XmlDocument SerializeToXml(object data)
+        {
+            XmlDocument xml = new XmlDocument();
+
+            using (var writer = xml.CreateNavigator().AppendChild())
+                new XmlSerializer(data.GetType()).Serialize(writer, data);
+
+            return xml;
+        }
+
+        private void Write<T>(string type, T data, bool isXML)
         {
             using (var writer = new StreamWriter(Context.Response.OutputStream))
-                writer.Write(data);
+                if (isXML)
+                    writer.Write(new XElement(type, data as XElement));
+                else
+                    writer.Write(new XElement(type, data as string));
         }
     }
 }
