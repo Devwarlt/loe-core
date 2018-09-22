@@ -142,12 +142,12 @@ namespace LoESoft.WebServer.Core.Networking
                 {
                     var packetID = (PacketID)pid;
 
-                    string message = $"[PID: {(int)packetID}] Request\t->\t{context.Request.Url.LocalPath}";
+                    string message = $"[PID: {(int)packetID}] Request\t->\t";
 
                     if (!PacketBase.RequestLibrary.TryGetValue(packetID, out PacketBase packet))
-                        InvalidRequest(context, message);
+                        InvalidRequest(context, message + packetID);
                     else
-                        GoodRequest(context, message, packet, query);
+                        GoodRequest(context, message + packetID, packet, query);
                 }
                 else
                     InvalidRequest(context, $"PID '{pid}' isn't implemented yet.");

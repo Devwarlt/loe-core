@@ -50,7 +50,8 @@ namespace LoESoft.Launcher
             {
                 var httpEngine = HttpEngine.CreateRequest(PacketID.LOGIN_TOKEN);
                 var query = new HttpEngineQuery();
-                query.AddQuery("accToken", account.LoginToken);
+                query.AddQuery("token", account.LoginToken);
+
                 httpEngine.SendRequest(null, error =>
                 {
                     account.Invalidate();

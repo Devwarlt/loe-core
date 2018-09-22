@@ -50,10 +50,9 @@ namespace LoESoft.WebServer.Core.Database
             {
                 cmd.CommandText = "SELECT * FROM accounts WHERE name = @name AND password = @password;";
                 cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@password", Crypt.Encode(password));
 
                 using (var row = cmd.ExecuteReader())
-                {
                     while (row.Read())
                         return new Account()
                         {
@@ -64,7 +63,6 @@ namespace LoESoft.WebServer.Core.Database
                             Token = (string)row["token"],
                             Creation = (DateTime)row["creation"]
                         };
-                }
             }
 
             return null;
@@ -101,17 +99,36 @@ namespace LoESoft.WebServer.Core.Database
         }
         #endregion
 
-        #region "Create methods"
-        public void CreateNewAccount(string name, string password)
+        #region "Check methods"
+        public bool CheckAccountNameIfExists(string name)
         {
             using (var cmd = new SQLiteCommand(Connection))
             {
+                cmd.CommandText = "SELECT id FROM accounts WHERE name = @name;";
+                cmd.Parameters.AddWithValue("@name", name);
+
+                using (var row = cmd.ExecuteReader())
+                    while (row.Read())
+                        return true;
+            }
+
+            return false;
+        }
+        #endregion
+
+        #region "Create methods"
+        public void CreateNewAccount(string name, string password, out string token)
+        {
+            using (var cmd = new SQLiteCommand(Connection))
+            {
+                token = Crypt.Encode($"{Crypt.LoESoftHash}+{name}+{password}+{Crypt.LoESoftHash}");
+
                 cmd.CommandText = "INSERT INTO accounts (name, password, rank, token, creation) VALUES " +
                     "(@name, @password, @rank, @token, @creation);";
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@password", Crypt.Encode(password));
                 cmd.Parameters.AddWithValue("@rank", 0);
-                cmd.Parameters.AddWithValue("@token", Crypt.Encode($"{Crypt.LoESoftHash}+{name}+{password}+{Crypt.LoESoftHash}"));
+                cmd.Parameters.AddWithValue("@token", token);
                 cmd.Parameters.AddWithValue("@creation", DateTime.UtcNow);
                 cmd.ExecuteNonQuery();
             }

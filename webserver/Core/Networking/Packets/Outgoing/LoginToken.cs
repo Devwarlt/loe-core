@@ -2,6 +2,18 @@
 {
     public class LoginToken : PacketBase
     {
+        /// <summary>
+        /// Packet ID:
+        /// - (PacketID) LOGIN_TOKEN
+        /// Incoming:
+        /// - (string) token
+        /// Outgoing:
+        ///     On error:
+        ///     - (string) "Account token is invalid."
+        ///     - (string) "Account not found."
+        ///     On success:
+        ///     - (string) "You are logged in."
+        /// </summary>
         public override void Handle()
         {
             string token = Query["token"];
@@ -16,9 +28,11 @@
 
             if (account == null)
             {
-                OnError("Account credentials are not valid. Try again later.");
+                OnError("Account not found.");
                 return;
             }
+
+            OnSend("You are logged in.");
         }
     }
 }
