@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LoESoft.Server.Core.World.Map;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,35 +16,50 @@ namespace LoESoft.Server.Core.World
     }
     public class MapData
     {
-        class Data
+        class Data // temporrary class 
         {
             public string[,] Tiles { get; set; }
 
             public Data()
             {
-                Tiles = new string[11, 6]; //temporary
+                Tiles = new string[Chunk.CHUNKSIZE, Chunk.CHUNKSIZE];
+            }
+
+            public void AssignData(TileData[,] data)
+            {
+                for (var x = 0; x < Chunk.CHUNKSIZE; x++)
+                    for (var y = 0; y < Chunk.CHUNKSIZE; y++)
+                        Tiles[x, y] = JsonConvert.SerializeObject(data[x, y]);
             }
         }
 
-        public TileData[,] Tiles { get; set; }
+        public Chunk[,] ChunkMap;
+
 
         public MapData()
         {
-            Tiles = new TileData[160, 90];
+            ChunkMap = new Chunk[16, 16];
 
-            for (var x = 0; x < 160; x++) //Temp
-                for (var y = 0; y < 90; y++)
-                    Tiles[x, y] = new TileData() { X = x, Y = y, Type = x % 5 };
+            for (var x = 0; x < Chunk.CHUNKSIZE; x++)
+                for (var y = 0; y < Chunk.CHUNKSIZE; y++)
+                    ChunkMap[x, y] = new Chunk(x, y);
+
+            foreach (var i in ChunkMap)
+                i.LoadChunk();
         }
 
         public string GetData(int px, int py)
         {
             Data dat = new Data();
 
-            //var data = GetChunkData(px, py);
-            for (var x = 0; x < 11; x++)
-                for (var y = 0; y < 6; y++)
-                    dat.Tiles[x, y] = JsonConvert.SerializeObject(Tiles[px, py]);
+            var cx = px / Chunk.CHUNKSIZE;
+            var cy = py / Chunk.CHUNKSIZE;
+
+            Console.WriteLine($"{cx} , {cy}");
+
+            var chunk = ChunkMap[cx, cy];
+
+            dat.AssignData(chunk.Tiles);
 
             GameServer.Info(JsonConvert.SerializeObject(dat));
 

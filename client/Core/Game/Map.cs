@@ -15,22 +15,23 @@ namespace LoESoft.Client.Core.Game
         public int Y { get; set; }
         public int Type { get; set; }
     }
-    class Data
-    {
-        public string[,] Tiles { get; set; }
-
-        public Data()
-        {
-            Tiles = new string[11, 6]; //temporary
-        }
-    }
     public class Map
     {
+        class Data
+        {
+            public string[,] Tiles { get; set; }
+
+            public Data()
+            {
+                Tiles = new string[16, 16]; //temporary
+            }
+        }
+
         public Tile[,] Tiles { get; set; }
 
         public Map()
         {
-            Tiles = new Tile[11, 6];
+            Tiles = new Tile[16, 16];
         }
 
         protected bool initialUpdate = false;
@@ -39,15 +40,13 @@ namespace LoESoft.Client.Core.Game
         {
             Data dat = JsonConvert.DeserializeObject<Data>(data);
 
-            for (var x = 0; x < 11; x++)
-                for (var y = 0; y < 6; y++)
+            for (var x = 0; x < 16; x++)
+                for (var y = 0; y < 16; y++)
                 {
                     var tiledat = JsonConvert.DeserializeObject<TileData>(dat.Tiles[x, y]);
 
                     Tiles[x, y] = new Tile(tiledat.X, tiledat.Y, tiledat.Type);
                 }
-
-            initialUpdate = true;
         }
         
         public void Draw(SpriteBatch spriteBatch)
@@ -55,7 +54,7 @@ namespace LoESoft.Client.Core.Game
             var tile = Tiles;
             foreach(var i in tile)
             {
-                if (initialUpdate)
+                if (i != null)
                     i.Draw(spriteBatch);
             }
         }
