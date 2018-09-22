@@ -27,7 +27,7 @@ namespace LoESoft.Client.Core.Screens
         {
             GameUser = new GameUser(new Server("127.0.0.1", 7171));
             GameUser.Connect();
-            
+
             TempPlayer = new Player();
             PlayerMap = new Map();
 

@@ -62,6 +62,8 @@ namespace LoESoft.WebServer
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
+                _database.Disconnect();
+
                 connectionListener.EndAccept();
 
                 Info("Game Web Server has been stopped.");

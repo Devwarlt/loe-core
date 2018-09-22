@@ -1,11 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.Game
 {
@@ -49,11 +43,11 @@ namespace LoESoft.Client.Core.Game
 
             initialUpdate = true;
         }
-        
+
         public void Draw(SpriteBatch spriteBatch)
         {
             var tile = Tiles;
-            foreach(var i in tile)
+            foreach (var i in tile)
             {
                 if (initialUpdate)
                     i.Draw(spriteBatch);

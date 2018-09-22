@@ -1,9 +1,8 @@
 ﻿using LoESoft.WebServer.Core.Database.Models;
+using LoESoft.WebServer.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace LoESoft.WebServer.Core.Database
 {
@@ -21,22 +20,51 @@ namespace LoESoft.WebServer.Core.Database
         public void Disconnect() => Connection.Close();
 
         #region "Get methods"
-        public Account GetAccountById(int id)
+        public Account GetAccountByToken(string token)
         {
             using (var cmd = new SQLiteCommand(Connection))
             {
-                cmd.CommandText = "SELECT name, password FROM accounts WHERE id = @id;";
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.CommandText = "SELECT * FROM accounts WHERE token = @token;";
+                cmd.Parameters.AddWithValue("@token", token);
 
                 using (var row = cmd.ExecuteReader())
                     while (row.Read())
                         return new Account()
                         {
-                            Id = id,
+                            Id = (int)row["id"],
                             Name = (string)row["name"],
-                            Password = (string)row["password"]
+                            Password = (string)row["password"],
+                            Rank = (int)row["rank"],
+                            Token = token,
+                            Creation = (DateTime)row["creation"]
                         };
 
+            }
+
+            return null;
+        }
+
+        public Account GetAccountByCredentials(string name, string password)
+        {
+            using (var cmd = new SQLiteCommand(Connection))
+            {
+                cmd.CommandText = "SELECT * FROM accounts WHERE name = @name AND password = @password;";
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@password", password);
+
+                using (var row = cmd.ExecuteReader())
+                {
+                    while (row.Read())
+                        return new Account()
+                        {
+                            Id = (int)row["id"],
+                            Name = name,
+                            Password = password,
+                            Rank = (int)row["rank"],
+                            Token = (string)row["token"],
+                            Creation = (DateTime)row["creation"]
+                        };
+                }
             }
 
             return null;
@@ -78,9 +106,13 @@ namespace LoESoft.WebServer.Core.Database
         {
             using (var cmd = new SQLiteCommand(Connection))
             {
-                cmd.CommandText = "INSERT INTO accounts (name, password) VALUES (@name, @password);";
+                cmd.CommandText = "INSERT INTO accounts (name, password, rank, token, creation) VALUES " +
+                    "(@name, @password, @rank, @token, @creation);";
                 cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@password", Crypt(password));
+                cmd.Parameters.AddWithValue("@password", Crypt.Encode(password));
+                cmd.Parameters.AddWithValue("@rank", 0);
+                cmd.Parameters.AddWithValue("@token", Crypt.Encode($"{Crypt.LoESoftHash}+{name}+{password}+{Crypt.LoESoftHash}"));
+                cmd.Parameters.AddWithValue("@creation", DateTime.UtcNow);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -95,36 +127,25 @@ namespace LoESoft.WebServer.Core.Database
                 cmd.Parameters.AddWithValue("@account", account.Id);
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@class", 0); // Apprentice as default
-                cmd.Parameters.AddWithValue("@positionId", 0); // still need to adjust this
-                cmd.Parameters.AddWithValue("@positionX", 0); // still need to adjust this
-                cmd.Parameters.AddWithValue("@positionY", 0); // still need to adjust this
+                cmd.Parameters.AddWithValue("@positionId", 0); // TODO: still need to adjust this
+                cmd.Parameters.AddWithValue("@positionX", 0); // TODO: still need to adjust this
+                cmd.Parameters.AddWithValue("@positionY", 0); // TODO: still need to adjust this
                 cmd.Parameters.AddWithValue("@creation", DateTime.UtcNow);
                 cmd.ExecuteNonQuery();
 
                 cmd.CommandText = "SELECT id FROM characters WHERE account = @account;";
                 cmd.Parameters.AddWithValue("@account", account.Id);
-                
+
                 using (var row = cmd.ExecuteReader())
                     while (row.Read())
                     {
                         cmd.CommandText = "INSERT INTO depots (character) VALUES (@character);";
                         cmd.Parameters.AddWithValue("@character", (int)row["id"]);
                         cmd.ExecuteNonQuery();
-
                         break;
                     }
             }
         }
         #endregion
-
-        public static string Crypt(string value)
-        {
-            string hash = string.Empty;
-
-            foreach (byte theByte in new HMACSHA512().ComputeHash(Encoding.ASCII.GetBytes(value + "_103s0f7 g4m3s_"), 0, Encoding.ASCII.GetByteCount(value + "_103s0f7 g4m3s_")))
-                hash += theByte.ToString("x2");
-
-            return hash;
-        }
     }
 }
