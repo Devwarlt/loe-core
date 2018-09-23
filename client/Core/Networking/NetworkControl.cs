@@ -111,7 +111,7 @@ namespace LoESoft.Client.Core.Networking
         private void OnSend(IAsyncResult asyncResult)
         {
             try { Socket.EndSend(asyncResult); }
-            catch { Disconnect(); }
+            catch { }
         }
 
         public void ReceivePacket()
@@ -140,7 +140,7 @@ namespace LoESoft.Client.Core.Networking
 
                 ReceivePacket();
             }
-            catch { Disconnect(); }
+            catch { }
         }
 
         private void SetupIncomingPackets()
