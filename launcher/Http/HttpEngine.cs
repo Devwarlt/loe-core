@@ -42,7 +42,7 @@ namespace LoESoft.Launcher.Http
             var engine = new HttpEngine
             {
                 WebClient = new WebClient(),
-                Request = $"/?PID={packetID}"
+                Request = $"/?PID={(int)packetID}"
             };
             return engine;
         }
@@ -58,7 +58,7 @@ namespace LoESoft.Launcher.Http
                 i++;
             }
 
-            string requestURI = $"https://{GameLauncherParameters.SERVER}{Request}&{sb.ToString()}";
+            string requestURI = $"{GameLauncherParameters.SERVER}{Request}&{sb.ToString()}";
 
             GameLauncher.Info($"Sending Request {requestURI}");
 
@@ -74,10 +74,7 @@ namespace LoESoft.Launcher.Http
 
                 success?.Invoke(data);
             }
-            catch
-            {
-                error?.Invoke("Unable to connect to server");
-            }
+            catch { error?.Invoke("Unable to connect to server"); }
         }
     }
 }
