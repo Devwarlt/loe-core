@@ -15,16 +15,15 @@ namespace LoESoft.Server.Core.World.Entities.Player
         {
             Client = client;
             Map = new MapData();
-            client.SendPacket(new Update()
-            {
-                TileData = Map.GetData(X, Y)
-            });
         }
 
         public void UpdatePosition(int x, int y)
         {
             X = x;
             Y = y;
+
+            GameServer.Info("Sending Update Packet!");
+
             Client.SendPacket(new Update()
             {
                 TileData = Map.GetData(X, Y)

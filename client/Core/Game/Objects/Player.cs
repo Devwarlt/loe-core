@@ -19,9 +19,10 @@ namespace LoESoft.Client.Core.Game.Objects
         
         public override void Update(GameTime gameTime)
         {
-            var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
+            var dt = 1f / gameTime.ElapsedGameTime.Milliseconds; //MOVEMENT SPEED
             DetectMovement();
             UpdateMovement(dt);
+            _animation.Update(gameTime, this);
         }
 
         public override void Draw(SpriteBatch spriteBatch) => _animation.Draw(spriteBatch, this);
@@ -50,26 +51,16 @@ namespace LoESoft.Client.Core.Game.Objects
             {
                 if (X > DistinationX)
                     X -= dt;
-                else
+                else if (X < DistinationX)
                     X += dt;
-
             }
             if (Y != DistinationY)
             {
                 if (Y > DistinationY)
                     Y -= dt;
-                else
+                else if (Y < DistinationY)
                     Y += dt;
             }
-        }
-
-        private void SendPacket()
-        {
-            GameScreen.GameUser.SendPacket(new Move()
-            {
-                X = (int)X,
-                Y = (int)Y
-            });
         }
 
         public void DetectMovement()
@@ -84,39 +75,35 @@ namespace LoESoft.Client.Core.Game.Objects
                 IsMoving = true;
 
                 CurrentDirection = KeysToDirection[i];
-                Move(CurrentDirection);
+
+                if (DistinationX == X && DistinationY == Y)
+                    Move(CurrentDirection);
             }
 
-            if (pressedKeys.Count() == 0)
+            if (pressedKeys.Count() == 0 && DistinationX == X 
+                && DistinationY == Y)
                 ResetMovement();
         }
 
-        private int _dtoMoveX;
-        private int _dtoMoveY;
-        protected int DistinationX
-        {
-            get { return (int)X + _dtoMoveX; }
-        }
-        protected int DistinationY
-        {
-            get { return (int)Y + _dtoMoveY; }
-        }
+        protected int DistinationX;
+        protected int DistinationY;
 
         private void Move(Direction direction)
         {
+            DistinationX = (int)X;
+            DistinationY = (int)Y;
+
             switch(direction)
             {
-                case Direction.Up: _dtoMoveY += 1; break;
-                case Direction.Down: _dtoMoveY -= 1; break;
-                case Direction.Left: _dtoMoveX -= 1; break;
-                case Direction.Right: _dtoMoveX += 1; break;
+                case Direction.Up: DistinationY -= 1; break;
+                case Direction.Down: DistinationY += 1; break;
+                case Direction.Left: DistinationX -= 1; break;
+                case Direction.Right: DistinationX += 1; break;
             }
         }
 
         private void ResetMovement()
         {
-            _dtoMoveX = 0;
-            _dtoMoveY = 0;
             IsMoving = false;
         }
 

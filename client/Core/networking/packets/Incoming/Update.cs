@@ -11,7 +11,6 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public override void Handle(GameUser gameUser)
         {
-            GameClient.Info(TileData);
             GameScreen.PlayerMap.UpdateTiles(TileData);
         }
     }
