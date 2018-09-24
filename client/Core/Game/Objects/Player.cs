@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using LoESoft.Client.Core.Game.Animation;
-using LoESoft.Client.Core.Networking.Packets.Outgoing;
-using LoESoft.Client.Core.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

@@ -118,5 +118,6 @@
         private AccountLoginDisplay AccountLoginDisplay;
         private LoginRegisterDisplay LoginRegisterDisplay;
         private CurrentAcccountDisplay CurrentAccountDisplay;
+        private PopUpDisplay PopUpDisplay;
     }
 }

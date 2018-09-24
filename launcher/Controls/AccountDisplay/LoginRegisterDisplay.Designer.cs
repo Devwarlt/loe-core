@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             this.TitlePanelSeperator = new System.Windows.Forms.Panel();
+            this.CloseRegisterButton = new System.Windows.Forms.Button();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.AccountNameLabel = new System.Windows.Forms.Label();
             this.PasswordLabel = new System.Windows.Forms.Label();
@@ -37,7 +38,6 @@
             this.ConfirmPasswordTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
             this.PasswordTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
             this.AccountNameTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
-            this.CloseRegisterButton = new System.Windows.Forms.Button();
             this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +52,24 @@
             this.TitlePanelSeperator.Name = "TitlePanelSeperator";
             this.TitlePanelSeperator.Size = new System.Drawing.Size(514, 73);
             this.TitlePanelSeperator.TabIndex = 8;
+            // 
+            // CloseRegisterButton
+            // 
+            this.CloseRegisterButton.BackColor = System.Drawing.Color.DimGray;
+            this.CloseRegisterButton.FlatAppearance.BorderSize = 0;
+            this.CloseRegisterButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.CloseRegisterButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.CloseRegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseRegisterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseRegisterButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.CloseRegisterButton.Location = new System.Drawing.Point(475, 3);
+            this.CloseRegisterButton.Name = "CloseRegisterButton";
+            this.CloseRegisterButton.Size = new System.Drawing.Size(32, 32);
+            this.CloseRegisterButton.TabIndex = 1;
+            this.CloseRegisterButton.TabStop = false;
+            this.CloseRegisterButton.Text = "X";
+            this.CloseRegisterButton.UseVisualStyleBackColor = false;
+            this.CloseRegisterButton.Click += new System.EventHandler(this.CloseRegisterButton_Click);
             // 
             // TitleLabel
             // 
@@ -178,24 +196,6 @@
             this.AccountNameTextBox.TabIndex = 7;
             this.AccountNameTextBox.TabStop = false;
             this.AccountNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // CloseRegisterButton
-            // 
-            this.CloseRegisterButton.BackColor = System.Drawing.Color.DimGray;
-            this.CloseRegisterButton.FlatAppearance.BorderSize = 0;
-            this.CloseRegisterButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
-            this.CloseRegisterButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.CloseRegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseRegisterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseRegisterButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.CloseRegisterButton.Location = new System.Drawing.Point(475, 3);
-            this.CloseRegisterButton.Name = "CloseRegisterButton";
-            this.CloseRegisterButton.Size = new System.Drawing.Size(32, 32);
-            this.CloseRegisterButton.TabIndex = 1;
-            this.CloseRegisterButton.TabStop = false;
-            this.CloseRegisterButton.Text = "X";
-            this.CloseRegisterButton.UseVisualStyleBackColor = false;
-            this.CloseRegisterButton.Click += new System.EventHandler(this.CloseRegisterButton_Click);
             // 
             // LoginRegisterDisplay
             // 

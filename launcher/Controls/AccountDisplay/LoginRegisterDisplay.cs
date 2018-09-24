@@ -1,7 +1,6 @@
 ﻿using LoESoft.Launcher.Http;
 using System;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
 {
@@ -14,6 +13,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
+            var adc = ((AccountDisplayControl)Parent);
             var httpEngine = HttpEngine.CreateRequest(PacketID.REGISTER);
             var query = new HttpEngineQuery();
             query.AddQuery("name", AccountNameTextBox.Text);
@@ -22,15 +22,21 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             httpEngine.SendRequest(
                 success =>
                 {
+                    adc.PopUpUpdate("Account Created", success);
+                    adc.PopUpToggle();
+
                     GameLauncher.Info(success);
 
-                    Close();
+                    //Close();
                 },
                 error =>
                 {
+                    adc.PopUpUpdate("Error", error);
+                    adc.PopUpToggle();
+
                     GameLauncher.Warn(error);
 
-                    Close();
+                    //Close();
                 },
                 query);
         }

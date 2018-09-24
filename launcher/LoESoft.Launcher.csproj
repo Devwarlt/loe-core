@@ -203,6 +203,12 @@
     <Compile Include="Controls\AccountDisplay\LoginRegisterDisplay.Designer.cs">
       <DependentUpon>LoginRegisterDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AccountDisplay\PopUpDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\PopUpDisplay.Designer.cs">
+      <DependentUpon>PopUpDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CustomTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -243,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\LoginRegisterDisplay.resx">
       <DependentUpon>LoginRegisterDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\PopUpDisplay.resx">
+      <DependentUpon>PopUpDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\HomeDisplay\HomeDisplayControl.resx">
       <DependentUpon>HomeDisplayControl.cs</DependentUpon>
