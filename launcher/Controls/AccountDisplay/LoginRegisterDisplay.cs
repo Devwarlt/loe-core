@@ -24,6 +24,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                 {
                     adc.PopUpUpdate("Account Created", success);
                     adc.PopUpToggle();
+                    adc.ClickToggle();
 
                     GameLauncher.Info(success);
 
@@ -33,6 +34,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                 {
                     adc.PopUpUpdate("Error", error);
                     adc.PopUpToggle();
+                    adc.ClickToggle();
 
                     GameLauncher.Warn(error);
 

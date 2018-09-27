@@ -14,6 +14,10 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         public void SetText(string contentText) => PopUpText.Text = contentText;
 
-        private void OkButton_Click(object sender, EventArgs e) => Dispose();
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            ((AccountDisplayControl)Parent).ClickToggle();
+            Visible = !Visible;
+        }
     }
 }

@@ -22,6 +22,9 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             CurrentAccountDisplay.Visible = isLoggedIn;
             AccountLoginDisplay.Enabled = !isLoggedIn;
             AccountLoginDisplay.Visible = !isLoggedIn;
+
+            LoginRegisterDisplay.Enabled = false;
+            LoginRegisterDisplay.Visible = false;
             PopUpDisplay.Visible = false;
         }
 
@@ -30,6 +33,12 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             LoginRegisterDisplay.Visible = !LoginRegisterDisplay.Visible;
             LoginRegisterDisplay.Enabled = !LoginRegisterDisplay.Enabled;
             AccountLoginDisplay.Visible = !AccountLoginDisplay.Visible;
+            AccountLoginDisplay.Enabled = !AccountLoginDisplay.Enabled;
+        }
+
+        public void ClickToggle()
+        {
+            LoginRegisterDisplay.Enabled = !LoginRegisterDisplay.Enabled;
             AccountLoginDisplay.Enabled = !AccountLoginDisplay.Enabled;
         }
 
