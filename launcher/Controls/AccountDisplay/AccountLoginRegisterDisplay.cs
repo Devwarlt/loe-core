@@ -2,9 +2,9 @@
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    public partial class AccountLoginDisplay : UserControl
+    public partial class AccountLoginRegisterDisplay : UserControl
     {
-        public AccountLoginDisplay()
+        public AccountLoginRegisterDisplay()
         {
             InitializeComponent();
         }

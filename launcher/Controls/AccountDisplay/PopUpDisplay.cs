@@ -10,13 +10,18 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             InitializeComponent();
         }
 
-        public void SetTitle(string titleText) => PopUpTitle.Text = titleText;
+        public PopUpSettings Settings { get; set; }
 
-        public void SetText(string contentText) => PopUpText.Text = contentText;
+        public void LoadSettings()
+        {
+            PopUpTitle.Text = Settings.Title;
+            PopUpContent.Text = Settings.Content;
+            Settings.ExtraAction?.Invoke();
+        }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            ((AccountDisplayControl)Parent).ClickToggle();
+            Settings.Action?.Invoke();
             Visible = !Visible;
         }
     }

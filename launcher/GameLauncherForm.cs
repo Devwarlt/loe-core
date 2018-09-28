@@ -1,5 +1,4 @@
 using LoESoft.Launcher.Controls;
-using LoESoft.Launcher.Http;
 using System;
 using System.Windows.Forms;
 
@@ -21,6 +20,9 @@ namespace LoESoft.Launcher
         private void ChangeButtonSelected(object sender, EventArgs e)
         {
             var button = (ExtendedButton)sender;
+
+            if (button == ExitButton)
+                Environment.Exit(0);
 
             LauncherForm_SizeChanged(button, e);
 
@@ -44,7 +46,7 @@ namespace LoESoft.Launcher
             LauncherVersionLabel.Text = GameLauncherParameters.LAUNCHER_VERSION;
             SelectedDisplay = HomeButton;
 
-            var account = Account.LoadAccount();
+            /*var account = Account.LoadAccount();
 
             if (!string.IsNullOrWhiteSpace(account.LoginToken)) // if already logged in
             {
@@ -57,7 +59,7 @@ namespace LoESoft.Launcher
                     account.Invalidate();
                     GameLauncher.Info("Unable to relogin");
                 }, query);
-            }
+            }*/
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    partial class AccountLoginDisplay
+    partial class AccountLoginRegisterDisplay
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,46 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TitlePanelSeperator = new System.Windows.Forms.Panel();
-            this.TitleLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
-            this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // TitlePanelSeperator
-            // 
-            this.TitlePanelSeperator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitlePanelSeperator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TitlePanelSeperator.Controls.Add(this.TitleLabel);
-            this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, -1);
-            this.TitlePanelSeperator.Name = "TitlePanelSeperator";
-            this.TitlePanelSeperator.Size = new System.Drawing.Size(352, 73);
-            this.TitlePanelSeperator.TabStop = false;
-            // 
-            // TitleLabel
-            // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.TitleLabel.Location = new System.Drawing.Point(24, 3);
-            this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(302, 65);
-            this.TitleLabel.TabStop = false;
-            this.TitleLabel.Text = "Login";
-            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LoginButton
             // 
             this.LoginButton.FlatAppearance.BorderSize = 0;
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginButton.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginButton.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.LoginButton.Location = new System.Drawing.Point(6, 82);
+            this.LoginButton.Location = new System.Drawing.Point(3, 3);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(160, 75);
+            this.LoginButton.Size = new System.Drawing.Size(160, 79);
+            this.LoginButton.TabIndex = 1;
             this.LoginButton.TabStop = false;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
@@ -77,11 +51,12 @@
             // 
             this.RegisterButton.FlatAppearance.BorderSize = 0;
             this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RegisterButton.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterButton.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.RegisterButton.Location = new System.Drawing.Point(183, 82);
+            this.RegisterButton.Location = new System.Drawing.Point(176, 3);
             this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(160, 75);
+            this.RegisterButton.Size = new System.Drawing.Size(160, 79);
+            this.RegisterButton.TabIndex = 0;
             this.RegisterButton.TabStop = false;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = false;
@@ -95,19 +70,14 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.RegisterButton);
             this.Controls.Add(this.LoginButton);
-            this.Controls.Add(this.TitlePanelSeperator);
             this.Name = "AccountLoginDisplay";
-            this.Size = new System.Drawing.Size(348, 168);
-            this.TitlePanelSeperator.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(339, 85);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel TitlePanelSeperator;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Button RegisterButton;
-        private System.Windows.Forms.Label TitleLabel;
     }
 }

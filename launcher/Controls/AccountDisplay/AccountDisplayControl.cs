@@ -14,40 +14,21 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             if (!Enabled)
                 return;
 
-            var account = Account.UserAccount;
-
-            var isLoggedIn = !string.IsNullOrWhiteSpace(account.LoginToken);
-
-            CurrentAccountDisplay.Enabled = isLoggedIn;
-            CurrentAccountDisplay.Visible = isLoggedIn;
-            AccountLoginDisplay.Enabled = !isLoggedIn;
-            AccountLoginDisplay.Visible = !isLoggedIn;
-
-            LoginRegisterDisplay.Enabled = false;
-            LoginRegisterDisplay.Visible = false;
+            AccountLoginRegisterDisplay.Visible = true;
+            AccountLoginRegisterDisplay.Enabled = true;
+            CurrentAcccountDisplay.Visible = false;
+            CurrentAcccountDisplay.Enabled = false;
+            AccountRegisterPopUp.Visible = false;
+            AccountRegisterPopUp.Enabled = false;
             PopUpDisplay.Visible = false;
         }
 
         public void RegisterToggle()
         {
-            LoginRegisterDisplay.Visible = !LoginRegisterDisplay.Visible;
-            LoginRegisterDisplay.Enabled = !LoginRegisterDisplay.Enabled;
-            AccountLoginDisplay.Visible = !AccountLoginDisplay.Visible;
-            AccountLoginDisplay.Enabled = !AccountLoginDisplay.Enabled;
-        }
-
-        public void ClickToggle()
-        {
-            LoginRegisterDisplay.Enabled = !LoginRegisterDisplay.Enabled;
-            AccountLoginDisplay.Enabled = !AccountLoginDisplay.Enabled;
-        }
-
-        public void PopUpToggle() => PopUpDisplay.Visible = !PopUpDisplay.Visible;
-
-        public void PopUpUpdate(string title, string text)
-        {
-            PopUpDisplay.SetTitle(title);
-            PopUpDisplay.SetText(text);
+            AccountLoginRegisterDisplay.Visible = !AccountLoginRegisterDisplay.Visible;
+            AccountLoginRegisterDisplay.Enabled = !AccountLoginRegisterDisplay.Enabled;
+            AccountRegisterPopUp.Enabled = !AccountRegisterPopUp.Enabled;
+            AccountRegisterPopUp.Visible = !AccountRegisterPopUp.Visible;
         }
     }
 }

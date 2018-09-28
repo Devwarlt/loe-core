@@ -30,10 +30,10 @@
         {
             this.TitlePanelSeperator = new System.Windows.Forms.Panel();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.AccountLoginDisplay = new LoESoft.Launcher.Controls.AccountDisplay.AccountLoginDisplay();
-            this.CurrentAccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.CurrentAcccountDisplay();
-            this.LoginRegisterDisplay = new LoESoft.Launcher.Controls.AccountDisplay.LoginRegisterDisplay();
             this.PopUpDisplay = new LoESoft.Launcher.Controls.AccountDisplay.PopUpDisplay();
+            this.AccountRegisterPopUp = new LoESoft.Launcher.Controls.AccountDisplay.AccountRegisterPopUp();
+            this.CurrentAcccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.CurrentAcccountDisplay();
+            this.AccountLoginRegisterDisplay = new LoESoft.Launcher.Controls.AccountDisplay.AccountLoginRegisterDisplay();
             this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,72 +52,67 @@
             // 
             this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleLabel.Font = new System.Drawing.Font("Marlett", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.TitleLabel.Location = new System.Drawing.Point(366, 0);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(291, 73);
             this.TitleLabel.TabIndex = 0;
-            this.TitleLabel.Text = "Account Settings";
+            this.TitleLabel.Text = "Account";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // AccountLoginDisplay
-            // 
-            this.AccountLoginDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AccountLoginDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.AccountLoginDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AccountLoginDisplay.Location = new System.Drawing.Point(337, 216);
-            this.AccountLoginDisplay.Name = "AccountLoginDisplay";
-            this.AccountLoginDisplay.Size = new System.Drawing.Size(348, 168);
-            this.AccountLoginDisplay.TabIndex = 0;
-            this.AccountLoginDisplay.TabStop = false;
-            // 
-            // CurrentAccountDisplay
-            // 
-            this.CurrentAccountDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CurrentAccountDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.CurrentAccountDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CurrentAccountDisplay.Location = new System.Drawing.Point(-1, 75);
-            this.CurrentAccountDisplay.Name = "CurrentAccountDisplay";
-            this.CurrentAccountDisplay.Size = new System.Drawing.Size(1025, 526);
-            this.CurrentAccountDisplay.TabIndex = 3;
-            this.CurrentAccountDisplay.TabStop = false;
-            // 
-            // LoginRegisterDisplay
-            // 
-            this.LoginRegisterDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoginRegisterDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.LoginRegisterDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LoginRegisterDisplay.Enabled = false;
-            this.LoginRegisterDisplay.Location = new System.Drawing.Point(256, 155);
-            this.LoginRegisterDisplay.Name = "LoginRegisterDisplay";
-            this.LoginRegisterDisplay.Size = new System.Drawing.Size(510, 290);
-            this.LoginRegisterDisplay.TabIndex = 2;
-            this.LoginRegisterDisplay.TabStop = false;
-            this.LoginRegisterDisplay.Visible = false;
-            // 
-            // popUpDisplay1
+            // PopUpDisplay
             // 
             this.PopUpDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.PopUpDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PopUpDisplay.Location = new System.Drawing.Point(320, 229);
-            this.PopUpDisplay.Name = "popUpDisplay1";
-            this.PopUpDisplay.Size = new System.Drawing.Size(387, 139);
+            this.PopUpDisplay.Location = new System.Drawing.Point(240, 227);
+            this.PopUpDisplay.Name = "PopUpDisplay";
+            this.PopUpDisplay.Size = new System.Drawing.Size(546, 149);
             this.PopUpDisplay.TabIndex = 4;
+            // 
+            // LoginRegisterDisplay
+            // 
+            this.AccountRegisterPopUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AccountRegisterPopUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.AccountRegisterPopUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AccountRegisterPopUp.Enabled = false;
+            this.AccountRegisterPopUp.Location = new System.Drawing.Point(256, 155);
+            this.AccountRegisterPopUp.Name = "LoginRegisterDisplay";
+            this.AccountRegisterPopUp.Size = new System.Drawing.Size(510, 290);
+            this.AccountRegisterPopUp.TabIndex = 2;
+            this.AccountRegisterPopUp.TabStop = false;
+            this.AccountRegisterPopUp.Visible = false;
+            // 
+            // CurrentAcccountDisplay
+            // 
+            this.CurrentAcccountDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.CurrentAcccountDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CurrentAcccountDisplay.Location = new System.Drawing.Point(0, 76);
+            this.CurrentAcccountDisplay.Name = "CurrentAcccountDisplay";
+            this.CurrentAcccountDisplay.Size = new System.Drawing.Size(1025, 524);
+            this.CurrentAcccountDisplay.TabIndex = 5;
+            this.CurrentAcccountDisplay.Visible = false;
+            // 
+            // AccountLoginDisplay
+            // 
+            this.AccountLoginRegisterDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.AccountLoginRegisterDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AccountLoginRegisterDisplay.Location = new System.Drawing.Point(343, 263);
+            this.AccountLoginRegisterDisplay.Name = "AccountLoginDisplay";
+            this.AccountLoginRegisterDisplay.Size = new System.Drawing.Size(339, 85);
+            this.AccountLoginRegisterDisplay.TabIndex = 6;
             // 
             // AccountDisplayControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Controls.Add(this.PopUpDisplay);
-            this.Controls.Add(this.AccountLoginDisplay);
             this.Controls.Add(this.TitlePanelSeperator);
-            this.Controls.Add(this.LoginRegisterDisplay);
-            this.Controls.Add(this.CurrentAccountDisplay);
+            this.Controls.Add(this.PopUpDisplay);
+            this.Controls.Add(this.AccountLoginRegisterDisplay);
+            this.Controls.Add(this.AccountRegisterPopUp);
+            this.Controls.Add(this.CurrentAcccountDisplay);
             this.Name = "AccountDisplayControl";
             this.Size = new System.Drawing.Size(1023, 600);
             this.EnabledChanged += new System.EventHandler(this.AccountDisplayControl_EnabledChanged);
@@ -129,9 +124,9 @@
         #endregion
         private System.Windows.Forms.Panel TitlePanelSeperator;
         private System.Windows.Forms.Label TitleLabel;
-        private AccountLoginDisplay AccountLoginDisplay;
-        private LoginRegisterDisplay LoginRegisterDisplay;
-        private CurrentAcccountDisplay CurrentAccountDisplay;
-        private PopUpDisplay PopUpDisplay;
+        public AccountRegisterPopUp AccountRegisterPopUp;
+        public PopUpDisplay PopUpDisplay;
+        public CurrentAcccountDisplay CurrentAcccountDisplay;
+        public AccountLoginRegisterDisplay AccountLoginRegisterDisplay;
     }
 }
