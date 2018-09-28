@@ -14,7 +14,7 @@ namespace LoESoft.Client.Core.Game.Objects
             IsMoving = false;
             _animation = new PlayerAnimation();
         }
-        
+
         public override void Update(GameTime gameTime)
         {
             var dt = 1f / gameTime.ElapsedGameTime.Milliseconds; //MOVEMENT SPEED
@@ -37,12 +37,12 @@ namespace LoESoft.Client.Core.Game.Objects
         }
 
         public Direction CurrentDirection { get; private set; }
-        
+
         PlayerAnimation _animation;
         KeyboardState _curKeyBoard;
 
         public bool IsMoving { get; private set; }
-        
+
         public void UpdateMovement(float dt)
         {
             if (X != DistinationX)
@@ -68,7 +68,7 @@ namespace LoESoft.Client.Core.Game.Objects
             var pressedKeys = _curKeyBoard.GetPressedKeys().SkipWhile(_ =>
             (KeysToDirection.Keys.Contains(_)) ? false : true);
 
-            foreach(var i in pressedKeys)
+            foreach (var i in pressedKeys)
             {
                 IsMoving = true;
 
@@ -78,7 +78,7 @@ namespace LoESoft.Client.Core.Game.Objects
                     Move(CurrentDirection);
             }
 
-            if (pressedKeys.Count() == 0 && DistinationX == X 
+            if (pressedKeys.Count() == 0 && DistinationX == X
                 && DistinationY == Y)
                 ResetMovement();
         }
@@ -91,7 +91,7 @@ namespace LoESoft.Client.Core.Game.Objects
             DistinationX = (int)X;
             DistinationY = (int)Y;
 
-            switch(direction)
+            switch (direction)
             {
                 case Direction.Up: DistinationY -= 1; break;
                 case Direction.Down: DistinationY += 1; break;

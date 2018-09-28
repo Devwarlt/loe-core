@@ -38,7 +38,6 @@ namespace LoESoft.WebServer.Core.Database
                             Token = token,
                             Creation = (DateTime)row["creation"]
                         };
-
             }
 
             return null;
