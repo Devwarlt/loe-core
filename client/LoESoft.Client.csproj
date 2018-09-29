@@ -79,7 +79,9 @@
     <Compile Include="Core\Game\Map.cs" />
     <Compile Include="Core\Game\Objects\BasicObject.cs" />
     <Compile Include="Core\Game\Objects\Player.cs" />
+    <Compile Include="Core\Game\TempData.cs" />
     <Compile Include="Core\Game\Tile.cs" />
+    <Compile Include="Core\Game\TileData.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Update.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Move.cs" />

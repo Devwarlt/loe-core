@@ -10,10 +10,6 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             InitializeComponent();
         }
 
-        private void LogOutButton_Click(object sender, EventArgs e)
-        {
-            Account.UserAccount.Invalidate();
-            ((GameLauncherForm)((AccountDisplayControl)Parent).Parent).Reload();
-        }
+        private void LogOutButton_Click(object sender, EventArgs e) => ((AccountDisplayControl)Parent).RegisterToggle();
     }
 }

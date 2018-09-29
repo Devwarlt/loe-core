@@ -7,8 +7,8 @@ namespace LoESoft.Server.Core.World.Entities.Player
     {
         public Client Client { get; private set; }
 
-        public int X { get; set; } 
-        public int Y { get; set; } 
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public Player(Client client)
         {

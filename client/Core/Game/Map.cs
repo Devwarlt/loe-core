@@ -3,24 +3,8 @@ using Newtonsoft.Json;
 
 namespace LoESoft.Client.Core.Game
 {
-    public class TileData
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Type { get; set; }
-    }
     public class Map
     {
-        class Data
-        {
-            public string[,] Tiles { get; set; }
-
-            public Data()
-            {
-                Tiles = new string[16, 16]; //temporary
-            }
-        }
-
         public Tile[,] Tiles { get; set; }
 
         public Map()
@@ -32,7 +16,7 @@ namespace LoESoft.Client.Core.Game
 
         public void UpdateTiles(string data)
         {
-            Data dat = JsonConvert.DeserializeObject<Data>(data);
+            TempData dat = JsonConvert.DeserializeObject<TempData>(data);
 
             for (var x = 0; x < 16; x++)
                 for (var y = 0; y < 16; y++)

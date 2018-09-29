@@ -4,33 +4,9 @@ using System;
 
 namespace LoESoft.Server.Core.World
 {
-    public class TileData
-    {
-        public int Type { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
-    }
     public class MapData
     {
-        class Data // temporrary class 
-        {
-            public string[,] Tiles { get; set; }
-
-            public Data()
-            {
-                Tiles = new string[Chunk.CHUNKSIZE, Chunk.CHUNKSIZE];
-            }
-
-            public void AssignData(TileData[,] data)
-            {
-                for (var x = 0; x < Chunk.CHUNKSIZE; x++)
-                    for (var y = 0; y < Chunk.CHUNKSIZE; y++)
-                        Tiles[x, y] = JsonConvert.SerializeObject(data[x, y]);
-            }
-        }
-
         public Chunk[,] ChunkMap;
-
 
         public MapData()
         {
@@ -46,7 +22,7 @@ namespace LoESoft.Server.Core.World
 
         public string GetData(int px, int py)
         {
-            Data dat = new Data();
+            TempData dat = new TempData();
 
             var cx = px / Chunk.CHUNKSIZE;
             var cy = py / Chunk.CHUNKSIZE;
