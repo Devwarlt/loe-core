@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LoESoft.Server.Core.World.Entities;
+using LoESoft.Server.Core.World.Entities.Player;
+using System;
+using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World.Map
 {
@@ -6,7 +9,9 @@ namespace LoESoft.Server.Core.World.Map
     {
         public static readonly int CHUNKSIZE = 16;
 
-        public TileData[,] Tiles;
+        public TileData[,] Tiles { get; private set; }
+
+        public List<Player> Entities { get; private set; }
 
         private int _startX;
         private int _startY;
@@ -14,6 +19,7 @@ namespace LoESoft.Server.Core.World.Map
         public Chunk(int chunkx, int chunky)
         {
             Tiles = new TileData[CHUNKSIZE, CHUNKSIZE];
+            Entities = new List<Player>();
             _startX = chunkx * CHUNKSIZE;
             _startY = chunky * CHUNKSIZE;
         }

@@ -6,7 +6,6 @@ namespace LoESoft.Server.Core.World.Entities.Player
     public class Player : Entity
     {
         public Client Client { get; private set; }
-        public MapData Map { get; private set; }
 
         public int X { get; set; } 
         public int Y { get; set; } 
@@ -14,7 +13,6 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public Player(Client client)
         {
             Client = client;
-            Map = new MapData();
         }
 
         public void UpdatePosition(int x, int y)
@@ -26,7 +24,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
             Client.SendPacket(new Update()
             {
-                TileData = Map.GetData(X, Y)
+                TileData = WorldManager.Map.GetData(X, Y)
             });
         }
     }

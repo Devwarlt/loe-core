@@ -51,13 +51,9 @@ namespace LoESoft.Server.Core.World
             var cx = px / Chunk.CHUNKSIZE;
             var cy = py / Chunk.CHUNKSIZE;
 
-            Console.WriteLine($"{cx} , {cy}");
-
             var chunk = ChunkMap[cx, cy];
 
             dat.AssignData(chunk.Tiles);
-
-            GameServer.Info(JsonConvert.SerializeObject(dat));
 
             return JsonConvert.SerializeObject(dat);
         }
