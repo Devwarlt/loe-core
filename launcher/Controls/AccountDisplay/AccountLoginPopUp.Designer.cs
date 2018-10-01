@@ -81,7 +81,6 @@
             this.TitleLabel.TabIndex = 0;
             this.TitleLabel.Text = "Account Login";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TitleLabel.Click += new System.EventHandler(this.TitleLabel_Click);
             // 
             // AccountNameLabel
             // 

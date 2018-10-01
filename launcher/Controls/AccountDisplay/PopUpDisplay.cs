@@ -16,12 +16,12 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
         {
             PopUpTitle.Text = Settings.Title;
             PopUpContent.Text = Settings.Content;
-            Settings.ExtraAction?.Invoke();
+            Settings.WhenClose?.Invoke();
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            Settings.Action?.Invoke();
+            Settings.WhenDisplay?.Invoke();
             Visible = !Visible;
         }
     }

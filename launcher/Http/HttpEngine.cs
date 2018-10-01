@@ -26,6 +26,7 @@ namespace LoESoft.Launcher.Http
         {
             if (Objects == null)
                 Objects = new Dictionary<string, object>();
+
             Objects.Add(key, value);
         }
     }
@@ -36,6 +37,18 @@ namespace LoESoft.Launcher.Http
         private string Request { get; set; }
 
         private bool Downloaded { get; set; }
+
+        public static void Handle(PacketID packet, HttpEngineQuery query, Action<string> success, Action<string> error)
+        {
+            if (!Enum.IsDefined(typeof(PacketID), packet))
+            {
+                GameLauncher.Warn($"Packet ID '({(int)packet}){packet}' doesn't exist.");
+                return;
+            }
+
+            try { CreateRequest(packet).SendRequest(success, error, query); }
+            catch (Exception e) { GameLauncher.Error(e); }
+        }
 
         public static HttpEngine CreateRequest(PacketID packetID)
         {

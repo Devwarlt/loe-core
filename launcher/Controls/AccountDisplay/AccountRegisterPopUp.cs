@@ -1,5 +1,6 @@
 ﻿using LoESoft.Launcher.Http;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
@@ -14,20 +15,21 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
         private void RegisterButton_Click(object sender, EventArgs e)
         {
             var parent = ((AccountDisplayControl)Parent);
-            var httpEngine = HttpEngine.CreateRequest(PacketID.REGISTER);
             var query = new HttpEngineQuery();
             query.AddQuery("name", AccountNameTextBox.Text);
             query.AddQuery("password", PasswordTextBox.Text);
 
-            httpEngine.SendRequest(
+            HttpEngine.Handle(
+                PacketID.REGISTER,
+                query,
                 success =>
                 {
                     parent.PopUpDisplay.Settings = new PopUpSettings()
                     {
                         Title = "Account Created",
                         Content = success,
-                        Action = () => Enabled = false,
-                        ExtraAction = () => parent.PopUpDisplay.Visible = !parent.PopUpDisplay.Visible
+                        WhenDisplay = () => Enabled = false,
+                        WhenClose = () => parent.PopUpDisplay.Visible = !parent.PopUpDisplay.Visible
                     };
                     parent.PopUpDisplay.LoadSettings();
 
@@ -39,14 +41,13 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                     {
                         Title = "Account Error",
                         Content = error,
-                        Action = () => Enabled = false,
-                        ExtraAction = () => parent.PopUpDisplay.Visible = !parent.PopUpDisplay.Visible
+                        WhenDisplay = () => Enabled = false,
+                        WhenClose = () => parent.PopUpDisplay.Visible = !parent.PopUpDisplay.Visible
                     };
                     parent.PopUpDisplay.LoadSettings();
 
                     GameLauncher.Warn(error);
-                },
-                query);
+                });
         }
 
         private void IsKeyDown(object sender, KeyEventArgs e)
@@ -56,8 +57,6 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             CapsLockLabel.Enabled = isCaps;
             CapsLockLabel.Visible = isCaps;
         }
-
-        private void TitleLabel_Click(object sender, EventArgs e) { }
 
         private void CloseRegisterButton_Click(object sender, EventArgs e) => ((AccountDisplayControl)Parent).RegisterToggle();
     }

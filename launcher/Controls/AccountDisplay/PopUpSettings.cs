@@ -6,7 +6,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public Action Action { get; set; }
-        public Action ExtraAction { get; set; }
+        public Action WhenDisplay { get; set; }
+        public Action WhenClose { get; set; }
     }
 }
