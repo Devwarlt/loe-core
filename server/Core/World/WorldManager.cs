@@ -27,5 +27,11 @@ namespace LoESoft.Server.Core.World
 
             Players.Add(client, client.Player);
         }
+
+        public static void TryRemovePlayer(Client client)
+        {
+            if (Players.Keys.Contains(client))
+                Players.Remove(client);
+        }
     }
 }

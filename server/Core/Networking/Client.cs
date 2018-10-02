@@ -1,5 +1,6 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Incoming;
 using LoESoft.Server.Core.Networking.Packets.Outgoing;
+using LoESoft.Server.Core.World;
 using LoESoft.Server.Core.World.Entities.Player;
 using System;
 using System.Net.Sockets;
@@ -27,6 +28,8 @@ namespace LoESoft.Server.Core.Networking
 
             Player = new Player(this);
 
+            WorldManager.TryAddPlayer(this);
+
             var value = new Random().Next();
 
             GameServer.Info($"Server is sending value '{value}' via Ping packet.");
@@ -52,6 +55,7 @@ namespace LoESoft.Server.Core.Networking
         {
             Player.Dispose();
             Socket.Close();
+            WorldManager.TryRemovePlayer(this);
         }
     }
 }
