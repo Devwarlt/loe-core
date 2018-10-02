@@ -1,4 +1,6 @@
-﻿using LoESoft.Server.Core.World.Map;
+﻿using LoESoft.Server.Core.World.Entities;
+using LoESoft.Server.Core.World.Entities.Player;
+using LoESoft.Server.Core.World.Map;
 using Newtonsoft.Json;
 using System;
 
@@ -19,19 +21,34 @@ namespace LoESoft.Server.Core.World
             foreach (var i in ChunkMap)
                 i.LoadChunk();
         }
-
-        public string GetData(int px, int py)
+        
+        public string GetData(Player player)
         {
-            TempData dat = new TempData();
+            RawMapData dat = new RawMapData();
 
-            var cx = px / Chunk.CHUNKSIZE;
-            var cy = py / Chunk.CHUNKSIZE;
+            var chunk = ChunkMap[player.ChunkX, player.ChunkY];
 
-            var chunk = ChunkMap[cx, cy];
+            chunk.Players.Remove(player.GetData() as PlayerData);//to not send players self
 
-            dat.AssignData(chunk.Tiles);
+            dat.AssignTileData(chunk.Tiles);
+            dat.AssignEntityData(chunk.Entities);
+            dat.AssignPlayerData(chunk.Players);
 
             return JsonConvert.SerializeObject(dat);
         }
+
+        #region Add/Remove Entites
+        public void AddEntity(Entity entity)
+        => ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Add(entity.GetData());
+
+        public void AddPlayer(Player player) =>
+            ChunkMap[player.ChunkX, player.ChunkY].Players.Add(player.GetData() as PlayerData);
+
+        public void RemoveEntity(Entity entity, int cx, int cy)
+        => ChunkMap[cx, cy].Entities.Remove(entity.GetData());
+
+        public void RemovePlayer(Player player, int cx, int cy)
+        => ChunkMap[cx, cy].Players.Remove(player.GetData() as PlayerData);
+        #endregion
     }
 }

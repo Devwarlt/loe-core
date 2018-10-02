@@ -11,7 +11,8 @@ namespace LoESoft.Server.Core.World.Map
 
         public TileData[,] Tiles { get; private set; }
 
-        public List<Player> Entities { get; private set; }
+        public List<EntityData> Entities { get; private set; }
+        public List<PlayerData> Players { get; private set; }
 
         private int _startX;
         private int _startY;
@@ -19,7 +20,9 @@ namespace LoESoft.Server.Core.World.Map
         public Chunk(int chunkx, int chunky)
         {
             Tiles = new TileData[CHUNKSIZE, CHUNKSIZE];
-            Entities = new List<Player>();
+            Entities = new List<EntityData>();
+            Players = new List<PlayerData>();
+
             _startX = chunkx * CHUNKSIZE;
             _startY = chunky * CHUNKSIZE;
         }

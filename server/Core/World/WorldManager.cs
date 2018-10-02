@@ -12,7 +12,7 @@ namespace LoESoft.Server.Core.World
     {
         public static MapData Map { get; private set; }
 
-        public static Dictionary<Client, Player> Players = new Dictionary<Client, Player>();
+        public static Dictionary<Client, Player> Players = new Dictionary<Client, Player>(); //Useless atm
 
         static WorldManager()
         {
@@ -26,12 +26,15 @@ namespace LoESoft.Server.Core.World
                 return;
 
             Players.Add(client, client.Player);
+            GameServer.Warn($"{client.Player.X} Was added");
         }
 
         public static void TryRemovePlayer(Client client)
         {
             if (Players.Keys.Contains(client))
                 Players.Remove(client);
+
+            GameServer.Warn($"{client.Player.X} Was removed");
         }
     }
 }

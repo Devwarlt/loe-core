@@ -21,35 +21,18 @@ namespace LoESoft.Server.Core.Networking
 
             IpAddress = socket.RemoteEndPoint.ToString().Split(':')[0];
 
-            GameServer.Warn($"Client with IP '{IpAddress}' has connected!");
+            GameServer.Info($"Client with IP '{IpAddress}' has connected!");
 
             NetworkControl = new NetworkControl(this, Socket);
             NetworkControl.ReceivePacket();
 
             Player = new Player(this);
-
             WorldManager.TryAddPlayer(this);
 
+
             var value = new Random().Next();
-
-            GameServer.Info($"Server is sending value '{value}' via Ping packet.");
-
             SendPacket(new Ping() { Value = value });
         }
-
-        public bool IsConnected => NetworkControl.IsConnected;
-        
-        public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
-
-        public void SendSyncPacket(OutgoingPacket outgoingPacket, int timeout) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne(timeout, true);
-
-        public void SendSyncPackets(OutgoingPacket[] outgoingPackets) => ((IAsyncResult)Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne();
-
-        public void SendSyncPackets(OutgoingPacket[] outgoingPackets, int timeout) => ((IAsyncResult)Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne(timeout, true);
-        
-        public void SendPacket(OutgoingPacket outgoingPacket) => NetworkControl.SendPacket(outgoingPacket);
-
-        public void SendPackets(OutgoingPacket[] outgoingPackets) => NetworkControl.SendPackets(outgoingPackets);
 
         public void Disconnect()
         {
@@ -57,5 +40,21 @@ namespace LoESoft.Server.Core.Networking
             Socket.Close();
             WorldManager.TryRemovePlayer(this);
         }
+
+        #region SENDMETHODs
+        public bool IsConnected => NetworkControl.IsConnected;
+
+        public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
+
+        public void SendSyncPacket(OutgoingPacket outgoingPacket, int timeout) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne(timeout, true);
+
+        public void SendSyncPackets(OutgoingPacket[] outgoingPackets) => ((IAsyncResult)Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne();
+
+        public void SendSyncPackets(OutgoingPacket[] outgoingPackets, int timeout) => ((IAsyncResult)Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne(timeout, true);
+
+        public void SendPacket(OutgoingPacket outgoingPacket) => NetworkControl.SendPacket(outgoingPacket);
+
+        public void SendPackets(OutgoingPacket[] outgoingPackets) => NetworkControl.SendPackets(outgoingPackets);
+        #endregion
     }
 }
