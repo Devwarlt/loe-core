@@ -28,7 +28,7 @@ namespace LoESoft.Server.Core.World
 
             var chunk = ChunkMap[player.ChunkX, player.ChunkY];
 
-            chunk.Players.Remove(player.GetData() as PlayerData);//to not send players self
+            //chunk.Players.Remove(player.GetData() as PlayerData);//to not send players self
 
             dat.AssignTileData(chunk.Tiles);
             dat.AssignEntityData(chunk.Entities);

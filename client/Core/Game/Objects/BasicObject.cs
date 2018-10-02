@@ -1,6 +1,7 @@
 ﻿using LoESoft.Client.Assets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using System.Linq;
 
 namespace LoESoft.Client.Core.Game.Objects
@@ -21,10 +22,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public virtual void Update(GameTime gameTime) { }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (Texture == null)
-                Texture = AssetLibrary.Images.Values.First();
-
-            spriteBatch.Draw(Texture, new Vector2(DrawX, DrawY), new Rectangle(0, 0, Size, Size), Color.White);
+            spriteBatch.DrawRectangle(new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color.Orange, 4);
         }
     }
 }

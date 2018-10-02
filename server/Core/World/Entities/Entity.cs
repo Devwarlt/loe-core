@@ -16,7 +16,10 @@ namespace LoESoft.Server.Core.World.Entities
         {
             X = x;
             Y = y;
+        }
 
+        public virtual void Init()
+        {
             WorldManager.Map.AddEntity(this);
         }
         

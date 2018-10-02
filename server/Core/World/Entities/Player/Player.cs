@@ -14,6 +14,11 @@ namespace LoESoft.Server.Core.World.Entities.Player
             Client = client;
         }
 
+        public override void Init()
+        {
+            WorldManager.Map.AddPlayer(this);
+        }
+
         protected override void RepositionToChunk(int cx, int cy)
         {
             WorldManager.Map.RemovePlayer(this, cx, cy);

@@ -35,7 +35,12 @@ namespace LoESoft.Server.Core.World.Map
                 for (var y = 0; y < CHUNKSIZE; y++)
                 {
                     int id = random.Next(0, 2);
+
                     Tiles[x, y] = new TileData() { X = _startX + x, Y = _startY + y, Type = id };
+
+                    Entities.Add(new EntityData() { X = _startX + random.Next(0, 15),
+                        Y = _startY + random.Next(0, 15), Type = 0
+                    });
                 }
         }
     }

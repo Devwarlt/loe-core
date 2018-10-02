@@ -27,7 +27,8 @@ namespace LoESoft.Server.Core.Networking
             NetworkControl.ReceivePacket();
 
             Player = new Player(this);
-            WorldManager.TryAddPlayer(this);
+            if (WorldManager.TryAddPlayer(this))
+                Player.Init();
 
 
             var value = new Random().Next();

@@ -41,7 +41,10 @@ namespace LoESoft.Client.Core.Game
             foreach(var i in dat.Players)
             {
                 var playerdat = JsonConvert.DeserializeObject<PlayerData>(i);
-                Players.Add(new BasicObject() { X = playerdat.X, Y = playerdat.Y });
+                var player = new BasicObject() { X = playerdat.X, Y = playerdat.Y }; 
+                if (!Players.Contains(player))
+                    Players.Add(player);
+                GameClient.Warn("Player Added!");
             }
         }
 
@@ -53,9 +56,10 @@ namespace LoESoft.Client.Core.Game
                 if (i != null)
                     i.Draw(spriteBatch);
             }
-            foreach (var i in Entities)
+            foreach (var i in Entities.ToArray())
                 i.Draw(spriteBatch);
-            foreach (var i in Players)
+
+            foreach (var i in Players.ToArray())
                 i.Draw(spriteBatch);
         }
     }
