@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    public partial class Register : UserControl
+    public partial class RegisterBox : UserControl
     {
-        public Register()
+        public RegisterBox()
         {
             InitializeComponent();
         }

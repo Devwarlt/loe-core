@@ -38,7 +38,7 @@ namespace LoESoft.Launcher.Http
 
         private bool Downloaded { get; set; }
 
-        public static void Handle(PacketID packet, HttpEngineQuery query, Action<string> success, Action<string> error)
+        public static void Handle(PacketID packet, HttpEngineQuery query, Action<string> success, Action<string> error, Action<string> info = null)
         {
             if (!Enum.IsDefined(typeof(PacketID), packet))
             {
@@ -46,7 +46,7 @@ namespace LoESoft.Launcher.Http
                 return;
             }
 
-            try { CreateRequest(packet).SendRequest(success, error, query); }
+            try { CreateRequest(packet).SendRequest(query, success, error, info); }
             catch (Exception e) { GameLauncher.Error(e); }
         }
 
@@ -60,7 +60,7 @@ namespace LoESoft.Launcher.Http
             return engine;
         }
 
-        public void SendRequest(Action<string> success, Action<string> error, HttpEngineQuery query)
+        public void SendRequest(HttpEngineQuery query, Action<string> success, Action<string> error, Action<string> info)
         {
             var sb = new StringBuilder();
             var i = 0;
@@ -85,7 +85,15 @@ namespace LoESoft.Launcher.Http
                     return;
                 }
 
-                success?.Invoke(data);
+                if (data.Substring(0, 9) == "<Success>")
+                {
+                    success?.Invoke(XElement.Parse(data).Value);
+                    return;
+                }
+
+                // General web feedback data.
+                info?.Invoke(data);
+                
             }
             catch { error?.Invoke("Unable to connect to server"); }
         }

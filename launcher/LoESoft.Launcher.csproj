@@ -191,11 +191,11 @@
     <Compile Include="Controls\AccountDisplay\LoginBox.Designer.cs">
       <DependentUpon>LoginBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AccountDisplay\Register.cs">
+    <Compile Include="Controls\AccountDisplay\RegisterBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\AccountDisplay\Register.Designer.cs">
-      <DependentUpon>Register.cs</DependentUpon>
+    <Compile Include="Controls\AccountDisplay\RegisterBox.Designer.cs">
+      <DependentUpon>RegisterBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\AccountDisplay\PopUpBox.cs">
       <SubType>UserControl</SubType>
@@ -239,8 +239,8 @@
     <EmbeddedResource Include="Controls\AccountDisplay\LoginBox.resx">
       <DependentUpon>LoginBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\AccountDisplay\Register.resx">
-      <DependentUpon>Register.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\AccountDisplay\RegisterBox.resx">
+      <DependentUpon>RegisterBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\PopUpBox.resx">
       <DependentUpon>PopUpBox.cs</DependentUpon>

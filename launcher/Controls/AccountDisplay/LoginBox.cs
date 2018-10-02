@@ -18,36 +18,34 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             query.AddQuery("name", AccountNameTextBox.Text);
             query.AddQuery("password", PasswordTextBox.Text);
 
-            // TODO.
-            /*HttpEngine.Handle(
-                PacketID.LOGIN,
-                query,
+            Enabled = false;
+
+            HttpEngine.Handle(
+                PacketID.LOGIN, query,
                 success =>
                 {
-                    parent.PopUpDisplay.Settings = new PopUpSettings()
+                    GameLauncher.Info(success);
+
+                    parent.UpdatePopUp(new PopUpSettings()
                     {
                         Title = "Welcome",
                         Content = success,
-                        WhenDisplay = () => Visible = false,
-                        WhenClose = () => parent.PopUpDisplay.Visible = !parent.PopUpDisplay.Visible
-                    };
-                    parent.PopUpDisplay.LoadSettings();
-
-                    GameLauncher.Info(success);
+                        OnDisplay = () => parent.SetPopUpBoxVisibility(true),
+                        OnClose = () => Enabled = true
+                    });
                 },
                 error =>
                 {
-                    parent.PopUpDisplay.Settings = new PopUpSettings()
+                    GameLauncher.Warn(error);
+
+                    parent.UpdatePopUp(new PopUpSettings()
                     {
                         Title = "Login Denied",
                         Content = error,
-                        WhenDisplay = () => Visible = false,
-                        WhenClose = () => parent.PopUpDisplay.Visible = !parent.PopUpDisplay.Visible
-                    };
-                    parent.PopUpDisplay.LoadSettings();
-
-                    GameLauncher.Warn(error);
-                });*/
+                        OnDisplay = () => parent.SetPopUpBoxVisibility(true),
+                        OnClose = () => Enabled = true
+                    });
+                });
         }
 
         private void IsKeyDown(object sender, KeyEventArgs e)
@@ -58,7 +56,11 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             CapsLockLabel.Visible = isCaps;
         }
 
-        // TODO.
-        private void LoginCancelButton_Click(object sender, EventArgs e) { }
+        private void LoginCancelButton_Click(object sender, EventArgs e)
+        {
+            var parent = ((Main)Parent);
+            parent.ToggleLoginBox();
+            parent.ToggleButtons();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    partial class Register
+    partial class RegisterBox
     {
         /// <summary> 
         /// Required designer variable.
