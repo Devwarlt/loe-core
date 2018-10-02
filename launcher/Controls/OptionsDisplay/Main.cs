@@ -2,9 +2,9 @@
 
 namespace LoESoft.Launcher.Controls.OptionsDisplay
 {
-    public partial class OptionsDisplayControl : UserControl
+    public partial class Main : UserControl
     {
-        public OptionsDisplayControl()
+        public Main()
         {
             InitializeComponent();
         }

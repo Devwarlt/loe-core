@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    partial class PopUpDisplay
+    partial class PopUpBox
     {
         /// <summary> 
         /// Variável de designer necessária.

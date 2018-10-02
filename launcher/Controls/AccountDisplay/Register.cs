@@ -5,21 +5,22 @@ using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    public partial class AccountRegisterPopUp : UserControl
+    public partial class Register : UserControl
     {
-        public AccountRegisterPopUp()
+        public Register()
         {
             InitializeComponent();
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            var parent = ((AccountDisplayControl)Parent);
+            var parent = ((Main)Parent);
             var query = new HttpEngineQuery();
             query.AddQuery("name", AccountNameTextBox.Text);
             query.AddQuery("password", PasswordTextBox.Text);
 
-            HttpEngine.Handle(
+            // TODO.
+            /*HttpEngine.Handle(
                 PacketID.REGISTER,
                 query,
                 success =>
@@ -47,7 +48,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                     parent.PopUpDisplay.LoadSettings();
 
                     GameLauncher.Warn(error);
-                });
+                });*/
         }
 
         private void IsKeyDown(object sender, KeyEventArgs e)
@@ -58,6 +59,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             CapsLockLabel.Visible = isCaps;
         }
 
-        private void CloseRegisterButton_Click(object sender, EventArgs e) => ((AccountDisplayControl)Parent).RegisterToggle();
+        // TODO.
+        private void CloseRegisterButton_Click(object sender, EventArgs e) { }
     }
 }

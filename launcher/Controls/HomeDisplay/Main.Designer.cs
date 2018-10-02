@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Launcher.Controls.HomeDisplay
 {
-    partial class HomeDisplayControl
+    partial class Main
     {
         /// <summary> 
         /// Required designer variable.

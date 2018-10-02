@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    public partial class PopUpDisplay : UserControl
+    public partial class PopUpBox : UserControl
     {
-        public PopUpDisplay()
+        public PopUpBox()
         {
             InitializeComponent();
         }

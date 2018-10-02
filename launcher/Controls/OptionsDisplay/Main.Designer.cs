@@ -1,7 +1,10 @@
-﻿namespace LoESoft.Launcher.Controls.AccountDisplay
+﻿namespace LoESoft.Launcher.Controls.OptionsDisplay
 {
-    partial class CurrentAcccountDisplay
+    partial class Main
     {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
@@ -26,7 +29,6 @@
         private void InitializeComponent()
         {
             this.TitlePanelSeperator = new System.Windows.Forms.Panel();
-            this.LogOutButton = new System.Windows.Forms.Button();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
@@ -36,27 +38,11 @@
             this.TitlePanelSeperator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitlePanelSeperator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TitlePanelSeperator.Controls.Add(this.LogOutButton);
             this.TitlePanelSeperator.Controls.Add(this.TitleLabel);
-            this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, -1);
+            this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, 1);
             this.TitlePanelSeperator.Name = "TitlePanelSeperator";
-            this.TitlePanelSeperator.Size = new System.Drawing.Size(1028, 73);
+            this.TitlePanelSeperator.Size = new System.Drawing.Size(1025, 75);
             this.TitlePanelSeperator.TabIndex = 0;
-            // 
-            // LogOutButton
-            // 
-            this.LogOutButton.FlatAppearance.BorderSize = 0;
-            this.LogOutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LogOutButton.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LogOutButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.LogOutButton.Location = new System.Drawing.Point(874, 3);
-            this.LogOutButton.Name = "LogOutButton";
-            this.LogOutButton.Size = new System.Drawing.Size(148, 65);
-            this.LogOutButton.TabIndex = 0;
-            this.LogOutButton.TabStop = false;
-            this.LogOutButton.Text = "Log Out";
-            this.LogOutButton.UseVisualStyleBackColor = false;
-            this.LogOutButton.Click += new System.EventHandler(this.LogOutButton_Click);
             // 
             // TitleLabel
             // 
@@ -64,31 +50,28 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.TitleLabel.Location = new System.Drawing.Point(24, 3);
+            this.TitleLabel.Location = new System.Drawing.Point(366, 0);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(978, 65);
-            this.TitleLabel.TabIndex = 1;
-            this.TitleLabel.Text = "Account Information";
+            this.TitleLabel.Size = new System.Drawing.Size(291, 73);
+            this.TitleLabel.TabIndex = 0;
+            this.TitleLabel.Text = "Options";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // CurrentAcccountDisplay
+            // OptionsDisplayControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Controls.Add(this.TitlePanelSeperator);
-            this.Name = "CurrentAcccountDisplay";
-            this.Size = new System.Drawing.Size(1025, 521);
+            this.Name = "OptionsDisplayControl";
+            this.Size = new System.Drawing.Size(1023, 600);
             this.TitlePanelSeperator.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
         private System.Windows.Forms.Panel TitlePanelSeperator;
         private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.Button LogOutButton;
     }
 }
