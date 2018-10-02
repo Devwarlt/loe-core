@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    public partial class PopUpDisplay : UserControl
+    public partial class PopUpBox : UserControl
     {
-        public PopUpDisplay()
+        public PopUpBox()
         {
             InitializeComponent();
         }
@@ -16,12 +16,12 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
         {
             PopUpTitle.Text = Settings.Title;
             PopUpContent.Text = Settings.Content;
-            Settings.ExtraAction?.Invoke();
+            Settings.OnDisplay?.Invoke();
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            Settings.Action?.Invoke();
+            Settings.OnClose?.Invoke();
             Visible = !Visible;
         }
     }
