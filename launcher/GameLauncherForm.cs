@@ -87,7 +87,6 @@ namespace LoESoft.Launcher
                             OptionsButton.Enabled = true;
                             ExitButton.Enabled = true;
                         }
-
                     }),
                     error => UpdatePopUp(new PopUpSettings()
                     {

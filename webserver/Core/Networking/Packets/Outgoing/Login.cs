@@ -1,5 +1,4 @@
 ﻿using LoESoft.WebServer.Core.Utils;
-using System.Web;
 
 namespace LoESoft.WebServer.Core.Networking.Packets.Outgoing
 {
