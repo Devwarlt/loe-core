@@ -1,8 +1,6 @@
-﻿using LoESoft.Client.Assets;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using System.Linq;
 
 namespace LoESoft.Client.Core.Game.Objects
 {

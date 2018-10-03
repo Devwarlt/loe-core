@@ -1,6 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking;
 using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using Newtonsoft.Json;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
@@ -9,7 +8,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public Client Client { get; private set; }
 
         public Player(Client client)
-            : base (0, 0)
+            : base(0, 0)
         {
             Client = client;
         }

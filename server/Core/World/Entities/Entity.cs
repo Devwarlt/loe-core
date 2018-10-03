@@ -1,5 +1,4 @@
 ﻿using LoESoft.Server.Core.World.Map;
-using Newtonsoft.Json;
 using System;
 
 namespace LoESoft.Server.Core.World.Entities
@@ -22,7 +21,7 @@ namespace LoESoft.Server.Core.World.Entities
         {
             WorldManager.Map.AddEntity(this);
         }
-        
+
         public virtual void Move(int x, int y)
         {
             X = x;

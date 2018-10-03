@@ -31,17 +31,17 @@ namespace LoESoft.Client.Core.Game
 
                     Tiles[x, y] = new Tile(tiledat.X, tiledat.Y, tiledat.Type);
                 }
-            
-            foreach(var i in dat.Entitys)
+
+            foreach (var i in dat.Entitys)
             {
                 var entitydat = JsonConvert.DeserializeObject<EntityData>(i);
                 Entities.Add(new BasicObject() { X = entitydat.X, Y = entitydat.Y });
             }
 
-            foreach(var i in dat.Players)
+            foreach (var i in dat.Players)
             {
                 var playerdat = JsonConvert.DeserializeObject<PlayerData>(i);
-                var player = new BasicObject() { X = playerdat.X, Y = playerdat.Y }; 
+                var player = new BasicObject() { X = playerdat.X, Y = playerdat.Y };
                 if (!Players.Contains(player))
                     Players.Add(player);
                 GameClient.Warn("Player Added!");

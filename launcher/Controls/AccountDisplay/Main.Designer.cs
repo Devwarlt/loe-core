@@ -31,13 +31,13 @@
             this.TitleLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
-            this.RegisterControl = new LoESoft.Launcher.Controls.AccountDisplay.RegisterControl();
-            this.LoginControl = new LoESoft.Launcher.Controls.AccountDisplay.LoginControl();
+            this.RegisterControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Register.RegisterControl();
+            this.LoginControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Login.LoginControl();
             this.SuspendLayout();
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
             this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -119,7 +119,7 @@
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Button RegisterButton;
-        private RegisterControl RegisterControl;
-        private LoginControl LoginControl;
+        private Control.Register.RegisterControl RegisterControl;
+        private Control.Login.LoginControl LoginControl;
     }
 }

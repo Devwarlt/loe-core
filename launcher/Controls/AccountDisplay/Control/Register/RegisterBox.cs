@@ -2,9 +2,9 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static LoESoft.Launcher.Controls.AccountDisplay.RegisterEvent;
+using static LoESoft.Launcher.Controls.AccountDisplay.Control.Register.RegisterEvent;
 
-namespace LoESoft.Launcher.Controls.AccountDisplay
+namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
 {
     public partial class RegisterBox : UserControl
     {

@@ -20,7 +20,7 @@ namespace LoESoft.Server.Core.World
             foreach (var i in ChunkMap)
                 i.LoadChunk();
         }
-        
+
         public string GetData(Player player)
         {
             RawMapData dat = new RawMapData();

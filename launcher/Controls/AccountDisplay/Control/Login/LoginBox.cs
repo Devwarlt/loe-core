@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LoESoft.Launcher.Controls.AccountDisplay
+namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
 {
     public partial class LoginBox : UserControl
     {

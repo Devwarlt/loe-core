@@ -1,35 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LoESoft.Launcher.Controls.AccountDisplay
+namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
 {
-    public partial class LoginControl : UserControl
+    public partial class RegisterControl : UserControl
     {
-        public LoginControl()
+        public RegisterControl()
         {
             InitializeComponent();
         }
 
-        private void LoginControl_Load(object sender, EventArgs e)
+        private void RegisterControl_Load(object sender, EventArgs e)
         {
             // Hide the rest of boxes.
-            LoginBox.Visible = false;
-            LoginBox.Enabled = false;
+            RegisterBox.Visible = false;
+            RegisterBox.Enabled = false;
 
             SetPopUpBoxVisibility(false);
         }
 
-        public void ToggleLoginBox()
+        public void ToggleRegisterBox()
         {
-            LoginBox.Visible = !LoginBox.Visible;
-            LoginBox.Enabled = !LoginBox.Enabled;
+            RegisterBox.Visible = !RegisterBox.Visible;
+            RegisterBox.Enabled = !RegisterBox.Enabled;
         }
 
         public void ToggleUI()

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LoESoft.Launcher.Controls.AccountDisplay
+namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
 {
     public class RegisterEvent : EventArgs
     {

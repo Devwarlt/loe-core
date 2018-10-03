@@ -1,6 +1,4 @@
-﻿using LoESoft.Server.Core.World.Entities;
-using LoESoft.Server.Core.World.Entities.Player;
-using LoESoft.Server.Core.World.Map;
+﻿using LoESoft.Server.Core.World.Map;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -22,7 +20,7 @@ namespace LoESoft.Server.Core.World
         public void AssignEntityData(List<EntityData> entity)
         {
             int idx = 0;
-            foreach(var i in entity)
+            foreach (var i in entity)
             {
                 Entitys[idx] = JsonConvert.SerializeObject(i);
                 idx++;
