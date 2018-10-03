@@ -9,8 +9,8 @@
 
         public override void Handle(Client client)
         {
-            client.Player.UpdatePosition(X, Y);
             GameServer.Info($"X: {X} / Y: {Y}");
+            client.Player.Move(X, Y);
         }
     }
 }

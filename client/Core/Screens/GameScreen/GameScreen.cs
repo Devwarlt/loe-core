@@ -61,6 +61,8 @@ namespace LoESoft.Client.Core.Screens
                                 X = playerX;
                                 Y = playerY;
 
+                                GameClient.Warn("Sending Move Packet");
+
                                 GameUser.SendPacket(new Move()
                                 {
                                     X = playerX,
