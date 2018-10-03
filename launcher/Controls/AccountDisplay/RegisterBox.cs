@@ -52,15 +52,19 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             if (PasswordTextBox.Text != ConfirmPasswordTextBox.Text)
                 OnSend(sender, new RegisterEvent(EventFlags.ACCOUNT_PASSWORD_DOESNT_MATCH));
 
-            var parent = ((Main)Parent);
+            var parent = ((RegisterControl)Parent);
             var query = new HttpEngineQuery();
             query.AddQuery("name", AccountNameTextBox.Text);
             query.AddQuery("password", PasswordTextBox.Text);
 
             Enabled = false;
 
+            GameLauncher.Info($"Is Notifications null? {Notifications == null}.");
+
             if (Notifications != null)
             {
+                GameLauncher.Info(GetNotifications());
+
                 parent.UpdatePopUp(new PopUpSettings()
                 {
                     Title = "Register Denied",
@@ -75,6 +79,9 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                 });
             }
             else
+            {
+                GameLauncher.Info("Dispatching request to the web server...");
+
                 HttpEngine.Handle(
                     PacketID.LOGIN,
                     query,
@@ -104,6 +111,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                             OnClose = () => Enabled = true
                         });
                     });
+            }
         }
 
         private void IsKeyDown(object sender, KeyEventArgs e)
@@ -121,9 +129,9 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             PasswordTextBox.Text = null;
             ConfirmPasswordTextBox.Text = null;
 
-            var parent = ((Main)Parent);
+            var parent = ((RegisterControl)Parent);
             parent.ToggleRegisterBox();
-            parent.ToggleButtons();
+            parent.ToggleUI();
         }
     }
 }

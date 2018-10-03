@@ -14,7 +14,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            var parent = ((Main)Parent);
+            var parent = ((LoginControl)Parent);
             var query = new HttpEngineQuery();
             query.AddQuery("name", AccountNameTextBox.Text);
             query.AddQuery("password", PasswordTextBox.Text);
@@ -65,9 +65,9 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             AccountNameTextBox.Text = null;
             PasswordTextBox.Text = null;
 
-            var parent = ((Main)Parent);
+            var parent = ((LoginControl)Parent);
             parent.ToggleLoginBox();
-            parent.ToggleButtons();
+            parent.ToggleUI();
         }
     }
 }

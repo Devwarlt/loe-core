@@ -14,15 +14,15 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         public void LoadSettings()
         {
+            Settings.OnDisplay.Invoke();
             Title.Text = Settings.Title;
             Content.Text = Settings.Content;
             Content.TextAlign = Settings.Alignment;
-            Settings.OnDisplay?.Invoke();
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            Settings.OnClose?.Invoke();
+            Settings.OnClose.Invoke();
             Visible = !Visible;
         }
     }

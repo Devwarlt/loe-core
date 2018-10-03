@@ -179,6 +179,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="Controls\AccountDisplay\LoginControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\LoginControl.Designer.cs">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AccountDisplay\Main.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -204,6 +210,12 @@
       <DependentUpon>PopUpBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\AccountDisplay\PopUpSettings.cs" />
+    <Compile Include="Controls\AccountDisplay\RegisterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\RegisterControl.Designer.cs">
+      <DependentUpon>RegisterControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AccountDisplay\RegisterEvent.cs" />
     <Compile Include="Controls\CustomTextBox.cs">
       <SubType>Component</SubType>
@@ -234,6 +246,9 @@
     <Compile Include="Misc\IniFile.cs" />
     <Compile Include="GameLauncher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\AccountDisplay\LoginControl.resx">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -245,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\PopUpBox.resx">
       <DependentUpon>PopUpBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\RegisterControl.resx">
+      <DependentUpon>RegisterControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\HomeDisplay\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

@@ -14,33 +14,31 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             if (!Enabled)
                 return;
 
+            // Hide the rest of controls.
+            LoginControl.Visible = false;
+            LoginControl.Enabled = false;
+
+            RegisterControl.Visible = false;
+            RegisterControl.Enabled = false;
+
             // Display only buttons 'LoginButton' and 'RegisterButton'.
             LoginButton.Visible = true;
             LoginButton.Enabled = true;
 
             RegisterButton.Visible = true;
             RegisterButton.Enabled = true;
-
-            // Hide the rest of boxes.
-            LoginBox.Visible = false;
-            LoginBox.Enabled = false;
-
-            RegisterBox.Visible = false;
-            RegisterBox.Enabled = false;
-
-            SetPopUpBoxVisibility(false);
         }
 
         private void LoginButton_Click(object sender, System.EventArgs e)
         {
             ToggleButtons();
-            ToggleLoginBox();
+            ToggleLoginControl();
         }
 
         private void RegisterButton_Click(object sender, System.EventArgs e)
         {
             ToggleButtons();
-            ToggleRegisterBox();
+            ToggleRegisterControl();
         }
 
         public void ToggleButtons()
@@ -50,24 +48,18 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             RegisterButton.Enabled = !RegisterButton.Enabled;
         }
 
-        public void ToggleLoginBox()
+        public void ToggleLoginControl()
         {
-            LoginBox.Visible = !LoginBox.Visible;
-            LoginBox.Enabled = !LoginBox.Enabled;
+            LoginControl.Visible = !LoginControl.Visible;
+            LoginControl.Enabled = !LoginControl.Enabled;
+            LoginControl.ToggleLoginBox();
         }
 
-        public void ToggleRegisterBox()
+        public void ToggleRegisterControl()
         {
-            RegisterBox.Visible = !RegisterBox.Visible;
-            RegisterBox.Enabled = !RegisterBox.Enabled;
-        }
-
-        public void SetPopUpBoxVisibility(bool visible) => PopUpBox.Visible = visible;
-
-        public void UpdatePopUp(PopUpSettings settings)
-        {
-            PopUpBox.Settings = settings;
-            PopUpBox.LoadSettings();
+            RegisterControl.Visible = !RegisterControl.Visible;
+            RegisterControl.Enabled = !RegisterControl.Enabled;
+            RegisterControl.ToggleRegisterBox();
         }
     }
 }
