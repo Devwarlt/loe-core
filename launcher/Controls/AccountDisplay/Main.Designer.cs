@@ -31,9 +31,9 @@
             this.TitleLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
-            this.PopUpBox = new LoESoft.Launcher.Controls.AccountDisplay.PopUpBox();
-            this.LoginBox = new LoESoft.Launcher.Controls.AccountDisplay.LoginBox();
             this.RegisterBox = new LoESoft.Launcher.Controls.AccountDisplay.RegisterBox();
+            this.LoginBox = new LoESoft.Launcher.Controls.AccountDisplay.LoginBox();
+            this.PopUpBox = new LoESoft.Launcher.Controls.AccountDisplay.PopUpBox();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -60,7 +60,7 @@
             this.LoginButton.Location = new System.Drawing.Point(23, 479);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(160, 36);
-            this.LoginButton.TabIndex = 2;
+            this.LoginButton.TabIndex = 0;
             this.LoginButton.TabStop = false;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
@@ -76,39 +76,42 @@
             this.RegisterButton.Location = new System.Drawing.Point(23, 537);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(160, 36);
-            this.RegisterButton.TabIndex = 6;
+            this.RegisterButton.TabIndex = 0;
             this.RegisterButton.TabStop = false;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = false;
             this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
-            // PopUpBox
+            // RegisterBox
             // 
-            this.PopUpBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.PopUpBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PopUpBox.Location = new System.Drawing.Point(99, 204);
-            this.PopUpBox.Name = "PopUpBox";
-            this.PopUpBox.Settings = null;
-            this.PopUpBox.Size = new System.Drawing.Size(400, 173);
-            this.PopUpBox.TabIndex = 9;
+            this.RegisterBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.RegisterBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RegisterBox.Location = new System.Drawing.Point(100, 125);
+            this.RegisterBox.Name = "RegisterBox";
+            this.RegisterBox.Size = new System.Drawing.Size(400, 285);
+            this.RegisterBox.TabIndex = 0;
+            this.RegisterBox.TabStop = false;
             // 
             // LoginBox
             // 
             this.LoginBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.LoginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LoginBox.Location = new System.Drawing.Point(99, 164);
+            this.LoginBox.Location = new System.Drawing.Point(100, 125);
             this.LoginBox.Name = "LoginBox";
             this.LoginBox.Size = new System.Drawing.Size(400, 224);
-            this.LoginBox.TabIndex = 7;
+            this.LoginBox.TabIndex = 0;
+            this.LoginBox.TabStop = false;
             // 
-            // RegisterBox
+            // PopUpBox
             // 
-            this.RegisterBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.RegisterBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RegisterBox.Location = new System.Drawing.Point(99, 126);
-            this.RegisterBox.Name = "RegisterBox";
-            this.RegisterBox.Size = new System.Drawing.Size(400, 285);
-            this.RegisterBox.TabIndex = 8;
+            this.PopUpBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.PopUpBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PopUpBox.Location = new System.Drawing.Point(100, 165);
+            this.PopUpBox.Name = "PopUpBox";
+            this.PopUpBox.Settings = null;
+            this.PopUpBox.Size = new System.Drawing.Size(400, 242);
+            this.PopUpBox.TabIndex = 5;
+            this.PopUpBox.TabStop = false;
             // 
             // Main
             // 
@@ -116,11 +119,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Controls.Add(this.PopUpBox);
+            this.Controls.Add(this.LoginBox);
+            this.Controls.Add(this.RegisterBox);
             this.Controls.Add(this.RegisterButton);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.TitleLabel);
-            this.Controls.Add(this.LoginBox);
-            this.Controls.Add(this.RegisterBox);
             this.Name = "Main";
             this.Size = new System.Drawing.Size(600, 600);
             this.EnabledChanged += new System.EventHandler(this.Main_EnabledChanged);
@@ -133,8 +136,8 @@
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Button RegisterButton;
+        private RegisterBox RegisterBox;
         private LoginBox LoginBox;
         private PopUpBox PopUpBox;
-        private RegisterBox RegisterBox;
     }
 }

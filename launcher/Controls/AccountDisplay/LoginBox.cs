@@ -1,5 +1,6 @@
 ﻿using LoESoft.Launcher.Http;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
@@ -30,6 +31,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                     {
                         Title = "Welcome",
                         Content = success,
+                        Alignment = ContentAlignment.MiddleCenter,
                         OnDisplay = () => parent.SetPopUpBoxVisibility(true),
                         OnClose = () => Enabled = true
                     });
@@ -42,6 +44,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                     {
                         Title = "Login Denied",
                         Content = error,
+                        Alignment = ContentAlignment.MiddleCenter,
                         OnDisplay = () => parent.SetPopUpBoxVisibility(true),
                         OnClose = () => Enabled = true
                     });
@@ -58,6 +61,10 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         private void LoginCancelButton_Click(object sender, EventArgs e)
         {
+            // Clean text box cache.
+            AccountNameTextBox.Text = null;
+            PasswordTextBox.Text = null;
+
             var parent = ((Main)Parent);
             parent.ToggleLoginBox();
             parent.ToggleButtons();

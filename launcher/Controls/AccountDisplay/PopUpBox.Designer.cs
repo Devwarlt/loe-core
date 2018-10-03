@@ -28,52 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.OkButton = new System.Windows.Forms.Button();
-            this.PopUpTitle = new System.Windows.Forms.Label();
-            this.PopUpContent = new System.Windows.Forms.Label();
+            this.SubmitButton = new System.Windows.Forms.Button();
+            this.Title = new System.Windows.Forms.Label();
+            this.Content = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // OkButton
+            // SubmitButton
             // 
-            this.OkButton.BackColor = System.Drawing.Color.DimGray;
-            this.OkButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.OkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.OkButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OkButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.OkButton.Location = new System.Drawing.Point(117, 127);
-            this.OkButton.Name = "OkButton";
-            this.OkButton.Size = new System.Drawing.Size(160, 36);
-            this.OkButton.TabIndex = 0;
-            this.OkButton.Text = "Submit";
-            this.OkButton.UseVisualStyleBackColor = false;
-            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
+            this.SubmitButton.BackColor = System.Drawing.Color.DimGray;
+            this.SubmitButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.SubmitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SubmitButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubmitButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.SubmitButton.Location = new System.Drawing.Point(116, 197);
+            this.SubmitButton.Name = "SubmitButton";
+            this.SubmitButton.Size = new System.Drawing.Size(160, 36);
+            this.SubmitButton.TabIndex = 0;
+            this.SubmitButton.Text = "Submit";
+            this.SubmitButton.UseVisualStyleBackColor = false;
+            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
-            // PopUpTitle
+            // Title
             // 
-            this.PopUpTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Title.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PopUpTitle.BackColor = System.Drawing.Color.Gray;
-            this.PopUpTitle.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PopUpTitle.ForeColor = System.Drawing.Color.Gainsboro;
-            this.PopUpTitle.Location = new System.Drawing.Point(0, 0);
-            this.PopUpTitle.Name = "PopUpTitle";
-            this.PopUpTitle.Size = new System.Drawing.Size(400, 40);
-            this.PopUpTitle.TabIndex = 0;
-            this.PopUpTitle.Text = "<Title>";
-            this.PopUpTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Title.BackColor = System.Drawing.Color.Gray;
+            this.Title.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Title.Location = new System.Drawing.Point(0, 0);
+            this.Title.Name = "Title";
+            this.Title.Size = new System.Drawing.Size(400, 40);
+            this.Title.TabIndex = 0;
+            this.Title.Text = "<Title>";
+            this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // PopUpContent
+            // Content
             // 
-            this.PopUpContent.BackColor = System.Drawing.Color.Transparent;
-            this.PopUpContent.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PopUpContent.ForeColor = System.Drawing.Color.Gainsboro;
-            this.PopUpContent.Location = new System.Drawing.Point(0, 40);
-            this.PopUpContent.Name = "PopUpContent";
-            this.PopUpContent.Size = new System.Drawing.Size(400, 84);
-            this.PopUpContent.TabIndex = 2;
-            this.PopUpContent.Text = "<Content>";
-            this.PopUpContent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Content.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Content.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Content.Location = new System.Drawing.Point(0, 40);
+            this.Content.Name = "Content";
+            this.Content.Size = new System.Drawing.Size(400, 154);
+            this.Content.TabIndex = 1;
+            this.Content.Text = "<Content>";
+            this.Content.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PopUpBox
             // 
@@ -81,19 +80,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.PopUpTitle);
-            this.Controls.Add(this.PopUpContent);
-            this.Controls.Add(this.OkButton);
+            this.Controls.Add(this.Content);
+            this.Controls.Add(this.Title);
+            this.Controls.Add(this.SubmitButton);
             this.Name = "PopUpBox";
-            this.Size = new System.Drawing.Size(400, 173);
+            this.Size = new System.Drawing.Size(400, 242);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button OkButton;
-        private System.Windows.Forms.Label PopUpTitle;
-        private System.Windows.Forms.Label PopUpContent;
+        private System.Windows.Forms.Button SubmitButton;
+        private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.Label Content;
     }
 }

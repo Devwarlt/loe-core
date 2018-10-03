@@ -1,6 +1,5 @@
 ﻿using LoESoft.Server.Core.World.Map;
 using Newtonsoft.Json;
-using System;
 
 namespace LoESoft.Server.Core.World
 {

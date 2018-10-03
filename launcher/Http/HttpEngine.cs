@@ -93,9 +93,8 @@ namespace LoESoft.Launcher.Http
 
                 // General web feedback data.
                 info?.Invoke(data);
-                
             }
-            catch { error?.Invoke("Unable to connect to server"); }
+            catch { error?.Invoke("Server seems to be offline. Try again later."); }
         }
     }
 }

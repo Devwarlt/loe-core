@@ -14,12 +14,13 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         public void LoadSettings()
         {
-            PopUpTitle.Text = Settings.Title;
-            PopUpContent.Text = Settings.Content;
+            Title.Text = Settings.Title;
+            Content.Text = Settings.Content;
+            Content.TextAlign = Settings.Alignment;
             Settings.OnDisplay?.Invoke();
         }
 
-        private void OkButton_Click(object sender, EventArgs e)
+        private void SubmitButton_Click(object sender, EventArgs e)
         {
             Settings.OnClose?.Invoke();
             Visible = !Visible;

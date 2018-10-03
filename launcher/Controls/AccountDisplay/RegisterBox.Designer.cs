@@ -36,7 +36,7 @@
             this.ConfirmPasswordTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
             this.PasswordTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
             this.AccountNameTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.RegisterCancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -124,9 +124,9 @@
             this.ConfirmPasswordTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConfirmPasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.ConfirmPasswordTextBox.Location = new System.Drawing.Point(26, 173);
-            this.ConfirmPasswordTextBox.MaxLength = 32;
+            this.ConfirmPasswordTextBox.MaxLength = 64;
             this.ConfirmPasswordTextBox.Name = "ConfirmPasswordTextBox";
-            this.ConfirmPasswordTextBox.PasswordChar = '*';
+            this.ConfirmPasswordTextBox.PasswordChar = 'x';
             this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(348, 28);
             this.ConfirmPasswordTextBox.TabIndex = 5;
             this.ConfirmPasswordTextBox.TabStop = false;
@@ -142,9 +142,9 @@
             this.PasswordTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.PasswordTextBox.Location = new System.Drawing.Point(26, 123);
-            this.PasswordTextBox.MaxLength = 32;
+            this.PasswordTextBox.MaxLength = 64;
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.PasswordChar = '*';
+            this.PasswordTextBox.PasswordChar = 'x';
             this.PasswordTextBox.Size = new System.Drawing.Size(348, 28);
             this.PasswordTextBox.TabIndex = 6;
             this.PasswordTextBox.TabStop = false;
@@ -160,34 +160,37 @@
             this.AccountNameTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.AccountNameTextBox.Location = new System.Drawing.Point(26, 73);
+            this.AccountNameTextBox.MaxLength = 32;
             this.AccountNameTextBox.Name = "AccountNameTextBox";
+            this.AccountNameTextBox.PasswordChar = 'x';
             this.AccountNameTextBox.Size = new System.Drawing.Size(348, 28);
             this.AccountNameTextBox.TabIndex = 7;
             this.AccountNameTextBox.TabStop = false;
             this.AccountNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button1
+            // RegisterCancelButton
             // 
-            this.button1.BackColor = System.Drawing.Color.DimGray;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button1.Location = new System.Drawing.Point(214, 236);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 36);
-            this.button1.TabIndex = 8;
-            this.button1.TabStop = false;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = false;
+            this.RegisterCancelButton.BackColor = System.Drawing.Color.DimGray;
+            this.RegisterCancelButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.RegisterCancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RegisterCancelButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterCancelButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.RegisterCancelButton.Location = new System.Drawing.Point(214, 236);
+            this.RegisterCancelButton.Name = "RegisterCancelButton";
+            this.RegisterCancelButton.Size = new System.Drawing.Size(160, 36);
+            this.RegisterCancelButton.TabIndex = 8;
+            this.RegisterCancelButton.TabStop = false;
+            this.RegisterCancelButton.Text = "Cancel";
+            this.RegisterCancelButton.UseVisualStyleBackColor = false;
+            this.RegisterCancelButton.Click += new System.EventHandler(this.RegisterCancelButton_Click);
             // 
-            // AccountRegisterPopUp
+            // RegisterBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.RegisterCancelButton);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.CapsLockLabel);
             this.Controls.Add(this.RegisterCreateButton);
@@ -197,7 +200,7 @@
             this.Controls.Add(this.ConfirmPasswordTextBox);
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.AccountNameTextBox);
-            this.Name = "AccountRegisterPopUp";
+            this.Name = "RegisterBox";
             this.Size = new System.Drawing.Size(400, 285);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -214,6 +217,6 @@
         private System.Windows.Forms.Label ConfirmPasswordLabel;
         private System.Windows.Forms.Button RegisterCreateButton;
         private System.Windows.Forms.Label CapsLockLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button RegisterCancelButton;
     }
 }

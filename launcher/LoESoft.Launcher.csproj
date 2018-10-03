@@ -204,6 +204,7 @@
       <DependentUpon>PopUpBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\AccountDisplay\PopUpSettings.cs" />
+    <Compile Include="Controls\AccountDisplay\RegisterEvent.cs" />
     <Compile Include="Controls\CustomTextBox.cs">
       <SubType>Component</SubType>
     </Compile>

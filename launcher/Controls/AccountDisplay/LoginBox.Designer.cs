@@ -111,9 +111,9 @@
             this.PasswordTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.PasswordTextBox.Location = new System.Drawing.Point(26, 123);
-            this.PasswordTextBox.MaxLength = 32;
+            this.PasswordTextBox.MaxLength = 64;
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.PasswordChar = '*';
+            this.PasswordTextBox.PasswordChar = 'x';
             this.PasswordTextBox.Size = new System.Drawing.Size(348, 28);
             this.PasswordTextBox.TabIndex = 6;
             this.PasswordTextBox.TabStop = false;
@@ -129,7 +129,9 @@
             this.AccountNameTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.AccountNameTextBox.Location = new System.Drawing.Point(26, 73);
+            this.AccountNameTextBox.MaxLength = 32;
             this.AccountNameTextBox.Name = "AccountNameTextBox";
+            this.AccountNameTextBox.PasswordChar = 'x';
             this.AccountNameTextBox.Size = new System.Drawing.Size(348, 28);
             this.AccountNameTextBox.TabIndex = 7;
             this.AccountNameTextBox.TabStop = false;
@@ -150,7 +152,7 @@
             this.LoginCancelButton.UseVisualStyleBackColor = false;
             this.LoginCancelButton.Click += new System.EventHandler(this.LoginCancelButton_Click);
             // 
-            // AccountLoginPopUp
+            // LoginBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -164,7 +166,7 @@
             this.Controls.Add(this.AccountNameLabel);
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.AccountNameTextBox);
-            this.Name = "AccountLoginPopUp";
+            this.Name = "LoginBox";
             this.Size = new System.Drawing.Size(400, 224);
             this.ResumeLayout(false);
             this.PerformLayout();
