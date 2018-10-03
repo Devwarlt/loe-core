@@ -76,12 +76,14 @@
     <Compile Include="Core\Game\Animation\AnimationFrame.cs" />
     <Compile Include="Core\Game\Animation\PlayerAnimation.cs" />
     <Compile Include="Core\Game\Camera.cs" />
+    <Compile Include="Core\Game\EntityData.cs" />
     <Compile Include="Core\Game\Map.cs" />
     <Compile Include="Core\Game\Objects\BasicObject.cs" />
     <Compile Include="Core\Game\Objects\Player.cs" />
+    <Compile Include="Core\Game\PlayerData.cs" />
     <Compile Include="Core\Game\RawMapData.cs" />
     <Compile Include="Core\Game\Tile.cs" />
-    <Compile Include="Core\Game\MapDataTypes.cs" />
+    <Compile Include="Core\Game\TileData.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Update.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Move.cs" />
