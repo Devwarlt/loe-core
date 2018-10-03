@@ -12,9 +12,11 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         public PopUpSettings Settings { get; set; }
 
+        public void SetSubmit(bool enabled) => SubmitButton.Enabled = enabled;
+
         public void LoadSettings()
         {
-            Settings.OnDisplay.Invoke();
+            Settings.OnDisplay?.Invoke();
             Title.Text = Settings.Title;
             Content.Text = Settings.Content;
             Content.TextAlign = Settings.Alignment;
@@ -22,7 +24,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            Settings.OnClose.Invoke();
+            Settings.OnClose?.Invoke();
             Visible = !Visible;
         }
     }

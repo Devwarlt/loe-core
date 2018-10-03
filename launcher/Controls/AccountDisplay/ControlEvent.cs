@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
+namespace LoESoft.Launcher.Controls.AccountDisplay
 {
-    public class RegisterEvent : EventArgs
+    public class ControlEvent : EventArgs
     {
         [Flags]
         public enum EventFlags
@@ -26,7 +26,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
 
         private EventFlags EventFlag { get; set; }
 
-        public RegisterEvent(EventFlags eventFlag)
+        public ControlEvent(EventFlags eventFlag)
         {
             EventFlag = eventFlag;
         }

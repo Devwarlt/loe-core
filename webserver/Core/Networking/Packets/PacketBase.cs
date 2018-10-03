@@ -10,10 +10,9 @@ namespace LoESoft.WebServer.Core.Networking.Packets
 {
     public enum PacketID : int
     {
-        PING = 1,
-        LOGIN = 2,
-        LOGIN_TOKEN = 3,
-        REGISTER = 4
+        LOGIN = 1,
+        LOGIN_TOKEN = 2,
+        REGISTER = 3
     }
 
     public abstract class PacketBase
@@ -23,7 +22,6 @@ namespace LoESoft.WebServer.Core.Networking.Packets
 
         public static readonly Dictionary<PacketID, PacketBase> RequestLibrary = new Dictionary<PacketID, PacketBase>()
         {
-            { PacketID.PING, new Ping() },
             { PacketID.LOGIN, new Login() },
             { PacketID.LOGIN_TOKEN, new LoginToken() },
             { PacketID.REGISTER, new Register() }
@@ -31,7 +29,13 @@ namespace LoESoft.WebServer.Core.Networking.Packets
 
         public abstract void Handle();
 
-        public virtual void OnSend(string data) => Write("Success", data);
+        public virtual void OnInfo(string data)
+        {
+            using (var writer = new StreamWriter(Context.Response.OutputStream))
+                writer.Write(data);
+        }
+
+        public virtual void OnSend(string data = null) => Write("Success", data ?? string.Empty);
 
         public virtual void OnError(string data) => Write("Error", data);
 

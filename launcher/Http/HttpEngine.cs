@@ -8,10 +8,9 @@ namespace LoESoft.Launcher.Http
 {
     public enum PacketID : int
     {
-        PING = 1,
-        LOGIN = 2,
-        LOGIN_TOKEN = 3,
-        REGISTER = 4
+        LOGIN = 1,
+        LOGIN_TOKEN = 2,
+        REGISTER = 3
     }
 
     public struct HttpEngineQuery

@@ -49,7 +49,7 @@ namespace LoESoft.WebServer.Core.Database
             {
                 cmd.CommandText = "SELECT * FROM accounts WHERE name = @name AND password = @password;";
                 cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@password", Crypt.Encode(password));
+                cmd.Parameters.AddWithValue("@password", Cipher.Encode(password));
 
                 using (var row = cmd.ExecuteReader())
                     while (row.Read())
@@ -120,12 +120,12 @@ namespace LoESoft.WebServer.Core.Database
         {
             using (var cmd = new SQLiteCommand(Connection))
             {
-                token = Crypt.Encode($"{Crypt.LoESoftHash}+{name}+{password}+{Crypt.LoESoftHash}");
+                token = Cipher.Encode($"{Cipher.LoESoftHash}+{name}+{password}+{Cipher.LoESoftHash}");
 
                 cmd.CommandText = "INSERT INTO accounts (name, password, rank, token, creation) VALUES " +
                     "(@name, @password, @rank, @token, @creation);";
                 cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@password", Crypt.Encode(password));
+                cmd.Parameters.AddWithValue("@password", Cipher.Encode(password));
                 cmd.Parameters.AddWithValue("@rank", 0);
                 cmd.Parameters.AddWithValue("@token", token);
                 cmd.Parameters.AddWithValue("@creation", DateTime.UtcNow);

@@ -1,40 +1,46 @@
-﻿namespace LoESoft.WebServer.Core.Networking.Packets.Outgoing
+﻿using LoESoft.WebServer.Core.Utils;
+using System.Web;
+
+namespace LoESoft.WebServer.Core.Networking.Packets.Outgoing
 {
     public class Login : PacketBase
     {
-        /// <summary>
-        /// Packet ID:
-        /// - (PacketID) LOGIN
-        /// Incoming:
-        /// - (string) name
-        /// - (string) password
-        /// Outgoing:
-        ///     On error:
-        ///     - (string) "Account name is invalid."
-        ///     - (string) "Account password is invalid."
-        ///     - (string) "Account not found."
-        ///     On success:
-        ///     - (string) "You are logged in."
-        /// </summary>
         public override void Handle()
         {
             string name = Query["name"];
             string password = Query["password"];
 
-            bool isNameInvalid = string.IsNullOrEmpty(name) || name?.Length < 6;
-            bool isPasswordInvalid = string.IsNullOrEmpty(password) || password?.Length < 8;
+            bool isNameNullOrEmpty = string.IsNullOrEmpty(name);
+            bool isPasswordNullOrEmpty = string.IsNullOrEmpty(password);
 
-            if (isNameInvalid || isPasswordInvalid)
+            if (string.IsNullOrWhiteSpace(name))
             {
-                if (isNameInvalid)
-                    OnError("Account name is invalid.");
-                else
-                    OnError("Account password is invalid.");
-
+                OnError("Account name is empty.");
                 return;
             }
 
-            var account = GameWebServer._database.GetAccountByCredentials(name, password);
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                OnError("Account password is empty.");
+                return;
+            }
+
+            var name64 = Cipher.Decrypt(name);
+            var pass64 = Cipher.Decrypt(password);
+
+            if (name64.Length < 6)
+            {
+                OnError("Account name minimum length is 6.");
+                return;
+            }
+
+            if (pass64.Length < 8)
+            {
+                OnError("Account password minimum length is 8.");
+                return;
+            }
+
+            var account = GameWebServer._database.GetAccountByCredentials(name64, pass64);
 
             if (account == null)
             {
@@ -42,7 +48,7 @@
                 return;
             }
 
-            OnSend("You are logged in.");
+            OnSend(account.Token);
         }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using LoESoft.Launcher.Http;
+using LoESoft.Launcher.Utils;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static LoESoft.Launcher.Controls.AccountDisplay.Control.Register.RegisterEvent;
+using static LoESoft.Launcher.Controls.AccountDisplay.ControlEvent;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
 {
     public partial class RegisterBox : UserControl
     {
         private string Notifications;
-        private event EventHandler<RegisterEvent> OnSend;
+        private event EventHandler<ControlEvent> OnSend;
 
         public RegisterBox()
         {
@@ -19,7 +20,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
             InitializeComponent();
         }
 
-        private void OnReceive(object sender, RegisterEvent e) => Notifications += $"\t[ORDER]) {e.GetNotificationByFlag}|";
+        private void OnReceive(object sender, ControlEvent e) => Notifications += $"[ORDER]) {e.GetNotificationByFlag}|";
 
         private string GetNotifications()
         {
@@ -38,33 +39,30 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
         private void RegisterButton_Click(object sender, EventArgs e)
         {
             if (AccountNameTextBox.Text.Length < 6)
-                OnSend(sender, new RegisterEvent(EventFlags.ACCOUNT_NAME_INVALID_LENGTH));
+                OnSend(sender, new ControlEvent(EventFlags.ACCOUNT_NAME_INVALID_LENGTH));
 
             if (string.IsNullOrWhiteSpace(AccountNameTextBox.Text))
-                OnSend(sender, new RegisterEvent(EventFlags.ACCOUNT_NAME_NULL_OR_EMPTY));
+                OnSend(sender, new ControlEvent(EventFlags.ACCOUNT_NAME_NULL_OR_EMPTY));
 
             if (PasswordTextBox.Text.Length < 8 || ConfirmPasswordTextBox.Text.Length < 8)
-                OnSend(sender, new RegisterEvent(EventFlags.ACCOUNT_PASSWORD_INVALID_LENGTH));
+                OnSend(sender, new ControlEvent(EventFlags.ACCOUNT_PASSWORD_INVALID_LENGTH));
 
             if (string.IsNullOrWhiteSpace(PasswordTextBox.Text) || string.IsNullOrWhiteSpace(ConfirmPasswordTextBox.Text))
-                OnSend(sender, new RegisterEvent(EventFlags.ACCOUNT_PASSWORD_NULL_OR_EMPTY));
+                OnSend(sender, new ControlEvent(EventFlags.ACCOUNT_PASSWORD_NULL_OR_EMPTY));
 
             if (PasswordTextBox.Text != ConfirmPasswordTextBox.Text)
-                OnSend(sender, new RegisterEvent(EventFlags.ACCOUNT_PASSWORD_DOESNT_MATCH));
+                OnSend(sender, new ControlEvent(EventFlags.ACCOUNT_PASSWORD_DOESNT_MATCH));
 
+            var name = Cipher.Encrypt(AccountNameTextBox.Text);
+            var pass = Cipher.Encrypt(PasswordTextBox.Text);
             var parent = ((RegisterControl)Parent);
             var query = new HttpEngineQuery();
-            query.AddQuery("name", AccountNameTextBox.Text);
-            query.AddQuery("password", PasswordTextBox.Text);
+            query.AddQuery("name", name);
+            query.AddQuery("password", pass);
 
             Enabled = false;
 
-            GameLauncher.Info($"Is Notifications null? {Notifications == null}.");
-
             if (Notifications != null)
-            {
-                GameLauncher.Info(GetNotifications());
-
                 parent.UpdatePopUp(new PopUpSettings()
                 {
                     Title = "Register Denied",
@@ -77,41 +75,33 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
                         Notifications = null;
                     }
                 });
-            }
             else
-            {
-                GameLauncher.Info("Dispatching request to the web server...");
-
                 HttpEngine.Handle(
                     PacketID.LOGIN,
                     query,
-                    success =>
+                    success => parent.UpdatePopUp(new PopUpSettings()
                     {
-                        GameLauncher.Info(success);
-
-                        parent.UpdatePopUp(new PopUpSettings()
+                        Title = "Welcome",
+                        Content = "You have successfully registered a brand-new account, enjoy the game!",
+                        Alignment = ContentAlignment.MiddleCenter,
+                        OnDisplay = () =>
                         {
-                            Title = "Welcome",
-                            Content = success,
-                            Alignment = ContentAlignment.MiddleCenter,
-                            OnDisplay = () => parent.SetPopUpBoxVisibility(true),
-                            OnClose = () => Enabled = true
-                        });
-                    },
+                            // Store login token.
+                            Account.UserAccount.LoginToken = success;
+
+                            parent.SetPopUpBoxVisibility(true);
+                        },
+                        OnClose = () => Enabled = true
+                    }),
                     error =>
+                    parent.UpdatePopUp(new PopUpSettings()
                     {
-                        GameLauncher.Warn(error);
-
-                        parent.UpdatePopUp(new PopUpSettings()
-                        {
-                            Title = "Register Denied",
-                            Content = error,
-                            Alignment = ContentAlignment.MiddleCenter,
-                            OnDisplay = () => parent.SetPopUpBoxVisibility(true),
-                            OnClose = () => Enabled = true
-                        });
-                    });
-            }
+                        Title = "Register Denied",
+                        Content = error,
+                        Alignment = ContentAlignment.MiddleCenter,
+                        OnDisplay = () => parent.SetPopUpBoxVisibility(true),
+                        OnClose = () => Enabled = true
+                    }));
         }
 
         private void IsKeyDown(object sender, KeyEventArgs e)

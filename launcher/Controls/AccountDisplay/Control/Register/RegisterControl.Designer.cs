@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.RegisterBox = new LoESoft.Launcher.Controls.AccountDisplay.RegisterBox();
+            this.RegisterBox = new RegisterBox();
             this.PopUpBox = new LoESoft.Launcher.Controls.AccountDisplay.PopUpBox();
             this.SuspendLayout();
             // 

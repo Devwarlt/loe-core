@@ -1,5 +1,9 @@
 using LoESoft.Launcher.Controls;
+using LoESoft.Launcher.Controls.AccountDisplay;
+using LoESoft.Launcher.Http;
+using LoESoft.Launcher.Utils;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LoESoft.Launcher
@@ -41,25 +45,78 @@ namespace LoESoft.Launcher
 
         private void LauncherForm_FormClosed(object sender, FormClosedEventArgs e) => Account.UserAccount.SaveAccount();
 
+        public void UpdatePopUp(PopUpSettings settings, bool enabled = true)
+        {
+            PopUpBox.Settings = settings;
+            PopUpBox.LoadSettings();
+            PopUpBox.SetSubmit(enabled);
+        }
+
         private void LauncherForm_Load(object sender, EventArgs e)
         {
+            //Cipher.GenerateNewRSAKeys(Cipher.KeySize.KEY_512);
             LauncherVersionLabel.Text = GameLauncherParameters.LAUNCHER_VERSION;
             SelectedDisplay = HomeButton;
 
-            /*var account = Account.LoadAccount();
+            AccountButton.Enabled = false;
+            OptionsButton.Enabled = false;
+            ExitButton.Enabled = false;
 
-            if (!string.IsNullOrWhiteSpace(account.LoginToken)) // if already logged in
+            PopUpBox.Visible = false;
+
+            var account = Account.LoadAccount();
+
+            if (!string.IsNullOrWhiteSpace(account.LoginToken))
             {
-                var httpEngine = HttpEngine.CreateRequest(PacketID.LOGIN_TOKEN);
+                var token = Cipher.Encrypt(account.LoginToken);
                 var query = new HttpEngineQuery();
-                query.AddQuery("token", account.LoginToken);
+                query.AddQuery("token", token);
 
-                httpEngine.SendRequest(null, error =>
+                HttpEngine.Handle(
+                    PacketID.LOGIN_TOKEN,
+                    query,
+                    success => UpdatePopUp(new PopUpSettings()
+                    {
+                        Title = "Welcome",
+                        Content = "You have successfully logged in, enjoy the game!",
+                        Alignment = ContentAlignment.MiddleCenter,
+                        OnDisplay = () => PopUpBox.Visible = true,
+                        OnClose = () =>
+                        {
+                            AccountButton.Enabled = true;
+                            OptionsButton.Enabled = true;
+                            ExitButton.Enabled = true;
+                        }
+
+                    }),
+                    error => UpdatePopUp(new PopUpSettings()
+                    {
+                        Title = "Login Denied",
+                        Content = error,
+                        Alignment = ContentAlignment.MiddleCenter,
+                        OnDisplay = () => PopUpBox.Visible = true,
+                        OnClose = () =>
+                        {
+                            AccountButton.Enabled = true;
+                            OptionsButton.Enabled = true;
+                            ExitButton.Enabled = true;
+                        }
+                    }));
+            }
+            else
+                UpdatePopUp(new PopUpSettings()
                 {
-                    account.Invalidate();
-                    GameLauncher.Info("Unable to relogin");
-                }, query);
-            }*/
+                    Title = "Invalid Token",
+                    Content = "Account token not found, make sure to login next time to avoid this message.",
+                    Alignment = ContentAlignment.MiddleCenter,
+                    OnDisplay = () => PopUpBox.Visible = true,
+                    OnClose = () =>
+                    {
+                        AccountButton.Enabled = true;
+                        OptionsButton.Enabled = true;
+                        ExitButton.Enabled = true;
+                    }
+                });
         }
     }
 }
