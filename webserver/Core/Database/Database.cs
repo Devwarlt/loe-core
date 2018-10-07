@@ -116,7 +116,7 @@ namespace LoESoft.WebServer.Core.Database
         #endregion
 
         #region "Create methods"
-        public void CreateNewAccount(string name, string password, out string token)
+        public bool CreateNewAccount(string name, string password, out string token)
         {
             using (var cmd = new SQLiteCommand(Connection))
             {
@@ -129,7 +129,8 @@ namespace LoESoft.WebServer.Core.Database
                 cmd.Parameters.AddWithValue("@rank", 0);
                 cmd.Parameters.AddWithValue("@token", token);
                 cmd.Parameters.AddWithValue("@creation", DateTime.UtcNow);
-                cmd.ExecuteNonQuery();
+
+                return cmd.ExecuteNonQuery() > 0;
             }
         }
 

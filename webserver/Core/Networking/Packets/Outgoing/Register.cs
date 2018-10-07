@@ -47,9 +47,10 @@ namespace LoESoft.WebServer.Core.Networking.Packets.Outgoing
                 return;
             }
 
-            GameWebServer._database.CreateNewAccount(name64, pass64, out string token);
-
-            OnSend(token);
+            if (GameWebServer._database.CreateNewAccount(name64, pass64, out string token))
+                OnSend(token);
+            else
+                OnError("An error occurred while account registration, try again later...");
         }
     }
 }

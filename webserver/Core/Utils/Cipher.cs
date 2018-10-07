@@ -34,7 +34,7 @@ namespace LoESoft.WebServer.Core.Utils
         {
             string hash = string.Empty;
 
-            foreach (byte theByte in new HMACSHA512().ComputeHash(Encoding.ASCII.GetBytes(value + LoESoftHash), 0, Encoding.ASCII.GetByteCount(value + LoESoftHash)))
+            foreach (byte theByte in new SHA512Managed().ComputeHash(Encoding.UTF8.GetBytes(value + LoESoftHash), 0, Encoding.UTF8.GetByteCount(value + LoESoftHash)))
                 hash += theByte.ToString("x2");
 
             return hash;

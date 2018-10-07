@@ -81,6 +81,8 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
                             Account.UserAccount.SaveAccount();
 
                             parent.SetPopUpBoxVisibility(true);
+
+                            LoginCancelButton_Click(null, null); // remove UI when sucess
                         },
                         OnClose = () => Enabled = true
                     }),
