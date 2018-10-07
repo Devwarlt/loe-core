@@ -1,5 +1,4 @@
 using LoESoft.Launcher.Controls;
-using LoESoft.Launcher.Controls.AccountDisplay;
 using LoESoft.Launcher.Http;
 using LoESoft.Launcher.Utils;
 using System;

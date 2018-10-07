@@ -44,7 +44,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
             if (string.IsNullOrWhiteSpace(AccountNameTextBox.Text))
                 OnSend(sender, new ControlEvent(EventFlags.ACCOUNT_NAME_NULL_OR_EMPTY));
 
-            if (PasswordTextBox.Text.Length < 8 || ConfirmPasswordTextBox.Text.Length < 8)
+            if (PasswordTextBox.Text.Length < 8)
                 OnSend(sender, new ControlEvent(EventFlags.ACCOUNT_PASSWORD_INVALID_LENGTH));
 
             if (string.IsNullOrWhiteSpace(PasswordTextBox.Text) || string.IsNullOrWhiteSpace(ConfirmPasswordTextBox.Text))
@@ -77,7 +77,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
                 });
             else
                 HttpEngine.Handle(
-                    PacketID.LOGIN,
+                    PacketID.REGISTER,
                     query,
                     success => parent.UpdatePopUp(new PopUpSettings()
                     {
@@ -88,6 +88,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
                         {
                             // Store login token.
                             Account.UserAccount.LoginToken = success;
+                            Account.UserAccount.SaveAccount();
 
                             parent.SetPopUpBoxVisibility(true);
                         },

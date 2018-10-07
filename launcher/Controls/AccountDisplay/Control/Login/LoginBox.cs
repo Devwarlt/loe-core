@@ -78,6 +78,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
                         {
                             // Store login token.
                             Account.UserAccount.LoginToken = success;
+                            Account.UserAccount.SaveAccount();
 
                             parent.SetPopUpBoxVisibility(true);
                         },

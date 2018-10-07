@@ -29,7 +29,7 @@ namespace LoESoft.Launcher
             this.AccountDisplay = new LoESoft.Launcher.Controls.AccountDisplay.Main();
             this.HomeButton = new LoESoft.Launcher.Controls.ExtendedButton();
             this.HomeDisplay = new LoESoft.Launcher.Controls.HomeDisplay.Main();
-            this.PopUpBox = new LoESoft.Launcher.Controls.AccountDisplay.PopUpBox();
+            this.PopUpBox = new LoESoft.Launcher.Controls.PopUpBox();
             this.ButtonsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -241,7 +241,7 @@ namespace LoESoft.Launcher
         private Controls.OptionsDisplay.Main OptionsDisplay;
         private Controls.AccountDisplay.Main AccountDisplay;
         private Controls.HomeDisplay.Main HomeDisplay;
-        private Controls.AccountDisplay.PopUpBox PopUpBox;
+        private Controls.PopUpBox PopUpBox;
     }
 }
 

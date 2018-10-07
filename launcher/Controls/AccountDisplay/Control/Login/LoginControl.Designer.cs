@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.LoginBox = new LoginBox();
-            this.PopUpBox = new LoESoft.Launcher.Controls.AccountDisplay.PopUpBox();
+            this.PopUpBox = new LoESoft.Launcher.Controls.PopUpBox();
             this.SuspendLayout();
             // 
             // LoginBox
