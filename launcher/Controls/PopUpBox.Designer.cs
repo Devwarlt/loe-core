@@ -1,4 +1,4 @@
-﻿namespace LoESoft.Launcher.Controls.AccountDisplay
+﻿namespace LoESoft.Launcher.Controls
 {
     partial class PopUpBox
     {
