@@ -10,6 +10,7 @@ namespace LoESoft.Client.Core.Game.Objects
     public partial class Player : BasicObject
     {
         public Player()
+            : base(Color.White)
         {
             IsMoving = false;
             _animation = new PlayerAnimation();

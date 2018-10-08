@@ -23,16 +23,19 @@ namespace LoESoft.Server.Core.World
                 return false;
 
             Players.Add(client, client.Player);
-            GameServer.Warn($"{client.Player.X} Was added");
+
+            Map.AddPlayer(client.Player);
+
             return true;
         }
 
         public static void TryRemovePlayer(Client client)
         {
             if (Players.Keys.Contains(client))
+            {
                 Players.Remove(client);
-
-            GameServer.Warn($"{client.Player.X} Was removed");
+                Map.RemovePlayer(client.Player);
+            }
         }
     }
 }

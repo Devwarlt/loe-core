@@ -15,12 +15,18 @@ namespace LoESoft.Client.Core.Game.Objects
         public int Size = 8;
 
         public Texture2D Texture { get; set; }
+        public Color Color;
+
+        public BasicObject(Color color)
+        {
+            Color = color;
+        }
 
         //need 2 implement a asset loader for the objects b4 the base class is done
         public virtual void Update(GameTime gameTime) { }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawRectangle(new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color.Orange, 4);
+            spriteBatch.DrawRectangle(new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color, 4);
         }
     }
 }

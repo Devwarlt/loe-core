@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoESoft.Server.Core.World.Map.Data;
+using System;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World.Map
@@ -34,13 +35,25 @@ namespace LoESoft.Server.Core.World.Map
                 {
                     int id = random.Next(0, 2);
 
-                    Tiles[x, y] = new TileData() { X = _startX + x, Y = _startY + y, Type = id };
+                    Tiles[x, y] = new TileData()
+                    {
+                        X = _startX + x,
+                        Y = _startY + y,
+                        Type = id
+                    };
 
                     Entities.Add(new EntityData()
                     {
                         X = _startX + random.Next(0, 15),
                         Y = _startY + random.Next(0, 15),
                         Type = 0
+                    });
+
+                    Players.Add(new PlayerData()
+                    {
+                        X = _startX + random.Next(0, 15),
+                        Y = _startY + random.Next(0, 15),
+                        Type = 0,
                     });
                 }
         }

@@ -7,11 +7,15 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
     {
         public string WorldData { get; set; }
 
+        public string EntityData { get; set; }
+
+        public string PlayerData { get; set; }
+
         public override PacketID PacketID => PacketID.UPDATE;
 
         public override void Handle(GameUser gameUser)
         {
-            GameScreen.PlayerMap.Update(WorldData);
+            GameScreen.PlayerMap.Update(WorldData, EntityData, PlayerData);
         }
     }
 }

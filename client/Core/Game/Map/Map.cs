@@ -1,4 +1,5 @@
 ﻿using LoESoft.Client.Core.Game.Objects;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -20,47 +21,54 @@ namespace LoESoft.Client.Core.Game
 
         protected bool initialUpdate = false;
 
-        public void Update(string data)
+        public void Update(string mapdata, string entitydata, string playerdata)
         {
-            RawMapData dat = JsonConvert.DeserializeObject<RawMapData>(data);
+            ClearMap();
+
+            RawMapData mdat = JsonConvert.DeserializeObject<RawMapData>(mapdata);
+            RawEntityData edat = JsonConvert.DeserializeObject<RawEntityData>(entitydata);
+            RawPlayerData pdat = JsonConvert.DeserializeObject<RawPlayerData>(playerdata);
 
             for (var x = 0; x < 16; x++)
                 for (var y = 0; y < 16; y++)
                 {
-                    var tiledat = JsonConvert.DeserializeObject<TileData>(dat.Tiles[x, y]);
+                    var tiledat = JsonConvert.DeserializeObject<TileData>(mdat.Tiles[x, y]);
 
                     Tiles[x, y] = new Tile(tiledat.X, tiledat.Y, tiledat.Type);
                 }
 
-            foreach (var i in dat.Entitys)
+            foreach (var i in edat.Entity)
             {
                 var entitydat = JsonConvert.DeserializeObject<EntityData>(i);
-                Entities.Add(new BasicObject() { X = entitydat.X, Y = entitydat.Y });
+                Entities.Add(new BasicObject(Color.Red) { X = entitydat.X, Y = entitydat.Y });
             }
 
-            foreach (var i in dat.Players)
+            foreach (var i in pdat.Player)
             {
                 var playerdat = JsonConvert.DeserializeObject<PlayerData>(i);
-                var player = new BasicObject() { X = playerdat.X, Y = playerdat.Y };
-                if (!Players.Contains(player))
-                    Players.Add(player);
-                GameClient.Warn("Player Added!");
+                Players.Add(new BasicObject(Color.Green) { X = playerdat.X, Y = playerdat.Y });
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            var tile = Tiles;
-            foreach (var i in tile)
+            foreach (var i in Tiles)
             {
                 if (i != null)
                     i.Draw(spriteBatch);
             }
+
             foreach (var i in Entities.ToArray())
                 i.Draw(spriteBatch);
 
             foreach (var i in Players.ToArray())
                 i.Draw(spriteBatch);
+        }
+
+        public void ClearMap()
+        {
+            Players.Clear();
+            Entities.Clear();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Core.World.Map;
+using LoESoft.Server.Core.World.Map.Data;
 using System;
 
 namespace LoESoft.Server.Core.World.Entities
@@ -17,30 +18,26 @@ namespace LoESoft.Server.Core.World.Entities
             Y = y;
         }
 
-        public virtual void Init()
-        {
-            WorldManager.Map.AddEntity(this);
-        }
-
         public virtual void Move(int x, int y)
         {
             X = x;
             Y = y;
 
-            var cx = X / Chunk.CHUNKSIZE;
-            var cy = Y / Chunk.CHUNKSIZE;
+            var cx = x / Chunk.CHUNKSIZE;
+            var cy = y / Chunk.CHUNKSIZE;
 
-            if (ChunkX != cx || ChunkY != cy)
+            if (cx > ChunkX || cy > ChunkY)
             {
-                ChunkX = cx;
-                ChunkY = cy;
-                RepositionToChunk(cx, cy);
+                RepositionToChunk();
             }
+            
+            ChunkX = cx;
+            ChunkY = cy;
         }
 
-        protected virtual void RepositionToChunk(int cx, int cy)
+        protected virtual void RepositionToChunk()
         {
-            WorldManager.Map.RemoveEntity(this, cx, cy);
+            WorldManager.Map.RemoveEntity(this);
             WorldManager.Map.AddEntity(this);
         }
 

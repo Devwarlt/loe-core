@@ -28,8 +28,7 @@ namespace LoESoft.Server.Core.Networking
 
             Player = new Player(this);
 
-            if (WorldManager.TryAddPlayer(this))
-                Player.Init();
+            WorldManager.TryAddPlayer(this);
 
             SendPacket(new Ping() { Value = new Random().Next() });
         }
