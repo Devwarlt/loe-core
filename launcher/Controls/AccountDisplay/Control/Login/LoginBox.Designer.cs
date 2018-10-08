@@ -39,7 +39,7 @@
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
             this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -104,7 +104,7 @@
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.PasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.PasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -116,13 +116,12 @@
             this.PasswordTextBox.PasswordChar = 'x';
             this.PasswordTextBox.Size = new System.Drawing.Size(348, 28);
             this.PasswordTextBox.TabIndex = 6;
-            this.PasswordTextBox.TabStop = false;
             this.PasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsKeyDown);
             // 
             // AccountNameTextBox
             // 
-            this.AccountNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.AccountNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AccountNameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.AccountNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -134,7 +133,6 @@
             this.AccountNameTextBox.PasswordChar = 'x';
             this.AccountNameTextBox.Size = new System.Drawing.Size(348, 28);
             this.AccountNameTextBox.TabIndex = 7;
-            this.AccountNameTextBox.TabStop = false;
             this.AccountNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LoginCancelButton
@@ -148,6 +146,7 @@
             this.LoginCancelButton.Name = "LoginCancelButton";
             this.LoginCancelButton.Size = new System.Drawing.Size(160, 36);
             this.LoginCancelButton.TabIndex = 9;
+            this.LoginCancelButton.TabStop = false;
             this.LoginCancelButton.Text = "Cancel";
             this.LoginCancelButton.UseVisualStyleBackColor = false;
             this.LoginCancelButton.Click += new System.EventHandler(this.LoginCancelButton_Click);

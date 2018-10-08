@@ -78,8 +78,11 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
                         {
                             // Store login token.
                             Account.UserAccount.LoginToken = success;
+                            Account.UserAccount.SaveAccount();
 
                             parent.SetPopUpBoxVisibility(true);
+
+                            LoginCancelButton_Click(null, null); // remove UI when sucess
                         },
                         OnClose = () => Enabled = true
                     }),

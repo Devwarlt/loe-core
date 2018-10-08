@@ -42,12 +42,9 @@ namespace LoESoft.WebServer.Core.Networking.Packets.Outgoing
             var account = GameWebServer._database.GetAccountByCredentials(name64, pass64);
 
             if (account == null)
-            {
                 OnError("Account not found.");
-                return;
-            }
-
-            OnSend(account.Token);
+            else
+                OnSend(account.Token);
         }
     }
 }

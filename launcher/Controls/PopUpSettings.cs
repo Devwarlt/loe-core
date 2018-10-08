@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace LoESoft.Launcher.Controls.AccountDisplay
+namespace LoESoft.Launcher.Controls
 {
     public class PopUpSettings
     {
