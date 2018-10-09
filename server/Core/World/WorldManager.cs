@@ -1,7 +1,9 @@
 ﻿using LoESoft.Server.Core.Networking;
 using LoESoft.Server.Core.World.Entities.Player;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace LoESoft.Server.Core.World
 {
@@ -9,31 +11,57 @@ namespace LoESoft.Server.Core.World
     {
         public static MapData Map { get; private set; }
 
-        public static Dictionary<Client, Player> Players = new Dictionary<Client, Player>(); //Useless atm
+        public static ConcurrentBag<Client> Clients = new ConcurrentBag<Client>();
 
-        static WorldManager()
+        public static void Initialize()
         {
             Map = new MapData();
-            Players = new Dictionary<Client, Player>();
+
+            loopThread = new Thread(() =>
+            {
+                do
+                {
+                    Map.Update();
+
+                    Thread.Sleep(WorldSettings.COOLDOWN);
+
+                } while (true);
+            });
+
+            loopThread.Priority = ThreadPriority.Highest;
+        }
+
+        static Thread loopThread;
+        public static void TickUpdate()
+        {
+            loopThread.Start();
+        }
+
+        public static void Stop()
+        {
+            foreach (var i in Clients)
+                i.Disconnect();
         }
 
         public static bool TryAddPlayer(Client client)
         {
-            if (Players.Count >= WorldSettings.MAXPLAYERS)
+            if (Clients.Count >= WorldSettings.MAXPLAYERS)
                 return false;
 
-            Players.Add(client, client.Player);
+            Clients.Add(client);
 
             Map.AddPlayer(client.Player);
+
+            GameServer.Warn("Player added!");
 
             return true;
         }
 
         public static void TryRemovePlayer(Client client)
         {
-            if (Players.Keys.Contains(client))
+            if (Clients.Contains(client))
             {
-                Players.Remove(client);
+                Clients.TryTake(out client);
                 Map.RemovePlayer(client.Player);
             }
         }

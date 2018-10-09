@@ -1,4 +1,6 @@
-﻿namespace LoESoft.Server.Core.Networking.Packets.Incoming
+﻿using LoESoft.Server.Core.World;
+
+namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
     public class Move : IncomingPacket
     {
@@ -9,8 +11,10 @@
 
         public override void Handle(Client client)
         {
-            GameServer.Info($"X: {X} / Y: {Y}");
-            client.Player.Move(X, Y);
+            client.Player.X = X;
+            client.Player.Y = Y;
+
+            WorldManager.Map.RepositionPlayer(client.Player, X, Y);
         }
     }
 }

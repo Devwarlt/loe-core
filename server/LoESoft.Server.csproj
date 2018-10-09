@@ -212,6 +212,7 @@
     <Compile Include="Core\Networking\Client.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\IncomingPacket.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\Load.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Move.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\OutgoingPacket.cs" />

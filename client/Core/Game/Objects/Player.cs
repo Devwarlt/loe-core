@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Animation;
+using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,11 +11,14 @@ namespace LoESoft.Client.Core.Game.Objects
 {
     public partial class Player : BasicObject
     {
-        public Player()
+        public GameUser GameUser { get; private set; }
+
+        public Player(GameUser gameuser)
             : base(Color.White)
         {
             IsMoving = false;
             _animation = new PlayerAnimation();
+            GameUser = gameuser;
         }
 
         public override void Update(GameTime gameTime)
@@ -46,19 +51,28 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public void UpdateMovement(float dt)
         {
-            if (X != DistinationX)
+            if (X != DistinationX || Y != DistinationY)
             {
-                if (X > DistinationX)
-                    X -= dt;
-                else if (X < DistinationX)
-                    X += dt;
-            }
-            if (Y != DistinationY)
-            {
-                if (Y > DistinationY)
-                    Y -= dt;
-                else if (Y < DistinationY)
-                    Y += dt;
+                if (X != DistinationX)
+                {
+                    if (X > DistinationX)
+                        X -= dt;
+                    else if (X < DistinationX)
+                        X += dt;
+                }
+                if (Y != DistinationY)
+                {
+                    if (Y > DistinationY)
+                        Y -= dt;
+                    else if (Y < DistinationY)
+                        Y += dt;
+                }
+                
+                GameUser.SendPacket(new Move()
+                {
+                    X = DistinationX,
+                    Y = DistinationY
+                });
             }
         }
 

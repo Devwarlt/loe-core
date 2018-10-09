@@ -20,18 +20,21 @@ namespace LoESoft.Server.Core.World.Entities.Player
             WorldManager.Map.AddPlayer(this);
         }
 
-        public override void Move(int x, int y)
+        public override void Update()
         {
-            base.Move(x, y);
-
-            GameServer.Info("Sending Update!");
-
+            base.Update();
+            
             Client.SendPacket(new Update()
             {
                 WorldData = WorldManager.Map.GetTileData(this),
                 EntityData = WorldManager.Map.GetEntityData(this),
                 PlayerData = WorldManager.Map.GetPlayerData(this)
             });
+        }
+
+        public override void Dispose()
+        {
+            WorldManager.Map.RemovePlayer(this);
         }
 
         public PlayerData GetPlayerData()

@@ -9,8 +9,8 @@ namespace LoESoft.Server.Core.World.Entities
         public int X { get; set; }
         public int Y { get; set; }
 
-        public int ChunkX { get; set; }
-        public int ChunkY { get; set; }
+        public int ChunkX { get; set; } = 0;
+        public int ChunkY { get; set; } = 0;
 
         public Entity(int x, int y)
         {
@@ -18,19 +18,16 @@ namespace LoESoft.Server.Core.World.Entities
             Y = y;
         }
 
-        public virtual void Move(int x, int y)
+        public virtual void Update()
         {
-            X = x;
-            Y = y;
-
-            var cx = x / Chunk.CHUNKSIZE;
-            var cy = y / Chunk.CHUNKSIZE;
+            var cx = X / Chunk.CHUNKSIZE;
+            var cy = Y / Chunk.CHUNKSIZE;
 
             if (cx > ChunkX || cy > ChunkY)
             {
                 RepositionToChunk();
             }
-            
+
             ChunkX = cx;
             ChunkY = cy;
         }
@@ -46,6 +43,9 @@ namespace LoESoft.Server.Core.World.Entities
             return new EntityData() { X = X, Y = Y, Type = 0 };
         }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+            WorldManager.Map.RemoveEntity(this);
+        }
     }
 }

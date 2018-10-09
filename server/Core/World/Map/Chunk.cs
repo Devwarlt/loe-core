@@ -1,4 +1,6 @@
-﻿using LoESoft.Server.Core.World.Map.Data;
+﻿using LoESoft.Server.Core.World.Entities;
+using LoESoft.Server.Core.World.Entities.Player;
+using LoESoft.Server.Core.World.Map.Data;
 using System;
 using System.Collections.Generic;
 
@@ -10,20 +12,34 @@ namespace LoESoft.Server.Core.World.Map
 
         public TileData[,] Tiles { get; private set; }
 
-        public List<EntityData> Entities { get; private set; }
-        public List<PlayerData> Players { get; private set; }
+        public List<Entity> Entities { get; private set; }
+        public List<Player> Players { get; private set; }
 
         private int _startX;
         private int _startY;
 
+        public bool IsActive
+        {
+            get => (Players.Count > 0);
+        }
+
         public Chunk(int chunkx, int chunky)
         {
             Tiles = new TileData[CHUNKSIZE, CHUNKSIZE];
-            Entities = new List<EntityData>();
-            Players = new List<PlayerData>();
+            Entities = new List<Entity>();
+            Players = new List<Player>();
 
             _startX = chunkx * CHUNKSIZE;
             _startY = chunky * CHUNKSIZE;
+        }
+
+        public void Update()
+        {
+            foreach(var i in Entities.ToArray())
+                i.Update();
+            
+            foreach(var i in Players.ToArray())
+                i.Update();
         }
 
         public void LoadChunk() //temporary
@@ -42,19 +58,8 @@ namespace LoESoft.Server.Core.World.Map
                         Type = id
                     };
 
-                    Entities.Add(new EntityData()
-                    {
-                        X = _startX + random.Next(0, 15),
-                        Y = _startY + random.Next(0, 15),
-                        Type = 0
-                    });
-
-                    Players.Add(new PlayerData()
-                    {
-                        X = _startX + random.Next(0, 15),
-                        Y = _startY + random.Next(0, 15),
-                        Type = 0,
-                    });
+                    Entities.Add(new Entity(_startX + random.Next(0, 16),
+                        _startY + random.Next(0, 16)));
                 }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking;
+using LoESoft.Server.Core.World;
 using LoESoft.Server.Settings;
 using LoESoft.Server.Utils;
 using NLog;
@@ -53,14 +54,20 @@ namespace LoESoft.Server
 
             try
             {
+                WorldManager.Initialize();
+
                 var connectionListener = new ConnectionListener();
+                
                 connectionListener.StartAccept();
+                
+                WorldManager.TickUpdate();
 
                 Info("Game Server is loading... OK!");
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
                 connectionListener.EndAccept();
+                WorldManager.Stop();
 
                 Info("Game Server has been stopped.");
 

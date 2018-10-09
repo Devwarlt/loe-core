@@ -23,8 +23,6 @@ namespace LoESoft.Client.Core.Game
 
         public void Update(string mapdata, string entitydata, string playerdata)
         {
-            ClearMap();
-
             RawMapData mdat = JsonConvert.DeserializeObject<RawMapData>(mapdata);
             RawEntityData edat = JsonConvert.DeserializeObject<RawEntityData>(entitydata);
             RawPlayerData pdat = JsonConvert.DeserializeObject<RawPlayerData>(playerdata);
@@ -36,18 +34,24 @@ namespace LoESoft.Client.Core.Game
 
                     Tiles[x, y] = new Tile(tiledat.X, tiledat.Y, tiledat.Type);
                 }
-
+            
+            List<BasicObject> entities = new List<BasicObject>();
+            List<BasicObject> players = new List<BasicObject>();
             foreach (var i in edat.Entity)
             {
                 var entitydat = JsonConvert.DeserializeObject<EntityData>(i);
-                Entities.Add(new BasicObject(Color.Red) { X = entitydat.X, Y = entitydat.Y });
+                entities.Add(new BasicObject(Color.Red) { X = entitydat.X, Y = entitydat.Y });
             }
-
             foreach (var i in pdat.Player)
             {
                 var playerdat = JsonConvert.DeserializeObject<PlayerData>(i);
-                Players.Add(new BasicObject(Color.Green) { X = playerdat.X, Y = playerdat.Y });
+                players.Add(new BasicObject(Color.Green) { X = playerdat.X, Y = playerdat.Y });
             }
+
+            if (Entities != entities)
+                Entities = entities;
+            if (Players != players)
+                Players = players;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -63,12 +67,6 @@ namespace LoESoft.Client.Core.Game
 
             foreach (var i in Players.ToArray())
                 i.Draw(spriteBatch);
-        }
-
-        public void ClearMap()
-        {
-            Players.Clear();
-            Entities.Clear();
         }
     }
 }

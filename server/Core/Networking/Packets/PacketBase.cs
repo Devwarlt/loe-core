@@ -8,7 +8,8 @@ namespace LoESoft.Server.Core.Networking.Packets
         PING = 0,
         PONG = 1,
         MOVE = 2,
-        UPDATE = 3
+        UPDATE = 3,
+        LOAD = 4
     }
 
     public abstract class PacketBase

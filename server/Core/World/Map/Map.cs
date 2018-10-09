@@ -3,18 +3,13 @@ using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Core.World.Map.Data;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LoESoft.Server.Core.World
 {
     public class MapData
     {
-        public enum DataTypes
-        {
-            Player = 0,
-            Entities = 1,
-            Tiles = 2
-        }
-
         public Chunk[,] ChunkMap;
 
         public MapData()
@@ -29,16 +24,32 @@ namespace LoESoft.Server.Core.World
                 i.LoadChunk();
         }
 
+        public void Update()
+        {
+            foreach(var i in ChunkMap)
+                if (i.IsActive)
+                    i.Update();
+        }
+
+        #region MANAGECHUNKS
+        public void RepositionPlayer(Player player, int x, int y)
+        {
+            int idx = ChunkMap[player.ChunkX, player.ChunkY].Players.IndexOf(player);
+            ChunkMap[player.ChunkX, player.ChunkY].Players[idx].X = x;
+            ChunkMap[player.ChunkX, player.ChunkY].Players[idx].Y = y;
+        }
+        #endregion
+
         #region GETDATA
         public string GetPlayerData(Player player)
         {
             RawPlayerData dat = new RawPlayerData();
 
-            var chunk = ChunkMap[player.ChunkX, player.ChunkY];
+            Chunk chunk = ChunkMap[player.ChunkX, player.ChunkY];
 
-            chunk.Players.Remove(player.GetPlayerData());
+            var newdata = chunk.Players.Where(_ => _ != player).ToList();
 
-            dat.AssignData(chunk.Players);
+            dat.AssignData(newdata);
 
             return JsonConvert.SerializeObject(dat);
         }
@@ -68,16 +79,16 @@ namespace LoESoft.Server.Core.World
 
         #region Add/Remove Entites
         public void AddEntity(Entity entity)
-        => ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Add(entity.GetData());
+        => ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Add(entity);
 
         public void AddPlayer(Player player) =>
-            ChunkMap[player.ChunkX, player.ChunkY].Players.Add(player.GetPlayerData());
+            ChunkMap[player.ChunkX, player.ChunkY].Players.Add(player);
 
         public void RemoveEntity(Entity entity)
-        => ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Remove(entity.GetData());
+        => ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Remove(entity);
 
         public void RemovePlayer(Player player)
-        => ChunkMap[player.ChunkX, player.ChunkY].Players.Remove(player.GetPlayerData());
+        => ChunkMap[player.ChunkX, player.ChunkY].Players.Remove(player);
         #endregion
     }
 }

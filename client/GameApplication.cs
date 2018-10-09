@@ -32,6 +32,7 @@ namespace LoESoft.Client
         {
             base.Initialize();
 
+
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
 
             ScreenManager.DispatchScreen(new SplashScreen());
@@ -53,6 +54,8 @@ namespace LoESoft.Client
             AudioManager.Init();
 
             TextDisplay.LoadSpriteFont(Content);
+
+            AudioManager.SetActiveMusic("titleScreenMusic");
 
             ScreenManager.OnGameClose += () =>
             {

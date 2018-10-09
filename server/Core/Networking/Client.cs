@@ -12,8 +12,10 @@ namespace LoESoft.Server.Core.Networking
     {
         public Socket Socket { get; set; }
         public NetworkControl NetworkControl { get; set; }
-        public Player Player { get; private set; }
+
         public string IpAddress { get; set; }
+        
+        public Player Player { get; set; }
 
         public Client(Socket socket)
         {
@@ -26,18 +28,14 @@ namespace LoESoft.Server.Core.Networking
             NetworkControl = new NetworkControl(this, Socket);
             NetworkControl.ReceivePacket();
 
-            Player = new Player(this);
-
-            WorldManager.TryAddPlayer(this);
-
             SendPacket(new Ping() { Value = new Random().Next() });
         }
 
         public void Disconnect()
         {
+            NetworkControl.Disconnect();
             Player.Dispose();
             Socket.Close();
-            WorldManager.TryRemovePlayer(this);
         }
 
         #region SENDMETHODs
