@@ -63,13 +63,12 @@ namespace LoESoft.Launcher
 
             PopUpBox.Visible = false;
 
-            var account = Account.LoadAccount();
+            Account.LoadAccount();
 
-            if (!string.IsNullOrWhiteSpace(account.LoginToken))
+            if (!string.IsNullOrWhiteSpace(Account.UserAccount.LoginToken))
             {
-                var token = Cipher.Encrypt(account.LoginToken);
                 var query = new HttpEngineQuery();
-                query.AddQuery("token", token);
+                query.AddQuery("token", Account.UserAccount.LoginToken);
 
                 HttpEngine.Handle(
                     PacketID.LOGIN_TOKEN,
@@ -92,7 +91,12 @@ namespace LoESoft.Launcher
                         Title = "Login Denied",
                         Content = error,
                         Alignment = ContentAlignment.MiddleCenter,
-                        OnDisplay = () => PopUpBox.Visible = true,
+                        OnDisplay = () =>
+                        {
+                            Account.UserAccount.Invalidate();
+
+                            PopUpBox.Visible = true;
+                        },
                         OnClose = () =>
                         {
                             AccountButton.Enabled = true;

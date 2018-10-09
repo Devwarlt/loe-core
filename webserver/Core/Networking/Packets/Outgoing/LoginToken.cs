@@ -1,6 +1,4 @@
-﻿using LoESoft.WebServer.Core.Utils;
-
-namespace LoESoft.WebServer.Core.Networking.Packets.Outgoing
+﻿namespace LoESoft.WebServer.Core.Networking.Packets.Outgoing
 {
     public class LoginToken : PacketBase
     {
@@ -14,15 +12,13 @@ namespace LoESoft.WebServer.Core.Networking.Packets.Outgoing
                 return;
             }
 
-            var token64 = Cipher.Decrypt(token);
-
-            if (token64.Length != 128)
+            if (token.Length != 128)
             {
                 OnError("Account token doesn't match length.");
                 return;
             }
 
-            var account = GameWebServer._database.GetAccountByToken(token64);
+            var account = GameWebServer._database.GetAccountByToken(token);
 
             if (account == null)
                 OnError("Account not found.");

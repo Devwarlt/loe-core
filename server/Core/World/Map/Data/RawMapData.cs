@@ -1,5 +1,4 @@
-﻿using LoESoft.Server.Core.World.Map.Data;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World.Map.Data
