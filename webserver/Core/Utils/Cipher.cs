@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Serialization;
 
 namespace LoESoft.WebServer.Core.Utils
 {
@@ -20,14 +18,12 @@ namespace LoESoft.WebServer.Core.Utils
 
         public static string Decrypt(string plainText)
         {
-            using (var rsa = new RSACryptoServiceProvider((int)RSAKeySize, new CspParameters() { KeyContainerName = LoESoftHash }))
-                return Encoding.UTF8.GetString(rsa.Decrypt(Convert.FromBase64String(plainText), false));
-        }
-
-        private static RSAParameters DeserializeRSAFromString(string key)
-        {
-            using (var rdr = new StringReader(key))
-                return (RSAParameters)(new XmlSerializer(typeof(RSAParameters))).Deserialize(rdr);
+            try
+            {
+                using (var rsa = new RSACryptoServiceProvider((int)RSAKeySize, new CspParameters() { KeyContainerName = LoESoftHash }))
+                    return Encoding.UTF8.GetString(rsa.Decrypt(Convert.FromBase64String(plainText), false));
+            }
+            catch { return plainText; }
         }
 
         public static string Encode(string value)

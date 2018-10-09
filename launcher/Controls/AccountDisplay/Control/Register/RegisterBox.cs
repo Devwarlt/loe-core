@@ -91,10 +91,12 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
                             Account.UserAccount.SaveAccount();
 
                             parent.SetPopUpBoxVisibility(true);
-
-                            RegisterCancelButton_Click(null, null); // remove UI when success
                         },
-                        OnClose = () => Enabled = true
+                        OnClose = () =>
+                        {
+                            Enabled = true;
+                            RegisterCancelButton_Click(null, null); // remove UI when success
+                        }
                     }),
                     error =>
                     parent.UpdatePopUp(new PopUpSettings()

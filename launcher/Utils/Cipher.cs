@@ -19,8 +19,12 @@ namespace LoESoft.Launcher.Utils
 
         public static string Encrypt(string plainText)
         {
-            using (var rsa = new RSACryptoServiceProvider((int)RSAKeySize, new CspParameters() { KeyContainerName = LoESoftHash }))
-                return HttpUtility.UrlEncode(Convert.ToBase64String(rsa.Encrypt(Encoding.UTF8.GetBytes(plainText), false)));
+            try
+            {
+                using (var rsa = new RSACryptoServiceProvider((int)RSAKeySize, new CspParameters() { KeyContainerName = LoESoftHash }))
+                    return HttpUtility.UrlEncode(Convert.ToBase64String(rsa.Encrypt(Encoding.UTF8.GetBytes(plainText), false)));
+            }
+            catch { return plainText; }
         }
     }
 }
