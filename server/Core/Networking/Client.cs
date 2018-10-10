@@ -1,6 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Incoming;
 using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using LoESoft.Server.Core.World;
 using LoESoft.Server.Core.World.Entities.Player;
 using System;
 using System.Net.Sockets;
@@ -14,7 +13,7 @@ namespace LoESoft.Server.Core.Networking
         public NetworkControl NetworkControl { get; set; }
 
         public string IpAddress { get; set; }
-        
+
         public Player Player { get; set; }
 
         public Client(Socket socket)

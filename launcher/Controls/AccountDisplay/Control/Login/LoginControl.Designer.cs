@@ -28,18 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LoginBox = new LoginBox();
             this.PopUpBox = new LoESoft.Launcher.Controls.PopUpBox();
+            this.LoginBox = new LoESoft.Launcher.Controls.AccountDisplay.Control.Login.LoginBox();
             this.SuspendLayout();
-            // 
-            // LoginBox
-            // 
-            this.LoginBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.LoginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LoginBox.Location = new System.Drawing.Point(0, 0);
-            this.LoginBox.Name = "LoginBox";
-            this.LoginBox.Size = new System.Drawing.Size(400, 224);
-            this.LoginBox.TabIndex = 0;
             // 
             // PopUpBox
             // 
@@ -50,6 +41,15 @@
             this.PopUpBox.Settings = null;
             this.PopUpBox.Size = new System.Drawing.Size(400, 242);
             this.PopUpBox.TabIndex = 1;
+            // 
+            // LoginBox
+            // 
+            this.LoginBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.LoginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LoginBox.Location = new System.Drawing.Point(0, 0);
+            this.LoginBox.Name = "LoginBox";
+            this.LoginBox.Size = new System.Drawing.Size(400, 224);
+            this.LoginBox.TabIndex = 0;
             // 
             // LoginControl
             // 

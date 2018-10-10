@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LoESoft.WebServer.Core.Database.Models
+﻿namespace LoESoft.WebServer.Core.Database.Models
 {
     public class Account
     {

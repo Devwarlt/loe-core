@@ -8,8 +8,6 @@ using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Threading;
 
 namespace LoESoft.Client.Core.Screens
 {
@@ -17,7 +15,7 @@ namespace LoESoft.Client.Core.Screens
     {
         public static GameUser GameUser { get; set; }
         public static Map PlayerMap { get; set; }
-        
+
         public Player TempPlayer { get; set; }
 
         public override void OnScreenCreate()

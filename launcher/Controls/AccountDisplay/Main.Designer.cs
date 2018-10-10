@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.LoginButton = new System.Windows.Forms.Button();
+            this.LoginLogoutButton = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
             this.RegisterControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Register.RegisterControl();
             this.LoginControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Login.LoginControl();
+            this.PlayButton = new System.Windows.Forms.Button();
+            this.LogoutControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Logout.LogoutControl();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -49,21 +51,20 @@
             this.TitleLabel.Text = "Account";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // LoginButton
+            // LoginLogoutButton
             // 
-            this.LoginButton.BackColor = System.Drawing.Color.DimGray;
-            this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.LoginButton.Location = new System.Drawing.Point(23, 479);
-            this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(160, 36);
-            this.LoginButton.TabIndex = 0;
-            this.LoginButton.TabStop = false;
-            this.LoginButton.Text = "Login";
-            this.LoginButton.UseVisualStyleBackColor = false;
-            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
+            this.LoginLogoutButton.BackColor = System.Drawing.Color.DimGray;
+            this.LoginLogoutButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.LoginLogoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoginLogoutButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginLogoutButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.LoginLogoutButton.Location = new System.Drawing.Point(23, 479);
+            this.LoginLogoutButton.Name = "LoginLogoutButton";
+            this.LoginLogoutButton.Size = new System.Drawing.Size(160, 36);
+            this.LoginLogoutButton.TabIndex = 0;
+            this.LoginLogoutButton.TabStop = false;
+            this.LoginLogoutButton.Text = "Login";
+            this.LoginLogoutButton.UseVisualStyleBackColor = false;
             // 
             // RegisterButton
             // 
@@ -97,15 +98,40 @@
             this.LoginControl.Size = new System.Drawing.Size(400, 282);
             this.LoginControl.TabIndex = 4;
             // 
+            // PlayButton
+            // 
+            this.PlayButton.BackColor = System.Drawing.Color.DimGray;
+            this.PlayButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.PlayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PlayButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlayButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.PlayButton.Location = new System.Drawing.Point(23, 421);
+            this.PlayButton.Name = "PlayButton";
+            this.PlayButton.Size = new System.Drawing.Size(160, 36);
+            this.PlayButton.TabIndex = 6;
+            this.PlayButton.TabStop = false;
+            this.PlayButton.Text = "Play";
+            this.PlayButton.UseVisualStyleBackColor = false;
+            // 
+            // LogoutControl
+            // 
+            this.LogoutControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.LogoutControl.Location = new System.Drawing.Point(100, 140);
+            this.LogoutControl.Name = "LogoutControl";
+            this.LogoutControl.Size = new System.Drawing.Size(400, 224);
+            this.LogoutControl.TabIndex = 7;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.LogoutControl);
+            this.Controls.Add(this.PlayButton);
             this.Controls.Add(this.LoginControl);
             this.Controls.Add(this.RegisterControl);
             this.Controls.Add(this.RegisterButton);
-            this.Controls.Add(this.LoginButton);
+            this.Controls.Add(this.LoginLogoutButton);
             this.Controls.Add(this.TitleLabel);
             this.Name = "Main";
             this.Size = new System.Drawing.Size(600, 600);
@@ -117,9 +143,11 @@
         #endregion
 
         private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.Button LoginButton;
+        private System.Windows.Forms.Button LoginLogoutButton;
         private System.Windows.Forms.Button RegisterButton;
         private Control.Register.RegisterControl RegisterControl;
         private Control.Login.LoginControl LoginControl;
+        private System.Windows.Forms.Button PlayButton;
+        private Control.Logout.LogoutControl LogoutControl;
     }
 }

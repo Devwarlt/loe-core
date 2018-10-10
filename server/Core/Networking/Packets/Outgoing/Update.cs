@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace LoESoft.Server.Core.Networking.Packets.Outgoing
+﻿namespace LoESoft.Server.Core.Networking.Packets.Outgoing
 {
     public class Update : OutgoingPacket
     {
@@ -9,7 +7,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Outgoing
         public string EntityData { get; set; }
 
         public string PlayerData { get; set; }
-        
+
         public override PacketID PacketID => PacketID.UPDATE;
     }
 }

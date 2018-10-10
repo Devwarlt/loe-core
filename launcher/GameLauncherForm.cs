@@ -1,6 +1,5 @@
 using LoESoft.Launcher.Controls;
 using LoESoft.Launcher.Http;
-using LoESoft.Launcher.Utils;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -13,6 +12,8 @@ namespace LoESoft.Launcher
 
         public GameLauncherForm()
         {
+            Account.LoadAccount();
+
             InitializeComponent();
 
             GameLauncher.Info("Game Launcher is loading... OK!");
@@ -62,8 +63,6 @@ namespace LoESoft.Launcher
             ExitButton.Enabled = false;
 
             PopUpBox.Visible = false;
-
-            Account.LoadAccount();
 
             if (!string.IsNullOrWhiteSpace(Account.UserAccount.LoginToken))
             {

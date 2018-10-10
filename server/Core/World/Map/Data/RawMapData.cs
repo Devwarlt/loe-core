@@ -1,8 +1,6 @@
 using LoESoft.Server.Core.World.Entities;
 using LoESoft.Server.Core.World.Entities.Player;
-using LoESoft.Server.Core.World.Map.Data;
 using Newtonsoft.Json;
-﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World.Map.Data
@@ -34,8 +32,8 @@ namespace LoESoft.Server.Core.World.Map.Data
 
         public void AssignData(List<Entity> data)
         {
-            var dataToFormat = data.ConvertAll<EntityData>(_ => _.GetData());
-            Entity = dataToFormat.ConvertAll<string>(_ => JsonConvert.SerializeObject(_)).ToArray();
+            var dataToFormat = data.ConvertAll(_ => _.GetData());
+            Entity = dataToFormat.ConvertAll(_ => JsonConvert.SerializeObject(_)).ToArray();
         }
     }
     public class RawPlayerData
@@ -49,9 +47,9 @@ namespace LoESoft.Server.Core.World.Map.Data
 
         public void AssignData(List<Player> data)
         {
-            var dataToFormat = data.ConvertAll<PlayerData>(_ => _.GetPlayerData());
+            var dataToFormat = data.ConvertAll(_ => _.GetPlayerData());
 
-            Player = dataToFormat.ConvertAll<string>(_ => JsonConvert.SerializeObject(_)).ToArray();
+            Player = dataToFormat.ConvertAll(_ => JsonConvert.SerializeObject(_)).ToArray();
         }
     }
 }

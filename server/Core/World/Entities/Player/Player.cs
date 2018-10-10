@@ -23,7 +23,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public override void Update()
         {
             base.Update();
-            
+
             Client.SendPacket(new Update()
             {
                 WorldData = WorldManager.Map.GetTileData(this),
