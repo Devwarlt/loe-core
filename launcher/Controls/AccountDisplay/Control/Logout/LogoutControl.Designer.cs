@@ -37,7 +37,7 @@
             this.LogoutBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LogoutBox.Location = new System.Drawing.Point(0, 0);
             this.LogoutBox.Name = "LogoutBox";
-            this.LogoutBox.Size = new System.Drawing.Size(400, 224);
+            this.LogoutBox.Size = new System.Drawing.Size(325, 244);
             this.LogoutBox.TabIndex = 0;
             // 
             // LogoutControl
@@ -47,7 +47,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Controls.Add(this.LogoutBox);
             this.Name = "LogoutControl";
-            this.Size = new System.Drawing.Size(400, 224);
+            this.Size = new System.Drawing.Size(325, 244);
             this.Load += new System.EventHandler(this.LoginControl_Load);
             this.ResumeLayout(false);
 

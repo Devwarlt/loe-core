@@ -31,6 +31,6 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Logout
             ((Main)Parent).ToggleButtons();
         }
 
-        public void UpdateLabels() => ((Main)Parent).DispatchLogin(this, false);
+        public void UpdateLabels() => ((Main)Parent).DispatchLogin(this, new Tuple<bool, bool>(false, false));
     }
 }

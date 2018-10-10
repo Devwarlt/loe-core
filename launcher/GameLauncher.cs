@@ -49,6 +49,9 @@ namespace LoESoft.Launcher
 
             try
             {
+                Account.LoadAccount();
+                Settings.LoadSettings();
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new GameLauncherForm());

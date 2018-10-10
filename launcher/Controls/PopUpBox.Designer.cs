@@ -40,9 +40,9 @@
             this.SubmitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SubmitButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubmitButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.SubmitButton.Location = new System.Drawing.Point(116, 197);
+            this.SubmitButton.Location = new System.Drawing.Point(100, 213);
             this.SubmitButton.Name = "SubmitButton";
-            this.SubmitButton.Size = new System.Drawing.Size(160, 36);
+            this.SubmitButton.Size = new System.Drawing.Size(125, 36);
             this.SubmitButton.TabIndex = 0;
             this.SubmitButton.Text = "Submit";
             this.SubmitButton.UseVisualStyleBackColor = false;
@@ -50,15 +50,15 @@
             // 
             // Title
             // 
-            this.Title.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.Title.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Title.BackColor = System.Drawing.Color.Gray;
             this.Title.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title.ForeColor = System.Drawing.Color.Gainsboro;
             this.Title.Location = new System.Drawing.Point(0, 0);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(400, 40);
+            this.Title.Size = new System.Drawing.Size(325, 40);
             this.Title.TabIndex = 0;
             this.Title.Text = "<Title>";
             this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -69,7 +69,7 @@
             this.Content.ForeColor = System.Drawing.Color.Gainsboro;
             this.Content.Location = new System.Drawing.Point(0, 40);
             this.Content.Name = "Content";
-            this.Content.Size = new System.Drawing.Size(400, 154);
+            this.Content.Size = new System.Drawing.Size(325, 154);
             this.Content.TabIndex = 1;
             this.Content.Text = "<Content>";
             this.Content.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,7 +84,7 @@
             this.Controls.Add(this.Title);
             this.Controls.Add(this.SubmitButton);
             this.Name = "PopUpBox";
-            this.Size = new System.Drawing.Size(400, 242);
+            this.Size = new System.Drawing.Size(325, 265);
             this.ResumeLayout(false);
 
         }

@@ -6,7 +6,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
     public partial class Main : UserControl
     {
         public bool IsLoggedIn;
-        public EventHandler<bool> DispatchLogin;
+        public EventHandler<Tuple<bool, bool>> DispatchLogin;
 
         public Main()
         {
@@ -15,19 +15,20 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             InitializeComponent();
         }
 
-        private void LoginHandler(object sender, bool isLoggedIn)
+        private void LoginHandler(object sender, Tuple<bool, bool> isLoggedIn)
         {
             if (sender == null)
                 return;
 
-            IsLoggedIn = isLoggedIn; // Update only.
+            IsLoggedIn = isLoggedIn.Item1; // Update only.
 
-            if (isLoggedIn)
+            if (IsLoggedIn)
             {
                 PlayButton.Enabled = true;
 
                 LoginLogoutButton.Text = "Logout";
-                LoginLogoutButton.Click -= LoginButton_Click;
+                if (!isLoggedIn.Item2)
+                    LoginLogoutButton.Click -= LoginButton_Click;
                 LoginLogoutButton.Click += LogoutButton_Click;
 
                 RegisterButton.Enabled = false;
@@ -38,7 +39,8 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
                 LoginLogoutButton.Text = "Login";
                 LoginLogoutButton.Click += LoginButton_Click;
-                LoginLogoutButton.Click -= LogoutButton_Click;
+                if (!isLoggedIn.Item2)
+                    LoginLogoutButton.Click -= LogoutButton_Click;
 
                 RegisterButton.Enabled = true;
             }
@@ -51,7 +53,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
             IsLoggedIn = !string.IsNullOrWhiteSpace(Account.UserAccount.LoginToken);
 
-            DispatchLogin(this, IsLoggedIn);
+            DispatchLogin(this, new Tuple<bool, bool>(IsLoggedIn, true));
 
             // Hide the rest of controls.
             LoginControl.Visible = false;

@@ -36,14 +36,14 @@
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
             this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.TitleLabel.Location = new System.Drawing.Point(0, 0);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(400, 40);
+            this.TitleLabel.Size = new System.Drawing.Size(325, 40);
             this.TitleLabel.TabIndex = 0;
             this.TitleLabel.Text = "Logout";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -52,9 +52,9 @@
             // 
             this.AccountNameLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.AccountNameLabel.Location = new System.Drawing.Point(23, 54);
+            this.AccountNameLabel.Location = new System.Drawing.Point(0, 40);
             this.AccountNameLabel.Name = "AccountNameLabel";
-            this.AccountNameLabel.Size = new System.Drawing.Size(351, 119);
+            this.AccountNameLabel.Size = new System.Drawing.Size(325, 133);
             this.AccountNameLabel.TabIndex = 4;
             this.AccountNameLabel.Text = resources.GetString("AccountNameLabel.Text");
             this.AccountNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -66,9 +66,9 @@
             this.LoginOKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginOKButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginOKButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.LoginOKButton.Location = new System.Drawing.Point(27, 176);
+            this.LoginOKButton.Location = new System.Drawing.Point(27, 192);
             this.LoginOKButton.Name = "LoginOKButton";
-            this.LoginOKButton.Size = new System.Drawing.Size(160, 36);
+            this.LoginOKButton.Size = new System.Drawing.Size(124, 36);
             this.LoginOKButton.TabIndex = 1;
             this.LoginOKButton.TabStop = false;
             this.LoginOKButton.Text = "OK";
@@ -82,9 +82,9 @@
             this.LoginCancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginCancelButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginCancelButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.LoginCancelButton.Location = new System.Drawing.Point(214, 176);
+            this.LoginCancelButton.Location = new System.Drawing.Point(175, 192);
             this.LoginCancelButton.Name = "LoginCancelButton";
-            this.LoginCancelButton.Size = new System.Drawing.Size(160, 36);
+            this.LoginCancelButton.Size = new System.Drawing.Size(124, 36);
             this.LoginCancelButton.TabIndex = 9;
             this.LoginCancelButton.TabStop = false;
             this.LoginCancelButton.Text = "Cancel";
@@ -102,7 +102,7 @@
             this.Controls.Add(this.LoginOKButton);
             this.Controls.Add(this.AccountNameLabel);
             this.Name = "LogoutBox";
-            this.Size = new System.Drawing.Size(400, 224);
+            this.Size = new System.Drawing.Size(325, 244);
             this.ResumeLayout(false);
 
         }

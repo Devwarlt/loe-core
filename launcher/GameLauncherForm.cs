@@ -12,8 +12,6 @@ namespace LoESoft.Launcher
 
         public GameLauncherForm()
         {
-            Account.LoadAccount();
-
             InitializeComponent();
 
             GameLauncher.Info("Game Launcher is loading... OK!");
@@ -54,7 +52,6 @@ namespace LoESoft.Launcher
 
         private void LauncherForm_Load(object sender, EventArgs e)
         {
-            //Cipher.GenerateNewRSAKeys(Cipher.KeySize.KEY_512);
             LauncherVersionLabel.Text = GameLauncherParameters.LAUNCHER_VERSION;
             SelectedDisplay = HomeButton;
 
