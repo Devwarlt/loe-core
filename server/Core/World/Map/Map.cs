@@ -12,13 +12,17 @@ namespace LoESoft.Server.Core.World
     {
         public Chunk[,] ChunkMap;
 
-        public MapData()
+        public WorldManager Manager { get; private set; }
+
+        public MapData(WorldManager manager)
         {
             ChunkMap = new Chunk[16, 16];
 
+            Manager = manager;
+
             for (var x = 0; x < Chunk.CHUNKSIZE; x++)
                 for (var y = 0; y < Chunk.CHUNKSIZE; y++)
-                    ChunkMap[x, y] = new Chunk(x, y);
+                    ChunkMap[x, y] = new Chunk(Manager, x, y);
 
             foreach (var i in ChunkMap)
                 i.LoadChunk();

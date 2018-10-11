@@ -14,7 +14,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             client.Player.X = X;
             client.Player.Y = Y;
 
-            WorldManager.Map.RepositionPlayer(client.Player, X, Y);
+            client.Manager.Map.RepositionPlayer(client.Player, X, Y);
         }
     }
 }

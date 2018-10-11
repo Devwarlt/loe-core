@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoESoft.Server.Core.World;
+using System;
 using System.Net;
 using System.Net.Sockets;
 
@@ -8,8 +9,11 @@ namespace LoESoft.Server.Core.Networking
     {
         public Socket Socket { get; set; }
 
-        public ConnectionListener()
+        private WorldManager _manager;
+
+        public ConnectionListener(WorldManager manager)
         {
+            _manager = manager;
             Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             Socket.Bind(new IPEndPoint(IPAddress.Any, 7171));
             Socket.Listen(0xFF);
@@ -29,7 +33,7 @@ namespace LoESoft.Server.Core.Networking
 
             if (socket != null)
             {
-                var client = new Client(socket);
+                var client = new Client(socket, _manager);
             }
             StartAccept();
         }

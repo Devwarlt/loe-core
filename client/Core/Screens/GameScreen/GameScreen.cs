@@ -40,8 +40,6 @@ namespace LoESoft.Client.Core.Screens
 
             Camera.SetFocus(TempPlayer);
 
-            GameClient.Warn(GameUser.IsConnected.ToString());
-
             if (!GameUser.IsConnected)
                 ScreenManager.DispatchScreen(new TitleScreen());
         }

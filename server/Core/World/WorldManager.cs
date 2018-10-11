@@ -7,15 +7,15 @@ using System.Threading;
 
 namespace LoESoft.Server.Core.World
 {
-    public static class WorldManager
+    public class WorldManager
     {
-        public static MapData Map { get; private set; }
+        public MapData Map { get; private set; }
 
-        public static ConcurrentBag<Client> Clients = new ConcurrentBag<Client>();
+        public ConcurrentBag<Client> Clients = new ConcurrentBag<Client>();
 
-        public static void Initialize()
+        public void Initialize()
         {
-            Map = new MapData();
+            Map = new MapData(this);
 
             loopThread = new Thread(() =>
             {
@@ -27,23 +27,21 @@ namespace LoESoft.Server.Core.World
 
                 } while (true);
             });
-
-            loopThread.Priority = ThreadPriority.Highest;
         }
 
         static Thread loopThread;
-        public static void TickUpdate()
+        public void TickUpdate()
         {
             loopThread.Start();
         }
 
-        public static void Stop()
+        public void Stop()
         {
             foreach (var i in Clients)
                 i.Disconnect();
         }
 
-        public static bool TryAddPlayer(Client client)
+        public bool TryAddPlayer(Client client)
         {
             if (Clients.Count >= WorldSettings.MAXPLAYERS)
                 return false;
@@ -57,7 +55,7 @@ namespace LoESoft.Server.Core.World
             return true;
         }
 
-        public static void TryRemovePlayer(Client client)
+        public void TryRemovePlayer(Client client)
         {
             if (Clients.Contains(client))
             {

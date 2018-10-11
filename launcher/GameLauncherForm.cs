@@ -36,7 +36,7 @@ namespace LoESoft.Launcher
 
         private void LauncherForm_SizeChanged(object sender, EventArgs e)
         {
-            var button = sender is ExtendedButton ? (ExtendedButton)sender : SelectedDisplay;
+            var button = SelectedDisplay;
 
             ButtonSelectedDisplay.Height = button.Height;
             ButtonSelectedDisplay.Top = button.Top;

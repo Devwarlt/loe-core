@@ -14,10 +14,11 @@ namespace LoESoft.Server.Core.Networking
         public NetworkControl NetworkControl { get; set; }
 
         public string IpAddress { get; set; }
-        
+
+        public WorldManager Manager { get; private set; }
         public Player Player { get; set; }
 
-        public Client(Socket socket)
+        public Client(Socket socket, WorldManager manager)
         {
             Socket = socket;
 
@@ -28,7 +29,9 @@ namespace LoESoft.Server.Core.Networking
             NetworkControl = new NetworkControl(this, Socket);
             NetworkControl.ReceivePacket();
 
-            SendPacket(new Ping() { Value = new Random().Next() });
+            Manager = manager;
+
+            //SendPacket(new Ping() { Value = new Random().Next() });
         }
 
         public void Disconnect()

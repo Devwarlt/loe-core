@@ -99,6 +99,8 @@ namespace LoESoft.Client.Core.Networking
                 Content = Regex.Replace(JsonConvert.SerializeObject(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
 
+            GameClient.Warn($"Sending {outgoingPacket.PacketID}");
+            
             Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, OnSend, null);
         }
 
@@ -136,7 +138,7 @@ namespace LoESoft.Client.Core.Networking
 
                 GetIncomingPacket(packetData).Handle(GameUser);
 
-                GameClient.Warn($"New packet received! Packet: {packetData.PacketID}");
+                //GameClient.Warn($"New packet received! Packet: {packetData.PacketID}");
 
                 ReceivePacket();
             }

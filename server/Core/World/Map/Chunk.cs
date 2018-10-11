@@ -11,9 +11,10 @@ namespace LoESoft.Server.Core.World.Map
         public static readonly int CHUNKSIZE = 16;
 
         public TileData[,] Tiles { get; private set; }
-
         public List<Entity> Entities { get; private set; }
         public List<Player> Players { get; private set; }
+
+        public WorldManager Manager { get; private set; }
 
         private int _startX;
         private int _startY;
@@ -23,8 +24,9 @@ namespace LoESoft.Server.Core.World.Map
             get => (Players.Count > 0);
         }
 
-        public Chunk(int chunkx, int chunky)
+        public Chunk(WorldManager manager, int chunkx, int chunky)
         {
+            Manager = manager;
             Tiles = new TileData[CHUNKSIZE, CHUNKSIZE];
             Entities = new List<Entity>();
             Players = new List<Player>();
@@ -58,8 +60,11 @@ namespace LoESoft.Server.Core.World.Map
                         Type = id
                     };
 
-                    Entities.Add(new Entity(_startX + random.Next(0, 16),
-                        _startY + random.Next(0, 16)));
+                    Entities.Add(new Entity(Manager)
+                    {
+                        X = _startX + random.Next(0, 16),
+                        Y = _startY + random.Next(0, 16)
+                    });
                 }
         }
     }

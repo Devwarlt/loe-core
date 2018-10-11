@@ -6,16 +6,16 @@ namespace LoESoft.Server.Core.World.Entities
 {
     public class Entity : IDisposable
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public WorldManager Manager { get; private set; }
 
+        public int X { get; set; } = 0;
+        public int Y { get; set; } = 0;
         public int ChunkX { get; set; } = 0;
         public int ChunkY { get; set; } = 0;
 
-        public Entity(int x, int y)
+        public Entity(WorldManager manager)
         {
-            X = x;
-            Y = y;
+            Manager = manager;
         }
 
         public virtual void Update()
@@ -23,19 +23,18 @@ namespace LoESoft.Server.Core.World.Entities
             var cx = X / Chunk.CHUNKSIZE;
             var cy = Y / Chunk.CHUNKSIZE;
 
-            if (cx > ChunkX || cy > ChunkY)
-            {
-                RepositionToChunk();
-            }
-
-            ChunkX = cx;
-            ChunkY = cy;
+            if (cx != ChunkX || cy != ChunkY)
+                RepositionToChunk(cx, cy);
         }
 
-        protected virtual void RepositionToChunk()
+        protected virtual void RepositionToChunk(int cx, int cy)
         {
-            WorldManager.Map.RemoveEntity(this);
-            WorldManager.Map.AddEntity(this);
+            Manager.Map.RemoveEntity(this);
+            
+            ChunkX = cx;
+            ChunkY = cy;
+
+            Manager.Map.AddEntity(this);
         }
 
         public virtual EntityData GetData()
@@ -45,7 +44,7 @@ namespace LoESoft.Server.Core.World.Entities
 
         public virtual void Dispose()
         {
-            WorldManager.Map.RemoveEntity(this);
+            Manager.Map.RemoveEntity(this);
         }
     }
 }

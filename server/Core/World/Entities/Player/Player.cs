@@ -8,16 +8,20 @@ namespace LoESoft.Server.Core.World.Entities.Player
     {
         public Client Client { get; private set; }
 
-        public Player(Client client)
-            : base(0, 0)
+        public Player(WorldManager manager, Client client)
+            :base (manager)
         {
             Client = client;
         }
 
-        protected override void RepositionToChunk()
+        protected override void RepositionToChunk(int cx, int cy)
         {
-            WorldManager.Map.RemovePlayer(this);
-            WorldManager.Map.AddPlayer(this);
+            Manager.Map.RemovePlayer(this);
+
+            ChunkX = cx;
+            ChunkY = cy;
+
+            Manager.Map.AddPlayer(this);
         }
 
         public override void Update()
@@ -26,15 +30,15 @@ namespace LoESoft.Server.Core.World.Entities.Player
             
             Client.SendPacket(new Update()
             {
-                WorldData = WorldManager.Map.GetTileData(this),
-                EntityData = WorldManager.Map.GetEntityData(this),
-                PlayerData = WorldManager.Map.GetPlayerData(this)
+                WorldData = Manager.Map.GetTileData(this),
+                EntityData = Manager.Map.GetEntityData(this),
+                PlayerData = Manager.Map.GetPlayerData(this)
             });
         }
 
         public override void Dispose()
         {
-            WorldManager.Map.RemovePlayer(this);
+            Manager.Map.RemovePlayer(this);
         }
 
         public PlayerData GetPlayerData()
