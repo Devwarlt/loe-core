@@ -55,6 +55,15 @@ namespace LoESoft.Launcher
             LauncherVersionLabel.Text = GameLauncherParameters.LAUNCHER_VERSION;
             SelectedDisplay = HomeButton;
 
+            if (string.IsNullOrWhiteSpace(Settings.LauncherSettings.AutoLogin))
+                if (!Convert.ToBoolean(Settings.LauncherSettings.AutoLogin))
+                {
+                    AccountButton.Enabled = true;
+                    OptionsButton.Enabled = true;
+                    ExitButton.Enabled = true;
+                    return;
+                }
+
             AccountButton.Enabled = false;
             OptionsButton.Enabled = false;
             ExitButton.Enabled = false;

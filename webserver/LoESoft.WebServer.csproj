@@ -195,11 +195,13 @@
     <Compile Include="Core\Database\Models\Character.cs" />
     <Compile Include="Core\Database\Database.cs" />
     <Compile Include="Core\Networking\ConnectionListener.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\CheckVersion.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Login.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\LoginToken.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Register.cs" />
     <Compile Include="Core\Networking\Packets\PacketBase.cs" />
     <Compile Include="Core\Utils\Cipher.cs" />
+    <Compile Include="Core\Utils\GameVersion.cs" />
     <Compile Include="GameWebServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

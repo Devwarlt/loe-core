@@ -10,7 +10,8 @@ namespace LoESoft.Launcher.Http
     {
         LOGIN = 1,
         LOGIN_TOKEN = 2,
-        REGISTER = 3
+        REGISTER = 3,
+        CHECK_VERSION = 4
     }
 
     public struct HttpEngineQuery

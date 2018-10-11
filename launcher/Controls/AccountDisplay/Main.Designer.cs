@@ -96,6 +96,7 @@
             this.PlayButton.TabStop = false;
             this.PlayButton.Text = "Play";
             this.PlayButton.UseVisualStyleBackColor = false;
+            this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
             // LoginControl
             // 

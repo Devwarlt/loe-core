@@ -1,5 +1,4 @@
 ﻿using LoESoft.Launcher.Misc;
-using System;
 using System.IO;
 
 namespace LoESoft.Launcher
