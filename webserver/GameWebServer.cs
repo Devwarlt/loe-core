@@ -1,10 +1,12 @@
 ﻿using LoESoft.WebServer.Core.Database;
 using LoESoft.WebServer.Core.Networking;
+using LoESoft.WebServer.Core.Utils;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Rollbar;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 
@@ -14,7 +16,9 @@ namespace LoESoft.WebServer
     {
         // Assembly's Data
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
-        public static string _version => $"{Assembly.GetExecutingAssembly().GetName().Version}";
+        public static string _version =>
+            $"{Assembly.GetExecutingAssembly().GetName().Version}".Substring(0,
+            $"{Assembly.GetExecutingAssembly().GetName().Version}".Length - 2);
 
         // Log
         private static Logger _log => LogManager.GetLogger(_name);
@@ -22,6 +26,17 @@ namespace LoESoft.WebServer
 
         // Database
         public static Database _database { get; set; }
+
+        // Versions
+        public static List<GameVersion> _gameVersions => new List<GameVersion>()
+        {
+            new GameVersion(Version: "0.1.0", Allowed: false, Link: "0.1.X/test-archive.zip"),
+            new GameVersion(Version: "0.1.1", Allowed: false, Link: "0.1.X/test-archive.zip"),
+            new GameVersion(Version: "0.1.2", Allowed: false, Link: "0.1.X/test-archive.zip"),
+            new GameVersion(Version: "0.1.3", Allowed: false, Link: "0.1.X/test-archive.zip"),
+            new GameVersion(Version: "0.1.4", Allowed: false, Link: "0.1.X/test-archive.zip"),
+            new GameVersion(Version: "0.1.5", Allowed: true, Link: "0.1.X/test-archive.zip")
+        };
 
         public static void Main(string[] args)
         {
@@ -52,6 +67,14 @@ namespace LoESoft.WebServer
 
             try
             {
+                List<GameVersion> available = GameVersion.Available;
+                List<GameVersion> supported = GameVersion.Supported;
+
+                Info($"Game versions ({available.Count}/{supported.Count} available):");
+
+                for (int i = supported.Count - 1; i >= 0; i--)
+                    Info($"* [Access: {supported[i].Allowed}]\t{supported[i].Version}");
+
                 _database = new Database();
                 _database.Connect();
 

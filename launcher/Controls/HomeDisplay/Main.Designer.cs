@@ -29,51 +29,36 @@
         private void InitializeComponent()
         {
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.TitlePanelSeperator = new System.Windows.Forms.Panel();
-            this.TitlePanelSeperator.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.BackColor = System.Drawing.Color.Gray;
+            this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.TitleLabel.Location = new System.Drawing.Point(366, 0);
+            this.TitleLabel.Location = new System.Drawing.Point(0, 0);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(291, 73);
-            this.TitleLabel.TabIndex = 0;
+            this.TitleLabel.Size = new System.Drawing.Size(600, 40);
+            this.TitleLabel.TabIndex = 2;
             this.TitleLabel.Text = "Home";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // TitlePanelSeperator
-            // 
-            this.TitlePanelSeperator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitlePanelSeperator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TitlePanelSeperator.Controls.Add(this.TitleLabel);
-            this.TitlePanelSeperator.Location = new System.Drawing.Point(-1, 1);
-            this.TitlePanelSeperator.Name = "TitlePanelSeperator";
-            this.TitlePanelSeperator.Size = new System.Drawing.Size(1025, 75);
-            this.TitlePanelSeperator.TabIndex = 0;
-            // 
-            // HomeDisplayControl
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Controls.Add(this.TitlePanelSeperator);
-            this.Name = "HomeDisplayControl";
-            this.Size = new System.Drawing.Size(1023, 600);
-            this.TitlePanelSeperator.ResumeLayout(false);
+            this.Controls.Add(this.TitleLabel);
+            this.Name = "Main";
+            this.Size = new System.Drawing.Size(600, 600);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        //private ExtendedButton LaunchButton;
         private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.Panel TitlePanelSeperator;
     }
 }

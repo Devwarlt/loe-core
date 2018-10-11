@@ -1,6 +1,5 @@
 using LoESoft.Launcher.Controls;
 using LoESoft.Launcher.Http;
-using LoESoft.Launcher.Utils;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -53,17 +52,23 @@ namespace LoESoft.Launcher
 
         private void LauncherForm_Load(object sender, EventArgs e)
         {
-            //Cipher.GenerateNewRSAKeys(Cipher.KeySize.KEY_512);
             LauncherVersionLabel.Text = GameLauncherParameters.LAUNCHER_VERSION;
             SelectedDisplay = HomeButton;
+
+            if (string.IsNullOrWhiteSpace(Settings.LauncherSettings.AutoLogin))
+                if (!Convert.ToBoolean(Settings.LauncherSettings.AutoLogin))
+                {
+                    AccountButton.Enabled = true;
+                    OptionsButton.Enabled = true;
+                    ExitButton.Enabled = true;
+                    return;
+                }
 
             AccountButton.Enabled = false;
             OptionsButton.Enabled = false;
             ExitButton.Enabled = false;
 
             PopUpBox.Visible = false;
-
-            Account.LoadAccount();
 
             if (!string.IsNullOrWhiteSpace(Account.UserAccount.LoginToken))
             {

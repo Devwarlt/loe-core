@@ -115,6 +115,9 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
             var parent = ((LoginControl)Parent);
             parent.ToggleLoginBox();
             parent.ToggleUI();
+
+            if (sender == null && e == null)
+                parent.UpdateLabels();
         }
     }
 }

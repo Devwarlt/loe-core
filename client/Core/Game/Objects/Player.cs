@@ -67,7 +67,7 @@ namespace LoESoft.Client.Core.Game.Objects
                     else if (Y < DistinationY)
                         Y += dt;
                 }
-                
+
                 GameUser.SendPacket(new Move()
                 {
                     X = DistinationX,

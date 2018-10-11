@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.RegisterBox = new RegisterBox();
+            this.RegisterBox = new LoESoft.Launcher.Controls.AccountDisplay.Control.Register.RegisterBox();
             this.PopUpBox = new LoESoft.Launcher.Controls.PopUpBox();
             this.SuspendLayout();
             // 
@@ -38,17 +38,17 @@
             this.RegisterBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RegisterBox.Location = new System.Drawing.Point(0, 0);
             this.RegisterBox.Name = "RegisterBox";
-            this.RegisterBox.Size = new System.Drawing.Size(400, 285);
+            this.RegisterBox.Size = new System.Drawing.Size(325, 275);
             this.RegisterBox.TabIndex = 0;
             // 
             // PopUpBox
             // 
             this.PopUpBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.PopUpBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PopUpBox.Location = new System.Drawing.Point(0, 40);
+            this.PopUpBox.Location = new System.Drawing.Point(0, 38);
             this.PopUpBox.Name = "PopUpBox";
             this.PopUpBox.Settings = null;
-            this.PopUpBox.Size = new System.Drawing.Size(400, 242);
+            this.PopUpBox.Size = new System.Drawing.Size(325, 265);
             this.PopUpBox.TabIndex = 1;
             // 
             // RegisterControl
@@ -59,7 +59,7 @@
             this.Controls.Add(this.PopUpBox);
             this.Controls.Add(this.RegisterBox);
             this.Name = "RegisterControl";
-            this.Size = new System.Drawing.Size(400, 285);
+            this.Size = new System.Drawing.Size(325, 305);
             this.Load += new System.EventHandler(this.RegisterControl_Load);
             this.ResumeLayout(false);
 

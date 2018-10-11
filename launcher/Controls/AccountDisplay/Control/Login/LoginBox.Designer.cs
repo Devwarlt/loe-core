@@ -32,9 +32,9 @@
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.LoginOKButton = new System.Windows.Forms.Button();
             this.CapsLockLabel = new System.Windows.Forms.Label();
+            this.LoginCancelButton = new System.Windows.Forms.Button();
             this.PasswordTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
             this.AccountNameTextBox = new LoESoft.Launcher.Controls.CustomTextBox();
-            this.LoginCancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -46,7 +46,7 @@
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.TitleLabel.Location = new System.Drawing.Point(0, 0);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(400, 40);
+            this.TitleLabel.Size = new System.Drawing.Size(325, 40);
             this.TitleLabel.TabIndex = 0;
             this.TitleLabel.Text = "Login";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -56,7 +56,7 @@
             this.AccountNameLabel.AutoSize = true;
             this.AccountNameLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.AccountNameLabel.Location = new System.Drawing.Point(23, 54);
+            this.AccountNameLabel.Location = new System.Drawing.Point(24, 56);
             this.AccountNameLabel.Name = "AccountNameLabel";
             this.AccountNameLabel.Size = new System.Drawing.Size(101, 16);
             this.AccountNameLabel.TabIndex = 4;
@@ -67,7 +67,7 @@
             this.PasswordLabel.AutoSize = true;
             this.PasswordLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.PasswordLabel.Location = new System.Drawing.Point(23, 104);
+            this.PasswordLabel.Location = new System.Drawing.Point(24, 106);
             this.PasswordLabel.Name = "PasswordLabel";
             this.PasswordLabel.Size = new System.Drawing.Size(70, 16);
             this.PasswordLabel.TabIndex = 3;
@@ -80,9 +80,9 @@
             this.LoginOKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginOKButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginOKButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.LoginOKButton.Location = new System.Drawing.Point(27, 176);
+            this.LoginOKButton.Location = new System.Drawing.Point(27, 175);
             this.LoginOKButton.Name = "LoginOKButton";
-            this.LoginOKButton.Size = new System.Drawing.Size(160, 36);
+            this.LoginOKButton.Size = new System.Drawing.Size(124, 36);
             this.LoginOKButton.TabIndex = 1;
             this.LoginOKButton.TabStop = false;
             this.LoginOKButton.Text = "OK";
@@ -95,12 +95,28 @@
             this.CapsLockLabel.Enabled = false;
             this.CapsLockLabel.Font = new System.Drawing.Font("DisposableDroid BB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CapsLockLabel.ForeColor = System.Drawing.Color.Red;
-            this.CapsLockLabel.Location = new System.Drawing.Point(314, 57);
+            this.CapsLockLabel.Location = new System.Drawing.Point(239, 59);
             this.CapsLockLabel.Name = "CapsLockLabel";
             this.CapsLockLabel.Size = new System.Drawing.Size(60, 13);
             this.CapsLockLabel.TabIndex = 0;
             this.CapsLockLabel.Text = "CAPS LOCK";
             this.CapsLockLabel.Visible = false;
+            // 
+            // LoginCancelButton
+            // 
+            this.LoginCancelButton.BackColor = System.Drawing.Color.DimGray;
+            this.LoginCancelButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.LoginCancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoginCancelButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginCancelButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.LoginCancelButton.Location = new System.Drawing.Point(175, 175);
+            this.LoginCancelButton.Name = "LoginCancelButton";
+            this.LoginCancelButton.Size = new System.Drawing.Size(124, 36);
+            this.LoginCancelButton.TabIndex = 9;
+            this.LoginCancelButton.TabStop = false;
+            this.LoginCancelButton.Text = "Cancel";
+            this.LoginCancelButton.UseVisualStyleBackColor = false;
+            this.LoginCancelButton.Click += new System.EventHandler(this.LoginCancelButton_Click);
             // 
             // PasswordTextBox
             // 
@@ -110,11 +126,11 @@
             this.PasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PasswordTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
-            this.PasswordTextBox.Location = new System.Drawing.Point(26, 123);
+            this.PasswordTextBox.Location = new System.Drawing.Point(26, 125);
             this.PasswordTextBox.MaxLength = 64;
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = 'x';
-            this.PasswordTextBox.Size = new System.Drawing.Size(348, 28);
+            this.PasswordTextBox.Size = new System.Drawing.Size(273, 28);
             this.PasswordTextBox.TabIndex = 6;
             this.PasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsKeyDown);
@@ -127,29 +143,13 @@
             this.AccountNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AccountNameTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameTextBox.ForeColor = System.Drawing.Color.Gainsboro;
-            this.AccountNameTextBox.Location = new System.Drawing.Point(26, 73);
+            this.AccountNameTextBox.Location = new System.Drawing.Point(26, 75);
             this.AccountNameTextBox.MaxLength = 32;
             this.AccountNameTextBox.Name = "AccountNameTextBox";
             this.AccountNameTextBox.PasswordChar = 'x';
-            this.AccountNameTextBox.Size = new System.Drawing.Size(348, 28);
+            this.AccountNameTextBox.Size = new System.Drawing.Size(273, 28);
             this.AccountNameTextBox.TabIndex = 7;
             this.AccountNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // LoginCancelButton
-            // 
-            this.LoginCancelButton.BackColor = System.Drawing.Color.DimGray;
-            this.LoginCancelButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.LoginCancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginCancelButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginCancelButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.LoginCancelButton.Location = new System.Drawing.Point(214, 176);
-            this.LoginCancelButton.Name = "LoginCancelButton";
-            this.LoginCancelButton.Size = new System.Drawing.Size(160, 36);
-            this.LoginCancelButton.TabIndex = 9;
-            this.LoginCancelButton.TabStop = false;
-            this.LoginCancelButton.Text = "Cancel";
-            this.LoginCancelButton.UseVisualStyleBackColor = false;
-            this.LoginCancelButton.Click += new System.EventHandler(this.LoginCancelButton_Click);
             // 
             // LoginBox
             // 
@@ -166,7 +166,7 @@
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.AccountNameTextBox);
             this.Name = "LoginBox";
-            this.Size = new System.Drawing.Size(400, 224);
+            this.Size = new System.Drawing.Size(325, 219);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -12,7 +12,8 @@ namespace LoESoft.WebServer.Core.Networking.Packets
     {
         LOGIN = 1,
         LOGIN_TOKEN = 2,
-        REGISTER = 3
+        REGISTER = 3,
+        CHECK_VERSION = 4
     }
 
     public abstract class PacketBase
@@ -24,7 +25,8 @@ namespace LoESoft.WebServer.Core.Networking.Packets
         {
             { PacketID.LOGIN, new Login() },
             { PacketID.LOGIN_TOKEN, new LoginToken() },
-            { PacketID.REGISTER, new Register() }
+            { PacketID.REGISTER, new Register() },
+            { PacketID.CHECK_VERSION, new CheckVersion() }
         };
 
         public abstract void Handle();

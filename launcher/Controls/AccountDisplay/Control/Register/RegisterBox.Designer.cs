@@ -48,7 +48,7 @@
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.TitleLabel.Location = new System.Drawing.Point(0, -1);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(400, 40);
+            this.TitleLabel.Size = new System.Drawing.Size(325, 40);
             this.TitleLabel.TabIndex = 0;
             this.TitleLabel.Text = "Register";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -58,7 +58,7 @@
             this.AccountNameLabel.AutoSize = true;
             this.AccountNameLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.AccountNameLabel.Location = new System.Drawing.Point(23, 54);
+            this.AccountNameLabel.Location = new System.Drawing.Point(23, 57);
             this.AccountNameLabel.Name = "AccountNameLabel";
             this.AccountNameLabel.Size = new System.Drawing.Size(101, 16);
             this.AccountNameLabel.TabIndex = 4;
@@ -93,9 +93,9 @@
             this.RegisterCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RegisterCreateButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterCreateButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.RegisterCreateButton.Location = new System.Drawing.Point(26, 236);
+            this.RegisterCreateButton.Location = new System.Drawing.Point(26, 223);
             this.RegisterCreateButton.Name = "RegisterCreateButton";
-            this.RegisterCreateButton.Size = new System.Drawing.Size(160, 36);
+            this.RegisterCreateButton.Size = new System.Drawing.Size(124, 36);
             this.RegisterCreateButton.TabIndex = 1;
             this.RegisterCreateButton.TabStop = false;
             this.RegisterCreateButton.Text = "Create";
@@ -108,7 +108,7 @@
             this.CapsLockLabel.Enabled = false;
             this.CapsLockLabel.Font = new System.Drawing.Font("DisposableDroid BB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CapsLockLabel.ForeColor = System.Drawing.Color.Red;
-            this.CapsLockLabel.Location = new System.Drawing.Point(314, 57);
+            this.CapsLockLabel.Location = new System.Drawing.Point(232, 57);
             this.CapsLockLabel.Name = "CapsLockLabel";
             this.CapsLockLabel.Size = new System.Drawing.Size(60, 13);
             this.CapsLockLabel.TabIndex = 0;
@@ -122,9 +122,9 @@
             this.RegisterCancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RegisterCancelButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterCancelButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.RegisterCancelButton.Location = new System.Drawing.Point(214, 236);
+            this.RegisterCancelButton.Location = new System.Drawing.Point(175, 223);
             this.RegisterCancelButton.Name = "RegisterCancelButton";
-            this.RegisterCancelButton.Size = new System.Drawing.Size(160, 36);
+            this.RegisterCancelButton.Size = new System.Drawing.Size(124, 36);
             this.RegisterCancelButton.TabIndex = 8;
             this.RegisterCancelButton.TabStop = false;
             this.RegisterCancelButton.Text = "Cancel";
@@ -143,7 +143,7 @@
             this.ConfirmPasswordTextBox.MaxLength = 64;
             this.ConfirmPasswordTextBox.Name = "ConfirmPasswordTextBox";
             this.ConfirmPasswordTextBox.PasswordChar = 'x';
-            this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(348, 28);
+            this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(273, 28);
             this.ConfirmPasswordTextBox.TabIndex = 5;
             this.ConfirmPasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ConfirmPasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsKeyDown);
@@ -160,7 +160,7 @@
             this.PasswordTextBox.MaxLength = 64;
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = 'x';
-            this.PasswordTextBox.Size = new System.Drawing.Size(348, 28);
+            this.PasswordTextBox.Size = new System.Drawing.Size(273, 28);
             this.PasswordTextBox.TabIndex = 6;
             this.PasswordTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsKeyDown);
@@ -173,11 +173,11 @@
             this.AccountNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AccountNameTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameTextBox.ForeColor = System.Drawing.Color.Gainsboro;
-            this.AccountNameTextBox.Location = new System.Drawing.Point(26, 73);
+            this.AccountNameTextBox.Location = new System.Drawing.Point(26, 75);
             this.AccountNameTextBox.MaxLength = 32;
             this.AccountNameTextBox.Name = "AccountNameTextBox";
             this.AccountNameTextBox.PasswordChar = 'x';
-            this.AccountNameTextBox.Size = new System.Drawing.Size(348, 28);
+            this.AccountNameTextBox.Size = new System.Drawing.Size(273, 28);
             this.AccountNameTextBox.TabIndex = 7;
             this.AccountNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -198,7 +198,7 @@
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.AccountNameTextBox);
             this.Name = "RegisterBox";
-            this.Size = new System.Drawing.Size(400, 285);
+            this.Size = new System.Drawing.Size(325, 275);
             this.ResumeLayout(false);
             this.PerformLayout();
 

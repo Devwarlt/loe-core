@@ -13,7 +13,9 @@ namespace LoESoft.Launcher
     {
         // Assembly's Data
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
-        public static string _version => $"{Assembly.GetExecutingAssembly().GetName().Version}";
+        public static string _version =>
+            $"{Assembly.GetExecutingAssembly().GetName().Version}".Substring(0,
+            $"{Assembly.GetExecutingAssembly().GetName().Version}".Length - 2);
 
         // Log
         private static Logger _log => LogManager.GetLogger(_name);
@@ -49,6 +51,9 @@ namespace LoESoft.Launcher
 
             try
             {
+                Account.LoadAccount();
+                Settings.LoadSettings();
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new GameLauncherForm());

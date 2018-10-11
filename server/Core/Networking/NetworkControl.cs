@@ -40,7 +40,7 @@ namespace LoESoft.Server.Core.Networking
                 PacketID = outgoingPacket.PacketID,
                 Content = Regex.Replace(JsonConvert.SerializeObject(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
-            
+
             Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, OnSend, null);
         }
 

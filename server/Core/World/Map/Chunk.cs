@@ -37,10 +37,10 @@ namespace LoESoft.Server.Core.World.Map
 
         public void Update()
         {
-            foreach(var i in Entities.ToArray())
+            foreach (var i in Entities.ToArray())
                 i.Update();
-            
-            foreach(var i in Players.ToArray())
+
+            foreach (var i in Players.ToArray())
                 i.Update();
         }
 

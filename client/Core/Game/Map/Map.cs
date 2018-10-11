@@ -34,7 +34,7 @@ namespace LoESoft.Client.Core.Game
 
                     Tiles[x, y] = new Tile(tiledat.X, tiledat.Y, tiledat.Type);
                 }
-            
+
             List<BasicObject> entities = new List<BasicObject>();
             List<BasicObject> players = new List<BasicObject>();
             foreach (var i in edat.Entity)

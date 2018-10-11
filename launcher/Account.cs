@@ -5,6 +5,7 @@ namespace LoESoft.Launcher
 {
     public class Account
     {
+        private static string AccountConfig => "account-token.ini";
         public static Account UserAccount { get; set; }
         public string LoginToken { get; set; } // valid for a few days at most if we want to refresh and update the token
 
@@ -12,7 +13,7 @@ namespace LoESoft.Launcher
         {
             UserAccount = new Account();
 
-            var iniFile = new IniFile("config.ini");
+            var iniFile = new IniFile(AccountConfig);
 
             if (!File.Exists(iniFile.Path))
             {
@@ -27,7 +28,7 @@ namespace LoESoft.Launcher
 
         public void SaveAccount()
         {
-            var iniFile = new IniFile("config.ini");
+            var iniFile = new IniFile(AccountConfig);
 
             if (UserAccount == null) // no longer needed
             {

@@ -40,5 +40,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
             PopUpBox.Settings = settings;
             PopUpBox.LoadSettings();
         }
+
+        public void UpdateLabels() => ((Main)Parent).DispatchLogin(this, new Tuple<bool, bool>(true, false));
     }
 }
