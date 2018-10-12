@@ -51,42 +51,71 @@ namespace LoESoft.Client.Core.Networking
             if (Server == null)
                 Server = server;
 
-            Socket.BeginConnect(server.RemoteEndPoint, OnConnect, null);
+            Socket.BeginConnect(server.RemoteEndPoint,
+                (IAsyncResult result) =>
+                {
+                    try
+                    {
+                        ConnectionAttempt++;
+
+                        try
+                        {
+                            GameClient.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
+
+                            Socket.EndConnect(result);
+                        }
+                        catch
+                        {
+                            if (ConnectionAttempt == MAX_CONNECTION_ATTEMPTS)
+                            {
+                                GameClient.Warn($"Unable to connect to {Server} due max number of invalid attempts reached the limit.");
+
+                                Disconnect();
+
+                                return;
+                            }
+
+                            GameClient.Warn($"Failed to connect to {Server}. Retrying...");
+
+                            Connect(Server);
+
+                            return;
+                        }
+
+                        GameClient.Info($"Connected to {Server}.");
+
+                        Thread.Sleep(250);
+
+                        ReceivePacket();
+                    }
+                    catch (SocketException) { }
+                }, null);
         }
 
-        private void OnConnect(IAsyncResult asyncResult)
+        private bool FirstRun = true;
+        private int LastX;
+        private int LastY;
+
+        // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
+        private void HandleMovePacket(Move move)
         {
-            ConnectionAttempt++;
-
-            try
+            if (FirstRun)
             {
-                GameClient.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
+                LastX = move.X;
+                LastY = move.Y;
 
-                Socket.EndConnect(asyncResult);
+                FirstRun = false;
             }
-            catch
+            else
             {
-                if (ConnectionAttempt == MAX_CONNECTION_ATTEMPTS)
-                {
-                    GameClient.Warn($"Unable to connect to {Server} due max number of invalid attempts reached the limit.");
-
-                    Disconnect();
-
+                if (LastX == move.X && LastY == move.Y)
                     return;
+                else
+                {
+                    LastX = move.X;
+                    LastY = move.Y;
                 }
-
-                GameClient.Warn($"Failed to connect to {Server}. Retrying...");
-
-                Connect(Server);
-
-                return;
             }
-
-            GameClient.Info($"Connected to {Server}.");
-
-            Thread.Sleep(250);
-
-            ReceivePacket();
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
@@ -97,12 +126,24 @@ namespace LoESoft.Client.Core.Networking
             var buffer = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
             {
                 PacketID = outgoingPacket.PacketID,
-                Content = Regex.Replace(JsonConvert.SerializeObject(outgoingPacket), @"\r\n?|\n", string.Empty)
+                Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
+
+            if (outgoingPacket.PacketID == PacketID.MOVE)
+                HandleMovePacket(outgoingPacket as Move);
 
             GameClient.Warn($"Sending {outgoingPacket.PacketID}");
 
-            Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, OnSend, null);
+            try
+            {
+                Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
+                    (IAsyncResult result) =>
+                    {
+                        try { Socket.EndSend(result); }
+                        catch (SocketException) { }
+                    }, null);
+            }
+            catch (SocketException) { }
         }
 
         public void SendPackets(OutgoingPacket[] outgoingPackets)
@@ -111,39 +152,33 @@ namespace LoESoft.Client.Core.Networking
                 SendPacket(outgoingPackets[i]);
         }
 
-        private void OnSend(IAsyncResult asyncResult)
-        {
-            try { Socket.EndSend(asyncResult); }
-            catch { }
-        }
-
         public void ReceivePacket()
         {
             if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
 
-            Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None, OnReceivePacket, null);
-        }
+            Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None,
+                (IAsyncResult result) =>
+                {
+                    try
+                    {
+                        var len = Socket.EndReceive(result);
 
-        private void OnReceivePacket(IAsyncResult asyncResult)
-        {
-            try
-            {
-                var len = Socket.EndReceive(asyncResult);
+                        var buffer = new byte[len];
+                        Array.Copy(ReceiveBuffer, buffer, len);
 
-                var buffer = new byte[len];
-                Array.Copy(ReceiveBuffer, buffer, len);
+                        var data = Encoding.UTF8.GetString(buffer);
+                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                var data = Encoding.UTF8.GetString(buffer);
-                var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                        GetIncomingPacket(packetData).Handle(GameUser);
 
-                GetIncomingPacket(packetData).Handle(GameUser);
+                        GameClient.Warn($"New packet received! Packet: {packetData.PacketID}");
 
-                //GameClient.Warn($"New packet received! Packet: {packetData.PacketID}");
-
-                ReceivePacket();
-            }
-            catch { }
+                        ReceivePacket();
+                    }
+                    catch (SocketException) { }
+                    catch (JsonReaderException) { }
+                }, null);
         }
 
         private void SetupIncomingPackets()
@@ -175,6 +210,8 @@ namespace LoESoft.Client.Core.Networking
         {
             if (Disconnected)
                 return;
+
+            GameClient.Info("Client disconnected.");
 
             Disconnected = true;
 

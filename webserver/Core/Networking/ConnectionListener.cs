@@ -30,16 +30,16 @@ namespace LoESoft.WebServer.Core.Networking
 
             string url = $"http://*:{_port}/";
 
-            Process.Start(new ProcessStartInfo("netsh",
-                string.Format(@"http add urlacl url={0}", url) +
-                " user=\"" + Environment.UserDomainName + "\\" +
-                Environment.UserName + "\"")
-            {
-                Verb = "runas",
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Hidden,
-                UseShellExecute = true
-            }).WaitForExit();
+            Process.Start(
+                new ProcessStartInfo("netsh", string.Format(@"http add urlacl url={0}", url) +
+                " user=\"" + Environment.UserDomainName +
+                "\\" + Environment.UserName + "\"")
+                {
+                    Verb = "runas",
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    UseShellExecute = true
+                }).WaitForExit();
 
             _listener = new HttpListener();
             _listener.Prefixes.Add(url);

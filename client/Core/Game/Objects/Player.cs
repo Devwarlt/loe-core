@@ -10,12 +10,37 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LoESoft.Client.Core.Game.Objects
 {
-    public partial class Player : BasicObject
+    public class Player : BasicObject
     {
-        public GameUser GameUser { get; private set; }
+        public enum Direction
+        {
+            None = 0,
+            Up = 1,
+            Down = 2,
+            Left = 3,
+            Right = 4
+        }
 
-        public Player(GameUser gameuser)
-            : base(Color.White)
+        protected Dictionary<Keys, Direction> KeysToDirection = new Dictionary<Keys, Direction>()
+        {
+            { Keys.None, Direction.None },
+            { Keys.W, Direction.Up }, { Keys.Up, Direction.Up },
+            { Keys.S, Direction.Down }, { Keys.Down, Direction.Down },
+            { Keys.A, Direction.Left }, { Keys.Left, Direction.Left },
+            { Keys.D, Direction.Right }, { Keys.Right, Direction.Right }
+        };
+
+        protected int DistinationX;
+        protected int DistinationY;
+
+        public GameUser GameUser { get; private set; }
+        public Direction CurrentDirection { get; private set; }
+        public bool IsMoving { get; private set; }
+
+        PlayerAnimation _animation;
+        Timer sendTimer = new Timer(250);
+
+        public Player(GameUser gameuser) : base(Color.White)
         {
             IsMoving = false;
             _animation = new PlayerAnimation();
@@ -33,24 +58,6 @@ namespace LoESoft.Client.Core.Game.Objects
         }
 
         public override void Draw(SpriteBatch spriteBatch) => _animation.Draw(spriteBatch, this);
-    }
-    public partial class Player
-    {
-        public enum Direction
-        {
-            None = 0,
-            Up = 1,
-            Down = 2,
-            Left = 3,
-            Right = 4
-        }
-
-        public Direction CurrentDirection { get; private set; }
-
-        PlayerAnimation _animation;
-        KeyboardState _curKeyBoard;
-
-        public bool IsMoving { get; private set; }
 
         public void UpdateMovement(float dt)
         {
@@ -58,31 +65,21 @@ namespace LoESoft.Client.Core.Game.Objects
             {
                 if (X != DistinationX)
                 {
-                    if (X > DistinationX)
-                        X -= dt;
-                    else if (X < DistinationX)
-                        X += dt;
+                    if (X > DistinationX) X -= dt;
+                    if (X < DistinationX) X += dt;
                 }
                 if (Y != DistinationY)
                 {
-                    if (Y > DistinationY)
-                        Y -= dt;
-                    else if (Y < DistinationY)
-                        Y += dt;
+                    if (Y > DistinationY) Y -= dt;
+                    if (Y < DistinationY) Y += dt;
                 }
             }
         }
-        
-        Timer sendTimer = new Timer(250);
-        
-        private void SendTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            SendMovePacket();
-        }
+
+        private void SendTimer_Elapsed(object sender, ElapsedEventArgs e) => SendMovePacket();
 
         private void SendMovePacket()
         {
-
             GameUser.SendPacket(new Move()
             {
                 X = (int)X,
@@ -92,10 +89,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public void DetectMovement()
         {
-            _curKeyBoard = Keyboard.GetState();
-
-            var pressedKeys = _curKeyBoard.GetPressedKeys().SkipWhile(_ =>
-            (KeysToDirection.Keys.Contains(_)) ? false : true);
+            var pressedKeys = Keyboard.GetState().GetPressedKeys().SkipWhile(_ => (KeysToDirection.Keys.Contains(_)) ? false : true);
 
             foreach (var i in pressedKeys)
             {
@@ -107,13 +101,9 @@ namespace LoESoft.Client.Core.Game.Objects
                     Move(CurrentDirection);
             }
 
-            if (pressedKeys.Count() == 0 && DistinationX == X
-                && DistinationY == Y)
+            if (pressedKeys.Count() == 0 && DistinationX == X && DistinationY == Y)
                 ResetMovement();
         }
-
-        protected int DistinationX;
-        protected int DistinationY;
 
         private void Move(Direction direction)
         {
@@ -129,18 +119,6 @@ namespace LoESoft.Client.Core.Game.Objects
             }
         }
 
-        private void ResetMovement()
-        {
-            IsMoving = false;
-        }
-
-        protected Dictionary<Keys, Direction> KeysToDirection = new Dictionary<Keys, Direction>()
-        {
-            { Keys.None, Direction.None },
-            { Keys.W, Direction.Up }, { Keys.Up, Direction.Up },
-            { Keys.S, Direction.Down }, { Keys.Down, Direction.Down },
-            { Keys.A, Direction.Left }, { Keys.Left, Direction.Left },
-            { Keys.D, Direction.Right }, { Keys.Right, Direction.Right }
-        };
+        private void ResetMovement() => IsMoving = false;
     }
 }

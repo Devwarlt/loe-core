@@ -38,10 +38,20 @@ namespace LoESoft.Server.Core.Networking
             var buffer = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
             {
                 PacketID = outgoingPacket.PacketID,
-                Content = Regex.Replace(JsonConvert.SerializeObject(outgoingPacket), @"\r\n?|\n", string.Empty)
+                Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
 
-            Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, OnSend, null);
+            try
+            {
+                Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
+                    (IAsyncResult result) =>
+                    {
+                        try { Socket.EndAccept(result); }
+                        catch (SocketException) { }
+                        catch (ArgumentException) { }
+                    }, null);
+            }
+            catch (SocketException) { }
         }
 
         public bool IsConnected => Socket.Connected;
@@ -52,46 +62,36 @@ namespace LoESoft.Server.Core.Networking
                 SendPacket(outgoingPacket[i]);
         }
 
-        private void OnSend(IAsyncResult asyncResult)
-        {
-            try { Socket.EndSend(asyncResult); }
-            catch { }
-        }
-
         public void ReceivePacket()
         {
             if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
-            
-            Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None, OnReceivePacket, null);
-        }
 
-        private void OnReceivePacket(IAsyncResult asyncResult)
-        {
-            try
-            {
-                var len = Socket.EndReceive(asyncResult);
-                
-                var buffer = new byte[len];
+            Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None,
+                (IAsyncResult result) =>
+                {
+                    try
+                    {
+                        var len = Socket.EndReceive(result);
+                        var buffer = new byte[len];
 
-                Array.Copy(ReceiveBuffer, buffer, len);
+                        Array.Copy(ReceiveBuffer, buffer, len);
 
-                string data = Encoding.UTF8.GetString(buffer);
+                        string data = Encoding.UTF8.GetString(buffer);
 
-                GameServer.Warn(data);
+                        GameServer.Warn(data);
 
-                var packetData = JsonConvert.DeserializeObject<PacketData>(data);
-                
-                GetIncomingPacket(packetData).Handle(Client);
+                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
+                        GetIncomingPacket(packetData).Handle(Client);
 
-                ReceivePacket();
-            }
-            catch(Exception ex)
-            {
-                GameServer.Warn(ex.ToString());
-            }
+                        GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
+
+                        ReceivePacket();
+                    }
+                    catch (SocketException) { }
+                    catch (JsonReaderException) { }
+                }, null);
         }
 
         private void SetupIncomingPackets()
@@ -120,9 +120,12 @@ namespace LoESoft.Server.Core.Networking
 
         public void Disconnect()
         {
-            GameServer.Warn($"Client disconnected {Client.IpAddress}");
+            GameServer.Warn($"Client disconnected '{Client.IpAddress}'.");
 
+            Client.Player.Dispose();
             Client.Disconnect();
+            Client.Socket.Close();
+            Client.Socket.Dispose();
         }
     }
 }

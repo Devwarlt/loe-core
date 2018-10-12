@@ -25,17 +25,16 @@ namespace LoESoft.Server.Core.Networking
             Manager = manager;
         }
 
-        public void StartAccept() => Socket.BeginAccept(OnAccept, null);
+        public void StartAccept() =>
+            Socket.BeginAccept((IAsyncResult result) =>
+            {
+                var socket = Socket.EndAccept(result);
 
-        private void OnAccept(IAsyncResult asyncResult)
-        {
-            var socket = Socket.EndAccept(asyncResult);
+                if (socket != null)
+                    Manager.Clients.Add(new Client(socket, Manager));
 
-            if (socket != null)
-                Manager.Clients.Add(new Client(socket, Manager));
-
-            StartAccept();
-        }
+                StartAccept();
+            }, null);
 
         public void EndAccept() => Socket.Close();
     }

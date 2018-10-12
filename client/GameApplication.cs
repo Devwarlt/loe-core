@@ -11,8 +11,8 @@ namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        public static int WIDTH => 1280;
-        public static int HEIGHT => 720;
+        public static int WIDTH => 800;
+        public static int HEIGHT => 600;
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }

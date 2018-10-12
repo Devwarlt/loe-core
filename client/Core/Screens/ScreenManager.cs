@@ -26,6 +26,7 @@ namespace LoESoft.Client.Core.Screens
         {
             if (ActiveScreen == null || !ActiveScreen.Visible)
                 return;
+
             ActiveScreen.Draw(spriteBatch);
         }
 

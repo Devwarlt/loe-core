@@ -23,10 +23,8 @@ namespace LoESoft.Server
         // Log
         private static Logger _log => LogManager.GetLogger(_name);
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
-        
-        public static ServerSettings _settings => IO.Import<ServerSettings>("../../", "Settings");
 
-        private static WorldManager _worldManager;
+        public static ServerSettings _settings => IO.Import<ServerSettings>("../../", "Settings");
 
         public static void Main(string[] args)
         {
@@ -57,19 +55,18 @@ namespace LoESoft.Server
 
             try
             {
-                _worldManager = new WorldManager();
-                _worldManager.Initialize();
-                _worldManager.TickUpdate();
+                var manager = new WorldManager();
+                manager.BeginUpdate();
 
-                var connectionListener = new ConnectionListener(_worldManager);
-                connectionListener.StartAccept();
+                var connection = new ConnectionListener(manager);
+                connection.StartAccept();
 
                 Info("Game Server is loading... OK!");
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
-                connectionListener.EndAccept();
-                _worldManager.Stop();
+                connection.EndAccept();
+                manager.Stop();
 
                 Info("Game Server has been stopped.");
 

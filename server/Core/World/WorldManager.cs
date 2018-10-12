@@ -13,23 +13,12 @@ namespace LoESoft.Server.Core.World
         public WorldManager()
         {
             Map = new MapData(this);
-            _loopThread = new Thread(() =>
-            {
-                do
-                {
-                    Map.Update();
-
-                    Thread.Sleep(WorldSettings.COOLDOWN);
-                } while (true);
-            });
+            Clients = new ConcurrentBag<Client>();
         }
 
-        private Thread _loopThread;
-        public void TickUpdate() => _loopThread.Start();
-
-        public void Initialize()
+        public void BeginUpdate()
         {
-            _loopThread =
+            var tickUpdate =
                 new Thread(() =>
                 {
                     do
@@ -40,8 +29,7 @@ namespace LoESoft.Server.Core.World
                     } while (true);
                 })
                 { IsBackground = true };
-
-            Clients = new ConcurrentBag<Client>();
+            tickUpdate.Start();
         }
 
         public void Stop()

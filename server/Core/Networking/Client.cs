@@ -30,12 +30,7 @@ namespace LoESoft.Server.Core.Networking
             Manager = manager;
         }
 
-        public void Disconnect()
-        {
-            Player.Dispose();
-            NetworkControl.Disconnect();
-            Socket.Close();
-        }
+        public void Disconnect() => NetworkControl.Disconnect();
 
         public bool IsConnected => NetworkControl.IsConnected;
 
