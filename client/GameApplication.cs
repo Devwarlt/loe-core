@@ -6,6 +6,7 @@ using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static LoESoft.Client.Core.Networking.Server;
 
 namespace LoESoft.Client
 {
@@ -41,7 +42,7 @@ namespace LoESoft.Client
 
             ScreenManager.DispatchScreen(new SplashScreen());
 
-            GameUser = new GameUser(new Server("127.0.0.1", 7171));
+            GameUser = new GameUser(GetServers[ServerName.LOCAL]);
             GameUser.Connect();
 
             GameClient._discordPresence.State = "World: Chicago";

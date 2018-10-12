@@ -5,9 +5,14 @@ namespace LoESoft.Client.Core.Networking
 {
     public class Server
     {
-        public static readonly Dictionary<string, Server> GetServers = new Dictionary<string, Server>()
+        public enum ServerName
         {
-            { "Local Server", new Server("127.0.0.1", 7171) }
+            LOCAL
+        }
+
+        public static readonly Dictionary<ServerName, Server> GetServers = new Dictionary<ServerName, Server>()
+        {
+            { ServerName.LOCAL, new Server(Address: "127.0.0.1", Port: 7171) }
         };
 
         public string Address { get; set; }
@@ -15,11 +20,11 @@ namespace LoESoft.Client.Core.Networking
 
         public IPEndPoint RemoteEndPoint { get; set; }
 
-        public Server(string address, int port)
+        public Server(string Address, int Port)
         {
-            Address = address;
-            Port = port;
-            RemoteEndPoint = new IPEndPoint(IPAddress.Parse(address), port);
+            this.Address = Address;
+            this.Port = Port;
+            RemoteEndPoint = new IPEndPoint(IPAddress.Parse(Address), Port);
         }
 
         public override string ToString() => $"{RemoteEndPoint.Address}:{RemoteEndPoint.Port}";
