@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace LoESoft.Client.Core.Networking.Packets.Outgoing
+﻿namespace LoESoft.Client.Core.Networking.Packets.Outgoing
 {
     public class Move : OutgoingPacket
     {

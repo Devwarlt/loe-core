@@ -39,8 +39,6 @@ namespace LoESoft.Client.Core.Networking
             {
                 NoDelay = true,
                 UseOnlyOverlappedIO = true,
-                SendTimeout = 1000,
-                ReceiveTimeout = 1000,
                 Ttl = 112
             };
         }
@@ -100,7 +98,7 @@ namespace LoESoft.Client.Core.Networking
             }));
 
             GameClient.Warn($"Sending {outgoingPacket.PacketID}");
-            
+
             Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, OnSend, null);
         }
 

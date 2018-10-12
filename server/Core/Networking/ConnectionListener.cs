@@ -7,22 +7,22 @@ namespace LoESoft.Server.Core.Networking
 {
     public class ConnectionListener
     {
-        public Socket Socket { get; set; }
+        private WorldManager Manager { get; set; }
 
-        private WorldManager _manager;
+        public Socket Socket { get; set; }
 
         public ConnectionListener(WorldManager manager)
         {
-            _manager = manager;
-            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            {
+                NoDelay = true,
+                UseOnlyOverlappedIO = true,
+                Ttl = 112
+            };
             Socket.Bind(new IPEndPoint(IPAddress.Any, 7171));
             Socket.Listen(0xFF);
 
-            Socket.NoDelay = true;
-            Socket.UseOnlyOverlappedIO = true;
-            Socket.SendTimeout = 1000;
-            Socket.ReceiveTimeout = 1000;
-            Socket.Ttl = 112;
+            Manager = manager;
         }
 
         public void StartAccept() => Socket.BeginAccept(OnAccept, null);
@@ -32,9 +32,8 @@ namespace LoESoft.Server.Core.Networking
             var socket = Socket.EndAccept(asyncResult);
 
             if (socket != null)
-            {
-                var client = new Client(socket, _manager);
-            }
+                Manager.Clients.Add(new Client(socket, Manager));
+
             StartAccept();
         }
 

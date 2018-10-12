@@ -9,7 +9,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public Client Client { get; private set; }
 
         public Player(WorldManager manager, Client client)
-            :base (manager)
+            : base(manager)
         {
             Client = client;
         }

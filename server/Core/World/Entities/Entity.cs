@@ -30,7 +30,7 @@ namespace LoESoft.Server.Core.World.Entities
         protected virtual void RepositionToChunk(int cx, int cy)
         {
             Manager.Map.RemoveEntity(this);
-            
+
             ChunkX = cx;
             ChunkY = cy;
 

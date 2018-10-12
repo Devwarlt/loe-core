@@ -1,6 +1,4 @@
-﻿using LoESoft.Server.Core.World;
-
-namespace LoESoft.Server.Core.Networking.Packets.Incoming
+﻿namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
     public class Move : IncomingPacket
     {

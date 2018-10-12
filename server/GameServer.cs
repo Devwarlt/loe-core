@@ -27,8 +27,6 @@ namespace LoESoft.Server
         // Settings
         public static ServerSettings _settings => IO.Import<ServerSettings>("../../", "Settings");
 
-        private static WorldManager _worldManager;
-
         public static void Main(string[] args)
         {
             Console.Title = $"{_name} - Build: {_version}";
@@ -58,25 +56,18 @@ namespace LoESoft.Server
 
             try
             {
-                _worldManager = new WorldManager();
-                _worldManager.Initialize();
-                _worldManager.TickUpdate();
+                var worldManager = new WorldManager();
+                worldManager.OnUpdate();
 
-                var connectionListener = new ConnectionListener(_worldManager);
-                
+                var connectionListener = new ConnectionListener(worldManager);
                 connectionListener.StartAccept();
-                var connectionListener = new ConnectionListener();
-
-                connectionListener.StartAccept();
-
-                WorldManager.TickUpdate();
 
                 Info("Game Server is loading... OK!");
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
-                _worldManager.Stop();
                 connectionListener.EndAccept();
+                worldManager.Stop();
 
                 Info("Game Server has been stopped.");
 

@@ -1,5 +1,5 @@
-﻿using LoESoft.Server.Core.Networking.Packets.Incoming;
-using LoESoft.Server.Core.Networking.Packets.Outgoing;
+﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
+using LoESoft.Server.Core.World;
 using LoESoft.Server.Core.World.Entities.Player;
 using System;
 using System.Net.Sockets;
@@ -11,13 +11,8 @@ namespace LoESoft.Server.Core.Networking
     {
         public Socket Socket { get; set; }
         public NetworkControl NetworkControl { get; set; }
-
         public string IpAddress { get; set; }
-
-<<<<<<< HEAD
         public WorldManager Manager { get; private set; }
-=======
->>>>>>> f9611ff2074e892d3c2fc06df55b0a174b0c10c8
         public Player Player { get; set; }
 
         public Client(Socket socket, WorldManager manager)
@@ -32,8 +27,6 @@ namespace LoESoft.Server.Core.Networking
             NetworkControl.ReceivePacket();
 
             Manager = manager;
-
-            //SendPacket(new Ping() { Value = new Random().Next() });
         }
 
         public void Disconnect()
@@ -43,7 +36,6 @@ namespace LoESoft.Server.Core.Networking
             Socket.Close();
         }
 
-        #region SENDMETHODs
         public bool IsConnected => NetworkControl.IsConnected;
 
         public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
@@ -57,6 +49,5 @@ namespace LoESoft.Server.Core.Networking
         public void SendPacket(OutgoingPacket outgoingPacket) => NetworkControl.SendPacket(outgoingPacket);
 
         public void SendPackets(OutgoingPacket[] outgoingPackets) => NetworkControl.SendPackets(outgoingPackets);
-        #endregion
     }
 }
