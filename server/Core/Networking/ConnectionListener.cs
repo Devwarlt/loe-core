@@ -7,6 +7,9 @@ namespace LoESoft.Server.Core.Networking
 {
     public class ConnectionListener
     {
+        public static IPEndPoint TcpEndPoint = new IPEndPoint(IPAddress.Any, 7171);
+        public static IPEndPoint UdpEndPoint = new IPEndPoint(IPAddress.Any, 7271);
+
         private WorldManager Manager { get; set; }
 
         public Socket Socket { get; set; }
@@ -19,22 +22,32 @@ namespace LoESoft.Server.Core.Networking
                 UseOnlyOverlappedIO = true,
                 Ttl = 112
             };
-            Socket.Bind(new IPEndPoint(IPAddress.Any, 7171));
+            Socket.Bind(TcpEndPoint);
             Socket.Listen(0xFF);
 
             Manager = manager;
         }
 
-        public void StartAccept() =>
-            Socket.BeginAccept((IAsyncResult result) =>
+        public void StartAccept()
+        {
+            try
             {
-                var socket = Socket.EndAccept(result);
+                Socket.BeginAccept((IAsyncResult result) =>
+                {
+                    try
+                    {
+                        var socket = Socket.EndAccept(result);
 
-                if (socket != null)
-                    Manager.Clients.Add(new Client(socket, Manager));
+                        if (socket != null)
+                            Manager.Clients.Add(new Client(socket, Manager));
 
-                StartAccept();
-            }, null);
+                        StartAccept();
+                    }
+                    catch (ObjectDisposedException) { }
+                }, null);
+            }
+            catch (ObjectDisposedException) { }
+        }
 
         public void EndAccept() => Socket.Close();
     }

@@ -9,6 +9,9 @@
 
         public override void Handle(Client client)
         {
+            if (client.Player == null)
+                return;
+
             client.Player.X = X;
             client.Player.Y = Y;
 

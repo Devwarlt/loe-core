@@ -3,6 +3,7 @@ using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Core.World.Map.Data;
 using Newtonsoft.Json;
+using System;
 using System.Linq;
 
 namespace LoESoft.Server.Core.World
@@ -37,10 +38,14 @@ namespace LoESoft.Server.Core.World
         #region MANAGECHUNKS
         public void RepositionPlayer(Player player, int x, int y)
         {
-            int idx = ChunkMap[player.ChunkX, player.ChunkY].Players.IndexOf(player);
+            try
+            {
+                int idx = ChunkMap[player.ChunkX, player.ChunkY].Players.IndexOf(player);
 
-            ChunkMap[player.ChunkX, player.ChunkY].Players[idx].X = x;
-            ChunkMap[player.ChunkX, player.ChunkY].Players[idx].Y = y;
+                ChunkMap[player.ChunkX, player.ChunkY].Players[idx].X = x;
+                ChunkMap[player.ChunkX, player.ChunkY].Players[idx].Y = y;
+            }
+            catch (ArgumentOutOfRangeException) { }
         }
         #endregion
 

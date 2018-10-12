@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
@@ -17,7 +18,8 @@ namespace LoESoft.Server.Core.Networking
     {
         protected const int BUFFER_SIZE = ushort.MaxValue + 1;
 
-        public Socket Socket { get; set; }
+        public Socket TcpSocket { get; set; }
+        public UdpClient UdpClient { get; set; }
         public Client Client { get; set; }
 
         private byte[] ReceiveBuffer { get; set; }
@@ -26,8 +28,9 @@ namespace LoESoft.Server.Core.Networking
 
         public NetworkControl(Client client, Socket socket)
         {
-            Socket = socket;
             Client = client;
+            TcpSocket = socket;
+            UdpClient = new UdpClient(ConnectionListener.UdpEndPoint);
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
@@ -43,10 +46,10 @@ namespace LoESoft.Server.Core.Networking
 
             try
             {
-                Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
+                TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
                     (IAsyncResult result) =>
                     {
-                        try { Socket.EndAccept(result); }
+                        try { TcpSocket.EndAccept(result); }
                         catch (SocketException) { }
                         catch (ArgumentException) { }
                     }, null);
@@ -54,7 +57,7 @@ namespace LoESoft.Server.Core.Networking
             catch (SocketException) { }
         }
 
-        public bool IsConnected => Socket.Connected;
+        public bool IsConnected => TcpSocket.Connected;
 
         public void SendPackets(OutgoingPacket[] outgoingPacket)
         {
@@ -67,19 +70,18 @@ namespace LoESoft.Server.Core.Networking
             if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
 
-            Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None,
+            TcpSocket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None,
                 (IAsyncResult result) =>
                 {
                     try
                     {
-                        int len = Socket.EndReceive(result);
-                        byte[] buffer = new byte[len];
+                        var len = TcpSocket.EndReceive(result);
+                        var buffer = new byte[len];
 
                         Array.Copy(ReceiveBuffer, buffer, len);
 
-                        string data = Encoding.UTF8.GetString(buffer);
-
-                        PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                        var data = Encoding.UTF8.GetString(buffer);
+                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
                         GetIncomingPacket(packetData).Handle(Client);
 
@@ -90,6 +92,21 @@ namespace LoESoft.Server.Core.Networking
                     catch (SocketException) { }
                     catch (JsonReaderException) { }
                 }, null);
+
+            UdpClient.BeginReceive(
+                (IAsyncResult result) =>
+                {
+                    var endPoint = (IPEndPoint)result.AsyncState;
+                    var buffer = UdpClient.EndReceive(result, ref endPoint);
+                    var data = Encoding.UTF8.GetString(buffer);
+                    var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+
+                    GetIncomingPacket(packetData).Handle(Client);
+
+                    GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
+
+                    ReceivePacket();
+                }, ConnectionListener.UdpEndPoint);
         }
 
         private void SetupIncomingPackets()
@@ -98,8 +115,12 @@ namespace LoESoft.Server.Core.Networking
 
             foreach (var type in Assembly.GetAssembly(typeof(IncomingPacket)).GetTypes().Where(_ => _.IsClass && !_.IsAbstract && _.IsSubclassOf(typeof(IncomingPacket))))
             {
-                var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
-                IncomingPackets.Add(incomingMessage.PacketID, incomingMessage);
+                try
+                {
+                    var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
+                    IncomingPackets.Add(incomingMessage.PacketID, incomingMessage);
+                }
+                catch (ArgumentException) { continue; }
             }
         }
 
@@ -121,7 +142,6 @@ namespace LoESoft.Server.Core.Networking
             GameServer.Warn($"Client disconnected '{Client.IpAddress}'.");
 
             Client.Player.Dispose();
-            Client.Disconnect();
             Client.Socket.Close();
             Client.Socket.Dispose();
         }
