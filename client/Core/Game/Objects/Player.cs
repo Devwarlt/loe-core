@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Animation;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
@@ -19,6 +20,8 @@ namespace LoESoft.Client.Core.Game.Objects
             IsMoving = false;
             _animation = new PlayerAnimation();
             GameUser = gameuser;
+            sendTimer.Start();
+            sendTimer.Elapsed += SendTimer_Elapsed;
         }
 
         public override void Update(GameTime gameTime)
@@ -67,13 +70,24 @@ namespace LoESoft.Client.Core.Game.Objects
                     else if (Y < DistinationY)
                         Y += dt;
                 }
-
-                GameUser.SendPacket(new Move()
-                {
-                    X = DistinationX,
-                    Y = DistinationY
-                });
             }
+        }
+        
+        Timer sendTimer = new Timer(250);
+        
+        private void SendTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            SendMovePacket();
+        }
+
+        private void SendMovePacket()
+        {
+
+            GameUser.SendPacket(new Move()
+            {
+                X = (int)X,
+                Y = (int)Y
+            });
         }
 
         public void DetectMovement()

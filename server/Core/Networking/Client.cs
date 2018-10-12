@@ -12,13 +12,8 @@ namespace LoESoft.Server.Core.Networking
         public Socket Socket { get; set; }
         public NetworkControl NetworkControl { get; set; }
         public string IpAddress { get; set; }
-<<<<<<< HEAD
-        
-        public WorldManager Manager { get; private set; }
 
-=======
         public WorldManager Manager { get; private set; }
->>>>>>> f5348e87b0ad8e9d38163f9288400830e7d1ecde
         public Player Player { get; set; }
 
         public Client(Socket socket, WorldManager manager)

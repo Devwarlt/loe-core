@@ -84,6 +84,8 @@ namespace LoESoft.Client.Core.Networking
 
             GameClient.Info($"Connected to {Server}.");
 
+            Thread.Sleep(250);
+
             ReceivePacket();
         }
 

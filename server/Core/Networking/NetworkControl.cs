@@ -62,7 +62,7 @@ namespace LoESoft.Server.Core.Networking
         {
             if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
-
+            
             Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None, OnReceivePacket, null);
         }
 
@@ -71,20 +71,27 @@ namespace LoESoft.Server.Core.Networking
             try
             {
                 var len = Socket.EndReceive(asyncResult);
+                
                 var buffer = new byte[len];
 
                 Array.Copy(ReceiveBuffer, buffer, len);
 
-                var data = Encoding.UTF8.GetString(buffer);
-                var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                string data = Encoding.UTF8.GetString(buffer);
 
+                GameServer.Warn(data);
+
+                var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                
                 GetIncomingPacket(packetData).Handle(Client);
 
                 GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
 
                 ReceivePacket();
             }
-            catch { }
+            catch(Exception ex)
+            {
+                GameServer.Warn(ex.ToString());
+            }
         }
 
         private void SetupIncomingPackets()

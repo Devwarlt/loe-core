@@ -24,12 +24,12 @@ namespace LoESoft.Server.Core.World
             });
         }
 
-        static Thread _loopThread;
+        private Thread _loopThread;
         public void TickUpdate() => _loopThread.Start();
 
         public void Initialize()
         {
-            var tickUpdate =
+            _loopThread =
                 new Thread(() =>
                 {
                     do

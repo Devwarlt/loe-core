@@ -69,7 +69,7 @@ namespace LoESoft.Server
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
                 connectionListener.EndAccept();
-                worldManager.Stop();
+                _worldManager.Stop();
 
                 Info("Game Server has been stopped.");
 
