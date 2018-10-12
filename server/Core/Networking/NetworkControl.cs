@@ -72,16 +72,14 @@ namespace LoESoft.Server.Core.Networking
                 {
                     try
                     {
-                        var len = Socket.EndReceive(result);
-                        var buffer = new byte[len];
+                        int len = Socket.EndReceive(result);
+                        byte[] buffer = new byte[len];
 
                         Array.Copy(ReceiveBuffer, buffer, len);
 
                         string data = Encoding.UTF8.GetString(buffer);
 
-                        GameServer.Warn(data);
-
-                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                        PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
                         GetIncomingPacket(packetData).Handle(Client);
 

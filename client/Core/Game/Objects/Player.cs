@@ -38,7 +38,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public bool IsMoving { get; private set; }
 
         PlayerAnimation _animation;
-        Timer sendTimer = new Timer(250);
+        Timer sendTimer = new Timer(100);
 
         public Player(GameUser gameuser) : base(Color.White)
         {

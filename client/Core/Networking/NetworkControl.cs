@@ -97,7 +97,7 @@ namespace LoESoft.Client.Core.Networking
         private int LastY;
 
         // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
-        private void HandleMovePacket(Move move)
+        private bool HandleMovePacket(Move move)
         {
             if (FirstRun)
             {
@@ -109,13 +109,14 @@ namespace LoESoft.Client.Core.Networking
             else
             {
                 if (LastX == move.X && LastY == move.Y)
-                    return;
+                    return false;
                 else
                 {
                     LastX = move.X;
                     LastY = move.Y;
                 }
             }
+            return true;
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
@@ -130,7 +131,10 @@ namespace LoESoft.Client.Core.Networking
             }));
 
             if (outgoingPacket.PacketID == PacketID.MOVE)
-                HandleMovePacket(outgoingPacket as Move);
+            {
+                if (!HandleMovePacket(outgoingPacket as Move))
+                    return;
+            }
 
             GameClient.Warn($"Sending {outgoingPacket.PacketID}");
 
