@@ -11,11 +11,14 @@ namespace LoESoft.Server.Core.Networking
     {
         public Socket Socket { get; set; }
         public NetworkControl NetworkControl { get; set; }
-
         public string IpAddress { get; set; }
+<<<<<<< HEAD
         
         public WorldManager Manager { get; private set; }
 
+=======
+        public WorldManager Manager { get; private set; }
+>>>>>>> f5348e87b0ad8e9d38163f9288400830e7d1ecde
         public Player Player { get; set; }
 
         public Client(Socket socket, WorldManager manager)
@@ -30,8 +33,6 @@ namespace LoESoft.Server.Core.Networking
             NetworkControl.ReceivePacket();
 
             Manager = manager;
-
-            //SendPacket(new Ping() { Value = new Random().Next() });
         }
 
         public void Disconnect()
@@ -41,7 +42,6 @@ namespace LoESoft.Server.Core.Networking
             Socket.Close();
         }
 
-        #region SENDMETHODs
         public bool IsConnected => NetworkControl.IsConnected;
 
         public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
@@ -55,6 +55,5 @@ namespace LoESoft.Server.Core.Networking
         public void SendPacket(OutgoingPacket outgoingPacket) => NetworkControl.SendPacket(outgoingPacket);
 
         public void SendPackets(OutgoingPacket[] outgoingPackets) => NetworkControl.SendPackets(outgoingPackets);
-        #endregion
     }
 }

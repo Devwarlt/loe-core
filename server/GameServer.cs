@@ -23,8 +23,7 @@ namespace LoESoft.Server
         // Log
         private static Logger _log => LogManager.GetLogger(_name);
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
-
-        // Settings
+        
         public static ServerSettings _settings => IO.Import<ServerSettings>("../../", "Settings");
 
         private static WorldManager _worldManager;
@@ -69,8 +68,8 @@ namespace LoESoft.Server
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
-                _worldManager.Stop();
                 connectionListener.EndAccept();
+                worldManager.Stop();
 
                 Info("Game Server has been stopped.");
 

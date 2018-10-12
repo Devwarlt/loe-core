@@ -7,14 +7,12 @@ namespace LoESoft.Server.Core.World
 {
     public class WorldManager
     {
-        public MapData Map { get; private set; }
+        public MapData Map { get; set; }
+        public ConcurrentBag<Client> Clients { get; set; }
 
-        public ConcurrentBag<Client> Clients = new ConcurrentBag<Client>();
-
-        public void Initialize()
+        public WorldManager()
         {
             Map = new MapData(this);
-
             _loopThread = new Thread(() =>
             {
                 do
@@ -29,33 +27,60 @@ namespace LoESoft.Server.Core.World
         static Thread _loopThread;
         public void TickUpdate() => _loopThread.Start();
 
+        public void Initialize()
+        {
+            var tickUpdate =
+                new Thread(() =>
+                {
+                    do
+                    {
+                        Map.Update();
+
+                        Thread.Sleep(WorldSettings.COOLDOWN);
+                    } while (true);
+                })
+                { IsBackground = true };
+
+            Clients = new ConcurrentBag<Client>();
+        }
+
         public void Stop()
         {
             foreach (var i in Clients)
-                i.Disconnect();
+                i?.Disconnect();
         }
 
         public bool TryAddPlayer(Client client)
         {
-            if (Clients.Count >= WorldSettings.MAXPLAYERS)
+            if (Clients.Count >= WorldSettings.MAX_CONNECTIONS)
                 return false;
 
-            Clients.Add(client);
+            if (client.Player != null)
+            {
+                GameServer.Info("Player added!");
 
-            Map.AddPlayer(client.Player);
+                Map.AddPlayer(client.Player);
 
-            GameServer.Warn("Player added!");
+                return true;
+            }
 
-            return true;
+            return false;
         }
 
-        public void TryRemovePlayer(Client client)
+        public bool TryRemovePlayer(Client client)
         {
             if (Clients.Contains(client))
             {
+                GameServer.Info("Player removed!");
+
                 Clients.TryTake(out client);
+
                 Map.RemovePlayer(client.Player);
+
+                return true;
             }
+
+            return false;
         }
     }
 }
