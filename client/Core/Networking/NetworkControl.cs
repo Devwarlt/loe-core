@@ -12,6 +12,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace LoESoft.Client.Core.Networking
 {

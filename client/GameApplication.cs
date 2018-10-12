@@ -1,4 +1,6 @@
 using LoESoft.Client.Assets;
+using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Networking;
 using LoESoft.Client.Core.Screens;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Text;
@@ -14,6 +16,8 @@ namespace LoESoft.Client
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
+
+        public static GameUser GameUser { get; private set; }
 
         public GameApplication()
         {
@@ -36,6 +40,9 @@ namespace LoESoft.Client
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
 
             ScreenManager.DispatchScreen(new SplashScreen());
+
+            GameUser = new GameUser(new Server("127.0.0.1", 7171));
+            GameUser.Connect();
 
             GameClient._discordPresence.State = "World: Chicago";
             GameClient._discordPresence.Details = "Isle of Saepphira";

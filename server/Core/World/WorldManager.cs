@@ -15,23 +15,19 @@ namespace LoESoft.Server.Core.World
         {
             Map = new MapData(this);
 
-            loopThread = new Thread(() =>
+            _loopThread = new Thread(() =>
             {
                 do
                 {
                     Map.Update();
 
                     Thread.Sleep(WorldSettings.COOLDOWN);
-
                 } while (true);
             });
         }
 
-        static Thread loopThread;
-        public void TickUpdate()
-        {
-            loopThread.Start();
-        }
+        static Thread _loopThread;
+        public void TickUpdate() => _loopThread.Start();
 
         public void Stop()
         {

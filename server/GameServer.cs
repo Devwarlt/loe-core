@@ -63,13 +63,7 @@ namespace LoESoft.Server
                 _worldManager.TickUpdate();
 
                 var connectionListener = new ConnectionListener(_worldManager);
-                
                 connectionListener.StartAccept();
-                var connectionListener = new ConnectionListener();
-
-                connectionListener.StartAccept();
-
-                WorldManager.TickUpdate();
 
                 Info("Game Server is loading... OK!");
 
