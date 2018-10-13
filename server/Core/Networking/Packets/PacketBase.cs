@@ -5,11 +5,12 @@ namespace LoESoft.Server.Core.Networking.Packets
 {
     public enum PacketID : int
     {
-        PING = 0,
-        PONG = 1,
-        MOVE = 2,
+        PONG = 0,
+        PING = 1,
+        CLIENTMOVE = 2,
         UPDATE = 3,
-        LOAD = 4
+        LOAD = 4,
+        SERVERMOVE = 5
     }
 
     public abstract class PacketBase

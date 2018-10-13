@@ -213,10 +213,11 @@
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\IncomingPacket.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Load.cs" />
-    <Compile Include="Core\Networking\Packets\Incoming\Move.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\ClientMove.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\OutgoingPacket.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Pong.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\ServerMove.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Update.cs" />
     <Compile Include="Core\Networking\Packets\PacketBase.cs" />
     <Compile Include="Core\Networking\Packets\PacketData.cs" />

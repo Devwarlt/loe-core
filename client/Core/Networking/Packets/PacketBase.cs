@@ -7,9 +7,10 @@ namespace LoESoft.Client.Core.Networking.Packets
     {
         PONG = 0,
         PING = 1,
-        MOVE = 2,
+        CLIENTMOVE = 2,
         UPDATE = 3,
-        LOAD = 4
+        LOAD = 4,
+        SERVERMOVE = 5
     }
 
     public abstract class PacketBase

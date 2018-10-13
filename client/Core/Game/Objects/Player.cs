@@ -21,6 +21,8 @@ namespace LoESoft.Client.Core.Game.Objects
             Right = 4
         }
 
+        #region FIELDS
+
         protected Dictionary<Keys, Direction> KeysToDirection = new Dictionary<Keys, Direction>()
         {
             { Keys.None, Direction.None },
@@ -30,95 +32,88 @@ namespace LoESoft.Client.Core.Game.Objects
             { Keys.D, Direction.Right }, { Keys.Right, Direction.Right }
         };
 
-        protected int DistinationX;
-        protected int DistinationY;
+        public int DistinationX { get; set; }
+        public int DistinationY { get; set; }
 
         public GameUser GameUser { get; private set; }
         public Direction CurrentDirection { get; private set; }
         public bool IsMoving { get; private set; }
 
         PlayerAnimation _animation;
-        Timer sendTimer = new Timer(100);
+        #endregion
 
         public Player(GameUser gameuser) : base(Color.White)
         {
             IsMoving = false;
             _animation = new PlayerAnimation();
             GameUser = gameuser;
-            sendTimer.Start();
-            sendTimer.Elapsed += SendTimer_Elapsed;
+            DistinationX = (int)X;
+            DistinationY = (int)Y;
         }
 
         public override void Update(GameTime gameTime)
         {
             var dt = 1f / gameTime.ElapsedGameTime.Milliseconds; //MOVEMENT SPEED
             DetectMovement();
-            UpdateMovement(dt);
+            HandleMovement(dt);
             _animation.Update(gameTime, this);
         }
 
         public override void Draw(SpriteBatch spriteBatch) => _animation.Draw(spriteBatch, this);
 
-        public void UpdateMovement(float dt)
-        {
-            if (X != DistinationX || Y != DistinationY)
-            {
-                if (X != DistinationX)
-                {
-                    if (X > DistinationX) X -= dt;
-                    if (X < DistinationX) X += dt;
-                }
-                if (Y != DistinationY)
-                {
-                    if (Y > DistinationY) Y -= dt;
-                    if (Y < DistinationY) Y += dt;
-                }
-            }
-        }
-
-        private void SendTimer_Elapsed(object sender, ElapsedEventArgs e) => SendMovePacket();
-
+        #region MOVE
         private void SendMovePacket()
         {
-            GameUser.SendPacket(new Move()
-            {
-                X = (int)X,
-                Y = (int)Y
-            });
+            if (IsMoving)
+                GameUser.SendPacket(new ClientMove()
+                {
+                    Direction = (int)CurrentDirection,
+                    Player = this
+                });
         }
 
         public void DetectMovement()
         {
-            var pressedKeys = Keyboard.GetState().GetPressedKeys().SkipWhile(_ => (KeysToDirection.Keys.Contains(_)) ? false : true);
+            var pressedKeys = Keyboard.GetState().GetPressedKeys().SkipWhile(_ => 
+            (KeysToDirection.Keys.Contains(_)) ? false : true);
 
-            foreach (var i in pressedKeys)
+            if (pressedKeys.Count() > 0)
             {
+                if (pressedKeys.Count() > 1)
+                    GameClient.Warn("WARN! Do not spam input!");
+
                 IsMoving = true;
 
-                CurrentDirection = KeysToDirection[i];
+                CurrentDirection = KeysToDirection[pressedKeys.First()];
 
-                if (DistinationX == X && DistinationY == Y)
-                    Move(CurrentDirection);
+                GameClient.Warn(CurrentDirection.ToString());
+
+                SendMovePacket();
             }
 
             if (pressedKeys.Count() == 0 && DistinationX == X && DistinationY == Y)
                 ResetMovement();
         }
 
-        private void Move(Direction direction)
+        public void HandleMovement(float dt)
         {
-            DistinationX = (int)X;
-            DistinationY = (int)Y;
-
-            switch (direction)
+            if (DistinationX != X)
             {
-                case Direction.Up: DistinationY -= 1; break;
-                case Direction.Down: DistinationY += 1; break;
-                case Direction.Left: DistinationX -= 1; break;
-                case Direction.Right: DistinationX += 1; break;
+                if (DistinationX > X)
+                    X += dt;
+                else if (DistinationX < X)
+                    X -= dt;
+            }
+            if (DistinationY != Y)
+            {
+                if (DistinationY > Y)
+                    Y += dt;
+                else if (DistinationY < Y)
+                    Y -= dt;
             }
         }
 
         private void ResetMovement() => IsMoving = false;
+        #endregion
     }
 }

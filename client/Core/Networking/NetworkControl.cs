@@ -92,29 +92,25 @@ namespace LoESoft.Client.Core.Networking
                 }, null);
         }
 
-        private bool FirstRun = true;
-        private int LastX;
-        private int LastY;
+        private bool _firstMove = true;
+        private float LastX;
+        private float LastY;
 
         // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
-        private bool HandleMovePacket(Move move)
+        private bool HandleMovePacket(ClientMove move)
         {
-            if (FirstRun)
+            if (_firstMove)
             {
-                LastX = move.X;
-                LastY = move.Y;
-
-                FirstRun = false;
+                _firstMove = false;
+                LastX = move.Player.X;
+                LastY = move.Player.Y;
             }
+            else if (LastX == move.Player.X && LastY == move.Player.Y)//Server hasnt sent move packet
+                return false;
             else
             {
-                if (LastX == move.X && LastY == move.Y)
-                    return false;
-                else
-                {
-                    LastX = move.X;
-                    LastY = move.Y;
-                }
+                LastX = move.Player.X;
+                LastY = move.Player.Y;
             }
             return true;
         }
@@ -130,9 +126,9 @@ namespace LoESoft.Client.Core.Networking
                 Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
 
-            if (outgoingPacket.PacketID == PacketID.MOVE)
+            if (outgoingPacket.PacketID == PacketID.CLIENTMOVE)
             {
-                if (!HandleMovePacket(outgoingPacket as Move))
+                if (!HandleMovePacket(outgoingPacket as ClientMove))
                     return;
             }
 

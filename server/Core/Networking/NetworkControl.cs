@@ -79,6 +79,8 @@ namespace LoESoft.Server.Core.Networking
 
                         string data = Encoding.UTF8.GetString(buffer);
 
+                        GameServer.Warn(data);
+
                         PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
                         GetIncomingPacket(packetData).Handle(Client);
