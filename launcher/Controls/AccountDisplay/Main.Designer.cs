@@ -32,14 +32,15 @@
             this.LoginLogoutButton = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
             this.PlayButton = new System.Windows.Forms.Button();
-            this.LoginControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Login.LoginControl();
-            this.LogoutControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Logout.LogoutControl();
             this.RegisterControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Register.RegisterControl();
+            this.LogoutControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Logout.LogoutControl();
+            this.LoginControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Login.LoginControl();
+            this.UpdateControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Update.UpdateControl();
             this.SuspendLayout();
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
             this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -98,13 +99,13 @@
             this.PlayButton.UseVisualStyleBackColor = false;
             this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
-            // LoginControl
+            // RegisterControl
             // 
-            this.LoginControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.LoginControl.Location = new System.Drawing.Point(137, 80);
-            this.LoginControl.Name = "LoginControl";
-            this.LoginControl.Size = new System.Drawing.Size(325, 305);
-            this.LoginControl.TabIndex = 7;
+            this.RegisterControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.RegisterControl.Location = new System.Drawing.Point(137, 80);
+            this.RegisterControl.Name = "RegisterControl";
+            this.RegisterControl.Size = new System.Drawing.Size(325, 315);
+            this.RegisterControl.TabIndex = 9;
             // 
             // LogoutControl
             // 
@@ -114,19 +115,28 @@
             this.LogoutControl.Size = new System.Drawing.Size(325, 244);
             this.LogoutControl.TabIndex = 8;
             // 
-            // RegisterControl
+            // LoginControl
             // 
-            this.RegisterControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.RegisterControl.Location = new System.Drawing.Point(137, 80);
-            this.RegisterControl.Name = "RegisterControl";
-            this.RegisterControl.Size = new System.Drawing.Size(325, 315);
-            this.RegisterControl.TabIndex = 9;
+            this.LoginControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.LoginControl.Location = new System.Drawing.Point(137, 80);
+            this.LoginControl.Name = "LoginControl";
+            this.LoginControl.Size = new System.Drawing.Size(325, 305);
+            this.LoginControl.TabIndex = 7;
+            // 
+            // UpdateControl
+            // 
+            this.UpdateControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.UpdateControl.Location = new System.Drawing.Point(137, 80);
+            this.UpdateControl.Name = "UpdateControl";
+            this.UpdateControl.Size = new System.Drawing.Size(325, 265);
+            this.UpdateControl.TabIndex = 10;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.UpdateControl);
             this.Controls.Add(this.RegisterControl);
             this.Controls.Add(this.LogoutControl);
             this.Controls.Add(this.LoginControl);
@@ -150,5 +160,6 @@
         private Control.Login.LoginControl LoginControl;
         private Control.Logout.LogoutControl LogoutControl;
         private Control.Register.RegisterControl RegisterControl;
+        private Control.Update.UpdateControl UpdateControl;
     }
 }

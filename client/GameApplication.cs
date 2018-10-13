@@ -1,6 +1,5 @@
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Networking;
 using LoESoft.Client.Core.Screens;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Text;

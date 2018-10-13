@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LoESoft.Launcher.Http;
+using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
@@ -27,8 +29,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                 PlayButton.Enabled = true;
 
                 LoginLogoutButton.Text = "Logout";
-                if (!isLoggedIn.Item2)
-                    LoginLogoutButton.Click -= LoginButton_Click;
+                if (!isLoggedIn.Item2) LoginLogoutButton.Click -= LoginButton_Click;
                 LoginLogoutButton.Click += LogoutButton_Click;
 
                 RegisterButton.Enabled = false;
@@ -39,8 +40,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
                 LoginLogoutButton.Text = "Login";
                 LoginLogoutButton.Click += LoginButton_Click;
-                if (!isLoggedIn.Item2)
-                    LoginLogoutButton.Click -= LogoutButton_Click;
+                if (!isLoggedIn.Item2) LoginLogoutButton.Click -= LogoutButton_Click;
 
                 RegisterButton.Enabled = true;
             }
@@ -64,6 +64,9 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
             RegisterControl.Visible = false;
             RegisterControl.Enabled = false;
+
+            UpdateControl.Visible = false;
+            UpdateControl.Enabled = false;
 
             // Trigger only few buttons.
             PlayButton.Visible = true;
@@ -123,10 +126,58 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             RegisterControl.ToggleRegisterBox();
         }
 
+        public void BackToMenu(bool onCancel = false)
+        {
+            RegisterButton.Enabled = false;
+
+            if (onCancel)
+            {
+                PlayButton.Enabled = true;
+
+                LoginLogoutButton.Enabled = true;
+            }
+            else
+            {
+                PlayButton.Enabled = false;
+
+                LoginLogoutButton.Enabled = false;
+            }
+        }
+
         private void PlayButton_Click(object sender, EventArgs e)
         {
             if (!IsLoggedIn)
+            {
+                DispatchLogin(this, new Tuple<bool, bool>(false, false)); // prevent possible invalid play
                 return;
+            }
+
+            var query = new HttpEngineQuery();
+            query.AddQuery("version", GameLauncher._version);
+
+            HttpEngine.Handle(PacketID.CHECK_VERSION, query,
+                success =>
+                {
+                    // TODO: launch the game client.
+                },
+                error =>
+                {
+                    BackToMenu();
+
+                    if (error.Contains("released"))
+                        UpdateControl.ToggleUpdateBox();
+                    else
+                    {
+                        UpdateControl.UpdatePopUp(new PopUpSettings()
+                        {
+                            Title = "Update Denied",
+                            Content = error,
+                            Alignment = ContentAlignment.MiddleLeft,
+                            OnDisplay = () => UpdateControl.SetPopUpBoxVisibility(true),
+                            OnClose = () => UpdateControl.ToggleUI()
+                        });
+                    }
+                });
 
             // TODO: implement UpdateBox and UpdateControl, with following features below:
             // Update running App:
