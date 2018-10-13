@@ -83,9 +83,6 @@ namespace LoESoft.Server.Core.Networking
 
                         PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                        var data = Encoding.UTF8.GetString(buffer);
-                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
-
                         GetIncomingPacket(packetData).Handle(Client);
 
                         GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");

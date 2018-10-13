@@ -95,25 +95,15 @@ namespace LoESoft.Client.Core.Networking
             UdpClient.Connect(Server.UdpEndPoint);
         }
 
-        private bool _firstMove = true;
-        private float LastX;
-        private float LastY;
+        public static bool _recievedServerMove = false;
 
         // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
         private bool HandleMovePacket(ClientMove move)
         {
-            if (_firstMove)
+            if (_recievedServerMove == true)
             {
-                _firstMove = false;
-                LastX = move.Player.X;
-                LastY = move.Player.Y;
-            }
-            else if (LastX == move.Player.X && LastY == move.Player.Y)//Server hasnt sent move packet
-                return false;
-            else
-            {
-                LastX = move.Player.X;
-                LastY = move.Player.Y;
+                _recievedServerMove = false;
+                return true;
             }
             return true;
         }

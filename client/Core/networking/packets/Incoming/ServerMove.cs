@@ -8,7 +8,7 @@ using LoESoft.Client.Core.Screens;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {
-    public class ServerMove : IncomingPacket
+    public class ServerMove : IncomingPacket, IUdpPacket
     {
         public int X { get; set; }
         public int Y { get; set; }
@@ -27,6 +27,8 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     screen.TempPlayer.DistinationY = Y;
                 }
             }
+
+            NetworkControl._recievedServerMove = true;
         }
     }
 }

@@ -88,7 +88,8 @@ namespace LoESoft.Client.Core.Game.Objects
 
                 GameClient.Warn(CurrentDirection.ToString());
 
-                SendMovePacket();
+                if (DistinationX == X && DistinationY == Y)
+                    SendMovePacket();
             }
 
             if (pressedKeys.Count() == 0 && DistinationX == X && DistinationY == Y)

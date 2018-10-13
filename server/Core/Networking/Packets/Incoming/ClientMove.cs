@@ -17,7 +17,6 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         public override void Handle(Client client)
         {
-            GameServer.Warn($"Processing Client Move!{Direction}");
             switch (Direction)
             {
                 case 1: RepositionPlayer(client, 0, -1); break;
@@ -34,9 +33,8 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             int X = client.Player.X + x;
             int Y = client.Player.Y + y;
 
-            client.Manager.Map.RepositionPlayer(client.Player, x, y);
-
-            GameServer.Warn("Sending Server Move!");
+            client.Manager.Map.RepositionPlayer(client.Player, X, Y);
+            
             client.SendPacket(new ServerMove()
             {
                 X = X,

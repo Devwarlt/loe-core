@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace LoESoft.Client.Core.Networking.Packets.Outgoing
 {
-    public class ClientMove : OutgoingPacket
+    public class ClientMove : OutgoingPacket, IUdpPacket
     {
         public int Direction { get; set; } 
     
