@@ -22,7 +22,8 @@ namespace LoESoft.Client.Core.Networking
 
         public const int MAX_CONNECTION_ATTEMPTS = 5;
 
-        public Socket Socket { get; set; }
+        public Socket TcpSocket { get; set; }
+        public UdpClient UdpClient { get; set; }
         public Server Server { get; set; }
 
         private GameUser GameUser { get; set; }
@@ -35,23 +36,23 @@ namespace LoESoft.Client.Core.Networking
         public NetworkControl(GameUser gameUser)
         {
             GameUser = gameUser;
-
-            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            TcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
                 NoDelay = true,
                 UseOnlyOverlappedIO = true,
                 Ttl = 112
             };
+            UdpClient = new UdpClient();
         }
 
-        public bool IsConnected => Socket.Connected;
+        public bool IsConnected => TcpSocket.Connected;
 
         public void Connect(Server server)
         {
             if (Server == null)
                 Server = server;
 
-            Socket.BeginConnect(server.RemoteEndPoint,
+            TcpSocket.BeginConnect(server.TcpEndPoint,
                 (IAsyncResult result) =>
                 {
                     try
@@ -62,7 +63,7 @@ namespace LoESoft.Client.Core.Networking
                         {
                             GameClient.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
 
-                            Socket.EndConnect(result);
+                            TcpSocket.EndConnect(result);
                         }
                         catch
                         {
@@ -90,6 +91,8 @@ namespace LoESoft.Client.Core.Networking
                     }
                     catch (SocketException) { }
                 }, null);
+
+            UdpClient.Connect(Server.UdpEndPoint);
         }
 
         private bool _firstMove = true;
@@ -134,12 +137,18 @@ namespace LoESoft.Client.Core.Networking
 
             GameClient.Warn($"Sending {outgoingPacket.PacketID}");
 
+            if (outgoingPacket is IUdpPacket)
+            {
+                UdpClient.BeginSend(buffer, buffer.Length, (IAsyncResult result) => UdpClient.EndSend(result), null);
+                return;
+            }
+
             try
             {
-                Socket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
+                TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
                     (IAsyncResult result) =>
                     {
-                        try { Socket.EndSend(result); }
+                        try { TcpSocket.EndSend(result); }
                         catch (SocketException) { }
                     }, null);
             }
@@ -157,14 +166,14 @@ namespace LoESoft.Client.Core.Networking
             if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
 
-            Socket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None,
+            TcpSocket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None,
                 (IAsyncResult result) =>
                 {
                     try
                     {
-                        var len = Socket.EndReceive(result);
-
+                        var len = TcpSocket.EndReceive(result);
                         var buffer = new byte[len];
+
                         Array.Copy(ReceiveBuffer, buffer, len);
 
                         var data = Encoding.UTF8.GetString(buffer);
@@ -217,7 +226,7 @@ namespace LoESoft.Client.Core.Networking
 
             ScreenManager.DispatchScreen(new SplashScreen());
 
-            Socket.Close();
+            TcpSocket.Close();
         }
     }
 }

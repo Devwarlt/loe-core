@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LoESoft.Launcher.Http;
+using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls.AccountDisplay
@@ -27,8 +29,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                 PlayButton.Enabled = true;
 
                 LoginLogoutButton.Text = "Logout";
-                if (!isLoggedIn.Item2)
-                    LoginLogoutButton.Click -= LoginButton_Click;
+                if (!isLoggedIn.Item2) LoginLogoutButton.Click -= LoginButton_Click;
                 LoginLogoutButton.Click += LogoutButton_Click;
 
                 RegisterButton.Enabled = false;
@@ -39,8 +40,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
                 LoginLogoutButton.Text = "Login";
                 LoginLogoutButton.Click += LoginButton_Click;
-                if (!isLoggedIn.Item2)
-                    LoginLogoutButton.Click -= LogoutButton_Click;
+                if (!isLoggedIn.Item2) LoginLogoutButton.Click -= LogoutButton_Click;
 
                 RegisterButton.Enabled = true;
             }
@@ -64,6 +64,9 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
             RegisterControl.Visible = false;
             RegisterControl.Enabled = false;
+
+            UpdateControl.Visible = false;
+            UpdateControl.Enabled = false;
 
             // Trigger only few buttons.
             PlayButton.Visible = true;
@@ -123,21 +126,71 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             RegisterControl.ToggleRegisterBox();
         }
 
+        public void ToggleUpdateControl()
+        {
+            UpdateControl.Visible = !UpdateControl.Visible;
+            UpdateControl.Enabled = !UpdateControl.Enabled;
+            UpdateControl.ToggleUpdateBox();
+        }
+
+        public void BackToMenu(bool onCancel = false)
+        {
+            RegisterButton.Enabled = false;
+
+            if (onCancel)
+            {
+                PlayButton.Enabled = true;
+
+                LoginLogoutButton.Enabled = true;
+            }
+            else
+            {
+                PlayButton.Enabled = false;
+
+                LoginLogoutButton.Enabled = false;
+            }
+        }
+
         private void PlayButton_Click(object sender, EventArgs e)
         {
             if (!IsLoggedIn)
+            {
+                DispatchLogin(this, new Tuple<bool, bool>(false, false)); // prevent possible invalid play
                 return;
+            }
 
-            // TODO: implement UpdateBox and UpdateControl, with following features below:
-            // Update running App:
-            // https://visualstudiomagazine.com/articles/2017/12/15/replace-running-app.aspx
-            // ZIP:
-            // https://stackoverflow.com/questions/16052877/how-to-unzip-all-zip-file-from-folder-using-c-sharp-4-0-and-without-using-any-o
-            // https://stackoverflow.com/questions/22133053/how-to-extract-just-the-specific-directory-from-a-zip-archive-in-c-sharp-net-4
-            // https://www.youtube.com/watch?v=BH9-H-b41Ys
-            // https://www.youtube.com/watch?v=aE_Wl4Pouso
-            // https://www.youtube.com/watch?v=NGNQOWjkI_Y
-            // https://www.youtube.com/watch?v=KZr3KI2BbyE
+            var query = new HttpEngineQuery();
+            query.AddQuery("version", /*GameLauncher._version*/"0.1.1");
+
+            HttpEngine.Handle(PacketID.CHECK_VERSION, query,
+                success =>
+                {
+                    GameLauncher.Info("Start game client.");
+
+                    // TODO: launch the game client.
+                },
+                error =>
+                {
+                    BackToMenu();
+
+                    GameLauncher.Info(error);
+
+                    if (error.Contains("released"))
+                    {
+                        UpdateControl.GetUpdateInfo(error);
+                        UpdateControl.SetUpdateBoxContent();
+                        ToggleUpdateControl();
+                    }
+                    else
+                        UpdateControl.UpdatePopUp(new PopUpSettings()
+                        {
+                            Title = "Update Denied",
+                            Content = error,
+                            Alignment = ContentAlignment.MiddleLeft,
+                            OnDisplay = () => UpdateControl.SetPopUpBoxVisibility(true),
+                            OnClose = () => UpdateControl.ToggleUI()
+                        });
+                });
         }
     }
 }

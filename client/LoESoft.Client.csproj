@@ -87,6 +87,7 @@
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ServerMove.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Update.cs" />
+    <Compile Include="Core\Networking\Packets\IUdpPacket.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Load.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\ClientMove.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />

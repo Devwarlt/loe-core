@@ -178,6 +178,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AccountDisplay\Control\Update\UpdateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\Control\Update\UpdateControl.Designer.cs">
+      <DependentUpon>UpdateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\Control\Update\UpdateMediator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\Control\Update\UpdateMediator.Designer.cs">
+      <DependentUpon>UpdateMediator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\Control\Update\UpdateBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\Control\Update\UpdateBox.Designer.cs">
+      <DependentUpon>UpdateBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Controls\AccountDisplay\Control\Logout\LogoutControl.cs">
@@ -270,6 +288,15 @@
     <EmbeddedResource Include="Controls\AccountDisplay\Control\Login\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\Control\Update\UpdateControl.resx">
+      <DependentUpon>UpdateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\Control\Update\UpdateMediator.resx">
+      <DependentUpon>UpdateMediator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\Control\Update\UpdateBox.resx">
+      <DependentUpon>UpdateBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,5 +354,6 @@
   <ItemGroup>
     <Content Include="loesoft.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

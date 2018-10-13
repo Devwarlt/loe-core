@@ -19,7 +19,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Logout
 
         private void LogoutCancelButton_Click(object sender, EventArgs e)
         {
-            var parent = ((LogoutControl)Parent);
+            var parent = (LogoutControl)Parent;
             parent.ToggleLogoutBox();
             parent.ToggleUI();
 
