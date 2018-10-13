@@ -36,7 +36,7 @@
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
             this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -73,6 +73,7 @@
             this.UpdateOKButton.TabStop = false;
             this.UpdateOKButton.Text = "OK";
             this.UpdateOKButton.UseVisualStyleBackColor = false;
+            this.UpdateOKButton.Click += new System.EventHandler(this.UpdateOKButton_Click);
             // 
             // UpdateCancelButton
             // 
@@ -88,6 +89,7 @@
             this.UpdateCancelButton.TabStop = false;
             this.UpdateCancelButton.Text = "Cancel";
             this.UpdateCancelButton.UseVisualStyleBackColor = false;
+            this.UpdateCancelButton.Click += new System.EventHandler(this.UpdateCancelButton_Click);
             // 
             // UpdateBox
             // 
@@ -102,7 +104,6 @@
             this.Name = "UpdateBox";
             this.Size = new System.Drawing.Size(325, 233);
             this.ResumeLayout(false);
-
         }
 
         #endregion

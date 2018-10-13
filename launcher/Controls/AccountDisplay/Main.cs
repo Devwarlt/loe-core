@@ -126,6 +126,13 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             RegisterControl.ToggleRegisterBox();
         }
 
+        public void ToggleUpdateControl()
+        {
+            UpdateControl.Visible = !UpdateControl.Visible;
+            UpdateControl.Enabled = !UpdateControl.Enabled;
+            UpdateControl.ToggleUpdateBox();
+        }
+
         public void BackToMenu(bool onCancel = false)
         {
             RegisterButton.Enabled = false;
@@ -153,21 +160,28 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             }
 
             var query = new HttpEngineQuery();
-            query.AddQuery("version", GameLauncher._version);
+            query.AddQuery("version", /*GameLauncher._version*/"0.1.1");
 
             HttpEngine.Handle(PacketID.CHECK_VERSION, query,
                 success =>
                 {
+                    GameLauncher.Info("Start game client.");
+
                     // TODO: launch the game client.
                 },
                 error =>
                 {
                     BackToMenu();
 
+                    GameLauncher.Info(error);
+
                     if (error.Contains("released"))
-                        UpdateControl.ToggleUpdateBox();
-                    else
                     {
+                        UpdateControl.GetUpdateInfo(error);
+                        UpdateControl.SetUpdateBoxContent();
+                        ToggleUpdateControl();
+                    }
+                    else
                         UpdateControl.UpdatePopUp(new PopUpSettings()
                         {
                             Title = "Update Denied",
@@ -176,19 +190,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
                             OnDisplay = () => UpdateControl.SetPopUpBoxVisibility(true),
                             OnClose = () => UpdateControl.ToggleUI()
                         });
-                    }
                 });
-
-            // TODO: implement UpdateBox and UpdateControl, with following features below:
-            // Update running App:
-            // https://visualstudiomagazine.com/articles/2017/12/15/replace-running-app.aspx
-            // ZIP:
-            // https://stackoverflow.com/questions/16052877/how-to-unzip-all-zip-file-from-folder-using-c-sharp-4-0-and-without-using-any-o
-            // https://stackoverflow.com/questions/22133053/how-to-extract-just-the-specific-directory-from-a-zip-archive-in-c-sharp-net-4
-            // https://www.youtube.com/watch?v=BH9-H-b41Ys
-            // https://www.youtube.com/watch?v=aE_Wl4Pouso
-            // https://www.youtube.com/watch?v=NGNQOWjkI_Y
-            // https://www.youtube.com/watch?v=KZr3KI2BbyE
         }
     }
 }

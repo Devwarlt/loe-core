@@ -30,7 +30,7 @@
         {
             this.TitleLabel = new System.Windows.Forms.Label();
             this.UpdateLabel = new System.Windows.Forms.Label();
-            this.UpdatePlayButton = new System.Windows.Forms.Button();
+            this.UpdateStartPlayButton = new System.Windows.Forms.Button();
             this.UpdateCancelButton = new System.Windows.Forms.Button();
             this.UpdateProgressBar = new System.Windows.Forms.ProgressBar();
             this.FileNameLabel = new System.Windows.Forms.Label();
@@ -43,7 +43,7 @@
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
             this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -66,20 +66,21 @@
             this.UpdateLabel.Text = "The game is updating, please wait...";
             this.UpdateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // UpdatePlayButton
+            // UpdateStartPlayButton
             // 
-            this.UpdatePlayButton.BackColor = System.Drawing.Color.DimGray;
-            this.UpdatePlayButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.UpdatePlayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UpdatePlayButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UpdatePlayButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.UpdatePlayButton.Location = new System.Drawing.Point(27, 192);
-            this.UpdatePlayButton.Name = "UpdatePlayButton";
-            this.UpdatePlayButton.Size = new System.Drawing.Size(124, 36);
-            this.UpdatePlayButton.TabIndex = 7;
-            this.UpdatePlayButton.TabStop = false;
-            this.UpdatePlayButton.Text = "Play";
-            this.UpdatePlayButton.UseVisualStyleBackColor = false;
+            this.UpdateStartPlayButton.BackColor = System.Drawing.Color.DimGray;
+            this.UpdateStartPlayButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.UpdateStartPlayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UpdateStartPlayButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UpdateStartPlayButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.UpdateStartPlayButton.Location = new System.Drawing.Point(27, 192);
+            this.UpdateStartPlayButton.Name = "UpdateStartPlayButton";
+            this.UpdateStartPlayButton.Size = new System.Drawing.Size(124, 36);
+            this.UpdateStartPlayButton.TabIndex = 7;
+            this.UpdateStartPlayButton.TabStop = false;
+            this.UpdateStartPlayButton.Text = "Start";
+            this.UpdateStartPlayButton.UseVisualStyleBackColor = false;
+            this.UpdateStartPlayButton.Click += new System.EventHandler(this.UpdateStartPlayButton_Click);
             // 
             // UpdateCancelButton
             // 
@@ -138,34 +139,34 @@
             // FileValueLabel
             // 
             this.FileValueLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FileValueLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.FileValueLabel.ForeColor = System.Drawing.Color.Gold;
             this.FileValueLabel.Location = new System.Drawing.Point(175, 88);
             this.FileValueLabel.Name = "FileValueLabel";
             this.FileValueLabel.Size = new System.Drawing.Size(124, 16);
             this.FileValueLabel.TabIndex = 12;
-            this.FileValueLabel.Text = ".../build/file.zip";
+            this.FileValueLabel.Text = "...loading";
             this.FileValueLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // SpeedValueLabel
             // 
             this.SpeedValueLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SpeedValueLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.SpeedValueLabel.ForeColor = System.Drawing.Color.Gold;
             this.SpeedValueLabel.Location = new System.Drawing.Point(175, 104);
             this.SpeedValueLabel.Name = "SpeedValueLabel";
             this.SpeedValueLabel.Size = new System.Drawing.Size(124, 16);
             this.SpeedValueLabel.TabIndex = 12;
-            this.SpeedValueLabel.Text = "0 kbps";
+            this.SpeedValueLabel.Text = "...loading";
             this.SpeedValueLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // ProgressValueLabel
             // 
             this.ProgressValueLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProgressValueLabel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.ProgressValueLabel.ForeColor = System.Drawing.Color.Gold;
             this.ProgressValueLabel.Location = new System.Drawing.Point(175, 120);
             this.ProgressValueLabel.Name = "ProgressValueLabel";
             this.ProgressValueLabel.Size = new System.Drawing.Size(124, 16);
             this.ProgressValueLabel.TabIndex = 12;
-            this.ProgressValueLabel.Text = "0 %";
+            this.ProgressValueLabel.Text = "...loading";
             this.ProgressValueLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // UpdateMediator
@@ -182,20 +183,19 @@
             this.Controls.Add(this.FileNameLabel);
             this.Controls.Add(this.UpdateProgressBar);
             this.Controls.Add(this.UpdateCancelButton);
-            this.Controls.Add(this.UpdatePlayButton);
+            this.Controls.Add(this.UpdateStartPlayButton);
             this.Controls.Add(this.UpdateLabel);
             this.Controls.Add(this.TitleLabel);
             this.Name = "UpdateMediator";
             this.Size = new System.Drawing.Size(325, 233);
             this.ResumeLayout(false);
-
         }
 
         #endregion
 
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label UpdateLabel;
-        private System.Windows.Forms.Button UpdatePlayButton;
+        private System.Windows.Forms.Button UpdateStartPlayButton;
         private System.Windows.Forms.Button UpdateCancelButton;
         private System.Windows.Forms.ProgressBar UpdateProgressBar;
         private System.Windows.Forms.Label FileNameLabel;

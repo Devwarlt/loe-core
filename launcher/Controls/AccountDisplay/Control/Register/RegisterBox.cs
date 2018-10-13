@@ -55,7 +55,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
 
             var name = Cipher.Encrypt(AccountNameTextBox.Text);
             var pass = Cipher.Encrypt(PasswordTextBox.Text);
-            var parent = ((RegisterControl)Parent);
+            var parent = (RegisterControl)Parent;
             var query = new HttpEngineQuery();
             query.AddQuery("name", name);
             query.AddQuery("password", pass);
@@ -124,7 +124,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
             PasswordTextBox.Text = null;
             ConfirmPasswordTextBox.Text = null;
 
-            var parent = ((RegisterControl)Parent);
+            var parent = (RegisterControl)Parent;
             parent.ToggleRegisterBox();
             parent.ToggleUI();
         }

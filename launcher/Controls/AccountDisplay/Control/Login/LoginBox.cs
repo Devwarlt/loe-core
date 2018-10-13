@@ -46,7 +46,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
 
             var name = Cipher.Encrypt(AccountNameTextBox.Text);
             var pass = Cipher.Encrypt(PasswordTextBox.Text);
-            var parent = ((LoginControl)Parent);
+            var parent = (LoginControl)Parent;
             var query = new HttpEngineQuery();
             query.AddQuery("name", name);
             query.AddQuery("password", pass);
@@ -112,7 +112,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
             AccountNameTextBox.Text = null;
             PasswordTextBox.Text = null;
 
-            var parent = ((LoginControl)Parent);
+            var parent = (LoginControl)Parent;
             parent.ToggleLoginBox();
             parent.ToggleUI();
 
