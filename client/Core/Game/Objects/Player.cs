@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Animation;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;

@@ -65,8 +65,8 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             RegisterControl.Visible = false;
             RegisterControl.Enabled = false;
 
-            UpdateControl.Visible = false;
-            UpdateControl.Enabled = false;
+            UpdaterControl.Visible = false;
+            UpdaterControl.Enabled = false;
 
             // Trigger only few buttons.
             PlayButton.Visible = true;
@@ -126,11 +126,11 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
             RegisterControl.ToggleRegisterBox();
         }
 
-        public void ToggleUpdateControl()
+        public void ToggleUpdaterControl()
         {
-            UpdateControl.Visible = !UpdateControl.Visible;
-            UpdateControl.Enabled = !UpdateControl.Enabled;
-            UpdateControl.ToggleUpdateBox();
+            UpdaterControl.Visible = !UpdaterControl.Visible;
+            UpdaterControl.Enabled = !UpdaterControl.Enabled;
+            UpdaterControl.ToggleUpdaterBox();
         }
 
         public void BackToMenu(bool onCancel = false)
@@ -177,18 +177,17 @@ namespace LoESoft.Launcher.Controls.AccountDisplay
 
                     if (error.Contains("released"))
                     {
-                        UpdateControl.GetUpdateInfo(error);
-                        UpdateControl.SetUpdateBoxContent();
-                        ToggleUpdateControl();
+                        UpdaterControl.GetUpdateInfo(error);
+                        ToggleUpdaterControl();
                     }
                     else
-                        UpdateControl.UpdatePopUp(new PopUpSettings()
+                        UpdaterControl.UpdatePopUp(new PopUpSettings()
                         {
                             Title = "Update Denied",
                             Content = error,
                             Alignment = ContentAlignment.MiddleLeft,
-                            OnDisplay = () => UpdateControl.SetPopUpBoxVisibility(true),
-                            OnClose = () => UpdateControl.ToggleUI()
+                            OnDisplay = () => UpdaterControl.SetPopUpBoxVisibility(true),
+                            OnClose = () => UpdaterControl.ToggleUI()
                         });
                 });
         }

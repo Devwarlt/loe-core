@@ -178,6 +178,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AccountDisplay\Control\Updater\UpdaterBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\Control\Updater\UpdaterBox.Designer.cs">
+      <DependentUpon>UpdaterBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\Control\Updater\UpdaterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccountDisplay\Control\Updater\UpdaterControl.Designer.cs">
+      <DependentUpon>UpdaterControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AccountDisplay\Control\Update\UpdateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -287,6 +299,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\Control\Login\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\Control\Updater\UpdaterBox.resx">
+      <DependentUpon>UpdaterBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccountDisplay\Control\Updater\UpdaterControl.resx">
+      <DependentUpon>UpdaterControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccountDisplay\Control\Update\UpdateControl.resx">
       <DependentUpon>UpdateControl.cs</DependentUpon>

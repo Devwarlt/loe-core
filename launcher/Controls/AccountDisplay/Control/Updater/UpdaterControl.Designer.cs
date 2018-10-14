@@ -1,6 +1,8 @@
-﻿namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
+﻿using LoESoft.Launcher.Controls.AccountDisplay.Control.Register;
+
+namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Updater
 {
-    partial class LoginControl
+    partial class UpdaterControl
     {
         /// <summary> 
         /// Variável de designer necessária.
@@ -29,44 +31,44 @@
         private void InitializeComponent()
         {
             this.PopUpBox = new LoESoft.Launcher.Controls.PopUpBox();
-            this.LoginBox = new LoESoft.Launcher.Controls.AccountDisplay.Control.Login.LoginBox();
+            this.UpdaterBox = new LoESoft.Launcher.Controls.AccountDisplay.Control.Updater.UpdaterBox();
             this.SuspendLayout();
             // 
             // PopUpBox
             // 
             this.PopUpBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.PopUpBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PopUpBox.Location = new System.Drawing.Point(0, 40);
+            this.PopUpBox.Location = new System.Drawing.Point(0, 38);
             this.PopUpBox.Name = "PopUpBox";
             this.PopUpBox.Settings = null;
             this.PopUpBox.Size = new System.Drawing.Size(325, 265);
             this.PopUpBox.TabIndex = 1;
             // 
-            // LoginBox
+            // UpdaterBox
             // 
-            this.LoginBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.LoginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LoginBox.Location = new System.Drawing.Point(0, 0);
-            this.LoginBox.Name = "LoginBox";
-            this.LoginBox.Size = new System.Drawing.Size(325, 227);
-            this.LoginBox.TabIndex = 2;
+            this.UpdaterBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.UpdaterBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UpdaterBox.Location = new System.Drawing.Point(0, 0);
+            this.UpdaterBox.Name = "UpdaterBox";
+            this.UpdaterBox.Size = new System.Drawing.Size(325, 244);
+            this.UpdaterBox.TabIndex = 2;
             // 
-            // LoginControl
+            // UpdaterControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Controls.Add(this.PopUpBox);
-            this.Controls.Add(this.LoginBox);
-            this.Name = "LoginControl";
+            this.Controls.Add(this.UpdaterBox);
+            this.Name = "UpdaterControl";
             this.Size = new System.Drawing.Size(325, 305);
-            this.Load += new System.EventHandler(this.LoginControl_Load);
+            this.Load += new System.EventHandler(this.UpdaterControl_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private PopUpBox PopUpBox;
-        private LoginBox LoginBox;
+        private UpdaterBox UpdaterBox;
     }
 }

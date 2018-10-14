@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LoESoft.Launcher.Controls
@@ -21,6 +22,7 @@ namespace LoESoft.Launcher.Controls
             Display.Enabled = true;
             Display.Visible = true;
             Selected = true;
+            BackColor = Color.Gray;
         }
 
         public void SetInActive()
@@ -29,6 +31,7 @@ namespace LoESoft.Launcher.Controls
             Display.Enabled = false;
             Display.Visible = false;
             Selected = false;
+            BackColor = Color.DimGray;
         }
     }
 }

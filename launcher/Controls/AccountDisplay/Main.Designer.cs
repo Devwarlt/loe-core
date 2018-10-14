@@ -35,7 +35,7 @@
             this.RegisterControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Register.RegisterControl();
             this.LogoutControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Logout.LogoutControl();
             this.LoginControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Login.LoginControl();
-            this.UpdateControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Update.UpdateControl();
+            this.UpdaterControl = new LoESoft.Launcher.Controls.AccountDisplay.Control.Updater.UpdaterControl();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -123,20 +123,20 @@
             this.LoginControl.Size = new System.Drawing.Size(325, 305);
             this.LoginControl.TabIndex = 7;
             // 
-            // UpdateControl
+            // UpdaterControl
             // 
-            this.UpdateControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.UpdateControl.Location = new System.Drawing.Point(137, 80);
-            this.UpdateControl.Name = "UpdateControl";
-            this.UpdateControl.Size = new System.Drawing.Size(325, 265);
-            this.UpdateControl.TabIndex = 10;
+            this.UpdaterControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.UpdaterControl.Location = new System.Drawing.Point(137, 80);
+            this.UpdaterControl.Name = "UpdaterControl";
+            this.UpdaterControl.Size = new System.Drawing.Size(325, 305);
+            this.UpdaterControl.TabIndex = 10;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Controls.Add(this.UpdateControl);
+            this.Controls.Add(this.UpdaterControl);
             this.Controls.Add(this.RegisterControl);
             this.Controls.Add(this.LogoutControl);
             this.Controls.Add(this.LoginControl);
@@ -160,6 +160,6 @@
         private Control.Login.LoginControl LoginControl;
         private Control.Logout.LogoutControl LogoutControl;
         private Control.Register.RegisterControl RegisterControl;
-        private Control.Update.UpdateControl UpdateControl;
+        private Control.Updater.UpdaterControl UpdaterControl;
     }
 }

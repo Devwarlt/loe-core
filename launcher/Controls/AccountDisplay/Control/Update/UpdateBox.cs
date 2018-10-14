@@ -26,6 +26,6 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Update
             parent.ToggleUI();
         }
 
-        public void SetContent() => UpdateLabel.Text = ((UpdateControl)Parent).UpdateText;
+        public void SetContent() { }// => UpdateLabel.Text = ((UpdateControl)Parent).UpdateText;
     }
 }

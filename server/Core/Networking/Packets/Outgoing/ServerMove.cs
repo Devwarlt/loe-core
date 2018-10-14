@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LoESoft.Server.Core.Networking.Packets.Outgoing
+﻿namespace LoESoft.Server.Core.Networking.Packets.Outgoing
 {
     public class ServerMove : OutgoingPacket
     {

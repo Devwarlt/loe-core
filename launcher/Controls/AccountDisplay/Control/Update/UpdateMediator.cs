@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoESoft.Launcher.Controls.AccountDisplay.Control.Updater;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -36,7 +37,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Update
 
             Watch.Start();
 
-            try { Client.DownloadFileAsync(new Uri(((UpdateControl)Parent).UpdateLink), path); }
+            try { Client.DownloadFileAsync(new Uri(((UpdaterControl)Parent).UpdateLink), path); }
             catch (Exception ex) { GameLauncher.Error(ex); }
         }
 
@@ -72,6 +73,6 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Update
                 $"{(e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00")} MB]";
         }
 
-        public void SetText() => FileValueLabel.Text = $"...{((UpdateControl)Parent).UpdateLink.Substring(55)}";
+        public void SetText() => FileValueLabel.Text = $"...{((UpdaterControl)Parent).UpdateLink.Substring(55)}";
     }
 }

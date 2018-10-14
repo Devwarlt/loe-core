@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LoESoft.Client.Core.Client;
+﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Screens;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming

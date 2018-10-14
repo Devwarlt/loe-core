@@ -26,19 +26,9 @@ namespace LoESoft.Launcher
             if (button == ExitButton)
                 Environment.Exit(0);
 
-            LauncherForm_SizeChanged(button, e);
-
             SelectedDisplay.SetInActive();
             SelectedDisplay = button;
             SelectedDisplay.SetActive();
-        }
-
-        private void LauncherForm_SizeChanged(object sender, EventArgs e)
-        {
-            var button = SelectedDisplay;
-
-            ButtonSelectedDisplay.Height = button.Height;
-            ButtonSelectedDisplay.Top = button.Top;
         }
 
         private void LauncherForm_FormClosed(object sender, FormClosedEventArgs e) => Account.UserAccount.SaveAccount();
