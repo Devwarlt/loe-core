@@ -9,10 +9,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public Client Client { get; private set; }
 
         public Player(WorldManager manager, Client client)
-            : base(manager)
-        {
-            Client = client;
-        }
+            : base(manager) => Client = client;
 
         protected override void RepositionToChunk(int cx, int cy)
         {
@@ -36,19 +33,16 @@ namespace LoESoft.Server.Core.World.Entities.Player
             });
         }
 
-        public override void Dispose()
-        {
-            Manager.Map.RemovePlayer(this);
-        }
-
-        public PlayerData GetPlayerData()
-        {
-            return new PlayerData()
+        public PlayerData GetPlayerData =>
+            new PlayerData()
             {
                 X = X,
                 Y = Y,
                 Type = 0
             };
-        }
+
+        public void Save() => GameServer._database.SavePlayer(Client.Account, GetPlayerData);
+
+        public override void Dispose() => Manager.Map.RemovePlayer(this);
     }
 }

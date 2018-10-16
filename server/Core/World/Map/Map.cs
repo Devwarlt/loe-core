@@ -35,21 +35,24 @@ namespace LoESoft.Server.Core.World
                     i.Update();
         }
 
-        #region MANAGECHUNKS
+        #region "Manage chunks"
+
         public void RepositionPlayer(Player player, int x, int y)
         {
             try
             {
-                int idx = ChunkMap[player.ChunkX, player.ChunkY].Players.IndexOf(player);
+                var idx = ChunkMap[player.ChunkX, player.ChunkY].Players.IndexOf(player);
 
                 ChunkMap[player.ChunkX, player.ChunkY].Players[idx].X = x;
                 ChunkMap[player.ChunkX, player.ChunkY].Players[idx].Y = y;
             }
             catch (ArgumentOutOfRangeException) { }
         }
-        #endregion
 
-        #region GETDATA
+        #endregion "Manage chunks"
+
+        #region "Get data"
+
         public string GetPlayerData(Player player)
         {
             var dat = new RawPlayerData();
@@ -73,20 +76,23 @@ namespace LoESoft.Server.Core.World
 
             return JsonConvert.SerializeObject(dat);
         }
-        #endregion
 
-        #region Add/Remove Entites
-        public void AddEntity(Entity entity) =>
-            ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Add(entity);
+        #endregion "Get data"
 
-        public void AddPlayer(Player player) =>
-            ChunkMap[player.ChunkX, player.ChunkY].Players.Add(player);
+        #region "Add/Remove entites"
 
-        public void RemoveEntity(Entity entity) =>
-            ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Remove(entity);
+        public void AddEntity(Entity entity)
+            => ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Add(entity);
+
+        public void AddPlayer(Player player)
+            => ChunkMap[player.ChunkX, player.ChunkY].Players.Add(player);
+
+        public void RemoveEntity(Entity entity)
+            => ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Remove(entity);
 
         public void RemovePlayer(Player player)
             => ChunkMap[player.ChunkX, player.ChunkY].Players.Remove(player);
-        #endregion
+
+        #endregion "Add/Remove entites"
     }
 }

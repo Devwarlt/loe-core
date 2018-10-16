@@ -8,10 +8,9 @@ namespace LoESoft.Client.Core.Screens
 {
     public class LoginPanel : Panel
     {
-        TextBox mailTextBox;
-        TextBox passTextBox;
-
-        Button btnLogin;
+        private TextBox mailTextBox;
+        private TextBox passTextBox;
+        private Button btnLogin;
 
         public LoginPanel(int x, int y)
             : base(x, y, "Login", color: new RGBColor(85, 85, 88), height: 200)
@@ -42,9 +41,7 @@ namespace LoESoft.Client.Core.Screens
         }
 
         private void OnLogin(object sender, EventArgs e)
-        {
-            GameClient.Info($"Mail: {mailTextBox.Text.ToString()}, Password: {passTextBox.Text.ToString()}");
-        }
+            => GameClient.Info($"Mail: {mailTextBox.Text.ToString()}, Password: {passTextBox.Text.ToString()}");
 
         private void OnClick(object sender, EventArgs e)
         {

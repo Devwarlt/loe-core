@@ -1,4 +1,5 @@
-﻿using LoESoft.Server.Core.Networking;
+﻿using LoESoft.Server.Core.Database;
+using LoESoft.Server.Core.Networking;
 using LoESoft.Server.Core.World;
 using LoESoft.Server.Settings;
 using LoESoft.Server.Utils;
@@ -16,15 +17,21 @@ namespace LoESoft.Server
     {
         // Assembly's Data
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
+
         public static string _version =>
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Substring(0,
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Length - 2);
 
         // Log
         private static Logger _log => LogManager.GetLogger(_name);
+
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
+        // Settings
         public static ServerSettings _settings => IO.Import<ServerSettings>("../../", "Settings");
+
+        // Database
+        public static Database _database { get; set; }
 
         public static void Main(string[] args)
         {
@@ -55,6 +62,9 @@ namespace LoESoft.Server
 
             try
             {
+                _database = new Database();
+                _database.Connect();
+
                 var manager = new WorldManager();
                 manager.BeginUpdate();
 
@@ -65,6 +75,7 @@ namespace LoESoft.Server
 
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
+                _database.Disconnect();
                 connection.EndAccept();
                 manager.Stop();
 

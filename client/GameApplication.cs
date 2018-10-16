@@ -37,7 +37,6 @@ namespace LoESoft.Client
         {
             base.Initialize();
 
-
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
 
             ScreenManager.DispatchScreen(new SplashScreen());
@@ -74,7 +73,9 @@ namespace LoESoft.Client
             };
         }
 
-        protected override void UnloadContent() { }
+        protected override void UnloadContent()
+        {
+        }
 
         protected override void Update(GameTime gameTime)
         {

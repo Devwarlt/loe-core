@@ -10,6 +10,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Register
     public partial class RegisterBox : UserControl
     {
         private string Notifications;
+
         private event EventHandler<ControlEvent> OnSend;
 
         public RegisterBox()
