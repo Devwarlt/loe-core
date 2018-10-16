@@ -235,9 +235,11 @@
     <Compile Include="Core\World\Map\Data\EntityData.cs" />
     <Compile Include="Core\World\Map\Data\MapDatas.cs" />
     <Compile Include="Core\World\Map\Data\PlayerData.cs" />
+    <Compile Include="Core\World\Map\Data\RawEntityData.cs" />
     <Compile Include="Core\World\Map\Data\RawMapData.cs" />
     <Compile Include="Core\World\Entities\Entity.cs" />
     <Compile Include="Core\World\Entities\Player\Player.cs" />
+    <Compile Include="Core\World\Map\Data\RawPlayerData.cs" />
     <Compile Include="Core\World\Map\Data\TileData.cs" />
     <Compile Include="Core\World\Map\Map.cs" />
     <Compile Include="Core\World\Map\Chunk.cs" />
