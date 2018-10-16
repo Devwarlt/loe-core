@@ -24,8 +24,8 @@ namespace LoESoft.Client.Core.Game.Animation
                tempSpriteSet.GetSpritesByWidth(2));
         }
 
-        int curDirection = 1;
-        int preDirection = 1;
+        private int curDirection = 1;
+        private int preDirection = 1;
 
         public override void Update(GameTime gameTime, BasicObject basicObject)
         {

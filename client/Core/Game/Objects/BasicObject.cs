@@ -24,6 +24,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         //need 2 implement a asset loader for the objects b4 the base class is done
         public virtual void Update(GameTime gameTime) { }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawRectangle(new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color, 4);

@@ -8,10 +8,10 @@ namespace LoESoft.Client.Core.Screens
 {
     public class LoginPanel : Panel
     {
-        TextBox mailTextBox;
-        TextBox passTextBox;
+        private TextBox mailTextBox;
+        private TextBox passTextBox;
 
-        Button btnLogin;
+        private Button btnLogin;
 
         public LoginPanel(int x, int y)
             : base(x, y, "Login", color: new RGBColor(85, 85, 88), height: 200)

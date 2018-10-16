@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using LoESoft.Client.Core.Client;
+﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Animation;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LoESoft.Client.Core.Game.Objects
 {
@@ -38,8 +38,9 @@ namespace LoESoft.Client.Core.Game.Objects
         public Direction CurrentDirection { get; private set; }
         public bool IsMoving { get; private set; }
 
-        PlayerAnimation _animation;
-        #endregion
+        private PlayerAnimation _animation;
+
+        #endregion FIELDS
 
         public Player(GameUser gameuser) : base(Color.White)
         {
@@ -61,6 +62,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public override void Draw(SpriteBatch spriteBatch) => _animation.Draw(spriteBatch, this);
 
         #region MOVE
+
         private void SendMovePacket()
         {
             if (IsMoving)
@@ -114,6 +116,7 @@ namespace LoESoft.Client.Core.Game.Objects
         }
 
         private void ResetMovement() => IsMoving = false;
-        #endregion
+
+        #endregion MOVE
     }
 }

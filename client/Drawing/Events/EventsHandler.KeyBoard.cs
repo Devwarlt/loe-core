@@ -37,10 +37,10 @@ namespace LoESoft.Client.Drawing.Events
 
         //protected List<char> GetPressedKeysHoldable()
         //{
-
         //}
 
         #region KeysTable
+
         private readonly Dictionary<Keys, KeyValuePair<char, char>> _keysTable = new Dictionary<Keys, KeyValuePair<char, char>>()
         {
             { Keys.A, new KeyValuePair<char, char>('a', 'A') },
@@ -102,7 +102,8 @@ namespace LoESoft.Client.Drawing.Events
             { Keys.OemComma, new KeyValuePair<char, char>(',', '<') },
             { Keys.Space, new KeyValuePair<char, char>(' ', ' ') }
         };
-        #endregion
+
+        #endregion KeysTable
 
         public char KeysToChar(Keys key, bool shift)
         {

@@ -4,7 +4,7 @@
     {
         /// <summary>
         /// This is the Web Server DNS used to request and connect user's account to get game data.
-        /// 
+        ///
         /// <example>
         /// <para>Example:</para>
         /// <para>http://testing.loesoft.org/</para>

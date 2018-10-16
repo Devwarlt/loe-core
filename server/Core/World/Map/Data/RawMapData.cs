@@ -21,6 +21,7 @@ namespace LoESoft.Server.Core.World.Map.Data
                     Tiles[x, y] = JsonConvert.SerializeObject(data[x, y]);
         }
     }
+
     public class RawEntityData
     {
         public string[] Entity;

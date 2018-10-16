@@ -31,7 +31,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
         public TextDisplay TitleText { get; private set; }
         public TextDisplay TextField { get; private set; }
 
-        FilledRectangle _selectedMarket;
+        private FilledRectangle _selectedMarket;
 
         protected EventsHandler _keyEvents;
 
@@ -57,7 +57,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             AddChild(TextField);
         }
 
-        float _timer = 0f;
+        private float _timer = 0f;
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

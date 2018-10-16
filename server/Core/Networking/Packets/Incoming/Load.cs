@@ -8,6 +8,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         ServerFull = 1,
         Error = 2
     }
+
     public class Load : IncomingPacket
     {
         public override PacketID PacketID => PacketID.LOAD;

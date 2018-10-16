@@ -33,7 +33,9 @@ namespace LoESoft.Client.Core.Screens
             }
         }
 
-        public override void OnScreenDispatch() { }
+        public override void OnScreenDispatch()
+        {
+        }
 
         public override void Update(GameTime gameTime)
         {

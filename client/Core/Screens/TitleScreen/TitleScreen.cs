@@ -22,6 +22,7 @@ namespace LoESoft.Client.Core.Screens
         private FilledRectangle Background { get; set; }
 
         public List<Tile> Tiles { get; set; }
+
         public TitleScreen()
         {
             var buttonGap = 6;
@@ -68,19 +69,28 @@ namespace LoESoft.Client.Core.Screens
         }
 
         private void OnPlayButtonOver(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.Yellow;
+
         private void OnPlayButtonOut(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.White;
 
         private void OnOptionsButtonOver(object sender, EventArgs e) => OptionsButton.TextDisplay.SpriteColor = Color.Yellow;
+
         private void OnOptionsButtonOut(object sender, EventArgs e) => OptionsButton.TextDisplay.SpriteColor = Color.White;
 
         private void OnExitButtonOver(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.Yellow;
+
         private void OnExitButtonOut(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.White;
 
         private void OnPlay(object sender, EventArgs e) => ScreenManager.DispatchScreen(new GameScreen());
+
         private void OnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
 
-        public override void OnScreenCreate() { }
-        public override void OnScreenDispatch() { }
+        public override void OnScreenCreate()
+        {
+        }
+
+        public override void OnScreenDispatch()
+        {
+        }
 
         private float TitleFlashSpeedR = 0;
 

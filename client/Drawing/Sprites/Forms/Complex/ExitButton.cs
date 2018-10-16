@@ -8,6 +8,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
     public class ExitButton : Sprite
     {
         private Action _exit;
+
         public event Action Exit
         {
             add { _exit += value; }

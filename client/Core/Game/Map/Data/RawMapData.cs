@@ -9,6 +9,7 @@
             Tiles = new string[16, 16];
         }
     }
+
     public class RawEntityData
     {
         public string[] Entity;
@@ -18,6 +19,7 @@
             Entity = new string[] { };
         }
     }
+
     public class RawPlayerData
     {
         public string[] Player;

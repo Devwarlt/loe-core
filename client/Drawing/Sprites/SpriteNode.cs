@@ -74,6 +74,7 @@ namespace LoESoft.Client.Drawing.Sprites
         }
 
         #region ChildEvents
+
         public void AddChild(SpriteNode child)
         {
             child.ParentSprite = this;
@@ -90,9 +91,11 @@ namespace LoESoft.Client.Drawing.Sprites
         {
             ChildList.Clear();
         }
-        #endregion
+
+        #endregion ChildEvents
 
         #region EventListener
+
         public void AddEventListener(Event e, EventHandler handler)
         {
             if (!EventDictionary.ContainsKey(e))
@@ -106,6 +109,7 @@ namespace LoESoft.Client.Drawing.Sprites
         }
 
         public void RemoveAllEvent() => EventDictionary.Clear();
-        #endregion
+
+        #endregion EventListener
     }
 }

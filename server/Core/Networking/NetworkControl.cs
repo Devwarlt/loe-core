@@ -142,7 +142,6 @@ namespace LoESoft.Server.Core.Networking
 
         public void Disconnect()
         {
-
             GameServer.Info($"Disconnecting client '{Client.IpAddress}'...");
 
             SafeDisconnect.Set();

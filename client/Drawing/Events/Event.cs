@@ -19,8 +19,8 @@ namespace LoESoft.Client.Drawing.Events
 
     public partial class EventsHandler
     {
-        MouseState previousMouse;
-        MouseState currentMouse;
+        private MouseState previousMouse;
+        private MouseState currentMouse;
         public static Rectangle MouseRectangle { get; private set; }
 
         public bool HandleMouse(SpriteNode node, Event e)
@@ -40,8 +40,8 @@ namespace LoESoft.Client.Drawing.Events
             }
         }
 
-        KeyboardState previousKeyBoard;
-        KeyboardState currentKeyBoard;
+        private KeyboardState previousKeyBoard;
+        private KeyboardState currentKeyBoard;
 
         public List<char> HandleKeyBoard(Event e)
         {
@@ -56,7 +56,8 @@ namespace LoESoft.Client.Drawing.Events
             }
         }
 
-        float timer = 0f;
+        private float timer = 0f;
+
         public bool HandleBackSpace(GameTime time)
         {
             if (previousKeyBoard.IsKeyDown(Keys.Back) && currentKeyBoard.IsKeyUp(Keys.Back))

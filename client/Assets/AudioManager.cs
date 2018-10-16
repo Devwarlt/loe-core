@@ -64,12 +64,15 @@ namespace LoESoft.Client.Assets
         }
 
         public static void MuteSfx() => IsSfxMuted = false;
+
         public static void UnMuteSfx() => IsSfxMuted = false;
+
         public static void MuteMusic()
         {
             MediaPlayer.Volume = 0; // dont stop music just mute it
             IsMusicMuted = false;
         }
+
         public static void UnMuteMusic()
         {
             MediaPlayer.Volume = 1; // then replay it ;3

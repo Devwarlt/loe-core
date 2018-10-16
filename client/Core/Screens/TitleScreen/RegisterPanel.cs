@@ -6,13 +6,13 @@ using System;
 
 namespace LoESoft.Client.Core.Screens
 {
-    class RegisterPanel : Panel
+    internal class RegisterPanel : Panel
     {
-        TextBox mailTextBox;
-        TextBox userTextBox;
-        TextBox passTextBox;
+        private TextBox mailTextBox;
+        private TextBox userTextBox;
+        private TextBox passTextBox;
 
-        Button btnRegister;
+        private Button btnRegister;
 
         public RegisterPanel(int x, int y)
             : base(x, y, "Register", color: new RGBColor(85, 85, 88), height: 250)

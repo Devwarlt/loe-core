@@ -10,9 +10,11 @@ namespace LoESoft.Client.Drawing.Sprites.Text
     public class TextDisplay : Sprite
     {
         public static SpriteFont Font { get; private set; }
+
         public static void LoadSpriteFont(ContentManager contentManager) => Font = AssetLoader.LoadAsset<SpriteFont>("fonts/font");
 
         public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
+
         public static Vector2 MeasureString(string text, int size = 12)
         {
             var scale = size / 100f;

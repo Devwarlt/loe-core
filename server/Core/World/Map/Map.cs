@@ -36,6 +36,7 @@ namespace LoESoft.Server.Core.World
         }
 
         #region MANAGECHUNKS
+
         public void RepositionPlayer(Player player, int x, int y)
         {
             try
@@ -47,9 +48,11 @@ namespace LoESoft.Server.Core.World
             }
             catch (ArgumentOutOfRangeException) { }
         }
-        #endregion
+
+        #endregion MANAGECHUNKS
 
         #region GETDATA
+
         public string GetPlayerData(Player player)
         {
             var dat = new RawPlayerData();
@@ -73,9 +76,11 @@ namespace LoESoft.Server.Core.World
 
             return JsonConvert.SerializeObject(dat);
         }
-        #endregion
+
+        #endregion GETDATA
 
         #region Add/Remove Entites
+
         public void AddEntity(Entity entity) =>
             ChunkMap[entity.ChunkX, entity.ChunkY].Entities.Add(entity);
 
@@ -87,6 +92,7 @@ namespace LoESoft.Server.Core.World
 
         public void RemovePlayer(Player player)
             => ChunkMap[player.ChunkX, player.ChunkY].Players.Remove(player);
-        #endregion
+
+        #endregion Add/Remove Entites
     }
 }

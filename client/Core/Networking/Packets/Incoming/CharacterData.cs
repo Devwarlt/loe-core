@@ -1,6 +1,4 @@
-﻿using System;
-using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Models;
+﻿using LoESoft.Client.Core.Client;
 using Newtonsoft.Json;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming

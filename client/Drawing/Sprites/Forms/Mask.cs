@@ -5,6 +5,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
     public class Mask : FilledRectangle
     {
         private Action maskClicked;
+
         public event Action OnMaskClicked
         {
             add { maskClicked += value; }

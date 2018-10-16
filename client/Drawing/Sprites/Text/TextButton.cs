@@ -3,6 +3,7 @@
     public class TextButton : SpriteNode
     {
         private string _text;
+
         public string Text
         {
             get => _text; set
@@ -16,6 +17,7 @@
                 TextDisplay = new TextDisplay(5, 5, _text, Size);
             }
         }
+
         public int Size { get; set; }
 
         public TextDisplay TextDisplay { get; set; }

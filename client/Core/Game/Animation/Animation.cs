@@ -14,6 +14,7 @@ namespace LoESoft.Client.Core.Game.Animation
         Right = 4,
         Fighting = 5
     }
+
     public abstract class Animation
     {
         public int CurrentFrame { get; set; }
