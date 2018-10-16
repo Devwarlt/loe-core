@@ -9,10 +9,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public Client Client { get; private set; }
 
         public Player(WorldManager manager, Client client)
-            : base(manager)
-        {
-            Client = client;
-        }
+            : base(manager) => Client = client;
 
         protected override void RepositionToChunk(int cx, int cy)
         {

@@ -18,12 +18,12 @@ namespace LoESoft.Server.Core.Networking
 {
     public class NetworkControl
     {
-        private const int BUFFER_SIZE = ushort.MaxValue + 1;
-        private ManualResetEvent SafeDisconnect = new ManualResetEvent(false);
-
         public Socket TcpSocket { get; set; }
         public UdpClient UdpClient { get; set; }
         public Client Client { get; set; }
+
+        private const int BUFFER_SIZE = ushort.MaxValue + 1;
+        private ManualResetEvent SafeDisconnect = new ManualResetEvent(false);
 
         private byte[] ReceiveBuffer { get; set; }
         private byte[] SendBuffer { get; set; }

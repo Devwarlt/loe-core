@@ -13,10 +13,7 @@ namespace LoESoft.Server.Core.World.Entities
         public int ChunkX { get; set; } = 0;
         public int ChunkY { get; set; } = 0;
 
-        public Entity(WorldManager manager)
-        {
-            Manager = manager;
-        }
+        public Entity(WorldManager manager) => Manager = manager;
 
         public virtual void Update()
         {
@@ -37,14 +34,8 @@ namespace LoESoft.Server.Core.World.Entities
             Manager.Map.AddEntity(this);
         }
 
-        public virtual EntityData GetData()
-        {
-            return new EntityData() { X = X, Y = Y, Type = 0 };
-        }
+        public virtual EntityData GetData() => new EntityData() { X = X, Y = Y, Type = 0 };
 
-        public virtual void Dispose()
-        {
-            Manager.Map.RemoveEntity(this);
-        }
+        public virtual void Dispose() => Manager.Map.RemoveEntity(this);
     }
 }

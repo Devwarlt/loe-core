@@ -11,39 +11,13 @@ namespace LoESoft.Server.Core.Database
     {
         private SQLiteConnection Connection { get; set; }
 
-        public Database()
-        {
-            Connection = new SQLiteConnection("Data Source = ../../../database/brme.s3db");
-        }
+        public Database() => Connection = new SQLiteConnection("Data Source = ../../../database/brme.s3db");
 
         public void Connect() => Connection.Open();
 
         public void Disconnect() => Connection.Close();
 
         #region "Get methods"
-
-        public Account GetAccountByToken(string token)
-        {
-            using (var cmd = new SQLiteCommand(Connection))
-            {
-                cmd.CommandText = "SELECT * FROM accounts WHERE token = @token;";
-                cmd.Parameters.AddWithValue("@token", token);
-
-                using (var row = cmd.ExecuteReader())
-                    while (row.Read())
-                        return new Account()
-                        {
-                            Id = (long)row["id"],
-                            Name = (string)row["name"],
-                            Password = (string)row["password"],
-                            Rank = (int)row["rank"],
-                            Token = token,
-                            Creation = (string)row["creation"]
-                        };
-            }
-
-            return null;
-        }
 
         public Account GetAccountByCredentials(string name, string password)
         {
