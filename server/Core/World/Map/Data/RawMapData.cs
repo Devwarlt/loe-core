@@ -36,6 +36,7 @@ namespace LoESoft.Server.Core.World.Map.Data
             Entity = dataToFormat.ConvertAll(_ => JsonConvert.SerializeObject(_)).ToArray();
         }
     }
+
     public class RawPlayerData
     {
         public string[] Player;
@@ -45,11 +46,7 @@ namespace LoESoft.Server.Core.World.Map.Data
             Player = new string[] { };
         }
 
-        public void AssignData(List<Player> data)
-        {
-            var dataToFormat = data.ConvertAll(_ => _.GetPlayerData());
-
-            Player = dataToFormat.ConvertAll(_ => JsonConvert.SerializeObject(_)).ToArray();
-        }
+        public void AssignData(List<Player> data) =>
+            Player = data.ConvertAll(_ => _.GetPlayerData).ConvertAll(_ => JsonConvert.SerializeObject(_)).ToArray();
     }
 }

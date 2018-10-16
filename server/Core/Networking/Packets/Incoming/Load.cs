@@ -15,7 +15,6 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         public override void Handle(Client client)
         {
             client.Player = new Player(client.Manager, client);
-
             client.Manager.TryAddPlayer(client);
         }
     }

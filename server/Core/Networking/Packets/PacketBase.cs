@@ -10,7 +10,13 @@ namespace LoESoft.Server.Core.Networking.Packets
         CLIENTMOVE = 2,
         UPDATE = 3,
         LOAD = 4,
-        SERVERMOVE = 5
+        SERVERMOVE = 5,
+        LOGIN = 6,
+        REGISTER = 7,
+        CREATE_NEW_CHARACTER = 8,
+        RESPONSE = 9,
+        LOAD_CHARACTER = 10,
+        CHARACTER_DATA = 11
     }
 
     public abstract class PacketBase

@@ -34,7 +34,7 @@ namespace LoESoft.Client.Core.Screens
             TempPlayer = new Player(_gameUser);
 
             PlayerMap = new Map();
-            
+
             _gameUser.SendPacket(new Load());
         }
 

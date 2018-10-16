@@ -73,7 +73,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public void DetectMovement()
         {
-            var pressedKeys = Keyboard.GetState().GetPressedKeys().SkipWhile(_ => 
+            var pressedKeys = Keyboard.GetState().GetPressedKeys().SkipWhile(_ =>
             (KeysToDirection.Keys.Contains(_)) ? false : true);
 
             if (pressedKeys.Count() > 0)
