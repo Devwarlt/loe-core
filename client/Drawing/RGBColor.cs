@@ -2,6 +2,9 @@
 {
     public class RGBColor
     {
+        public static RGBColor Default => new RGBColor(255, 255, 255);
+        public static RGBColor Empty => new RGBColor(0, 0, 0);
+
         private int _r;
 
         public int R
@@ -32,8 +35,5 @@
             G = g;
             B = b;
         }
-
-        public static RGBColor Default => new RGBColor(255, 255, 255);
-        public static RGBColor Empty => new RGBColor(0, 0, 0);
     }
 }

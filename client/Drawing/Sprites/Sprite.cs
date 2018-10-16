@@ -13,10 +13,10 @@ namespace LoESoft.Client.Drawing.Sprites
         {
             SpriteTexture = texture;
 
-            var opacity = (byte)(255 * alpha);
             if (color == null)
                 color = RGBColor.Default;
-            SpriteColor = new Color(color.R, color.G, color.B, opacity);
+
+            SpriteColor = new Color(color.R, color.G, color.B, (byte)(255 * alpha));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

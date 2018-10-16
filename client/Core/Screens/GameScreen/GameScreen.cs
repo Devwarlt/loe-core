@@ -29,12 +29,9 @@ namespace LoESoft.Client.Core.Screens
         public override void OnScreenCreate()
         {
             _eventsHandler = new EventsHandler();
-            var mouseStat = Mouse.GetState();
-            _mouseSprite = new Sprite(mouseStat.X, mouseStat.Y, 5, 5);
+            _mouseSprite = new Sprite(Mouse.GetState().X, Mouse.GetState().Y, 5, 5);
             TempPlayer = new Player(_gameUser);
-
             PlayerMap = new Map();
-
             _gameUser.SendPacket(new Load());
         }
 

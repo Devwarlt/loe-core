@@ -10,7 +10,7 @@ namespace LoESoft.Client.Assets
 
         public static T LoadAsset<T>(string assetName)
         {
-            T content = default(T);
+            var content = default(T);
 
             if (Content != null)
                 content = Content.Load<T>(assetName);
@@ -20,7 +20,7 @@ namespace LoESoft.Client.Assets
 
         public static SpriteSet LoadSpriteSet(string filename)
         {
-            SpriteSet set = new SpriteSet();
+            var set = new SpriteSet();
             set.Initialize(filename);
 
             return set;

@@ -18,7 +18,7 @@ namespace LoESoft.Server.Core.World.Map
         private int _startX;
         private int _startY;
 
-        public bool IsActive => (Players.Count > 0);
+        public bool IsActive => Players.Count > 0;
 
         public Chunk(WorldManager manager, int chunkx, int chunky)
         {

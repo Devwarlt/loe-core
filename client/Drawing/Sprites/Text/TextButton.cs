@@ -2,6 +2,9 @@
 {
     public class TextButton : SpriteNode
     {
+        public int Size { get; set; }
+        public TextDisplay TextDisplay { get; set; }
+
         private string _text;
 
         public string Text
@@ -17,10 +20,6 @@
                 TextDisplay = new TextDisplay(5, 5, _text, Size);
             }
         }
-
-        public int Size { get; set; }
-
-        public TextDisplay TextDisplay { get; set; }
 
         public TextButton(string text, int size)
             : base(0, 0, 0, 0)

@@ -13,55 +13,45 @@ namespace LoESoft.Client.Core.Screens
 {
     public class TitleScreen : Screen
     {
+        public List<Tile> Tiles { get; set; }
+
+        private float TitleFlashSpeedR = 0;
+
         private TextDisplay Title { get; set; }
         private TextButton PlayButton { get; set; }
         private TextButton OptionsButton { get; set; }
         private TextButton ExitButton { get; set; }
-
         private Texture2D BackgroundImage { get; set; }
         private FilledRectangle Background { get; set; }
 
-        public List<Tile> Tiles { get; set; }
-
         public TitleScreen()
         {
-            var buttonGap = 6;
-
             Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 0, 0));
             Title.X = (GameApplication.WIDTH - Title.Width) / 2;
             Title.Y = Title.Height * 3;
             Title.Outline = true;
-
             PlayButton = new TextButton("Play", 30);
             PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
             PlayButton.Y = (GameApplication.HEIGHT - PlayButton.Height) / 2;
             PlayButton.TextDisplay.Outline = true;
-
             OptionsButton = new TextButton("Options", 30);
             OptionsButton.X = (GameApplication.WIDTH - OptionsButton.Width) / 2;
-            OptionsButton.Y = PlayButton.Y + PlayButton.Height + buttonGap;
+            OptionsButton.Y = PlayButton.Y + PlayButton.Height + 6;
             OptionsButton.TextDisplay.Outline = true;
-
             ExitButton = new TextButton("Exit", 30);
             ExitButton.X = (GameApplication.WIDTH - ExitButton.Width) / 2;
-            ExitButton.Y = OptionsButton.Y + OptionsButton.Height + buttonGap;
+            ExitButton.Y = OptionsButton.Y + OptionsButton.Height + 6;
             ExitButton.TextDisplay.Outline = true;
-
             PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
             PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
             PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
-
             OptionsButton.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
             OptionsButton.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
-
             ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
             ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
             ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
-
             BackgroundImage = AssetLoader.LoadAsset<Texture2D>("images/titleScreenBackground");
-
             Background = new FilledRectangle(BackgroundImage);
-
             Background.AddChild(Title);
             Background.AddChild(PlayButton);
             Background.AddChild(OptionsButton);
@@ -92,13 +82,9 @@ namespace LoESoft.Client.Core.Screens
         {
         }
 
-        private float TitleFlashSpeedR = 0;
-
         public override void Update(GameTime gameTime)
         {
-            var dt = 1.0f / gameTime.ElapsedGameTime.Milliseconds;
-
-            TitleFlashSpeedR += dt * 0.5f;
+            TitleFlashSpeedR += 1.0f / gameTime.ElapsedGameTime.Milliseconds * 0.5f;
 
             Title.SpriteColor = Color.Lerp(Color.Red, Color.Yellow, (float)Math.Sin(TitleFlashSpeedR));
 

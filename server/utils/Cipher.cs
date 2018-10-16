@@ -4,15 +4,8 @@ using System.Text;
 
 namespace LoESoft.Server.Core.Utils
 {
-    public class Cipher
+    public partial class Cipher
     {
-        public enum KeySize : int
-        {
-            KEY_512 = 512,
-            KEY_1024 = 1024,
-            KEY_2048 = 2048
-        }
-
         public static string LoESoftHash => "_103s0f7 g4m3s_";
         public static KeySize RSAKeySize => KeySize.KEY_512;
 

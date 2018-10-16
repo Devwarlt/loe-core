@@ -17,12 +17,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         {
             IsZeroApplicaple = true;
 
-            AddEventListener(Events.Event.CLICKLEFT, onMaskClicked);
-        }
-
-        private void onMaskClicked(object sender, EventArgs e)
-        {
-            maskClicked?.Invoke();
+            AddEventListener(Events.Event.CLICKLEFT, delegate { maskClicked?.Invoke(); });
         }
     }
 }

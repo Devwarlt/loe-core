@@ -8,6 +8,8 @@ namespace LoESoft.Client.Core.Screens
     {
         public static Screen ActiveScreen { get; set; }
 
+        private static Action DoCloseGame { get; set; }
+
         public static void DispatchScreen(Screen newScreen)
         {
             newScreen.OnScreenCreate();
@@ -19,6 +21,7 @@ namespace LoESoft.Client.Core.Screens
         {
             if (ActiveScreen == null || !ActiveScreen.Visible)
                 return;
+
             ActiveScreen.Update(gameTime);
         }
 
@@ -29,8 +32,6 @@ namespace LoESoft.Client.Core.Screens
 
             ActiveScreen.Draw(spriteBatch);
         }
-
-        private static Action DoCloseGame { get; set; }
 
         public static void CloseGame()
         {

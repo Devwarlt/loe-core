@@ -10,10 +10,10 @@ namespace LoESoft.Client.Core.Screens
     public class SplashScreen : Screen
     {
         private static bool HasLoadedAssets { get; set; }
+
         private const int DELAY_BETWEEN_SPLASH = 3500;
 
         private int CurrentTime { get; set; } = DELAY_BETWEEN_SPLASH;
-
         private bool FadeIn { get; set; }
         private bool FadedOut { get; set; }
         private float TextureToDrawAlpha { get; set; }
@@ -45,11 +45,13 @@ namespace LoESoft.Client.Core.Screens
             if (CurrentTime <= 0 && FadedOut)
             {
                 TextureToDraw = null;
+
                 if (TexturesToDisplay.Count == 0)
                 {
                     ScreenManager.DispatchScreen(new TitleScreen());
                     return;
                 }
+
                 CurrentTime = DELAY_BETWEEN_SPLASH;
             }
 
@@ -72,12 +74,14 @@ namespace LoESoft.Client.Core.Screens
             if (FadeIn)
             {
                 TextureToDrawAlpha = 1f - ((float)CurrentTime / DELAY_BETWEEN_SPLASH);
+
                 if (FadeIn && TextureToDrawAlpha >= 1)
                     FadeIn = false;
             }
             else
             {
                 TextureToDrawAlpha -= 0.02f;
+
                 if (!FadedOut && TextureToDrawAlpha <= 0)
                     FadedOut = true;
             }

@@ -49,7 +49,7 @@ namespace LoESoft.Server.Core.World
             catch (ArgumentOutOfRangeException) { }
         }
 
-        #endregion
+        #endregion "Manage chunks"
 
         #region "Get data"
 
@@ -77,7 +77,7 @@ namespace LoESoft.Server.Core.World
             return JsonConvert.SerializeObject(dat);
         }
 
-        #endregion
+        #endregion "Get data"
 
         #region "Add/Remove entites"
 
@@ -93,6 +93,6 @@ namespace LoESoft.Server.Core.World
         public void RemovePlayer(Player player)
             => ChunkMap[player.ChunkX, player.ChunkY].Players.Remove(player);
 
-        #endregion
+        #endregion "Add/Remove entites"
     }
 }

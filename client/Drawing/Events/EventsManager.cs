@@ -6,27 +6,24 @@ namespace LoESoft.Client.Drawing.Events
     {
         public static ActiveSpriteNode ActiveNode;
 
-        static EventsManager()
+        static EventsManager() => ActiveNode = new ActiveSpriteNode()
         {
-            ActiveNode = new ActiveSpriteNode()
-            {
-                IsActive = false,
-                Node = null
-            };
-        }
+            IsActive = false,
+            Node = null
+        };
 
         public static void SetUnactive()
         {
             var timer = new Timer(1);
-            timer.Elapsed += StopTimer;
-            timer.Enabled = true;
-
-            void StopTimer(object o, ElapsedEventArgs e)
+            timer.Elapsed += delegate
             {
-                ActiveNode.IsActive = false;
-                ActiveNode.Node = null;
-                timer.Stop();
-            }
+                {
+                    ActiveNode.IsActive = false;
+                    ActiveNode.Node = null;
+                    timer.Stop();
+                }
+            };
+            timer.Enabled = true;
         }
     }
 }

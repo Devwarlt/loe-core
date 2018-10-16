@@ -10,27 +10,27 @@ namespace LoESoft.Client.Drawing.Sprites
     {
         public List<SpriteNode> ChildList { get; set; }
         public Dictionary<Event, EventHandler> EventDictionary { get; set; }
-
         public SpriteNode ParentSprite { get; set; }
 
         public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
-
-        public bool IsZeroApplicaple { get; set; } = false;
-
-        public int _x { get; set; }
-        public int X { get => _x; set => _x = value; }
-        public int _y { get; set; }
-        public int Y { get => _y; set => _y = value; }
-
         public int StageX => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X;
         public int StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
 
+        public bool Visible = true;
+        public bool IsInvoked = false;
+
+        public bool IsZeroApplicaple { get; set; } = false;
+
+        public int X { get => _x; set => _x = value; }
+        public int Y { get => _y; set => _y = value; }
+
+        public int _x { get; set; }
+        public int _y { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-
         public int Index { get; set; }
 
-        public bool Visible = true;
+        protected EventsHandler _eventsHandler;
 
         public SpriteNode(int x, int y, int width, int height)
         {
@@ -43,9 +43,6 @@ namespace LoESoft.Client.Drawing.Sprites
             EventDictionary = new Dictionary<Event, EventHandler>();
             _eventsHandler = new EventsHandler();
         }
-
-        protected EventsHandler _eventsHandler;
-        public bool IsInvoked = false;
 
         public virtual void Update(GameTime gameTime)
         {
@@ -61,7 +58,9 @@ namespace LoESoft.Client.Drawing.Sprites
                         EventsManager.ActiveNode.IsActive = true;
                         EventsManager.ActiveNode.Node = this;
                     }
+
                     i.Value?.Invoke(this, new EventArgs());
+
                     EventsManager.SetUnactive();
                 }
         }
@@ -73,7 +72,7 @@ namespace LoESoft.Client.Drawing.Sprites
                     i.Draw(spriteBatch);
         }
 
-        #region ChildEvents
+        #region "Child events"
 
         public void AddChild(SpriteNode child)
         {
@@ -82,19 +81,13 @@ namespace LoESoft.Client.Drawing.Sprites
             ChildList.Add(child);
         }
 
-        public void RemoveChild(SpriteNode child)
-        {
-            ChildList.Remove(child);
-        }
+        public void RemoveChild(SpriteNode child) => ChildList.Remove(child);
 
-        public void RemoveAllChild()
-        {
-            ChildList.Clear();
-        }
+        public void RemoveAllChild() => ChildList.Clear();
 
-        #endregion ChildEvents
+        #endregion "Child events"
 
-        #region EventListener
+        #region Event listener
 
         public void AddEventListener(Event e, EventHandler handler)
         {
@@ -110,6 +103,6 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public void RemoveAllEvent() => EventDictionary.Clear();
 
-        #endregion EventListener
+        #endregion Event listener
     }
 }

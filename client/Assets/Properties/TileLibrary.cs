@@ -22,6 +22,7 @@ namespace LoESoft.Client.Assets.Properties
                 IdToType = new Dictionary<string, int>();
 
             var elems = XmlLoader.LoadAsset(assetName);
+
             foreach (var elem in elems.Elements())
             {
                 var type = int.Parse(elem.Attribute("type").Value);
