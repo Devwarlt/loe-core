@@ -42,9 +42,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            Width = (int)MeasureString(Text, (int)Size).X;
-            Height = (int)MeasureString(Text, (int)Size).Y;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
