@@ -73,6 +73,8 @@ namespace LoESoft.Client.Core.Game.Objects
 
                 CurrentDirection = KeysToDirection[Keyboard.GetState().GetPressedKeys().SkipWhile(_ => KeysToDirection.Keys.Contains(_) ? false : true).First()];
 
+                GameClient.Warn(CurrentDirection.ToString());
+
                 if (DistinationX == X && DistinationY == Y)
                     SendMovePacket();
             }

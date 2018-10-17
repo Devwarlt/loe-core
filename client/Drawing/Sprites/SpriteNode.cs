@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace LoESoft.Client.Drawing.Sprites
 {
@@ -21,10 +20,7 @@ namespace LoESoft.Client.Drawing.Sprites
         public bool IsInvoked = false;
 
         public bool IsZeroApplicaple { get; set; } = false;
-        
-        private int _x { get; set; }
-        public int X { get => _x; set => _x = value; }
-        private int _y { get; set; }
+
         public int X { get => _x; set => _x = value; }
         public int Y { get => _y; set => _y = value; }
 
@@ -32,17 +28,6 @@ namespace LoESoft.Client.Drawing.Sprites
         public int _y { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-
-        public int Index { get; set; } = 0;
-        public int SpriteLevel
-        {
-            get
-            {
-                if (ParentSprite != null)
-                    return ParentSprite.SpriteLevel + 1;
-                return 0;
-            }
-        }
         public int Index { get; set; }
 
         protected EventsHandler _eventsHandler;
@@ -58,19 +43,13 @@ namespace LoESoft.Client.Drawing.Sprites
             EventDictionary = new Dictionary<Event, EventHandler>();
             _eventsHandler = new EventsHandler();
         }
-        
-        protected EventsHandler _eventsHandler;
-        
+
         public virtual void Update(GameTime gameTime)
         {
-            foreach (var i in ChildList.ToArray())
-                i.Update(gameTime);
+            for (var i = ChildList.ToArray().Length - 1; i >= 0; i--)
+                ChildList[i].Update(gameTime);
 
             foreach (var i in EventDictionary)
-            {
-                if (_eventsHandler.HandleMouse(this, i.Key))
-                    i.Value?.Invoke(this, new EventArgs());
-            }
                 if (_eventsHandler.HandleMouse(this, i.Key) &&
                     !EventsManager.ActiveNode.IsActive && EventsManager.ActiveNode.Node != this)
                 {
