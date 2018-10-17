@@ -5,22 +5,11 @@ using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Game.Animation
 {
-    public enum AnimationType : byte
-    {
-        Singular = 0, // For enemies with only 1 type of animation EX: Monsters, Decor entities/tiles
-        Forward = 1,
-        Backward = 2,
-        Left = 3,
-        Right = 4,
-        Fighting = 5
-    }
     public abstract class Animation
     {
         public int CurrentFrame { get; set; }
         public float CoolDown { get; private set; }
-
         public Dictionary<AnimationType, List<AnimationFrame>> Frames { get; private set; }
-
         public AnimationType TypeAnimation { get; set; }
 
         protected float Timer = 0f;
@@ -35,7 +24,7 @@ namespace LoESoft.Client.Core.Game.Animation
 
         public void AddAnimation(AnimationType type, Texture2D[] textures)
         {
-            List<AnimationFrame> frames = new List<AnimationFrame>();
+            var frames = new List<AnimationFrame>();
 
             foreach (var i in textures)
                 frames.Add(new AnimationFrame(i));

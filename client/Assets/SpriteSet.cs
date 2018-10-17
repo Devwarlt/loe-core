@@ -41,23 +41,13 @@ namespace LoESoft.Client.Assets
 
         public void Initialize(string file)
         {
-            string path = $"sprites/{file}";
-
-            var baseTexture = AssetLoader.LoadAsset<Texture2D>(path);
-
-            int width = baseTexture.Width;
-            int height = baseTexture.Height;
-
-            for (var x = 0; (x < width / 8 && x < MaxX); x++)
-                for (var y = 0; (y < height / 8 && y < MaxY); y++)
+            for (var x = 0; x < AssetLoader.LoadAsset<Texture2D>($"sprites/{file}").Width / 8 && x < MaxX; x++)
+                for (var y = 0; y < AssetLoader.LoadAsset<Texture2D>($"sprites/{file}").Height / 8 && y < MaxY; y++)
                 {
-                    Texture2D texture = new Texture2D(baseTexture.GraphicsDevice, 8, 8);
-                    Rectangle region = new Rectangle(x * 8, y * 8, 8, 8);
-                    var rawData = new Color[8 * 8];
+                    AssetLoader.LoadAsset<Texture2D>($"sprites/{file}").GetData(0, new Rectangle(x * 8, y * 8, 8, 8), new Color[8 * 8], 0, 8 * 8);
 
-                    baseTexture.GetData(0, region, rawData, 0, 8 * 8);
-
-                    texture.SetData(rawData);
+                    var texture = new Texture2D(AssetLoader.LoadAsset<Texture2D>($"sprites/{file}").GraphicsDevice, 8, 8);
+                    texture.SetData(new Color[8 * 8]);
 
                     Textures[x, y] = texture;
                 }

@@ -28,7 +28,7 @@ namespace LoESoft.WebServer.Core.Networking
                 return;
             }
 
-            string url = $"http://*:{_port}/";
+            var url = $"http://*:{_port}/";
 
             Process.Start(
                 new ProcessStartInfo("netsh", string.Format(@"http add urlacl url={0}", url) +
@@ -118,7 +118,7 @@ namespace LoESoft.WebServer.Core.Networking
 
         private void HandleRequest(HttpListenerContext context)
         {
-            NameValueCollection query = new NameValueCollection();
+            var query = new NameValueCollection();
 
             using (var reader = new StreamReader(context.Request.InputStream))
                 query = HttpUtility.ParseQueryString(reader.ReadToEnd());

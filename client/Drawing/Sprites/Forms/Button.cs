@@ -13,24 +13,13 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
             : base(x, y, 0, 0, AssetLoader.LoadAsset<Texture2D>("images/btnImage"), color, alpha)
         {
             NameText = new TextDisplay(5, 5, name);
-
-            var textwidth = (int)TextDisplay.MeasureString(name).X;
-            var textheight = (int)TextDisplay.MeasureString(name).Y;
-
-            Width = textwidth + 10;
-            Height = textheight + 10;
-
+            Width = (int)TextDisplay.MeasureString(name).X + 10;
+            Height = (int)TextDisplay.MeasureString(name).Y + 10;
             AddChild(NameText);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
+        public override void Draw(SpriteBatch spriteBatch) => base.Draw(spriteBatch);
 
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
+        public override void Update(GameTime gameTime) => base.Update(gameTime);
     }
 }

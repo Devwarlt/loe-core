@@ -3,16 +3,6 @@ using System.Text;
 
 namespace LoESoft.Server.Core.Networking.Packets
 {
-    public enum PacketID : int
-    {
-        PONG = 0,
-        PING = 1,
-        CLIENTMOVE = 2,
-        UPDATE = 3,
-        LOAD = 4,
-        SERVERMOVE = 5
-    }
-
     public abstract class PacketBase
     {
         [JsonIgnore]
