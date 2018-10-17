@@ -18,6 +18,13 @@ namespace LoESoft.Client.Core.Screens
         private TextButton OptionsButton { get; set; }
         private TextButton ExitButton { get; set; }
 
+        private RegisterPanel _registerPanel;
+        private LoginPanel _loginPanel;
+        private TextButton _registerButton;
+        private TextButton _loginButton;
+
+        private Mask _maskBlocker;
+
         private Texture2D BackgroundImage { get; set; }
         private FilledRectangle Background { get; set; }
 
@@ -31,9 +38,30 @@ namespace LoESoft.Client.Core.Screens
             Title.Y = Title.Height * 3;
             Title.Outline = true;
 
+            _maskBlocker = new Mask(new RGBColor(Color.Black.R, Color.Black.G, Color.Black.B));
+
+            _registerPanel = new RegisterPanel(((GameApplication.WIDTH - 400) / 2),
+            ((GameApplication.HEIGHT - 250) / 2));
+
+            _loginPanel = new LoginPanel(((GameApplication.WIDTH - 400) / 2),
+            ((GameApplication.HEIGHT - 200) / 2));
+
+            _registerPanel.OnPanelExit += _registerPanel_OnPanelExit;
+            _loginPanel.OnPanelExit += _loginPanel_OnPanelExit;
+
+            _registerButton = new TextButton("Register", 30);
+            _registerButton.X = (GameApplication.WIDTH - _registerButton.Width) / 2;
+            _registerButton.Y = (GameApplication.HEIGHT - _registerButton.Height) / 2;
+            _registerButton.TextDisplay.Outline = true;
+
+            _loginButton = new TextButton("Login", 30);
+            _loginButton.X = (GameApplication.WIDTH - _loginButton.Width) / 2;
+            _loginButton.Y = _registerButton.Y + _registerButton.Height + buttonGap;
+            _loginButton.TextDisplay.Outline = true;
+
             PlayButton = new TextButton("Play", 30);
             PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
-            PlayButton.Y = (GameApplication.HEIGHT - PlayButton.Height) / 2;
+            PlayButton.Y = _loginButton.Y + _loginButton.Height + buttonGap;
             PlayButton.TextDisplay.Outline = true;
 
             OptionsButton = new TextButton("Options", 30);
@@ -46,6 +74,14 @@ namespace LoESoft.Client.Core.Screens
             ExitButton.Y = OptionsButton.Y + OptionsButton.Height + buttonGap;
             ExitButton.TextDisplay.Outline = true;
 
+            _registerButton.AddEventListener(Event.CLICKLEFT, onRegisterPanel);
+            _registerButton.AddEventListener(Event.MOUSEOUT, onRegisterOut);
+            _registerButton.AddEventListener(Event.MOUSEOVER, onRegisterOver);
+
+            _loginButton.AddEventListener(Event.CLICKLEFT, onLoginPanel);
+            _loginButton.AddEventListener(Event.MOUSEOVER, onLoginOver);
+            _loginButton.AddEventListener(Event.MOUSEOUT, onLoginOut);
+
             PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
             PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
             PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
@@ -56,15 +92,57 @@ namespace LoESoft.Client.Core.Screens
             ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
             ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
             ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
+            
 
             BackgroundImage = AssetLoader.LoadAsset<Texture2D>("images/titleScreenBackground");
 
             Background = new FilledRectangle(BackgroundImage);
+            Background.X = 0;
+            Background.Y = 0;
+
+
+            Background.AddEventListener(Event.CLICKLEFT, onTitle);
 
             Background.AddChild(Title);
+            Background.AddChild(_registerButton);
+            Background.AddChild(_loginButton);
             Background.AddChild(PlayButton);
             Background.AddChild(OptionsButton);
             Background.AddChild(ExitButton);
+        }
+
+        private void _loginPanel_OnPanelExit()
+        {
+            Background.RemoveChild(_maskBlocker);
+        }
+
+        private void _registerPanel_OnPanelExit()
+        {
+            Background.RemoveChild(_maskBlocker);
+        }
+
+        private void onTitle(object sender, EventArgs e)
+        {
+            GameClient.Info("TITLE");
+        }
+
+        private void onRegisterOver(object sender, EventArgs e) =>_registerButton.TextDisplay.SpriteColor = Color.Yellow;
+        private void onRegisterOut(object sender, EventArgs e) => _registerButton.TextDisplay.SpriteColor = Color.White;
+        
+
+        private void onLoginOut(object sender, EventArgs e) => _loginButton.TextDisplay.SpriteColor = Color.White;
+        private void onLoginOver(object sender, EventArgs e) => _loginButton.TextDisplay.SpriteColor = Color.Yellow;
+
+        private void onLoginPanel(object sender, EventArgs e)
+        {
+            Background.AddChild(_maskBlocker);
+            Background.AddChild(_loginPanel);
+        }
+
+        private void onRegisterPanel(object sender, EventArgs e)
+        {
+            Background.AddChild(_maskBlocker);
+            Background.AddChild(_registerPanel);
         }
 
         private void OnPlayButtonOver(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.Yellow;

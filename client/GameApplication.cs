@@ -2,6 +2,7 @@ using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Screens;
 using LoESoft.Client.Drawing;
+using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -42,7 +43,7 @@ namespace LoESoft.Client
             ScreenManager.DispatchScreen(new SplashScreen());
 
             GameUser = new GameUser(GetServers[ServerName.LOCAL]);
-            GameUser.Connect();
+            //GameUser.Connect();
 
             GameClient._discordPresence.State = "World: Chicago";
             GameClient._discordPresence.Details = "Isle of Saepphira";
@@ -77,6 +78,7 @@ namespace LoESoft.Client
 
         protected override void Update(GameTime gameTime)
         {
+            EventsManager.Update();
             ScreenManager.Update(gameTime);
 
             base.Update(gameTime);

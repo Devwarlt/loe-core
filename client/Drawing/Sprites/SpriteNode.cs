@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace LoESoft.Client.Drawing.Sprites
 {
@@ -17,9 +18,9 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public bool IsZeroApplicaple { get; set; } = false;
 
-        public int _x { get; set; }
+        private int _x { get; set; }
         public int X { get => _x; set => _x = value; }
-        public int _y { get; set; }
+        private int _y { get; set; }
         public int Y { get => _y; set => _y = value; }
 
         public int StageX => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X;
@@ -28,7 +29,16 @@ namespace LoESoft.Client.Drawing.Sprites
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public int Index { get; set; }
+        public int Index { get; set; } = 0;
+        public int SpriteLevel
+        {
+            get
+            {
+                if (ParentSprite != null)
+                    return ParentSprite.SpriteLevel + 1;
+                return 0;
+            }
+        }
 
         public bool Visible = true;
 
@@ -45,25 +55,17 @@ namespace LoESoft.Client.Drawing.Sprites
         }
 
         protected EventsHandler _eventsHandler;
-        public bool IsInvoked = false;
 
         public virtual void Update(GameTime gameTime)
         {
-            for (var i = ChildList.ToArray().Length - 1; i >= 0; i--)
-                ChildList[i].Update(gameTime);
+            foreach (var i in ChildList.ToArray())
+                i.Update(gameTime);
 
             foreach (var i in EventDictionary)
-                if (_eventsHandler.HandleMouse(this, i.Key) &&
-                    !EventsManager.ActiveNode.IsActive && EventsManager.ActiveNode.Node != this)
-                {
-                    if (i.Key != Event.MOUSEOUT)
-                    {
-                        EventsManager.ActiveNode.IsActive = true;
-                        EventsManager.ActiveNode.Node = this;
-                    }
+            {
+                if (_eventsHandler.HandleMouse(this, i.Key))
                     i.Value?.Invoke(this, new EventArgs());
-                    EventsManager.SetUnactive();
-                }
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
