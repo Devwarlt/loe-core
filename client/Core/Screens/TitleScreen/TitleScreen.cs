@@ -31,8 +31,6 @@ namespace LoESoft.Client.Core.Screens
 
         public TitleScreen()
         {
-            var buttonGap = 6;
-
             Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 0, 0));
             Title.X = (GameApplication.WIDTH - Title.Width) / 2;
             Title.Y = Title.Height * 3;
@@ -48,20 +46,20 @@ namespace LoESoft.Client.Core.Screens
             _registerButton.TextDisplay.Outline = true;
             _loginButton = new TextButton("Login", 30);
             _loginButton.X = (GameApplication.WIDTH - _loginButton.Width) / 2;
-            _loginButton.Y = _registerButton.Y + _registerButton.Height + buttonGap;
+            _loginButton.Y = _registerButton.Y + _registerButton.Height + 6;
             _loginButton.TextDisplay.Outline = true;
             PlayButton = new TextButton("Play", 30);
             PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
             PlayButton.Y = (GameApplication.HEIGHT - PlayButton.Height) / 2;
-            PlayButton.Y = _loginButton.Y + _loginButton.Height + buttonGap;
+            PlayButton.Y = _loginButton.Y + _loginButton.Height + 6;
             PlayButton.TextDisplay.Outline = true;
             OptionsButton = new TextButton("Options", 30);
             OptionsButton.X = (GameApplication.WIDTH - OptionsButton.Width) / 2;
-            OptionsButton.Y = PlayButton.Y + PlayButton.Height + buttonGap;
+            OptionsButton.Y = PlayButton.Y + PlayButton.Height + 6;
             OptionsButton.TextDisplay.Outline = true;
             ExitButton = new TextButton("Exit", 30);
             ExitButton.X = (GameApplication.WIDTH - ExitButton.Width) / 2;
-            ExitButton.Y = OptionsButton.Y + OptionsButton.Height + buttonGap;
+            ExitButton.Y = OptionsButton.Y + OptionsButton.Height + 6;
             ExitButton.TextDisplay.Outline = true;
             _registerButton.AddEventListener(Event.CLICKLEFT, OnRegisterPanel);
             _registerButton.AddEventListener(Event.MOUSEOUT, OnRegisterOut);
