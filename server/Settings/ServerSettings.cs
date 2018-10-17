@@ -4,14 +4,13 @@
     {
         public TCPServerSettings TcpServerSettings { get; set; }
 
-        public static ServerSettings DefaultServerSettings =>
-            new ServerSettings()
+        public static ServerSettings DefaultServerSettings => new ServerSettings()
+        {
+            TcpServerSettings = new TCPServerSettings()
             {
-                TcpServerSettings = new TCPServerSettings()
-                {
-                    Port = -1,
-                    MaxClients = -1
-                }
-            };
+                Port = -1,
+                MaxClients = -1
+            }
+        };
     }
 }

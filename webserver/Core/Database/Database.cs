@@ -20,7 +20,6 @@ namespace LoESoft.WebServer.Core.Database
         public void Disconnect() => Connection.Close();
 
         #region "Get methods"
-
         public Account GetAccountByToken(string token)
         {
             using (var cmd = new SQLiteCommand(Connection))
@@ -96,11 +95,9 @@ namespace LoESoft.WebServer.Core.Database
                 }
             }
         }
-
-        #endregion "Get methods"
+        #endregion
 
         #region "Check methods"
-
         public bool CheckAccountNameIfExists(string name)
         {
             using (var cmd = new SQLiteCommand(Connection))
@@ -115,11 +112,9 @@ namespace LoESoft.WebServer.Core.Database
 
             return false;
         }
-
-        #endregion "Check methods"
+        #endregion
 
         #region "Create methods"
-
         public bool CreateNewAccount(string name, string password, out string token)
         {
             using (var cmd = new SQLiteCommand(Connection))
@@ -166,7 +161,6 @@ namespace LoESoft.WebServer.Core.Database
 
             return false;
         }
-
-        #endregion "Create methods"
+        #endregion
     }
 }

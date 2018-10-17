@@ -12,7 +12,8 @@ namespace LoESoft.Client.Assets
             if (Images == null)
                 Images = new Dictionary<string, Texture2D>();
 
-            Images.Add(name, AssetLoader.LoadAsset<Texture2D>(file));
+            var asset = AssetLoader.LoadAsset<Texture2D>(file);
+            Images.Add(name, asset);
         }
     }
 }

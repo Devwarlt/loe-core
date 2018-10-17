@@ -22,7 +22,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         public Panel(int x, int y, string title, int width = 400, int height = 400, RGBColor color = null)
             : base(x, y, width, height, color)
         {
-            Title = new TextDisplay((width / 2) - ((int)TextDisplay.MeasureString(title).X / 2), 5, title);
+            var textpos = TextDisplay.MeasureString(title);
+            Title = new TextDisplay((width / 2) - ((int)textpos.X / 2), 5, title);
             _exitBtn = new ExitButton(width - 23, 3, 20, 20);
             _exitBtn.Exit += OnExit;
 

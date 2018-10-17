@@ -11,19 +11,16 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace LoESoft.Server.Core.Networking
 {
     public class NetworkControl
     {
+        protected const int BUFFER_SIZE = ushort.MaxValue + 1;
+
         public Socket TcpSocket { get; set; }
         public UdpClient UdpClient { get; set; }
         public Client Client { get; set; }
-
-        private const int BUFFER_SIZE = ushort.MaxValue + 1;
-        private ManualResetEvent SafeDisconnect = new ManualResetEvent(false);
 
         private byte[] ReceiveBuffer { get; set; }
         private byte[] SendBuffer { get; set; }
@@ -142,25 +139,11 @@ namespace LoESoft.Server.Core.Networking
 
         public void Disconnect()
         {
-            GameServer.Info($"Disconnecting client '{Client.IpAddress}'...");
-
-            SafeDisconnect.Set();
-
-            ((IAsyncResult)Task.Run(() =>
-            {
-                try { Client.Player.Save(); }
-                catch (Exception e) { GameServer.Error(e); }
-
-                SafeDisconnect.Reset();
-            })).AsyncWaitHandle.WaitOne();
-
-            SafeDisconnect.WaitOne();
+            GameServer.Warn($"Client disconnected '{Client.IpAddress}'.");
 
             Client.Player.Dispose();
             Client.Socket.Close();
             Client.Socket.Dispose();
-
-            GameServer.Info($"Client disconnected '{Client.IpAddress}'.");
         }
     }
 }

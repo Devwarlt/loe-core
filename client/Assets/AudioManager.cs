@@ -9,6 +9,8 @@ namespace LoESoft.Client.Assets
         private static Dictionary<string, SoundEffect> SoundEffects { get; set; }
         private static Dictionary<string, Song> Music { get; set; }
 
+        private static Song ActiveMusic { get; set; }
+
         public static bool IsSfxMuted { get; set; }
         public static bool IsMusicMuted { get; set; }
 
@@ -22,7 +24,6 @@ namespace LoESoft.Client.Assets
         {
             if (SoundEffects == null)
                 SoundEffects = new Dictionary<string, SoundEffect>();
-
             SoundEffects.Add(sound, AssetLoader.LoadAsset<SoundEffect>(path));
         }
 
@@ -30,7 +31,6 @@ namespace LoESoft.Client.Assets
         {
             if (Music == null)
                 Music = new Dictionary<string, Song>();
-
             Music.Add(music, AssetLoader.LoadAsset<Song>(path));
         }
 
@@ -53,28 +53,26 @@ namespace LoESoft.Client.Assets
             if (!Music.ContainsKey(music))
                 throw new System.Exception($"Unknown music {music}");
 
-            //TODO: implement a way to chance volume.
+            ActiveMusic = Music[music];
+
+            //todo implement a way to chance volume
+
             MediaPlayer.Stop();
             MediaPlayer.Volume = 1;
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(Music[music]);
+            MediaPlayer.Play(ActiveMusic);
         }
 
         public static void MuteSfx() => IsSfxMuted = false;
-
         public static void UnMuteSfx() => IsSfxMuted = false;
-
         public static void MuteMusic()
         {
-            MediaPlayer.Volume = 0;
-
+            MediaPlayer.Volume = 0; // dont stop music just mute it
             IsMusicMuted = false;
         }
-
         public static void UnMuteMusic()
         {
-            MediaPlayer.Volume = 1;
-
+            MediaPlayer.Volume = 1; // then replay it ;3
             IsMusicMuted = false;
         }
     }

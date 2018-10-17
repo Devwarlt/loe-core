@@ -1,5 +1,4 @@
-﻿using LoESoft.Server.Core.Database.Models;
-using LoESoft.Server.Core.Networking.Packets.Outgoing;
+﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using LoESoft.Server.Core.World;
 using LoESoft.Server.Core.World.Entities.Player;
 using System;
@@ -10,7 +9,6 @@ namespace LoESoft.Server.Core.Networking
 {
     public class Client
     {
-        public Account Account { get; set; }
         public Socket Socket { get; set; }
         public NetworkControl NetworkControl { get; set; }
         public string IpAddress { get; set; }

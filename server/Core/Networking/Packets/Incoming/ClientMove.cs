@@ -34,7 +34,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             int Y = client.Player.Y + y;
 
             client.Manager.Map.RepositionPlayer(client.Player, X, Y);
-
+            
             client.SendPacket(new ServerMove()
             {
                 X = X,

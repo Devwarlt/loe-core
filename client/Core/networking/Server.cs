@@ -3,8 +3,13 @@ using System.Net;
 
 namespace LoESoft.Client.Core.Networking
 {
-    public partial class Server
+    public class Server
     {
+        public enum ServerName
+        {
+            LOCAL
+        }
+
         public static readonly Dictionary<ServerName, Server> GetServers = new Dictionary<ServerName, Server>()
         {
             { ServerName.LOCAL, new Server(Address: "127.0.0.1") }

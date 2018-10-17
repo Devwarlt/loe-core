@@ -1,4 +1,9 @@
-﻿namespace LoESoft.Client.Drawing.Events
+﻿using LoESoft.Client.Drawing.Sprites;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+
+namespace LoESoft.Client.Drawing.Events
 {
     public enum Event : int
     {
@@ -11,6 +16,7 @@
         HANDLEBACKSPACE = 6,
         CLICKOUTLEFT = 7
     }
+
     public partial class EventsHandler
     {
         MouseState previousMouse;

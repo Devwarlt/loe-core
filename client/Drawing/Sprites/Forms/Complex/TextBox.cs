@@ -26,11 +26,12 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
         public bool Selected { get; set; }
         public bool Encoded { get; set; }
         public int Limit { get; set; }
+
         public StringBuilder Text { get; private set; }
         public TextDisplay TitleText { get; private set; }
         public TextDisplay TextField { get; private set; }
 
-        private FilledRectangle _selectedMarket;
+        FilledRectangle _selectedMarket;
 
         protected EventsHandler _keyEvents;
 
@@ -56,8 +57,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             AddChild(TextField);
         }
 
-        private float _timer = 0f;
-
+        float _timer = 0f;
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -70,7 +70,9 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            foreach (var i in _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray())
+            char[] pressedKeys = _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray();
+
+            foreach (var i in pressedKeys)
                 if (Text.Length <= Limit && Selected)
                     Text.Append(i.ToString());
 
@@ -78,7 +80,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
                 if (Text.Length > 0)
                     Text.Length--;
 
-            TextField.Text = Encoded ? GetEncodedString(Text.ToString()) : Text.ToString();
+            TextField.Text = Encoded ? GetEncodedString(Text.ToString())
+                : Text.ToString();
 
             if (Selected && _timer > 0.5f)
             {
@@ -91,7 +94,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
         private string GetEncodedString(string value)
         {
-            var text = new StringBuilder();
+            StringBuilder text = new StringBuilder();
 
             for (var i = 0; i < value.Length; i++)
                 text.Append("*");

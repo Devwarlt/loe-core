@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 [assembly: AssemblyTitle("Baron Ramerok")]
 [assembly: AssemblyProduct("GameClient")]

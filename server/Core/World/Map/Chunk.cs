@@ -13,12 +13,16 @@ namespace LoESoft.Server.Core.World.Map
         public TileData[,] Tiles { get; private set; }
         public List<Entity> Entities { get; private set; }
         public List<Player> Players { get; private set; }
+
         public WorldManager Manager { get; private set; }
 
         private int _startX;
         private int _startY;
 
-        public bool IsActive => Players.Count > 0;
+        public bool IsActive
+        {
+            get => (Players.Count > 0);
+        }
 
         public Chunk(WorldManager manager, int chunkx, int chunky)
         {
@@ -42,20 +46,24 @@ namespace LoESoft.Server.Core.World.Map
 
         public void LoadChunk() //temporary
         {
+            Random random = new Random();
+
             for (var x = 0; x < CHUNKSIZE; x++)
                 for (var y = 0; y < CHUNKSIZE; y++)
                 {
+                    int id = random.Next(0, 2);
+
                     Tiles[x, y] = new TileData()
                     {
                         X = _startX + x,
                         Y = _startY + y,
-                        Type = new Random().Next(0, 2)
+                        Type = id
                     };
 
                     Entities.Add(new Entity(Manager)
                     {
-                        X = _startX + new Random().Next(0, 16),
-                        Y = _startY + new Random().Next(0, 16)
+                        X = _startX + random.Next(0, 16),
+                        Y = _startY + random.Next(0, 16)
                     });
                 }
         }

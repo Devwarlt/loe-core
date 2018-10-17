@@ -8,15 +8,15 @@ namespace LoESoft.Client.Drawing.Events
     {
         protected List<char> GetPressedKeys()
         {
-            var pressedKeys = new List<KeyValuePair<bool, Keys>>();
+            List<KeyValuePair<bool, Keys>> pressedKeys = new List<KeyValuePair<bool, Keys>>();
 
-            var oldPressedKeys = previousKeyBoard.GetPressedKeys();
+            Keys[] oldPressedKeys = previousKeyBoard.GetPressedKeys();
 
             for (var i = 0; i < oldPressedKeys.Length; i++)
                 if (currentKeyBoard.IsKeyUp(oldPressedKeys[i]))
-                    pressedKeys.Add(new KeyValuePair<bool, Keys>(DetectCaps, oldPressedKeys[i]));
+                    pressedKeys.Add(new KeyValuePair<bool, Keys>(DetectCaps(), oldPressedKeys[i]));
 
-            var keys = new List<char>();
+            List<char> keys = new List<char>();
 
             foreach (var i in pressedKeys)
                 if (i.Value.ToString().Length <= 2 || TextBox.ValidKeys.Contains(i.Value))
@@ -25,13 +25,22 @@ namespace LoESoft.Client.Drawing.Events
             return keys;
         }
 
-        protected bool DetectCaps
-            => currentKeyBoard.CapsLock
-            || (previousKeyBoard.IsKeyDown(Keys.LeftShift) && currentKeyBoard.IsKeyDown(Keys.LeftShift))
-            || (previousKeyBoard.IsKeyDown(Keys.RightShift) && currentKeyBoard.IsKeyDown(Keys.RightShift));
+        protected bool DetectCaps()
+        {
+            if (currentKeyBoard.CapsLock || (previousKeyBoard.IsKeyDown(Keys.LeftShift)
+                && currentKeyBoard.IsKeyDown(Keys.LeftShift)) ||
+                (previousKeyBoard.IsKeyDown(Keys.RightShift) && currentKeyBoard.IsKeyDown(Keys.RightShift)))
+                return true;
 
-        #region "Keys table"
+            return false;
+        }
 
+        //protected List<char> GetPressedKeysHoldable()
+        //{
+
+        //}
+
+        #region KeysTable
         private readonly Dictionary<Keys, KeyValuePair<char, char>> _keysTable = new Dictionary<Keys, KeyValuePair<char, char>>()
         {
             { Keys.A, new KeyValuePair<char, char>('a', 'A') },
@@ -93,10 +102,14 @@ namespace LoESoft.Client.Drawing.Events
             { Keys.OemComma, new KeyValuePair<char, char>(',', '<') },
             { Keys.Space, new KeyValuePair<char, char>(' ', ' ') }
         };
-
-        #endregion "Keys table"
+        #endregion
 
         public char KeysToChar(Keys key, bool shift)
-            => _keysTable.TryGetValue(key, out KeyValuePair<char, char> data) ? shift ? data.Value : data.Key : '\0';
+        {
+            if (_keysTable.TryGetValue(key, out KeyValuePair<char, char> data))
+                return shift ? data.Value : data.Key;
+            else
+                return '\0';
+        }
     }
 }

@@ -18,13 +18,13 @@ namespace LoESoft.Client.Core.Networking
 {
     public class NetworkControl
     {
+        protected const int BUFFER_SIZE = ushort.MaxValue + 1;
+
         public const int MAX_CONNECTION_ATTEMPTS = 5;
 
         public Socket TcpSocket { get; set; }
         public UdpClient UdpClient { get; set; }
         public Server Server { get; set; }
-
-        private const int BUFFER_SIZE = ushort.MaxValue + 1;
 
         private GameUser GameUser { get; set; }
         private byte[] ReceiveBuffer { get; set; }
@@ -120,8 +120,10 @@ namespace LoESoft.Client.Core.Networking
             }));
 
             if (outgoingPacket.PacketID == PacketID.CLIENTMOVE)
+            {
                 if (!HandleMovePacket(outgoingPacket as ClientMove))
                     return;
+            }
 
             GameClient.Warn($"Sending {outgoingPacket.PacketID}");
 

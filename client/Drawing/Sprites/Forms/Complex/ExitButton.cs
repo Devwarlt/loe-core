@@ -8,7 +8,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
     public class ExitButton : Sprite
     {
         private Action _exit;
-
         public event Action Exit
         {
             add { _exit += value; }
@@ -17,12 +16,13 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
         public ExitButton(int x, int y, int width, int height, RGBColor color = null)
             : base(x, y, width, height, AssetLoader.LoadAsset<Texture2D>("images/exitImage"), color)
-            => AddEventListener(Event.CLICKLEFT, OnExit);
+        {
+            AddEventListener(Event.CLICKLEFT, onExit);
+        }
 
-        private void OnExit(object sender, EventArgs e)
+        private void onExit(object sender, EventArgs e)
         {
             _exit?.Invoke();
-
             ParentSprite.ParentSprite.RemoveChild(ParentSprite);
         }
     }

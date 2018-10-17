@@ -6,12 +6,13 @@ using System;
 
 namespace LoESoft.Client.Core.Screens
 {
-    internal class RegisterPanel : Panel
+    class RegisterPanel : Panel
     {
-        private TextBox mailTextBox;
-        private TextBox userTextBox;
-        private TextBox passTextBox;
-        private Button btnRegister;
+        TextBox mailTextBox;
+        TextBox userTextBox;
+        TextBox passTextBox;
+
+        Button btnRegister;
 
         public RegisterPanel(int x, int y)
             : base(x, y, "Register", color: new RGBColor(85, 85, 88), height: 250)
@@ -37,7 +38,9 @@ namespace LoESoft.Client.Core.Screens
         }
 
         private void OnRegister(object sender, EventArgs e)
-            => GameClient.Info($"Mail: {mailTextBox.Text.ToString()},Username: {userTextBox.Text.ToString()}, Password: {passTextBox.Text.ToString()}");
+        {
+            GameClient.Info($"Mail: {mailTextBox.Text.ToString()},Username: {userTextBox.Text.ToString()}, Password: {passTextBox.Text.ToString()}");
+        }
 
         private void OnPassClick(object sender, EventArgs e)
         {

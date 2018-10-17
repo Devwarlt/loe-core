@@ -10,7 +10,6 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Login
     public partial class LoginBox : UserControl
     {
         private string Notifications;
-
         private event EventHandler<ControlEvent> OnSend;
 
         public LoginBox()

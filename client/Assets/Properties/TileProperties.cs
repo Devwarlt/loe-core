@@ -9,8 +9,9 @@ namespace LoESoft.Client.Assets.Properties
 
         public TileProperties(XElement elem)
         {
-            TextureIndex = int.Parse(elem.Element("Texture").Attribute("index").Value);
-            TextureFile = elem.Element("Texture").Value;
+            var texture = elem.Element("Texture");
+            TextureIndex = int.Parse(texture.Attribute("index").Value);
+            TextureFile = texture.Value;
         }
     }
 }

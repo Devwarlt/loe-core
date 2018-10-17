@@ -1,4 +1,6 @@
-﻿namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Updater
+﻿using LoESoft.Launcher.Controls.AccountDisplay.Control.Register;
+
+namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Updater
 {
     partial class UpdaterControl
     {

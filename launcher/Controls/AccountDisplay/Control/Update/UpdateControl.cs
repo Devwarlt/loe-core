@@ -54,9 +54,7 @@ namespace LoESoft.Launcher.Controls.AccountDisplay.Control.Update
             ((Main)Parent).BackToMenu(true);
         }
 
-        public void SetPopUpBoxVisibility(bool visible)
-        {
-        } //=> PopUpBox.Visible = visible;
+        public void SetPopUpBoxVisibility(bool visible) { } //=> PopUpBox.Visible = visible;
 
         public void UpdatePopUp(PopUpSettings settings)
         {

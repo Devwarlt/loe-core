@@ -1,11 +1,11 @@
-﻿using DiscordRPC;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Rollbar;
 using System;
 using System.Reflection;
 using System.Threading;
+using DiscordRPC;
 
 namespace LoESoft.Client
 {
@@ -13,7 +13,6 @@ namespace LoESoft.Client
     {
         // Assembly's Data
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
-
         public static string _version =>
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Substring(0,
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Length - 2);
@@ -23,12 +22,10 @@ namespace LoESoft.Client
 
         // Unique IDs
         private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
-
         private static string _brmeRpcId => "483698369559003156";
 
         // Discord
         public static DiscordClient _discordClient { get; set; }
-
         public static RichPresence _discordPresence { get; set; }
 
         [STAThread]

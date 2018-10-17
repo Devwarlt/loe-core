@@ -10,8 +10,16 @@ namespace LoESoft.Client.Drawing.Sprites.Text
     public class TextDisplay : Sprite
     {
         public static SpriteFont Font { get; private set; }
+        public static void LoadSpriteFont(ContentManager contentManager) => Font = AssetLoader.LoadAsset<SpriteFont>("fonts/font");
 
         public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
+        public static Vector2 MeasureString(string text, int size = 12)
+        {
+            var scale = size / 100f;
+            var x = Font.MeasureString(text).X * scale;
+            var y = Font.MeasureString(text).Y * scale;
+            return new Vector2(x, y);
+        }
 
         public string Text { get; set; }
         public float Size { get; set; }
@@ -31,12 +39,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             Height = (int)MeasureString(Text, (int)Size).Y;
         }
 
-        public static void LoadSpriteFont(ContentManager contentManager)
-            => Font = AssetLoader.LoadAsset<SpriteFont>("fonts/font");
-
-        public static Vector2 MeasureString(string text, int size = 12)
-            => new Vector2(Font.MeasureString(text).X * (size / 100f), Font.MeasureString(text).Y * (size / 100f));
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -44,6 +46,8 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            var scale = Size / 100f;
+
             if (PerLineWidth != 0)
             {
                 var offset = 0;
@@ -51,13 +55,12 @@ namespace LoESoft.Client.Drawing.Sprites.Text
                 {
                     if (Outline) // Test
                     {
-                        spriteBatch.DrawString(Font, i, new Vector2(StageX - Size / 100f, StageY + offset), Color.Black, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
-                        spriteBatch.DrawString(Font, i, new Vector2(StageX + Size / 100f, StageY + offset), Color.Black, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
-                        spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY - Size / 100f + offset), Color.Black, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
-                        spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + Size / 100f + offset), Color.Black, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
+                        spriteBatch.DrawString(Font, i, new Vector2(StageX - scale, StageY + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                        spriteBatch.DrawString(Font, i, new Vector2(StageX + scale, StageY + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                        spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY - scale + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                        spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + scale + offset), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                     } // Test End
-
-                    spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + offset), SpriteColor, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + offset), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                     offset += GetHeight((int)Size) + 2;
                 }
             }
@@ -65,15 +68,13 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             {
                 if (Outline) // Test
                 {
-                    spriteBatch.DrawString(Font, Text, new Vector2(StageX - Size / 100f, StageY), Color.Black, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
-                    spriteBatch.DrawString(Font, Text, new Vector2(StageX + Size / 100f, StageY), Color.Black, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
-                    spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY - Size / 100f), Color.Black, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
-                    spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY + Size / 100f), Color.Black, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, Text, new Vector2(StageX - scale, StageY), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, Text, new Vector2(StageX + scale, StageY), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY - scale), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY + scale), Color.Black, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
                 } // Test End
-
-                spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(Font, Text, new Vector2(StageX, StageY), SpriteColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
             }
-
             base.Draw(spriteBatch);
         }
 
@@ -84,7 +85,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
             var cWidth = 0;
             var cSize = 0;
-
             foreach (var i in Text)
             {
                 cWidth += (int)MeasureString(i.ToString(), (int)Size).X;
@@ -96,7 +96,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             return Split(Text, cSize).ToList();
         }
 
-        private static IEnumerable<string> Split(string str, int chunkSize)
-            => Enumerable.Range(0, str.Length / chunkSize).Select(i => str.Substring(i * chunkSize, chunkSize));
+        private static IEnumerable<string> Split(string str, int chunkSize) => Enumerable.Range(0, str.Length / chunkSize).Select(i => str.Substring(i * chunkSize, chunkSize));
     }
 }
