@@ -7,7 +7,7 @@ namespace LoESoft.Client.Drawing.Events
     {
         protected bool HandleMouseClickLeft(SpriteNode node)
         {
-            if (!node.Visible || !node.SpriteRectangle.Intersects(EventsManager.MouseRect))
+            if (!node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle))
                 return false;
 
             if (!(currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed))
@@ -18,7 +18,7 @@ namespace LoESoft.Client.Drawing.Events
 
         protected bool HandleMouseClickRight(SpriteNode node)
         {
-            if (!node.Visible || !node.SpriteRectangle.Intersects(EventsManager.MouseRect))
+            if (!node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle))
                 return false;
 
             if (!(currentMouse.RightButton == ButtonState.Released && previousMouse.RightButton == ButtonState.Pressed))
@@ -29,7 +29,7 @@ namespace LoESoft.Client.Drawing.Events
 
         protected bool HandleClickOutLeft(SpriteNode node)
         {
-            if (!node.Visible || node.SpriteRectangle.Intersects(EventsManager.MouseRect))
+            if (!node.Visible || node.SpriteRectangle.Intersects(MouseRectangle))
                 return false;
 
             if (!(currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed))
@@ -40,14 +40,14 @@ namespace LoESoft.Client.Drawing.Events
 
         protected bool HandleMouseOver(SpriteNode node)
         {
-            if (!node.Visible || !node.SpriteRectangle.Intersects(EventsManager.MouseRect))
+            if (!node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle))
                 return false;
             return true;
         }
 
         protected bool HandleMouseOut(SpriteNode node)
         {
-            if (!node.Visible || node.SpriteRectangle.Intersects(EventsManager.MouseRect))
+            if (!node.Visible || node.SpriteRectangle.Intersects(MouseRectangle))
                 return false;
             return true;
         }

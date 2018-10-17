@@ -1,6 +1,5 @@
 ﻿using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using LoESoft.Client.Drawing.Sprites.Text;
-using System;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms
 {
@@ -11,13 +10,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         protected Mask _grayMask;
 
         protected ExitButton _exitBtn;
-
-        private Action _panelExit;
-        public event Action OnPanelExit
-        {
-            add { _panelExit += value; }
-            remove { _panelExit -= value; }
-        }
 
         public Panel(int x, int y, string title, int width = 400, int height = 400, RGBColor color = null)
             : base(x, y, width, height, color)
@@ -33,7 +25,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
 
         public virtual void OnExit()
         {
-            _panelExit?.Invoke();
         }
     }
 }

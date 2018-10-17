@@ -106,6 +106,8 @@
     <Compile Include="Core\Screens\ScreenManager.cs" />
     <Compile Include="Core\Utils\IO.cs" />
     <Compile Include="Drawing\DrawHelper.cs" />
+    <Compile Include="Drawing\Events\ActiveSpriteMode.cs" />
+    <Compile Include="Drawing\Events\EventsManager.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
     <Compile Include="Drawing\Events\EventsHandler.KeyBoard.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
