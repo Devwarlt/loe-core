@@ -8,27 +8,23 @@ namespace LoESoft.Client.Drawing.Sprites
 {
     public class SpriteNode
     {
+        public bool Visible = true;
+
+        public bool IsZeroApplicaple { get; set; } = false;
+        public int Index { get; set; } = 0;
+
         public List<SpriteNode> ChildList { get; set; }
         public Dictionary<Event, EventHandler> EventDictionary { get; set; }
         public SpriteNode ParentSprite { get; set; }
-
-        public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
-        public int StageX => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X;
-        public int StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
-
-        public bool Visible = true;
-        public bool IsInvoked = false;
-
-        public bool IsZeroApplicaple { get; set; } = false;
-
-        public int X { get => _x; set => _x = value; }
-        public int Y { get => _y; set => _y = value; }
-
-        public int _x { get; set; }
-        public int _y { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public int Index { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public int StageX => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X;
+        public int StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
+        public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
+        public int SpriteLevel => ParentSprite != null ? ParentSprite.SpriteLevel + 1 : 0;
 
         protected EventsHandler _eventsHandler;
 
@@ -46,23 +42,12 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public virtual void Update(GameTime gameTime)
         {
-            for (var i = ChildList.ToArray().Length - 1; i >= 0; i--)
-                ChildList[i].Update(gameTime);
+            foreach (var i in ChildList.ToArray())
+                i.Update(gameTime);
 
             foreach (var i in EventDictionary)
-                if (_eventsHandler.HandleMouse(this, i.Key) &&
-                    !EventsManager.ActiveNode.IsActive && EventsManager.ActiveNode.Node != this)
-                {
-                    if (i.Key != Event.MOUSEOUT)
-                    {
-                        EventsManager.ActiveNode.IsActive = true;
-                        EventsManager.ActiveNode.Node = this;
-                    }
-
+                if (_eventsHandler.HandleMouse(this, i.Key))
                     i.Value?.Invoke(this, new EventArgs());
-
-                    EventsManager.SetUnactive();
-                }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

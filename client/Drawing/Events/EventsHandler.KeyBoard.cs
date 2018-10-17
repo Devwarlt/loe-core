@@ -9,14 +9,12 @@ namespace LoESoft.Client.Drawing.Events
         protected List<char> GetPressedKeys()
         {
             var pressedKeys = new List<KeyValuePair<bool, Keys>>();
-
             var oldPressedKeys = previousKeyBoard.GetPressedKeys();
+            var keys = new List<char>();
 
             for (var i = 0; i < oldPressedKeys.Length; i++)
                 if (currentKeyBoard.IsKeyUp(oldPressedKeys[i]))
                     pressedKeys.Add(new KeyValuePair<bool, Keys>(DetectCaps, oldPressedKeys[i]));
-
-            var keys = new List<char>();
 
             foreach (var i in pressedKeys)
                 if (i.Value.ToString().Length <= 2 || TextBox.ValidKeys.Contains(i.Value))

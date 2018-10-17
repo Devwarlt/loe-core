@@ -11,6 +11,24 @@ namespace LoESoft.Client.Core.Game.Objects
 {
     public partial class Player : BasicObject
     {
+        public Player(GameUser gameuser) : base(Color.White)
+        {
+            IsMoving = false;
+            _animation = new PlayerAnimation();
+            GameUser = gameuser;
+            DistinationX = (int)X;
+            DistinationY = (int)Y;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            DetectMovement();
+            HandleMovement(1f / gameTime.ElapsedGameTime.Milliseconds);
+            _animation.Update(gameTime, this);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch) => _animation.Draw(spriteBatch, this);
+
         #region "Fields"
 
         protected Dictionary<Keys, Direction> KeysToDirection = new Dictionary<Keys, Direction>()
@@ -31,24 +49,6 @@ namespace LoESoft.Client.Core.Game.Objects
         private PlayerAnimation _animation;
 
         #endregion "Fields"
-
-        public Player(GameUser gameuser) : base(Color.White)
-        {
-            IsMoving = false;
-            _animation = new PlayerAnimation();
-            GameUser = gameuser;
-            DistinationX = (int)X;
-            DistinationY = (int)Y;
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            DetectMovement();
-            HandleMovement(1f / gameTime.ElapsedGameTime.Milliseconds);
-            _animation.Update(gameTime, this);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch) => _animation.Draw(spriteBatch, this);
 
         #region "Move"
 
@@ -72,8 +72,6 @@ namespace LoESoft.Client.Core.Game.Objects
                 IsMoving = true;
 
                 CurrentDirection = KeysToDirection[Keyboard.GetState().GetPressedKeys().SkipWhile(_ => KeysToDirection.Keys.Contains(_) ? false : true).First()];
-
-                GameClient.Warn(CurrentDirection.ToString());
 
                 if (DistinationX == X && DistinationY == Y)
                     SendMovePacket();

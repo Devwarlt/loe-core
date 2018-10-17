@@ -20,7 +20,6 @@ namespace LoESoft.Client.Drawing.Events
         {
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();
-            MouseRectangle = new Rectangle(currentMouse.X, currentMouse.Y, 3, 3);
 
             switch (e)
             {
@@ -62,5 +61,7 @@ namespace LoESoft.Client.Drawing.Events
 
             return false;
         }
+
+        public static void Update() => MouseRectangle = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 3, 3);
     }
 }

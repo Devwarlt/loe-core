@@ -69,6 +69,8 @@ namespace LoESoft.Client.Core.Screens
 
         public override void OnExit()
         {
+            base.OnExit();
+
             mailTextBox.Clear();
             userTextBox.Clear();
             passTextBox.Clear();

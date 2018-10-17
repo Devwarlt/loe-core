@@ -33,6 +33,8 @@ namespace LoESoft.Client.Core.Screens
 
         public override void OnExit()
         {
+            base.OnExit();
+
             mailTextBox.Selected = false;
             passTextBox.Selected = false;
             mailTextBox.Clear();
