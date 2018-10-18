@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LoESoft.Client.Drawing.Sprites
 {
@@ -42,7 +43,7 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public virtual void Update(GameTime gameTime)
         {
-            foreach (var i in ChildList.ToArray())
+            foreach (var i in ChildList.OrderBy(_ => _.Index).Reverse().ToArray())
                 i.Update(gameTime);
 
             foreach (var i in EventDictionary)
