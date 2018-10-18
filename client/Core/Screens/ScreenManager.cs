@@ -8,7 +8,7 @@ namespace LoESoft.Client.Core.Screens
     {
         public static Screen ActiveScreen { get; set; }
 
-        private static Action DoCloseGame { get; set; }
+        private static Action _closeGame { get; set; }
 
         public static void DispatchScreen(Screen newScreen)
         {
@@ -36,14 +36,13 @@ namespace LoESoft.Client.Core.Screens
         public static void CloseGame()
         {
             ActiveScreen = null;
-            //DoCloseGame?.Invoke(); // not working!
-            Environment.Exit(0);
+            _closeGame?.Invoke();
         }
 
         public static event Action OnGameClose
         {
-            add { DoCloseGame += value; }
-            remove { DoCloseGame -= value; }
+            add { _closeGame += value; }
+            remove { _closeGame -= value; }
         }
     }
 }

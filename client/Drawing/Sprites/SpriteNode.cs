@@ -14,8 +14,8 @@ namespace LoESoft.Client.Drawing.Sprites
         public bool IsZeroApplicaple { get; set; } = false;
         public int Index { get; set; } = 0;
 
-        public List<SpriteNode> ChildList { get; set; }
-        public Dictionary<Event, EventHandler> EventDictionary { get; set; }
+        public List<SpriteNode> ChildList { get; set; } = new List<SpriteNode>();
+        public Dictionary<Event, EventHandler> EventDictionary { get; set; } = new Dictionary<Event, EventHandler>();
         public SpriteNode ParentSprite { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
@@ -26,19 +26,13 @@ namespace LoESoft.Client.Drawing.Sprites
         public int StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
         public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
         public int SpriteLevel => ParentSprite != null ? ParentSprite.SpriteLevel + 1 : 0;
-
-        protected EventsHandler _eventsHandler;
-
+ 
         public SpriteNode(int x, int y, int width, int height)
         {
             X = x;
             Y = y;
             Width = width;
             Height = height;
-
-            ChildList = new List<SpriteNode>();
-            EventDictionary = new Dictionary<Event, EventHandler>();
-            _eventsHandler = new EventsHandler();
         }
 
         public virtual void Update(GameTime gameTime)
@@ -47,7 +41,7 @@ namespace LoESoft.Client.Drawing.Sprites
                 i.Update(gameTime);
 
             foreach (var i in EventDictionary)
-                if (_eventsHandler.HandleMouse(this, i.Key))
+                if (EventsHandler.HandleMouse(this, i.Key))
                     i.Value?.Invoke(this, new EventArgs());
         }
 

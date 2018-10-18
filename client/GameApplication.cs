@@ -70,6 +70,8 @@ namespace LoESoft.Client
                 GameClient._discordClient.Dispose();
 
                 Exit();
+
+                GameClient.Warn("Closing Game!");
             };
         }
 
