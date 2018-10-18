@@ -36,7 +36,8 @@ namespace LoESoft.Client.Core.Screens
         public static void CloseGame()
         {
             ActiveScreen = null;
-            DoCloseGame?.Invoke();
+            //DoCloseGame?.Invoke(); // not working!
+            Environment.Exit(0);
         }
 
         public static event Action OnGameClose
