@@ -26,7 +26,7 @@ namespace LoESoft.Client.Drawing.Sprites
         public int StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
         public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
         public int SpriteLevel => ParentSprite != null ? ParentSprite.SpriteLevel + 1 : 0;
- 
+
         public SpriteNode(int x, int y, int width, int height)
         {
             X = x;
