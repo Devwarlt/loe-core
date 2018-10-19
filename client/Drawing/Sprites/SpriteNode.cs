@@ -37,7 +37,7 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public virtual void Update(GameTime gameTime)
         {
-            ChildList.Select(_ => { _?.Update(gameTime); return _; }).ToList();
+            ChildList.OrderBy(_ => _.Index).Reverse().Select(_ => { _?.Update(gameTime); return _; }).ToList();
             EventDictionary.Select(_ => { if (EventsHandler.HandleMouse(this, _.Key)) _.Value?.Invoke(this, new EventArgs()); return _; }).ToList();
         }
 
