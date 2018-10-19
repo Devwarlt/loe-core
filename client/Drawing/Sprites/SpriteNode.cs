@@ -37,19 +37,13 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public virtual void Update(GameTime gameTime)
         {
-            foreach (var i in ChildList.OrderBy(_ => _.Index).Reverse().ToArray())
-                i.Update(gameTime);
-
-            foreach (var i in EventDictionary)
-                if (EventsHandler.HandleMouse(this, i.Key))
-                    i.Value?.Invoke(this, new EventArgs());
+            ChildList.Select(_ => { _?.Update(gameTime); return _; }).ToList();
+            EventDictionary.Select(_ => { if (EventsHandler.HandleMouse(this, _.Key)) _.Value?.Invoke(this, new EventArgs()); return _; }).ToList();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (Visible)
-                foreach (var i in ChildList.ToArray())
-                    i.Draw(spriteBatch);
+            if (Visible) ChildList.Select(_ => { _.Draw(spriteBatch); return _; }).ToList();
         }
 
         #region "Child events"
