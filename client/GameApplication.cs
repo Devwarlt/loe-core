@@ -62,7 +62,7 @@ namespace LoESoft.Client
 
             TextDisplay.LoadSpriteFont(Content);
 
-            //AudioManager.SetActiveMusic("titleScreenMusic");
+            AudioManager.SetActiveMusic("titleScreenMusic");
 
             ScreenManager.OnGameClose += () =>
             {

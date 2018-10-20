@@ -126,11 +126,6 @@ namespace LoESoft.Client.Core.Screens
             var b = new TextDisplay(12, 12, "B", 12, new RGBColor(255, 0, 0)) { Outline = true };
             b.AddEventListener(Event.CLICKLEFT, delegate { OnClick(nameof(b), new Tuple<string, string>(nameof(maskB), "b clicked!")); });
 
-            maskC.AddEventListener(Event.CLICKLEFT, delegate
-            {
-                GameClient.Warn("MasC Clicked!");
-            });
-
             maskA.AddChild(a);
 
             maskB.AddChild(b);
