@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace LoESoft.Client.Drawing.Events
 {
-    public static partial class EventsHandler
+    public partial class EventsHandler
     {
-        public static List<char> GetPressedKeys()
+        protected List<char> GetPressedKeys()
         {
             var pressedKeys = new List<KeyValuePair<bool, Keys>>();
             var oldPressedKeys = previousKeyBoard.GetPressedKeys();
@@ -23,14 +23,14 @@ namespace LoESoft.Client.Drawing.Events
             return keys;
         }
 
-        public static bool DetectCaps
+        protected bool DetectCaps
             => currentKeyBoard.CapsLock
             || (previousKeyBoard.IsKeyDown(Keys.LeftShift) && currentKeyBoard.IsKeyDown(Keys.LeftShift))
             || (previousKeyBoard.IsKeyDown(Keys.RightShift) && currentKeyBoard.IsKeyDown(Keys.RightShift));
 
         #region "Keys table"
 
-        private static Dictionary<Keys, KeyValuePair<char, char>> _keysTable = new Dictionary<Keys, KeyValuePair<char, char>>()
+        private readonly Dictionary<Keys, KeyValuePair<char, char>> _keysTable = new Dictionary<Keys, KeyValuePair<char, char>>()
         {
             { Keys.A, new KeyValuePair<char, char>('a', 'A') },
             { Keys.B, new KeyValuePair<char, char>('b', 'B') },
@@ -94,7 +94,7 @@ namespace LoESoft.Client.Drawing.Events
 
         #endregion "Keys table"
 
-        public static char KeysToChar(Keys key, bool shift)
+        public char KeysToChar(Keys key, bool shift)
             => _keysTable.TryGetValue(key, out KeyValuePair<char, char> data) ? shift ? data.Value : data.Key : '\0';
     }
 }

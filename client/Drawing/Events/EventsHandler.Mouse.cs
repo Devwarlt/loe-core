@@ -3,24 +3,24 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LoESoft.Client.Drawing.Events
 {
-    public static partial class EventsHandler
+    public partial class EventsHandler
     {
-        static bool HandleMouseClickLeft(SpriteNode node)
+        protected bool HandleMouseClickLeft(SpriteNode node)
             => !node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle) ? false
             : currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed;
 
-        static bool HandleMouseClickRight(SpriteNode node)
+        protected bool HandleMouseClickRight(SpriteNode node)
             => !node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle) ? false
             : currentMouse.RightButton == ButtonState.Released && previousMouse.RightButton == ButtonState.Pressed;
 
-        static bool HandleClickOutLeft(SpriteNode node)
+        protected bool HandleClickOutLeft(SpriteNode node)
             => !node.Visible || node.SpriteRectangle.Intersects(MouseRectangle) ? false
             : currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed;
 
-        static bool HandleMouseOver(SpriteNode node)
+        protected bool HandleMouseOver(SpriteNode node)
             => !node.Visible || !node.SpriteRectangle.Intersects(MouseRectangle) ? false : true;
 
-        static bool HandleMouseOut(SpriteNode node)
+        protected bool HandleMouseOut(SpriteNode node)
             => !node.Visible || node.SpriteRectangle.Intersects(MouseRectangle) ? false : true;
     }
 }

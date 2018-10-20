@@ -32,13 +32,16 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
         private FilledRectangle _selectedMarket;
 
+        protected EventsHandler _keyEvents;
+
         public TextBox(int x, int y, int width = 100, string name = "", int limit = 16, bool encoded = false)
             : base(x, y, width, TextDisplay.GetHeight(12) + 4, new RGBColor(255, 255, 255))
         {
             Limit = limit;
             Selected = false;
             Encoded = encoded;
-            
+
+            _keyEvents = new EventsHandler();
             Text = new StringBuilder();
             TitleText = new TextDisplay(2, -20, name, color: new RGBColor(10, 10, 10));
             TextField = new TextDisplay(2, 2, "", color: new RGBColor(10, 10, 10));
@@ -67,11 +70,11 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            foreach (var i in EventsHandler.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray())
+            foreach (var i in _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray())
                 if (Text.Length <= Limit && Selected)
                     Text.Append(i.ToString());
 
-            if (EventsHandler.HandleBackSpace(gameTime))
+            if (_keyEvents.HandleBackSpace(gameTime))
                 if (Text.Length > 0)
                     Text.Length--;
 
