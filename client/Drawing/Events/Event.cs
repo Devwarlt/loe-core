@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Client.Drawing.Events
 {
-    public enum MouseEvent : int
+    public enum Event : int
     {
         CLICKLEFT = 0,
         CLICKRIGT = 1,
