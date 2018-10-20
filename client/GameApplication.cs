@@ -80,6 +80,7 @@ namespace LoESoft.Client
         protected override void Update(GameTime gameTime)
         {
             EventsHandler.Update();
+            EventsManager.Update();
             ScreenManager.Update(gameTime);
 
             base.Update(gameTime);

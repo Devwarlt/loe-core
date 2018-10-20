@@ -13,6 +13,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
             : base(x, y, 0, 0, AssetLoader.LoadAsset<Texture2D>("images/btnImage"), color, alpha)
         {
             NameText = new TextDisplay(5, 5, name);
+            NameText.IsEventApplicable = false;
             Width = (int)TextDisplay.MeasureString(name).X + 10;
             Height = (int)TextDisplay.MeasureString(name).Y + 10;
             AddChild(NameText);

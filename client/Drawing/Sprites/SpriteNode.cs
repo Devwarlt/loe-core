@@ -12,7 +12,7 @@ namespace LoESoft.Client.Drawing.Sprites
         public bool Visible = true;
 
         public bool IsZeroApplicaple { get; set; } = false;
-        public int Index { get; set; } = 0;
+        public int Index { get; set; }
 
         public List<SpriteNode> ChildList { get; set; }
         public Dictionary<Event, EventHandler> EventDictionary { get; set; }
@@ -35,16 +35,33 @@ namespace LoESoft.Client.Drawing.Sprites
             Y = y;
             Width = width;
             Height = height;
+            Index = 0;
 
             ChildList = new List<SpriteNode>();
             EventDictionary = new Dictionary<Event, EventHandler>();
             _eventsHandler = new EventsHandler();
         }
 
+        public bool IsEventApplicable { get; set; } = true;
+
         public virtual void Update(GameTime gameTime)
         {
             ChildList.OrderBy(_ => _.Index).Reverse().Select(_ => { _?.Update(gameTime); return _; }).ToList();
-            EventDictionary.Select(_ => { if (_eventsHandler.HandleMouse(this, _.Key)) _.Value.Invoke(this, new EventArgs()); return _; }).ToList();
+
+            if (IsEventApplicable)
+                EventsManager.TrySet(this);
+
+            //EventDictionary.Select(_ => { if (_eventsHandler.HandleMouse(this, _.Key) && isInvalidEvent(_.Key))
+            //            _.Value.Invoke(this, new EventArgs()); return _; }).ToList();
+
+            foreach (var i in EventDictionary)
+                if (_eventsHandler.HandleMouse(this, i.Key))
+                {
+                    if ((i.Key == Event.CLICKOUTLEFT || i.Key == Event.MOUSEOUT))
+                        i.Value?.Invoke(this, new EventArgs());
+                    if (EventsManager.IsValid(this))
+                        i.Value?.Invoke(this, new EventArgs());
+                }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

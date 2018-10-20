@@ -47,41 +47,41 @@ namespace LoESoft.Client.Core.Screens
             _registerButton.X = (GameApplication.WIDTH - _registerButton.Width) / 2;
             _registerButton.Y = (GameApplication.HEIGHT - _registerButton.Height) / 2;
             _registerButton.TextDisplay.Outline = true;
-            _registerButton.AddEventListener(Event.CLICKLEFT, OnRegisterPanel);
-            _registerButton.AddEventListener(Event.MOUSEOUT, OnRegisterOut);
-            _registerButton.AddEventListener(Event.MOUSEOVER, OnRegisterOver);
+            _registerButton.TextDisplay.AddEventListener(Event.CLICKLEFT, OnRegisterPanel);
+            _registerButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnRegisterOut);
+            _registerButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnRegisterOver);
 
             _loginButton = new TextButton("Login", 30);
             _loginButton.X = (GameApplication.WIDTH - _loginButton.Width) / 2;
             _loginButton.Y = _registerButton.Y + _registerButton.Height + 6;
             _loginButton.TextDisplay.Outline = true;
-            _loginButton.AddEventListener(Event.CLICKLEFT, OnLoginPanel);
-            _loginButton.AddEventListener(Event.MOUSEOVER, OnLoginOver);
-            _loginButton.AddEventListener(Event.MOUSEOUT, OnLoginOut);
+            _loginButton.TextDisplay.AddEventListener(Event.CLICKLEFT, OnLoginPanel);
+            _loginButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnLoginOver);
+            _loginButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnLoginOut);
 
             PlayButton = new TextButton("Play", 30);
             PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
             PlayButton.Y = (GameApplication.HEIGHT - PlayButton.Height) / 2;
             PlayButton.Y = _loginButton.Y + _loginButton.Height + 6;
             PlayButton.TextDisplay.Outline = true;
-            PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
-            PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
-            PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
+            PlayButton.TextDisplay.AddEventListener(Event.CLICKLEFT, OnPlay);
+            PlayButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
+            PlayButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
 
             OptionsButton = new TextButton("Options", 30);
             OptionsButton.X = (GameApplication.WIDTH - OptionsButton.Width) / 2;
             OptionsButton.Y = PlayButton.Y + PlayButton.Height + 6;
             OptionsButton.TextDisplay.Outline = true;
-            OptionsButton.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
-            OptionsButton.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
+            OptionsButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
+            OptionsButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
 
             ExitButton = new TextButton("Exit", 30);
             ExitButton.X = (GameApplication.WIDTH - ExitButton.Width) / 2;
             ExitButton.Y = OptionsButton.Y + OptionsButton.Height + 6;
             ExitButton.TextDisplay.Outline = true;
-            ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
-            ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
-            ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
+            ExitButton.TextDisplay.AddEventListener(Event.CLICKLEFT, OnExit);
+            ExitButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
+            ExitButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
 
             Background = new FilledRectangle(AssetLoader.LoadAsset<Texture2D>("images/titleScreenBackground"))
             {
@@ -152,6 +152,8 @@ namespace LoESoft.Client.Core.Screens
 
         private void OnLoginPanel(object sender, EventArgs e)
         {
+            GameClient.Warn("Login!");
+
             Background.AddChild(_maskBlocker);
             Background.AddChild(_loginPanel);
         }

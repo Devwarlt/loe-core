@@ -62,6 +62,6 @@ namespace LoESoft.Client.Drawing.Events
             return false;
         }
 
-        public static void Update() => MouseRectangle = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 3, 3);
+        public static void Update() => MouseRectangle = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 5, 5);
     }
 }
