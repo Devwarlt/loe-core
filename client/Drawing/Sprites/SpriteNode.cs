@@ -46,27 +46,33 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public virtual void Update(GameTime gameTime)
         {
-            ChildList.OrderBy(_ => _.Index).Reverse().Select(_ => { _?.Update(gameTime); return _; }).ToList();
+            ChildList.OrderBy(_ => _.Index).Reverse().Select(_ =>
+            {
+                _?.Update(gameTime);
+                return _;
+            }).ToList();
 
             if (IsEventApplicable)
                 EventsManager.TrySet(this);
 
-            //EventDictionary.Select(_ => { if (_eventsHandler.HandleMouse(this, _.Key) && isInvalidEvent(_.Key))
-            //            _.Value.Invoke(this, new EventArgs()); return _; }).ToList();
+            EventDictionary.Where(_ => _eventsHandler.HandleMouse(this, _.Key)).Select(_ =>
+            {
+                if (_.Key == Event.CLICKOUTLEFT || _.Key == Event.MOUSEOUT || EventsManager.IsValid(this))
+                    _.Value?.Invoke(this, new EventArgs());
 
-            foreach (var i in EventDictionary)
-                if (_eventsHandler.HandleMouse(this, i.Key))
-                {
-                    if ((i.Key == Event.CLICKOUTLEFT || i.Key == Event.MOUSEOUT))
-                        i.Value?.Invoke(this, new EventArgs());
-                    if (EventsManager.IsValid(this))
-                        i.Value?.Invoke(this, new EventArgs());
-                }
+                return _;
+            }).ToList();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (Visible) ChildList.Select(_ => { _.Draw(spriteBatch); return _; }).ToList();
+            if (Visible)
+                ChildList.Select(_ =>
+                {
+                    _.Draw(spriteBatch);
+
+                    return _;
+                }).ToList();
         }
 
         #region "Child events"
