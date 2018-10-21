@@ -19,6 +19,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "CreateNewCharacter",
                     Result = -1,
                     Content = "You are not logged in to peform this action."
                 });
@@ -29,6 +30,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "CreateNewCharacter",
                     Result = -1,
                     Content = "Character name could not be empty."
                 });
@@ -39,6 +41,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "CreateNewCharacter",
                     Result = -1,
                     Content = "Character name minimum length is 3."
                 });
@@ -49,6 +52,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "CreateNewCharacter",
                     Result = -1,
                     Content = "Character name maximum length is 20."
                 });
@@ -58,12 +62,14 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             if (GameServer._database.CreateNewCharacter(AccountId, World, Name))
                 client.SendPacket(new Response()
                 {
+                    From = "CreateNewCharacter",
                     Result = 0,
                     Content = "You have successfully created a new character!"
                 });
             else
                 client.SendPacket(new Response()
                 {
+                    From = "CreateNewCharacter",
                     Result = -1,
                     Content = "An error occurred while character creation, try again later..."
                 });

@@ -48,7 +48,7 @@ namespace LoESoft.Client.Core.Screens
 
                 if (TexturesToDisplay.Count == 0)
                 {
-                    ScreenManager.DispatchScreen(new TitleScreen());
+                    ScreenManager.DispatchScreen(GameApplication.TitleScreen = new TitleScreen());
                     return;
                 }
 

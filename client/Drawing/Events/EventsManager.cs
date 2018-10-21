@@ -6,10 +6,7 @@ namespace LoESoft.Client.Drawing.Events
     {
         public static SpriteNode CurrentNode { get; private set; }
 
-        static EventsManager()
-        {
-            CurrentNode = null;
-        }
+        static EventsManager() => CurrentNode = null;
 
         public static void TrySet(SpriteNode node)
         {
@@ -30,8 +27,8 @@ namespace LoESoft.Client.Drawing.Events
             }
         }
 
-        public static bool IsValid(SpriteNode node) => (CurrentNode != null &&
-            CurrentNode.SpriteLevel == node.SpriteLevel && CurrentNode.Index == node.Index);
+        public static bool IsValid(SpriteNode node)
+            => (CurrentNode != null && CurrentNode.SpriteLevel == node.SpriteLevel && CurrentNode.Index == node.Index);
 
         public static void Update()
         {
@@ -40,10 +37,7 @@ namespace LoESoft.Client.Drawing.Events
                 return;
 
             if (!EventsHandler.MouseRectangle.Intersects(CurrentNode.SpriteRectangle))
-            {
-                GameClient.Warn($"{CurrentNode.X} was nulled!");
                 CurrentNode = null;
-            }
         }
     }
 }

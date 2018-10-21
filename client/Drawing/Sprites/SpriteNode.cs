@@ -27,7 +27,7 @@ namespace LoESoft.Client.Drawing.Sprites
         public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
         public int SpriteLevel => ParentSprite != null ? ParentSprite.SpriteLevel + 1 : 0;
 
-        protected EventsHandler _eventsHandler;
+        protected EventsHandler EventsHandler;
 
         public SpriteNode(int x, int y, int width, int height)
         {
@@ -39,7 +39,7 @@ namespace LoESoft.Client.Drawing.Sprites
 
             ChildList = new List<SpriteNode>();
             EventDictionary = new Dictionary<Event, EventHandler>();
-            _eventsHandler = new EventsHandler();
+            EventsHandler = new EventsHandler();
         }
 
         public bool IsEventApplicable { get; set; } = true;
@@ -55,7 +55,7 @@ namespace LoESoft.Client.Drawing.Sprites
             if (IsEventApplicable)
                 EventsManager.TrySet(this);
 
-            EventDictionary.Where(_ => _eventsHandler.HandleMouse(this, _.Key)).Select(_ =>
+            EventDictionary.Where(_ => EventsHandler.HandleMouse(this, _.Key)).Select(_ =>
             {
                 if (_.Key == Event.CLICKOUTLEFT || _.Key == Event.MOUSEOUT || EventsManager.IsValid(this))
                     _.Value?.Invoke(this, new EventArgs());

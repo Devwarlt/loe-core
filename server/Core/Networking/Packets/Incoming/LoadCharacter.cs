@@ -19,6 +19,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "LoadCharacter",
                     Result = -1,
                     Content = "You are not logged in to peform this action."
                 });
@@ -30,6 +31,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             if (getCharacterData == null)
                 client.SendPacket(new Response()
                 {
+                    From = "LoadCharacter",
                     Result = -1,
                     Content = "Character not found, try again later..."
                 });

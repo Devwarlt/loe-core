@@ -19,6 +19,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Login",
                     Result = -1,
                     Content = "Account name is empty."
                 });
@@ -29,6 +30,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Login",
                     Result = -1,
                     Content = "Account password is empty."
                 });
@@ -42,6 +44,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Login",
                     Result = -1,
                     Content = "Account name minimum length is 6."
                 });
@@ -52,6 +55,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Login",
                     Result = -1,
                     Content = "Account password minimum length is 8."
                 });
@@ -64,6 +68,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Login",
                     Result = -1,
                     Content = "Account not found."
                 });
@@ -73,6 +78,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Login",
                     Result = 0,
                     Content = "You have successfully logged in, enjoy the game!"
                 });
