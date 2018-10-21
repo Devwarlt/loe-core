@@ -18,9 +18,6 @@ namespace LoESoft.Client.Drawing.Events
 
         public static void TrySet(SpriteNode node)
         {
-            /*
-             If the sprite is the current sprite let it still set in case of a moving sprite!
-             */
             if (!EventsHandler.MouseRectangle.Intersects(node.SpriteRectangle))
                 return;
 
@@ -45,11 +42,7 @@ namespace LoESoft.Client.Drawing.Events
                 return;
 
             if (!EventsHandler.MouseRectangle.Intersects(CurrentNode.SpriteRectangle))
-            {
-
-                GameClient.Warn($"{CurrentNode.X} was nulled!");
                 CurrentNode = null;
-            }
         }
     }
 }

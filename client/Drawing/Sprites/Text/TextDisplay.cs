@@ -26,9 +26,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             Size = size;
             PerLineWidth = 0;
             Bold = bold;
-
-            Width = (int)MeasureString(Text, (int)Size).X;
-            Height = (int)MeasureString(Text, (int)Size).Y;
         }
 
         public static void LoadSpriteFont(ContentManager contentManager)
@@ -37,7 +34,12 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public static Vector2 MeasureString(string text, int size = 12)
             => new Vector2(Font.MeasureString(text).X * (size / 100f), Font.MeasureString(text).Y * (size / 100f));
 
-        public override void Update(GameTime gameTime) => base.Update(gameTime);
+        public override void Update(GameTime gameTime)
+        {
+            Width = (int)MeasureString(Text, (int)Size).X;
+            Height = (int)MeasureString(Text, (int)Size).Y;
+            base.Update(gameTime);
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {

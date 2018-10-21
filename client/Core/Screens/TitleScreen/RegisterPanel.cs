@@ -16,9 +16,9 @@ namespace LoESoft.Client.Core.Screens
         public RegisterPanel(int x, int y)
             : base(x, y, "Register", color: new RGBColor(85, 85, 88), height: 250)
         {
-            mailTextBox = new TextBox(10, 50, 380, "Email:");
-            userTextBox = new TextBox(10, 100, 380, "Name:");
-            passTextBox = new TextBox(10, 150, 380, "Password:", encoded: true);
+            mailTextBox = new TextBox(10, 50, 380, "Email:", 10, 24);
+            userTextBox = new TextBox(10, 100, 380, "Name:", 10, 24);
+            passTextBox = new TextBox(10, 150, 380, "Password:", 10, 24, encoded: true);
 
             btnRegister = new Button(0, 190, "Register", new RGBColor(255, 0, 0));
             btnRegister.X = (Width / 2) - (btnRegister.Width / 2);

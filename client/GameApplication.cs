@@ -57,12 +57,10 @@ namespace LoESoft.Client
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             AssetLoader.Init(Content);
-
             AudioManager.Init();
-
             TextDisplay.LoadSpriteFont(Content);
 
-            AudioManager.SetActiveMusic("titleScreenMusic");
+            //AudioManager.SetActiveMusic("titleScreenMusic");
 
             ScreenManager.OnGameClose += () =>
             {

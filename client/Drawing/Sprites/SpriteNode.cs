@@ -57,7 +57,8 @@ namespace LoESoft.Client.Drawing.Sprites
             foreach (var i in EventDictionary)
                 if (_eventsHandler.HandleMouse(this, i.Key))
                 {
-                    if ((i.Key == Event.CLICKOUTLEFT || i.Key == Event.MOUSEOUT))
+                    if ((i.Key == Event.CLICKOUTLEFT || i.Key == Event.MOUSEOUT ||i.Key == Event.GETPRESSEDKEYS
+                        || i.Key == Event.GETPRESSEDKEYSHOLDABLE || i.Key == Event.HANDLEBACKSPACE))
                         i.Value?.Invoke(this, new EventArgs());
                     if (EventsManager.IsValid(this))
                         i.Value?.Invoke(this, new EventArgs());
