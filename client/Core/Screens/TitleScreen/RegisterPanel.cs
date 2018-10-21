@@ -1,82 +1,73 @@
-﻿using LoESoft.Client.Drawing;
+﻿using LoESoft.Client.Core.Networking.Packets.Outgoing;
+using LoESoft.Client.Core.Utils;
+using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Forms.Complex;
-using System;
 
 namespace LoESoft.Client.Core.Screens
 {
-    internal class RegisterPanel : Panel
+    public partial class RegisterPanel : Panel
     {
-        private TextBox mailTextBox;
-        private TextBox userTextBox;
-        private TextBox passTextBox;
-        private Button btnRegister;
+        private TextBox AccountName;
+        private TextBox AccountPassword;
+        private Button RegisterButton;
 
         public RegisterPanel(int x, int y)
-            : base(x, y, "Register", color: new RGBColor(85, 85, 88), height: 250)
+            : base(x, y, "Register", color: new RGBColor(85, 85, 88), height: 200)
         {
-            mailTextBox = new TextBox(10, 50, 380, "Email:", 10, 24);
-            userTextBox = new TextBox(10, 100, 380, "Name:", 10, 24);
-            passTextBox = new TextBox(10, 150, 380, "Password:", 10, 24, encoded: true);
+            AccountName = new TextBox(10, 50, 380, "Account Name:");
+            AccountPassword = new TextBox(10, 100, 380, "Account Password:");
 
-            btnRegister = new Button(0, 190, "Register", new RGBColor(255, 0, 0));
-            btnRegister.X = (Width / 2) - (btnRegister.Width / 2);
+            RegisterButton = new Button(0, 150, "Register", new RGBColor(255, 0, 0));
+            RegisterButton.X = (Width / 2) - (RegisterButton.Width / 2);
 
-            AddChild(mailTextBox);
-            AddChild(userTextBox);
-            AddChild(passTextBox);
-            AddChild(btnRegister);
+            AddChild(AccountName);
+            AddChild(AccountPassword);
+            AddChild(RegisterButton);
 
-            mailTextBox.AddEventListener(Event.CLICKLEFT, OnMailClick);
-            userTextBox.AddEventListener(Event.CLICKLEFT, OnUserClick);
-            passTextBox.AddEventListener(Event.CLICKLEFT, OnPassClick);
-            btnRegister.AddEventListener(Event.CLICKLEFT, OnRegister);
+            AccountName.Selected = false;
+            AccountPassword.Selected = false;
 
-            AddEventListener(Event.CLICKLEFT, OnClick);
+            AccountName.AddEventListener(Event.CLICKLEFT, (s, h) => ToggleTextBox(TextBoxType.AccountName));
+            AccountPassword.AddEventListener(Event.CLICKLEFT, (s, h) => ToggleTextBox(TextBoxType.AccountPassword));
+            RegisterButton.AddEventListener(Event.CLICKLEFT, (s, h) =>
+            {
+                AccountName.Selected = false;
+                AccountPassword.Selected = false;
+
+                GameApplication.GameUser.SendPacket(new Register()
+                {
+                    Name = Cipher.Encrypt(AccountName.GetText),
+                    Password = Cipher.Encrypt(AccountPassword.GetText)
+                });
+            });
         }
 
-        private void OnRegister(object sender, EventArgs e)
-            => GameClient.Info($"Mail: {mailTextBox.Text.ToString()},Username: {userTextBox.Text.ToString()}, Password: {passTextBox.Text.ToString()}");
-
-        private void OnPassClick(object sender, EventArgs e)
+        private void ToggleTextBox(TextBoxType textBoxType)
         {
-            mailTextBox.Selected = false;
-            userTextBox.Selected = false;
-            passTextBox.Selected = true;
-        }
+            switch (textBoxType)
+            {
+                case TextBoxType.AccountName:
+                    AccountName.Selected = true;
+                    AccountPassword.Selected = false;
+                    break;
 
-        private void OnUserClick(object sender, EventArgs e)
-        {
-            mailTextBox.Selected = false;
-            userTextBox.Selected = true;
-            passTextBox.Selected = false;
-        }
-
-        private void OnMailClick(object sender, EventArgs e)
-        {
-            mailTextBox.Selected = true;
-            userTextBox.Selected = false;
-            passTextBox.Selected = false;
-        }
-
-        private void OnClick(object sender, EventArgs e)
-        {
-            mailTextBox.Selected = false;
-            userTextBox.Selected = false;
-            passTextBox.Selected = false;
+                case TextBoxType.AccountPassword:
+                    AccountName.Selected = false;
+                    AccountPassword.Selected = true;
+                    break;
+            }
         }
 
         public override void OnExit()
         {
             base.OnExit();
 
-            mailTextBox.Clear();
-            userTextBox.Clear();
-            passTextBox.Clear();
-            mailTextBox.Selected = false;
-            userTextBox.Selected = false;
-            passTextBox.Selected = false;
+            AccountName.Clear();
+            AccountPassword.Clear();
+            AccountName.Selected = false;
+            AccountPassword.Selected = false;
         }
     }
 }

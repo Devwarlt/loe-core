@@ -107,6 +107,7 @@
     <Compile Include="Core\Networking\Server.ServerName.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />
     <Compile Include="Core\Screens\SplashScreen\SplashScreen.cs" />
+    <Compile Include="Core\Screens\TitleScreen\RegisterPanel.TextBoxType.cs" />
     <Compile Include="Core\Screens\TitleScreen\TitleScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\LoginPanel.cs" />
     <Compile Include="Core\Screens\TitleScreen\RegisterPanel.cs" />

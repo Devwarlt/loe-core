@@ -1,9 +1,4 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -11,10 +6,7 @@ namespace LoESoft.Client.Drawing.Events
     {
         public static SpriteNode CurrentNode { get; private set; }
 
-        static EventsManager()
-        {
-            CurrentNode = null;
-        }
+        static EventsManager() => CurrentNode = null;
 
         public static void TrySet(SpriteNode node)
         {
@@ -32,8 +24,8 @@ namespace LoESoft.Client.Drawing.Events
             }
         }
 
-        public static bool IsValid(SpriteNode node) => (CurrentNode != null &&
-            CurrentNode.SpriteLevel == node.SpriteLevel && CurrentNode.Index == node.Index);
+        public static bool IsValid(SpriteNode node)
+            => (CurrentNode != null && CurrentNode.SpriteLevel == node.SpriteLevel && CurrentNode.Index == node.Index);
 
         public static void Update()
         {

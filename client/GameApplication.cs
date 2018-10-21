@@ -14,6 +14,8 @@ namespace LoESoft.Client
     {
         public static int WIDTH => 800;
         public static int HEIGHT => 600;
+        public static TitleScreen TitleScreen { get; set; }
+        public static SplashScreen SplashScreen { get; set; }
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
@@ -39,13 +41,13 @@ namespace LoESoft.Client
 
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
 
-            ScreenManager.DispatchScreen(new SplashScreen());
+            ScreenManager.DispatchScreen(SplashScreen = new SplashScreen());
 
             GameUser = new GameUser(GetServers[ServerName.LOCAL]);
-            //GameUser.Connect();
+            GameUser.Connect();
 
             GameClient._discordPresence.State = "World: Chicago";
-            GameClient._discordPresence.Details = "Isle of Saepphira";
+            GameClient._discordPresence.Details = "Main Menu";
 
             GameClient.UpdateRPC();
 

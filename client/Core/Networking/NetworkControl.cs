@@ -110,6 +110,12 @@ namespace LoESoft.Client.Core.Networking
 
         public void SendPacket(OutgoingPacket outgoingPacket)
         {
+            if (!GameUser.IsConnected)
+            {
+                GameClient.Warn($"Client isn't connected! Disposing packet {outgoingPacket.PacketID}...");
+                return;
+            }
+
             if (SendBuffer == null)
                 SendBuffer = new byte[BUFFER_SIZE];
 
@@ -123,7 +129,7 @@ namespace LoESoft.Client.Core.Networking
                 if (!HandleMovePacket(outgoingPacket as ClientMove))
                     return;
 
-            GameClient.Warn($"Sending {outgoingPacket.PacketID}");
+            GameClient.Warn($"Sending {outgoingPacket.PacketID}...");
 
             if (outgoingPacket is IUdpPacket)
             {

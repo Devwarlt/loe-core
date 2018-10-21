@@ -19,6 +19,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Regiser",
                     Result = -1,
                     Content = "Account name is empty."
                 });
@@ -29,6 +30,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Regiser",
                     Result = -1,
                     Content = "Account password is empty."
                 });
@@ -42,6 +44,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Regiser",
                     Result = -1,
                     Content = "Account name minimum length is 6."
                 });
@@ -52,6 +55,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Regiser",
                     Result = -1,
                     Content = "Account password minimum length is 8."
                 });
@@ -64,6 +68,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.SendPacket(new Response()
                 {
+                    From = "Regiser",
                     Result = -1,
                     Content = "Account name already registered."
                 });
@@ -73,12 +78,14 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             if (GameServer._database.CreateNewAccount(name64, pass64, out string token))
                 client.SendPacket(new Response()
                 {
+                    From = "Regiser",
                     Result = 0,
                     Content = "You have successfully registered a brand-new account, enjoy the game!"
                 });
             else
                 client.SendPacket(new Response()
                 {
+                    From = "Regiser",
                     Result = -1,
                     Content = "An error occurred while account registration, try again later..."
                 });
