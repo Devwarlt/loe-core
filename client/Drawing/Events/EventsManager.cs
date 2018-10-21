@@ -1,9 +1,4 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -46,7 +41,6 @@ namespace LoESoft.Client.Drawing.Events
 
             if (!EventsHandler.MouseRectangle.Intersects(CurrentNode.SpriteRectangle))
             {
-
                 GameClient.Warn($"{CurrentNode.X} was nulled!");
                 CurrentNode = null;
             }
