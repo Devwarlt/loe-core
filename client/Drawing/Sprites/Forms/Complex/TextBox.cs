@@ -56,6 +56,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             AddChild(TextField);
         }
 
+        public string GetText => TextField.Text;
+
         private float _timer = 0f;
 
         public override void Update(GameTime gameTime)

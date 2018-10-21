@@ -42,8 +42,8 @@ namespace LoESoft.Client.Core.Screens
 
                 GameApplication.GameUser.SendPacket(new Login()
                 {
-                    Name = Cipher.Encrypt(AccountName.Text.ToString()),
-                    Password = Cipher.Encrypt(AccountPassword.Text.ToString())
+                    Name = Cipher.Encrypt(AccountName.GetText),
+                    Password = Cipher.Encrypt(AccountPassword.GetText)
                 });
             });
 
