@@ -82,9 +82,9 @@ namespace LoESoft.Server.Core.Networking
                         var buffer = new byte[len];
 
                         Array.Copy(ReceiveBuffer, buffer, len);
-                        string data = Encoding.UTF8.GetString(buffer);
 
-                        PacketData packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                        var data = Encoding.UTF8.GetString(buffer);
+                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
                         GetIncomingPacket(packetData).Handle(Client);
 
@@ -94,21 +94,27 @@ namespace LoESoft.Server.Core.Networking
                     }
                     catch (SocketException) { }
                     catch (JsonReaderException) { }
+                    catch (NullReferenceException) { }
                 }, null);
 
             UdpClient.BeginReceive(
                 (IAsyncResult result) =>
                 {
-                    var endPoint = (IPEndPoint)result.AsyncState;
-                    var buffer = UdpClient.EndReceive(result, ref endPoint);
-                    var data = Encoding.UTF8.GetString(buffer);
-                    var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                    try
+                    {
+                        var endPoint = (IPEndPoint)result.AsyncState;
+                        var buffer = UdpClient.EndReceive(result, ref endPoint);
+                        var data = Encoding.UTF8.GetString(buffer);
+                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                    GetIncomingPacket(packetData).Handle(Client);
+                        GetIncomingPacket(packetData).Handle(Client);
 
-                    GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
+                        GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
 
-                    ReceivePacket();
+                        ReceivePacket();
+                    }
+                    catch (JsonReaderException) { }
+                    catch (NullReferenceException) { }
                 }, ConnectionListener.UdpEndPoint);
         }
 
@@ -148,7 +154,7 @@ namespace LoESoft.Server.Core.Networking
 
             ((IAsyncResult)Task.Run(() =>
             {
-                try { Client.Player.Save(); }
+                try { Client.Player?.Save(); }
                 catch (Exception e) { GameServer.Error(e); }
 
                 SafeDisconnect.Reset();
@@ -156,9 +162,12 @@ namespace LoESoft.Server.Core.Networking
 
             SafeDisconnect.WaitOne();
 
-            Client.Player.Dispose();
+            Client.Player?.Dispose();
             Client.Socket.Close();
             Client.Socket.Dispose();
+
+            UdpClient.Close();
+            UdpClient.Dispose();
 
             GameServer.Info($"Client disconnected '{Client.IpAddress}'.");
         }

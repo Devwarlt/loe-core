@@ -63,7 +63,8 @@ namespace LoESoft.Server.Core.World
 
                 Clients.TryTake(out client);
 
-                Map.RemovePlayer(client.Player);
+                if (client.Player != null)
+                    Map.RemovePlayer(client.Player);
 
                 return true;
             }

@@ -181,6 +181,7 @@ namespace LoESoft.Client.Core.Networking
                     }
                     catch (SocketException) { }
                     catch (JsonReaderException) { }
+                    catch (NullReferenceException) { }
                 }, null);
         }
 
@@ -221,6 +222,10 @@ namespace LoESoft.Client.Core.Networking
             ScreenManager.DispatchScreen(new SplashScreen());
 
             TcpSocket.Close();
+            TcpSocket.Dispose();
+
+            UdpClient.Close();
+            UdpClient.Dispose();
         }
     }
 }
