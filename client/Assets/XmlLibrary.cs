@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace LoESoft.Client.Assets
@@ -30,7 +27,7 @@ namespace LoESoft.Client.Assets
             var xmlFile = XmlLoader.LoadAsset(name);
 
             var xmlList = new List<XElement>();
-            
+
             //process through the xml file...
         }
     }

@@ -11,29 +11,26 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace LoESoft.Server.Core.Networking
 {
     public class NetworkControl
     {
+        public static int BUFFER_SIZE => ushort.MaxValue + 1;
+
         public Socket TcpSocket { get; set; }
         public UdpClient UdpClient { get; set; }
         public Client Client { get; set; }
-
-        private const int BUFFER_SIZE = ushort.MaxValue + 1;
-        private ManualResetEvent SafeDisconnect = new ManualResetEvent(false);
 
         private byte[] ReceiveBuffer { get; set; }
         private byte[] SendBuffer { get; set; }
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
 
-        public NetworkControl(Client client, Socket socket)
+        public NetworkControl(Client client, Socket tcpSocket, UdpClient udpClient)
         {
             Client = client;
-            TcpSocket = socket;
-            UdpClient = new UdpClient(ConnectionListener.UdpEndPoint);
+            TcpSocket = tcpSocket;
+            UdpClient = udpClient;
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
@@ -49,13 +46,12 @@ namespace LoESoft.Server.Core.Networking
 
             try
             {
-                TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
-                    (IAsyncResult result) =>
-                    {
-                        try { TcpSocket.EndAccept(result); }
-                        catch (SocketException) { }
-                        catch (ArgumentException) { }
-                    }, null);
+                TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, result =>
+                {
+                    try { TcpSocket.EndAccept(result); }
+                    catch (SocketException) { }
+                    catch (ArgumentException) { }
+                }, null);
             }
             catch (SocketException) { }
         }
@@ -63,74 +59,72 @@ namespace LoESoft.Server.Core.Networking
         public bool IsConnected => TcpSocket.Connected;
 
         public void SendPackets(OutgoingPacket[] outgoingPacket)
-        {
-            for (var i = 0; i < outgoingPacket.Length; i++)
-                SendPacket(outgoingPacket[i]);
-        }
+            => outgoingPacket.Select(packet => { SendPacket(packet); return packet; }).ToList();
 
         public void ReceivePacket()
         {
             if (ReceiveBuffer == null)
                 ReceiveBuffer = new byte[BUFFER_SIZE];
 
-            TcpSocket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None,
-                (IAsyncResult result) =>
+            TcpSocket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None, result =>
+            {
+                try
                 {
-                    try
-                    {
-                        var len = TcpSocket.EndReceive(result);
-                        var buffer = new byte[len];
+                    var len = TcpSocket.EndReceive(result);
+                    var buffer = new byte[len];
 
-                        Array.Copy(ReceiveBuffer, buffer, len);
+                    Array.Copy(ReceiveBuffer, buffer, len);
 
-                        var data = Encoding.UTF8.GetString(buffer);
-                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                    var data = Encoding.UTF8.GetString(buffer);
+                    var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                        GetIncomingPacket(packetData).Handle(Client);
+                    GetIncomingPacket(packetData).Handle(Client);
 
-                        GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
+                    GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
 
-                        ReceivePacket();
-                    }
-                    catch (SocketException) { }
-                    catch (JsonReaderException) { }
-                    catch (NullReferenceException) { }
-                }, null);
+                    ReceivePacket();
+                }
+                catch (SocketException) { }
+                catch (JsonReaderException) { }
+                catch (NullReferenceException) { }
+            }, null);
 
-            UdpClient.BeginReceive(
-                (IAsyncResult result) =>
+            UdpClient.BeginReceive(result =>
+            {
+                try
                 {
-                    try
-                    {
-                        var endPoint = (IPEndPoint)result.AsyncState;
-                        var buffer = UdpClient.EndReceive(result, ref endPoint);
-                        var data = Encoding.UTF8.GetString(buffer);
-                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                    var endPoint = (IPEndPoint)result.AsyncState;
+                    var buffer = UdpClient.EndReceive(result, ref endPoint);
+                    var data = Encoding.UTF8.GetString(buffer);
+                    var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                        GetIncomingPacket(packetData).Handle(Client);
+                    GetIncomingPacket(packetData).Handle(Client);
 
-                        GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
+                    GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
 
-                        ReceivePacket();
-                    }
-                    catch (JsonReaderException) { }
-                    catch (NullReferenceException) { }
-                }, ConnectionListener.UdpEndPoint);
+                    ReceivePacket();
+                }
+                catch (JsonReaderException) { }
+                catch (NullReferenceException) { }
+                catch (ObjectDisposedException) { }
+            }, ConnectionListener.UdpEndPoint);
         }
 
         private void SetupIncomingPackets()
         {
             IncomingPackets = new Dictionary<PacketID, IncomingPacket>();
 
-            foreach (var type in Assembly.GetAssembly(typeof(IncomingPacket)).GetTypes().Where(_ => _.IsClass && !_.IsAbstract && _.IsSubclassOf(typeof(IncomingPacket))))
+            Assembly.GetAssembly(typeof(IncomingPacket)).GetTypes().Where(_ => _.IsClass && !_.IsAbstract && _.IsSubclassOf(typeof(IncomingPacket))).Select(type =>
             {
                 try
                 {
                     var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
                     IncomingPackets.Add(incomingMessage.PacketID, incomingMessage);
                 }
-                catch (ArgumentException) { continue; }
-            }
+                catch (ArgumentException) { }
+
+                return type;
+            }).ToList();
         }
 
         private IncomingPacket GetIncomingPacket(PacketData packetData)
@@ -148,28 +142,14 @@ namespace LoESoft.Server.Core.Networking
 
         public void Disconnect()
         {
-            GameServer.Info($"Disconnecting client '{Client.IpAddress}'...");
-
-            SafeDisconnect.Set();
-
-            ((IAsyncResult)Task.Run(() =>
-            {
-                try { Client.Player?.Save(); }
-                catch (Exception e) { GameServer.Error(e); }
-
-                SafeDisconnect.Reset();
-            })).AsyncWaitHandle.WaitOne();
-
-            SafeDisconnect.WaitOne();
-
+            Client.Player?.Save();
             Client.Player?.Dispose();
-            Client.Socket.Close();
-            Client.Socket.Dispose();
+            Client.TcpSocket?.Close();
+            Client.TcpSocket?.Dispose();
+            Client.UdpClient?.Close();
+            Client.UdpClient?.Dispose();
 
-            UdpClient.Close();
-            UdpClient.Dispose();
-
-            GameServer.Info($"Client disconnected '{Client.IpAddress}'.");
+            GameServer.Info($"Client ID {Client.Id} has left.");
         }
     }
 }

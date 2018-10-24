@@ -10,26 +10,27 @@ namespace LoESoft.Server.Core.Networking
 {
     public class Client
     {
+        public static int LatestId = 0;
+
+        public int Id { get; set; }
         public Account Account { get; set; }
-        public Socket Socket { get; set; }
+        public Socket TcpSocket { get; set; }
+        public UdpClient UdpClient { get; set; }
         public NetworkControl NetworkControl { get; set; }
         public string IpAddress { get; set; }
-
         public WorldManager Manager { get; private set; }
         public Player Player { get; set; }
 
-        public Client(Socket socket, WorldManager manager)
-        {
-            Socket = socket;
+        public Client(WorldManager manager) => Manager = manager;
 
-            IpAddress = socket.RemoteEndPoint.ToString().Split(':')[0];
+        public void Handle()
+        {
+            IpAddress = TcpSocket.RemoteEndPoint.ToString().Split(':')[0];
 
             GameServer.Info($"Client with IP '{IpAddress}' has connected!");
 
-            NetworkControl = new NetworkControl(this, Socket);
+            NetworkControl = new NetworkControl(this, TcpSocket, UdpClient);
             NetworkControl.ReceivePacket();
-
-            Manager = manager;
         }
 
         public void Disconnect() => NetworkControl.Disconnect();

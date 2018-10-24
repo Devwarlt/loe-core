@@ -38,6 +38,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         {
             Width = (int)MeasureString(Text, (int)Size).X;
             Height = (int)MeasureString(Text, (int)Size).Y;
+
             base.Update(gameTime);
         }
 

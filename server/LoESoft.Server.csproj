@@ -212,6 +212,7 @@
     <Compile Include="Core\Database\Models\Account.cs" />
     <Compile Include="Core\Database\Models\Character.cs" />
     <Compile Include="Core\Database\Models\Position.cs" />
+    <Compile Include="Core\Networking\ClientData.cs" />
     <Compile Include="Core\Networking\ConnectionListener.cs" />
     <Compile Include="Core\Networking\Client.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
