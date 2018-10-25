@@ -16,8 +16,8 @@ namespace LoESoft.Client.Core.Screens
         public LoginPanel(int x, int y)
             : base(x, y, "Login", color: new RGBColor(85, 85, 88), height: 200)
         {
-            AccountName = new TextBox(10, 50, 380, "Account Name:", 16, true);
-            AccountPassword = new TextBox(10, 100, 380, "Account Password:", 16, true);
+            AccountName = new TextBox(10, 50, 380, "Account Name:", 16, encoded: true);
+            AccountPassword = new TextBox(10, 100, 380, "Account Password:", 16, encoded: true);
 
             LoginButton = new Button(0, 140, "Login", new RGBColor(255, 0, 0));
             LoginButton.X = (Width / 2) - (LoginButton.Width / 2);

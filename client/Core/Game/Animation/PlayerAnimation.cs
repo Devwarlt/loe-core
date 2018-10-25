@@ -14,8 +14,7 @@ namespace LoESoft.Client.Core.Game.Animation
             : base(0.1f, AnimationType.Forward) //Speed will be determined by player speed later on
         {
             //temporary loading, til proper xml managing and proper player handling is added
-            var tempSpriteSet = new SpriteSet();
-            tempSpriteSet.Initialize("playersEmbed");
+            var tempSpriteSet = AssetLibrary.Sprites["playersEmbed"];
 
             AddAnimation(AnimationType.Forward, tempSpriteSet.GetSpritesByWidth(1));
             AddAnimation(AnimationType.Backward, tempSpriteSet.GetSpritesByWidth(0));

@@ -17,13 +17,5 @@ namespace LoESoft.Client.Assets
 
             return content;
         }
-
-        public static SpriteSet LoadSpriteSet(string filename)
-        {
-            var set = new SpriteSet();
-            set.Initialize(filename);
-
-            return set;
-        }
     }
 }

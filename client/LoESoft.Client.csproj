@@ -67,11 +67,10 @@
   <ItemGroup>
     <Compile Include="Assets\AssetLibrary.cs" />
     <Compile Include="Assets\AssetLoader.cs" />
-    <Compile Include="Assets\Properties\TileLibrary.cs" />
-    <Compile Include="Assets\Properties\TileProperties.cs" />
     <Compile Include="Assets\SpriteSet.cs" />
-    <Compile Include="Assets\XmlLibrary.cs" />
-    <Compile Include="Assets\XmlLoader.cs" />
+    <Compile Include="Assets\Xml\Structure\Contents.cs" />
+    <Compile Include="Assets\Xml\XmlLibrary.cs" />
+    <Compile Include="Assets\Xml\XmlLoader.cs" />
     <Compile Include="Core\Client\GameUser.cs" />
     <Compile Include="Core\Game\Animation\Animation.cs" />
     <Compile Include="Core\Game\Animation\AnimationFrame.cs" />
@@ -356,10 +355,15 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <EmbeddedResource Include="Assets\Embeds\Tiles.xml" />
+    <EmbeddedResource Include="Assets\Embeds\Tiles.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\Embeds\Players.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="loesoft.ico" />
   </ItemGroup>
   <ItemGroup>

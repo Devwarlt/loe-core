@@ -6,6 +6,7 @@ using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Threading;
 using static LoESoft.Client.Core.Networking.Server;
 
 namespace LoESoft.Client
@@ -21,6 +22,8 @@ namespace LoESoft.Client
         protected SpriteBatch SpriteBatch { get; set; }
 
         public static GameUser GameUser { get; private set; }
+
+        public static bool Loaded = false;
 
         public GameApplication()
         {
@@ -38,9 +41,7 @@ namespace LoESoft.Client
         protected override void Initialize()
         {
             base.Initialize();
-
-            DrawHelper.Setup(GraphicsDevice, SpriteBatch);
-
+            
             ScreenManager.DispatchScreen(SplashScreen = new SplashScreen());
 
             GameUser = new GameUser(GetServers[ServerName.LOCAL]);
@@ -50,8 +51,9 @@ namespace LoESoft.Client
             GameClient._discordPresence.Details = "Main Menu";
 
             GameClient.UpdateRPC();
-
-            GameClient.Info("Game Client is loading... OK!");
+            
+            Loaded = true;
+            GameClient.Info("Game Client is initializing... OK!");
         }
 
         protected override void LoadContent()
@@ -59,7 +61,10 @@ namespace LoESoft.Client
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             AssetLoader.Init(Content);
+            AssetLibrary.Init();
+            XmlLibrary.Init();
             AudioManager.Init();
+            DrawHelper.Setup(GraphicsDevice, SpriteBatch);
             TextDisplay.LoadSpriteFont(Content);
 
             //AudioManager.SetActiveMusic("titleScreenMusic");

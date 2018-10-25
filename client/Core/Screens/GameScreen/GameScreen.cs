@@ -1,5 +1,6 @@
 #define TEMP_DISABLE
 
+using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
 using LoESoft.Client.Core.Game.Objects;
@@ -23,13 +24,8 @@ namespace LoESoft.Client.Core.Screens
 
         private GameUser _gameUser = GameApplication.GameUser;
 
-        private EventsHandler _eventsHandler;
-        private Sprite _mouseSprite;
-
         public override void OnScreenCreate()
         {
-            _eventsHandler = new EventsHandler();
-            _mouseSprite = new Sprite(Mouse.GetState().X, Mouse.GetState().Y, 5, 5);
             TempPlayer = new Player(_gameUser);
             PlayerMap = new Map();
             _gameUser.SendPacket(new Load());
@@ -55,8 +51,6 @@ namespace LoESoft.Client.Core.Screens
                 {
                     PlayerMap.Draw(spriteBatch);
                     TempPlayer.Draw(spriteBatch);
-
-                    spriteBatch.End();
                 }
                 else
                     new TextDisplay(DrawHelper.CenteredPosition(GameApplication.WIDTH,
@@ -64,6 +58,8 @@ namespace LoESoft.Client.Core.Screens
                         400, "Unable To Connect The Server!", 30).Draw(spriteBatch);
             }
             catch (InvalidOperationException) { }
+
+            spriteBatch.End();
         }
     }
 }

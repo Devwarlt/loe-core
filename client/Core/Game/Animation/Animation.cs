@@ -22,7 +22,7 @@ namespace LoESoft.Client.Core.Game.Animation
             CurrentFrame = 0;
         }
 
-        public void AddAnimation(AnimationType type, Texture2D[] textures)
+        public void AddAnimation(AnimationType type, List<Texture2D> textures)
         {
             var frames = new List<AnimationFrame>();
 

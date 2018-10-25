@@ -1,17 +1,17 @@
-﻿<Tiles>
-  <Tile type="0" id="Water">
-    <Texture index="0">Tiles</Texture>
-  </Tile>
-  <Tile type="1" id="Dirt">
-    <Texture index="1">Tiles</Texture>
-  </Tile>
-  <Tile type="2" id="Grass">
-    <Texture index="2">Tiles</Texture>
-  </Tile>
-  <Tile type="3" id="Sand">
-    <Texture index="3">Tiles</Texture>
-  </Tile>
-  <Tile type="4" id="Stone">
-    <Texture index="4">Tiles</Texture>
-  </Tile>
-</Tiles>
+﻿<Objects>
+  <Object type="3" id="0" name="Water">
+    <Texture animated="false" x="0" y="0">tilesEmbed</Texture>
+  </Object>
+  <Object type="3" id="1" name="Dirt">
+    <Texture animated="false" x="1" y="0">tilesEmbed</Texture>
+  </Object>
+  <Object type="3" id="2" name="Grass">
+    <Texture animated="false" x="2" y="0">tilesEmbed</Texture>
+  </Object>
+  <Object type="3" id="3" name="Sand">
+    <Texture animated="false" x="3" y="0">tilesEmbed</Texture>
+  </Object>
+  <Object type="3" id="4" name="Stone">
+    <Texture animated="false" x="4" y="0">tilesEmbed</Texture>
+  </Object>
+</Objects>

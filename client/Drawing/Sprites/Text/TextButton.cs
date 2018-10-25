@@ -27,6 +27,8 @@
             Size = size;
             Text = text;
 
+            TextDisplay.IsEventApplicable = false;
+
             AddChild(TextDisplay);
         }
     }

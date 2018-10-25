@@ -80,7 +80,7 @@ namespace LoESoft.Client.Drawing.Sprites
         public void AddChild(SpriteNode child)
         {
             child.ParentSprite = this;
-            child.Index = ChildList.Count;
+            child.Index = ChildList.Count();
             ChildList.Add(child);
         }
 

@@ -1,4 +1,6 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
+using System.Diagnostics;
+using System.Linq;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -10,6 +12,12 @@ namespace LoESoft.Client.Drawing.Events
 
         public static void TrySet(SpriteNode node)
         {
+            if (isClientActive == false)
+            {
+                CurrentNode = null;
+                return;
+            }
+
             if (!EventsHandler.MouseRectangle.Intersects(node.SpriteRectangle))
                 return;
 
@@ -29,12 +37,24 @@ namespace LoESoft.Client.Drawing.Events
 
         public static void Update()
         {
+            handleUnactiveClient();
+
             // Checks if the currentnode is still a valid node
             if (CurrentNode == null)
                 return;
 
             if (!EventsHandler.MouseRectangle.Intersects(CurrentNode.SpriteRectangle))
                 CurrentNode = null;
+        }
+
+        private static bool isClientActive = true;
+
+        private static void handleUnactiveClient()
+        {
+            int processId = Process.GetProcesses().Where(_ => _.ProcessName == "").First().Id;
+            var curProcess = Process.GetCurrentProcess();
+
+            isClientActive = (processId == curProcess.Id);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         public TextDisplay NameText { get; set; }
 
         public Button(int x, int y, string name, RGBColor color = null, float alpha = 1)
-            : base(x, y, 0, 0, AssetLoader.LoadAsset<Texture2D>("images/btnImage"), color, alpha)
+            : base(x, y, 0, 0, AssetLibrary.Images["btnImage"], color, alpha)
         {
             NameText = new TextDisplay(5, 5, name);
             NameText.IsEventApplicable = false;

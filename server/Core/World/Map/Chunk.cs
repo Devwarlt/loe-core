@@ -49,7 +49,7 @@ namespace LoESoft.Server.Core.World.Map
                     {
                         X = _startX + x,
                         Y = _startY + y,
-                        Type = new Random().Next(0, 2)
+                        Type = new Random().Next(0, 4)
                     };
 
                     Entities.Add(new Entity(Manager)

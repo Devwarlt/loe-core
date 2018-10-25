@@ -47,41 +47,41 @@ namespace LoESoft.Client.Core.Screens
             _registerButton.X = (GameApplication.WIDTH - _registerButton.Width) / 2;
             _registerButton.Y = (GameApplication.HEIGHT - _registerButton.Height) / 2;
             _registerButton.TextDisplay.Outline = true;
-            _registerButton.TextDisplay.AddEventListener(Event.CLICKLEFT, OnRegisterPanel);
-            _registerButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnRegisterOut);
-            _registerButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnRegisterOver);
+            _registerButton.AddEventListener(Event.CLICKLEFT, OnRegisterPanel);
+            _registerButton.AddEventListener(Event.MOUSEOUT, OnRegisterOut);
+            _registerButton.AddEventListener(Event.MOUSEOVER, OnRegisterOver);
 
             _loginButton = new TextButton("Login", 30);
             _loginButton.X = (GameApplication.WIDTH - _loginButton.Width) / 2;
             _loginButton.Y = _registerButton.Y + _registerButton.Height + 6;
             _loginButton.TextDisplay.Outline = true;
-            _loginButton.TextDisplay.AddEventListener(Event.CLICKLEFT, OnLoginPanel);
-            _loginButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnLoginOver);
-            _loginButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnLoginOut);
+            _loginButton.AddEventListener(Event.CLICKLEFT, OnLoginPanel);
+            _loginButton.AddEventListener(Event.MOUSEOVER, OnLoginOver);
+            _loginButton.AddEventListener(Event.MOUSEOUT, OnLoginOut);
 
             PlayButton = new TextButton("Play", 30);
             PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
             PlayButton.Y = (GameApplication.HEIGHT - PlayButton.Height) / 2;
             PlayButton.Y = _loginButton.Y + _loginButton.Height + 6;
             PlayButton.TextDisplay.Outline = true;
-            PlayButton.TextDisplay.AddEventListener(Event.CLICKLEFT, OnPlay);
-            PlayButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
-            PlayButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
+            PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
+            PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
+            PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
 
             OptionsButton = new TextButton("Options", 30);
             OptionsButton.X = (GameApplication.WIDTH - OptionsButton.Width) / 2;
             OptionsButton.Y = PlayButton.Y + PlayButton.Height + 6;
             OptionsButton.TextDisplay.Outline = true;
-            OptionsButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
-            OptionsButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
+            OptionsButton.AddEventListener(Event.MOUSEOVER, OnOptionsButtonOver);
+            OptionsButton.AddEventListener(Event.MOUSEOUT, OnOptionsButtonOut);
 
             ExitButton = new TextButton("Exit", 30);
             ExitButton.X = (GameApplication.WIDTH - ExitButton.Width) / 2;
             ExitButton.Y = OptionsButton.Y + OptionsButton.Height + 6;
             ExitButton.TextDisplay.Outline = true;
-            ExitButton.TextDisplay.AddEventListener(Event.CLICKLEFT, OnExit);
-            ExitButton.TextDisplay.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
-            ExitButton.TextDisplay.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
+            ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
+            ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
+            ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
 
             Background = new FilledRectangle(AssetLoader.LoadAsset<Texture2D>("images/titleScreenBackground"))
             {
@@ -95,45 +95,6 @@ namespace LoESoft.Client.Core.Screens
             Background.AddChild(PlayButton);
             Background.AddChild(OptionsButton);
             Background.AddChild(ExitButton);
-
-            var maskA = new Mask(new RGBColor(0, 0, 0))
-            {
-                Width = 48,
-                Height = 48
-            };
-            maskA.X = 24;
-            maskA.Y = 24;
-
-            var maskB = new Mask(new RGBColor(0, 0, 0))
-            {
-                Width = 48,
-                Height = 48
-            };
-            maskB.X = (int)(maskA.X * 1.5f) + maskA.Width;
-            maskB.Y = maskA.Y;
-
-            var maskC = new Mask(new RGBColor(0, 0, 0))
-            {
-                Width = 132,
-                Height = 72
-            };
-            maskC.X = 12;
-            maskC.Y = 12;
-
-            var a = new TextDisplay(12, 12, "A", 12, new RGBColor(255, 0, 0)) { Outline = true };
-            a.AddEventListener(Event.CLICKLEFT, delegate { OnClick(nameof(a), new Tuple<string, string>(nameof(maskA), "a clicked!")); });
-
-            var b = new TextDisplay(12, 12, "B", 12, new RGBColor(255, 0, 0)) { Outline = true };
-            b.AddEventListener(Event.CLICKLEFT, delegate { OnClick(nameof(b), new Tuple<string, string>(nameof(maskB), "b clicked!")); });
-
-            maskA.AddChild(a);
-
-            maskB.AddChild(b);
-
-            maskC.AddChild(maskA);
-            maskC.AddChild(maskB);
-
-            Background.AddChild(maskC);
         }
 
         private void OnClick(object sender, Tuple<string, string> e) => GameClient.Info($"Element '{(string)sender}' dispatch '{e.Item2}' from parent '{e.Item1}'.");

@@ -46,7 +46,7 @@ namespace LoESoft.Server.Core.World
                 ChunkMap[player.ChunkX, player.ChunkY].Players[idx].X = x;
                 ChunkMap[player.ChunkX, player.ChunkY].Players[idx].Y = y;
             }
-            catch (ArgumentOutOfRangeException) { }
+            catch { }
         }
 
         #endregion "Manage chunks"
