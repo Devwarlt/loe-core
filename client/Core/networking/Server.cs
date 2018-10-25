@@ -17,6 +17,7 @@ namespace LoESoft.Client.Core.Networking
         public Server(string Address)
         {
             this.Address = Address;
+
             TcpEndPoint = new IPEndPoint(IPAddress.Parse(Address), 7171);
             UdpEndPoint = new IPEndPoint(IPAddress.Parse(Address), 7271);
         }

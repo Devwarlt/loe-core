@@ -1,7 +1,10 @@
 ﻿using LoESoft.Server.Core.World;
 using System;
+using System.Collections.Concurrent;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace LoESoft.Server.Core.Networking
 {
@@ -10,36 +13,49 @@ namespace LoESoft.Server.Core.Networking
         public static IPEndPoint TcpEndPoint = new IPEndPoint(IPAddress.Any, 7171);
         public static IPEndPoint UdpEndPoint = new IPEndPoint(IPAddress.Any, 7271);
 
+        public static ConcurrentDictionary<int, Client> Clients = new ConcurrentDictionary<int, Client>();
+
         private WorldManager Manager { get; set; }
 
-        public Socket Socket { get; set; }
+        public Socket TcpSocket { get; set; }
 
         public ConnectionListener(WorldManager manager)
         {
-            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            TcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
                 NoDelay = true,
                 UseOnlyOverlappedIO = true,
                 Ttl = 112
             };
-            Socket.Bind(TcpEndPoint);
-            Socket.Listen(0xFF);
-
+            TcpSocket.Bind(TcpEndPoint);
+            TcpSocket.Listen(0xFF);
             Manager = manager;
+
+            new Thread(ConnectionManager) { IsBackground = true }.Start();
         }
 
         public void StartAccept()
         {
             try
             {
-                Socket.BeginAccept((IAsyncResult result) =>
+                TcpSocket.BeginAccept(result =>
                 {
                     try
                     {
-                        var socket = Socket.EndAccept(result);
+                        var tcpSocket = TcpSocket.EndAccept(result);
 
-                        if (socket != null)
-                            Manager.Clients.Add(new Client(socket, Manager));
+                        if (tcpSocket != null)
+                        {
+                            var client = new Client(Manager)
+                            {
+                                Id = Interlocked.Increment(ref Client.LatestId),
+                                TcpSocket = tcpSocket,
+                                UdpClient = new UdpClient(tcpSocket.RemoteEndPoint as IPEndPoint)
+                            };
+
+                            if (Clients.TryAdd(client.Id, client))
+                                client.Handle();
+                        }
 
                         StartAccept();
                     }
@@ -49,6 +65,28 @@ namespace LoESoft.Server.Core.Networking
             catch (ObjectDisposedException) { }
         }
 
-        public void EndAccept() => Socket.Close();
+        public void EndAccept()
+        {
+            Clients.Select(client => { client.Value.Disconnect(); return client; }).ToList();
+
+            TcpSocket.Close();
+            TcpSocket.Dispose();
+        }
+
+        public void ConnectionManager()
+        {
+            Clients.Select(client =>
+            {
+                if (!client.Value.IsConnected)
+                    if (Clients.TryRemove(client.Value.Id, out Client invalidClient))
+                        invalidClient.Disconnect();
+
+                return client;
+            }).ToList();
+
+            Thread.Sleep(10 * 1000); // it's not even a thread priority for us due stability :)
+
+            ConnectionManager();
+        }
     }
 }

@@ -76,8 +76,8 @@ namespace LoESoft.Server
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
 
                 _database.Disconnect();
+
                 connection.EndAccept();
-                manager.Stop();
 
                 Info("Game Server has been stopped.");
 

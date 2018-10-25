@@ -18,6 +18,8 @@ namespace LoESoft.Client.Core.Screens
         {
             AccountName = new TextBox(10, 50, 380, "Account Name:", 16, encoded: true);
             AccountPassword = new TextBox(10, 100, 380, "Account Password:", 16, encoded: true);
+            AccountName = new TextBox(10, 50, 380, "Account Name:", 12, 16, true);
+            AccountPassword = new TextBox(10, 100, 380, "Account Password:", 12, 16, true);
 
             LoginButton = new Button(0, 140, "Login", new RGBColor(255, 0, 0));
             LoginButton.X = (Width / 2) - (LoginButton.Width / 2);

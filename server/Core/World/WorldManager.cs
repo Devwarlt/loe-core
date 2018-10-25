@@ -1,6 +1,4 @@
 ﻿using LoESoft.Server.Core.Networking;
-using System.Collections.Concurrent;
-using System.Linq;
 using System.Threading;
 
 namespace LoESoft.Server.Core.World
@@ -8,39 +6,24 @@ namespace LoESoft.Server.Core.World
     public class WorldManager
     {
         public MapData Map { get; set; }
-        public ConcurrentBag<Client> Clients { get; set; }
 
-        public WorldManager()
-        {
-            Map = new MapData(this);
-            Clients = new ConcurrentBag<Client>();
-        }
+        public WorldManager() => Map = new MapData(this);
 
         public void BeginUpdate()
-        {
-            var tickUpdate =
-                new Thread(() =>
+            => new Thread(() =>
+            {
+                do
                 {
-                    do
-                    {
-                        Map.Update();
+                    Map.Update();
 
-                        Thread.Sleep(WorldSettings.COOLDOWN);
-                    } while (true);
-                })
-                { IsBackground = true };
-            tickUpdate.Start();
-        }
-
-        public void Stop()
-        {
-            foreach (var i in Clients)
-                i?.Disconnect();
-        }
+                    Thread.Sleep(WorldSettings.COOLDOWN);
+                } while (true);
+            })
+            { IsBackground = true }.Start();
 
         public bool TryAddPlayer(Client client)
         {
-            if (Clients.Count >= WorldSettings.MAX_CONNECTIONS)
+            if (ConnectionListener.Clients.Count >= WorldSettings.MAX_CONNECTIONS)
                 return false;
 
             if (client.Player != null)
@@ -57,13 +40,12 @@ namespace LoESoft.Server.Core.World
 
         public bool TryRemovePlayer(Client client)
         {
-            if (Clients.Contains(client))
+            if (ConnectionListener.Clients.Values.Contains(client))
             {
                 GameServer.Info("Player removed!");
 
-                Clients.TryTake(out client);
-
-                Map.RemovePlayer(client.Player);
+                if (client.Player != null)
+                    Map.RemovePlayer(client.Player);
 
                 return true;
             }

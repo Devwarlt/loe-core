@@ -30,6 +30,12 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         //Repositions player and sends back a server move packet once it's done
         private void RepositionPlayer(Client client, int x, int y)
         {
+            if (client == null)
+                return;
+
+            if (client.Player == null)
+                return;
+
             int X = client.Player.X + x;
             int Y = client.Player.Y + y;
 
