@@ -47,13 +47,13 @@ namespace LoESoft.Client
             GameUser = new GameUser(GetServers[ServerName.LOCAL]);
             GameUser.Connect();
 
-            GameClient._discordPresence.State = "World: Chicago";
-            GameClient._discordPresence.Details = "Main Menu";
+            BrmeClient._discordPresence.State = "World: Chicago";
+            BrmeClient._discordPresence.Details = "Main Menu";
 
-            GameClient.UpdateRPC();
+            BrmeClient.UpdateRPC();
             
             Loaded = true;
-            GameClient.Info("Game Client is initializing... OK!");
+            BrmeClient.Info("Game Client is initializing... OK!");
         }
 
         protected override void LoadContent()
@@ -71,8 +71,8 @@ namespace LoESoft.Client
 
             ScreenManager.OnGameClose += () =>
             {
-                GameClient._discordClient.ClearPresence();
-                GameClient._discordClient.Dispose();
+                BrmeClient._discordClient.ClearPresence();
+                BrmeClient._discordClient.Dispose();
 
                 Exit();
             };

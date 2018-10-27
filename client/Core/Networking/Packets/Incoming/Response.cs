@@ -22,7 +22,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                 case "Register": RegisterHandler(); break; // TODO.
                 case "CreateNewCharacter": CreateNewCharacterHandler(); break; // TODO.
                 case "LoadCharacter": LoadCharacterHandler(); break; // TODO.
-                default: GameClient.Info($"New server response detected!\n{ToString()}"); break;
+                default: BrmeClient.Info($"New server response detected!\n{ToString()}"); break;
             }
         }
 

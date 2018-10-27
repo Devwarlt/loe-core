@@ -28,7 +28,7 @@ namespace LoESoft.Client.Core.Game
                     Tiles[x, y] = new Tile(
                         JsonConvert.DeserializeObject<TileData>(JsonConvert.DeserializeObject<RawMapData>(mapdata).Tiles[x, y]).X,
                         JsonConvert.DeserializeObject<TileData>(JsonConvert.DeserializeObject<RawMapData>(mapdata).Tiles[x, y]).Y,
-                        JsonConvert.DeserializeObject<TileData>(JsonConvert.DeserializeObject<RawMapData>(mapdata).Tiles[x, y]).Type);
+                        JsonConvert.DeserializeObject<TileData>(JsonConvert.DeserializeObject<RawMapData>(mapdata).Tiles[x, y]).Id);
 
             var entities = new List<BasicObject>();
             var players = new List<BasicObject>();

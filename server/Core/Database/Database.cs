@@ -155,7 +155,7 @@ namespace LoESoft.Server.Core.Database
                 cmd.CommandText = "UPDATE characters SET position = '@position';";
                 cmd.Parameters.AddWithValue("@position", JsonConvert.SerializeObject(new Position()
                 {
-                    Type = data.Type,
+                    Type = data.Id,
                     X = data.X,
                     Y = data.Y
                 }));

@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace LoESoft.Client
 {
-    public static class GameClient
+    public static class BrmeClient
     {
         // Assembly's Data
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;

@@ -51,10 +51,10 @@ namespace LoESoft.Client.Drawing.Events
 
         private static void handleUnactiveClient()
         {
-            int processId = Process.GetProcesses().Where(_ => _.ProcessName == "").First().Id;
+            var gameProcess = Process.GetProcesses().Where(_ => _.ProcessName == "GameClient").First();
             var curProcess = Process.GetCurrentProcess();
 
-            isClientActive = (processId == curProcess.Id);
+            isClientActive = (gameProcess.Id == curProcess.Id);
         }
     }
 }

@@ -3,7 +3,7 @@ using LoESoft.Client.Core.Screens;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {
-    public class ServerMove : IncomingPacket, IUdpPacket
+    public class ServerMove : IncomingPacket
     {
         public int X { get; set; }
         public int Y { get; set; }

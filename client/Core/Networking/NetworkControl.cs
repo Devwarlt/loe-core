@@ -61,7 +61,7 @@ namespace LoESoft.Client.Core.Networking
 
                         try
                         {
-                            GameClient.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
+                            BrmeClient.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
 
                             TcpSocket.EndConnect(result);
                         }
@@ -69,21 +69,21 @@ namespace LoESoft.Client.Core.Networking
                         {
                             if (ConnectionAttempt == MAX_CONNECTION_ATTEMPTS)
                             {
-                                GameClient.Warn($"Unable to connect to {Server} due max number of invalid attempts reached the limit.");
+                                BrmeClient.Warn($"Unable to connect to {Server} due max number of invalid attempts reached the limit.");
 
                                 Disconnect();
 
                                 return;
                             }
 
-                            GameClient.Warn($"Failed to connect to {Server}. Retrying...");
+                            BrmeClient.Warn($"Failed to connect to {Server}. Retrying...");
 
                             Connect(Server);
 
                             return;
                         }
 
-                        GameClient.Info($"Connected to {Server}.");
+                        BrmeClient.Info($"Connected to {Server}.");
 
                         Thread.Sleep(250);
 
@@ -95,7 +95,8 @@ namespace LoESoft.Client.Core.Networking
             UdpClient.Connect(Server.UdpEndPoint);
         }
 
-        public static bool _recievedServerMove = false;
+        public static bool _recievedServerMove = true;
+        private static bool _firstMove = true;
 
         // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
         private bool HandleMovePacket(ClientMove move)
@@ -105,14 +106,14 @@ namespace LoESoft.Client.Core.Networking
                 _recievedServerMove = false;
                 return true;
             }
-            return true;
+            return false;
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
         {
             if (!GameUser.IsConnected)
             {
-                GameClient.Warn($"Client isn't connected! Disposing packet {outgoingPacket.PacketID}...");
+                BrmeClient.Warn($"Client isn't connected! Disposing packet {outgoingPacket.PacketID}...");
                 return;
             }
 
@@ -129,7 +130,7 @@ namespace LoESoft.Client.Core.Networking
                 if (!HandleMovePacket(outgoingPacket as ClientMove))
                     return;
 
-            GameClient.Warn($"Sending {outgoingPacket.PacketID}...");
+            BrmeClient.Warn($"Sending {outgoingPacket.PacketID}...");
 
             if (outgoingPacket is IUdpPacket)
             {
@@ -175,7 +176,7 @@ namespace LoESoft.Client.Core.Networking
 
                         GetIncomingPacket(packetData).Handle(GameUser);
 
-                        GameClient.Warn($"New packet received! Packet: {packetData.PacketID}");
+                        BrmeClient.Warn($"New packet received! Packet: {packetData.PacketID}");
 
                         ReceivePacket();
                     }
@@ -215,7 +216,7 @@ namespace LoESoft.Client.Core.Networking
             if (Disconnected)
                 return;
 
-            GameClient.Info("Client disconnected.");
+            BrmeClient.Info("Client disconnected.");
 
             Disconnected = true;
 

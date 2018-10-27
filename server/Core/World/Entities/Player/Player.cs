@@ -38,7 +38,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
             {
                 X = X,
                 Y = Y,
-                Type = 0
+                Id = 0
             };
 
         public void Save() => GameServer._database.SavePlayer(Client.Account, GetPlayerData);
