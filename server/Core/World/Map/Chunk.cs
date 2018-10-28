@@ -42,6 +42,8 @@ namespace LoESoft.Server.Core.World.Map
 
         public void LoadChunk() //temporary
         {
+            Random random = new Random();
+
             for (var x = 0; x < CHUNKSIZE; x++)
                 for (var y = 0; y < CHUNKSIZE; y++)
                 {
@@ -49,13 +51,13 @@ namespace LoESoft.Server.Core.World.Map
                     {
                         X = _startX + x,
                         Y = _startY + y,
-                        Id = new Random().Next(0, 4)
+                        Id = random.Next(0, 4)
                     };
 
                     Entities.Add(new Entity(Manager)
                     {
-                        X = _startX + new Random().Next(0, 16),
-                        Y = _startY + new Random().Next(0, 16)
+                        X = _startX + random.Next(0, 16),
+                        Y = _startY + random.Next(0, 16)
                     });
                 }
         }

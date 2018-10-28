@@ -3,6 +3,7 @@ using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
@@ -72,13 +73,18 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            foreach (var i in _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).ToArray())
-                if (Text.Length <= Limit && Selected)
-                    Text.Append(i.ToString());
-
             if (_keyEvents.HandleBackSpace(gameTime))
                 if (Text.Length > 0)
                     Text.Length--;
+            else
+            {
+                _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).Where(_ => (Text.Length <= Limit && Selected)).Select(_ =>
+                {
+                    Text.Append(_.ToString());
+
+                    return _;
+                }).ToList();
+            }
 
             TextField.Text = Encoded ? GetEncodedString(Text.ToString()) : Text.ToString();
 

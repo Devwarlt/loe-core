@@ -7,18 +7,19 @@ namespace LoESoft.Client.Drawing.Events
     public partial class EventsHandler
     {
         protected List<char> GetPressedKeys()
-        {
-            var pressedKeys = new List<KeyValuePair<bool, Keys>>();
+        { 
             var oldPressedKeys = previousKeyBoard.GetPressedKeys();
             var keys = new List<char>();
 
             for (var i = 0; i < oldPressedKeys.Length; i++)
-                if (currentKeyBoard.IsKeyUp(oldPressedKeys[i]))
-                    pressedKeys.Add(new KeyValuePair<bool, Keys>(DetectCaps, oldPressedKeys[i]));
-
-            foreach (var i in pressedKeys)
-                if (i.Value.ToString().Length <= 2 || TextBox.ValidKeys.Contains(i.Value))
-                    keys.Add(KeysToChar(i.Value, i.Key));
+            {
+                if (currentKeyBoard.IsKeyUp(oldPressedKeys[i]) && previousKeyBoard.IsKeyDown(oldPressedKeys[i]))
+                {
+                    var key = oldPressedKeys[i];
+                    if (key.ToString().Length <= 2 || TextBox.ValidKeys.Contains(key))
+                        keys.Add(KeysToChar(key, DetectCaps));
+                }
+            }
 
             return keys;
         }

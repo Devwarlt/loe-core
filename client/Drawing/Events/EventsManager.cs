@@ -12,11 +12,11 @@ namespace LoESoft.Client.Drawing.Events
 
         public static void TrySet(SpriteNode node)
         {
-            if (isClientActive == false)
-            {
-                CurrentNode = null;
-                return;
-            }
+            //if (isClientActive == false)
+            //{
+            //    CurrentNode = null;
+            //    return;
+            //}
 
             if (!EventsHandler.MouseRectangle.Intersects(node.SpriteRectangle))
                 return;

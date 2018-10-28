@@ -26,5 +26,30 @@ namespace LoESoft.Client.Drawing.Sprites
 
             base.Draw(spriteBatch);
         }
+
+        public static void AddOutline(ref Texture2D texture)
+        {
+            int w = texture.Width;
+            int h = texture.Height;
+
+            var color = new Color[w * h];
+
+            texture.GetData<Color>(color);
+
+            for (var i = 0; i < w * h; i++)
+            {
+                var c = color[i];
+
+                if (c == Color.Transparent)
+                {
+                    try
+                    {
+
+                    }
+                    catch { }
+                }
+            }
+                
+        }
     }
 }

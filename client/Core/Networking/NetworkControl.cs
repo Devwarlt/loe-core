@@ -96,7 +96,6 @@ namespace LoESoft.Client.Core.Networking
         }
 
         public static bool _recievedServerMove = true;
-        private static bool _firstMove = true;
 
         // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
         private bool HandleMovePacket(ClientMove move)

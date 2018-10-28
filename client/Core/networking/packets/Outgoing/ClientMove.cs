@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace LoESoft.Client.Core.Networking.Packets.Outgoing
 {
-    public class ClientMove : OutgoingPacket, IUdpPacket //UDP Packets are not being recieved
+    public class ClientMove : OutgoingPacket //UDP Packets are not being recieved
     {
         public int Direction { get; set; }
 

@@ -11,6 +11,7 @@ namespace LoESoft.Client.Drawing.Events
 
         private MouseState previousMouse;
         private MouseState currentMouse;
+
         private KeyboardState previousKeyBoard;
         private KeyboardState currentKeyBoard;
 

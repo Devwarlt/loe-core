@@ -3,29 +3,25 @@
     public class TextButton : SpriteNode
     {
         public int Size { get; set; }
-        public TextDisplay TextDisplay { get; set; }
 
-        private string _text;
-
-        public string Text
+        private TextDisplay _textDisplay;
+        public TextDisplay TextDisplay
         {
-            get => _text; set
+            get => _textDisplay;
+            set
             {
-                _text = value;
-
-                var mesurements = TextDisplay.MeasureString(_text, Size);
-                Width = (int)mesurements.X + 10;
-                Height = (int)mesurements.Y + 10;
-
-                TextDisplay = new TextDisplay(5, 5, _text, Size);
+                _textDisplay = value;
+                Width = _textDisplay.Width;
+                Height = _textDisplay.Height;
             }
         }
-
+        
         public TextButton(string text, int size)
             : base(0, 0, 0, 0)
         {
             Size = size;
-            Text = text;
+
+            TextDisplay = new TextDisplay(0, 0, text, size);
 
             TextDisplay.IsEventApplicable = false;
 

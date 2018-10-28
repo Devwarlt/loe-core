@@ -13,7 +13,18 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
         public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
 
-        public string Text { get; set; }
+        private string _text;
+        public string Text
+        {
+            get => _text;
+            set
+            {
+                Width = (int)MeasureString(value, (int)Size).X;
+                Height = (int)MeasureString(value, (int)Size).Y;
+
+                _text = value;
+            }
+        }
         public float Size { get; set; }
         public bool Bold { get; set; } //unhandled
         public int PerLineWidth { get; set; }
@@ -22,10 +33,10 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public TextDisplay(int x, int y, string text, float size = 12, RGBColor color = null, float alpha = 1, bool bold = false)
             : base(x, y, 0, 0, null, color, alpha)
         {
-            Text = text;
             Size = size;
             PerLineWidth = 0;
             Bold = bold;
+            Text = text;
         }
 
         public static void LoadSpriteFont(ContentManager contentManager)
@@ -36,9 +47,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
         public override void Update(GameTime gameTime)
         {
-            Width = (int)MeasureString(Text, (int)Size).X;
-            Height = (int)MeasureString(Text, (int)Size).Y;
-
             base.Update(gameTime);
         }
 

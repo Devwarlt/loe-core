@@ -53,14 +53,12 @@ namespace LoESoft.Client.Core.Game.Objects
         #region "Move"
 
         private void SendMovePacket()
-        {
-            if (IsMoving)
-                GameUser.SendPacket(new ClientMove()
-                {
-                    Direction = (int)CurrentDirection,
-                    Player = this
-                });
-        }
+            =>
+            GameUser.SendPacket(new ClientMove()
+            {
+                Direction = (int)CurrentDirection,
+                Player = this
+            });
 
         public void DetectMovement()
         {
