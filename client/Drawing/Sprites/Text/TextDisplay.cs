@@ -39,7 +39,8 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
                 _text = value;
 
-                _textByLine = DetectPerLine(value);
+                if (PerLineWidth > 0)
+                    _textByLine = DetectPerLine(value);
             }
         }
 

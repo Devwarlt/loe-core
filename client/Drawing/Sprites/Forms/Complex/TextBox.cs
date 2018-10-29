@@ -74,8 +74,10 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (_keyEvents.HandleBackSpace(gameTime))
+            {
                 if (Text.Length > 0)
                     Text.Length--;
+            }
             else
             {
                 _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).Where(_ => (Text.Length <= Limit && Selected)).Select(_ =>

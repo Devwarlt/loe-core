@@ -48,12 +48,8 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawPlayerData();
 
-            try
-            {
-                foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)))
-                    dat.SetData<PlayerData>(i.GetPlayerData);
-            }
-            catch { }
+            foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)))
+                dat.SetData<PlayerData>(i.GetPlayerData);
 
             return JsonConvert.SerializeObject(dat);
         }
@@ -62,12 +58,8 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawEntityData();
 
-            try
-            {
-                foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Entities)
-                    dat.SetData<EntityData>(i.GetData);
-            }
-            catch { }
+            foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Entities)
+                dat.SetData<EntityData>(i.GetData);
 
             return JsonConvert.SerializeObject(dat);
         }
@@ -76,12 +68,8 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawMapData();
 
-            try
-            {
-                foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Tiles)
-                    dat.SetData<TileData>(i);
-            }
-            catch { }
+            foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Tiles)
+                dat.SetData<TileData>(i);
 
             return JsonConvert.SerializeObject(dat);
         }
