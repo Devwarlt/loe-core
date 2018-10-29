@@ -22,6 +22,7 @@ namespace LoESoft.Server.Core.World.Entities
 
             if (cx != ChunkX || cy != ChunkY)
                 RepositionToChunk(cx, cy);
+
         }
 
         protected virtual void RepositionToChunk(int cx, int cy)

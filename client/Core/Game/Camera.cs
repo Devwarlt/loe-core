@@ -5,7 +5,7 @@ namespace LoESoft.Client.Core.Game
 {
     public class Camera
     {
-        public const int SCALE = Tile.TILE_SIZE / 2;
+        public const double SCALE = Tile.TILE_SIZE / 1.2;
 
         public static BasicObject Focus { get; set; }
         public static float X { get; set; }
@@ -22,7 +22,7 @@ namespace LoESoft.Client.Core.Game
             Y = MathHelper.Lerp(Y, Focus.DrawY, 1f);
 
             return Matrix.CreateTranslation(-X - 4, -Y - 4, 0) * // -4 is magic number atm until gameobject sprite size has a part
-                Matrix.CreateScale(SCALE) *
+                Matrix.CreateScale((float)SCALE) *
                 Matrix.CreateTranslation(GameApplication.WIDTH / 2, GameApplication.HEIGHT / 2, 0);
         }
     }

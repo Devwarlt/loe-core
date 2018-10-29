@@ -13,6 +13,7 @@ namespace LoESoft.Server.Core.World.Map
         public TileData[,] Tiles { get; private set; }
         public List<Entity> Entities { get; private set; }
         public List<Player> Players { get; private set; }
+
         public WorldManager Manager { get; private set; }
 
         private int _startX;

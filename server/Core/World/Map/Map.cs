@@ -34,14 +34,12 @@ namespace LoESoft.Server.Core.World
                 if (i.IsActive)
                     i.Update();
         }
-
-        #region "Conditions" 
+        
         public bool IsValidChunk(int x, int y)
         {
             return ((x >= 0 && x < 16 * 16) && (y >= 0 && y < 16 * 16));
         }
-        #endregion "Conditions"
-
+        
         #region "Get data"
 
         public string GetPlayerData(Player player)
