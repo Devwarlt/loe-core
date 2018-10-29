@@ -3,7 +3,7 @@ using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Core.World.Map.Data;
 using Newtonsoft.Json;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LoESoft.Server.Core.World
@@ -35,28 +35,25 @@ namespace LoESoft.Server.Core.World
                     i.Update();
         }
 
-        #region "Manage chunks"
-
-        public void RepositionPlayer(Player player, int x, int y)
+        #region "Conditions" 
+        public bool IsValidChunk(int x, int y)
         {
-            try
-            {
-                var idx = ChunkMap[player.ChunkX, player.ChunkY].Players.IndexOf(player);
-
-                ChunkMap[player.ChunkX, player.ChunkY].Players[idx].X = x;
-                ChunkMap[player.ChunkX, player.ChunkY].Players[idx].Y = y;
-            }
-            catch { }
+            return ((x >= 0 && x < 16 * 16) && (y >= 0 && y < 16 * 16));
         }
-
-        #endregion "Manage chunks"
+        #endregion "Conditions"
 
         #region "Get data"
 
         public string GetPlayerData(Player player)
         {
             var dat = new RawPlayerData();
-            dat.AssignData(ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => _ != player).ToList());
+
+            try
+            {
+                foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)))
+                    dat.SetData<PlayerData>(i.GetPlayerData);
+            }
+            catch { }
 
             return JsonConvert.SerializeObject(dat);
         }
@@ -64,7 +61,13 @@ namespace LoESoft.Server.Core.World
         public string GetEntityData(Player player)
         {
             var dat = new RawEntityData();
-            dat.AssignData(ChunkMap[player.ChunkX, player.ChunkY].Entities);
+
+            try
+            {
+                foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Entities)
+                    dat.SetData<EntityData>(i.GetData);
+            }
+            catch { }
 
             return JsonConvert.SerializeObject(dat);
         }
@@ -72,7 +75,13 @@ namespace LoESoft.Server.Core.World
         public string GetTileData(Player player)
         {
             var dat = new RawMapData();
-            dat.AssignData(ChunkMap[player.ChunkX, player.ChunkY].Tiles);
+
+            try
+            {
+                foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Tiles)
+                    dat.SetData<TileData>(i);
+            }
+            catch { }
 
             return JsonConvert.SerializeObject(dat);
         }

@@ -78,13 +78,11 @@
     <Compile Include="Core\Game\Animation\PlayerAnimation.cs" />
     <Compile Include="Core\Game\Camera.cs" />
     <Compile Include="Core\Game\Map\Data\EntityData.cs" />
-    <Compile Include="Core\Game\Map\Data\RawEntityData.cs" />
-    <Compile Include="Core\Game\Map\Data\RawPlayerData.cs" />
+    <Compile Include="Core\Game\Map\Data\RawDatas.cs" />
     <Compile Include="Core\Game\Map\Map.cs" />
     <Compile Include="Core\Game\Objects\BasicObject.cs" />
     <Compile Include="Core\Game\Objects\Player.cs" />
     <Compile Include="Core\Game\Map\Data\PlayerData.cs" />
-    <Compile Include="Core\Game\Map\Data\RawMapData.cs" />
     <Compile Include="Core\Game\Objects\Player.Direction.cs" />
     <Compile Include="Core\Game\Objects\Tile.cs" />
     <Compile Include="Core\Game\Map\Data\TileData.cs" />

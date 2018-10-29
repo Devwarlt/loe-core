@@ -12,6 +12,21 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public static SpriteFont Font { get; private set; }
 
         public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
+        
+        public float Size { get; set; }
+        public bool Bold { get; set; }
+        public bool Outline { get; set; }
+
+        private int _perLineWidth = 0;
+        public int PerLineWidth
+        {
+            get => _perLineWidth;
+            set
+            {
+                _perLineWidth = value;
+                _textByLine = DetectPerLine(Text);
+            }
+        }
 
         private string _text;
         public string Text
@@ -23,18 +38,15 @@ namespace LoESoft.Client.Drawing.Sprites.Text
                 Height = (int)MeasureString(value, (int)Size).Y;
 
                 _text = value;
+
+                _textByLine = DetectPerLine(value);
             }
         }
-        public float Size { get; set; }
-        public bool Bold { get; set; } //unhandled
-        public int PerLineWidth { get; set; }
-        public bool Outline { get; set; } // Test End
 
         public TextDisplay(int x, int y, string text, float size = 12, RGBColor color = null, float alpha = 1, bool bold = false)
             : base(x, y, 0, 0, null, color, alpha)
         {
             Size = size;
-            PerLineWidth = 0;
             Bold = bold;
             Text = text;
         }
@@ -55,7 +67,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             if (PerLineWidth != 0)
             {
                 var offset = 0;
-                foreach (var i in DetectPerLine())
+                foreach (var i in _textByLine)
                 {
                     if (Outline) // Test
                     {
@@ -85,7 +97,9 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             base.Draw(spriteBatch);
         }
 
-        private List<string> DetectPerLine()
+        private List<string> _textByLine;
+
+        public  List<string> DetectPerLine(string text)
         {
             if (PerLineWidth == 0)
                 return null;
@@ -93,7 +107,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             var cWidth = 0;
             var cSize = 0;
 
-            foreach (var i in Text)
+            foreach (var i in text)
             {
                 cWidth += (int)MeasureString(i.ToString(), (int)Size).X;
                 if (cWidth >= PerLineWidth)

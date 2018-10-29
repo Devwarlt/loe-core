@@ -1,17 +1,14 @@
 #define TEMP_DISABLE
 
-using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
+using LoESoft.Client.Core.Game.Map;
 using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Drawing;
-using LoESoft.Client.Drawing.Events;
-using LoESoft.Client.Drawing.Sprites;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace LoESoft.Client.Core.Screens

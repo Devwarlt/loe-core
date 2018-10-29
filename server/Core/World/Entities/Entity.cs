@@ -34,7 +34,7 @@ namespace LoESoft.Server.Core.World.Entities
             Manager.Map.AddEntity(this);
         }
 
-        public virtual EntityData GetData() => new EntityData() { X = X, Y = Y, Id = 0 };
+        public virtual EntityData GetData => new EntityData() { X = X, Y = Y, Id = 0 };
 
         public virtual void Dispose() => Manager.Map.RemoveEntity(this);
     }
