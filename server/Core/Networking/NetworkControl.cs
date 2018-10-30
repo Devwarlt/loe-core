@@ -17,12 +17,14 @@ namespace LoESoft.Server.Core.Networking
     {
         public static int BUFFER_SIZE => ushort.MaxValue + 1;
 
+        public bool IsConnected => TcpSocket.Connected;
+
         public Socket TcpSocket { get; set; }
         public Client Client { get; set; }
 
-        private byte[] ReceiveBuffer { get; set; }
-        private byte[] SendBuffer { get; set; }
+        private byte[] Buffer { get; set; }
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
+        private bool Disconnected { get; set; }
 
         public NetworkControl(Client client, Socket tcpSocket)
         {
@@ -32,8 +34,16 @@ namespace LoESoft.Server.Core.Networking
 
         public void SendPacket(OutgoingPacket outgoingPacket)
         {
-            if (SendBuffer == null)
-                SendBuffer = new byte[BUFFER_SIZE];
+            App.Info($"Processing new outgoing packet...");
+
+            if (!IsConnected && !Disconnected)
+            {
+                App.Warn($"Disposing packet {outgoingPacket.PacketID} and client...");
+
+                Disconnect();
+
+                return;
+            }
 
             var buffer = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
             {
@@ -41,51 +51,101 @@ namespace LoESoft.Server.Core.Networking
                 Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
 
+            App.Info($"Packet buffer length: {buffer.Length}");
+
             try
             {
+                App.Info($"Sending {outgoingPacket.PacketID}...");
+
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, result =>
                 {
                     try
                     { TcpSocket.EndAccept(result); }
                     catch (SocketException) { }
                     catch (ArgumentException) { }
+                    catch
+                    {
+                        if (!Disconnected)
+                            App.Warn("Something went wrong!");
+                    }
                 }, null);
             }
             catch (SocketException) { }
+            catch
+            {
+                if (!Disconnected)
+                    App.Warn("Something went wrong!");
+            }
+
+            App.Info("Sent!");
         }
 
-        public bool IsConnected => TcpSocket.Connected;
-
-        public void SendPackets(OutgoingPacket[] outgoingPacket)
-            => outgoingPacket.Select(packet => { SendPacket(packet); return packet; }).ToList();
+        public void SendPackets(IEnumerable<OutgoingPacket> outgoingPackets)
+            => outgoingPackets.Select(outgoingPacket =>
+            {
+                SendPacket(outgoingPacket);
+                return outgoingPacket;
+            }).ToList();
 
         public void ReceivePacket()
         {
-            if (ReceiveBuffer == null)
-                ReceiveBuffer = new byte[BUFFER_SIZE];
+            if (Buffer == null)
+                Buffer = new byte[BUFFER_SIZE];
 
-            TcpSocket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None, result =>
+            if (!IsConnected && !Disconnected)
             {
-                try
+                App.Warn($"Disposing client...");
+
+                Disconnect();
+
+                return;
+            }
+
+            try
+            {
+                TcpSocket.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, result =>
                 {
-                    var len = TcpSocket.EndReceive(result);
-                    var buffer = new byte[len];
+                    App.Info("Processing new incoming packet...");
 
-                    Array.Copy(ReceiveBuffer, buffer, len);
+                    try
+                    {
+                        var len = TcpSocket.EndReceive(result);
+                        var buffer = new byte[len];
 
-                    var data = Encoding.UTF8.GetString(buffer);
-                    var packetData = JsonConvert.DeserializeObject<PacketData>(data);
+                        Array.Copy(Buffer, buffer, len);
 
-                    GetIncomingPacket(packetData).Handle(Client);
+                        var data = Encoding.UTF8.GetString(buffer);
+                        var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                    App.Warn($"New packet received! Packet: {packetData.PacketID}");
+                        GetIncomingPacket(packetData).Handle(Client);
+
+                        App.Warn($"New packet received! Packet: {packetData.PacketID}");
+
+                        ReceivePacket();
+                    }
+                    catch (SocketException) { }
+                    catch (JsonReaderException) { }
+                    catch (NullReferenceException) { }
+                    catch
+                    {
+                        if (!Disconnected)
+                        {
+                            App.Warn("Something went wrong!");
+
+                            ReceivePacket();
+                        }
+                    }
+                }, null);
+            }
+            catch
+            {
+                if (!Disconnected)
+                {
+                    App.Warn("Something went wrong!");
 
                     ReceivePacket();
                 }
-                catch (SocketException) { }
-                catch (JsonReaderException) { }
-                catch (NullReferenceException) { }
-            }, null);
+            }
         }
 
         private void SetupIncomingPackets()
@@ -120,12 +180,17 @@ namespace LoESoft.Server.Core.Networking
 
         public void Disconnect()
         {
+            if (Disconnected)
+                return;
+
+            Disconnected = true;
+
             Client.Player?.Save();
             Client.Player?.Dispose();
             Client.TcpSocket?.Close();
             Client.TcpSocket?.Dispose();
 
-            App.Info($"Client ID {Client.Id} has left.");
+            App.Info($"Client ID {Client.Id} has left from the server.");
         }
     }
 }

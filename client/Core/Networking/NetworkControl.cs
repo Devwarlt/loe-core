@@ -20,72 +20,62 @@ namespace LoESoft.Client.Core.Networking
     {
         public static bool ReceivedServerMove = true;
 
-        public const int MAX_CONNECTION_ATTEMPTS = 5;
-
         public Socket TcpSocket { get; set; }
         public Server Server { get; set; }
+
+        public bool IsConnected => TcpSocket.Connected;
 
         private const int BUFFER_SIZE = ushort.MaxValue + 1;
 
         private GameUser GameUser { get; set; }
-        private byte[] ReceiveBuffer { get; set; }
-        private byte[] SendBuffer { get; set; }
+        private byte[] Buffer { get; set; }
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
         private int ConnectionAttempt { get; set; }
         private bool Disconnected { get; set; }
 
-        public NetworkControl(GameUser gameUser)
+        public NetworkControl(GameUser gameUser, Server server)
         {
             GameUser = gameUser;
-            TcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Server = server;
+            TcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            {
+                NoDelay = true,
+                UseOnlyOverlappedIO = true,
+                SendTimeout = 1000,
+                ReceiveTimeout = 1000
+            };
         }
 
-        public bool IsConnected => TcpSocket.Connected;
-
-        public void Connect(Server server)
+        public void Connect()
         {
-            if (Server == null)
-                Server = server;
-
-            TcpSocket.BeginConnect(server.TcpEndPoint,
-                (IAsyncResult result) =>
+            try
+            {
+                TcpSocket.BeginConnect(Server.TcpEndPoint, (result) =>
                 {
+                    ConnectionAttempt++;
+
+                    App.Info($"[Attempt {ConnectionAttempt}] Connecting to {Server}...");
+
                     try
                     {
-                        ConnectionAttempt++;
+                        TcpSocket.EndConnect(result);
 
-                        try
-                        {
-                            App.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
-
-                            TcpSocket.EndConnect(result);
-                        }
-                        catch
-                        {
-                            if (ConnectionAttempt == MAX_CONNECTION_ATTEMPTS)
-                            {
-                                App.Warn($"Unable to connect to {Server} due max number of invalid attempts reached the limit.");
-
-                                Disconnect();
-
-                                return;
-                            }
-
-                            App.Warn($"Failed to connect to {Server}. Retrying...");
-
-                            Connect(Server);
-
-                            return;
-                        }
-
-                        App.Info($"Connected to {Server}.");
-
-                        Thread.Sleep(250);
+                        App.Info($"Connected to {Server}!");
 
                         ReceivePacket();
                     }
-                    catch (SocketException) { }
+                    catch
+                    {
+                        Thread.Sleep(3000);
+
+                        Connect();
+                    }
                 }, null);
+            }
+            catch
+            {
+                App.Info("Server is offline.");
+            }
         }
 
         // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
@@ -96,19 +86,22 @@ namespace LoESoft.Client.Core.Networking
                 ReceivedServerMove = false;
                 return true;
             }
+
             return false;
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
         {
-            if (!GameUser.IsConnected)
+            App.Info($"Processing new outgoing packet...");
+
+            if (!IsConnected && !Disconnected)
             {
-                App.Warn($"Client isn't connected! Disposing packet {outgoingPacket.PacketID}...");
+                App.Warn($"Disposing packet {outgoingPacket.PacketID} and reconnecting...");
+
+                Connect();
+
                 return;
             }
-
-            if (SendBuffer == null)
-                SendBuffer = new byte[BUFFER_SIZE];
 
             var buffer = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
             {
@@ -120,41 +113,66 @@ namespace LoESoft.Client.Core.Networking
                 if (!HandleMovePacket(outgoingPacket as ClientMove))
                     return;
 
-            App.Warn($"Sending {outgoingPacket.PacketID}...");
+            App.Info($"Packet buffer length: {buffer.Length}");
 
             try
             {
-                TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
-                    (IAsyncResult result) =>
+                App.Info($"Sending {outgoingPacket.PacketID}...");
+
+                TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, (result) =>
+                {
+                    try
+                    { TcpSocket.EndSend(result); }
+                    catch (SocketException) { }
+                    catch
                     {
-                        try
-                        { TcpSocket.EndSend(result); }
-                        catch (SocketException) { }
-                    }, null);
+                        if (!Disconnected)
+                            App.Warn("Something went wrong!");
+                    }
+                }, null);
             }
             catch (SocketException) { }
+            catch
+            {
+                if (!Disconnected)
+                    App.Warn("Something went wrong!");
+            }
+
+            App.Info("Sent!");
         }
 
-        public void SendPackets(OutgoingPacket[] outgoingPackets)
-        {
-            for (var i = 0; i < outgoingPackets.Length; i++)
-                SendPacket(outgoingPackets[i]);
-        }
+        public void SendPackets(IEnumerable<OutgoingPacket> outgoingPackets)
+            => outgoingPackets.Select(outgoingPacket =>
+            {
+                SendPacket(outgoingPacket);
+                return outgoingPacket;
+            }).ToList();
 
         public void ReceivePacket()
         {
-            if (ReceiveBuffer == null)
-                ReceiveBuffer = new byte[BUFFER_SIZE];
+            if (Buffer == null)
+                Buffer = new byte[BUFFER_SIZE];
 
-            TcpSocket.BeginReceive(ReceiveBuffer, 0, ReceiveBuffer.Length, SocketFlags.None,
-                (IAsyncResult result) =>
+            if (!IsConnected && !Disconnected)
+            {
+                App.Warn($"Reconnecting...");
+
+                Connect();
+
+                return;
+            }
+            try
+            {
+                TcpSocket.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, (result) =>
                 {
+                    App.Info("Processing new incoming packet...");
+
                     try
                     {
                         var len = TcpSocket.EndReceive(result);
                         var buffer = new byte[len];
 
-                        Array.Copy(ReceiveBuffer, buffer, len);
+                        Array.Copy(Buffer, buffer, len);
 
                         var data = Encoding.UTF8.GetString(buffer);
                         var packetData = JsonConvert.DeserializeObject<PacketData>(data);
@@ -168,7 +186,26 @@ namespace LoESoft.Client.Core.Networking
                     catch (SocketException) { }
                     catch (JsonReaderException) { }
                     catch (NullReferenceException) { }
+                    catch
+                    {
+                        if (!Disconnected)
+                        {
+                            App.Warn("Something went wrong!");
+
+                            ReceivePacket();
+                        }
+                    }
                 }, null);
+            }
+            catch
+            {
+                if (!Disconnected)
+                {
+                    App.Warn("Something went wrong!");
+
+                    ReceivePacket();
+                }
+            }
         }
 
         private void SetupIncomingPackets()
@@ -201,14 +238,14 @@ namespace LoESoft.Client.Core.Networking
             if (Disconnected)
                 return;
 
-            App.Info("Client disconnected.");
-
             Disconnected = true;
 
             ScreenManager.DispatchScreen(new SplashScreen());
 
             TcpSocket?.Close();
             TcpSocket?.Dispose();
+
+            App.Info("Client disconnected.");
         }
     }
 }
