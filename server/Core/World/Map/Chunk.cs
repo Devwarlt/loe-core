@@ -2,6 +2,7 @@
 using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map.Data;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World.Map
@@ -34,16 +35,13 @@ namespace LoESoft.Server.Core.World.Map
 
         public void Update()
         {
-            foreach (var i in Entities.ToArray())
-                i.Update();
-
-            foreach (var i in Players.ToArray())
-                i.Update();
+            Entities.ToArray().Select(entity => { entity.Update(); return entity; }).ToList();
+            Players.ToArray().Select(player => { player.Update(); return player; }).ToList();
         }
 
         public void LoadChunk() //temporary
         {
-            Random random = new Random();
+            var random = new Random();
 
             for (var x = 0; x < CHUNKSIZE; x++)
                 for (var y = 0; y < CHUNKSIZE; y++)
