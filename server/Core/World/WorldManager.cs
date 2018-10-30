@@ -28,7 +28,7 @@ namespace LoESoft.Server.Core.World
 
             if (client.Player != null)
             {
-                GameServer.Info("Player added!");
+                App.Info("Player added!");
 
                 Map.AddPlayer(client.Player);
 
@@ -42,7 +42,7 @@ namespace LoESoft.Server.Core.World
         {
             if (ConnectionListener.Clients.Values.Contains(client))
             {
-                GameServer.Info("Player removed!");
+                App.Info("Player removed!");
 
                 if (client.Player != null)
                     Map.RemovePlayer(client.Player);

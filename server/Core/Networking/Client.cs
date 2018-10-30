@@ -26,7 +26,7 @@ namespace LoESoft.Server.Core.Networking
         {
             IpAddress = TcpSocket.RemoteEndPoint.ToString().Split(':')[0];
 
-            GameServer.Info($"Client with IP '{IpAddress}' has connected!");
+            App.Info($"Client with IP '{IpAddress}' has connected!");
 
             NetworkControl = new NetworkControl(this, TcpSocket);
             NetworkControl.ReceivePacket();

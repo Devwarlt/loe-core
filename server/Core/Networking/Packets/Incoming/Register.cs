@@ -62,7 +62,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            var isAccountNameExist = GameServer._database.CheckAccountNameIfExists(name64);
+            var isAccountNameExist = App._database.CheckAccountNameIfExists(name64);
 
             if (isAccountNameExist)
             {
@@ -75,7 +75,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            if (GameServer._database.CreateNewAccount(name64, pass64, out string token))
+            if (App._database.CreateNewAccount(name64, pass64, out string token))
                 client.SendPacket(new Response()
                 {
                     From = "Regiser",

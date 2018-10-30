@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace LoESoft.Server
 {
-    public class GameServer
+    public class App
     {
         // Assembly's Data
         public static string _name => Assembly.GetExecutingAssembly().GetName().Name;

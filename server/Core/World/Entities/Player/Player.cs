@@ -41,7 +41,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
                 Id = 0
             };
 
-        public void Save() => GameServer._database.SavePlayer(Client.Account, GetPlayerData);
+        public void Save() => App._database.SavePlayer(Client.Account, GetPlayerData);
 
         public override void Dispose() => Manager.Map.RemovePlayer(this);
     }

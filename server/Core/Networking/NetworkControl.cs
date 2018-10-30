@@ -78,7 +78,7 @@ namespace LoESoft.Server.Core.Networking
 
                     GetIncomingPacket(packetData).Handle(Client);
 
-                    GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
+                    App.Warn($"New packet received! Packet: {packetData.PacketID}");
 
                     ReceivePacket();
                 }
@@ -125,7 +125,7 @@ namespace LoESoft.Server.Core.Networking
             Client.TcpSocket?.Close();
             Client.TcpSocket?.Dispose();
 
-            GameServer.Info($"Client ID {Client.Id} has left.");
+            App.Info($"Client ID {Client.Id} has left.");
         }
     }
 }
