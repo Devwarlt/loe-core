@@ -23,11 +23,16 @@ namespace LoESoft.Server.Core.World
                 for (var y = 0; y < Chunk.CHUNKSIZE; y++)
                     ChunkMap[x, y] = new Chunk(Manager, x, y);
 
-            ChunkMap.Select(chunk => { chunk.LoadChunk(); return chunk; }).ToList();
+            foreach (var chunk in ChunkMap)
+                chunk.LoadChunk();
         }
 
         public void Update()
-            => ChunkMap.Where(chunk => chunk.IsActive).Select(chunk => { chunk.Update(); return chunk; }).ToList();
+        {
+            foreach (var chunk in ChunkMap)
+                if (chunk.IsActive)
+                    chunk.Update();
+        }
 
         public bool IsValidChunk(int x, int y)
             => ((x >= 0 && x < 16 * 16) && (y >= 0 && y < 16 * 16));
@@ -38,10 +43,10 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawPlayerData();
 
-            ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)).Select(player =>
+            ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)).Select(playerData =>
             {
-                dat.SetData<PlayerData>(player.GetPlayerData);
-                return player;
+                dat.SetData(playerData.GetPlayerData);
+                return playerData;
             }).ToList();
 
             return JsonConvert.SerializeObject(dat);
@@ -53,7 +58,7 @@ namespace LoESoft.Server.Core.World
 
             ChunkMap[player.ChunkX, player.ChunkY].Entities.Select(entity =>
             {
-                dat.SetData<EntityData>(entity.GetData);
+                dat.SetData(entity.GetData);
                 return entity;
             }).ToList();
 
@@ -64,11 +69,8 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawMapData();
 
-            ChunkMap[player.ChunkX, player.ChunkY].Tiles.Select(tile =>
-            {
-                dat.SetData<TileData>(tile);
-                return tile;
-            }).ToList();
+            foreach (var tile in ChunkMap[player.ChunkX, player.ChunkY].Tiles)
+                dat.SetData(tile);
 
             return JsonConvert.SerializeObject(dat);
         }
