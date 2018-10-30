@@ -62,7 +62,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            var account = App._database.GetAccountByCredentials(name64, pass64);
+            var account = App.Database.GetAccountByCredentials(name64, pass64);
 
             if (account == null)
             {

@@ -17,8 +17,8 @@ namespace LoESoft.Server.Core.World.Map
 
         public WorldManager Manager { get; private set; }
 
-        private int _startX;
-        private int _startY;
+        private readonly int StartX;
+        private readonly int StartY;
 
         public bool IsActive => Players.Count > 0;
 
@@ -29,8 +29,8 @@ namespace LoESoft.Server.Core.World.Map
             Entities = new List<Entity>();
             Players = new List<Player>();
 
-            _startX = chunkx * CHUNKSIZE;
-            _startY = chunky * CHUNKSIZE;
+            StartX = chunkx * CHUNKSIZE;
+            StartY = chunky * CHUNKSIZE;
         }
 
         public void Update()
@@ -48,15 +48,15 @@ namespace LoESoft.Server.Core.World.Map
                 {
                     Tiles[x, y] = new TileData()
                     {
-                        X = _startX + x,
-                        Y = _startY + y,
+                        X = StartX + x,
+                        Y = StartY + y,
                         Id = random.Next(0, 4)
                     };
 
                     Entities.Add(new Entity(Manager)
                     {
-                        X = _startX + random.Next(0, 16),
-                        Y = _startY + random.Next(0, 16)
+                        X = StartX + random.Next(0, 16),
+                        Y = StartY + random.Next(0, 16)
                     });
                 }
         }

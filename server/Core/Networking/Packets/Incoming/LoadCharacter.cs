@@ -26,7 +26,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            var getCharacterData = App._database.GetCharacterByAccountId(AccountId, Id);
+            var getCharacterData = App.Database.GetCharacterByAccountId(AccountId, Id);
 
             if (getCharacterData == null)
                 client.SendPacket(new Response()

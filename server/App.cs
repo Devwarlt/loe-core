@@ -16,26 +16,26 @@ namespace LoESoft.Server
     public class App
     {
         // Assembly's Data
-        public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
+        public static string Name => Assembly.GetExecutingAssembly().GetName().Name;
 
-        public static string _version =>
+        public static string Version =>
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Substring(0,
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Length - 2);
 
         // Log
-        private static Logger _log => LogManager.GetLogger(_name);
+        private static Logger Log => LogManager.GetLogger(Name);
 
-        private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
+        private static string RollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
         // Settings
-        public static ServerSettings _settings => IO.Import<ServerSettings>("../../", "Settings");
+        public static ServerSettings Settings => IO.Import<ServerSettings>("../../", "Settings");
 
         // Database
-        public static Database _database { get; set; }
+        public static Database Database { get; set; }
 
         public static void Main(string[] args)
         {
-            Console.Title = $"{_name} - Build: {_version}";
+            Console.Title = $"{Name} - Build: {Version}";
 
             var config = new LoggingConfiguration();
             var developerLog = new ColoredConsoleTarget()
@@ -56,14 +56,14 @@ namespace LoESoft.Server
 
             LogManager.Configuration = config;
 
-            RollbarLocator.RollbarInstance.Configure(new RollbarConfig(_rollbarId));
+            RollbarLocator.RollbarInstance.Configure(new RollbarConfig(RollbarId));
 
             Info("Game Server is loading...");
 
             try
             {
-                _database = new Database();
-                _database.Connect();
+                Database = new Database();
+                Database.Connect();
 
                 var manager = new WorldManager();
                 manager.BeginUpdate();
@@ -76,7 +76,7 @@ namespace LoESoft.Server
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape)
                     ;
 
-                _database.Disconnect();
+                Database.Disconnect();
 
                 connection.EndAccept();
 
@@ -101,13 +101,13 @@ namespace LoESoft.Server
             }
         }
 
-        public static void Info(string data) => _log.Info(data);
+        public static void Info(string data) => Log.Info(data);
 
-        public static void Warn(string data) => _log.Warn(data);
+        public static void Warn(string data) => Log.Warn(data);
 
         public static void Error(Exception e, string data = null)
         {
-            _log.Error($"{data}{(data == null ? "" : "\n")}{e.ToString()}");
+            Log.Error($"{data}{(data == null ? "" : "\n")}{e.ToString()}");
 
 #if DEBUG
             // Rollbar error analytics for developers only.

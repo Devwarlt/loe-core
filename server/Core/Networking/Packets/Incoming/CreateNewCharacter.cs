@@ -59,7 +59,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            if (App._database.CreateNewCharacter(AccountId, World, Name))
+            if (App.Database.CreateNewCharacter(AccountId, World, Name))
                 client.SendPacket(new Response()
                 {
                     From = "CreateNewCharacter",
