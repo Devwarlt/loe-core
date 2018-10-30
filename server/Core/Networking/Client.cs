@@ -15,7 +15,6 @@ namespace LoESoft.Server.Core.Networking
         public int Id { get; set; }
         public Account Account { get; set; }
         public Socket TcpSocket { get; set; }
-        public UdpClient UdpClient { get; set; }
         public NetworkControl NetworkControl { get; set; }
         public string IpAddress { get; set; }
         public WorldManager Manager { get; private set; }
@@ -29,7 +28,7 @@ namespace LoESoft.Server.Core.Networking
 
             GameServer.Info($"Client with IP '{IpAddress}' has connected!");
 
-            NetworkControl = new NetworkControl(this, TcpSocket, UdpClient);
+            NetworkControl = new NetworkControl(this, TcpSocket);
             NetworkControl.ReceivePacket();
         }
 

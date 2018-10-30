@@ -10,10 +10,9 @@ namespace LoESoft.Server.Core.Networking
 {
     public class ConnectionListener
     {
-        public static IPEndPoint TcpEndPoint = new IPEndPoint(IPAddress.Any, 7171);
-        public static IPEndPoint UdpEndPoint = new IPEndPoint(IPAddress.Any, 7271);
-
         public static ConcurrentDictionary<int, Client> Clients = new ConcurrentDictionary<int, Client>();
+
+        private IPEndPoint TcpEndPoint => new IPEndPoint(IPAddress.Any, 7171);
 
         private WorldManager Manager { get; set; }
 
@@ -49,8 +48,7 @@ namespace LoESoft.Server.Core.Networking
                             var client = new Client(Manager)
                             {
                                 Id = Interlocked.Increment(ref Client.LatestId),
-                                TcpSocket = tcpSocket,
-                                UdpClient = new UdpClient(tcpSocket.RemoteEndPoint as IPEndPoint)
+                                TcpSocket = tcpSocket
                             };
 
                             if (Clients.TryAdd(client.Id, client))

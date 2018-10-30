@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
@@ -19,18 +18,16 @@ namespace LoESoft.Server.Core.Networking
         public static int BUFFER_SIZE => ushort.MaxValue + 1;
 
         public Socket TcpSocket { get; set; }
-        public UdpClient UdpClient { get; set; }
         public Client Client { get; set; }
 
         private byte[] ReceiveBuffer { get; set; }
         private byte[] SendBuffer { get; set; }
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
 
-        public NetworkControl(Client client, Socket tcpSocket, UdpClient udpClient)
+        public NetworkControl(Client client, Socket tcpSocket)
         {
             Client = client;
             TcpSocket = tcpSocket;
-            UdpClient = udpClient;
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
@@ -89,26 +86,6 @@ namespace LoESoft.Server.Core.Networking
                 catch (JsonReaderException) { }
                 catch (NullReferenceException) { }
             }, null);
-
-            UdpClient.BeginReceive(result =>
-            {
-                try
-                {
-                    var endPoint = (IPEndPoint) result.AsyncState;
-                    var buffer = UdpClient.EndReceive(result, ref endPoint);
-                    var data = Encoding.UTF8.GetString(buffer);
-                    var packetData = JsonConvert.DeserializeObject<PacketData>(data);
-
-                    GetIncomingPacket(packetData).Handle(Client);
-
-                    GameServer.Warn($"New packet received! Packet: {packetData.PacketID}");
-
-                    ReceivePacket();
-                }
-                catch (JsonReaderException) { }
-                catch (NullReferenceException) { }
-                catch (ObjectDisposedException) { }
-            }, ConnectionListener.UdpEndPoint);
         }
 
         private void SetupIncomingPackets()
@@ -147,8 +124,6 @@ namespace LoESoft.Server.Core.Networking
             Client.Player?.Dispose();
             Client.TcpSocket?.Close();
             Client.TcpSocket?.Dispose();
-            Client.UdpClient?.Close();
-            Client.UdpClient?.Dispose();
 
             GameServer.Info($"Client ID {Client.Id} has left.");
         }
