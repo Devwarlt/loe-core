@@ -1,7 +1,6 @@
 ﻿using LoESoft.Client.Assets.Xml.Structure;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.XPath;
 using static LoESoft.Client.Assets.Xml.Structure.XmlContent;
 
@@ -23,33 +22,37 @@ namespace LoESoft.Client.Assets
         private static void LoadContent(string name)
         {
             //process through the xml file...
-            foreach(var elem in XmlLoader.LoadAsset(name).XPathSelectElements("//Object"))
+            foreach (var elem in XmlLoader.LoadAsset(name).XPathSelectElements("//Object"))
             {
                 XmlContent content;
 
-                switch((ContentType)int.Parse(elem.Attribute("type").Value))
+                switch ((ContentType) int.Parse(elem.Attribute("type").Value))
                 {
                     case ContentType.Players:
                         {
                             content = new PlayersContent(elem);
-                            PlayersXml.Add(content.Id, (PlayersContent)content);
+                            PlayersXml.Add(content.Id, (PlayersContent) content);
                         }
                         break;
+
                     case ContentType.Objects:
                         {
                             content = new ObjectsContent(elem);
-                            ObjectsXml.Add(content.Id, (ObjectsContent)content); 
+                            ObjectsXml.Add(content.Id, (ObjectsContent) content);
                         }
                         break;
+
                     case ContentType.Items:
                         {
                             content = new ItemsContent(elem);
-                            ItemsXml.Add(content.Id, (ItemsContent)content);
-                        } break;
+                            ItemsXml.Add(content.Id, (ItemsContent) content);
+                        }
+                        break;
+
                     case ContentType.Tiles:
                         {
                             content = new TilesContent(elem);
-                            TilesXml.Add(content.Id, (TilesContent)content);
+                            TilesXml.Add(content.Id, (TilesContent) content);
                         }
                         break;
                 }
@@ -62,7 +65,6 @@ namespace LoESoft.Client.Assets
 
             return spriteSet.GetSprite(content.Texture.ImageIndex.Item1, content.Texture.ImageIndex.Item2);
         }
-
 
         public static List<Texture2D> GetAnimatedSpriteFromContent(XmlContent content)
         {

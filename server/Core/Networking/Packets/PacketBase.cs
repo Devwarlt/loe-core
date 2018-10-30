@@ -14,7 +14,8 @@ namespace LoESoft.Server.Core.Networking.Packets
             var arr = GetType().GetProperties();
             for (var i = 0; i < arr.Length; i++)
             {
-                if (i != 0) ret.Append(",\n");
+                if (i != 0)
+                    ret.Append(",\n");
                 ret.AppendFormat("\t{0}: {1}", arr[i].Name, arr[i].GetValue(this, null));
             }
             ret.Append("\n}");

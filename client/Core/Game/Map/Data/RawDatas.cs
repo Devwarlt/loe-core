@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LoESoft.Client.Core.Game.Map.Data
+﻿namespace LoESoft.Client.Core.Game.Map.Data
 {
     public class RawData
     {
@@ -12,16 +6,25 @@ namespace LoESoft.Client.Core.Game.Map.Data
 
         public RawData() => Data = new string[] { };
     }
+
     public class RawMapData : RawData
     {
-        public RawMapData() { }
+        public RawMapData()
+        {
+        }
     }
+
     public class RawEntityData : RawData
     {
-        public RawEntityData() { }
+        public RawEntityData()
+        {
+        }
     }
+
     public class RawPlayerData : RawData
     {
-        public RawPlayerData() { }
+        public RawPlayerData()
+        {
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace LoESoft.Client.Assets.Xml.Structure
             Items = 2,
             Tiles = 3
         }
+
         public class XmlTexture
         {
             public bool Animated { get; set; }
@@ -29,10 +30,10 @@ namespace LoESoft.Client.Assets.Xml.Structure
                 );
             }
         }
-        
+
         public XmlContent(XElement elem)
         {
-            Type = (ContentType)(int.Parse(elem.Attribute("type").Value));
+            Type = (ContentType) (int.Parse(elem.Attribute("type").Value));
             Id = int.Parse(elem.Attribute("id").Value);
             Name = elem.Attribute("name").Value;
             Texture = new XmlTexture(elem.Element("Texture"));
@@ -46,18 +47,29 @@ namespace LoESoft.Client.Assets.Xml.Structure
 
     public class PlayersContent : XmlContent
     {
-        public PlayersContent(XElement elem) : base(elem) { }
+        public PlayersContent(XElement elem) : base(elem)
+        {
+        }
     }
+
     public class ObjectsContent : XmlContent
     {
-        public ObjectsContent(XElement elem) : base(elem) { }
+        public ObjectsContent(XElement elem) : base(elem)
+        {
+        }
     }
+
     public class ItemsContent : XmlContent
     {
-        public ItemsContent(XElement elem) : base(elem) { }
+        public ItemsContent(XElement elem) : base(elem)
+        {
+        }
     }
+
     public class TilesContent : XmlContent
     {
-        public TilesContent(XElement elem) : base(elem) { }
+        public TilesContent(XElement elem) : base(elem)
+        {
+        }
     }
 }

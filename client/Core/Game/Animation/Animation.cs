@@ -40,7 +40,7 @@ namespace LoESoft.Client.Core.Game.Animation
 
         public virtual void Update(GameTime gameTime, BasicObject basicObject)
         {
-            Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Timer += (float) gameTime.ElapsedGameTime.TotalSeconds;
 
             if (Timer >= CoolDown)
             {

@@ -37,13 +37,13 @@ namespace LoESoft.Server.Core.Networking
 
         public bool IsConnected => NetworkControl.IsConnected;
 
-        public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
+        public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult) Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
 
-        public void SendSyncPacket(OutgoingPacket outgoingPacket, int timeout) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne(timeout, true);
+        public void SendSyncPacket(OutgoingPacket outgoingPacket, int timeout) => ((IAsyncResult) Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne(timeout, true);
 
-        public void SendSyncPackets(OutgoingPacket[] outgoingPackets) => ((IAsyncResult)Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne();
+        public void SendSyncPackets(OutgoingPacket[] outgoingPackets) => ((IAsyncResult) Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne();
 
-        public void SendSyncPackets(OutgoingPacket[] outgoingPackets, int timeout) => ((IAsyncResult)Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne(timeout, true);
+        public void SendSyncPackets(OutgoingPacket[] outgoingPackets, int timeout) => ((IAsyncResult) Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne(timeout, true);
 
         public void SendPacket(OutgoingPacket outgoingPacket) => NetworkControl.SendPacket(outgoingPacket);
 

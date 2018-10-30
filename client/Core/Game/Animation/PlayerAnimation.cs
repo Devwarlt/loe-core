@@ -25,17 +25,17 @@ namespace LoESoft.Client.Core.Game.Animation
         public override void Update(GameTime gameTime, BasicObject basicObject)
         {
             preDirection = curDirection;
-            curDirection = (((Player)basicObject).CurrentDirection != Player.Direction.None) ?
-                (int)((Player)basicObject).CurrentDirection :
+            curDirection = (((Player) basicObject).CurrentDirection != Player.Direction.None) ?
+                (int) ((Player) basicObject).CurrentDirection :
                 preDirection;
 
             if (curDirection != preDirection)
-                ChangeAnimationType((AnimationType)curDirection);
+                ChangeAnimationType((AnimationType) curDirection);
 
             base.Update(gameTime, basicObject);
         }
 
         public override void Draw(SpriteBatch spriteBatch, BasicObject basicObject)
-            => Frames[(AnimationType)curDirection][CurrentFrame].Draw(spriteBatch, basicObject);
+            => Frames[(AnimationType) curDirection][CurrentFrame].Draw(spriteBatch, basicObject);
     }
 }

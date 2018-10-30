@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.Screens
 {

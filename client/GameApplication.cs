@@ -6,7 +6,6 @@ using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Threading;
 using static LoESoft.Client.Core.Networking.Server;
 
 namespace LoESoft.Client
@@ -41,7 +40,7 @@ namespace LoESoft.Client
         protected override void Initialize()
         {
             base.Initialize();
-            
+
             ScreenManager.DispatchScreen(SplashScreen = new SplashScreen());
 
             GameUser = new GameUser(GetServers[ServerName.LOCAL]);
@@ -51,7 +50,7 @@ namespace LoESoft.Client
             BrmeClient._discordPresence.Details = "Main Menu";
 
             BrmeClient.UpdateRPC();
-            
+
             Loaded = true;
             BrmeClient.Info("Game Client is initializing... OK!");
         }

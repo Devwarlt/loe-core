@@ -33,7 +33,6 @@ namespace LoESoft.Client.Core.Game.Map
                 var data = JsonConvert.DeserializeObject<TileData>(i);
                 tiles.Add(new Tile(data.X, data.Y, data.Id));
             }
-            
 
             foreach (var i in JsonConvert.DeserializeObject<RawEntityData>(entitydata).Data)
                 entities.Add(new BasicObject(Color.Red)

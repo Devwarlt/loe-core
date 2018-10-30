@@ -1,5 +1,4 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using LoESoft.Server.Core.World.Map;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
@@ -20,11 +19,24 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         {
             switch (Direction)
             {
-                case 1: RepositionPlayer(client, client.Player.X, client.Player.Y - 1); return;
-                case 2: RepositionPlayer(client, client.Player.X, client.Player.Y + 1); return;
-                case 3: RepositionPlayer(client, client.Player.X - 1, client.Player.Y); return;
-                case 4: RepositionPlayer(client, client.Player.X + 1 , client.Player.Y); return;
-                default: return;
+                case 1:
+                    RepositionPlayer(client, client.Player.X, client.Player.Y - 1);
+                    return;
+
+                case 2:
+                    RepositionPlayer(client, client.Player.X, client.Player.Y + 1);
+                    return;
+
+                case 3:
+                    RepositionPlayer(client, client.Player.X - 1, client.Player.Y);
+                    return;
+
+                case 4:
+                    RepositionPlayer(client, client.Player.X + 1, client.Player.Y);
+                    return;
+
+                default:
+                    return;
             }
         }
 
@@ -36,7 +48,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (client.Player == null)
                 return;
-            
+
             if (client.Manager.Map.IsValidChunk(newX, newY))
             {
                 client.Player.X = newX;

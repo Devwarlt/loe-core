@@ -51,7 +51,7 @@ namespace LoESoft.Client.Core.Screens
                 }
                 else
                     new TextDisplay(DrawHelper.CenteredPosition(GameApplication.WIDTH,
-                        (int)TextDisplay.MeasureString("Unable To Connect The Server!", 30).X),
+                        (int) TextDisplay.MeasureString("Unable To Connect The Server!", 30).X),
                         400, "Unable To Connect The Server!", 30).Draw(spriteBatch);
             }
             catch (InvalidOperationException) { }

@@ -5,6 +5,7 @@
         public int Size { get; set; }
 
         private TextDisplay _textDisplay;
+
         public TextDisplay TextDisplay
         {
             get => _textDisplay;
@@ -15,7 +16,7 @@
                 Height = _textDisplay.Height;
             }
         }
-        
+
         public TextButton(string text, int size)
             : base(0, 0, 0, 0)
         {

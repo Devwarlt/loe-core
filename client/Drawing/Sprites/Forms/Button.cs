@@ -14,8 +14,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         {
             NameText = new TextDisplay(5, 5, name);
             NameText.IsEventApplicable = false;
-            Width = (int)TextDisplay.MeasureString(name).X + 10;
-            Height = (int)TextDisplay.MeasureString(name).Y + 10;
+            Width = (int) TextDisplay.MeasureString(name).X + 10;
+            Height = (int) TextDisplay.MeasureString(name).Y + 10;
             AddChild(NameText);
         }
 

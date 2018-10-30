@@ -7,7 +7,7 @@ namespace LoESoft.Client.Drawing.Events
     public partial class EventsHandler
     {
         protected List<char> GetPressedKeys()
-        { 
+        {
             var oldPressedKeys = previousKeyBoard.GetPressedKeys();
             var keys = new List<char>();
 

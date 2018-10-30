@@ -34,6 +34,5 @@ namespace LoESoft.Client.Assets
 
         public static void AddImage(string file) =>
             Images.Add(file, AssetLoader.LoadAsset<Texture2D>("images/" + file));
-        
     }
 }

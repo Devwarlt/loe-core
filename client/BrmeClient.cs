@@ -92,7 +92,8 @@ namespace LoESoft.Client
 
                 Warn("Press 'ESC' to close...");
 
-                while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
+                while (Console.ReadKey(true).Key != ConsoleKey.Escape)
+                    ;
 
                 Environment.Exit(0);
             }

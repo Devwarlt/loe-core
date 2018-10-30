@@ -24,12 +24,23 @@ namespace LoESoft.Client.Drawing.Events
 
             switch (e)
             {
-                case Event.CLICKLEFT: return HandleMouseClickLeft(node);
-                case Event.CLICKRIGT: return HandleMouseClickRight(node);
-                case Event.MOUSEOVER: return HandleMouseOver(node);
-                case Event.MOUSEOUT: return HandleMouseOut(node);
-                case Event.CLICKOUTLEFT: return HandleClickOutLeft(node);
-                default: return false;
+                case Event.CLICKLEFT:
+                    return HandleMouseClickLeft(node);
+
+                case Event.CLICKRIGT:
+                    return HandleMouseClickRight(node);
+
+                case Event.MOUSEOVER:
+                    return HandleMouseOver(node);
+
+                case Event.MOUSEOUT:
+                    return HandleMouseOut(node);
+
+                case Event.CLICKOUTLEFT:
+                    return HandleClickOutLeft(node);
+
+                default:
+                    return false;
             }
         }
 
@@ -40,9 +51,11 @@ namespace LoESoft.Client.Drawing.Events
 
             switch (e)
             {
-                case Event.GETPRESSEDKEYS: return GetPressedKeys();
+                case Event.GETPRESSEDKEYS:
+                    return GetPressedKeys();
                 //case Event.GETPRESSEDKEYSHOLDABLE: return GetPressedKeysHoldable();
-                default: return null;
+                default:
+                    return null;
             }
         }
 

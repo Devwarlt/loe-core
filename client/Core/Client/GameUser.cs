@@ -22,13 +22,13 @@ namespace LoESoft.Client.Core.Client
         /// This method block current thread work until action is completed synchronously or when timeout in milliseconds is declared.
         /// </summary>
         /// <param name="outgoingPacket"></param>
-        public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
+        public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult) Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
 
-        public void SendSyncPacket(OutgoingPacket outgoingPacket, int timeout) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne(timeout, true);
+        public void SendSyncPacket(OutgoingPacket outgoingPacket, int timeout) => ((IAsyncResult) Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne(timeout, true);
 
-        public void SendSyncPackets(OutgoingPacket[] outgoingPackets) => ((IAsyncResult)Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne();
+        public void SendSyncPackets(OutgoingPacket[] outgoingPackets) => ((IAsyncResult) Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne();
 
-        public void SendSyncPackets(OutgoingPacket[] outgoingPackets, int timeout) => ((IAsyncResult)Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne(timeout, true);
+        public void SendSyncPackets(OutgoingPacket[] outgoingPackets, int timeout) => ((IAsyncResult) Task.Run(() => SendPackets(outgoingPackets))).AsyncWaitHandle.WaitOne(timeout, true);
 
         /// <summary>
         /// Regular send packet method.

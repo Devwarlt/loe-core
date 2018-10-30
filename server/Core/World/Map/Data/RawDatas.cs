@@ -22,18 +22,25 @@ namespace LoESoft.Server.Core.World.Map.Data
             Data = dataList.ToArray();
         }
     }
+
     public class RawMapData : RawData
     {
-        public RawMapData() : base() { }
+        public RawMapData() : base()
+        {
+        }
     }
 
     public class RawEntityData : RawData
     {
-        public RawEntityData() : base() { }
+        public RawEntityData() : base()
+        {
+        }
     }
 
     public class RawPlayerData : RawData
     {
-        public RawPlayerData() : base() { }
+        public RawPlayerData() : base()
+        {
+        }
     }
 }

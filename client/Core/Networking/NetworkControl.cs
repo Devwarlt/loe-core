@@ -142,7 +142,8 @@ namespace LoESoft.Client.Core.Networking
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None,
                     (IAsyncResult result) =>
                     {
-                        try { TcpSocket.EndSend(result); }
+                        try
+                        { TcpSocket.EndSend(result); }
                         catch (SocketException) { }
                     }, null);
             }
@@ -191,7 +192,7 @@ namespace LoESoft.Client.Core.Networking
 
             foreach (var type in Assembly.GetAssembly(typeof(IncomingPacket)).GetTypes().Where(_ => _.IsClass && !_.IsAbstract && _.IsSubclassOf(typeof(IncomingPacket))))
             {
-                var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
+                var incomingMessage = (IncomingPacket) Activator.CreateInstance(type);
 
                 IncomingPackets.Add(incomingMessage.PacketID, incomingMessage);
             }
@@ -207,7 +208,7 @@ namespace LoESoft.Client.Core.Networking
             if (!IncomingPackets.ContainsKey(packetID))
                 throw new Exception($"Unknown IncomingPacket: {packetID}");
 
-            return (IncomingPacket)JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
+            return (IncomingPacket) JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
         }
 
         public void Disconnect()

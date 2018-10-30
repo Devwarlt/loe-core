@@ -18,11 +18,21 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
         {
             switch (From)
             {
-                case "Login": LoginHandler(); break; // TODO.
-                case "Register": RegisterHandler(); break; // TODO.
-                case "CreateNewCharacter": CreateNewCharacterHandler(); break; // TODO.
-                case "LoadCharacter": LoadCharacterHandler(); break; // TODO.
-                default: BrmeClient.Info($"New server response detected!\n{ToString()}"); break;
+                case "Login":
+                    LoginHandler();
+                    break; // TODO.
+                case "Register":
+                    RegisterHandler();
+                    break; // TODO.
+                case "CreateNewCharacter":
+                    CreateNewCharacterHandler();
+                    break; // TODO.
+                case "LoadCharacter":
+                    LoadCharacterHandler();
+                    break; // TODO.
+                default:
+                    BrmeClient.Info($"New server response detected!\n{ToString()}");
+                    break;
             }
         }
 

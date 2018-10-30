@@ -48,7 +48,8 @@ namespace LoESoft.Server.Core.Networking
             {
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, result =>
                 {
-                    try { TcpSocket.EndAccept(result); }
+                    try
+                    { TcpSocket.EndAccept(result); }
                     catch (SocketException) { }
                     catch (ArgumentException) { }
                 }, null);
@@ -93,7 +94,7 @@ namespace LoESoft.Server.Core.Networking
             {
                 try
                 {
-                    var endPoint = (IPEndPoint)result.AsyncState;
+                    var endPoint = (IPEndPoint) result.AsyncState;
                     var buffer = UdpClient.EndReceive(result, ref endPoint);
                     var data = Encoding.UTF8.GetString(buffer);
                     var packetData = JsonConvert.DeserializeObject<PacketData>(data);
@@ -118,7 +119,7 @@ namespace LoESoft.Server.Core.Networking
             {
                 try
                 {
-                    var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
+                    var incomingMessage = (IncomingPacket) Activator.CreateInstance(type);
                     IncomingPackets.Add(incomingMessage.PacketID, incomingMessage);
                 }
                 catch (ArgumentException) { }
@@ -137,7 +138,7 @@ namespace LoESoft.Server.Core.Networking
             if (!IncomingPackets.ContainsKey(packetID))
                 throw new Exception($"Unknown IncomingPacket: {packetID}");
 
-            return (IncomingPacket)JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
+            return (IncomingPacket) JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
         }
 
         public void Disconnect()

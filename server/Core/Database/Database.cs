@@ -32,12 +32,12 @@ namespace LoESoft.Server.Core.Database
                     while (row.Read())
                         return new Account()
                         {
-                            Id = (long)row["id"],
+                            Id = (long) row["id"],
                             Name = name,
                             Password = password,
-                            Rank = (int)row["rank"],
-                            Token = (string)row["token"],
-                            Creation = (string)row["creation"]
+                            Rank = (int) row["rank"],
+                            Token = (string) row["token"],
+                            Creation = (string) row["creation"]
                         };
             }
 
@@ -57,11 +57,11 @@ namespace LoESoft.Server.Core.Database
                         return new Character()
                         {
                             Id = characterId,
-                            World = (int)row["world"],
-                            Name = (string)row["name"],
-                            Class = (int)row["class"],
-                            Position = JsonConvert.DeserializeObject<Position>((string)row["position"]),
-                            Creation = (string)row["creation"]
+                            World = (int) row["world"],
+                            Name = (string) row["name"],
+                            Class = (int) row["class"],
+                            Position = JsonConvert.DeserializeObject<Position>((string) row["position"]),
+                            Creation = (string) row["creation"]
                         };
             }
 
@@ -135,7 +135,7 @@ namespace LoESoft.Server.Core.Database
                     while (row.Read())
                     {
                         cmd.CommandText = "INSERT INTO depots (character) VALUES (@character);";
-                        cmd.Parameters.AddWithValue("@character", (long)row["id"]);
+                        cmd.Parameters.AddWithValue("@character", (long) row["id"]);
                         return cmd.ExecuteNonQuery() > 0;
                     }
             }

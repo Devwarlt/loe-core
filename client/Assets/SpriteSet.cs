@@ -60,7 +60,6 @@ namespace LoESoft.Client.Assets
             }
         }
 
-
         public static SpriteSet LoadSet(string assetName, int maxX = 16, int maxY = 16) =>
             new SpriteSet(assetName, maxX, maxY);
     }

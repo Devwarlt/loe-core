@@ -3,7 +3,6 @@ using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Core.World.Map.Data;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace LoESoft.Server.Core.World
@@ -29,17 +28,18 @@ namespace LoESoft.Server.Core.World
 
         public void Update()
             => ChunkMap.Where(chunk => chunk.IsActive).Select(chunk => { chunk.Update(); return chunk; }).ToList();
-        
+
         public bool IsValidChunk(int x, int y)
             => ((x >= 0 && x < 16 * 16) && (y >= 0 && y < 16 * 16));
-        
+
         #region "Get data"
 
         public string GetPlayerData(Player player)
         {
             var dat = new RawPlayerData();
-            
-            ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)).Select(player => {
+
+            ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)).Select(player =>
+            {
                 dat.SetData<PlayerData>(player.GetPlayerData);
                 return player;
             }).ToList();
@@ -51,7 +51,8 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawEntityData();
 
-            ChunkMap[player.ChunkX, player.ChunkY].Entities.Select(entity => {
+            ChunkMap[player.ChunkX, player.ChunkY].Entities.Select(entity =>
+            {
                 dat.SetData<EntityData>(entity.GetData);
                 return entity;
             }).ToList();
@@ -63,11 +64,12 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawMapData();
 
-            ChunkMap[player.ChunkX, player.ChunkY].Tiles.Select(tile => {
+            ChunkMap[player.ChunkX, player.ChunkY].Tiles.Select(tile =>
+            {
                 dat.SetData<TileData>(tile);
                 return tile;
             }).ToList();
-            
+
             return JsonConvert.SerializeObject(dat);
         }
 

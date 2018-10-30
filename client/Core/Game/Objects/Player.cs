@@ -16,8 +16,8 @@ namespace LoESoft.Client.Core.Game.Objects
             IsMoving = false;
             _animation = new PlayerAnimation();
             GameUser = gameuser;
-            DistinationX = (int)X;
-            DistinationY = (int)Y;
+            DistinationX = (int) X;
+            DistinationY = (int) Y;
         }
 
         public override void Update(GameTime gameTime)
@@ -56,7 +56,7 @@ namespace LoESoft.Client.Core.Game.Objects
             =>
             GameUser.SendPacket(new ClientMove()
             {
-                Direction = (int)CurrentDirection,
+                Direction = (int) CurrentDirection,
                 Player = this
             });
 

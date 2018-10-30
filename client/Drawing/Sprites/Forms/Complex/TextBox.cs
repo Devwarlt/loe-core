@@ -71,7 +71,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
                 return;
             }
 
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _timer += (float) gameTime.ElapsedGameTime.TotalSeconds;
 
             if (_keyEvents.HandleBackSpace(gameTime))
             {

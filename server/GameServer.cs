@@ -73,7 +73,8 @@ namespace LoESoft.Server
 
                 Info("Game Server is loading... OK!");
 
-                while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
+                while (Console.ReadKey(true).Key != ConsoleKey.Escape)
+                    ;
 
                 _database.Disconnect();
 
@@ -93,7 +94,8 @@ namespace LoESoft.Server
 
                 Warn("Press 'ESC' to close...");
 
-                while (Console.ReadKey(true).Key != ConsoleKey.Escape) ;
+                while (Console.ReadKey(true).Key != ConsoleKey.Escape)
+                    ;
 
                 Environment.Exit(-1);
             }
