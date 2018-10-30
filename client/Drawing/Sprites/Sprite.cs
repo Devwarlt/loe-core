@@ -34,7 +34,7 @@ namespace LoESoft.Client.Drawing.Sprites
 
             var color = new Color[w * h];
 
-            texture.GetData<Color>(color);
+            texture.GetData(color);
 
             for (var i = 0; i < w * h; i++)
             {
