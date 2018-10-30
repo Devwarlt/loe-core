@@ -10,26 +10,26 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
 
         public event Action OnPanelExit
         {
-            add { _panelExit += value; }
-            remove { _panelExit -= value; }
+            add { _onPanelExit += value; }
+            remove { _onPanelExit -= value; }
         }
 
-        private Action _panelExit;
+        private Action _onPanelExit;
 
-        protected ExitButton _exitBtn;
-        protected Mask _grayMask;
+        protected ExitButton ExitBtn;
+        protected Mask GrayMask;
 
         public Panel(int x, int y, string title, int width = 400, int height = 400, RGBColor color = null)
             : base(x, y, width, height, color)
         {
             Title = new TextDisplay((width / 2) - ((int) TextDisplay.MeasureString(title).X / 2), 5, title);
-            _exitBtn = new ExitButton(width - 23, 3, 20, 20);
-            _exitBtn.Exit += OnExit;
+            ExitBtn = new ExitButton(width - 23, 3, 20, 20);
+            ExitBtn.Exit += OnExit;
 
             AddChild(Title);
-            AddChild(_exitBtn);
+            AddChild(ExitBtn);
         }
 
-        public virtual void OnExit() => _panelExit?.Invoke();
+        public virtual void OnExit() => _onPanelExit?.Invoke();
     }
 }

@@ -14,7 +14,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public Player(GameUser gameuser) : base(Color.White)
         {
             IsMoving = false;
-            _animation = new PlayerAnimation();
+            Animation = new PlayerAnimation();
             GameUser = gameuser;
             DistinationX = (int) X;
             DistinationY = (int) Y;
@@ -24,10 +24,10 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             DetectMovement();
             HandleMovement(1f / gameTime.ElapsedGameTime.Milliseconds);
-            _animation.Update(gameTime, this);
+            Animation.Update(gameTime, this);
         }
 
-        public override void Draw(SpriteBatch spriteBatch) => _animation.Draw(spriteBatch, this);
+        public override void Draw(SpriteBatch spriteBatch) => Animation.Draw(spriteBatch, this);
 
         #region "Fields"
 
@@ -46,7 +46,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public Direction CurrentDirection { get; private set; }
         public bool IsMoving { get; private set; }
 
-        private PlayerAnimation _animation;
+        private PlayerAnimation Animation;
 
         #endregion "Fields"
 

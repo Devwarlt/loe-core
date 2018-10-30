@@ -12,29 +12,29 @@ namespace LoESoft.Client
     public static class App
     {
         // Assembly's Data
-        public static string _name => Assembly.GetExecutingAssembly().GetName().Name;
+        public static string Name => Assembly.GetExecutingAssembly().GetName().Name;
 
-        public static string _version =>
+        public static string Version =>
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Substring(0,
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Length - 2);
 
         // Log
-        private static Logger _log => LogManager.GetLogger(_name);
+        private static Logger Log => LogManager.GetLogger(Name);
 
         // Unique IDs
-        private static string _rollbarId => "ca02c5d9fb834c33880af31a6407fa18";
+        private static string RollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
-        private static string _brmeRpcId => "483698369559003156";
+        private static string RpcId => "483698369559003156";
 
         // Discord
-        public static DiscordClient _discordClient { get; set; }
+        public static DiscordClient DscordClient { get; set; }
 
-        public static RichPresence _discordPresence { get; set; }
+        public static RichPresence DiscordRichPresence { get; set; }
 
         [STAThread]
         public static void Main(string[] args)
         {
-            Console.Title = $"{_name} - Build: {_version}";
+            Console.Title = $"{Name} - Build: {Version}";
 
             var config = new LoggingConfiguration();
             var developerLog = new ColoredConsoleTarget()
@@ -55,12 +55,12 @@ namespace LoESoft.Client
 
             LogManager.Configuration = config;
 
-            RollbarLocator.RollbarInstance.Configure(new RollbarConfig(_rollbarId));
+            RollbarLocator.RollbarInstance.Configure(new RollbarConfig(RollbarId));
 
             Info("Game Client is loading...");
 
-            _discordClient = new DiscordClient(_brmeRpcId);
-            _discordPresence = new RichPresence()
+            DscordClient = new DiscordClient(RpcId);
+            DiscordRichPresence = new RichPresence()
             {
                 Timestamps = new Timestamps() { Start = DateTime.UtcNow },
                 Assets = new DiscordRPC.Assets()
@@ -74,7 +74,7 @@ namespace LoESoft.Client
 
             try
             {
-                _discordClient.SetPresence(_discordPresence);
+                DscordClient.SetPresence(DiscordRichPresence);
 
                 using (var game = new GameApplication())
                     game.Run();
@@ -87,8 +87,8 @@ namespace LoESoft.Client
 
                 Thread.Sleep(100);
 
-                _discordClient.ClearPresence();
-                _discordClient.Dispose();
+                DscordClient.ClearPresence();
+                DscordClient.Dispose();
 
                 Warn("Press 'ESC' to close...");
 
@@ -99,15 +99,15 @@ namespace LoESoft.Client
             }
         }
 
-        public static void UpdateRPC() => _discordClient.SetPresence(_discordPresence);
+        public static void UpdateRPC() => DscordClient.SetPresence(DiscordRichPresence);
 
-        public static void Info(string data) => _log.Info(data);
+        public static void Info(string data) => Log.Info(data);
 
-        public static void Warn(string data) => _log.Warn(data);
+        public static void Warn(string data) => Log.Warn(data);
 
         public static void Error(Exception e, string data = null)
         {
-            _log.Error($"{data}{(data == null ? "" : "\n")}{e.ToString()}");
+            Log.Error($"{data}{(data == null ? "" : "\n")}{e.ToString()}");
 
 #if DEBUG
             // Rollbar error analytics for developers only.

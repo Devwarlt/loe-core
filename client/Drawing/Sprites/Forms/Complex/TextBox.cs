@@ -31,9 +31,9 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
         public TextDisplay TitleText { get; private set; }
         public TextDisplay TextField { get; private set; }
 
-        private FilledRectangle _selectedMarket;
+        private FilledRectangle SelectedMarket;
 
-        protected EventsHandler _keyEvents;
+        protected EventsHandler KeyEvents;
 
         public TextBox(int x, int y, int width = 100, string name = "", int tsize = 12, int limit = 16, bool encoded = false)
             : base(x, y, width, TextDisplay.GetHeight(12) + 4, new RGBColor(255, 255, 255))
@@ -42,24 +42,24 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             Selected = false;
             Encoded = encoded;
 
-            _keyEvents = new EventsHandler();
+            KeyEvents = new EventsHandler();
             Text = new StringBuilder();
             TitleText = new TextDisplay(2, -20, name, color: new RGBColor(10, 10, 10));
             TextField = new TextDisplay(2, 2, "", size: tsize, color: new RGBColor(10, 10, 10));
 
-            _selectedMarket = new FilledRectangle(1, 1, 2, Height - 2, new RGBColor(0, 0, 0))
+            SelectedMarket = new FilledRectangle(1, 1, 2, Height - 2, new RGBColor(0, 0, 0))
             {
                 Visible = false
             };
 
-            AddChild(_selectedMarket);
+            AddChild(SelectedMarket);
             AddChild(TitleText);
             AddChild(TextField);
         }
 
         public string GetText => TextField.Text;
 
-        private float _timer = 0f;
+        private float Timer = 0f;
 
         public override void Update(GameTime gameTime)
         {
@@ -67,20 +67,20 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
             if (!Selected)
             {
-                _selectedMarket.Visible = false;
+                SelectedMarket.Visible = false;
                 return;
             }
 
-            _timer += (float) gameTime.ElapsedGameTime.TotalSeconds;
+            Timer += (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (_keyEvents.HandleBackSpace(gameTime))
+            if (KeyEvents.HandleBackSpace(gameTime))
             {
                 if (Text.Length > 0)
                     Text.Length--;
             }
             else
             {
-                _keyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).Where(_ => (Text.Length <= Limit && Selected)).Select(_ =>
+                KeyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).Where(_ => (Text.Length <= Limit && Selected)).Select(_ =>
                 {
                     Text.Append(_.ToString());
 
@@ -90,13 +90,13 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
             TextField.Text = Encoded ? GetEncodedString(Text.ToString()) : Text.ToString();
 
-            if (Selected && _timer > 0.5f)
+            if (Selected && Timer > 0.5f)
             {
-                _selectedMarket.Visible = !_selectedMarket.Visible;
-                _timer = 0f;
+                SelectedMarket.Visible = !SelectedMarket.Visible;
+                Timer = 0f;
             }
 
-            _selectedMarket.X = TextField.Width + 3;
+            SelectedMarket.X = TextField.Width + 3;
         }
 
         private string GetEncodedString(string value)

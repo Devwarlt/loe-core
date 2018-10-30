@@ -46,8 +46,8 @@ namespace LoESoft.Client
             GameUser = new GameUser(GetServers[ServerName.LOCAL]);
             GameUser.Connect();
 
-            App._discordPresence.State = "World: Chicago";
-            App._discordPresence.Details = "Main Menu";
+            App.DiscordRichPresence.State = "World: Chicago";
+            App.DiscordRichPresence.Details = "Main Menu";
 
             App.UpdateRPC();
 
@@ -70,8 +70,8 @@ namespace LoESoft.Client
 
             ScreenManager.OnGameClose += () =>
             {
-                App._discordClient.ClearPresence();
-                App._discordClient.Dispose();
+                App.DscordClient.ClearPresence();
+                App.DscordClient.Dispose();
 
                 Exit();
             };

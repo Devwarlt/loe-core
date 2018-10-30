@@ -25,7 +25,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             set
             {
                 _perLineWidth = value;
-                _textByLine = DetectPerLine(Text);
+                TextByLine = DetectPerLine(Text);
             }
         }
 
@@ -42,7 +42,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
                 _text = value;
 
                 if (PerLineWidth > 0)
-                    _textByLine = DetectPerLine(value);
+                    TextByLine = DetectPerLine(value);
             }
         }
 
@@ -70,7 +70,8 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             if (PerLineWidth != 0)
             {
                 var offset = 0;
-                foreach (var i in _textByLine)
+
+                foreach (var i in TextByLine)
                 {
                     if (Outline) // Test
                     {
@@ -100,7 +101,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             base.Draw(spriteBatch);
         }
 
-        private List<string> _textByLine;
+        private List<string> TextByLine;
 
         public List<string> DetectPerLine(string text)
         {
@@ -113,8 +114,10 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             foreach (var i in text)
             {
                 cWidth += (int) MeasureString(i.ToString(), (int) Size).X;
+
                 if (cWidth >= PerLineWidth)
                     break;
+
                 cSize++;
             }
 

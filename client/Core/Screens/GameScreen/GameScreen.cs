@@ -19,16 +19,16 @@ namespace LoESoft.Client.Core.Screens
 
         public Player TempPlayer { get; set; }
 
-        private GameUser _gameUser = GameApplication.GameUser;
+        private GameUser GameUser = GameApplication.GameUser;
 
         public override void OnScreenCreate()
         {
-            TempPlayer = new Player(_gameUser);
+            TempPlayer = new Player(GameUser);
             PlayerMap = new Map();
-            _gameUser.SendPacket(new Load());
+            GameUser.SendPacket(new Load());
         }
 
-        public override void OnScreenDispatch() => _gameUser.Disconnect();
+        public override void OnScreenDispatch() => GameUser.Disconnect();
 
         public override void Update(GameTime gameTime)
         {
@@ -44,7 +44,7 @@ namespace LoESoft.Client.Core.Screens
                 spriteBatch.Clear();
                 spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetMatrix());
 
-                if (_gameUser.IsConnected)
+                if (GameUser.IsConnected)
                 {
                     PlayerMap.Draw(spriteBatch);
                     TempPlayer.Draw(spriteBatch);

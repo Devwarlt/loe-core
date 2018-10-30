@@ -31,7 +31,7 @@ namespace LoESoft.Client.Drawing.Events
 
         #region "Keys table"
 
-        private readonly Dictionary<Keys, KeyValuePair<char, char>> _keysTable = new Dictionary<Keys, KeyValuePair<char, char>>()
+        private readonly Dictionary<Keys, KeyValuePair<char, char>> KeysTable = new Dictionary<Keys, KeyValuePair<char, char>>()
         {
             { Keys.A, new KeyValuePair<char, char>('a', 'A') },
             { Keys.B, new KeyValuePair<char, char>('b', 'B') },
@@ -96,6 +96,6 @@ namespace LoESoft.Client.Drawing.Events
         #endregion "Keys table"
 
         public char KeysToChar(Keys key, bool shift)
-            => _keysTable.TryGetValue(key, out KeyValuePair<char, char> data) ? shift ? data.Value : data.Key : '\0';
+            => KeysTable.TryGetValue(key, out KeyValuePair<char, char> data) ? shift ? data.Value : data.Key : '\0';
     }
 }
