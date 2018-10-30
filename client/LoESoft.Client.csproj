@@ -137,7 +137,7 @@
     <Compile Include="Drawing\Sprites\Text\TextButton.cs" />
     <Compile Include="Drawing\Sprites\Text\TextDisplay.cs" />
     <Compile Include="GameApplication.cs" />
-    <Compile Include="BrmeClient.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\AudioManager.cs" />
   </ItemGroup>

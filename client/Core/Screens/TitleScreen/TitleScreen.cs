@@ -97,7 +97,7 @@ namespace LoESoft.Client.Core.Screens
             Background.AddChild(ExitButton);
         }
 
-        private void OnClick(object sender, Tuple<string, string> e) => BrmeClient.Info($"Element '{(string) sender}' dispatch '{e.Item2}' from parent '{e.Item1}'.");
+        private void OnClick(object sender, Tuple<string, string> e) => App.Info($"Element '{(string) sender}' dispatch '{e.Item2}' from parent '{e.Item1}'.");
 
         private void _loginPanel_OnPanelExit() => Background.RemoveChild(_maskBlocker);
 
@@ -113,7 +113,7 @@ namespace LoESoft.Client.Core.Screens
 
         private void OnLoginPanel(object sender, EventArgs e)
         {
-            BrmeClient.Warn("Login!");
+            App.Warn("Login!");
 
             Background.AddChild(_maskBlocker);
             Background.AddChild(_loginPanel);

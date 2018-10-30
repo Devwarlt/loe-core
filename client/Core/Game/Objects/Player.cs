@@ -65,7 +65,7 @@ namespace LoESoft.Client.Core.Game.Objects
             if (Keyboard.GetState().GetPressedKeys().SkipWhile(_ => KeysToDirection.Keys.Contains(_) ? false : true).Count() > 0)
             {
                 if (Keyboard.GetState().GetPressedKeys().SkipWhile(_ => KeysToDirection.Keys.Contains(_) ? false : true).Count() > 1)
-                    BrmeClient.Warn("WARN! Do not spam input!");
+                    App.Warn("WARN! Do not spam input!");
 
                 IsMoving = true;
 

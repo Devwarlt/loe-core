@@ -31,7 +31,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     LoadCharacterHandler();
                     break; // TODO.
                 default:
-                    BrmeClient.Info($"New server response detected!\n{ToString()}");
+                    App.Info($"New server response detected!\n{ToString()}");
                     break;
             }
         }

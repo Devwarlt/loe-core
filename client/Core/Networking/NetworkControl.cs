@@ -56,7 +56,7 @@ namespace LoESoft.Client.Core.Networking
 
                         try
                         {
-                            BrmeClient.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
+                            App.Warn($"[Attempt {ConnectionAttempt}/{MAX_CONNECTION_ATTEMPTS}] Trying to connect to {Server}");
 
                             TcpSocket.EndConnect(result);
                         }
@@ -64,21 +64,21 @@ namespace LoESoft.Client.Core.Networking
                         {
                             if (ConnectionAttempt == MAX_CONNECTION_ATTEMPTS)
                             {
-                                BrmeClient.Warn($"Unable to connect to {Server} due max number of invalid attempts reached the limit.");
+                                App.Warn($"Unable to connect to {Server} due max number of invalid attempts reached the limit.");
 
                                 Disconnect();
 
                                 return;
                             }
 
-                            BrmeClient.Warn($"Failed to connect to {Server}. Retrying...");
+                            App.Warn($"Failed to connect to {Server}. Retrying...");
 
                             Connect(Server);
 
                             return;
                         }
 
-                        BrmeClient.Info($"Connected to {Server}.");
+                        App.Info($"Connected to {Server}.");
 
                         Thread.Sleep(250);
 
@@ -103,7 +103,7 @@ namespace LoESoft.Client.Core.Networking
         {
             if (!GameUser.IsConnected)
             {
-                BrmeClient.Warn($"Client isn't connected! Disposing packet {outgoingPacket.PacketID}...");
+                App.Warn($"Client isn't connected! Disposing packet {outgoingPacket.PacketID}...");
                 return;
             }
 
@@ -120,7 +120,7 @@ namespace LoESoft.Client.Core.Networking
                 if (!HandleMovePacket(outgoingPacket as ClientMove))
                     return;
 
-            BrmeClient.Warn($"Sending {outgoingPacket.PacketID}...");
+            App.Warn($"Sending {outgoingPacket.PacketID}...");
 
             try
             {
@@ -161,7 +161,7 @@ namespace LoESoft.Client.Core.Networking
 
                         GetIncomingPacket(packetData).Handle(GameUser);
 
-                        BrmeClient.Warn($"New packet received! Packet: {packetData.PacketID}");
+                        App.Warn($"New packet received! Packet: {packetData.PacketID}");
 
                         ReceivePacket();
                     }
@@ -201,7 +201,7 @@ namespace LoESoft.Client.Core.Networking
             if (Disconnected)
                 return;
 
-            BrmeClient.Info("Client disconnected.");
+            App.Info("Client disconnected.");
 
             Disconnected = true;
 
