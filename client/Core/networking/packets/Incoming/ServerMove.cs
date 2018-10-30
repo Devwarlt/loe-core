@@ -16,10 +16,9 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
             {
                 GameScreen screen = ScreenManager.ActiveScreen as GameScreen;
 
-                if (screen.TempPlayer != null)
+                if (screen.Player != null)
                 {
-                    screen.TempPlayer.DistinationX = X;
-                    screen.TempPlayer.DistinationY = Y;
+                    screen.Player.UserPlayer.SetDistination(X, Y);
 
                     NetworkControl.ReceivedServerMove = true;
                 }

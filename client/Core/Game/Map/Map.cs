@@ -11,7 +11,7 @@ namespace LoESoft.Client.Core.Game.Map
     {
         public List<Tile> Tiles { get; set; }
         public List<BasicObject> Entities { get; set; }
-        public List<BasicObject> Players { get; set; }
+        public List<Player> Players { get; set; }
 
         protected bool initialUpdate = false;
 
@@ -19,13 +19,13 @@ namespace LoESoft.Client.Core.Game.Map
         {
             Tiles = new List<Tile>();
             Entities = new List<BasicObject>();
-            Players = new List<BasicObject>();
+            Players = new List<Player>();
         }
 
         public void Update(string mapdata, string entitydata, string playerdata)
         {
             var entities = new List<BasicObject>();
-            var players = new List<BasicObject>();
+            var players = new List<Player>();
             var tiles = new List<Tile>();
 
             foreach (var i in JsonConvert.DeserializeObject<RawMapData>(mapdata).Data)
@@ -42,10 +42,10 @@ namespace LoESoft.Client.Core.Game.Map
                 });
 
             foreach (var i in JsonConvert.DeserializeObject<RawPlayerData>(playerdata).Data)
-                players.Add(new BasicObject(Color.Green)
+                players.Add(new Player()
                 {
-                    X = JsonConvert.DeserializeObject<PlayerData>(i).X,
-                    Y = JsonConvert.DeserializeObject<PlayerData>(i).Y
+                    DistinationX = JsonConvert.DeserializeObject<PlayerData>(i).X,
+                    DistinationY = JsonConvert.DeserializeObject<PlayerData>(i).Y
                 });
 
             if (Tiles != tiles)

@@ -4,6 +4,7 @@ using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
 using LoESoft.Client.Core.Game.Map;
 using LoESoft.Client.Core.Game.Objects;
+using LoESoft.Client.Core.Game.User;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Text;
@@ -17,13 +18,13 @@ namespace LoESoft.Client.Core.Screens
     {
         public static Map PlayerMap { get; set; }
 
-        public Player TempPlayer { get; set; }
+        public GamePlayer Player { get; set; }
 
         private GameUser GameUser = GameApplication.GameUser;
 
         public override void OnScreenCreate()
         {
-            TempPlayer = new Player(GameUser);
+            Player = new GamePlayer(GameUser);
             PlayerMap = new Map();
             GameUser.SendPacket(new Load());
         }
@@ -32,9 +33,9 @@ namespace LoESoft.Client.Core.Screens
 
         public override void Update(GameTime gameTime)
         {
-            TempPlayer.Update(gameTime);
+            Player.Update(gameTime);
 
-            Camera.SetFocus(TempPlayer);
+            Camera.SetFocus(Player.UserPlayer);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -47,7 +48,7 @@ namespace LoESoft.Client.Core.Screens
                 if (GameUser.IsConnected)
                 {
                     PlayerMap.Draw(spriteBatch);
-                    TempPlayer.Draw(spriteBatch);
+                    Player.Draw(spriteBatch);
                 }
                 else
                     new TextDisplay(DrawHelper.CenteredPosition(GameApplication.WIDTH,

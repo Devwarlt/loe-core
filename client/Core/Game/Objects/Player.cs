@@ -11,18 +11,15 @@ namespace LoESoft.Client.Core.Game.Objects
 {
     public partial class Player : BasicObject
     {
-        public Player(GameUser gameuser) : base(Color.White)
+        public Player() : base(Color.White)
         {
-            IsMoving = false;
             Animation = new PlayerAnimation();
-            GameUser = gameuser;
             DistinationX = (int) X;
             DistinationY = (int) Y;
         }
 
         public override void Update(GameTime gameTime)
         {
-            DetectMovement();
             HandleMovement(1f / gameTime.ElapsedGameTime.Milliseconds);
             Animation.Update(gameTime, this);
         }
@@ -31,7 +28,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         #region "Fields"
 
-        protected Dictionary<Keys, Direction> KeysToDirection = new Dictionary<Keys, Direction>()
+        public static Dictionary<Keys, Direction> KeysToDirection = new Dictionary<Keys, Direction>()
         {
             { Keys.None, Direction.None },
             { Keys.W, Direction.Up }, { Keys.Up, Direction.Up },
@@ -42,41 +39,24 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public int DistinationX { get; set; }
         public int DistinationY { get; set; }
-        public GameUser GameUser { get; private set; }
-        public Direction CurrentDirection { get; private set; }
-        public bool IsMoving { get; private set; }
+
+        public Direction CurrentDirection { get; set; }
+
+        public bool IsMoving
+        {
+            get { return (X != DistinationX && Y != DistinationY); }
+        }
 
         private PlayerAnimation Animation;
 
         #endregion "Fields"
 
         #region "Move"
-
-        private void SendMovePacket()
-            =>
-            GameUser.SendPacket(new ClientMove()
-            {
-                Direction = (int) CurrentDirection,
-                Player = this
-            });
-
-        public void DetectMovement()
+        
+        public void SetDistination(int x, int y)
         {
-            if (Keyboard.GetState().GetPressedKeys().SkipWhile(_ => KeysToDirection.Keys.Contains(_) ? false : true).Count() > 0)
-            {
-                if (Keyboard.GetState().GetPressedKeys().SkipWhile(_ => KeysToDirection.Keys.Contains(_) ? false : true).Count() > 1)
-                    App.Warn("WARN! Do not spam input!");
-
-                IsMoving = true;
-
-                CurrentDirection = KeysToDirection[Keyboard.GetState().GetPressedKeys().SkipWhile(_ => KeysToDirection.Keys.Contains(_) ? false : true).First()];
-
-                if (DistinationX == X && DistinationY == Y)
-                    SendMovePacket();
-            }
-
-            if (Keyboard.GetState().GetPressedKeys().SkipWhile(_ => KeysToDirection.Keys.Contains(_) ? false : true).Count() == 0 && DistinationX == X && DistinationY == Y)
-                ResetMovement();
+            DistinationX = x;
+            DistinationY = y;
         }
 
         public void HandleMovement(float dt)
@@ -97,8 +77,6 @@ namespace LoESoft.Client.Core.Game.Objects
                     Y -= dt;
             }
         }
-
-        private void ResetMovement() => IsMoving = false;
 
         #endregion "Move"
     }
