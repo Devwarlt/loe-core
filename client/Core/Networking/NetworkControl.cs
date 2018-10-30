@@ -18,10 +18,11 @@ namespace LoESoft.Client.Core.Networking
 {
     public class NetworkControl
     {
+        public static bool ReceivedServerMove = true;
+
         public const int MAX_CONNECTION_ATTEMPTS = 5;
 
         public Socket TcpSocket { get; set; }
-        public UdpClient UdpClient { get; set; }
         public Server Server { get; set; }
 
         private const int BUFFER_SIZE = ushort.MaxValue + 1;
@@ -36,13 +37,7 @@ namespace LoESoft.Client.Core.Networking
         public NetworkControl(GameUser gameUser)
         {
             GameUser = gameUser;
-            TcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-            {
-                NoDelay = true,
-                UseOnlyOverlappedIO = true,
-                Ttl = 112
-            };
-            UdpClient = new UdpClient();
+            TcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
         public bool IsConnected => TcpSocket.Connected;
@@ -91,18 +86,14 @@ namespace LoESoft.Client.Core.Networking
                     }
                     catch (SocketException) { }
                 }, null);
-
-            UdpClient.Connect(Server.UdpEndPoint);
         }
-
-        public static bool _recievedServerMove = true;
 
         // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
         private bool HandleMovePacket(ClientMove move)
         {
-            if (_recievedServerMove == true)
+            if (ReceivedServerMove == true)
             {
-                _recievedServerMove = false;
+                ReceivedServerMove = false;
                 return true;
             }
             return false;
@@ -130,12 +121,6 @@ namespace LoESoft.Client.Core.Networking
                     return;
 
             BrmeClient.Warn($"Sending {outgoingPacket.PacketID}...");
-
-            if (outgoingPacket is IUdpPacket)
-            {
-                UdpClient.BeginSend(buffer, buffer.Length, (IAsyncResult result) => UdpClient.EndSend(result), null);
-                return;
-            }
 
             try
             {
@@ -222,11 +207,8 @@ namespace LoESoft.Client.Core.Networking
 
             ScreenManager.DispatchScreen(new SplashScreen());
 
-            TcpSocket.Close();
-            TcpSocket.Dispose();
-
-            UdpClient.Close();
-            UdpClient.Dispose();
+            TcpSocket?.Close();
+            TcpSocket?.Dispose();
         }
     }
 }

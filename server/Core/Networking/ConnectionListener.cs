@@ -23,8 +23,7 @@ namespace LoESoft.Server.Core.Networking
             TcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
                 NoDelay = true,
-                UseOnlyOverlappedIO = true,
-                Ttl = 112
+                UseOnlyOverlappedIO = true
             };
             TcpSocket.Bind(TcpEndPoint);
             TcpSocket.Listen(0xFF);

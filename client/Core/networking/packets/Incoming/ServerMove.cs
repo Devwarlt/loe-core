@@ -21,7 +21,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     screen.TempPlayer.DistinationX = X;
                     screen.TempPlayer.DistinationY = Y;
 
-                    NetworkControl._recievedServerMove = true;
+                    NetworkControl.ReceivedServerMove = true;
                 }
             }
         }
