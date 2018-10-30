@@ -24,30 +24,25 @@ namespace LoESoft.Server.Core.World
                 for (var y = 0; y < Chunk.CHUNKSIZE; y++)
                     ChunkMap[x, y] = new Chunk(Manager, x, y);
 
-            foreach (var i in ChunkMap)
-                i.LoadChunk();
+            ChunkMap.Select(chunk => { chunk.LoadChunk(); return chunk; }).ToList();
         }
 
         public void Update()
-        {
-            foreach (var i in ChunkMap)
-                if (i.IsActive)
-                    i.Update();
-        }
+            => ChunkMap.Where(chunk => chunk.IsActive).Select(chunk => { chunk.Update(); return chunk; }).ToList();
         
         public bool IsValidChunk(int x, int y)
-        {
-            return ((x >= 0 && x < 16 * 16) && (y >= 0 && y < 16 * 16));
-        }
+            => ((x >= 0 && x < 16 * 16) && (y >= 0 && y < 16 * 16));
         
         #region "Get data"
 
         public string GetPlayerData(Player player)
         {
             var dat = new RawPlayerData();
-
-            foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)))
-                dat.SetData<PlayerData>(i.GetPlayerData);
+            
+            ChunkMap[player.ChunkX, player.ChunkY].Players.Where(_ => !_.Equals(player)).Select(player => {
+                dat.SetData<PlayerData>(player.GetPlayerData);
+                return player;
+            }).ToList();
 
             return JsonConvert.SerializeObject(dat);
         }
@@ -56,8 +51,10 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawEntityData();
 
-            foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Entities)
-                dat.SetData<EntityData>(i.GetData);
+            ChunkMap[player.ChunkX, player.ChunkY].Entities.Select(entity => {
+                dat.SetData<EntityData>(entity.GetData);
+                return entity;
+            }).ToList();
 
             return JsonConvert.SerializeObject(dat);
         }
@@ -66,9 +63,11 @@ namespace LoESoft.Server.Core.World
         {
             var dat = new RawMapData();
 
-            foreach (var i in ChunkMap[player.ChunkX, player.ChunkY].Tiles)
-                dat.SetData<TileData>(i);
-
+            ChunkMap[player.ChunkX, player.ChunkY].Tiles.Select(tile => {
+                dat.SetData<TileData>(tile);
+                return tile;
+            }).ToList();
+            
             return JsonConvert.SerializeObject(dat);
         }
 
