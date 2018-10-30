@@ -13,7 +13,7 @@ namespace LoESoft.Client.Core.Client
         public GameUser(Server server)
         {
             Server = server;
-            NetworkControl = new NetworkControl(this);
+            NetworkControl = new NetworkControl(this, Server);
         }
 
         public bool IsConnected => NetworkControl.IsConnected;
@@ -38,7 +38,7 @@ namespace LoESoft.Client.Core.Client
 
         public void SendPackets(OutgoingPacket[] outgoingPackets) => NetworkControl.SendPackets(outgoingPackets);
 
-        public void Connect() => NetworkControl.Connect(Server);
+        public void Connect() => NetworkControl.Connect();
 
         public void Disconnect() => NetworkControl.Disconnect();
     }

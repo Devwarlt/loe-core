@@ -23,7 +23,9 @@ namespace LoESoft.Server.Core.Networking
             TcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
                 NoDelay = true,
-                UseOnlyOverlappedIO = true
+                UseOnlyOverlappedIO = true,
+                SendTimeout = 1000,
+                ReceiveTimeout = 1000
             };
             TcpSocket.Bind(TcpEndPoint);
             TcpSocket.Listen(0xFF);
