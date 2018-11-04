@@ -1,3 +1,3 @@
 cd client/bin/DesktopGL/AnyCPU/Debug
-start GameClient.exe
+start BRMEClient.exe
 exit

@@ -7,7 +7,7 @@
     <ProjectGuid>{728A3882-9A81-4556-862D-C5F356679289}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>LoESoft.Server</RootNamespace>
-    <AssemblyName>GameServer</AssemblyName>
+    <AssemblyName>BRMEServer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
