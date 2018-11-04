@@ -1,25 +1,50 @@
 ﻿using LoESoft.Server.Core.Networking;
+using System.Diagnostics;
 using System.Threading;
 
 namespace LoESoft.Server.Core.World
 {
     public class WorldManager
     {
-        public MapData Map { get; set; }
+        public WorldMap Map { get; set; }
 
-        public WorldManager() => Map = new MapData(this);
+        public bool CanUpdate = true;
+
+        private Thread UpdateThread { get; set; }
+
+        public WorldManager() => Map = new WorldMap(this);
 
         public void BeginUpdate()
-            => new Thread(() =>
+        {
+            UpdateThread = new Thread(() =>
             {
-                do
+                var time = new GameTime();
+                var timer = new Stopwatch();
+
+                int looptime = 0;
+
+                timer.Start();
+
+                while (CanUpdate)
                 {
-                    Map.Update();
+                    time.TotalElapsedMs = timer.ElapsedMilliseconds;
+                    time.TickDelta = looptime / WorldSettings.COOLDOWN;
+                    time.ElaspedMsDelta = WorldSettings.COOLDOWN * time.TickDelta;
+
+                    if (time.TickDelta > 3)
+                        App.Warn("LAGGED!");
+
+                    Map.Update(time);
 
                     Thread.Sleep(WorldSettings.COOLDOWN);
-                } while (true);
+                    looptime += (int)(timer.ElapsedMilliseconds - time.TotalElapsedMs) - time.ElaspedMsDelta;
+                }
             })
-            { IsBackground = true }.Start();
+            { IsBackground = true };
+
+            UpdateThread.Start();
+        }
+            
 
         public bool TryAddPlayer(Client client)
         {
@@ -28,9 +53,7 @@ namespace LoESoft.Server.Core.World
 
             if (client.Player != null)
             {
-                App.Info("Player added!");
-
-                Map.AddPlayer(client.Player);
+                Map.Add(client.Player);
 
                 return true;
             }
@@ -42,15 +65,19 @@ namespace LoESoft.Server.Core.World
         {
             if (ConnectionListener.Clients.Values.Contains(client))
             {
-                App.Info("Player removed!");
-
-                if (client.Player != null)
-                    Map.RemovePlayer(client.Player);
+                if (client != null)
+                    Map.Remove(client.Player);
 
                 return true;
             }
 
             return false;
+        }
+
+        public void Stop()
+        {
+            CanUpdate = false;
+            Map.Dispose();
         }
     }
 }

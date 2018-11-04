@@ -22,7 +22,7 @@ namespace LoESoft.Client.Core.Game.Animation
             AddAnimation(AnimationType.Right, tempSpriteSet.GetSpritesByWidth(2));
         }
 
-        public override void Update(GameTime gameTime, BasicObject basicObject)
+        public override void Update(GameTime gameTime, Entity basicObject)
         {
             preDirection = curDirection;
             curDirection = (((Player) basicObject).CurrentDirection != Player.Direction.None) ?
@@ -35,7 +35,7 @@ namespace LoESoft.Client.Core.Game.Animation
             base.Update(gameTime, basicObject);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, BasicObject basicObject)
+        public override void Draw(SpriteBatch spriteBatch, Entity basicObject)
             => Frames[(AnimationType) curDirection][CurrentFrame].Draw(spriteBatch, basicObject);
     }
 }

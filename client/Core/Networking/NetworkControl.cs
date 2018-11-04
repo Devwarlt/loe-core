@@ -32,7 +32,7 @@ namespace LoESoft.Client.Core.Networking
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
         private int ConnectionAttempt { get; set; }
         private bool Disconnected { get; set; }
-
+        
         public NetworkControl(GameUser gameUser, Server server)
         {
             GameUser = gameUser;
@@ -78,18 +78,6 @@ namespace LoESoft.Client.Core.Networking
             }
         }
 
-        // Send move packet only if cached positions doesn't match and prevent unecessary move packets.
-        private bool HandleMovePacket(ClientMove move)
-        {
-            if (ReceivedServerMove == true)
-            {
-                ReceivedServerMove = false;
-                return true;
-            }
-
-            return false;
-        }
-
         public void SendPacket(OutgoingPacket outgoingPacket)
         {
             App.Info($"Processing new outgoing packet...");
@@ -108,10 +96,6 @@ namespace LoESoft.Client.Core.Networking
                 PacketID = outgoingPacket.PacketID,
                 Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
-
-            if (outgoingPacket.PacketID == PacketID.CLIENTMOVE)
-                if (!HandleMovePacket(outgoingPacket as ClientMove))
-                    return;
 
             App.Info($"Packet buffer length: {buffer.Length}");
 
@@ -150,6 +134,8 @@ namespace LoESoft.Client.Core.Networking
 
         public void ReceivePacket()
         {
+            App.Warn("Recieving!");
+
             if (Buffer == null)
                 Buffer = new byte[BUFFER_SIZE];
 
@@ -165,7 +151,7 @@ namespace LoESoft.Client.Core.Networking
             {
                 TcpSocket.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, (result) =>
                 {
-                    App.Info("Processing new incoming packet...");
+                    App.Warn("Processing new incoming packet...");
 
                     try
                     {
@@ -245,7 +231,7 @@ namespace LoESoft.Client.Core.Networking
             TcpSocket?.Close();
             TcpSocket?.Dispose();
 
-            App.Info("Client disconnected.");
+            App.Warn("Client disconnected.");
         }
     }
 }

@@ -7,10 +7,9 @@ namespace LoESoft.Client.Assets.Xml.Structure
     {
         public enum ContentType : int
         {
-            Players = 0,
-            Objects = 1,
-            Items = 2,
-            Tiles = 3
+            Objects = 0,
+            Items = 1,
+            Tiles = 2
         }
 
         public class XmlTexture
@@ -43,13 +42,6 @@ namespace LoESoft.Client.Assets.Xml.Structure
         public ContentType Type { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
-    }
-
-    public class PlayersContent : XmlContent
-    {
-        public PlayersContent(XElement elem) : base(elem)
-        {
-        }
     }
 
     public class ObjectsContent : XmlContent

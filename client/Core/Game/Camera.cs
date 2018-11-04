@@ -7,11 +7,11 @@ namespace LoESoft.Client.Core.Game
     {
         public const double SCALE = Tile.TILE_SIZE / 1.2;
 
-        public static BasicObject Focus { get; set; }
+        public static Entity Focus { get; set; }
         public static float X { get; set; }
         public static float Y { get; set; }
 
-        public static void SetFocus(BasicObject focus) => Focus = focus;
+        public static void SetFocus(Entity focus) => Focus = focus;
 
         public static Matrix GetMatrix()
         {

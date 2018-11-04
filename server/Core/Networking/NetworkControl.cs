@@ -183,13 +183,9 @@ namespace LoESoft.Server.Core.Networking
             if (Disconnected)
                 return;
 
+            Client.Disconnect();
             Disconnected = true;
-
-            Client.Player?.Save();
-            Client.Player?.Dispose();
-            Client.TcpSocket?.Close();
-            Client.TcpSocket?.Dispose();
-
+            
             App.Info($"Client ID {Client.Id} has left from the server.");
         }
     }

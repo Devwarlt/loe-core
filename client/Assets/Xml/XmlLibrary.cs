@@ -8,7 +8,6 @@ namespace LoESoft.Client.Assets
 {
     public static class XmlLibrary
     {
-        public static Dictionary<int, PlayersContent> PlayersXml = new Dictionary<int, PlayersContent>();
         public static Dictionary<int, ObjectsContent> ObjectsXml = new Dictionary<int, ObjectsContent>();
         public static Dictionary<int, ItemsContent> ItemsXml = new Dictionary<int, ItemsContent>();
         public static Dictionary<int, TilesContent> TilesXml = new Dictionary<int, TilesContent>();
@@ -28,13 +27,6 @@ namespace LoESoft.Client.Assets
 
                 switch ((ContentType) int.Parse(elem.Attribute("type").Value))
                 {
-                    case ContentType.Players:
-                        {
-                            content = new PlayersContent(elem);
-                            PlayersXml.Add(content.Id, (PlayersContent) content);
-                        }
-                        break;
-
                     case ContentType.Objects:
                         {
                             content = new ObjectsContent(elem);

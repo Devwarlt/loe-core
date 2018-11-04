@@ -1,17 +1,17 @@
 ﻿<Objects>
-  <Object type="3" id="0" name="Water">
+  <Object type="2" id="0" name="Water">
     <Texture animated="false" x="0" y="0">tilesEmbed</Texture>
   </Object>
-  <Object type="3" id="1" name="Dirt">
+  <Object type="2" id="1" name="Dirt">
     <Texture animated="false" x="1" y="0">tilesEmbed</Texture>
   </Object>
-  <Object type="3" id="2" name="Grass">
+  <Object type="2" id="2" name="Grass">
     <Texture animated="false" x="2" y="0">tilesEmbed</Texture>
   </Object>
-  <Object type="3" id="3" name="Sand">
+  <Object type="2" id="3" name="Sand">
     <Texture animated="false" x="3" y="0">tilesEmbed</Texture>
   </Object>
-  <Object type="3" id="4" name="Stone">
+  <Object type="2" id="4" name="Stone">
     <Texture animated="false" x="4" y="0">tilesEmbed</Texture>
   </Object>
 </Objects>

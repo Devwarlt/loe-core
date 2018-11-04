@@ -3,14 +3,16 @@ using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LoESoft.Client.Core.Game.Map
 {
     public class Map
     {
         public List<Tile> Tiles { get; set; }
-        public List<BasicObject> Entities { get; set; }
+        public ConcurrentBag<Entity> Entities { get; set; }
         public List<Player> Players { get; set; }
 
         protected bool initialUpdate = false;
@@ -18,44 +20,42 @@ namespace LoESoft.Client.Core.Game.Map
         public Map()
         {
             Tiles = new List<Tile>();
-            Entities = new List<BasicObject>();
+            Entities = new ConcurrentBag<Entity>();
             Players = new List<Player>();
         }
 
         public void Update(string mapdata, string entitydata, string playerdata)
         {
-            var entities = new List<BasicObject>();
-            var players = new List<Player>();
-            var tiles = new List<Tile>();
+            var tile = new List<Tile>();
 
-            foreach (var i in JsonConvert.DeserializeObject<RawMapData>(mapdata).Data)
+            foreach (var i in JsonConvert.DeserializeObject<RawMapData>(mapdata).GetData<TileData>())
+                tile.Add(new Tile(i.X, i.Y, i.Id));
+
+            Tiles = tile;
+            
+            foreach(var i in JsonConvert.DeserializeObject<RawEntityData>(entitydata).GetData<EntityData>())
             {
-                var data = JsonConvert.DeserializeObject<TileData>(i);
-                tiles.Add(new Tile(data.X, data.Y, data.Id));
+                Entities.TryTake(out var entity);
+
+                if (entity.UniqueId == i.UniqueId)
+                {
+                    entity.DistinationX = i.X;
+                    entity.DistinationY = i.Y;
+                    Entities.Add(entity);
+                } else
+                {
+                    Entities.Add(new Entity(i.Id) { X = i.X, Y = i.Y, UniqueId = i.UniqueId });
+                }
             }
+        }
 
-            foreach (var i in JsonConvert.DeserializeObject<RawEntityData>(entitydata).Data)
-                entities.Add(new BasicObject(Color.Red)
-                {
-                    X = JsonConvert.DeserializeObject<EntityData>(i).X,
-                    Y = JsonConvert.DeserializeObject<EntityData>(i).Y
-                });
+        public void Update(GameTime gameTime)
+        {
+            foreach (var i in Entities.ToArray())
+                i.Update(gameTime);
 
-            foreach (var i in JsonConvert.DeserializeObject<RawPlayerData>(playerdata).Data)
-                players.Add(new Player()
-                {
-                    DistinationX = JsonConvert.DeserializeObject<PlayerData>(i).X,
-                    DistinationY = JsonConvert.DeserializeObject<PlayerData>(i).Y
-                });
-
-            if (Tiles != tiles)
-                Tiles = tiles;
-
-            if (Entities != entities)
-                Entities = entities;
-
-            if (Players != players)
-                Players = players;
+            foreach (var i in Players.ToArray())
+                i.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)

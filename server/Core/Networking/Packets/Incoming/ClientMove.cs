@@ -49,17 +49,19 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             if (client.Player == null)
                 return;
 
-            if (client.Manager.Map.IsValidChunk(newX, newY))
+            if (client.Manager.Map.IsValidPosition(newX, newY))
             {
                 client.Player.X = newX;
                 client.Player.Y = newY;
-            }
 
-            client.SendPacket(new ServerMove()
-            {
-                X = client.Player.X,
-                Y = client.Player.Y
-            });
+                client.SendPacket(new ServerMove()
+                {
+                    X = client.Player.X,
+                    Y = client.Player.Y
+                });
+
+                App.Warn("Server Move sent!");
+            }
         }
     }
 }

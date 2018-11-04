@@ -12,43 +12,44 @@ namespace LoESoft.Client.Core.Game.User
     {
         public GameUser User { get; private set; }
 
-        public Player UserPlayer { get; private set; }
+        public Player Player { get; private set; }
 
         public GamePlayer(GameUser user)
         {
-            UserPlayer = new Player();
+            User = user;
+            Player = new Player();
         }
 
         public void Update(GameTime gameTime)
         {
             HandlePlayerInput();
 
-            UserPlayer.Update(gameTime);
+            Player.Update(gameTime);
         }
 
         private void HandlePlayerInput()
         {
-            if (Keyboard.GetState().GetPressedKeys().SkipWhile(_ => Player.KeysToDirection.Keys.Contains(_) ? false : true).Count() > 0)
+            if (Keyboard.GetState().GetPressedKeys().SkipWhile(_ => !Player.KeysToDirection.Keys.Contains(_)).Count() > 0)
             {
-                UserPlayer.CurrentDirection = Player.KeysToDirection[Keyboard.GetState().GetPressedKeys().SkipWhile(_ => Player.KeysToDirection.Keys.Contains(_) ? false : true).First()];
+                Player.CurrentDirection = Player.KeysToDirection[Keyboard.GetState().GetPressedKeys().SkipWhile(_ => Player.KeysToDirection.Keys.Contains(_) ? false : true).First()];
 
-                if (UserPlayer.DistinationX == UserPlayer.X && UserPlayer.DistinationY == UserPlayer.Y)
+                if (!Player.IsMoving)
                     SendMovePacket();
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void SetDistination(int x, int y)
         {
-            UserPlayer.Draw(spriteBatch);
+            Player.DistinationX = x;
+            Player.DistinationY = y;
         }
 
-        private void SendMovePacket()
-            =>
-            User.SendPacket(new ClientMove()
-            {
-                Direction = (int)UserPlayer.CurrentDirection,
-                Player = UserPlayer
-            });
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            Player.Draw(spriteBatch);
+        }
+
+        private void SendMovePacket() => User.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });
 
     }
 }

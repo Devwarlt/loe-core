@@ -18,13 +18,13 @@ namespace LoESoft.Client.Core.Screens
     {
         public static Map PlayerMap { get; set; }
 
-        public GamePlayer Player { get; set; }
+        public GamePlayer Controller { get; set; }
 
         private GameUser GameUser = GameApplication.GameUser;
 
         public override void OnScreenCreate()
         {
-            Player = new GamePlayer(GameUser);
+            Controller = new GamePlayer(GameUser);
             PlayerMap = new Map();
             GameUser.SendPacket(new Load());
         }
@@ -33,9 +33,10 @@ namespace LoESoft.Client.Core.Screens
 
         public override void Update(GameTime gameTime)
         {
-            Player.Update(gameTime);
+            PlayerMap.Update(gameTime);
+            Controller.Update(gameTime);
 
-            Camera.SetFocus(Player.UserPlayer);
+            Camera.SetFocus(Controller.Player);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -48,12 +49,8 @@ namespace LoESoft.Client.Core.Screens
                 if (GameUser.IsConnected)
                 {
                     PlayerMap.Draw(spriteBatch);
-                    Player.Draw(spriteBatch);
+                    Controller.Draw(spriteBatch);
                 }
-                else
-                    new TextDisplay(DrawHelper.CenteredPosition(GameApplication.WIDTH,
-                        (int) TextDisplay.MeasureString("Unable To Connect The Server!", 30).X),
-                        400, "Unable To Connect The Server!", 30).Draw(spriteBatch);
             }
             catch (InvalidOperationException) { }
 

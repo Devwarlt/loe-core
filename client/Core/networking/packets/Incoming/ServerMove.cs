@@ -12,17 +12,9 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public override void Handle(GameUser gameUser)
         {
-            if (ScreenManager.ActiveScreen is GameScreen)
-            {
-                GameScreen screen = ScreenManager.ActiveScreen as GameScreen;
+            var game = (ScreenManager.ActiveScreen as GameScreen);
 
-                if (screen.Player != null)
-                {
-                    screen.Player.UserPlayer.SetDistination(X, Y);
-
-                    NetworkControl.ReceivedServerMove = true;
-                }
-            }
+            game.Controller?.SetDistination(X, Y);
         }
     }
 }

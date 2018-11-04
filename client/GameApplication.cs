@@ -40,12 +40,10 @@ namespace LoESoft.Client
         protected override void Initialize()
         {
             base.Initialize();
-
-            ScreenManager.DispatchScreen(SplashScreen = new SplashScreen());
-
+            
             GameUser = new GameUser(GetServers[ServerName.LOCAL]);
             GameUser.Connect();
-
+            
             App.DiscordRichPresence.State = "World: Chicago";
             App.DiscordRichPresence.Details = "Main Menu";
 
@@ -60,12 +58,15 @@ namespace LoESoft.Client
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             AssetLoader.Init(Content);
-            AssetLibrary.Init();
-            XmlLibrary.Init();
-            AudioManager.Init();
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
             TextDisplay.LoadSpriteFont(Content);
 
+            ScreenManager.DispatchScreen(SplashScreen = new SplashScreen());
+
+            AssetLibrary.Init();
+            XmlLibrary.Init();
+            AudioManager.Init();
+           
             //AudioManager.SetActiveMusic("titleScreenMusic");
 
             ScreenManager.OnGameClose += () =>

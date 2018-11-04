@@ -32,7 +32,13 @@ namespace LoESoft.Server.Core.Networking
             NetworkControl.ReceivePacket();
         }
 
-        public void Disconnect() => NetworkControl.Disconnect();
+        public void Disconnect()
+        {
+            Player?.Save();
+            Player?.Dispose();
+            TcpSocket?.Close();
+            TcpSocket?.Dispose();
+        }
 
         public bool IsConnected => NetworkControl.IsConnected;
 

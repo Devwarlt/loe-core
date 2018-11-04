@@ -15,6 +15,9 @@ namespace LoESoft.Server.Core.World.Map.Data
 
         public virtual void SetData<T>(T data)
         {
+            if (data == null)
+                return;
+
             List<string> dataList = Data.ToList();
 
             dataList.Add(JsonConvert.SerializeObject(data));
