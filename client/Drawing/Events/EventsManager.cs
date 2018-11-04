@@ -51,7 +51,7 @@ namespace LoESoft.Client.Drawing.Events
 
         private static void handleUnactiveClient()
         {
-            var gameProcess = Process.GetProcesses().Where(_ => _.ProcessName == "GameClient").First();
+            var gameProcess = Process.GetProcesses().Where(_ => _.ProcessName == "BRMEClient").First();
             var curProcess = Process.GetCurrentProcess();
 
             isClientActive = (gameProcess.Id == curProcess.Id);

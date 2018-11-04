@@ -79,47 +79,49 @@ namespace LoESoft.Client.Core.Networking
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
-        {
-            if (!IsConnected)
+            => new Thread(() =>
             {
-                if (!Disconnected)
-                    App.Warn($"Disposing packet {outgoingPacket.PacketID} and reconnecting...");
-
-                Connect();
-
-                return;
-            }
-
-            var buffer = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
-            {
-                PacketID = outgoingPacket.PacketID,
-                Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
-            }));
-
-            try
-            {
-                if (outgoingPacket.PacketID != PacketID.UPDATE)
-                    App.Info($"client -> server\t{outgoingPacket.PacketID}");
-
-                TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, (result) =>
+                if (!IsConnected)
                 {
-                    try
-                    { TcpSocket.EndSend(result); }
-                    catch (SocketException) { }
-                    catch
+                    if (!Disconnected)
+                        App.Warn($"Disposing packet {outgoingPacket.PacketID} and reconnecting...");
+
+                    Connect();
+
+                    return;
+                }
+
+                var buffer = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
+                {
+                    PacketID = outgoingPacket.PacketID,
+                    Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
+                }));
+
+                try
+                {
+                    if (outgoingPacket.PacketID != PacketID.UPDATE)
+                        App.Info($"client -> server\t{outgoingPacket.PacketID}");
+
+                    TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, (result) =>
                     {
-                        if (!Disconnected)
-                            App.Warn("Something went wrong!");
-                    }
-                }, null);
-            }
-            catch (SocketException) { }
-            catch
-            {
-                if (!Disconnected)
-                    App.Warn("Something went wrong!");
-            }
-        }
+                        try
+                        { TcpSocket.EndSend(result); }
+                        catch (SocketException) { }
+                        catch
+                        {
+                            if (!Disconnected)
+                                App.Warn("Something went wrong!");
+                        }
+                    }, null);
+                }
+                catch (SocketException) { }
+                catch
+                {
+                    if (!Disconnected)
+                        App.Warn("Something went wrong!");
+                }
+            })
+            { IsBackground = true }.Start();
 
         public void SendPackets(IEnumerable<OutgoingPacket> outgoingPackets)
             => outgoingPackets.Select(outgoingPacket =>
