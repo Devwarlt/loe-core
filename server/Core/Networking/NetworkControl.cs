@@ -15,7 +15,7 @@ namespace LoESoft.Server.Core.Networking
 {
     public class NetworkControl
     {
-        public static int BUFFER_SIZE => ushort.MaxValue + 1;
+        public static int BUFFER_SIZE => 4096;
 
         public bool IsConnected => TcpSocket.Connected;
 
@@ -34,11 +34,10 @@ namespace LoESoft.Server.Core.Networking
 
         public void SendPacket(OutgoingPacket outgoingPacket)
         {
-            App.Info($"Processing new outgoing packet...");
-
-            if (!IsConnected && !Disconnected)
+            if (!IsConnected)
             {
-                App.Warn($"Disposing packet {outgoingPacket.PacketID} and client...");
+                if (!Disconnected)
+                    App.Warn($"Disposing packet {outgoingPacket.PacketID} and client...");
 
                 Disconnect();
 
@@ -51,11 +50,10 @@ namespace LoESoft.Server.Core.Networking
                 Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
 
-            App.Info($"Packet buffer length: {buffer.Length}");
-
             try
             {
-                App.Info($"Sending {outgoingPacket.PacketID}...");
+                if (outgoingPacket.PacketID != PacketID.UPDATE)
+                    App.Info($"server -> client {Client.Id}\t{outgoingPacket.PacketID}");
 
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, result =>
                 {
@@ -76,8 +74,6 @@ namespace LoESoft.Server.Core.Networking
                 if (!Disconnected)
                     App.Warn("Something went wrong!");
             }
-
-            App.Info("Sent!");
         }
 
         public void SendPackets(IEnumerable<OutgoingPacket> outgoingPackets)
@@ -92,9 +88,10 @@ namespace LoESoft.Server.Core.Networking
             if (Buffer == null)
                 Buffer = new byte[BUFFER_SIZE];
 
-            if (!IsConnected && !Disconnected)
+            if (!IsConnected)
             {
-                App.Warn($"Disposing client...");
+                if (!Disconnected)
+                    App.Warn($"Disposing client...");
 
                 Disconnect();
 
@@ -105,8 +102,6 @@ namespace LoESoft.Server.Core.Networking
             {
                 TcpSocket.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, result =>
                 {
-                    App.Info("Processing new incoming packet...");
-
                     try
                     {
                         var len = TcpSocket.EndReceive(result);
@@ -119,7 +114,8 @@ namespace LoESoft.Server.Core.Networking
 
                         GetIncomingPacket(packetData).Handle(Client);
 
-                        App.Warn($"New packet received! Packet: {packetData.PacketID}");
+                        if (packetData.PacketID != PacketID.UPDATE)
+                            App.Info($"client -> server\t{packetData.PacketID}");
 
                         ReceivePacket();
                     }
@@ -156,7 +152,7 @@ namespace LoESoft.Server.Core.Networking
             {
                 try
                 {
-                    var incomingMessage = (IncomingPacket) Activator.CreateInstance(type);
+                    var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
                     IncomingPackets.Add(incomingMessage.PacketID, incomingMessage);
                 }
                 catch (ArgumentException) { }
@@ -175,7 +171,7 @@ namespace LoESoft.Server.Core.Networking
             if (!IncomingPackets.ContainsKey(packetID))
                 throw new Exception($"Unknown IncomingPacket: {packetID}");
 
-            return (IncomingPacket) JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
+            return (IncomingPacket)JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
         }
 
         public void Disconnect()
@@ -185,7 +181,7 @@ namespace LoESoft.Server.Core.Networking
 
             Client.Disconnect();
             Disconnected = true;
-            
+
             App.Info($"Client ID {Client.Id} has left from the server.");
         }
     }
