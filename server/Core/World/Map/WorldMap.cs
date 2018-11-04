@@ -50,10 +50,8 @@ namespace LoESoft.Server.Core.World
         {
             if (Entities.Count > 0)
             {
-                Entity entity = null;
-                Entities.TryTake(out entity);
-
-                Chunks[new Tuple<int, int>(entity.ChunkX, entity.ChunkY)].Add(entity);
+                if (Entities.TryTake(out var entity))
+                    Chunks[new Tuple<int, int>(entity.ChunkX, entity.ChunkY)].Add(entity);
             }
             
             foreach (var i in Chunks.Values)
