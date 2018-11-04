@@ -25,14 +25,14 @@ namespace LoESoft.Client.Core.Networking
 
         public bool IsConnected => TcpSocket.Connected;
 
-        private const int BUFFER_SIZE = ushort.MaxValue + 1;
+        private const int BUFFER_SIZE = 4096;
 
         private GameUser GameUser { get; set; }
         private byte[] Buffer { get; set; }
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
         private int ConnectionAttempt { get; set; }
         private bool Disconnected { get; set; }
-        
+
         public NetworkControl(GameUser gameUser, Server server)
         {
             GameUser = gameUser;
@@ -80,11 +80,10 @@ namespace LoESoft.Client.Core.Networking
 
         public void SendPacket(OutgoingPacket outgoingPacket)
         {
-            App.Info($"Processing new outgoing packet...");
-
-            if (!IsConnected && !Disconnected)
+            if (!IsConnected)
             {
-                App.Warn($"Disposing packet {outgoingPacket.PacketID} and reconnecting...");
+                if (!Disconnected)
+                    App.Warn($"Disposing packet {outgoingPacket.PacketID} and reconnecting...");
 
                 Connect();
 
@@ -97,11 +96,10 @@ namespace LoESoft.Client.Core.Networking
                 Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
 
-            App.Info($"Packet buffer length: {buffer.Length}");
-
             try
             {
-                App.Info($"Sending {outgoingPacket.PacketID}...");
+                if (outgoingPacket.PacketID != PacketID.UPDATE)
+                    App.Info($"client -> server\t{outgoingPacket.PacketID}");
 
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, (result) =>
                 {
@@ -121,8 +119,6 @@ namespace LoESoft.Client.Core.Networking
                 if (!Disconnected)
                     App.Warn("Something went wrong!");
             }
-
-            App.Info("Sent!");
         }
 
         public void SendPackets(IEnumerable<OutgoingPacket> outgoingPackets)
@@ -134,14 +130,13 @@ namespace LoESoft.Client.Core.Networking
 
         public void ReceivePacket()
         {
-            App.Warn("Recieving!");
-
             if (Buffer == null)
                 Buffer = new byte[BUFFER_SIZE];
 
-            if (!IsConnected && !Disconnected)
+            if (!IsConnected)
             {
-                App.Warn($"Reconnecting...");
+                if (!Disconnected)
+                    App.Warn($"Reconnecting...");
 
                 Connect();
 
@@ -151,8 +146,6 @@ namespace LoESoft.Client.Core.Networking
             {
                 TcpSocket.BeginReceive(Buffer, 0, Buffer.Length, SocketFlags.None, (result) =>
                 {
-                    App.Warn("Processing new incoming packet...");
-
                     try
                     {
                         var len = TcpSocket.EndReceive(result);
@@ -165,7 +158,8 @@ namespace LoESoft.Client.Core.Networking
 
                         GetIncomingPacket(packetData).Handle(GameUser);
 
-                        App.Warn($"New packet received! Packet: {packetData.PacketID}");
+                        if (packetData.PacketID != PacketID.UPDATE)
+                            App.Warn($"server -> client\t{packetData.PacketID}");
 
                         ReceivePacket();
                     }
@@ -200,7 +194,7 @@ namespace LoESoft.Client.Core.Networking
 
             foreach (var type in Assembly.GetAssembly(typeof(IncomingPacket)).GetTypes().Where(_ => _.IsClass && !_.IsAbstract && _.IsSubclassOf(typeof(IncomingPacket))))
             {
-                var incomingMessage = (IncomingPacket) Activator.CreateInstance(type);
+                var incomingMessage = (IncomingPacket)Activator.CreateInstance(type);
 
                 IncomingPackets.Add(incomingMessage.PacketID, incomingMessage);
             }
@@ -216,7 +210,7 @@ namespace LoESoft.Client.Core.Networking
             if (!IncomingPackets.ContainsKey(packetID))
                 throw new Exception($"Unknown IncomingPacket: {packetID}");
 
-            return (IncomingPacket) JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
+            return (IncomingPacket)JsonConvert.DeserializeObject(packetData.Content, IncomingPackets[packetID].GetType());
         }
 
         public void Disconnect()
