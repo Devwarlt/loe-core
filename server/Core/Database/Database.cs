@@ -1,5 +1,6 @@
 ﻿using LoESoft.Server.Core.Database.Models;
 using LoESoft.Server.Core.Utils;
+using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map.Data;
 using Newtonsoft.Json;
 using System;
@@ -195,7 +196,7 @@ namespace LoESoft.Server.Core.Database
         #region "Update methods"
 
         // This method ONLY save player position atm.
-        public void SavePlayer(Account account, PlayerData data)
+        public void SavePlayer(Account account, Player data)
         {
             try
             {

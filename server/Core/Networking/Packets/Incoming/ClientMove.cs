@@ -53,15 +53,13 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             {
                 client.Player.X = newX;
                 client.Player.Y = newY;
-
-                client.SendPacket(new ServerMove()
-                {
-                    X = client.Player.X,
-                    Y = client.Player.Y
-                });
-
-                App.Warn("Server Move sent!");
             }
+
+            client.SendPacket(new ServerMove()
+            {
+                X = client.Player.X,
+                Y = client.Player.Y
+            });
         }
     }
 }

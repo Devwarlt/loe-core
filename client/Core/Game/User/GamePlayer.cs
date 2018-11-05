@@ -16,6 +16,7 @@ namespace LoESoft.Client.Core.Game.User
 
         public GamePlayer(GameUser user)
         {
+            CanMove = true;
             User = user;
             Player = new Player();
         }
@@ -27,14 +28,19 @@ namespace LoESoft.Client.Core.Game.User
             Player.Update(gameTime);
         }
 
+        public bool CanMove { get; set; }
+
         private void HandlePlayerInput()
         {
             if (Keyboard.GetState().GetPressedKeys().SkipWhile(_ => !Player.KeysToDirection.Keys.Contains(_)).Count() > 0)
             {
                 Player.CurrentDirection = Player.KeysToDirection[Keyboard.GetState().GetPressedKeys().SkipWhile(_ => Player.KeysToDirection.Keys.Contains(_) ? false : true).First()];
 
-                if (!Player.IsMoving)
+                if (!Player.IsMoving && CanMove)
+                {
                     SendMovePacket();
+                    CanMove = false;
+                }
             }
         }
 

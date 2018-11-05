@@ -77,20 +77,19 @@
     <Compile Include="Core\Game\Animation\AnimationType.cs" />
     <Compile Include="Core\Game\Animation\PlayerAnimation.cs" />
     <Compile Include="Core\Game\Camera.cs" />
-    <Compile Include="Core\Game\Map\Data\EntityData.cs" />
-    <Compile Include="Core\Game\Map\Data\RawDatas.cs" />
+    <Compile Include="Core\Game\Map\Data\ObjectData.cs" />
+    <Compile Include="Core\Game\Map\Data\TileData.cs" />
     <Compile Include="Core\Game\Map\Map.cs" />
     <Compile Include="Core\Game\Objects\Entity.cs" />
     <Compile Include="Core\Game\Objects\Player.cs" />
-    <Compile Include="Core\Game\Map\Data\PlayerData.cs" />
     <Compile Include="Core\Game\Objects\Player.Direction.cs" />
     <Compile Include="Core\Game\Objects\Tile.cs" />
-    <Compile Include="Core\Game\Map\Data\TileData.cs" />
     <Compile Include="Core\Game\User\GamePlayer.cs" />
     <Compile Include="Core\Models\Character.cs" />
     <Compile Include="Core\Models\Position.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\CharacterData.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\LoadMap.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Response.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ServerMove.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Update.cs" />
@@ -379,6 +378,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <PropertyGroup>

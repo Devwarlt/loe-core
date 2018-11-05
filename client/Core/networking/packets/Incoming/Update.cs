@@ -1,21 +1,19 @@
 ﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Screens;
+using LoESoft.Client.Core.Game.Map;
+using LoESoft.Client.Core.Game.Map.Data;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {
     public class Update : IncomingPacket
     {
-        public string WorldData { get; set; }
-
-        public string EntityData { get; set; }
-
-        public string PlayerData { get; set; }
+        public TileData[] AddOrUpdateTile { get; set; }
+        public ObjectData[] AddOrUpdateObject { get; set; }
 
         public override PacketID PacketID => PacketID.UPDATE;
 
-        public override void Handle(GameUser gameUser)
-        {
-            GameScreen.PlayerMap.Update(WorldData, EntityData, PlayerData);
+        public override void Handle(GameUser user)
+        { 
+            Map.AddOrUpdate(AddOrUpdateTile, AddOrUpdateObject);
         }
     }
 }

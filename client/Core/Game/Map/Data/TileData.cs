@@ -1,4 +1,4 @@
-﻿namespace LoESoft.Client.Core.Game
+﻿namespace LoESoft.Client.Core.Game.Map.Data
 {
     public class TileData
     {

@@ -13,6 +13,7 @@
         CREATE_NEW_CHARACTER = 8,
         RESPONSE = 9,
         LOAD_CHARACTER = 10,
-        CHARACTER_DATA = 11
+        CHARACTER_DATA = 11,
+        LOAD_MAP = 12
     }
 }

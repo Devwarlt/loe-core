@@ -6,32 +6,59 @@ namespace LoESoft.Server.Core.World.Entities
 {
     public class Entity : IDisposable
     {
-        public static int UNIQUEIDC = 0;
         public WorldManager Manager { get; private set; }
-
-        public int X { get; set; } = 0;
-        public int Y { get; set; } = 0;
 
         public int ChunkX => X / Chunk.SIZE;
         public int ChunkY => Y / Chunk.SIZE;
 
+        private int _realX;
+        public int X
+        {
+            get => _realX;
+            set
+            {
+                _realX = value;
+                UpdateCount++;
+            }
+        }
+        private int _realY;
+        public int Y
+        {
+            get => _realY;
+            set
+            {
+                _realY = value;
+                UpdateCount++;
+            }
+        }
+        
         public int Id { get; private set; }
-        public int UniqueId { get; private set; }
 
+        public int UpdateCount { get; set; }
+        
         public Entity(WorldManager manager, int id)
         {
             Manager = manager;
             Id = id;
-            UniqueId =  UNIQUEIDC;
-            UNIQUEIDC++;
         }
 
         public virtual void Update()
         {
         }
 
-        public virtual EntityData GetEntityData => new EntityData() { X = X, Y = Y, Id = 0, UniqueId = UniqueId };
+        public virtual void Dispose()
+        {
+        }
 
-        public virtual void Dispose() { }
+        public static Entity Create(WorldManager manager, int x, int y, int id)
+        {
+            var entity = new Entity(manager, id)
+            {
+                X = x,
+                Y = y
+            };
+
+            return entity;
+        }
     }
 }

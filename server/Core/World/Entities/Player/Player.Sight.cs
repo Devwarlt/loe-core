@@ -1,9 +1,6 @@
-﻿using System;
+﻿using LoESoft.Server.Core.World.Map;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
@@ -11,22 +8,27 @@ namespace LoESoft.Server.Core.World.Entities.Player
     {
         public int X { get; set; }
         public int Y { get; set; }
+
+        public Points(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
     }
     public partial class Player
     {
-        public Points[] GetSightPoints(int radius = 8)
+        public Points[] GetSightPoints(int radius = 20)
         {
-            List<Points> points = new List<Points>();
-
-            for (var x = -radius; x < X + radius; x++)
-                for (var y = -radius; y < Y + radius; y++)
+            var points = new List<Points>();
+            
+            for (var x = -radius; x < radius; x++)
+                for (var y = -radius; y < radius; y++)
                 {
                     var sx = x * x;
                     var sy = y * y;
-                    var sr = radius * radius;
 
                     if (sx + sy <= radius)
-                        points.Add(new Points() { X = x, Y = y });
+                        points.Add(new Points(x + X, y + Y));
                 }
 
             return points.ToArray();

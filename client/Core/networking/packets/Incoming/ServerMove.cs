@@ -15,6 +15,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
             var game = (ScreenManager.ActiveScreen as GameScreen);
 
             game.Controller?.SetDistination(X, Y);
+            game.Controller.CanMove = true;
         }
     }
 }
