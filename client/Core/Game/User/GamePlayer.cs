@@ -19,6 +19,7 @@ namespace LoESoft.Client.Core.Game.User
             CanMove = true;
             User = user;
             Player = new Player();
+            Player.Init();
         }
 
         public void Update(GameTime gameTime)

@@ -20,13 +20,9 @@ namespace LoESoft.Client.Assets.Xml.Structure
 
             public XmlTexture(XElement elem)
             {
-                Animated = bool.Parse(elem.Attribute("animated").Value);
-                FileName = elem.Value;
-                ImageIndex = new Tuple<int, int>
-                (
-                    int.Parse(elem.Attribute("x").Value),
-                    int.Parse(elem.Attribute("y").Value)
-                );
+                Animated = elem.Element("Animated") != null;
+                FileName = elem.Element("FileName").Value;
+                ImageIndex = new Tuple<int, int>(int.Parse(elem.Attribute("x").Value), int.Parse(elem.Attribute("y").Value));
             }
         }
 
@@ -46,6 +42,7 @@ namespace LoESoft.Client.Assets.Xml.Structure
 
     public class ObjectsContent : XmlContent
     {
+
         public ObjectsContent(XElement elem) : base(elem)
         {
         }

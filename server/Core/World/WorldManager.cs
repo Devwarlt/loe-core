@@ -65,8 +65,11 @@ namespace LoESoft.Server.Core.World
         {
             if (ConnectionListener.Clients.Values.Contains(client))
             {
-                if (client != null)
+                if (client.Player != null)
+                {
                     Map.Remove(client.Player);
+                    App.Warn("Player removed!");
+                }
 
                 return true;
             }

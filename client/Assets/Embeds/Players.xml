@@ -1,5 +1,8 @@
 ﻿<Objects>
   <Object type="0" id="5" name="Apprentice">
-    <Texture animated="true" x ="0" y="0">PlayersEmbed</Texture>
+    <Texture x ="0" y="0">
+      <FileName>playersEmbed</FileName>
+      <Animated/>
+    </Texture>
   </Object>
 </Objects>

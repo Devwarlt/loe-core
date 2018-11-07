@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LoESoft.Client.Core.Game.Animation
 {
@@ -22,16 +23,9 @@ namespace LoESoft.Client.Core.Game.Animation
             CurrentFrame = 0;
         }
 
-        public void AddAnimation(AnimationType type, List<Texture2D> textures)
-        {
-            var frames = new List<AnimationFrame>();
-
-            foreach (var i in textures)
-                frames.Add(new AnimationFrame(i));
-
-            Frames.Add(type, frames);
-        }
-
+        public void AddAnimation(AnimationType type, List<Texture2D> textures) 
+            => Frames.Add(type, textures.Select(_ => new AnimationFrame(_)).ToList());
+        
         public void ChangeAnimationType(AnimationType type)
         {
             CurrentFrame = 0;
@@ -59,6 +53,6 @@ namespace LoESoft.Client.Core.Game.Animation
             }
         }
 
-        public abstract void Draw(SpriteBatch spriteBatch, Entity basicObject); //Draw should differentuate between types: Enemy, Player, Animated tiles / effects
+        public abstract void Draw(SpriteBatch spriteBatch, Entity entity); //Draw should differentuate between types: Enemy, Player, Animated tiles / effects
     }
 }

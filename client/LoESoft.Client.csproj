@@ -75,6 +75,7 @@
     <Compile Include="Core\Game\Animation\Animation.cs" />
     <Compile Include="Core\Game\Animation\AnimationFrame.cs" />
     <Compile Include="Core\Game\Animation\AnimationType.cs" />
+    <Compile Include="Core\Game\Animation\ObjectAnimation.cs" />
     <Compile Include="Core\Game\Animation\PlayerAnimation.cs" />
     <Compile Include="Core\Game\Camera.cs" />
     <Compile Include="Core\Game\Map\Data\ObjectData.cs" />
@@ -361,6 +362,7 @@
     <EmbeddedResource Include="Assets\Embeds\Players.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Embeds\TestObjects.xml" />
     <Content Include="loesoft.ico" />
   </ItemGroup>
   <ItemGroup>

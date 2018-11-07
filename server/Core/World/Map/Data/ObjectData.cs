@@ -7,12 +7,14 @@ namespace LoESoft.Server.Core.World.Map.Data
         public int X { get; set; }
         public int Y { get; set; }
         public int Id { get; set; }
+        public int ObjectId { get; set; }
 
         public static ObjectData GetData(Entity entity) => new ObjectData()
         {
             X = entity.X,
             Y = entity.Y,
-            Id = entity.Id
+            Id = entity.Id,
+            ObjectId = entity.ObjectId
         };
     }
 }

@@ -1,11 +1,12 @@
 ﻿using LoESoft.Server.Core.World.Map;
-using LoESoft.Server.Core.World.Map.Data;
-using System;
 
 namespace LoESoft.Server.Core.World.Entities
 {
-    public class Entity : IDisposable
+    public class Entity
     {
+        private static int NextObjectId = 0;
+        public static int GetNextObjectId() => ++NextObjectId;
+
         public WorldManager Manager { get; private set; }
 
         public int ChunkX => X / Chunk.SIZE;
@@ -33,6 +34,7 @@ namespace LoESoft.Server.Core.World.Entities
         }
         
         public int Id { get; private set; }
+        public int ObjectId { get; set; }
 
         public int UpdateCount { get; set; }
         

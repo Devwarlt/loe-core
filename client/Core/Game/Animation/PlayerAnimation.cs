@@ -1,7 +1,9 @@
 ﻿using LoESoft.Client.Assets;
+using LoESoft.Client.Assets.Xml.Structure;
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static LoESoft.Client.Core.Game.Objects.Player;
 
 namespace LoESoft.Client.Core.Game.Animation
 {
@@ -11,31 +13,35 @@ namespace LoESoft.Client.Core.Game.Animation
         private int preDirection = 1;
 
         public PlayerAnimation()
-            : base(0.1f, AnimationType.Forward) //Speed will be determined by player speed later on
+            : base(0.1f, AnimationType.Forward) 
         {
-            //temporary loading, til proper xml managing and proper player handling is added
-            var tempSpriteSet = AssetLibrary.Sprites["playersEmbed"];
+        }
+        
+        public void UpdateOrAdd(ObjectsContent content)
+        {
+            var animation = XmlLibrary.GetPlayerAnimation(content);
 
-            AddAnimation(AnimationType.Forward, tempSpriteSet.GetSpritesByWidth(1));
-            AddAnimation(AnimationType.Backward, tempSpriteSet.GetSpritesByWidth(0));
-            AddAnimation(AnimationType.Left, tempSpriteSet.GetSpritesByWidth(3));
-            AddAnimation(AnimationType.Right, tempSpriteSet.GetSpritesByWidth(2));
+            AddAnimation(AnimationType.Forward, animation[1]);
+            AddAnimation(AnimationType.Backward, animation[0]);
+            AddAnimation(AnimationType.Left, animation[3]);
+            AddAnimation(AnimationType.Right, animation[2]);
         }
 
         public override void Update(GameTime gameTime, Entity basicObject)
         {
             preDirection = curDirection;
-            curDirection = (((Player) basicObject).CurrentDirection != Player.Direction.None) ?
-                (int) ((Player) basicObject).CurrentDirection :
-                preDirection;
+            curDirection = (((Player) basicObject).CurrentDirection != Direction.None) ? 
+                (int) ((Player) basicObject).CurrentDirection : preDirection;
 
             if (curDirection != preDirection)
-                ChangeAnimationType((AnimationType) curDirection);
+                ChangeAnimationType((AnimationType)curDirection);
 
             base.Update(gameTime, basicObject);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Entity basicObject)
-            => Frames[(AnimationType) curDirection][CurrentFrame].Draw(spriteBatch, basicObject);
+        public override void Draw(SpriteBatch spriteBatch, Entity entity)
+        {
+            Frames[(AnimationType)curDirection][CurrentFrame].Draw(spriteBatch, entity);
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using LoESoft.Server.Core.World.Map;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
@@ -17,7 +15,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
     }
     public partial class Player
     {
-        public Points[] GetSightPoints(int radius = 20)
+        public Points[] GetSightPoints(int radius = 30)
         {
             var points = new List<Points>();
             
