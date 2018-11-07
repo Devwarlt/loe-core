@@ -40,10 +40,10 @@ namespace LoESoft.Client
         protected override void Initialize()
         {
             base.Initialize();
-            
+
             GameUser = new GameUser(GetServers[ServerName.LOCAL]);
             GameUser.Connect();
-            
+
             App.DiscordRichPresence.State = "World: Chicago";
             App.DiscordRichPresence.Details = "Main Menu";
 
@@ -66,7 +66,7 @@ namespace LoESoft.Client
             AssetLibrary.Init();
             XmlLibrary.Init();
             AudioManager.Init();
-           
+
             //AudioManager.SetActiveMusic("titleScreenMusic");
 
             ScreenManager.OnGameClose += () =>

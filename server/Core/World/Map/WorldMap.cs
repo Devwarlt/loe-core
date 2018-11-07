@@ -3,7 +3,6 @@ using LoESoft.Server.Core.World.Entities;
 using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World
@@ -28,13 +27,13 @@ namespace LoESoft.Server.Core.World
             Chunks = new Dictionary<Tuple<int, int>, Chunk>();
             Players = new List<Player>();
 
-            //Temporary Initiazation 
+            //Temporary Initiazation
             var rand = new Random();
 
             for (var x = 0; x < WIDTH; x++)
                 for (var y = 0; y < HEIGHT; y++)
                     Tiles[x, y] = new Tile(Manager, rand.Next(0, 4)) { X = x, Y = y };
-            
+
             Chunks.Add(new Tuple<int, int>(0, 0), new Chunk(Manager, 0, 0));
             Chunks[new Tuple<int, int>(0, 0)].RandomGen();
 
@@ -43,7 +42,7 @@ namespace LoESoft.Server.Core.World
 
         public List<Player> Players { get; set; }
 
-        public void Update(GameTime time)
+        public void Update()
         {
             if (Loaded)
             {

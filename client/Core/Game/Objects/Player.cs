@@ -21,8 +21,8 @@ namespace LoESoft.Client.Core.Game.Objects
                 { Keys.D, Direction.Right }, { Keys.Right, Direction.Right }
             };
 
-            DistinationX = (int) X;
-            DistinationY = (int) Y;
+            DistinationX = (int)X;
+            DistinationY = (int)Y;
         }
 
         public void Init()
@@ -41,9 +41,9 @@ namespace LoESoft.Client.Core.Game.Objects
         #region "Fields"
 
         public Dictionary<Keys, Direction> KeysToDirection { get; private set; }
-        
+
         public Direction CurrentDirection { get; set; }
-        
+
         private PlayerAnimation Animation;
 
         #endregion "Fields"

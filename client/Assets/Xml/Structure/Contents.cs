@@ -28,7 +28,7 @@ namespace LoESoft.Client.Assets.Xml.Structure
 
         public XmlContent(XElement elem)
         {
-            Type = (ContentType) (int.Parse(elem.Attribute("type").Value));
+            Type = (ContentType)(int.Parse(elem.Attribute("type").Value));
             Id = int.Parse(elem.Attribute("id").Value);
             Name = elem.Attribute("name").Value;
             Texture = new XmlTexture(elem.Element("Texture"));
@@ -42,7 +42,6 @@ namespace LoESoft.Client.Assets.Xml.Structure
 
     public class ObjectsContent : XmlContent
     {
-
         public ObjectsContent(XElement elem) : base(elem)
         {
         }

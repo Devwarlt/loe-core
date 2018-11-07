@@ -10,7 +10,7 @@ namespace LoESoft.Client.Core.Game.Map
     public static class Map
     {
         public static Tile[,] TileMap { get; set; }
-        
+
         public static Dictionary<int, Entity> Objects { get; set; }
 
         public static int MapWidth { get; private set; }
@@ -47,7 +47,8 @@ namespace LoESoft.Client.Core.Game.Map
                     //Update stat
                     Objects[i.ObjectId].DistinationX = i.X;
                     Objects[i.ObjectId].DistinationY = i.Y;
-                } else
+                }
+                else
                 {
                     Objects.Add(i.ObjectId, new Entity(i.Id) { X = i.X, Y = i.Y });
                 }

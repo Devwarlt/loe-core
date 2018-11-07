@@ -1,9 +1,6 @@
-﻿using LoESoft.Client.Core.Game.Objects;
-using Newtonsoft.Json;
-
-namespace LoESoft.Client.Core.Networking.Packets.Outgoing
+﻿namespace LoESoft.Client.Core.Networking.Packets.Outgoing
 {
-    public class ClientMove : OutgoingPacket 
+    public class ClientMove : OutgoingPacket
     {
         public int Direction { get; set; }
 

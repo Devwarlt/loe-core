@@ -1,7 +1,6 @@
 ﻿using LoESoft.Server.Core.Database.Models;
 using LoESoft.Server.Core.Utils;
 using LoESoft.Server.Core.World.Entities.Player;
-using LoESoft.Server.Core.World.Map.Data;
 using Newtonsoft.Json;
 using System;
 using System.Data.SQLite;

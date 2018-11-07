@@ -11,7 +11,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
     {
         public static SpriteFont Font { get; private set; }
 
-        public static int GetHeight(int size) => (int) MeasureString("I", size).Y;
+        public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
 
         public float Size { get; set; }
         public bool Bold { get; set; }
@@ -36,8 +36,8 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             get => _text;
             set
             {
-                Width = (int) MeasureString(value, (int) Size).X;
-                Height = (int) MeasureString(value, (int) Size).Y;
+                Width = (int)MeasureString(value, (int)Size).X;
+                Height = (int)MeasureString(value, (int)Size).Y;
 
                 _text = value;
 
@@ -82,7 +82,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
                     } // Test End
 
                     spriteBatch.DrawString(Font, i, new Vector2(StageX, StageY + offset), SpriteColor, 0f, Vector2.Zero, Size / 100f, SpriteEffects.None, 0f);
-                    offset += GetHeight((int) Size) + 2;
+                    offset += GetHeight((int)Size) + 2;
                 }
             }
             else
@@ -113,7 +113,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 
             foreach (var i in text)
             {
-                cWidth += (int) MeasureString(i.ToString(), (int) Size).X;
+                cWidth += (int)MeasureString(i.ToString(), (int)Size).X;
 
                 if (cWidth >= PerLineWidth)
                     break;
