@@ -13,10 +13,10 @@ namespace LoESoft.Client.Core.Game.Animation
         private int preDirection = 1;
 
         public PlayerAnimation()
-            : base(0.1f, AnimationType.Forward) 
+            : base(0.1f, AnimationType.Forward)
         {
         }
-        
+
         public void UpdateOrAdd(ObjectsContent content)
         {
             var animation = XmlLibrary.GetPlayerAnimation(content);
@@ -30,8 +30,8 @@ namespace LoESoft.Client.Core.Game.Animation
         public override void Update(GameTime gameTime, Entity basicObject)
         {
             preDirection = curDirection;
-            curDirection = (((Player) basicObject).CurrentDirection != Direction.None) ? 
-                (int) ((Player) basicObject).CurrentDirection : preDirection;
+            curDirection = (((Player)basicObject).CurrentDirection != Direction.None) ?
+                (int)((Player)basicObject).CurrentDirection : preDirection;
 
             if (curDirection != preDirection)
                 ChangeAnimationType((AnimationType)curDirection);

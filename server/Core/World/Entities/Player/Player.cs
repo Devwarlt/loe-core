@@ -11,7 +11,9 @@ namespace LoESoft.Server.Core.World.Entities.Player
             Client = client;
         }
 
-        public void Save() { }
+        public void Save()
+        {
+        }
 
         public override void Dispose()
         {

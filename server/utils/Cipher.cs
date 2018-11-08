@@ -13,7 +13,7 @@ namespace LoESoft.Server.Core.Utils
         {
             try
             {
-                using (var rsa = new RSACryptoServiceProvider((int) RSAKeySize, new CspParameters() { KeyContainerName = LoESoftHash }))
+                using (var rsa = new RSACryptoServiceProvider((int)RSAKeySize, new CspParameters() { KeyContainerName = LoESoftHash }))
                     return Encoding.UTF8.GetString(rsa.Decrypt(Convert.FromBase64String(plainText), false));
             }
             catch { return plainText; }

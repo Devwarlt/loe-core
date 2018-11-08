@@ -1,5 +1,4 @@
 ﻿using LoESoft.Server.Core.Networking;
-using System.Diagnostics;
 using System.Threading;
 
 namespace LoESoft.Server.Core.World
@@ -10,41 +9,18 @@ namespace LoESoft.Server.Core.World
 
         public bool CanUpdate = true;
 
+        private GameClock _clock { get; set; }
+
         private Thread UpdateThread { get; set; }
 
-        public WorldManager() => Map = new WorldMap(this);
-
-        public void BeginUpdate()
+        public WorldManager()
         {
-            UpdateThread = new Thread(() =>
-            {
-                var time = new GameTime();
-                var timer = new Stopwatch();
+            Map = new WorldMap(this);
 
-                int looptime = 0;
-
-                timer.Start();
-
-                while (CanUpdate)
-                {
-                    time.TotalElapsedMs = timer.ElapsedMilliseconds;
-                    time.TickDelta = looptime / WorldSettings.COOLDOWN;
-                    time.ElaspedMsDelta = WorldSettings.COOLDOWN * time.TickDelta;
-
-                    if (time.TickDelta > 3)
-                        App.Warn("LAGGED!");
-
-                    Map.Update(time);
-
-                    Thread.Sleep(WorldSettings.COOLDOWN);
-                    looptime += (int)(timer.ElapsedMilliseconds - time.TotalElapsedMs) - time.ElaspedMsDelta;
-                }
-            })
-            { IsBackground = true };
-
-            UpdateThread.Start();
+            _clock = new GameClock(() => Map.Update());
         }
-            
+
+        public void BeginUpdate() => _clock.Start();
 
         public bool TryAddPlayer(Client client)
         {
@@ -79,7 +55,8 @@ namespace LoESoft.Server.Core.World
 
         public void Stop()
         {
-            CanUpdate = false;
+            _clock.Stop();
+
             Map.Dispose();
         }
     }

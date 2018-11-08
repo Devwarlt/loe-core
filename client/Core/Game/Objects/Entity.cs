@@ -25,7 +25,7 @@ namespace LoESoft.Client.Core.Game.Objects
             ObjectId = id;
             Content = XmlLibrary.ObjectsXml[ObjectId];
         }
-        
+
         public virtual void Update(GameTime gameTime)
         {
             HandleMovement(1f / gameTime.ElapsedGameTime.Milliseconds);
@@ -58,6 +58,6 @@ namespace LoESoft.Client.Core.Game.Objects
             }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch) => spriteBatch.DrawRectangle(new Rectangle((int) DrawX, (int) DrawY, Size, Size), Color, 4);
+        public virtual void Draw(SpriteBatch spriteBatch) => spriteBatch.DrawRectangle(new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color, 4);
     }
 }

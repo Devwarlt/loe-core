@@ -4,12 +4,20 @@ namespace LoESoft.Server.Core.World.Entities
 {
     public class Entity
     {
+<<<<<<< HEAD
+=======
+        private static int NextObjectId = 0;
+
+        public static int GetNextObjectId() => ++NextObjectId;
+
+>>>>>>> 307714a782480e1e4ca9a2521f2f6c78cee45400
         public WorldManager Manager { get; private set; }
 
         public int ChunkX => X / Chunk.SIZE;
         public int ChunkY => Y / Chunk.SIZE;
 
         private int _realX;
+
         public int X
         {
             get => _realX;
@@ -19,7 +27,9 @@ namespace LoESoft.Server.Core.World.Entities
                 UpdateCount++;
             }
         }
+
         private int _realY;
+
         public int Y
         {
             get => _realY;
@@ -29,12 +39,12 @@ namespace LoESoft.Server.Core.World.Entities
                 UpdateCount++;
             }
         }
-        
+
         public int Id { get; private set; }
         public int ObjectId { get; set; }
 
         public int UpdateCount { get; set; }
-        
+
         public Entity(WorldManager manager, int id)
         {
             Manager = manager;

@@ -57,6 +57,5 @@ namespace LoESoft.Client.Core.Game.User
         }
 
         private void SendMovePacket() => User.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });
-
     }
 }

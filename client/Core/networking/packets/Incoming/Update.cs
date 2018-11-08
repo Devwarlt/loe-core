@@ -12,7 +12,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
         public override PacketID PacketID => PacketID.UPDATE;
 
         public override void Handle(GameUser user)
-        { 
+        {
             Map.AddOrUpdate(AddOrUpdateTile, AddOrUpdateObject);
         }
     }

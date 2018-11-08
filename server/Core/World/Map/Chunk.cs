@@ -8,7 +8,7 @@ namespace LoESoft.Server.Core.World.Map
 {
     public class Chunk
     {
-        public static int SIZE = 256; 
+        public static int SIZE = 256;
 
         public readonly int StartX;
         public readonly int StartY;
@@ -28,15 +28,18 @@ namespace LoESoft.Server.Core.World.Map
         }
 
         #region METHODS
+
         public void Add(Entity entity)
         {
             entity.ObjectId = EntityManager.GetNextId();
             Entities.Add(entity);
         }
+
         public void Remove(Entity entity) => Entities.Remove(entity);
+
         public void Contains(Entity entity) => Entities.Contains(entity);
 
-        public List<Entity> GetEntities(IEnumerable<Points> radius) => 
+        public List<Entity> GetEntities(IEnumerable<Points> radius) =>
             radius.Select(_ => Entities.Where(e => e.X == _.X && e.Y == _.Y).First()).ToList();
 
         public Entity GetEntity(int x, int y)
@@ -58,6 +61,7 @@ namespace LoESoft.Server.Core.World.Map
                     Y = rand.Next(StartY, StartY + 30)
                 });
         }
+
         #endregion METHODS
 
         public void Update()

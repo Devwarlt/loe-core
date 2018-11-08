@@ -28,7 +28,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
             foreach (var i in sight)
             {
-                var tile = Manager.Map.Tiles[i.X , i.Y];
+                var tile = Manager.Map.Tiles[i.X, i.Y];
 
                 if ((_addedTile.Contains(tile) && tile.UpdateCount > 0) || !_addedTile.Contains(tile))
                     _tilesToUpdateOrAdd.Add(tile);
@@ -47,7 +47,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
                     if (!_addedObjects.Contains(entity))
                         _addedObjects.Add(entity);
-                    
+
                     entity.UpdateCount = 0;
                 }
 
@@ -64,17 +64,17 @@ namespace LoESoft.Server.Core.World.Entities.Player
                     player.UpdateCount = 0;
                 }
             }
-            
+
             if (_tilesToUpdateOrAdd.Count > 0 || _objectsToUpdateOrAdd.Count > 0)
                 Client.SendPacket(new Update()
                 {
-                    AddOrUpdateTile = _tilesToUpdateOrAdd.Select( _ => TileData.GetData(_)).ToArray(),
+                    AddOrUpdateTile = _tilesToUpdateOrAdd.Select(_ => TileData.GetData(_)).ToArray(),
                     AddOrUpdateObject = _objectsToUpdateOrAdd.Select(_ => ObjectData.GetData(_)).ToArray()
                 });
-            
+
             _tilesToUpdateOrAdd.Clear();
             _objectsToUpdateOrAdd.Clear();
-            
+
             App.Warn("Took Server " + timer.ElapsedMilliseconds.ToString() + "MS to update!");
 
             timer.Stop();

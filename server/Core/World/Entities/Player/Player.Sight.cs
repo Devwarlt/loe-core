@@ -13,12 +13,13 @@ namespace LoESoft.Server.Core.World.Entities.Player
             Y = y;
         }
     }
+
     public partial class Player
     {
         public Points[] GetSightPoints(int radius = 30)
         {
             var points = new List<Points>();
-            
+
             for (var x = -radius; x < radius; x++)
                 for (var y = -radius; y < radius; y++)
                 {

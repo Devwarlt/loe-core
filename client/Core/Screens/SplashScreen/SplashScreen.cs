@@ -63,7 +63,7 @@ namespace LoESoft.Client.Core.Screens
 
             if (FadeIn)
             {
-                TextureToDrawAlpha = 1f - ((float) CurrentTime / DELAY_BETWEEN_SPLASH);
+                TextureToDrawAlpha = 1f - ((float)CurrentTime / DELAY_BETWEEN_SPLASH);
 
                 if (FadeIn && TextureToDrawAlpha >= 1)
                     FadeIn = false;

@@ -23,9 +23,9 @@ namespace LoESoft.Client.Core.Game.Animation
             CurrentFrame = 0;
         }
 
-        public void AddAnimation(AnimationType type, List<Texture2D> textures) 
+        public void AddAnimation(AnimationType type, List<Texture2D> textures)
             => Frames.Add(type, textures.Select(_ => new AnimationFrame(_)).ToList());
-        
+
         public void ChangeAnimationType(AnimationType type)
         {
             CurrentFrame = 0;
@@ -34,7 +34,7 @@ namespace LoESoft.Client.Core.Game.Animation
 
         public virtual void Update(GameTime gameTime, Entity basicObject)
         {
-            Timer += (float) gameTime.ElapsedGameTime.TotalSeconds;
+            Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (Timer >= CoolDown)
             {

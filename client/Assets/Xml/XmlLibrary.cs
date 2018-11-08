@@ -26,26 +26,26 @@ namespace LoESoft.Client.Assets
             {
                 XmlContent content;
 
-                switch ((ContentType) int.Parse(elem.Attribute("type").Value))
+                switch ((ContentType)int.Parse(elem.Attribute("type").Value))
                 {
                     case ContentType.Objects:
                         {
                             content = new ObjectsContent(elem);
-                            ObjectsXml.Add(content.Id, (ObjectsContent) content);
+                            ObjectsXml.Add(content.Id, (ObjectsContent)content);
                         }
                         break;
 
                     case ContentType.Items:
                         {
                             content = new ItemsContent(elem);
-                            ItemsXml.Add(content.Id, (ItemsContent) content);
+                            ItemsXml.Add(content.Id, (ItemsContent)content);
                         }
                         break;
 
                     case ContentType.Tiles:
                         {
                             content = new TilesContent(elem);
-                            TilesXml.Add(content.Id, (TilesContent) content);
+                            TilesXml.Add(content.Id, (TilesContent)content);
                         }
                         break;
                 }
@@ -77,7 +77,7 @@ namespace LoESoft.Client.Assets
             offSetList.Add(yOffset + 1);
             offSetList.Add(yOffset + 2);
             offSetList.Add(yOffset + 3);
-            
+
             var dictionary = new Dictionary<int, List<Texture2D>>();
             int idx = 0;
 

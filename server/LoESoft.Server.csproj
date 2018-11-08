@@ -238,7 +238,7 @@
     <Compile Include="Core\World\Entities\Player\Player.Sight.cs" />
     <Compile Include="Core\World\Entities\Player\Player.Update.cs" />
     <Compile Include="Core\World\Entities\Tile.cs" />
-    <Compile Include="Core\World\GameTime.cs" />
+    <Compile Include="Core\World\GameClock.cs" />
     <Compile Include="Core\World\Entities\Entity.cs" />
     <Compile Include="Core\World\Entities\Player\Player.cs" />
     <Compile Include="Core\World\Map\Data\ObjectData.cs" />

@@ -97,7 +97,7 @@ namespace LoESoft.Client.Core.Screens
             Background.AddChild(ExitButton);
         }
 
-        private void OnClick(object sender, Tuple<string, string> e) => App.Info($"Element '{(string) sender}' dispatch '{e.Item2}' from parent '{e.Item1}'.");
+        private void OnClick(object sender, Tuple<string, string> e) => App.Info($"Element '{(string)sender}' dispatch '{e.Item2}' from parent '{e.Item1}'.");
 
         private void _loginPanel_OnPanelExit() => Background.RemoveChild(MaskBlocker);
 
@@ -153,7 +153,7 @@ namespace LoESoft.Client.Core.Screens
         {
             TitleFlashSpeedR += 1.0f / gameTime.ElapsedGameTime.Milliseconds * 0.5f;
 
-            Title.SpriteColor = Color.Lerp(Color.Red, Color.Yellow, (float) Math.Sin(TitleFlashSpeedR));
+            Title.SpriteColor = Color.Lerp(Color.Red, Color.Yellow, (float)Math.Sin(TitleFlashSpeedR));
 
             Background.Update(gameTime);
         }

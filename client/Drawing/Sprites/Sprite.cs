@@ -16,7 +16,7 @@ namespace LoESoft.Client.Drawing.Sprites
             if (color == null)
                 color = RGBColor.Default;
 
-            SpriteColor = new Color(color.R, color.G, color.B, (byte) (255 * alpha));
+            SpriteColor = new Color(color.R, color.G, color.B, (byte)(255 * alpha));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

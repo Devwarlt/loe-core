@@ -8,7 +8,7 @@ namespace LoESoft.Client.Core.Game.Animation
 {
     public class ObjectAnimation : Animation
     {
-        public ObjectAnimation() 
+        public ObjectAnimation()
             : base(0.1f)
         {
         }

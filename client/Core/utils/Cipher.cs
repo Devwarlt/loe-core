@@ -14,7 +14,7 @@ namespace LoESoft.Client.Core.Utils
         {
             try
             {
-                using (var rsa = new RSACryptoServiceProvider((int) RSAKeySize, new CspParameters() { KeyContainerName = LoESoftHash }))
+                using (var rsa = new RSACryptoServiceProvider((int)RSAKeySize, new CspParameters() { KeyContainerName = LoESoftHash }))
                     return HttpUtility.UrlEncode(Convert.ToBase64String(rsa.Encrypt(Encoding.UTF8.GetBytes(plainText), false)));
             }
             catch { return plainText; }

@@ -2,7 +2,7 @@
   <Object type="0" id="5" name="Apprentice">
     <Texture x ="0" y="0">
       <FileName>playersEmbed</FileName>
-      <Animated/>
+      <Animated />
     </Texture>
   </Object>
 </Objects>
