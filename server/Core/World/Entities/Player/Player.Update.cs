@@ -50,6 +50,19 @@ namespace LoESoft.Server.Core.World.Entities.Player
                     
                     entity.UpdateCount = 0;
                 }
+
+                var player = Manager.Map.GetPlayer(i.X, i.Y);
+
+                if (player != null && player.ObjectId != ObjectId)
+                {
+                    if ((_addedObjects.Contains(player) && player.UpdateCount > 0) || !_addedObjects.Contains(player))
+                        _objectsToUpdateOrAdd.Add(player);
+
+                    if (!_addedObjects.Contains(player))
+                        _addedObjects.Add(player);
+
+                    player.UpdateCount = 0;
+                }
             }
             
             if (_tilesToUpdateOrAdd.Count > 0 || _objectsToUpdateOrAdd.Count > 0)

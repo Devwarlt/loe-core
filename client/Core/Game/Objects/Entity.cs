@@ -15,7 +15,6 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public int Size = 8;
         public int ObjectId { get; set; }
-        public int UniqueId { get; set; }
 
         public Texture2D Texture { get; set; }
         public ObjectsContent Content { get; set; }
@@ -42,6 +41,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public void HandleMovement(float dt)
         {
+            //TODO: Pathfinding
             if (DistinationX != X)
             {
                 if (DistinationX > X)

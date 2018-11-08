@@ -13,7 +13,7 @@ namespace LoESoft.Client.Core.Game.Animation
         {
         }
 
-        public void Init(ObjectsContent content)
+        public void InitOrUpdate(ObjectsContent content)
         {
             var animation = XmlLibrary.GetObjectAnimation(content);
 

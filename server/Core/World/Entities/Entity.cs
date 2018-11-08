@@ -4,9 +4,6 @@ namespace LoESoft.Server.Core.World.Entities
 {
     public class Entity
     {
-        private static int NextObjectId = 0;
-        public static int GetNextObjectId() => ++NextObjectId;
-
         public WorldManager Manager { get; private set; }
 
         public int ChunkX => X / Chunk.SIZE;
@@ -42,6 +39,15 @@ namespace LoESoft.Server.Core.World.Entities
         {
             Manager = manager;
             Id = id;
+        }
+
+        public void Move(int x, int y)
+        {
+            if (x >= 0 && X < WorldMap.WIDTH && Y >= 0 && Y < WorldMap.HEIGHT)
+            {
+                X = x;
+                Y = y;
+            }
         }
 
         public virtual void Update()

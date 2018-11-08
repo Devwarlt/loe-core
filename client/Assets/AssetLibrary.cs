@@ -27,10 +27,11 @@ namespace LoESoft.Client.Assets
         {
             AddSprites("playersEmbed");
             AddSprites("tilesEmbed");
+            AddSprites("objectsEmbed");
         }
 
-        public static void AddSprites(string filename, int maxX = 16, int maxY = 16) =>
-            Sprites.Add(filename, SpriteSet.LoadSet(filename, maxX, maxY));
+        public static void AddSprites(string filename) =>
+            Sprites.Add(filename, SpriteSet.LoadSet(filename));
 
         public static void AddImage(string file) =>
             Images.Add(file, AssetLoader.LoadAsset<Texture2D>("images/" + file));

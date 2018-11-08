@@ -7,15 +7,11 @@ namespace LoESoft.Client.Assets
     public class SpriteSet
     {
         public Texture2D[,] Textures { get; private set; }
-        public readonly int MaxX;
-        public readonly int MaxY;
+        public int MAXX { get; private set; }
+        public int MAXY { get; private set; }
 
-        public SpriteSet(string fileName, int maxX = 16, int maxY = 16)
+        public SpriteSet(string fileName)
         {
-            MaxX = maxX;
-            MaxY = maxY;
-            Textures = new Texture2D[maxX, maxY];
-
             Initialize(fileName);
         }
 
@@ -25,7 +21,7 @@ namespace LoESoft.Client.Assets
         {
             List<Texture2D> textures = new List<Texture2D>();
 
-            for (var x = 0; x < MaxX; x++)
+            for (var x = 0; x < MAXX; x++)
                 textures.Add(Textures[x, y]);
 
             return textures;
@@ -35,7 +31,7 @@ namespace LoESoft.Client.Assets
         {
             List<Texture2D> textures = new List<Texture2D>();
 
-            for (var y = 0; y < MaxY; y++)
+            for (var y = 0; y < MAXY; y++)
                 textures.Add(Textures[x, y]);
 
             return textures;
@@ -44,10 +40,14 @@ namespace LoESoft.Client.Assets
         private void Initialize(string fileName)
         {
             var asset = AssetLoader.LoadAsset<Texture2D>("sprites/" + fileName);
+            
+            Textures = new Texture2D[asset.Width / 8, asset.Height / 8];
+            MAXX = asset.Width / 8;
+            MAXY = asset.Height / 8;
 
-            for (var x = 0; x < asset.Width / 8 && x < MaxX; x++)
+            for (var x = 0; x < asset.Width / 8 && x < MAXX; x++)
             {
-                for (var y = 0; y < asset.Height / 8 && y < MaxY; y++)
+                for (var y = 0; y < asset.Height / 8 && y < MAXY; y++)
                 {
                     var data = new Color[64];
                     asset.GetData(0, new Rectangle(x * 8, y * 8, 8, 8), data, 0, 64);
@@ -60,7 +60,7 @@ namespace LoESoft.Client.Assets
             }
         }
 
-        public static SpriteSet LoadSet(string assetName, int maxX = 16, int maxY = 16) =>
-            new SpriteSet(assetName, maxX, maxY);
+        public static SpriteSet LoadSet(string assetName) =>
+            new SpriteSet(assetName);
     }
 }

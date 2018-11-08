@@ -2,6 +2,7 @@
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -49,17 +50,53 @@ namespace LoESoft.Client.Core.Game.Map
                     Objects[i.ObjectId].DistinationY = i.Y;
                 } else
                 {
-                    Objects.Add(i.ObjectId, new Entity(i.Id) { X = i.X, Y = i.Y });
+                    if (i.IsPlayer)
+                    {
+                        HandlePlayer(i);
+                    } else
+                    {
+                        HandleEntity(i);
+                    }
                 }
-
-                App.Warn("Entites !");
             }
+        }
+
+        private static void HandleEntity(ObjectData data)
+        {
+            try
+            {
+                var obj = new EntityObject()
+                {
+                    X = data.X,
+                    Y = data.Y,
+                    DistinationX = data.X,
+                    DistinationY = data.Y
+                };
+                obj.Init();
+                Objects.Add(data.ObjectId, obj);
+            }catch(Exception ex)
+            {
+                App.Warn(ex.ToString());
+            }
+        }
+
+        private static void HandlePlayer(ObjectData data)
+        {
+            var player = new Player()
+            {
+                X = data.X,
+                Y = data.Y,
+                DistinationX = data.X,
+                DistinationY = data.Y
+            };
+            player.Init();
+            Objects.Add(data.ObjectId, player);
         }
 
         public static void Update(GameTime gameTime)
         {
-            foreach (var i in Objects.Values)
-                i.Update(gameTime);
+            foreach (var i in Objects.ToArray())
+                i.Value.Update(gameTime);
         }
 
         public static void Draw(SpriteBatch spriteBatch)

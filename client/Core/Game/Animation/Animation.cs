@@ -38,7 +38,7 @@ namespace LoESoft.Client.Core.Game.Animation
 
             if (Timer >= CoolDown)
             {
-                if (basicObject is Player && !(basicObject as Player).IsMoving)
+                if (!basicObject.IsMoving)
                 {
                     CurrentFrame = 0;
                     return;

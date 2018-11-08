@@ -30,7 +30,7 @@ namespace LoESoft.Server.Core.World.Map
         #region METHODS
         public void Add(Entity entity)
         {
-            entity.ObjectId = Entity.GetNextObjectId();
+            entity.ObjectId = EntityManager.GetNextId();
             Entities.Add(entity);
         }
         public void Remove(Entity entity) => Entities.Remove(entity);
@@ -52,16 +52,20 @@ namespace LoESoft.Server.Core.World.Map
             var rand = new Random();
 
             for (var i = 0; i < 100; i++)
-                Entities.Add(new Entity(Manager, 6)
+                Add(new Entity(Manager, 6)
                 {
-                    X = rand.Next(StartX, StartX + SIZE),
-                    Y = rand.Next(StartY, StartY + SIZE)
+                    X = rand.Next(StartX, StartX + 30),
+                    Y = rand.Next(StartY, StartY + 30)
                 });
         }
         #endregion METHODS
 
         public void Update()
         {
+            var rand = new Random();
+            foreach (var i in Entities.ToArray())
+                if (i.X < 30 && i.Y < 30)
+                    i.Move(i.X + rand.Next(-2, 2), i.Y + rand.Next(-2, 2));
         }
     }
 }

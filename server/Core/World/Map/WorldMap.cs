@@ -17,6 +17,7 @@ namespace LoESoft.Server.Core.World
 
         public Tile[,] Tiles { get; private set; }
         public Dictionary<Tuple<int, int>, Chunk> Chunks { get; private set; }
+        public ConcurrentDictionary<int, Player> Players { get; private set; }
 
         private bool Loaded = false;
 
@@ -26,7 +27,7 @@ namespace LoESoft.Server.Core.World
 
             Tiles = new Tile[256, 256];
             Chunks = new Dictionary<Tuple<int, int>, Chunk>();
-            Players = new List<Player>();
+            Players = new ConcurrentDictionary<int, Player>();
 
             //Temporary Initiazation 
             var rand = new Random();
@@ -41,8 +42,6 @@ namespace LoESoft.Server.Core.World
             Loaded = true;
         }
 
-        public List<Player> Players { get; set; }
-
         public void Update(GameTime time)
         {
             if (Loaded)
@@ -51,7 +50,7 @@ namespace LoESoft.Server.Core.World
                     i.Update();
 
                 foreach (var i in Players.ToArray())
-                    i.Update();
+                    i.Value.Update();
             }
         }
 
@@ -65,12 +64,27 @@ namespace LoESoft.Server.Core.World
                 MapHeight = HEIGHT
             });
 
-            Players.Add(player);
+            player.ObjectId = EntityManager.GetNextId();
+            Players.TryAdd(player.ObjectId, player);
         }
+
+        public Player GetPlayer(int x, int y)
+        {
+            foreach (var i in Players.Values)
+                if (i.X == x && i.Y == y)
+                    return i;
+            return null;
+        }
+
+        public Player GetPlayer(int objId) => Players[objId];
 
         public void Add(Entity entity) => Chunks[new Tuple<int, int>(entity.ChunkX, entity.ChunkY)].Add(entity);
 
-        public void Remove(Player player) => Players.Remove(player);
+        public void Remove(Player player)
+        {
+            if (!Players.TryRemove(player.ObjectId, out var plyer))
+                plyer.Dispose();
+        }
 
         public void Dispose()
         {

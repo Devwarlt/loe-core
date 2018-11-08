@@ -49,11 +49,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             if (client.Player == null)
                 return;
 
-            if (client.Manager.Map.IsValidPosition(newX, newY))
-            {
-                client.Player.X = newX;
-                client.Player.Y = newY;
-            }
+            client.Player.Move(newX, newY);
 
             client.SendPacket(new ServerMove()
             {
