@@ -4,13 +4,10 @@ namespace LoESoft.Server.Core.World.Entities
 {
     public class Entity
     {
-<<<<<<< HEAD
-=======
         private static int NextObjectId = 0;
 
         public static int GetNextObjectId() => ++NextObjectId;
-
->>>>>>> 307714a782480e1e4ca9a2521f2f6c78cee45400
+        
         public WorldManager Manager { get; private set; }
 
         public int ChunkX => X / Chunk.SIZE;
