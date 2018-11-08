@@ -3,6 +3,7 @@ using LoESoft.Server.Core.World.Entities;
 using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World
@@ -40,7 +41,7 @@ namespace LoESoft.Server.Core.World
 
             Loaded = true;
         }
-        
+
         public void Update()
         {
             if (Loaded)

@@ -7,7 +7,7 @@ namespace LoESoft.LCBase
     public class Base
     {
         public string MainDir => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        
+
         private string _basedir;
         private Action<string> _log;
 
