@@ -6,16 +6,18 @@ namespace LoESoft.LCBase
 {
     public class Base
     {
-        public string MainDir => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        
-        private string _basedir;
-        private Action<string> _log;
+        public string MainDir { get; }
+        public string BaseDir { get; }
+
+        private readonly Action<string> _log;
 
         private void Logger(string message) => _log?.Invoke(message);
 
         public Base(string basedir, Action<string> log)
         {
-            _basedir = basedir;
+            MainDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            BaseDir = basedir;
+
             _log = log;
 
             Logger("------------------------");
@@ -25,7 +27,7 @@ namespace LoESoft.LCBase
 
         public void CreateMainDirectory()
         {
-            var basedir = Path.Combine(MainDir, _basedir);
+            var basedir = Path.Combine(MainDir, BaseDir);
 
             if (!Directory.Exists(basedir))
             {
@@ -36,7 +38,7 @@ namespace LoESoft.LCBase
 
         public void CreateSubDirectory(string subfolder)
         {
-            var subdir = Path.Combine(MainDir, $"/{_basedir}/{subfolder}/");
+            var subdir = Path.Combine(MainDir, $"/{BaseDir}/{subfolder}/");
 
             if (!Directory.Exists(subdir))
             {
@@ -45,15 +47,40 @@ namespace LoESoft.LCBase
             }
         }
 
+        public void Save<T>(string path, T data)
+        {
+            if (data == null)
+                Logger($"(SaveException) Missing data from path: {path}.json");
+            else
+            {
+                File.WriteAllText(Path.Combine(MainDir, $"{path}.json"), JsonConvert.SerializeObject(data));
+                Logger($"Saved data to '{path}.json'.");
+            }
+        }
+
         public void Save<T>(string folder, string target, T data)
         {
             if (data == null)
-                Logger($"(SaveException) Missing data from path: {_basedir}/{folder}/{target}.json");
+                Logger($"(SaveException) Missing data from path: {BaseDir}/{folder}/{target}.json");
             else
             {
-                File.WriteAllText(Path.Combine(MainDir, $"/{_basedir}/{folder}/{target}.json"), JsonConvert.SerializeObject(data));
-                Logger($"Saved data to '{_basedir}/{folder}/{target}.json'.");
+                File.WriteAllText(Path.Combine(MainDir, $"/{BaseDir}/{folder}/{target}.json"), JsonConvert.SerializeObject(data));
+                Logger($"Saved data to '{BaseDir}/{folder}/{target}.json'.");
             }
+        }
+
+        public T Load<T>(string path)
+        {
+            object data = null;
+
+            try
+            {
+                data = JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
+                Logger($"Loaded data from '{path}'.");
+            }
+            catch { Logger($"(LoadException) Missing data from path: {path}"); }
+
+            return (T)data;
         }
 
         public T Load<T>(string folder, string target)
@@ -62,10 +89,10 @@ namespace LoESoft.LCBase
 
             try
             {
-                data = JsonConvert.DeserializeObject<T>(File.ReadAllText(Path.Combine(MainDir, $"{_basedir}/{folder}/{target}.json")));
-                Logger($"Loaded data from '{_basedir}/{folder}/{target}.json'.");
+                data = JsonConvert.DeserializeObject<T>(File.ReadAllText(Path.Combine(MainDir, $"{BaseDir}/{folder}/{target}.json")));
+                Logger($"Loaded data from '{BaseDir}/{folder}/{target}.json'.");
             }
-            catch { Logger($"(LoadException) Missing data from path: {_basedir}/{folder}/{target}.json"); }
+            catch { Logger($"(LoadException) Missing data from path: {BaseDir}/{folder}/{target}.json"); }
 
             return (T)data;
         }

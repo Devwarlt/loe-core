@@ -19,7 +19,7 @@ namespace LoESoft.Server.Core.World
         public Dictionary<Tuple<int, int>, Chunk> Chunks { get; private set; }
         public ConcurrentDictionary<int, Player> Players { get; private set; }
 
-        private bool Loaded = false;
+        private readonly bool Loaded = false;
 
         public WorldMap(WorldManager manager)
         {
@@ -41,7 +41,7 @@ namespace LoESoft.Server.Core.World
 
             Loaded = true;
         }
-        
+
         public void Update()
         {
             if (Loaded)

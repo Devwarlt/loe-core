@@ -2,7 +2,6 @@
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,7 +53,8 @@ namespace LoESoft.Client.Core.Game.Map
                     if (i.IsPlayer)
                     {
                         HandlePlayer(i);
-                    } else
+                    }
+                    else
                     {
                         HandleEntity(i);
                     }
@@ -64,21 +64,15 @@ namespace LoESoft.Client.Core.Game.Map
 
         private static void HandleEntity(ObjectData data)
         {
-            try
+            var obj = new EntityObject()
             {
-                var obj = new EntityObject()
-                {
-                    X = data.X,
-                    Y = data.Y,
-                    DistinationX = data.X,
-                    DistinationY = data.Y
-                };
-                obj.Init();
-                Objects.Add(data.ObjectId, obj);
-            }catch(Exception ex)
-            {
-                App.Warn(ex.ToString());
-            }
+                X = data.X,
+                Y = data.Y,
+                DistinationX = data.X,
+                DistinationY = data.Y
+            };
+            obj.Init();
+            Objects.Add(data.ObjectId, obj);
         }
 
         private static void HandlePlayer(ObjectData data)

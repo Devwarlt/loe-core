@@ -40,7 +40,7 @@ namespace LoESoft.Client.Assets
         private void Initialize(string fileName)
         {
             var asset = AssetLoader.LoadAsset<Texture2D>("sprites/" + fileName);
-            
+
             Textures = new Texture2D[asset.Width / 8, asset.Height / 8];
             MAXX = asset.Width / 8;
             MAXY = asset.Height / 8;

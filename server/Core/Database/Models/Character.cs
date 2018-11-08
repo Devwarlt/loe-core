@@ -3,6 +3,7 @@
     public class Character
     {
         public long Id { get; set; }
+        public long AccountId { get; set; }
         public int World { get; set; }
         public string Name { get; set; }
         public int Class { get; set; }
