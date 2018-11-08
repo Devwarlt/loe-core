@@ -64,9 +64,7 @@ namespace LoESoft.Client.Core.Game.Map
 
         private static void HandleEntity(ObjectData data)
         {
-            try
-            {
-                var obj = new EntityObject()
+            var obj = new EntityObject()
                 {
                     X = data.X,
                     Y = data.Y,
@@ -75,10 +73,6 @@ namespace LoESoft.Client.Core.Game.Map
                 };
                 obj.Init();
                 Objects.Add(data.ObjectId, obj);
-            }catch(Exception ex)
-            {
-                App.Warn(ex.ToString());
-            }
         }
 
         private static void HandlePlayer(ObjectData data)
