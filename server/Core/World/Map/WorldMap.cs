@@ -82,8 +82,8 @@ namespace LoESoft.Server.Core.World
 
         public void Remove(Player player)
         {
-            if (!Players.TryRemove(player.ObjectId, out var plyer))
-                plyer.Dispose();
+            if (!Players.TryRemove(player.ObjectId, out var disposedPlayer))
+                disposedPlayer?.Dispose();
         }
 
         public void Dispose()
