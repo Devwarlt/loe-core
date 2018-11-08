@@ -63,7 +63,6 @@ namespace LoESoft.Server
             try
             {
                 Database = new Database();
-                Database.Connect();
 
                 var manager = new WorldManager();
                 manager.BeginUpdate();
@@ -76,7 +75,7 @@ namespace LoESoft.Server
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape)
                     ;
 
-                Database.Disconnect();
+                Database.Dispose();
 
                 connection.EndAccept();
 
