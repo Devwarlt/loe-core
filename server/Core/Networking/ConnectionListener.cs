@@ -30,8 +30,6 @@ namespace LoESoft.Server.Core.Networking
             TcpSocket.Bind(TcpEndPoint);
             TcpSocket.Listen(0xFF);
             Manager = manager;
-
-            new Thread(ConnectionManager) { IsBackground = true }.Start();
         }
 
         public void StartAccept()
@@ -70,22 +68,6 @@ namespace LoESoft.Server.Core.Networking
 
             TcpSocket.Close();
             TcpSocket.Dispose();
-        }
-
-        public void ConnectionManager()
-        {
-            Clients.Select(client =>
-            {
-                if (!client.Value.IsConnected)
-                    if (Clients.TryRemove(client.Value.Id, out Client invalidClient))
-                        invalidClient.Disconnect();
-
-                return client;
-            }).ToList();
-
-            Thread.Sleep(10 * 1000); // it's not even a thread priority for us due stability :)
-
-            ConnectionManager();
         }
     }
 }

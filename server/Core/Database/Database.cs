@@ -70,7 +70,7 @@ namespace LoESoft.Server.Core.Database
         }
 
         public Account GetAccountByCredentials(string name, string password)
-            => Accounts.TryGetValue(new KeyValuePair<string, string>(name, Cipher.Encode(password)), out Account account) ? account : null;
+            => Accounts.TryGetValue(new KeyValuePair<string, string>(name, password), out Account account) ? account : null;
 
         public Character GetCharacterByAccountId(long accountId, long characterId)
             => Characters.TryGetValue(new KeyValuePair<long, long>(accountId, characterId), out Character character) ? character : null;
@@ -82,13 +82,11 @@ namespace LoESoft.Server.Core.Database
         {
             token = Cipher.Encode($"{Cipher.LoESoftHash}+{name}+{password}+{Cipher.LoESoftHash}");
 
-            var pass = Cipher.Encode(password);
-
-            return Accounts.TryAdd(new KeyValuePair<string, string>(name, pass), new Account()
+            return Accounts.TryAdd(new KeyValuePair<string, string>(name, password), new Account()
             {
                 Id = Interlocked.Increment(ref LastAccountId),
                 Name = name,
-                Password = pass,
+                Password = password,
                 Rank = 0,
                 Token = token,
                 Creation = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss UTC")

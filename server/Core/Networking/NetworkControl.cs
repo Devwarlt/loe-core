@@ -112,7 +112,8 @@ namespace LoESoft.Server.Core.Networking
                         var data = Encoding.UTF8.GetString(buffer);
                         var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
-                        GetIncomingPacket(packetData).Handle(Client);
+                        if (Client != null)
+                            GetIncomingPacket(packetData).Handle(Client);
 
                         if (packetData.PacketID != PacketID.UPDATE)
                             App.Info($"client -> server\t{packetData.PacketID}");

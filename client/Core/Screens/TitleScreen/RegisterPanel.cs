@@ -1,5 +1,4 @@
 ﻿using LoESoft.Client.Core.Networking.Packets.Outgoing;
-using LoESoft.Client.Core.Utils;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
@@ -38,8 +37,8 @@ namespace LoESoft.Client.Core.Screens
 
                 GameApplication.GameUser.SendPacket(new Register()
                 {
-                    Name = Cipher.Encrypt(AccountName.GetText),
-                    Password = Cipher.Encrypt(AccountPassword.GetText)
+                    Name = AccountName.GetText,
+                    Password = AccountPassword.GetText
                 });
             });
         }
