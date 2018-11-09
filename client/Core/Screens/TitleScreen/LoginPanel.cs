@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Networking.Packets.Outgoing;
-using LoESoft.Client.Drawing;
+﻿using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Forms.Complex;
@@ -40,12 +39,6 @@ namespace LoESoft.Client.Core.Screens
             {
                 AccountName.Selected = false;
                 AccountPassword.Selected = false;
-
-                GameApplication.GameUser.SendPacket(new Login()
-                {
-                    Name = AccountName.GetText,
-                    Password = AccountPassword.GetText
-                });
             });
 
             AddChild(AccountName);

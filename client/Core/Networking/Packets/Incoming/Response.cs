@@ -36,7 +36,25 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         private void LoginHandler()
         {
-            GameApplication.TitleScreen._logged = Result == 0;
+            App.Launcher.MainMenu.LoggedIn = Result == 0; // temporarily
+
+            //App.Launcher.MainMenu.UpdateSettings(new PopUpSettings()
+            //{
+            //    Title = Result == 0 ? "Welcome" : "Login Denied",
+            //    Content = Content,
+            //    Alignment = ContentAlignment.MiddleCenter,
+            //    OnDisplay = () =>
+            //    {
+            //        App.Launcher.MainMenu.LoggedIn = Result == 0;
+            //        App.Launcher.MainMenu.SetPopUpBoxVisibility(true);
+            //        App.Launcher.MainMenu.ToggleLoginBox();
+            //    },
+            //    OnClose = () =>
+            //    {
+            //        App.Launcher.MainMenu.SetPopUpBoxVisibility(false);
+            //        App.Launcher.MainMenu.OnLoginBoxClose(Result == 0);
+            //    }
+            //});
 
             App.Info($"({From} [{Result}]) {Content}");
         }

@@ -4,6 +4,11 @@ namespace LoESoft.Client.Assets.Xml.Structure
 {
     public partial class XmlContent
     {
+        public XmlTexture Texture { get; set; }
+        public ContentType Type { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
         public XmlContent(XElement elem)
         {
             Type = (ContentType)(int.Parse(elem.Attribute("type").Value));
@@ -11,10 +16,5 @@ namespace LoESoft.Client.Assets.Xml.Structure
             Name = elem.Attribute("name").Value;
             Texture = new XmlTexture(elem.Element("Texture"));
         }
-
-        public XmlTexture Texture { get; set; }
-        public ContentType Type { get; set; }
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }

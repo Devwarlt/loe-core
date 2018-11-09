@@ -34,12 +34,6 @@ namespace LoESoft.Client.Core.Screens
             {
                 AccountName.Selected = false;
                 AccountPassword.Selected = false;
-
-                GameApplication.GameUser.SendPacket(new Register()
-                {
-                    Name = AccountName.GetText,
-                    Password = AccountPassword.GetText
-                });
             });
         }
 

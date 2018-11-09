@@ -55,7 +55,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>loesoft.ico</ApplicationIcon>
+    <ApplicationIcon>loesoft-new.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -95,6 +95,37 @@
     <Compile Include="Core\Game\PathFinder\PathNode.cs" />
     <Compile Include="Core\Game\PathFinder\Points.cs" />
     <Compile Include="Core\Game\User\GamePlayer.cs" />
+    <Compile Include="Core\GUI\Launcher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\Launcher.Designer.cs">
+      <DependentUpon>Launcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\MainScreen\LoginBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\MainScreen\LoginBox.Designer.cs">
+      <DependentUpon>LoginBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\MainScreen\MainMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\MainScreen\MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\MainScreen\PopUp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\MainScreen\PopUp.Designer.cs">
+      <DependentUpon>PopUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\MainScreen\PopUpSettings.cs" />
+    <Compile Include="Core\GUI\MainScreen\RegisterBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\MainScreen\RegisterBox.Designer.cs">
+      <DependentUpon>RegisterBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Models\Character.cs" />
     <Compile Include="Core\Models\Position.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
@@ -150,6 +181,11 @@
     <Compile Include="App.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assets\AudioManager.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Discord RPC">
@@ -306,13 +342,33 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Core\GUI\Launcher.resx">
+      <DependentUpon>Launcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\MainScreen\LoginBox.resx">
+      <DependentUpon>LoginBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\MainScreen\MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\MainScreen\PopUp.resx">
+      <DependentUpon>PopUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\MainScreen\RegisterBox.resx">
+      <DependentUpon>RegisterBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
@@ -368,10 +424,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\loesoft-new-expanded-shadows-closer.png" />
     <EmbeddedResource Include="Assets\Embeds\Players.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Assets\Embeds\TestObjects.xml" />
+    <Content Include="loesoft-new-expanded-shadows-closer.png" />
+    <Content Include="loesoft-new.ico" />
     <Content Include="loesoft.ico" />
   </ItemGroup>
   <ItemGroup>

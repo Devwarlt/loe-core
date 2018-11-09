@@ -1,4 +1,5 @@
 ﻿using DiscordRPC;
+using LoESoft.Client.Core.GUI;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -6,6 +7,7 @@ using Rollbar;
 using System;
 using System.Reflection;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace LoESoft.Client
 {
@@ -30,6 +32,9 @@ namespace LoESoft.Client
         public static DiscordClient DscordClient { get; set; }
 
         public static RichPresence DiscordRichPresence { get; set; }
+
+        // Launcher
+        public static Launcher Launcher { get; set; }
 
         [STAThread]
         public static void Main(string[] args)
@@ -76,8 +81,11 @@ namespace LoESoft.Client
             {
                 DscordClient.SetPresence(DiscordRichPresence);
 
-                using (var game = new GameApplication())
-                    game.Run();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(Launcher = new Launcher());
+
+                Console.ReadKey();
             }
             catch (Exception e)
             {

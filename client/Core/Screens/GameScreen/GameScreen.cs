@@ -16,7 +16,9 @@ namespace LoESoft.Client.Core.Screens
     {
         public GamePlayer Controller { get; set; }
 
-        private GameUser GameUser = GameApplication.GameUser;
+        private GameUser GameUser { get; set; }
+
+        public GameScreen(GameUser gameUser) => GameUser = gameUser;
 
         public override void OnScreenCreate()
         {

@@ -149,10 +149,6 @@ namespace LoESoft.Client.Core.Screens
 
         private void OnPlay(object sender, EventArgs e)
         {
-            if (_logged)
-                ScreenManager.DispatchScreen(new GameScreen());
-            else
-                App.Info("You are not logged in!");
         }
 
         private void OnExit(object sender, EventArgs e) => ScreenManager.CloseGame();

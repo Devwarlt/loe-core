@@ -32,6 +32,7 @@ namespace LoESoft.Client.Core.Networking
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
         private int ConnectionAttempt { get; set; }
         private bool Disconnected { get; set; }
+        private bool Reconnecting { get; set; }
 
         public NetworkControl(GameUser gameUser, Server server)
         {
@@ -44,6 +45,7 @@ namespace LoESoft.Client.Core.Networking
                 SendTimeout = 1000,
                 ReceiveTimeout = 1000
             };
+            Reconnecting = true;
         }
 
         public void Connect()
@@ -62,10 +64,14 @@ namespace LoESoft.Client.Core.Networking
 
                         App.Info($"Connected to {Server}!");
 
+                        Reconnecting = false;
+
                         ReceivePacket();
                     }
                     catch
                     {
+                        App.Info("Server is probably offline, retrying...");
+
                         Thread.Sleep(3000);
 
                         Connect();
@@ -74,7 +80,11 @@ namespace LoESoft.Client.Core.Networking
             }
             catch
             {
-                App.Info("Server is offline.");
+                App.Info("Server is offline! Retrying...");
+
+                Thread.Sleep(3000);
+
+                Connect();
             }
         }
 
@@ -83,8 +93,13 @@ namespace LoESoft.Client.Core.Networking
             {
                 if (!IsConnected)
                 {
+                    if (Reconnecting)
+                        return;
+
                     if (!Disconnected)
-                        App.Warn($"Disposing packet {outgoingPacket.PacketID} and reconnecting...");
+                        App.Info($"Disposing packet {outgoingPacket.PacketID} and reconnecting...");
+
+                    Reconnecting = true;
 
                     Connect();
 
@@ -103,20 +118,10 @@ namespace LoESoft.Client.Core.Networking
                     {
                         try
                         { TcpSocket.EndSend(result); }
-                        catch (SocketException) { }
-                        catch
-                        {
-                            if (!Disconnected)
-                                App.Warn("Something went wrong!");
-                        }
+                        catch { }
                     }, null);
                 }
-                catch (SocketException) { }
-                catch
-                {
-                    if (!Disconnected)
-                        App.Warn("Something went wrong!");
-                }
+                catch { }
             })
             { IsBackground = true }.Start();
 
@@ -134,8 +139,13 @@ namespace LoESoft.Client.Core.Networking
 
             if (!IsConnected)
             {
+                if (Reconnecting)
+                    return;
+
                 if (!Disconnected)
-                    App.Warn($"Reconnecting...");
+                    App.Info($"Reconnecting...");
+
+                Reconnecting = true;
 
                 Connect();
 
@@ -159,28 +169,17 @@ namespace LoESoft.Client.Core.Networking
 
                         ReceivePacket();
                     }
-                    catch (SocketException) { }
-                    catch (JsonReaderException) { }
-                    catch (NullReferenceException) { }
                     catch
                     {
                         if (!Disconnected)
-                        {
-                            App.Warn("Something went wrong!");
-
                             ReceivePacket();
-                        }
                     }
                 }, null);
             }
             catch
             {
                 if (!Disconnected)
-                {
-                    App.Warn("Something went wrong!");
-
                     ReceivePacket();
-                }
             }
         }
 
@@ -216,12 +215,12 @@ namespace LoESoft.Client.Core.Networking
 
             Disconnected = true;
 
-            ScreenManager.DispatchScreen(new SplashScreen());
+            ScreenManager.DispatchScreen(GameApplication.SplashScreen);
 
             TcpSocket?.Close();
             TcpSocket?.Dispose();
 
-            App.Warn("Client disconnected.");
+            App.Info("Client has left from the server network.");
         }
     }
 }
