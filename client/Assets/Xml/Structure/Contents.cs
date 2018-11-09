@@ -42,8 +42,11 @@ namespace LoESoft.Client.Assets.Xml.Structure
 
     public class ObjectsContent : XmlContent
     {
+        public bool Blocked { get; set; }
+
         public ObjectsContent(XElement elem) : base(elem)
         {
+            Blocked = elem.Element("Blocked") != null;
         }
     }
 
@@ -56,8 +59,11 @@ namespace LoESoft.Client.Assets.Xml.Structure
 
     public class TilesContent : XmlContent
     {
+        public bool Walkable { get; set; }
+
         public TilesContent(XElement elem) : base(elem)
         {
+            Walkable = elem.Element("UnWalkable") != null;
         }
     }
 }

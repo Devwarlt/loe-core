@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace LoESoft.Client.Core.Game.Map
 {
-    public static class Map
+    public static class WorldMap
     {
         public static Tile[,] TileMap { get; set; }
 
@@ -18,7 +18,7 @@ namespace LoESoft.Client.Core.Game.Map
 
         private static bool _initialized = false;
 
-        static Map()
+        static WorldMap()
         {
             Objects = new Dictionary<int, Entity>();
         }
@@ -45,6 +45,8 @@ namespace LoESoft.Client.Core.Game.Map
                 if (Objects.ContainsKey(i.ObjectId))
                 {
                     //Update stat
+                    //if (!i.IsPlayer)
+                    //    (Objects[i.ObjectId] as EntityObject).SetNewDistination(i.X, i.Y, i.ObjectId);
                     Objects[i.ObjectId].DistinationX = i.X;
                     Objects[i.ObjectId].DistinationY = i.Y;
                 }

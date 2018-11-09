@@ -39,7 +39,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public int DistinationX { get; set; }
         public int DistinationY { get; set; }
 
-        public void HandleMovement(float dt)
+        public virtual void HandleMovement(float dt)
         {
             //TODO: Pathfinding
             if (DistinationX != X)
@@ -49,7 +49,7 @@ namespace LoESoft.Client.Core.Game.Objects
                 else if (DistinationX < X)
                     X -= dt;
             }
-            if (DistinationY != Y)
+            else if (DistinationY != Y)
             {
                 if (DistinationY > Y)
                     Y += dt;

@@ -50,11 +50,11 @@ namespace LoESoft.Server.Core.World.Map
             return null;
         }
 
+        Random rand = new Random();
+
         public void RandomGen()
         {
-            var rand = new Random();
-
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 50; i++)
                 Add(new Entity(Manager, 6)
                 {
                     X = rand.Next(StartX, StartX + 30),
@@ -66,10 +66,6 @@ namespace LoESoft.Server.Core.World.Map
 
         public void Update()
         {
-            var rand = new Random();
-            foreach (var i in Entities.ToArray())
-                if (i.X < 30 && i.Y < 30)
-                    i.Move(i.X + rand.Next(-2, 2), i.Y + rand.Next(-2, 2));
         }
     }
 }

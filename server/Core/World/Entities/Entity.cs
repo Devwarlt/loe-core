@@ -46,11 +46,10 @@ namespace LoESoft.Server.Core.World.Entities
 
         public void Move(int x, int y)
         {
-            if (x >= 0 && X < WorldMap.WIDTH && Y >= 0 && Y < WorldMap.HEIGHT)
-            {
+            if (x >= 0 && X < WorldMap.WIDTH)
                 X = x;
+            if (Y >= 0 && Y < WorldMap.HEIGHT)
                 Y = y;
-            }
         }
 
         public virtual void Update()

@@ -28,7 +28,7 @@ namespace LoESoft.Client.Core.Screens
 
         public override void Update(GameTime gameTime)
         {
-            Map.Update(gameTime);
+            WorldMap.Update(gameTime);
             Controller.Update(gameTime);
 
             Camera.SetFocus(Controller.Player);
@@ -43,7 +43,7 @@ namespace LoESoft.Client.Core.Screens
 
                 if (GameUser.IsConnected)
                 {
-                    Map.Draw(spriteBatch);
+                    WorldMap.Draw(spriteBatch);
                     Controller.Draw(spriteBatch);
                 }
             }

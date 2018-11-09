@@ -99,9 +99,6 @@ namespace LoESoft.Client.Core.Networking
 
                 try
                 {
-                    if (outgoingPacket.PacketID != PacketID.UPDATE)
-                        App.Info($"client -> server\t{outgoingPacket.PacketID}");
-
                     TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, (result) =>
                     {
                         try
@@ -159,9 +156,6 @@ namespace LoESoft.Client.Core.Networking
                         var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
                         GetIncomingPacket(packetData).Handle(GameUser);
-
-                        if (packetData.PacketID != PacketID.UPDATE)
-                            App.Warn($"server -> client\t{packetData.PacketID}");
 
                         ReceivePacket();
                     }

@@ -52,9 +52,6 @@ namespace LoESoft.Server.Core.Networking
 
             try
             {
-                if (outgoingPacket.PacketID != PacketID.UPDATE)
-                    App.Info($"server -> client {Client.Id}\t{outgoingPacket.PacketID}");
-
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, result =>
                 {
                     try
@@ -113,9 +110,6 @@ namespace LoESoft.Server.Core.Networking
                         var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
                         GetIncomingPacket(packetData).Handle(Client);
-
-                        if (packetData.PacketID != PacketID.UPDATE)
-                            App.Info($"client -> server\t{packetData.PacketID}");
 
                         ReceivePacket();
                     }

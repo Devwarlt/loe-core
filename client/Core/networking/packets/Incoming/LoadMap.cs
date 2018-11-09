@@ -12,7 +12,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public override void Handle(GameUser gameUser)
         {
-            Map.Initialize(MapWidth, MapHeight);
+            WorldMap.Initialize(MapWidth, MapHeight);
         }
     }
 }

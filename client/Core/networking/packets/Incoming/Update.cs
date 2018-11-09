@@ -13,7 +13,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public override void Handle(GameUser user)
         {
-            Map.AddOrUpdate(AddOrUpdateTile, AddOrUpdateObject);
+            WorldMap.AddOrUpdate(AddOrUpdateTile, AddOrUpdateObject);
         }
     }
 }
