@@ -48,7 +48,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
             foreach (var i in sight)
             {
-                var tile = Manager.Map.Tiles[i.X, i.Y];
+                var tile = Manager.Core.Map.Tiles[i.X, i.Y];
 
                 if ((_addedTile.Contains(tile) && tile.UpdateCount > 0) || !_addedTile.Contains(tile))
                     _tilesToUpdateOrAdd.Add(tile);
@@ -58,7 +58,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
                 tile.UpdateCount = 0;
 
-                var entity = Manager.Map.Chunks[new Tuple<int, int>(ChunkX, ChunkY)].GetEntity(i.X, i.Y);
+                var entity = Manager.Core.Map.Chunks[new Tuple<int, int>(ChunkX, ChunkY)].GetEntity(i.X, i.Y);
 
                 if (entity != null)
                 {
@@ -71,7 +71,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
                     entity.UpdateCount = 0;
                 }
 
-                var player = Manager.Map.GetPlayer(i.X, i.Y);
+                var player = Manager.Core.Map.GetPlayer(i.X, i.Y);
 
                 if (player != null && player.ObjectId != ObjectId)
                 {

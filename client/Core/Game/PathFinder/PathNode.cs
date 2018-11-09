@@ -25,12 +25,12 @@ namespace LoESoft.Client.Core.Game.PathFinder
             
         public PathNode(XmlContent content, int x , int y)
         {
-            if (content is ObjectsContent)
-                Blocked = (content as ObjectsContent).Blocked;
-            else if (content is TilesContent)
-                Blocked = !(content as TilesContent).Walkable;
-            else
-                Blocked = false; //Unloaded stuff
+            //if (content is ObjectsContent)
+            //    Blocked = (content as ObjectsContent).Blocked;
+            //else if (content is TilesContent)
+            //    Blocked = !(content as TilesContent).Walkable;
+            //else
+            //    Blocked = false; //Unloaded stuff
 
             X = x;
             Y = y;

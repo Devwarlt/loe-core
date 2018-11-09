@@ -5,22 +5,24 @@ namespace LoESoft.Server.Core.World
 {
     public class WorldManager
     {
-        public WorldMap Map { get; set; }
-
         public bool CanUpdate = true;
 
         private GameClock _clock { get; set; }
 
-        private Thread UpdateThread { get; set; }
+        public CoreUpdate Core { get; set; }
 
         public WorldManager()
         {
-            Map = new WorldMap(this);
+            Core = new CoreUpdate(this);
 
-            _clock = new GameClock(() => Map.Update());
+            _clock = new GameClock(() => Core.ResetEvent.Set());
         }
 
-        public void BeginUpdate() => _clock.Start();
+        public void BeginUpdate()
+        {
+            Core.Initialize();
+            _clock.Start();
+        }
 
         public bool TryAddPlayer(Client client)
         {
@@ -29,7 +31,7 @@ namespace LoESoft.Server.Core.World
 
             if (client.Player != null)
             {
-                Map.Add(client.Player);
+                Core.Map.Add(client.Player);
 
                 return true;
             }
@@ -43,7 +45,7 @@ namespace LoESoft.Server.Core.World
             {
                 if (client.Player != null)
                 {
-                    Map.Remove(client.Player);
+                    Core.Map.Remove(client.Player);
                     App.Warn("Player removed!");
                 }
 
@@ -57,7 +59,7 @@ namespace LoESoft.Server.Core.World
         {
             _clock.Stop();
 
-            Map.Dispose();
+            Core.Dispose();
         }
     }
 }
