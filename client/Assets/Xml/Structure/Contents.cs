@@ -1,31 +1,9 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace LoESoft.Client.Assets.Xml.Structure
 {
-    public class XmlContent
+    public partial class XmlContent
     {
-        public enum ContentType : int
-        {
-            Objects = 0,
-            Items = 1,
-            Tiles = 2
-        }
-
-        public class XmlTexture
-        {
-            public bool Animated { get; set; }
-            public string FileName { get; set; }
-            public Tuple<int, int> ImageIndex { get; set; }
-
-            public XmlTexture(XElement elem)
-            {
-                Animated = elem.Element("Animated") != null;
-                FileName = elem.Element("FileName").Value;
-                ImageIndex = new Tuple<int, int>(int.Parse(elem.Attribute("x").Value), int.Parse(elem.Attribute("y").Value));
-            }
-        }
-
         public XmlContent(XElement elem)
         {
             Type = (ContentType)(int.Parse(elem.Attribute("type").Value));
@@ -38,32 +16,5 @@ namespace LoESoft.Client.Assets.Xml.Structure
         public ContentType Type { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
-    }
-
-    public class ObjectsContent : XmlContent
-    {
-        public bool Blocked { get; set; }
-
-        public ObjectsContent(XElement elem) : base(elem)
-        {
-            Blocked = elem.Element("Blocked") != null;
-        }
-    }
-
-    public class ItemsContent : XmlContent
-    {
-        public ItemsContent(XElement elem) : base(elem)
-        {
-        }
-    }
-
-    public class TilesContent : XmlContent
-    {
-        public bool Walkable { get; set; }
-
-        public TilesContent(XElement elem) : base(elem)
-        {
-            Walkable = elem.Element("UnWalkable") != null;
-        }
     }
 }

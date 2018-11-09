@@ -16,7 +16,7 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             Animation = new ObjectAnimation();
             PathFinder = new AStar();
-            path = new ConcurrentQueue<Points>(); 
+            path = new ConcurrentQueue<Points>();
         }
 
         public void Init()
@@ -28,7 +28,7 @@ namespace LoESoft.Client.Core.Game.Objects
         //public void SetNewDistination(int x, int y, int uid)
         //{
         //    lastPoint = new Points() { X = (int)X, Y = (int)Y };
-            
+
         //    var start = new Points() { X = (int)X, Y = (int)Y };
         //    var end = new Points() { X = x, Y = y };
 

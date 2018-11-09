@@ -1,15 +1,9 @@
 ﻿using LoESoft.Client.Core.Game.Map;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace LoESoft.Client.Core.Game.PathFinder
 {
-    public class Points
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-    }
     public class AStar
     {
         private PathNode _startNode;
@@ -52,7 +46,8 @@ namespace LoESoft.Client.Core.Game.PathFinder
                         e.Checked = true;
                         return null;
                     }).Where(_ => _ != null).FirstOrDefault();
-                } catch
+                }
+                catch
                 {
                     currentNode = null;
                 }
@@ -68,8 +63,6 @@ namespace LoESoft.Client.Core.Game.PathFinder
 
             return path;
         }
-
-
 
         public List<Points> GetShortestRoute() => GeneratePath();
     }

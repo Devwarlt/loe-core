@@ -22,8 +22,8 @@ namespace LoESoft.Client.Core.Game.PathFinder
         public bool Blocked { get; set; }
 
         public bool Checked { get; set; }
-            
-        public PathNode(XmlContent content, int x , int y)
+
+        public PathNode(XmlContent content, int x, int y)
         {
             //if (content is ObjectsContent)
             //    Blocked = (content as ObjectsContent).Blocked;
