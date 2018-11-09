@@ -68,7 +68,7 @@
     <Compile Include="Assets\AssetLibrary.cs" />
     <Compile Include="Assets\AssetLoader.cs" />
     <Compile Include="Assets\SpriteSet.cs" />
-    <Compile Include="Assets\Xml\Structure\Contents.cs" />
+    <Compile Include="Assets\Xml\Structure\XmlContent.cs" />
     <Compile Include="Assets\Xml\Structure\ItemsContent.cs" />
     <Compile Include="Assets\Xml\Structure\ObjectsContent.cs" />
     <Compile Include="Assets\Xml\Structure\TilesContent.cs" />
