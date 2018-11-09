@@ -1,5 +1,4 @@
 ﻿using LoESoft.Client.Core.Networking.Packets.Outgoing;
-using LoESoft.Client.Core.Utils;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
@@ -16,10 +15,10 @@ namespace LoESoft.Client.Core.Screens
         public LoginPanel(int x, int y)
             : base(x, y, "Login", color: new RGBColor(85, 85, 88), height: 200)
         {
-            AccountName = new TextBox(10, 50, 380, "Account Name:", 16, encoded: true);
-            AccountPassword = new TextBox(10, 100, 380, "Account Password:", 16, encoded: true);
-            AccountName = new TextBox(10, 50, 380, "Account Name:", 12, 16, true);
-            AccountPassword = new TextBox(10, 100, 380, "Account Password:", 12, 16, true);
+            AccountName = new TextBox(10, 50, 380, "Account Name:", 16);
+            AccountPassword = new TextBox(10, 100, 380, "Account Password:", 16);
+            AccountName = new TextBox(10, 50, 380, "Account Name:", 12, 16);
+            AccountPassword = new TextBox(10, 100, 380, "Account Password:", 12, 16);
 
             LoginButton = new Button(0, 140, "Login", new RGBColor(255, 0, 0));
             LoginButton.X = (Width / 2) - (LoginButton.Width / 2);
@@ -44,8 +43,8 @@ namespace LoESoft.Client.Core.Screens
 
                 GameApplication.GameUser.SendPacket(new Login()
                 {
-                    Name = Cipher.Encrypt(AccountName.GetText),
-                    Password = Cipher.Encrypt(AccountPassword.GetText)
+                    Name = AccountName.GetText,
+                    Password = AccountPassword.GetText
                 });
             });
 

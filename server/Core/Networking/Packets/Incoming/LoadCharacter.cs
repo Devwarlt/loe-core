@@ -12,9 +12,6 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         public override void Handle(Client client)
         {
-            if (client == null)
-                return;
-
             if (AccountId == -1)
             {
                 client.SendPacket(new Response()

@@ -18,8 +18,28 @@ namespace LoESoft.Server.Core.World.Entities.Player
         //unused atm
         private List<Entity> _removedObjects = new List<Entity>();
 
+        private int ConnectionLostAttempts = 0;
+        private readonly int MaxConnectionListAttempts = 30;
+
         public override void Update()
         {
+            if (!Client.IsConnected)
+            {
+                ConnectionLostAttempts++;
+
+                App.Info($"[Attempt {ConnectionLostAttempts}/{MaxConnectionListAttempts}] Client {Client.Id} dropped connection, retrying...");
+
+                if (ConnectionLostAttempts == MaxConnectionListAttempts)
+                {
+                    Client.Disconnect();
+                    return;
+                }
+
+                return;
+            }
+            else
+                ConnectionLostAttempts = 0;
+
             var timer = new Stopwatch();
             timer.Start();
 
@@ -74,8 +94,6 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
             _tilesToUpdateOrAdd.Clear();
             _objectsToUpdateOrAdd.Clear();
-
-            App.Warn("Took Server " + timer.ElapsedMilliseconds.ToString() + "MS to update!");
 
             timer.Stop();
         }

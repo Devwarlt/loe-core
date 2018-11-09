@@ -1,5 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using LoESoft.Server.Core.Utils;
+using LoESoft.Server.Core.World.Entities.Player;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
@@ -12,9 +12,6 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         public override void Handle(Client client)
         {
-            if (client == null)
-                return;
-
             if (string.IsNullOrWhiteSpace(Name))
             {
                 client.SendPacket(new Response()
@@ -37,10 +34,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            var name64 = Cipher.Decrypt(Name);
-            var pass64 = Cipher.Decrypt(Password);
-
-            if (name64.Length < 6)
+            if (Name.Length < 6)
             {
                 client.SendPacket(new Response()
                 {
@@ -51,7 +45,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            if (pass64.Length < 8)
+            if (Password.Length < 8)
             {
                 client.SendPacket(new Response()
                 {
@@ -62,7 +56,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            var account = App.Database.GetAccountByCredentials(name64, pass64);
+            var account = App.Database.GetAccountByCredentials(Name, Password);
 
             if (account == null)
             {
@@ -83,7 +77,17 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     Content = "You have successfully logged in, enjoy the game!"
                 });
 
-                client.Account = account;
+                if (App.Database.GetCharacterByAccountId(account.Id, 1) == null) // temporarily
+                    if (App.Database.CreateNewCharacter(account.Id, 0, $"Player {account.Id}")) // temporarily
+                        client.SendPacket(new Response()
+                        {
+                            From = "CreateNewCharacter",
+                            Result = 0,
+                            Content = "You have successfully created a new character!"
+                        }); // temporarily
+
+                client.Account = account; // do not change this
+                client.Player = new Player(client.Manager, client, (int)account.Id); // temporarily
             }
         }
     }

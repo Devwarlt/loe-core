@@ -28,8 +28,12 @@ namespace LoESoft.Client.Core.Screens
         private TextButton LoginButton;
         private readonly Mask MaskBlocker;
 
+        public bool _logged { get; set; }
+
         public TitleScreen()
         {
+            _logged = false;
+
             Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 0, 0));
             Title.X = (GameApplication.WIDTH - Title.Width) / 2;
             Title.Y = Title.Height * 3;
@@ -97,8 +101,6 @@ namespace LoESoft.Client.Core.Screens
             Background.AddChild(ExitButton);
         }
 
-        private void OnClick(object sender, Tuple<string, string> e) => App.Info($"Element '{(string)sender}' dispatch '{e.Item2}' from parent '{e.Item1}'.");
-
         private void _loginPanel_OnPanelExit() => Background.RemoveChild(MaskBlocker);
 
         private void _registerPanel_OnPanelExit() => Background.RemoveChild(MaskBlocker);
@@ -113,16 +115,24 @@ namespace LoESoft.Client.Core.Screens
 
         private void OnLoginPanel(object sender, EventArgs e)
         {
-            App.Warn("Login!");
-
-            Background.AddChild(MaskBlocker);
-            Background.AddChild(LoginPanel);
+            if (!_logged)
+            {
+                Background.AddChild(MaskBlocker);
+                Background.AddChild(LoginPanel);
+            }
+            else
+                App.Info("You cannot login when already logged in!");
         }
 
         private void OnRegisterPanel(object sender, EventArgs e)
         {
-            Background.AddChild(MaskBlocker);
-            Background.AddChild(RegisterPanel);
+            if (!_logged)
+            {
+                Background.AddChild(MaskBlocker);
+                Background.AddChild(RegisterPanel);
+            }
+            else
+                App.Info("You cannot register when already logged in!");
         }
 
         private void OnPlayButtonOver(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.Yellow;
@@ -137,7 +147,13 @@ namespace LoESoft.Client.Core.Screens
 
         private void OnExitButtonOut(object sender, EventArgs e) => ExitButton.TextDisplay.SpriteColor = Color.White;
 
-        private void OnPlay(object sender, EventArgs e) => ScreenManager.DispatchScreen(new GameScreen());
+        private void OnPlay(object sender, EventArgs e)
+        {
+            if (_logged)
+                ScreenManager.DispatchScreen(new GameScreen());
+            else
+                App.Info("You are not logged in!");
+        }
 
         private void OnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
 

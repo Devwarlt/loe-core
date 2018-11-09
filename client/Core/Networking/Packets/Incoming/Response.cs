@@ -1,6 +1,5 @@
 ﻿using LoESoft.Client.Core.Client;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {
@@ -13,23 +12,22 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
         [JsonIgnore]
         public override PacketID PacketID => PacketID.RESPONSE;
 
-        // TODO: result '-1' display a popup with content / result '0' display a popup and let player login.
+        // result '-1' -> error
+        // result '0' -> success
         public override void Handle(GameUser gameUser)
         {
             switch (From)
             {
-                case "Login":
+                case "Login": // TODO.
                     LoginHandler();
-                    break; // TODO.
-                case "Register":
-                    RegisterHandler();
-                    break; // TODO.
-                case "CreateNewCharacter":
-                    CreateNewCharacterHandler();
-                    break; // TODO.
-                case "LoadCharacter":
-                    LoadCharacterHandler();
-                    break; // TODO.
+                    break;
+
+                case "Register": // TODO.
+                case "CreateNewCharacter": // TODO.
+                case "LoadCharacter": // TODO.
+                    App.Info($"({From} [{Result}]) {Content}");
+                    break;
+
                 default:
                     App.Info($"New server response detected!\n{ToString()}");
                     break;
@@ -38,35 +36,9 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         private void LoginHandler()
         {
-        }
+            GameApplication.TitleScreen._logged = Result == 0;
 
-        private void RegisterHandler()
-        {
-        }
-
-        private void CreateNewCharacterHandler()
-        {
-        }
-
-        private void LoadCharacterHandler()
-        {
-        }
-
-        public override string ToString()
-        {
-            var ret = new StringBuilder("{\n");
-
-            for (var i = 0; i < GetType().GetProperties().Length; i++)
-            {
-                if (i != 0)
-                    ret.Append(",\n");
-
-                ret.AppendFormat("\t{0}: {1}", GetType().GetProperties()[i].Name, GetType().GetProperties()[i].GetValue(this, null));
-            }
-
-            ret.Append("\n}");
-
-            return ret.ToString();
+            App.Info($"({From} [{Result}]) {Content}");
         }
     }
 }
