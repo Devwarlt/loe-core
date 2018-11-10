@@ -1,4 +1,4 @@
-﻿using LoESoft.Client.Assets;
+﻿using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Assets.Xml.Structure;
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
@@ -20,10 +20,7 @@ namespace LoESoft.Client.Core.Game.Animation
             AddAnimation(AnimationType.Singular, animation);
         }
 
-        public override void Update(GameTime gameTime, Entity basicObject)
-        {
-            base.Update(gameTime, basicObject);
-        }
+        public override void Update(GameTime gameTime, Entity basicObject) => base.Update(gameTime, basicObject);
 
         public override void Draw(SpriteBatch spriteBatch, Entity entity)
         {

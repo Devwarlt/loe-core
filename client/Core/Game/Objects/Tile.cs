@@ -1,4 +1,4 @@
-﻿using LoESoft.Client.Assets;
+﻿using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Assets.Xml.Structure;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

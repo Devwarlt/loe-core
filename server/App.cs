@@ -1,4 +1,5 @@
-﻿using LoESoft.Server.Core.Database;
+﻿using LoESoft.Server.Assets.Xml;
+using LoESoft.Server.Core.Database;
 using LoESoft.Server.Core.Networking;
 using LoESoft.Server.Core.World;
 using LoESoft.Server.Settings;
@@ -62,6 +63,8 @@ namespace LoESoft.Server
 
             try
             {
+                XmlLibrary.Init();
+
                 Database = new Database();
 
                 var manager = new WorldManager();

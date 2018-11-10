@@ -409,7 +409,7 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <EmbeddedResource Include="Assets\Embeds\Tiles.xml">
+    <EmbeddedResource Include="Assets\Xml\Embeds\Tiles.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -417,10 +417,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\DisposableDroidBB.ttf" />
     <EmbeddedResource Include="Resources\loesoft-new-expanded-shadows-closer.png" />
-    <EmbeddedResource Include="Assets\Embeds\Players.xml">
+    <EmbeddedResource Include="Assets\Xml\Embeds\Players.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Assets\Embeds\TestObjects.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\TestObjects.xml" />
     <Content Include="loesoft-new-expanded-shadows-closer.png" />
     <Content Include="loesoft-new.ico" />
     <Content Include="loesoft.ico" />

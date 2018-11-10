@@ -1,4 +1,4 @@
-﻿using LoESoft.Client.Assets;
+﻿using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Assets.Xml.Structure;
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
