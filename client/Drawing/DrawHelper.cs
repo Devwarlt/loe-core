@@ -38,5 +38,17 @@ namespace LoESoft.Client.Drawing
         public static void DrawRectangle(this SpriteBatch spriteBatch, int x, int y, int width, int height) => DrawRectangle(spriteBatch, x, y, width, height, Color.White);
 
         public static void DrawRectangle(this SpriteBatch spriteBatch, int x, int y, int width, int height, Color color) => spriteBatch.Draw(TextureRect, new Vector2(x, y), new Rectangle(x, y, width, height), color);
+
+        public static void StartClamp(this SpriteBatch spriteBatch)
+        {
+            spriteBatch.End();
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        }
+
+        public static void EndClamp(this SpriteBatch spriteBatch)
+        {
+            spriteBatch.End();
+            spriteBatch.Begin();
+        }
     }
 }

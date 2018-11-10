@@ -37,8 +37,6 @@ namespace LoESoft.Client.Drawing.Events
 
         public static void Update()
         {
-            handleUnactiveClient();
-
             // Checks if the currentnode is still a valid node
             if (CurrentNode == null)
                 return;

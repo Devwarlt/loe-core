@@ -53,7 +53,7 @@ namespace LoESoft.Client.Core.Screens
         {
             Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 0, 0));
             Title.X = (GameApplication.WIDTH - Title.Width) / 2;
-            Title.Y = Title.Height * 3;
+            Title.Y = 430;
             Title.Outline = true;
 
             PlayButton = new TextButton("Play", 30);
@@ -93,7 +93,7 @@ namespace LoESoft.Client.Core.Screens
 
         public void AddCharacterSelection(string response)
         {
-            CharacterSelect = new CharacterSelectHUD(200, 400);
+            CharacterSelect = new CharacterSelectHUD(0, 0);
             CharacterSelect.Init(response);
 
             Background.AddChild(CharacterSelect);
