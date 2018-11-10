@@ -5,4 +5,16 @@
       <Animated />
     </Texture>
   </Object>
+  <Object type="0" id="6" name="ApprenticBlue">
+      <Texture x ="0" y="1">
+        <FileName>playersEmbed</FileName>
+        <Animated />
+      </Texture>
+   </Object>
+  <Object type="0" id="7" name="ApprenticeRed">
+    <Texture x ="0" y="2">
+      <FileName>playersEmbed</FileName>
+      <Animated />
+    </Texture>
+  </Object>
 </Objects>

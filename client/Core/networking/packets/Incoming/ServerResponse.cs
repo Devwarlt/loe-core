@@ -44,7 +44,9 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         private void LoginHandler()
         {
-            App.Launcher.MainMenu.LoggedIn = Result == 0; // temporarily
+            bool result = (Result == 0) ? true : false;
+
+            App.Launcher.MainMenu.LoggedIn = result;
 
             MessageBox.Show(Content, Result == 0 ? "Welcome" : "Login Denied");
         }

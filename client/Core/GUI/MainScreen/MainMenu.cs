@@ -14,6 +14,7 @@ namespace LoESoft.Client.Core.GUI.MainScreen
         private void MainScreen_Load(object sender, EventArgs e)
         {
             LoggedIn = false;
+            PlayButton.Enabled = LoggedIn;
 
             BRMEVersion.Text = $"Version: {App.Version}";
         }
@@ -27,11 +28,14 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 
             if (LoggedIn)
                 LoginButton.Text = "Logout";
-
-            PlayButton.Enabled = LoggedIn;
+            
             LoginButton.Enabled = true;
             RegisterButton.Enabled = !LoggedIn;
             ExitButton.Enabled = true;
+            
+            PlayButton.Enabled = !PlayButton.Enabled;
+
+            App.Warn($"{LoggedIn}");
         }
 
         public void ToggleRegisterBox() => RegisterBox.Enabled = !RegisterBox.Enabled;

@@ -56,20 +56,20 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            if (App.Database.CreateNewCharacter(AccountId, World, Name, out string error))
-                client.SendPacket(new ServerResponse()
-                {
-                    From = "CreateNewCharacter",
-                    Result = 0,
-                    Content = "You have successfully created a new character!"
-                });
-            else
-                client.SendPacket(new ServerResponse()
-                {
-                    From = "CreateNewCharacter",
-                    Result = -1,
-                    Content = $"An error occurred while character creation: {error}"
-                });
+            //if (App.Database.CreateNewCharacter(AccountId, World, Name, out string error))
+            //    client.SendPacket(new ServerResponse()
+            //    {
+            //        From = "CreateNewCharacter",
+            //        Result = 0,
+            //        Content = "You have successfully created a new character!"
+            //    });
+            //else
+            //    client.SendPacket(new ServerResponse()
+            //    {
+            //        From = "CreateNewCharacter",
+            //        Result = -1,
+            //        Content = $"An error occurred while character creation: {error}"
+            //    });
         }
     }
 }

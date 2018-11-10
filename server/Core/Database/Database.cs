@@ -106,7 +106,7 @@ namespace LoESoft.Server.Core.Database
             });
         }
 
-        public bool CreateNewCharacter(long accountId, int world, string name, out string error)
+        public bool CreateNewCharacter(long accountId, int world, string name, int classType, out string error)
         {
             var account = Accounts.Values.FirstOrDefault(acc => acc.Id == accountId);
 
@@ -130,7 +130,7 @@ namespace LoESoft.Server.Core.Database
                 AccountId = accountId,
                 World = world,
                 Name = name,
-                Class = 0,
+                Class = classType,
                 Position = new Position()
                 {
                     Type = 0,

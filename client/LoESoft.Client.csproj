@@ -149,6 +149,7 @@
     <Compile Include="Core\Networking\Server.cs" />
     <Compile Include="Core\Screens\Screen.cs" />
     <Compile Include="Core\Screens\ScreenManager.cs" />
+    <Compile Include="Core\Screens\TitleScreen\CharacterSelection\ChooseView\ChooseCharacterBar.cs" />
     <Compile Include="Core\Utils\Cipher.cs" />
     <Compile Include="Core\Utils\Cipher.KeySize.cs" />
     <Compile Include="Core\Utils\IO.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Drawing\Sprites\Forms\Complex\ExitButton.cs" />
     <Compile Include="Drawing\Sprites\Forms\Complex\TextBox.cs" />
     <Compile Include="Drawing\Sprites\Forms\FilledRectangle.cs" />
+    <Compile Include="Drawing\Sprites\Forms\GameBar.cs" />
     <Compile Include="Drawing\Sprites\Forms\Mask.cs" />
     <Compile Include="Drawing\Sprites\Forms\Panel.cs" />
     <Compile Include="Drawing\Sprites\SpriteNode.cs" />

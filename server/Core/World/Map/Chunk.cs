@@ -55,7 +55,7 @@ namespace LoESoft.Server.Core.World.Map
         public void RandomGen()
         {
             for (var i = 0; i < 50; i++)
-                Add(new Entity(Manager, 6)
+                Add(new Entity(Manager, 8)
                 {
                     X = rand.Next(StartX, StartX + 30),
                     Y = rand.Next(StartY, StartY + 30)
