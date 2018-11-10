@@ -113,13 +113,6 @@
     <Compile Include="Core\GUI\MainScreen\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\GUI\MainScreen\PopUp.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\MainScreen\PopUp.Designer.cs">
-      <DependentUpon>PopUp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\MainScreen\PopUpSettings.cs" />
     <Compile Include="Core\GUI\MainScreen\RegisterBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -355,9 +348,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\MainScreen\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\MainScreen\PopUp.resx">
-      <DependentUpon>PopUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\MainScreen\RegisterBox.resx">
       <DependentUpon>RegisterBox.cs</DependentUpon>

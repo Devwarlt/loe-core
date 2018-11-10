@@ -23,8 +23,13 @@ namespace LoESoft.Client.Core.GUI.MainScreen
         private void RegisterBox_Load(object sender, EventArgs e)
         {
             AccountNameTextBox.KeyDown += AccountNameTextBox_KeyDown;
+            AccountNameTextBox.Text = null;
+
             PasswordTextBox.KeyDown += PasswordTextBox_KeyDown;
+            PasswordTextBox.Text = null;
+
             ConfirmPasswordTextBox.KeyDown += ConfirmPasswordTextBox_KeyDown;
+            ConfirmPasswordTextBox.Text = null;
         }
 
         private void AccountNameTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -54,17 +59,27 @@ namespace LoESoft.Client.Core.GUI.MainScreen
         private void RegisterCreateButton_Click(object sender, EventArgs e)
         {
             var gameuser = ((MainMenu)Parent).GameUser;
-
             if (PasswordTextBox.Text == ConfirmPasswordTextBox.Text)
+            {
                 gameuser.SendPacket(new Register()
                 {
                     Name = AccountNameTextBox.Text,
                     Password = PasswordTextBox.Text
                 });
+
+                RegisterCancelButton_Click(null, null);
+            }
             else
                 App.Info("Password doesn't match.");
         }
 
-        private void RegisterCancelButton_Click(object sender, EventArgs e) => ((MainMenu)Parent).OnRegisterBoxClose();
+        private void RegisterCancelButton_Click(object sender, EventArgs e)
+        {
+            AccountNameTextBox.Text = null;
+            PasswordTextBox.Text = null;
+            ConfirmPasswordTextBox.Text = null;
+
+            ((MainMenu)Parent).OnRegisterBoxClose();
+        }
     }
 }

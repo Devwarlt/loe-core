@@ -38,7 +38,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LoginBox = new LoESoft.Client.Core.GUI.MainScreen.LoginBox();
             this.RegisterBox = new LoESoft.Client.Core.GUI.MainScreen.RegisterBox();
-            this.PopUp = new LoESoft.Client.Core.GUI.MainScreen.PopUp();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,7 +130,7 @@
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
             this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -159,6 +158,7 @@
             this.LoginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LoginBox.Enabled = false;
             this.LoginBox.Location = new System.Drawing.Point(200, 80);
+            this.LoginBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.LoginBox.Name = "LoginBox";
             this.LoginBox.Size = new System.Drawing.Size(325, 227);
             this.LoginBox.TabIndex = 7;
@@ -175,22 +175,11 @@
             this.RegisterBox.TabIndex = 8;
             this.RegisterBox.Visible = false;
             // 
-            // PopUp
-            // 
-            this.PopUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.PopUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PopUp.Location = new System.Drawing.Point(200, 80);
-            this.PopUp.Name = "PopUp";
-            this.PopUp.Settings = null;
-            this.PopUp.Size = new System.Drawing.Size(325, 265);
-            this.PopUp.TabIndex = 11;
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Controls.Add(this.PopUp);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.LoginBox);
             this.Controls.Add(this.ExitButton);
@@ -221,6 +210,5 @@
         private RegisterBox RegisterBox;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private PopUp PopUp;
     }
 }

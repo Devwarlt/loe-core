@@ -85,6 +85,8 @@ namespace LoESoft.Server
             }
             catch (Exception e)
             {
+                Database.Dispose();
+
                 Info("An error occurred!");
 
                 Error(e);

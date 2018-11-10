@@ -1,4 +1,5 @@
 ﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.GUI.MainScreen;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -32,11 +33,7 @@ namespace LoESoft.Client.Core.GUI
             });
         }
 
-        private void OnDisplay(object sender, bool e)
-        {
-            Enabled = e;
-            Visible = e;
-        }
+        private void OnDisplay(object sender, bool e) => WindowState = e ? FormWindowState.Normal : FormWindowState.Minimized;
 
         private List<Control> GetAllControls(Control container) => GetAllControls(container, new List<Control>());
 
