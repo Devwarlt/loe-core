@@ -38,7 +38,7 @@
             this.SubmitButton.BackColor = System.Drawing.Color.DimGray;
             this.SubmitButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.SubmitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SubmitButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubmitButton.Font = new System.Drawing.Font(App.DisposableDroidBB, 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubmitButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.SubmitButton.Location = new System.Drawing.Point(100, 213);
             this.SubmitButton.Name = "SubmitButton";
@@ -49,7 +49,7 @@
             // 
             // Content
             // 
-            this.Content.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Content.Font = new System.Drawing.Font(App.DisposableDroidBB, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Content.ForeColor = System.Drawing.Color.Gainsboro;
             this.Content.Location = new System.Drawing.Point(0, 40);
             this.Content.Name = "Content";
@@ -64,7 +64,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Title.BackColor = System.Drawing.Color.Gray;
-            this.Title.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.Font = new System.Drawing.Font(App.DisposableDroidBB, 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title.ForeColor = System.Drawing.Color.Gainsboro;
             this.Title.Location = new System.Drawing.Point(0, 0);
             this.Title.Name = "Title";

@@ -146,7 +146,7 @@
     <Compile Include="Core\Screens\SplashScreen\SplashScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterSelection\CharacterRect.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterSelection\CharacterSelectHUD.cs" />
-    <Compile Include="Core\Screens\TitleScreen\CharacterScreen.cs" />
+    <Compile Include="Core\Screens\TitleScreen\TitleScreen.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\OutgoingPacket.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
     <Compile Include="Core\Networking\Packets\PacketBase.cs" />
@@ -423,7 +423,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\loesoft-new-expanded-shadows-closer.png" />
+    <EmbeddedResource Include="Resources\DisposableDroidBB.ttf" />
+    <EmbeddedResource Include="Resources\loesoft-new-expanded-shadows-closer.png" />
     <EmbeddedResource Include="Assets\Embeds\Players.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
