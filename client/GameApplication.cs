@@ -1,4 +1,5 @@
 using LoESoft.Client.Assets;
+using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Screens;
 using LoESoft.Client.Drawing;

@@ -1,0 +1,8 @@
+﻿<Objects>
+  <Object type="0" id="8" name="Dummy">
+    <Texture x ="0" y="0">
+      <FileName>objectsEmbed</FileName>
+      <Animated />
+    </Texture>
+  </Object>
+</Objects>

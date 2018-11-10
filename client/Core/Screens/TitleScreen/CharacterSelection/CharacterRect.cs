@@ -1,13 +1,13 @@
-﻿using System;
-using LoESoft.Client.Assets;
+﻿using LoESoft.Client.Assets;
+using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Assets.Xml.Structure;
+using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView;
+using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using LoESoft.Client.Drawing;
-using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView;
-using LoESoft.Client.Drawing.Sprites.Forms;
+using System;
 
 namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
 {
@@ -18,7 +18,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
         public int ClassIndex { get; private set; }
 
         private ChooseCharacterBar _chooseCharacterBar;
-        
+
         public CharacterRect(int x, int y) :
             base(x, y, 250, 250, AssetLibrary.Images["characterRect"])
         {
@@ -43,7 +43,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
             {
                 Content = XmlLibrary.ObjectsXml[ClassIndex];
                 AddCharacterView();
-            } 
+            }
         }
 
         private void AddCharacterView()

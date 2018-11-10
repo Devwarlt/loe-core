@@ -1,4 +1,4 @@
-﻿using LoESoft.Client.Assets;
+﻿using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites;
@@ -30,7 +30,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
             int spriteX = 0;
 
             var spriteList = new List<Sprite>();
-            foreach(var i in ClassIds)
+            foreach (var i in ClassIds)
             {
                 var texture = XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[i]);
                 var classSprite = new Sprite(spriteX + 10, 10, 120, 120, texture);
@@ -93,7 +93,8 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
             try
             {
                 ParentSprite.RemoveChild(this);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 App.Warn(ex.ToString());
             }

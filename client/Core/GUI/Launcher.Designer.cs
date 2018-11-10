@@ -41,7 +41,6 @@
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(600, 400);
             this.MainMenu.TabIndex = 0;
-            this.MainMenu.Load += new System.EventHandler(this.MainMenu_Load);
             // 
             // Launcher
             // 

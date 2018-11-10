@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Xml.Linq;
 
-namespace LoESoft.Client.Assets.Xml
+namespace LoESoft.Server.Assets.Xml
 {
     public static class XmlLoader
     {

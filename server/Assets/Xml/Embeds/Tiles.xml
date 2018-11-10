@@ -1,0 +1,27 @@
+﻿<Objects>
+  <Object type="2" id="0" name="Water">
+    <Texture x ="0" y="0">
+      <FileName>tilesEmbed</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1" name="Dirt">
+    <Texture x ="1" y="0">
+      <FileName>tilesEmbed</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="2" name="Grass">
+    <Texture x ="2" y="0">
+      <FileName>tilesEmbed</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="3" name="Sand">
+    <Texture x ="3" y="0">
+      <FileName>tilesEmbed</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="4" name="Stone">
+    <Texture x ="4" y="0">
+      <FileName>tilesEmbed</FileName>
+    </Texture>
+  </Object>
+</Objects>
