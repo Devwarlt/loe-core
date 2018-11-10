@@ -113,13 +113,6 @@
     <Compile Include="Core\GUI\MainScreen\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\GUI\MainScreen\PopUp.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\MainScreen\PopUp.Designer.cs">
-      <DependentUpon>PopUp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\MainScreen\PopUpSettings.cs" />
     <Compile Include="Core\GUI\MainScreen\RegisterBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,9 +137,9 @@
     <Compile Include="Core\Networking\Server.ServerName.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />
     <Compile Include="Core\Screens\SplashScreen\SplashScreen.cs" />
+    <Compile Include="Core\Screens\TitleScreen\CharacterScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterSelection\CharacterRect.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterSelection\CharacterSelectHUD.cs" />
-    <Compile Include="Core\Screens\TitleScreen\CharacterScreen.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\OutgoingPacket.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
     <Compile Include="Core\Networking\Packets\PacketBase.cs" />
@@ -356,9 +349,6 @@
     <EmbeddedResource Include="Core\GUI\MainScreen\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\MainScreen\PopUp.resx">
-      <DependentUpon>PopUp.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\MainScreen\RegisterBox.resx">
       <DependentUpon>RegisterBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -423,7 +413,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\loesoft-new-expanded-shadows-closer.png" />
+    <EmbeddedResource Include="Resources\DisposableDroidBB.ttf" />
+    <EmbeddedResource Include="Resources\loesoft-new-expanded-shadows-closer.png" />
     <EmbeddedResource Include="Assets\Embeds\Players.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

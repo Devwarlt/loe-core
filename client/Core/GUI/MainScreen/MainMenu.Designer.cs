@@ -38,13 +38,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LoginBox = new LoESoft.Client.Core.GUI.MainScreen.LoginBox();
             this.RegisterBox = new LoESoft.Client.Core.GUI.MainScreen.RegisterBox();
-            this.PopUp = new LoESoft.Client.Core.GUI.MainScreen.PopUp();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // BRMELabel
             // 
-            this.BRMELabel.Font = new System.Drawing.Font("Stencil", 32.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BRMELabel.Font = new System.Drawing.Font("DisposableDroid BB", 32.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BRMELabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.BRMELabel.Location = new System.Drawing.Point(3, 40);
             this.BRMELabel.Name = "BRMELabel";
@@ -55,7 +54,7 @@
             // 
             // BRMEVersion
             // 
-            this.BRMEVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BRMEVersion.Font = new System.Drawing.Font("DisposableDroid BB", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BRMEVersion.ForeColor = System.Drawing.Color.Gray;
             this.BRMEVersion.Location = new System.Drawing.Point(23, 91);
             this.BRMEVersion.Name = "BRMEVersion";
@@ -69,7 +68,7 @@
             this.RegisterButton.BackColor = System.Drawing.Color.DimGray;
             this.RegisterButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RegisterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.RegisterButton.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.RegisterButton.Location = new System.Drawing.Point(23, 290);
             this.RegisterButton.Name = "RegisterButton";
@@ -85,7 +84,7 @@
             this.LoginButton.BackColor = System.Drawing.Color.DimGray;
             this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.LoginButton.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.LoginButton.Location = new System.Drawing.Point(23, 240);
             this.LoginButton.Name = "LoginButton";
@@ -102,7 +101,7 @@
             this.PlayButton.Enabled = false;
             this.PlayButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.PlayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PlayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.PlayButton.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PlayButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.PlayButton.Location = new System.Drawing.Point(23, 190);
             this.PlayButton.Name = "PlayButton";
@@ -118,7 +117,7 @@
             this.ExitButton.BackColor = System.Drawing.Color.DimGray;
             this.ExitButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.ExitButton.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ExitButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.ExitButton.Location = new System.Drawing.Point(24, 340);
             this.ExitButton.Name = "ExitButton";
@@ -134,7 +133,7 @@
             this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
-            this.TitleLabel.Font = new System.Drawing.Font("Stencil", 30F, System.Drawing.FontStyle.Bold);
+            this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.TitleLabel.Location = new System.Drawing.Point(0, 0);
             this.TitleLabel.Name = "TitleLabel";
@@ -159,6 +158,7 @@
             this.LoginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LoginBox.Enabled = false;
             this.LoginBox.Location = new System.Drawing.Point(200, 80);
+            this.LoginBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.LoginBox.Name = "LoginBox";
             this.LoginBox.Size = new System.Drawing.Size(325, 227);
             this.LoginBox.TabIndex = 7;
@@ -175,22 +175,11 @@
             this.RegisterBox.TabIndex = 8;
             this.RegisterBox.Visible = false;
             // 
-            // PopUp
-            // 
-            this.PopUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.PopUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PopUp.Location = new System.Drawing.Point(200, 80);
-            this.PopUp.Name = "PopUp";
-            this.PopUp.Settings = null;
-            this.PopUp.Size = new System.Drawing.Size(325, 265);
-            this.PopUp.TabIndex = 11;
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Controls.Add(this.PopUp);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.LoginBox);
             this.Controls.Add(this.ExitButton);
@@ -221,6 +210,5 @@
         private RegisterBox RegisterBox;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private PopUp PopUp;
     }
 }

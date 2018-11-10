@@ -1,11 +1,15 @@
 ﻿using DiscordRPC;
 using LoESoft.Client.Core.GUI;
+using LoESoft.Client.Properties;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Rollbar;
 using System;
+using System.Drawing;
+using System.Drawing.Text;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -13,6 +17,13 @@ namespace LoESoft.Client
 {
     public static class App
     {
+        // Font Cache DLL
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbfont, uint cbfont, IntPtr pdv, [In] ref uint pcFonts);
+
+        // Embedded Font
+        public static FontFamily DisposableDroidBB;
+
         // Assembly's Data
         public static string Name => Assembly.GetExecutingAssembly().GetName().Name;
 
@@ -81,6 +92,8 @@ namespace LoESoft.Client
             {
                 DscordClient.SetPresence(DiscordRichPresence);
 
+                LoadEmbeddedFonts();
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(Launcher = new Launcher());
@@ -121,6 +134,26 @@ namespace LoESoft.Client
             // Rollbar error analytics for developers only.
             RollbarLocator.RollbarInstance.Error(e);
 #endif
+        }
+
+        private static void LoadEmbeddedFonts()
+        {
+            var buffer = Resources.DisposableDroidBB;
+            var len = buffer.Length;
+            var data = Marshal.AllocCoTaskMem(len);
+
+            Marshal.Copy(buffer, 0, data, len);
+
+            uint pcFonts = 0;
+
+            AddFontMemResourceEx(data, (uint)buffer.Length, IntPtr.Zero, ref pcFonts);
+
+            var fontcollection = new PrivateFontCollection();
+            fontcollection.AddMemoryFont(data, len);
+
+            Marshal.FreeCoTaskMem(data);
+
+            DisposableDroidBB = fontcollection.Families[0];
         }
     }
 }

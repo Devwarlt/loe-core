@@ -16,8 +16,6 @@ namespace LoESoft.Client.Core.GUI.MainScreen
             LoggedIn = false;
 
             BRMEVersion.Text = $"Version: {App.Version}";
-
-            SetPopUpBoxVisibility(false);
         }
 
         public void ToggleLoginBox() => LoginBox.Enabled = !LoginBox.Enabled;
@@ -48,30 +46,18 @@ namespace LoESoft.Client.Core.GUI.MainScreen
             ExitButton.Enabled = true;
         }
 
-        public void UpdateSettings(PopUpSettings settings)
-        {
-            PopUp.Settings = settings;
-            PopUp.LoadSettings();
-        }
-
-        public void SetPopUpBoxVisibility(bool visible) => PopUp.Visible = visible;
-
         private void PlayButton_Click(object sender, EventArgs e)
         {
+            ((Launcher)Parent).Display(null, false); // hide launcher
+
             try
             {
                 using (var game = new GameApplication(GameUser))
-                {
-                    ((Launcher)Parent).Display(null, false);
-
                     game.Run();
-                }
-
-            ((Launcher)Parent).Display(null, true);
-            }catch(Exception ex)
-            {
-                App.Warn($"Something went wrong whilst transitioning between Launcher and Client! {ex.ToString()}");
             }
+            catch (Exception ex) { App.Error(ex); }
+
+            ((Launcher)Parent).Display(null, true); // display launcher
         }
 
         private void LoginButton_Click(object sender, EventArgs e)

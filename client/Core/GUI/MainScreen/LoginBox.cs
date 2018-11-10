@@ -50,6 +50,8 @@ namespace LoESoft.Client.Core.GUI.MainScreen
                 Name = AccountNameTextBox.Text,
                 Password = PasswordTextBox.Text
             });
+
+            LoginCancelButton_Click(null, null);
         }
 
         private void LoginCancelButton_Click(object sender, EventArgs e) => ((MainMenu)Parent).OnLoginBoxClose();

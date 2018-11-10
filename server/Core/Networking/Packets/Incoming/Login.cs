@@ -94,7 +94,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                         }); // temporarily
 
                 client.Account = account; // do not change this
-                client.Player = new Player(client.Manager, client, (int)account.Id, 5); // temporarily
+                client.Player = new Player(client.Manager, client, (int)account.Id, account.CurrentCharacterId); // temporarily
             }
         }
     }
