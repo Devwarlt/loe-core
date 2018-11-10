@@ -44,7 +44,7 @@
             this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
-            this.TitleLabel.Font = new System.Drawing.Font(App.DisposableDroidBB, 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.TitleLabel.Location = new System.Drawing.Point(0, 0);
             this.TitleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -57,7 +57,7 @@
             // AccountNameLabel
             // 
             this.AccountNameLabel.AutoSize = true;
-            this.AccountNameLabel.Font = new System.Drawing.Font(App.DisposableDroidBB, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountNameLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.AccountNameLabel.Location = new System.Drawing.Point(24, 56);
             this.AccountNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -70,7 +70,7 @@
             // 
             this.AccountNameCapsLockLabel.AutoSize = true;
             this.AccountNameCapsLockLabel.Enabled = false;
-            this.AccountNameCapsLockLabel.Font = new System.Drawing.Font(App.DisposableDroidBB, 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountNameCapsLockLabel.Font = new System.Drawing.Font("DisposableDroid BB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameCapsLockLabel.ForeColor = System.Drawing.Color.Red;
             this.AccountNameCapsLockLabel.Location = new System.Drawing.Point(239, 59);
             this.AccountNameCapsLockLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -86,7 +86,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AccountNameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.AccountNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AccountNameTextBox.Font = new System.Drawing.Font(App.DisposableDroidBB, 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountNameTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.AccountNameTextBox.Location = new System.Drawing.Point(26, 74);
             this.AccountNameTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -98,7 +98,7 @@
             // PasswordLabel
             // 
             this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Font = new System.Drawing.Font(App.DisposableDroidBB, 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.PasswordLabel.Location = new System.Drawing.Point(24, 106);
             this.PasswordLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -112,7 +112,7 @@
             this.LoginCancelButton.BackColor = System.Drawing.Color.DimGray;
             this.LoginCancelButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.LoginCancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginCancelButton.Font = new System.Drawing.Font(App.DisposableDroidBB, 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginCancelButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginCancelButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.LoginCancelButton.Location = new System.Drawing.Point(175, 175);
             this.LoginCancelButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -129,7 +129,7 @@
             this.LoginOKButton.BackColor = System.Drawing.Color.DimGray;
             this.LoginOKButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.LoginOKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginOKButton.Font = new System.Drawing.Font(App.DisposableDroidBB, 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginOKButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginOKButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.LoginOKButton.Location = new System.Drawing.Point(26, 175);
             this.LoginOKButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -147,7 +147,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.PasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PasswordTextBox.Font = new System.Drawing.Font(App.DisposableDroidBB, 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.PasswordTextBox.Location = new System.Drawing.Point(26, 125);
             this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
@@ -161,7 +161,7 @@
             // 
             this.PasswordCapsLockLabel.AutoSize = true;
             this.PasswordCapsLockLabel.Enabled = false;
-            this.PasswordCapsLockLabel.Font = new System.Drawing.Font(App.DisposableDroidBB, 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordCapsLockLabel.Font = new System.Drawing.Font("DisposableDroid BB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordCapsLockLabel.ForeColor = System.Drawing.Color.Red;
             this.PasswordCapsLockLabel.Location = new System.Drawing.Point(239, 108);
             this.PasswordCapsLockLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);

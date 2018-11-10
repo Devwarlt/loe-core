@@ -41,7 +41,6 @@
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(600, 400);
             this.MainMenu.TabIndex = 0;
-            this.MainMenu.Load += new System.EventHandler(this.MainMenu_Load);
             // 
             // Launcher
             // 
@@ -58,6 +57,8 @@
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "Launcher";
             this.Opacity = 0.99D;
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Launcher";
             this.Load += new System.EventHandler(this.Launcher_Load);

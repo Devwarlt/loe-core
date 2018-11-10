@@ -28,9 +28,11 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                 case "LoadCharacter": // TODO.
                     App.Info($"({From} [{Result}]) {Content}");
                     break;
+
                 case "Server.Character.UnlockedCharacters":
                     HandleUnlockedCharacters();
                     break;
+
                 default:
                     App.Info($"New server response detected!\n{ToString()}");
                     break;

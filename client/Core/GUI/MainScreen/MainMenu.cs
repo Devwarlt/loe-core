@@ -68,7 +68,8 @@ namespace LoESoft.Client.Core.GUI.MainScreen
                 }
 
             ((Launcher)Parent).Display(null, true);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 App.Warn($"Something went wrong whilst transitioning between Launcher and Client! {ex.ToString()}");
             }
