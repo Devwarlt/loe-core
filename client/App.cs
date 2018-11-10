@@ -19,7 +19,7 @@ namespace LoESoft.Client
     {
         // Font Cache DLL
         [DllImport("gdi32.dll")]
-        private static extern IntPtr AddEmbeddedFontToMemoryCache(IntPtr pbfont, uint cbfont, IntPtr pdv, [In] ref uint pcFonts);
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbfont, uint cbfont, IntPtr pdv, [In] ref uint pcFonts);
 
         // Embedded Font
         public static FontFamily DisposableDroidBB;
@@ -92,6 +92,8 @@ namespace LoESoft.Client
             {
                 DscordClient.SetPresence(DiscordRichPresence);
 
+                LoadEmbeddedFonts();
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(Launcher = new Launcher());
@@ -144,7 +146,7 @@ namespace LoESoft.Client
 
             uint pcFonts = 0;
 
-            AddEmbeddedFontToMemoryCache(data, (uint)buffer.Length, IntPtr.Zero, ref pcFonts);
+            AddFontMemResourceEx(data, (uint)buffer.Length, IntPtr.Zero, ref pcFonts);
 
             var fontcollection = new PrivateFontCollection();
             fontcollection.AddMemoryFont(data, len);
