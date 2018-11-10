@@ -144,9 +144,9 @@
     <Compile Include="Core\Networking\Server.ServerName.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />
     <Compile Include="Core\Screens\SplashScreen\SplashScreen.cs" />
+    <Compile Include="Core\Screens\TitleScreen\CharacterScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterSelection\CharacterRect.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterSelection\CharacterSelectHUD.cs" />
-    <Compile Include="Core\Screens\TitleScreen\TitleScreen.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\OutgoingPacket.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
     <Compile Include="Core\Networking\Packets\PacketBase.cs" />
