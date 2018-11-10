@@ -23,6 +23,7 @@ namespace LoESoft.Client.Assets
             AddImage("loeLogo");
             AddImage("characterRect");
             AddImage("panelImage");
+            AddImage("titleScreenBackGround");
         }
 
         private static void InitSprites()

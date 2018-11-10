@@ -73,7 +73,7 @@ namespace LoESoft.Client.Core.Screens
             ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
             ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
 
-            Background = new FilledRectangle(AssetLoader.LoadAsset<Texture2D>("images/titleScreenBackground"))
+            Background = new FilledRectangle(AssetLibrary.Images["titleScreenBackGround"])
             {
                 X = 0,
                 Y = 0
