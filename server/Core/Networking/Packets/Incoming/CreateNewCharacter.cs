@@ -56,7 +56,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            if (App.Database.CreateNewCharacter(AccountId, World, Name))
+            if (App.Database.CreateNewCharacter(AccountId, World, Name, out string error))
                 client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
@@ -68,7 +68,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 {
                     From = "CreateNewCharacter",
                     Result = -1,
-                    Content = "An error occurred while character creation, try again later..."
+                    Content = $"An error occurred while character creation: {error}"
                 });
         }
     }

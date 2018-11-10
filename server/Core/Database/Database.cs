@@ -13,7 +13,6 @@ namespace LoESoft.Server.Core.Database
     public class Database : Base, IDisposable
     {
         public static long LastAccountId = 0;
-        public static long LastCharacterId = 0;
         public static string AccountsPath => "accounts";
         public static string CharactersPath => "characters";
         public static ConcurrentDictionary<KeyValuePair<string, string>, Account> Accounts { get; set; }
@@ -32,7 +31,6 @@ namespace LoESoft.Server.Core.Database
             LoadCharacters();
 
             LastAccountId = Accounts.Count;
-            LastCharacterId = Characters.Count;
         }
 
         private void LoadAccounts()
@@ -75,6 +73,20 @@ namespace LoESoft.Server.Core.Database
         public Character GetCharacterByAccountId(long accountId, long characterId)
             => Characters.TryGetValue(new KeyValuePair<long, long>(accountId, characterId), out Character character) ? character : null;
 
+        public List<Character> GetCharactersByAccountId(long accountId, out string error)
+        {
+            var account = Accounts.Values.FirstOrDefault(acc => acc.Id == accountId);
+
+            if (account == null)
+            {
+                error = "Account is null.";
+                return null;
+            }
+
+            error = null;
+            return Characters.Where(acc => acc.Key.Key == account.Id).Select(character => character.Value).ToList();
+        }
+
         public bool CheckAccountNameIfExists(string name)
             => Accounts.Keys.Select(names => names.Key).ToList().FirstOrDefault(data => data == name) != null;
 
@@ -85,6 +97,7 @@ namespace LoESoft.Server.Core.Database
             return Accounts.TryAdd(new KeyValuePair<string, string>(name, password), new Account()
             {
                 Id = Interlocked.Increment(ref LastAccountId),
+                CurrentCharacterId = 0,
                 Name = name,
                 Password = password,
                 Rank = 0,
@@ -93,11 +106,27 @@ namespace LoESoft.Server.Core.Database
             });
         }
 
-        public bool CreateNewCharacter(long accountId, int world, string name)
+        public bool CreateNewCharacter(long accountId, int world, string name, out string error)
         {
+            var account = Accounts.Values.FirstOrDefault(acc => acc.Id == accountId);
+
+            if (account == null)
+            {
+                error = "Account is null.";
+                return false;
+            }
+
+            if (account.CurrentCharacterId == 3)
+            {
+                error = "Max number of characters reached the limit.";
+                return false;
+            }
+
+            account.CurrentCharacterId++;
+
             var character = new Character()
             {
-                Id = Interlocked.Increment(ref LastCharacterId),
+                Id = account.CurrentCharacterId,
                 AccountId = accountId,
                 World = world,
                 Name = name,
@@ -111,6 +140,7 @@ namespace LoESoft.Server.Core.Database
                 Creation = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss UTC")
             };
 
+            error = null;
             return Characters.TryAdd(new KeyValuePair<long, long>(character.AccountId, character.Id), character);
         }
 
