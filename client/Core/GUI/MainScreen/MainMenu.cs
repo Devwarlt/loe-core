@@ -28,11 +28,11 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 
             if (LoggedIn)
                 LoginButton.Text = "Logout";
-            
+
             LoginButton.Enabled = true;
             RegisterButton.Enabled = !LoggedIn;
             ExitButton.Enabled = true;
-            
+
             PlayButton.Enabled = !PlayButton.Enabled;
 
             App.Warn($"{LoggedIn}");

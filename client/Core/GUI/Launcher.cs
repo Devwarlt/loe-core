@@ -49,10 +49,5 @@ namespace LoESoft.Client.Core.GUI
 
             return list;
         }
-
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
