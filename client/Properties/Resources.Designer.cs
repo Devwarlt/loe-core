@@ -61,6 +61,16 @@ namespace LoESoft.Client.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Byte[].
+        /// </summary>
+        internal static byte[] DisposableDroidBB {
+            get {
+                object obj = ResourceManager.GetObject("DisposableDroidBB", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap loesoft_new_expanded_shadows_closer {
