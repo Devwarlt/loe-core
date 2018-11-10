@@ -32,21 +32,23 @@
             this.MainMenu = new LoESoft.Client.Core.GUI.MainScreen.MainMenu();
             this.SuspendLayout();
             // 
-            // MainScreen
+            // MainMenu
             // 
             this.MainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.MainMenu.GameUser = null;
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
-            this.MainMenu.Name = "MainScreen";
+            this.MainMenu.LoggedIn = false;
+            this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(600, 400);
             this.MainMenu.TabIndex = 0;
+            this.MainMenu.Load += new System.EventHandler(this.MainMenu_Load);
             // 
             // Launcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(584, 362);
+            this.ClientSize = new System.Drawing.Size(600, 400);
             this.Controls.Add(this.MainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

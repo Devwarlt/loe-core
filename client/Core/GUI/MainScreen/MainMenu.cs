@@ -58,11 +58,19 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            using (var game = new GameApplication(GameUser))
+            try
             {
-                ((Launcher)Parent).Display(null, false);
+                using (var game = new GameApplication(GameUser))
+                {
+                    ((Launcher)Parent).Display(null, false);
 
-                game.Run();
+                    game.Run();
+                }
+
+            ((Launcher)Parent).Display(null, true);
+            }catch(Exception ex)
+            {
+                App.Warn($"Something went wrong whilst transitioning between Launcher and Client! {ex.ToString()}");
             }
         }
 

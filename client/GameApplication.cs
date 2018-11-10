@@ -15,6 +15,7 @@ namespace LoESoft.Client
         public static int HEIGHT => 600;
         public static SplashScreen SplashScreen { get; set; }
         public static GameScreen GameScreen { get; set; }
+        public static TitleScreen TitleScreen { get; set; }
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }

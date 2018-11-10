@@ -14,7 +14,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         {
             if (AccountId == -1)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
                     Result = -1,
@@ -25,7 +25,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (string.IsNullOrEmpty(Name))
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
                     Result = -1,
@@ -36,7 +36,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (Name.Length < 3)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
                     Result = -1,
@@ -47,7 +47,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (Name.Length > 20)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
                     Result = -1,
@@ -57,14 +57,14 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             }
 
             if (App.Database.CreateNewCharacter(AccountId, World, Name))
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
                     Result = 0,
                     Content = "You have successfully created a new character!"
                 });
             else
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
                     Result = -1,

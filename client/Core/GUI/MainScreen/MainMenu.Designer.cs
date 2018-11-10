@@ -44,18 +44,18 @@
             // 
             // BRMELabel
             // 
-            this.BRMELabel.Font = new System.Drawing.Font("DisposableDroid BB", 32.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BRMELabel.Font = new System.Drawing.Font("Stencil", 32.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BRMELabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.BRMELabel.Location = new System.Drawing.Point(23, 54);
+            this.BRMELabel.Location = new System.Drawing.Point(3, 40);
             this.BRMELabel.Name = "BRMELabel";
-            this.BRMELabel.Size = new System.Drawing.Size(124, 37);
+            this.BRMELabel.Size = new System.Drawing.Size(171, 51);
             this.BRMELabel.TabIndex = 0;
             this.BRMELabel.Text = "BRME";
             this.BRMELabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BRMEVersion
             // 
-            this.BRMEVersion.Font = new System.Drawing.Font("DisposableDroid BB", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BRMEVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BRMEVersion.ForeColor = System.Drawing.Color.Gray;
             this.BRMEVersion.Location = new System.Drawing.Point(23, 91);
             this.BRMEVersion.Name = "BRMEVersion";
@@ -69,7 +69,7 @@
             this.RegisterButton.BackColor = System.Drawing.Color.DimGray;
             this.RegisterButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RegisterButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.RegisterButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.RegisterButton.Location = new System.Drawing.Point(23, 290);
             this.RegisterButton.Name = "RegisterButton";
@@ -85,7 +85,7 @@
             this.LoginButton.BackColor = System.Drawing.Color.DimGray;
             this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.LoginButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.LoginButton.Location = new System.Drawing.Point(23, 240);
             this.LoginButton.Name = "LoginButton";
@@ -102,14 +102,14 @@
             this.PlayButton.Enabled = false;
             this.PlayButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.PlayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PlayButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.PlayButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.PlayButton.Location = new System.Drawing.Point(23, 190);
             this.PlayButton.Name = "PlayButton";
             this.PlayButton.Size = new System.Drawing.Size(124, 36);
             this.PlayButton.TabIndex = 5;
             this.PlayButton.TabStop = false;
-            this.PlayButton.Text = "Play";
+            this.PlayButton.Text = "Launch";
             this.PlayButton.UseVisualStyleBackColor = false;
             this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
@@ -118,7 +118,7 @@
             this.ExitButton.BackColor = System.Drawing.Color.DimGray;
             this.ExitButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ExitButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.ExitButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.ExitButton.Location = new System.Drawing.Point(24, 340);
             this.ExitButton.Name = "ExitButton";
@@ -131,16 +131,16 @@
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
-            this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Font = new System.Drawing.Font("Stencil", 30F, System.Drawing.FontStyle.Bold);
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.TitleLabel.Location = new System.Drawing.Point(0, 0);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(600, 40);
             this.TitleLabel.TabIndex = 9;
-            this.TitleLabel.Text = "Account Manager";
+            this.TitleLabel.Text = "Launcher";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
@@ -185,7 +185,7 @@
             this.PopUp.Size = new System.Drawing.Size(325, 265);
             this.PopUp.TabIndex = 11;
             // 
-            // MainScreen
+            // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -201,7 +201,7 @@
             this.Controls.Add(this.BRMELabel);
             this.Controls.Add(this.RegisterBox);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "MainScreen";
+            this.Name = "MainMenu";
             this.Size = new System.Drawing.Size(600, 400);
             this.Load += new System.EventHandler(this.MainScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

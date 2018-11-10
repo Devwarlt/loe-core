@@ -23,7 +23,6 @@ namespace LoESoft.Client.Core.Screens
         public override void OnScreenCreate()
         {
             Controller = new GamePlayer(GameUser);
-            GameUser.SendPacket(new Load());
         }
 
         public override void OnScreenDispatch() => GameUser.Disconnect();

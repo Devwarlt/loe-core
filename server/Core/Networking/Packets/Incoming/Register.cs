@@ -13,7 +13,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "Register",
                     Result = -1,
@@ -24,7 +24,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (string.IsNullOrWhiteSpace(Password))
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "Register",
                     Result = -1,
@@ -35,7 +35,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (Name.Length < 6)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "Register",
                     Result = -1,
@@ -46,7 +46,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (Password.Length < 8)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "Register",
                     Result = -1,
@@ -59,7 +59,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (isAccountNameExist)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "Register",
                     Result = -1,
@@ -69,14 +69,14 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             }
 
             if (App.Database.CreateNewAccount(Name, Password, out string token))
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "Register",
                     Result = 0,
                     Content = $"You have successfully registered a brand-new account with token '{token}', enjoy the game!"
                 });
             else
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
                     From = "Register",
                     Result = -1,

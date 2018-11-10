@@ -56,6 +56,9 @@ namespace LoESoft.Client.Assets
         {
             var spriteSet = AssetLibrary.Sprites[content.Texture.FileName];
 
+            if (content.Texture.Animated)
+                return spriteSet.GetSprite(content.Texture.ImageIndex.Item1, content.Texture.ImageIndex.Item2 * 4);
+
             return spriteSet.GetSprite(content.Texture.ImageIndex.Item1, content.Texture.ImageIndex.Item2);
         }
 

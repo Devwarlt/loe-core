@@ -223,7 +223,6 @@
     <Compile Include="Core\Networking\Packets\Incoming\IncomingPacket.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Load.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ClientMove.cs" />
-    <Compile Include="Core\Networking\Packets\Incoming\LoadCharacter.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Register.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Login.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\CharacterData.cs" />

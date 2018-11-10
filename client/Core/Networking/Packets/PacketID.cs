@@ -11,9 +11,9 @@
         LOGIN = 6,
         REGISTER = 7,
         CREATE_NEW_CHARACTER = 8,
-        RESPONSE = 9,
-        LOAD_CHARACTER = 10,
-        CHARACTER_DATA = 11,
-        LOAD_MAP = 12
+        SERVER_RESPONSE = 9,
+        CHARACTER_DATA = 10,
+        LOAD_MAP = 11,
+        CLIENT_REPONSE = 12
     }
 }

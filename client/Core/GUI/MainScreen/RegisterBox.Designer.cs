@@ -47,7 +47,7 @@
             this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleLabel.BackColor = System.Drawing.Color.Gray;
-            this.TitleLabel.Font = new System.Drawing.Font("DisposableDroid BB", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitleLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.TitleLabel.Location = new System.Drawing.Point(0, 0);
             this.TitleLabel.Name = "TitleLabel";
@@ -59,11 +59,11 @@
             // AccountNameLabel
             // 
             this.AccountNameLabel.AutoSize = true;
-            this.AccountNameLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameLabel.ForeColor = System.Drawing.Color.Gainsboro;
             this.AccountNameLabel.Location = new System.Drawing.Point(23, 57);
             this.AccountNameLabel.Name = "AccountNameLabel";
-            this.AccountNameLabel.Size = new System.Drawing.Size(101, 16);
+            this.AccountNameLabel.Size = new System.Drawing.Size(114, 20);
             this.AccountNameLabel.TabIndex = 5;
             this.AccountNameLabel.Text = "Account Name";
             // 
@@ -71,11 +71,11 @@
             // 
             this.AccountNameCapsLockLabel.AutoSize = true;
             this.AccountNameCapsLockLabel.Enabled = false;
-            this.AccountNameCapsLockLabel.Font = new System.Drawing.Font("DisposableDroid BB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AccountNameCapsLockLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameCapsLockLabel.ForeColor = System.Drawing.Color.Red;
-            this.AccountNameCapsLockLabel.Location = new System.Drawing.Point(232, 57);
+            this.AccountNameCapsLockLabel.Location = new System.Drawing.Point(232, 61);
             this.AccountNameCapsLockLabel.Name = "AccountNameCapsLockLabel";
-            this.AccountNameCapsLockLabel.Size = new System.Drawing.Size(60, 13);
+            this.AccountNameCapsLockLabel.Size = new System.Drawing.Size(81, 16);
             this.AccountNameCapsLockLabel.TabIndex = 6;
             this.AccountNameCapsLockLabel.Text = "CAPS LOCK";
             this.AccountNameCapsLockLabel.Visible = false;
@@ -86,23 +86,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AccountNameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.AccountNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AccountNameTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F);
+            this.AccountNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.AccountNameTextBox.ForeColor = System.Drawing.Color.Gainsboro;
             this.AccountNameTextBox.Location = new System.Drawing.Point(26, 75);
             this.AccountNameTextBox.MaxLength = 32;
             this.AccountNameTextBox.Name = "AccountNameTextBox";
-            this.AccountNameTextBox.PasswordChar = 'x';
-            this.AccountNameTextBox.Size = new System.Drawing.Size(273, 28);
+            this.AccountNameTextBox.Size = new System.Drawing.Size(273, 29);
             this.AccountNameTextBox.TabIndex = 8;
             // 
             // PasswordLabel
             // 
             this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.PasswordLabel.Location = new System.Drawing.Point(23, 104);
+            this.PasswordLabel.Location = new System.Drawing.Point(23, 109);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(70, 16);
+            this.PasswordLabel.Size = new System.Drawing.Size(78, 20);
             this.PasswordLabel.TabIndex = 9;
             this.PasswordLabel.Text = "Password";
             // 
@@ -112,23 +111,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.PasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PasswordTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F);
+            this.PasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.PasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
-            this.PasswordTextBox.Location = new System.Drawing.Point(26, 123);
+            this.PasswordTextBox.Location = new System.Drawing.Point(26, 126);
             this.PasswordTextBox.MaxLength = 32;
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = 'x';
-            this.PasswordTextBox.Size = new System.Drawing.Size(273, 28);
+            this.PasswordTextBox.Size = new System.Drawing.Size(273, 29);
             this.PasswordTextBox.TabIndex = 10;
             // 
             // ConfirmPasswordLabel
             // 
             this.ConfirmPasswordLabel.AutoSize = true;
-            this.ConfirmPasswordLabel.Font = new System.Drawing.Font("DisposableDroid BB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConfirmPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConfirmPasswordLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.ConfirmPasswordLabel.Location = new System.Drawing.Point(23, 154);
+            this.ConfirmPasswordLabel.Location = new System.Drawing.Point(22, 157);
             this.ConfirmPasswordLabel.Name = "ConfirmPasswordLabel";
-            this.ConfirmPasswordLabel.Size = new System.Drawing.Size(127, 16);
+            this.ConfirmPasswordLabel.Size = new System.Drawing.Size(137, 20);
             this.ConfirmPasswordLabel.TabIndex = 11;
             this.ConfirmPasswordLabel.Text = "Confirm Password";
             // 
@@ -138,13 +137,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ConfirmPasswordTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.ConfirmPasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ConfirmPasswordTextBox.Font = new System.Drawing.Font("DisposableDroid BB", 15.75F);
+            this.ConfirmPasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.ConfirmPasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
-            this.ConfirmPasswordTextBox.Location = new System.Drawing.Point(26, 173);
+            this.ConfirmPasswordTextBox.Location = new System.Drawing.Point(26, 180);
             this.ConfirmPasswordTextBox.MaxLength = 32;
             this.ConfirmPasswordTextBox.Name = "ConfirmPasswordTextBox";
             this.ConfirmPasswordTextBox.PasswordChar = 'x';
-            this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(273, 28);
+            this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(273, 29);
             this.ConfirmPasswordTextBox.TabIndex = 12;
             // 
             // RegisterCancelButton
@@ -152,7 +151,7 @@
             this.RegisterCancelButton.BackColor = System.Drawing.Color.DimGray;
             this.RegisterCancelButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.RegisterCancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RegisterCancelButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterCancelButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.RegisterCancelButton.Location = new System.Drawing.Point(175, 223);
             this.RegisterCancelButton.Name = "RegisterCancelButton";
@@ -168,7 +167,7 @@
             this.RegisterCreateButton.BackColor = System.Drawing.Color.DimGray;
             this.RegisterCreateButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.RegisterCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RegisterCreateButton.Font = new System.Drawing.Font("DisposableDroid BB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterCreateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterCreateButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.RegisterCreateButton.Location = new System.Drawing.Point(26, 223);
             this.RegisterCreateButton.Name = "RegisterCreateButton";
@@ -183,11 +182,11 @@
             // 
             this.PasswordCapsLockLabel.AutoSize = true;
             this.PasswordCapsLockLabel.Enabled = false;
-            this.PasswordCapsLockLabel.Font = new System.Drawing.Font("DisposableDroid BB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordCapsLockLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordCapsLockLabel.ForeColor = System.Drawing.Color.Red;
-            this.PasswordCapsLockLabel.Location = new System.Drawing.Point(232, 107);
+            this.PasswordCapsLockLabel.Location = new System.Drawing.Point(232, 112);
             this.PasswordCapsLockLabel.Name = "PasswordCapsLockLabel";
-            this.PasswordCapsLockLabel.Size = new System.Drawing.Size(60, 13);
+            this.PasswordCapsLockLabel.Size = new System.Drawing.Size(81, 16);
             this.PasswordCapsLockLabel.TabIndex = 6;
             this.PasswordCapsLockLabel.Text = "CAPS LOCK";
             this.PasswordCapsLockLabel.Visible = false;
@@ -196,11 +195,11 @@
             // 
             this.ConfirmPasswordCapsLockLabel.AutoSize = true;
             this.ConfirmPasswordCapsLockLabel.Enabled = false;
-            this.ConfirmPasswordCapsLockLabel.Font = new System.Drawing.Font("DisposableDroid BB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConfirmPasswordCapsLockLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConfirmPasswordCapsLockLabel.ForeColor = System.Drawing.Color.Red;
-            this.ConfirmPasswordCapsLockLabel.Location = new System.Drawing.Point(232, 156);
+            this.ConfirmPasswordCapsLockLabel.Location = new System.Drawing.Point(232, 161);
             this.ConfirmPasswordCapsLockLabel.Name = "ConfirmPasswordCapsLockLabel";
-            this.ConfirmPasswordCapsLockLabel.Size = new System.Drawing.Size(60, 13);
+            this.ConfirmPasswordCapsLockLabel.Size = new System.Drawing.Size(81, 16);
             this.ConfirmPasswordCapsLockLabel.TabIndex = 6;
             this.ConfirmPasswordCapsLockLabel.Text = "CAPS LOCK";
             this.ConfirmPasswordCapsLockLabel.Visible = false;

@@ -14,9 +14,9 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
-                    From = "Login",
+                    From = $"Login",
                     Result = -1,
                     Content = "Account name is empty."
                 });
@@ -25,9 +25,9 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (string.IsNullOrWhiteSpace(Password))
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
-                    From = "Login",
+                    From = $"Login",
                     Result = -1,
                     Content = "Account password is empty."
                 });
@@ -36,9 +36,9 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (Name.Length < 6)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
-                    From = "Login",
+                    From = $"Login",
                     Result = -1,
                     Content = "Account name minimum length is 6."
                 });
@@ -47,9 +47,9 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (Password.Length < 8)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
-                    From = "Login",
+                    From = $"Login",
                     Result = -1,
                     Content = "Account password minimum length is 8."
                 });
@@ -60,9 +60,9 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             if (account == null)
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
-                    From = "Login",
+                    From = $"Login",
                     Result = -1,
                     Content = "Account not found."
                 });
@@ -70,16 +70,16 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             }
             else
             {
-                client.SendPacket(new Response()
+                client.SendPacket(new ServerResponse()
                 {
-                    From = "Login",
+                    From = $"Login",
                     Result = 0,
                     Content = "You have successfully logged in, enjoy the game!"
                 });
 
                 if (App.Database.GetCharacterByAccountId(account.Id, 1) == null) // temporarily
                     if (App.Database.CreateNewCharacter(account.Id, 0, $"Player {account.Id}")) // temporarily
-                        client.SendPacket(new Response()
+                        client.SendPacket(new ServerResponse()
                         {
                             From = "CreateNewCharacter",
                             Result = 0,

@@ -28,5 +28,10 @@ namespace LoESoft.Client.Core.GUI
             Enabled = e;
             Visible = e;
         }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
