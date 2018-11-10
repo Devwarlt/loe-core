@@ -1,4 +1,6 @@
-﻿namespace LoESoft.Server.Core.Networking.Packets.Incoming
+﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
+
+namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
     public class ClientResponse : IncomingPacket
     {
@@ -12,15 +14,22 @@
         {
             switch(From)
             {
-                case "Client.Character.GetCharacterData":
-
+                case "Client.Character.GetUnlockedCharacters":
+                    HandleUnlockedCharacters(client);
                     break;
             }
         }
 
-        private void HandleGetCharacterData()
+        private void HandleUnlockedCharacters(Client client)
         {
+            App.Warn("Sending Character Unlocked Info!");
 
+            client.SendPacket(new ServerResponse()
+            {
+                From = "Server.Character.UnlockedCharacters",
+                Result = 0, //Assumes that player even has a character
+                Content = "5,5,5" //Id's of classes
+            });
         }
     }
 }
