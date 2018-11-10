@@ -2,6 +2,7 @@ using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
+using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Forms;
@@ -13,7 +14,7 @@ using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Screens
 {
-    public class TitleScreen : Screen
+    public class CharacterScreen : Screen
     {
         public List<Tile> Tiles { get; set; }
 
@@ -24,9 +25,11 @@ namespace LoESoft.Client.Core.Screens
         private TextButton ExitButton { get; set; }
         private FilledRectangle Background { get; set; }
 
+        private CharacterSelectHUD CharacterSelect { get; set; }
+
         private GameUser _gameUser;
 
-        public TitleScreen(GameUser gameUser)
+        public CharacterScreen(GameUser gameUser)
         {
             _gameUser = gameUser;
         }
@@ -82,10 +85,18 @@ namespace LoESoft.Client.Core.Screens
 
             _gameUser.SendPacket(new ClientResponse()
             {
-                From = "Client.Character.GetCharacterData",
+                From = "Client.Character.GetUnlockedCharacters",
                 Result = 0,
                 Content = ""
             });
+        }
+
+        public void AddCharacterSelection(string response)
+        {
+            CharacterSelect = new CharacterSelectHUD(200, 400);
+            CharacterSelect.Init(response);
+
+            Background.AddChild(CharacterSelect);
         }
 
         public override void OnScreenDispatch()

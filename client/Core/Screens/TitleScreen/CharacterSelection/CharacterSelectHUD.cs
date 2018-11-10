@@ -1,36 +1,43 @@
 ﻿using LoESoft.Client.Assets;
 using LoESoft.Client.Drawing.Sprites.Forms;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
 {
     public class CharacterSelectHUD : FilledRectangle
     {
-        private Dictionary<int, CharacterRect> _classView;
+        public static int MAXCHARACTERS = 3;
 
-        private List<int> _classIds = new List<int>()
-        { 5 };
+        private List<CharacterRect> _classView;
+
+        private List<int> _unlockedClasses;
 
         public CharacterSelectHUD(int x, int y)
-            : base(x, y, 400, 200, new Drawing.RGBColor(225, 35, 35), 0.75f)
+            : base(x, y, 400, 200, alpha: 0.75f)
         {
-            _classView = new Dictionary<int, CharacterRect>();
+            _classView = new List<CharacterRect>();
+            _unlockedClasses = new List<int>();
 
-            int rx = 0;
-            foreach (var i in XmlLibrary.ObjectsXml.Where(_ => _classIds.Contains(_.Key)))
+            SpriteColor = Color.Black;
+        }
+
+        public void Init(string result)
+        {
+            string[] results = result.Split(',');
+
+            for (var i = 0; i < MAXCHARACTERS; i++)
             {
-                _classView.Add(i.Key, new CharacterRect(i.Value, rx, 5));
-                rx += 40 + 3;
+                int idx = int.Parse(results[i]);
+                var character = new CharacterRect(i * 40 + 5, 5);
+
+                if (idx != -1)
+                    character.Init(XmlLibrary.ObjectsXml[idx]);
+
+                _classView.Add(character);
+                AddChild(character);
             }
         }
-
-        public void Init()
-        {
-
-        }
-
-
-
     }
 }

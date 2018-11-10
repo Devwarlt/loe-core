@@ -1,4 +1,5 @@
 ﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Screens;
 using Newtonsoft.Json;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
@@ -27,11 +28,19 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                 case "LoadCharacter": // TODO.
                     App.Info($"({From} [{Result}]) {Content}");
                     break;
-
+                case "Server.Character.UnlockedCharacters":
+                    HandleUnlockedCharacters();
+                    break;
                 default:
                     App.Info($"New server response detected!\n{ToString()}");
                     break;
             }
+        }
+
+        private void HandleUnlockedCharacters()
+        {
+            if (ScreenManager.ActiveScreen == GameApplication.CharacterScreen)
+                GameApplication.CharacterScreen.AddCharacterSelection(Content);
         }
 
         private void LoginHandler()
