@@ -1,105 +1,84 @@
 ﻿using LoESoft.Client.Assets.Xml;
+using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
 {
     public class ChooseCharacterBar : Sprite
     {
-        public int[] ClassIds;
-
         private Mask _mask;
 
-        public ChooseCharacterBar() : base(0, 0, 400, 200)
+        private Sprite _meleeClass;
+        private Sprite _rangeClass;
+        private Sprite _defenseClass;
+
+        public ChooseCharacterBar() : base(DrawHelper.CenteredPosition(GameApplication.WIDTH, 400), 250, 400, 200)
         {
             _mask = new Mask(new RGBColor(26, 13, 2), 0.75f);
-            ClassIds = new int[] { 5, 6, 7 }; //All the classes
         }
 
-        public void Init()
+        GameUser _gameUser;
+        CharacterRect _parent;
+        public void Init(GameUser user, CharacterRect parent)
         {
-            X = DrawHelper.CenteredPosition(GameApplication.WIDTH, 400);
-            Y = DrawHelper.CenteredPosition(GameApplication.HEIGHT, 200);
+            _gameUser = user;
+            _parent = parent;
 
-            int spriteX = 0;
+            int spriteX = 10;
 
-            var spriteList = new List<Sprite>();
-            foreach (var i in ClassIds)
-            {
-                var texture = XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[i]);
-                var classSprite = new Sprite(spriteX + 10, 10, 120, 120, texture);
+            _meleeClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[5]));
+            spriteX += 130;
+            _rangeClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[6]));
+            spriteX += 130;
+            _defenseClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[7]));
 
-                spriteList.Add(classSprite);
-
-                spriteX += 120;
-            }
-
-            spriteList[0].AddEventListener(Event.MOUSEOUT, delegate
+            
+            _meleeClass.AddEventListener(Event.CLICKLEFT, delegate
             {
-                spriteList[0].SpriteColor = Color.White;
-            });
-            spriteList[0].AddEventListener(Event.MOUSEOVER, delegate
-            {
-                spriteList[0].SpriteColor = Color.SlateGray;
-            });
-            spriteList[0].AddEventListener(Event.CLICKLEFT, delegate
-            {
-                Remove();
-                //Send Packet
-            });
-            spriteList[1].AddEventListener(Event.MOUSEOUT, delegate
-            {
-                spriteList[1].SpriteColor = Color.White;
-            });
-            spriteList[1].AddEventListener(Event.MOUSEOVER, delegate
-            {
-                spriteList[1].SpriteColor = Color.SlateGray;
-            });
-            spriteList[1].AddEventListener(Event.CLICKLEFT, delegate
-            {
-                Remove();
-                //Send Packet
-            });
-            spriteList[2].AddEventListener(Event.MOUSEOUT, delegate
-            {
-                spriteList[2].SpriteColor = Color.White;
-            });
-            spriteList[2].AddEventListener(Event.MOUSEOVER, delegate
-            {
-                spriteList[2].SpriteColor = Color.SlateGray;
-            });
-            spriteList[2].AddEventListener(Event.CLICKLEFT, delegate
-            {
-                App.Warn("WTF!");
+                CreateCharacter(5);
                 ParentSprite.RemoveChild(this);
-                //Send Packet
             });
+            _meleeClass.AddEventListener(Event.MOUSEOUT, delegate { _meleeClass.SpriteColor = Color.White; });
+            _meleeClass.AddEventListener(Event.MOUSEOVER, delegate { _meleeClass.SpriteColor = Color.DarkSlateGray; });
+
+            _rangeClass.AddEventListener(Event.CLICKLEFT, delegate
+            {
+                CreateCharacter(6);
+                ParentSprite.RemoveChild(this);
+            });
+            _rangeClass.AddEventListener(Event.MOUSEOUT, delegate {_rangeClass.SpriteColor = Color.White; });
+            _rangeClass.AddEventListener(Event.MOUSEOVER, delegate { _rangeClass.SpriteColor = Color.DarkSlateGray; });
+
+            _defenseClass.AddEventListener(Event.CLICKLEFT, delegate 
+            {
+                CreateCharacter(7);
+                ParentSprite.RemoveChild(this);
+            });
+            _defenseClass.AddEventListener(Event.MOUSEOUT, delegate { _defenseClass.SpriteColor = Color.White; });
+            _defenseClass.AddEventListener(Event.MOUSEOVER, delegate { _defenseClass.SpriteColor = Color.DarkSlateGray; });
 
             AddChild(_mask);
-            AddChild(spriteList[0]);
-            AddChild(spriteList[1]);
-            AddChild(spriteList[2]);
+            AddChild(_meleeClass);
+            AddChild(_rangeClass);
+            AddChild(_defenseClass);
         }
 
-        private void Remove()
+        private void CreateCharacter(int classType)
         {
-            App.Warn("TEST!");
-            try
+            _gameUser.SendPacket(new CreateNewCharacter()
             {
-                ParentSprite.RemoveChild(this);
-            }
-            catch (Exception ex)
-            {
-                App.Warn(ex.ToString());
-            }
+                World = 0,
+                ClassType = classType,
+                CharacterIndex = _parent.CharacterIndex
+            });
         }
-
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.StartClamp();

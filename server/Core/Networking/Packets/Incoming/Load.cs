@@ -1,18 +1,18 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using Newtonsoft.Json;
+using LoESoft.Server.Core.World;
+using LoESoft.Server.Core.World.Entities.Player;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
     public class Load : IncomingPacket
     {
-        public int AccountId { get; set; }
-        public int Id { get; set; }
+        public int CharacterIndex { get; set; }
 
         public override PacketID PacketID => PacketID.LOAD;
 
         public override void Handle(Client client)
         {
-            if (AccountId == -1)
+            if (client.Account.Id == -1)
             {
                 client.SendPacket(new ServerResponse()
                 {
@@ -22,8 +22,9 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 });
                 return;
             }
+            App.Warn("TEST!2");
 
-            var getCharacterData = App.Database.GetCharacterByAccountId(AccountId, Id);
+            var getCharacterData = App.Database.GetCharacterByAccountId(client.Account.Id, CharacterIndex);
 
             if (getCharacterData == null)
                 client.SendPacket(new ServerResponse()
@@ -33,12 +34,23 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     Content = "Character not found, try again later..."
                 });
             else
-                client.SendPacket(new CharacterData()
+            {
+                client.SendPacket(new LoadMap()
                 {
-                    Character = JsonConvert.SerializeObject(getCharacterData)
+                    MapWidth = WorldMap.WIDTH,
+                    MapHeight = WorldMap.HEIGHT
                 });
-            
-            client.Manager.TryAddPlayer(client);
+                //client.SendPacket(new ServerResponse()
+                //{
+
+                //});
+
+                client.Player = new Player(client.Manager, client, (int)client.Account.Id, getCharacterData.Class);
+
+                client.Player.Move(getCharacterData.Position.X, getCharacterData.Position.Y);
+
+                client.Manager.TryAddPlayer(client);
+            }
         }
     }
 }

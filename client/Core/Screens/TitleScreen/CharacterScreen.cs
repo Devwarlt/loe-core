@@ -2,6 +2,7 @@ using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
+using LoESoft.Client.Core.Screens.TitleScreen;
 using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
@@ -44,7 +45,15 @@ namespace LoESoft.Client.Core.Screens
 
         private void OnPlay(object sender, EventArgs e)
         {
-            ScreenManager.DispatchScreen(GameApplication.GameScreen = new GameScreen(_gameUser));
+            if (CharacterSettings.CurrentCharacterId != -1)
+            {
+                _gameUser.SendPacket(new Load()
+                {
+                    CharacterIndex = CharacterSettings.CurrentCharacterId
+                });
+
+                ScreenManager.DispatchScreen(GameApplication.GameScreen = new GameScreen(_gameUser));
+            }
         }
 
         private void OnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
@@ -53,25 +62,17 @@ namespace LoESoft.Client.Core.Screens
         {
             Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 0, 0));
             Title.X = (GameApplication.WIDTH - Title.Width) / 2;
-            Title.Y = 430;
+            Title.Y = 20;
             Title.Outline = true;
 
             PlayButton = new TextButton("Play", 30);
             PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
             PlayButton.Y = (GameApplication.HEIGHT - PlayButton.Height) / 2;
-            PlayButton.Y = Title.Y + Title.Height + 15 + 6;
+            PlayButton.Y = 525;
             PlayButton.TextDisplay.Outline = true;
             PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
             PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
             PlayButton.AddEventListener(Event.MOUSEOUT, OnPlayButtonOut);
-
-            ExitButton = new TextButton("Exit", 30);
-            ExitButton.X = (GameApplication.WIDTH - ExitButton.Width) / 2;
-            ExitButton.Y = PlayButton.Y + PlayButton.Height + 6;
-            ExitButton.TextDisplay.Outline = true;
-            ExitButton.AddEventListener(Event.CLICKLEFT, OnExit);
-            ExitButton.AddEventListener(Event.MOUSEOVER, OnExitButtonOver);
-            ExitButton.AddEventListener(Event.MOUSEOUT, OnExitButtonOut);
 
             Background = new FilledRectangle(AssetLibrary.Images["titleScreenBackGround"])
             {
@@ -81,7 +82,6 @@ namespace LoESoft.Client.Core.Screens
 
             Background.AddChild(Title);
             Background.AddChild(PlayButton);
-            Background.AddChild(ExitButton);
 
             _gameUser.SendPacket(new ClientResponse()
             {
@@ -93,11 +93,13 @@ namespace LoESoft.Client.Core.Screens
 
         public void AddCharacterSelection(string response)
         {
-            CharacterSelect = new CharacterSelectHUD(0, 0);
-            CharacterSelect.Init(response);
+            CharacterSelect = new CharacterSelectHUD(0, 235);
+            CharacterSelect.Init(_gameUser, response);
 
             Background.AddChild(CharacterSelect);
         }
+
+        public void RefreshCharacterSelection(int index, int type) => CharacterSelect.ReloadView(index, type);
 
         public override void OnScreenDispatch()
         {
@@ -114,9 +116,9 @@ namespace LoESoft.Client.Core.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
+            spriteBatch.StartClamp();
             Background.Draw(spriteBatch);
-            spriteBatch.End();
+            spriteBatch.EndClamp();
         }
     }
 }

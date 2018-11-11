@@ -12,8 +12,7 @@
         REGISTER = 7,
         CREATE_NEW_CHARACTER = 8,
         SERVER_RESPONSE = 9,
-        CHARACTER_DATA = 10,
-        LOAD_MAP = 11,
-        CLIENT_REPONSE = 12
+        LOAD_MAP = 10,
+        CLIENT_REPONSE = 11
     }
 }

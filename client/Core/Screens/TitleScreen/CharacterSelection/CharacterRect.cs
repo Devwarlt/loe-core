@@ -1,6 +1,7 @@
 ﻿using LoESoft.Client.Assets;
 using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Assets.Xml.Structure;
+using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
@@ -15,29 +16,40 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
     {
         public Sprite CharacterView { get; private set; }
         public ObjectsContent Content { get; private set; }
-        public int ClassIndex { get; private set; }
 
         private ChooseCharacterBar _chooseCharacterBar;
 
+        public int ClassIndex { get; private set; }
+        public int CharacterIndex { get; set; }
+        public bool Selected { get; set; }
+        
         public CharacterRect(int x, int y) :
             base(x, y, 250, 250, AssetLibrary.Images["characterRect"])
         {
             _chooseCharacterBar = new ChooseCharacterBar();
+            _chooseCharacterBar.IsZeroApplicaple = true;
+
+            Selected = false;
 
             AddEventListener(Event.CLICKLEFT, onSelected);
             AddEventListener(Event.MOUSEOUT, delegate
             {
-                SpriteColor = Color.White;
+                if (!Selected)
+                    SpriteColor = Color.White;
             });
             AddEventListener(Event.MOUSEOVER, delegate
             {
-                SpriteColor = Color.DarkGray;
+                SpriteColor = Color.RoyalBlue;
             });
         }
 
-        public void Init(int idx)
+        private GameUser _gameUser;
+
+        public void Init(GameUser user, int idx, int cidx)
         {
+            _gameUser = user;
             ClassIndex = idx;
+            CharacterIndex = cidx;
 
             if (ClassIndex != -1)
             {
@@ -48,10 +60,20 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
 
         private void AddCharacterView()
         {
+            RemoveChild(CharacterView);
+
             CharacterView = new Sprite(50, 15, 150, 150, XmlLibrary.GetSpriteFromContent(Content));
             CharacterView.IsEventApplicable = false;
 
             AddChild(CharacterView);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if ((Selected = (CharacterSettings.CurrentCharacterId == CharacterIndex)))
+                SpriteColor = Color.RoyalBlue;
+
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -65,10 +87,12 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
         {
             if (ClassIndex == -1)
             {
-                //Make Choose Character Bar
-                _chooseCharacterBar.Init();
+                _chooseCharacterBar.Init(_gameUser, this);
 
                 ParentSprite.AddChild(_chooseCharacterBar);
+            } else
+            {
+                CharacterSettings.CurrentCharacterId = CharacterIndex;
             }
         }
     }

@@ -79,12 +79,19 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public void AddChild(SpriteNode child)
         {
-            child.ParentSprite = this;
-            child.Index = ChildList.Count();
-            ChildList.Add(child);
+            if (!ChildList.Contains(child))
+            {
+                child.ParentSprite = this;
+                child.Index = ChildList.Count();
+                ChildList.Add(child);
+            }
         }
 
-        public void RemoveChild(SpriteNode child) => ChildList.Remove(child);
+        public void RemoveChild(SpriteNode child)
+        {
+            if (ChildList.Contains(child))
+                ChildList.Remove(child);
+        }
 
         public void RemoveAllChild() => ChildList.Clear();
 

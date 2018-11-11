@@ -12,7 +12,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         private AStar PathFinder;
 
-        public EntityObject() : base(6)
+        public EntityObject(int id) : base(id)
         {
             Animation = new ObjectAnimation();
             PathFinder = new AStar();

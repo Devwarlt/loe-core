@@ -44,9 +44,6 @@ namespace LoESoft.Client.Core.Game.Map
             {
                 if (Objects.ContainsKey(i.ObjectId))
                 {
-                    //Update stat
-                    //if (!i.IsPlayer)
-                    //    (Objects[i.ObjectId] as EntityObject).SetNewDistination(i.X, i.Y, i.ObjectId);
                     Objects[i.ObjectId].DistinationX = i.X;
                     Objects[i.ObjectId].DistinationY = i.Y;
                 }
@@ -66,7 +63,7 @@ namespace LoESoft.Client.Core.Game.Map
 
         private static void HandleEntity(ObjectData data)
         {
-            var obj = new EntityObject()
+            var obj = new EntityObject(data.Id)
             {
                 X = data.X,
                 Y = data.Y,
@@ -79,7 +76,7 @@ namespace LoESoft.Client.Core.Game.Map
 
         private static void HandlePlayer(ObjectData data)
         {
-            var player = new Player()
+            var player = new Player(6)
             {
                 X = data.X,
                 Y = data.Y,

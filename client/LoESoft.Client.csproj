@@ -119,10 +119,8 @@
     <Compile Include="Core\GUI\MainScreen\RegisterBox.Designer.cs">
       <DependentUpon>RegisterBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Models\Character.cs" />
     <Compile Include="Core\Models\Position.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
-    <Compile Include="Core\Networking\Packets\Incoming\CharacterData.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\LoadMap.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ServerResponse.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ServerMove.cs" />
@@ -150,6 +148,7 @@
     <Compile Include="Core\Screens\Screen.cs" />
     <Compile Include="Core\Screens\ScreenManager.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterSelection\ChooseView\ChooseCharacterBar.cs" />
+    <Compile Include="Core\Screens\TitleScreen\CharacterSettings.cs" />
     <Compile Include="Core\Utils\Cipher.cs" />
     <Compile Include="Core\Utils\Cipher.KeySize.cs" />
     <Compile Include="Core\Utils\IO.cs" />

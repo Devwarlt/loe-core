@@ -30,13 +30,25 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     RegisterHandler();
                     break;
 
-                case "CreateNewCharacter": // TODO.
+                case "CreateNewCharacter":
+                    CreateNewCharacter();
+                    break;
                 case "LoadCharacter": // TODO.
                     break;
 
                 case "Server.Character.UnlockedCharacters":
                     HandleUnlockedCharacters();
                     break;
+            }
+        }
+
+        public void CreateNewCharacter()
+        {
+            if (ScreenManager.ActiveScreen == GameApplication.CharacterScreen)
+            {
+                var content = Content.Split(',');
+                
+                GameApplication.CharacterScreen.RefreshCharacterSelection(int.Parse(content[0]), int.Parse(content[1]));
             }
         }
 

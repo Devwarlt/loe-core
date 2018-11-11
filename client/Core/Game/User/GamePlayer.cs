@@ -1,6 +1,7 @@
 ﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
+using LoESoft.Client.Core.Screens.TitleScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -18,7 +19,7 @@ namespace LoESoft.Client.Core.Game.User
         {
             CanMove = true;
             User = user;
-            Player = new Player();
+            Player = new Player(6);
             Player.Init();
         }
 

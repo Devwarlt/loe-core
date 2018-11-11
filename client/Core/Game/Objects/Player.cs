@@ -8,7 +8,7 @@ namespace LoESoft.Client.Core.Game.Objects
 {
     public partial class Player : Entity
     {
-        public Player() : base(5)
+        public Player(int id) : base(id)
         {
             Animation = new PlayerAnimation();
 

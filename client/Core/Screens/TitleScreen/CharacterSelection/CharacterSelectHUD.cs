@@ -1,7 +1,8 @@
-﻿using LoESoft.Client.Assets;
+﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Text;
+using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -13,41 +14,52 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
     }
     public class CharacterSelectHUD : FilledRectangle
     {
-        public static int MAXCHARACTERS = 3;
-
         private List<CharacterRect> _classView;
-
         private List<int> _unlockedClasses;
-
         private TextDisplay _chooseACharacter;
 
         public CharacterSelectHUD(int x, int y)
-            : base(x, y, 800, 400, new RGBColor(25, 35, 125), alpha: 0.4f)
+            : base(x, y, GameApplication.WIDTH, 200, new RGBColor(0, 0, 0), alpha: 0f)
         {
             _classView = new List<CharacterRect>();
             _unlockedClasses = new List<int>();
         }
-
-        public void Init(string result)
+        
+        private GameUser _gameUser;
+        public void Init(GameUser user, string result)
         {
-            _chooseACharacter = new TextDisplay(20, 5, "Choose A Character", 24, new RGBColor(75, 225, 125));
+            _gameUser = user;
+
+            _chooseACharacter = new TextDisplay(20, 5, "Choose a character", 24, new RGBColor(105, 225, 125));
             _chooseACharacter.Outline = true;
 
             var data = JsonConvert.DeserializeObject<UnlockedCharacterData>(result);
 
-            for (var i = 0; i < MAXCHARACTERS; i++)
+            for (var i = 0; i < CharacterSettings.MaxCharacter; i++)
             {
                 int idx = data.UnlockedClassTypes[i];
-                int x = i * 250 + 15;
-                var character = new CharacterRect(x, 60);
+                int x = (i * 250) + (15 * i) + 5;
+                var character = new CharacterRect(x, 0);
                 
-                character.Init(idx);
+                character.Init(user, idx, i);
 
                 _classView.Add(character);
                 AddChild(character);
             }
 
             AddChild(_chooseACharacter);
+        }
+
+        public void Unselect(int index)
+        {
+            foreach (var i in _classView)
+                if (i.CharacterIndex != index)
+                    i.Selected = false;
+        }
+
+        public void ReloadView(int index, int classType)
+        {
+            _classView[index].Init(_gameUser, classType, index);
         }
     }
 }

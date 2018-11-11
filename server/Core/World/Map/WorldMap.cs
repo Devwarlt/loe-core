@@ -58,12 +58,6 @@ namespace LoESoft.Server.Core.World
 
         public void Add(Player player)
         {
-            player.Client.SendPacket(new LoadMap()
-            {
-                MapWidth = WIDTH,
-                MapHeight = HEIGHT
-            });
-
             player.ObjectId = EntityManager.GetNextId();
             Players.TryAdd(player.ObjectId, player);
         }

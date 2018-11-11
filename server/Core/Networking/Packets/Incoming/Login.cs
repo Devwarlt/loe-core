@@ -77,24 +77,9 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     Content = "You have successfully logged in, enjoy the game!"
                 });
 
-                //if (App.Database.GetCharacterByAccountId(account.Id, 1) == null) // temporarily
-                //    if (App.Database.CreateNewCharacter(account.Id, 0, $"Player {account.Id}", out string error)) // temporarily
-                //        client.SendPacket(new ServerResponse()
-                //        {
-                //            From = "CreateNewCharacter",
-                //            Result = 0,
-                //            Content = "You have successfully created a new character!"
-                //        }); // temporarily
-                //    else
-                //        client.SendPacket(new ServerResponse()
-                //        {
-                //            From = "CreateNewCharacter",
-                //            Result = -1,
-                //            Content = $"An error occurred while character creation: {error}"
-                //        }); // temporarily
-
                 client.Account = account; // do not change this
-                client.Player = new Player(client.Manager, client, (int)account.Id, account.CurrentCharacterId); // temporarily
+
+                App.Warn("TEST");
             }
         }
     }

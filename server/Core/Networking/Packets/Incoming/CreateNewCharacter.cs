@@ -4,72 +4,41 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
     public class CreateNewCharacter : IncomingPacket
     {
-        public int AccountId { get; set; }
         public int World { get; set; }
-        public string Name { get; set; }
+        public int ClassType { get; set; }
+        public int CharacterIndex { get; set; }
 
         public override PacketID PacketID => PacketID.CREATE_NEW_CHARACTER;
 
         public override void Handle(Client client)
         {
-            if (AccountId == -1)
+            if (client.Account.Id == -1)
             {
                 client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
                     Result = -1,
-                    Content = "You are not logged in to peform this action."
+                    Content = "You are not logged in to preform this action!"
                 });
                 return;
             }
 
-            if (string.IsNullOrEmpty(Name))
+            if (App.Database.CreateNewCharacter(client.Account.Id, World, ClassType, out string error))
             {
                 client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
-                    Result = -1,
-                    Content = "Character name could not be empty."
+                    Result = 0,
+                    Content = $"{CharacterIndex},{ClassType}"
                 });
-                return;
             }
-
-            if (Name.Length < 3)
-            {
+            else
                 client.SendPacket(new ServerResponse()
                 {
                     From = "CreateNewCharacter",
                     Result = -1,
-                    Content = "Character name minimum length is 3."
+                    Content = $"An error occurred while character creation: {error}"
                 });
-                return;
-            }
-
-            if (Name.Length > 20)
-            {
-                client.SendPacket(new ServerResponse()
-                {
-                    From = "CreateNewCharacter",
-                    Result = -1,
-                    Content = "Character name maximum length is 20."
-                });
-                return;
-            }
-
-            //if (App.Database.CreateNewCharacter(AccountId, World, Name, out string error))
-            //    client.SendPacket(new ServerResponse()
-            //    {
-            //        From = "CreateNewCharacter",
-            //        Result = 0,
-            //        Content = "You have successfully created a new character!"
-            //    });
-            //else
-            //    client.SendPacket(new ServerResponse()
-            //    {
-            //        From = "CreateNewCharacter",
-            //        Result = -1,
-            //        Content = $"An error occurred while character creation: {error}"
-            //    });
         }
     }
 }
