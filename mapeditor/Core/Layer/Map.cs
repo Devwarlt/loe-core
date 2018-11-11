@@ -14,40 +14,54 @@ namespace LoESoft.MapEditor.Core.Layer
     {
         public int Width { get; set; }
         public int Height { get; set; }
-        public List<Rectangle> TileSets { get; set; }
+        public Dictionary<int, List<Rectangle>> TileSets { get; set; }
         public List<Layer> Layers { get; set; }
+        public int CurrentLayer { get; set; }
 
         private Rectangle _bounds { get; set; }
 
-        public Map(int width, int height)
+        public Map(int width, int height) : this()
         {
             Width = width;
             Height = height;
-            Layers = new List<Layer>(5);
+        }
 
-            for (var i = 0; i < Layers.Count; i++)
-                Layers[i] = new Layer(i, Width, Height);
+        public Map(MapSize size) : this()
+        {
+            Width = (int)size;
+            Height = (int)size;
+        }
+
+        private Map()
+        {
+            Layers = new List<Layer>(5);
+            CurrentLayer = 0;
+
+            for (var i = 0; i < 5; i++)
+                Layers.Add(new Layer(i, Width, Height));
+
+            TileSets = new Dictionary<int, List<Rectangle>>(4);
         }
 
         public void Update()
         {
             var keyboard = Keyboard.GetState();
 
-            if (MapEditor.DrawOffset.X > 0)
-                if (keyboard.IsKeyDown(Keys.D))
-                    MapEditor.DrawOffset.X--;
-
-            if (MapEditor.DrawOffset.X < Width - 1)
-                if (keyboard.IsKeyDown(Keys.A))
-                    MapEditor.DrawOffset.X++;
-
             if (MapEditor.DrawOffset.Y > 0)
-                if (keyboard.IsKeyDown(Keys.S))
+                if (keyboard.IsKeyDown(Keys.W))
                     MapEditor.DrawOffset.Y--;
 
+            if (MapEditor.DrawOffset.X > 0)
+                if (keyboard.IsKeyDown(Keys.A))
+                    MapEditor.DrawOffset.X--;
+
             if (MapEditor.DrawOffset.Y < Height - 1)
-                if (keyboard.IsKeyDown(Keys.W))
+                if (keyboard.IsKeyDown(Keys.S))
                     MapEditor.DrawOffset.Y++;
+
+            if (MapEditor.DrawOffset.X < Width - 1)
+                if (keyboard.IsKeyDown(Keys.D))
+                    MapEditor.DrawOffset.X++;
         }
 
         public void Draw()
@@ -63,16 +77,16 @@ namespace LoESoft.MapEditor.Core.Layer
 
                             if (chunk != null)
                             {
-                                _bounds = TileSets[chunk.Coordinate - 1];
+                                _bounds = TileSets[CurrentLayer][chunk.Coordinate - 1];
 
-                                MapEditor.SpriteBatch.Draw(null/*MapEditor.TileSheet*/,
+                                MapEditor.SpriteBatch.Draw(MapEditor.MapSprites[CurrentLayer],
                                     new Vector2(
                                         (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
                                         (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
                                     ), _bounds, Color.White);
 
                                 if (layer.Id == Layer.MAP_SOLID_LAYER)
-                                    MapEditor.SpriteBatch.Draw(null/*MapEditor.Solid*/,
+                                    MapEditor.SpriteBatch.Draw(MapEditor.MapSolid,
                                         new Vector2(
                                             (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
                                             (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
@@ -87,19 +101,19 @@ namespace LoESoft.MapEditor.Core.Layer
             catch { }
         }
 
-        public void LoadTileSet(Texture2D texture)
+        public void LoadTileSet(int layer, Texture2D texture)
         {
             var spritesx = texture.Width / Layer.TILE_SIZE;
             var spritesy = texture.Height / Layer.TILE_SIZE;
 
-            TileSets = new List<Rectangle>(spritesx * spritesy);
+            TileSets[layer] = new List<Rectangle>(spritesx * spritesy);
 
             for (var x = 0; x < spritesx; x++)
                 for (var y = 0; y < spritesy; y++)
                 {
                     _bounds = new Rectangle(x * Layer.TILE_SIZE, y * Layer.TILE_SIZE, Layer.TILE_SIZE, Layer.TILE_SIZE);
 
-                    TileSets.Add(_bounds);
+                    TileSets[layer].Add(_bounds);
                 }
         }
 
