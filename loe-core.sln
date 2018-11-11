@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Server", "server\LoESoft.Server.csproj", "{728A3882-9A81-4556-862D-C5F356679289}"
 EndProject
@@ -9,24 +9,46 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Client", "client\Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.LCBase", "lcbase\LoESoft.LCBase.csproj", "{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.MapEditor", "mapeditor\LoESoft.MapEditor.csproj", "{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{728A3882-9A81-4556-862D-C5F356679289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{728A3882-9A81-4556-862D-C5F356679289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728A3882-9A81-4556-862D-C5F356679289}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{728A3882-9A81-4556-862D-C5F356679289}.Debug|x86.Build.0 = Debug|Any CPU
 		{728A3882-9A81-4556-862D-C5F356679289}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{728A3882-9A81-4556-862D-C5F356679289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{728A3882-9A81-4556-862D-C5F356679289}.Release|x86.ActiveCfg = Release|Any CPU
+		{728A3882-9A81-4556-862D-C5F356679289}.Release|x86.Build.0 = Release|Any CPU
 		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Debug|x86.Build.0 = Debug|Any CPU
 		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Release|x86.ActiveCfg = Release|Any CPU
+		{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}.Release|x86.Build.0 = Release|Any CPU
 		{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}.Debug|x86.Build.0 = Debug|Any CPU
 		{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}.Release|x86.ActiveCfg = Release|Any CPU
+		{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}.Release|x86.Build.0 = Release|Any CPU
+		{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}.Debug|x86.ActiveCfg = Debug|x86
+		{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}.Debug|x86.Build.0 = Debug|x86
+		{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}.Release|Any CPU.ActiveCfg = Release|x86
+		{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}.Release|x86.ActiveCfg = Release|x86
+		{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
