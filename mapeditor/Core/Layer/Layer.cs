@@ -10,24 +10,19 @@ namespace LoESoft.MapEditor.Core.Layer
     public class Layer
     {
         public const int TILE_SIZE = 16;
-        public const int MAP_TILE_LAYER = 0;
-        public const int MAP_TILE_BORDER_LAYER = 1;
-        public const int MAP_OBJECTS_LAYER = 2;
-        public const int MAP_ENVIRONMENTS_LAYER = 3;
-        public const int MAP_SOLID_LAYER = 4;
 
-        public int Id { get; set; }
+        public MapLayer MapLayer { get; set; }
         public ChunkData[,] Chunk { get; set; }
 
         private int _width { get; set; }
         private int _height { get; set; }
 
-        public Layer(int layer, int width, int height)
+        public Layer(MapLayer layer, int width, int height)
         {
             _width = width;
             _height = height;
 
-            Id = layer;
+            MapLayer = layer;
             Chunk = new ChunkData[_width, _height];
         }
 

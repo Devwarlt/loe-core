@@ -1,10 +1,12 @@
-﻿using LoESoft.MapEditor.Core.GUI.HUD;
+﻿using LoESoft.MapEditor.Core.GUI.Forms;
 using LoESoft.MapEditor.Core.Layer;
 using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Windows.Forms;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace LoESoft.MapEditor
 {
@@ -15,19 +17,19 @@ namespace LoESoft.MapEditor
         public static MapState MapState { get; set; }
         public static Vector2 ClientBounds { get; set; }
         public static bool Quit { get; set; }
-        public static string MapName { get; set; }
+        public static string ActualMapName { get; set; }
+        public static MapSize ActualMapSize { get; set; }
+        public static string FormattedMapName { get; set; }
         public static string CurrentFileName { get; set; }
         public static string LoadFileName { get; set; }
         public static Map Map { get; set; }
-        public static int CurrentLayer { get; set; }
+        public static MapLayer CurrentLayer { get; set; }
         public static int CurrentIndex { get; set; }
-        public static Dictionary<int, Texture2D> MapSprites { get; set; }
+        public static Dictionary<MapLayer, Texture2D> MapSprites { get; set; }
         public static Texture2D MapSolid { get; set; }
 
         public static Vector2 DrawOffset = Vector2.Zero;
 
-        private static HUD HUD { get; set; }
-        private static Texture2D MapCursor { get; set; }
         private static MouseState MouseState { get; set; }
         private static KeyboardState KeyboardState { get; set; }
 
@@ -43,7 +45,7 @@ namespace LoESoft.MapEditor
 
             IsMouseVisible = true;
 
-            CurrentLayer = 0;
+            CurrentLayer = MapLayer.UNDERGROUND;
             CurrentIndex = 0;
         }
 
@@ -58,23 +60,46 @@ namespace LoESoft.MapEditor
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+
+            App.Info("Creating a sample map...");
+
             Map = new Map(MapSize.SIZE_128);
-            MapCursor = Utils.LoadEmbeddedTexture("mouse-icon.png");
+
             MapSolid = Utils.LoadEmbeddedTexture("solid-sprite.png");
-            MapSprites = new Dictionary<int, Texture2D>(4);
+            MapSprites = new Dictionary<MapLayer, Texture2D>(4);
 
             for (var i = 0; i < 4; i++)
-                MapSprites.Add(i, new Texture2D(GraphicsDevice, 1, 1));
+                MapSprites.Add((MapLayer)i, new Texture2D(GraphicsDevice, 1, 1));
 
-            MapSprites[0] = Utils.LoadEmbeddedTexture("sample-spritesheet-0.png");
-            MapSprites[1] = Utils.LoadEmbeddedTexture("sample-spritesheet-1.png");
-            MapSprites[2] = Utils.LoadEmbeddedTexture("sample-spritesheet-2.png");
-            MapSprites[3] = Utils.LoadEmbeddedTexture("sample-spritesheet-3.png");
+            MapSprites[MapLayer.UNDERGROUND] = Utils.LoadEmbeddedTexture("sample-spritesheet-0.png");
+            MapSprites[MapLayer.GROUND] = Utils.LoadEmbeddedTexture("sample-spritesheet-1.png");
+            MapSprites[MapLayer.OBJECT] = Utils.LoadEmbeddedTexture("sample-spritesheet-2.png");
+            MapSprites[MapLayer.SKY] = Utils.LoadEmbeddedTexture("sample-spritesheet-3.png");
+
+            ActualMapName = "sample";
+            ActualMapSize = MapSize.SIZE_128;
+            FormattedMapName = $"(Size: {(int)ActualMapSize} x {(int)ActualMapSize}) Map: {ActualMapName}";
+
+            App.Info($"- Name: {ActualMapName}");
+            App.Info($"- Size: {(int)ActualMapSize} x {(int)ActualMapSize}");
+
+            LoadTileSets();
+
+            App.Info("Creating a sample map... OK!");
+
+            Window.Title = $"LoESoft - {App.Name}: {FormattedMapName}";
+
+            App.Info("Game Map Editor is loading... OK!\n");
+        }
+
+        private void LoadTileSets(bool loading = true)
+        {
+            App.Info($"{(loading ? "Loading" : "Reloading")} tile sets...");
 
             foreach (var mapsprite in MapSprites)
                 Map.LoadTileSet(mapsprite.Key, mapsprite.Value);
 
-            HUD = new HUD();
+            App.Info($"{(loading ? "Loading" : "Reloading")} tile sets... OK!");
         }
 
         protected override void UnloadContent()
@@ -86,38 +111,69 @@ namespace LoESoft.MapEditor
             if (Quit)
                 Exit();
 
-            if (!string.IsNullOrEmpty(MapName))
-                Window.Title = $"{App.Name}: {MapName}";
+            if (!string.IsNullOrEmpty(FormattedMapName))
+                Window.Title = $"LoESoft - {App.Name}: {FormattedMapName}";
 
             var keyboard = Keyboard.GetState();
 
             if (keyboard.IsKeyDown(Keys.PageUp) && !KeyboardState.IsKeyDown(Keys.PageUp))
-                if (CurrentLayer < Layer.MAP_SOLID_LAYER)
+                if ((int)CurrentLayer < (int)MapLayer.ABSTRACT)
                     CurrentLayer++;
 
             if (keyboard.IsKeyDown(Keys.PageDown) && !KeyboardState.IsKeyDown(Keys.PageDown))
-                if (CurrentLayer > 0)
+                if (CurrentLayer > (int)MapLayer.UNDERGROUND)
                     CurrentLayer--;
 
             if (keyboard.IsKeyDown(Keys.Up) && !KeyboardState.IsKeyDown(Keys.Up))
-                if (CurrentIndex < Map.TileSets.Count - 1)
+                if (CurrentIndex < Map.TileSets[CurrentLayer].Count - 1)
                     CurrentIndex++;
 
             if (keyboard.IsKeyDown(Keys.Down) && !KeyboardState.IsKeyDown(Keys.Down))
                 if (CurrentIndex > 0)
                     CurrentIndex--;
 
+            if (keyboard.IsKeyDown(Keys.N) && !KeyboardState.IsKeyDown(Keys.N))
+            {
+                MapState = MapState.Inactive;
+
+                var newmap = new NewMapForm();
+                newmap.ShowDialog();
+
+                if (newmap.DialogResult == DialogResult.OK)
+                {
+                    App.Info("Creating new map...");
+
+                    Map = new Map(newmap.MapSize);
+
+                    CurrentLayer = MapLayer.UNDERGROUND;
+                    CurrentIndex = 0;
+                    DrawOffset = Vector2.Zero;
+                    ActualMapName = newmap.MapName;
+                    ActualMapSize = newmap.MapSize;
+                    FormattedMapName = $"(Size: {(int)ActualMapSize} x {(int)ActualMapSize}) Map: {ActualMapName}";
+
+                    App.Info($"- Name: {newmap.MapName}");
+                    App.Info($"- Size: {(int)ActualMapSize} x {(int)ActualMapSize}");
+
+                    LoadTileSets(false);
+
+                    App.Info("Creating new map... OK!\n");
+                }
+
+                MapState = MapState.Active;
+            }
+
             if (MapState == MapState.Active && MapSprites != null)
             {
                 Map.CurrentLayer = CurrentLayer;
 
-                if (CurrentLayer == Layer.MAP_SOLID_LAYER)
-                    Map.Layers[Layer.MAP_SOLID_LAYER].SetTiles(new ChunkData()
+                if (CurrentLayer == MapLayer.ABSTRACT)
+                    Map.Layers[(int)CurrentLayer].SetTiles(new ChunkData()
                     {
                         Coordinate = 1
                     });
                 else
-                    Map.Layers[CurrentLayer].SetTiles(new ChunkData()
+                    Map.Layers[(int)CurrentLayer].SetTiles(new ChunkData()
                     {
                         Coordinate = CurrentIndex
                     });
@@ -126,7 +182,6 @@ namespace LoESoft.MapEditor
             MouseState = Mouse.GetState();
             KeyboardState = keyboard;
             Map.Update();
-            HUD.Update();
 
             base.Update(gameTime);
         }
@@ -143,9 +198,8 @@ namespace LoESoft.MapEditor
                 ), Color.White);
 
             Map.Draw();
-            //HUD.Draw();
 
-            if (MapSprites != null && CurrentLayer != Layer.MAP_SOLID_LAYER)
+            if (MapSprites != null && CurrentLayer != MapLayer.ABSTRACT)
                 SpriteBatch.Draw(MapSprites[CurrentLayer], new Vector2(
                     MouseState.X - Layer.TILE_SIZE / 2,
                     MouseState.Y - Layer.TILE_SIZE / 2
