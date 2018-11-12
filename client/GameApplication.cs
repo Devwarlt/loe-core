@@ -7,6 +7,8 @@ using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Concurrent;
 
 namespace LoESoft.Client
 {
@@ -14,15 +16,13 @@ namespace LoESoft.Client
     {
         public static int WIDTH => 800;
         public static int HEIGHT => 600;
-        public static SplashScreen SplashScreen { get; set; }
+        
         public static GameScreen GameScreen { get; set; }
         public static CharacterScreen CharacterScreen { get; set; }
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
-
-        public static bool Loaded = false;
-
+        
         public GameUser GameUser { get; set; }
 
         public GameApplication(GameUser gameUser)
@@ -49,8 +49,9 @@ namespace LoESoft.Client
 
             App.UpdateRPC();
 
-            Loaded = true;
-
+            //No point in making it a variable as it'll only be used in initial launch
+            ScreenManager.DispatchScreen(new SplashScreen(GameUser));
+            
             App.Info("Game Client is initializing... OK!");
         }
 
@@ -62,15 +63,7 @@ namespace LoESoft.Client
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
             TextDisplay.LoadSpriteFont(Content);
 
-            ScreenManager.DispatchScreen(SplashScreen = new SplashScreen(GameUser));
-
-            AssetLibrary.Init();
-            XmlLibrary.Init();
-            AudioManager.Init();
-
-            //AudioManager.SetActiveMusic("titleScreenMusic");
-
-            ScreenManager.OnGameClose += () =>
+            ScreenManager.CloseGame += () =>
             {
                 App.DscordClient.ClearPresence();
                 App.DscordClient.Dispose();

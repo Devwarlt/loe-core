@@ -11,6 +11,7 @@ using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Screens
@@ -47,16 +48,15 @@ namespace LoESoft.Client.Core.Screens
         {
             if (CharacterSettings.CurrentCharacterId != -1)
             {
-                _gameUser.SendPacket(new Load()
-                {
-                    CharacterIndex = CharacterSettings.CurrentCharacterId
-                });
+                var loading = new ConcurrentQueue<Action>();
 
-                ScreenManager.DispatchScreen(GameApplication.GameScreen = new GameScreen(_gameUser));
+                loading.Enqueue(delegate { _gameUser.SendPacket(new Load() { CharacterIndex = CharacterSettings.CurrentCharacterId }); });
+
+                ScreenManager.DispatchScreen(new LoadingScreen(loading, GameApplication.GameScreen = new GameScreen(_gameUser)));
             }
         }
 
-        private void OnExit(object sender, EventArgs e) => ScreenManager.CloseGame();
+        private void OnExit(object sender, EventArgs e) => ScreenManager.Close();
 
         public override void OnScreenCreate()
         {
@@ -116,9 +116,9 @@ namespace LoESoft.Client.Core.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.StartClamp();
+            spriteBatch.Begin();
             Background.Draw(spriteBatch);
-            spriteBatch.EndClamp();
+            spriteBatch.End();
         }
     }
 }

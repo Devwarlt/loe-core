@@ -215,7 +215,7 @@ namespace LoESoft.Client.Core.Networking
 
             Disconnected = true;
 
-            ScreenManager.DispatchScreen(GameApplication.SplashScreen);
+            ScreenManager.DispatchScreen(GameApplication.CharacterScreen);
 
             TcpSocket?.Close();
             TcpSocket?.Dispose();

@@ -8,12 +8,10 @@ namespace LoESoft.Client.Core.Screens
     {
         public static Screen ActiveScreen { get; set; }
 
-        private static Action DoCloseGame { get; set; }
-
         public static void DispatchScreen(Screen newScreen)
         {
-            newScreen.OnScreenCreate();
             ActiveScreen?.OnScreenDispatch();
+            newScreen.OnScreenCreate();
             ActiveScreen = newScreen;
         }
 
@@ -33,17 +31,18 @@ namespace LoESoft.Client.Core.Screens
             ActiveScreen.Draw(spriteBatch);
         }
 
-        public static void CloseGame()
+        public static void Close()
         {
             ActiveScreen = null;
-            //DoCloseGame?.Invoke(); // not working!
+            _closeGame?.Invoke(); 
             Environment.Exit(0);
         }
 
-        public static event Action OnGameClose
+        private static Action _closeGame;
+        public static event Action CloseGame
         {
-            add { DoCloseGame += value; }
-            remove { DoCloseGame -= value; }
+            add { _closeGame += value; }
+            remove { _closeGame -= value; }
         }
     }
 }

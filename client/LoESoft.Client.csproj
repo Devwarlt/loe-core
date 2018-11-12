@@ -134,6 +134,7 @@
     <Compile Include="Core\Networking\Packets\PacketID.cs" />
     <Compile Include="Core\Networking\Server.ServerName.cs" />
     <Compile Include="Core\Screens\GameScreen\GameScreen.cs" />
+    <Compile Include="Core\Screens\LoadingScreen\LoadingScreen.cs" />
     <Compile Include="Core\Screens\SplashScreen\SplashScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterScreen.cs" />
     <Compile Include="Core\Screens\TitleScreen\CharacterSelection\CharacterRect.cs" />

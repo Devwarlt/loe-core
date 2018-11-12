@@ -1,8 +1,11 @@
 ﻿using LoESoft.Client.Assets;
+using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Screens
@@ -40,9 +43,15 @@ namespace LoESoft.Client.Core.Screens
             {
                 TextureToDraw = null;
 
-                if (TexturesToDisplay.Count == 0 && GameApplication.Loaded)
+                if (TexturesToDisplay.Count == 0)
                 {
-                    ScreenManager.DispatchScreen(GameApplication.CharacterScreen = new CharacterScreen(GameUser));
+                    var loading = new ConcurrentQueue<Action>();
+
+                    loading.Enqueue(delegate { AssetLibrary.Init(); });
+                    loading.Enqueue(delegate { XmlLibrary.Init(); });
+                    loading.Enqueue(delegate { AudioManager.Init(); });
+
+                    ScreenManager.DispatchScreen(new LoadingScreen(loading, GameApplication.CharacterScreen = new CharacterScreen(GameUser)));
                     return;
                 }
 
