@@ -14,33 +14,25 @@ namespace LoESoft.MapEditor.Core.Layer
     {
         public int Width { get; set; }
         public int Height { get; set; }
-        public Dictionary<int, List<Rectangle>> TileSets { get; set; }
+        public Dictionary<MapLayer, List<Rectangle>> TileSets { get; set; }
         public List<Layer> Layers { get; set; }
-        public int CurrentLayer { get; set; }
+        public MapLayer CurrentLayer { get; set; }
 
         private Rectangle _bounds { get; set; }
+        private KeyboardState _keyboard { get; set; }
 
-        public Map(int width, int height) : this()
-        {
-            Width = width;
-            Height = height;
-        }
-
-        public Map(MapSize size) : this()
+        public Map(MapSize size)
         {
             Width = (int)size;
             Height = (int)size;
-        }
 
-        private Map()
-        {
             Layers = new List<Layer>(5);
-            CurrentLayer = 0;
+            CurrentLayer = MapLayer.UNDERGROUND;
 
             for (var i = 0; i < 5; i++)
-                Layers.Add(new Layer(i, Width, Height));
+                Layers.Add(new Layer((MapLayer)i, Width, Height));
 
-            TileSets = new Dictionary<int, List<Rectangle>>(4);
+            TileSets = new Dictionary<MapLayer, List<Rectangle>>(4);
         }
 
         public void Update()
@@ -48,20 +40,22 @@ namespace LoESoft.MapEditor.Core.Layer
             var keyboard = Keyboard.GetState();
 
             if (MapEditor.DrawOffset.Y > 0)
-                if (keyboard.IsKeyDown(Keys.W))
+                if (keyboard.IsKeyDown(Keys.W) && !_keyboard.IsKeyDown(Keys.W))
                     MapEditor.DrawOffset.Y--;
 
             if (MapEditor.DrawOffset.X > 0)
-                if (keyboard.IsKeyDown(Keys.A))
+                if (keyboard.IsKeyDown(Keys.A) && !_keyboard.IsKeyDown(Keys.A))
                     MapEditor.DrawOffset.X--;
 
             if (MapEditor.DrawOffset.Y < Height - 1)
-                if (keyboard.IsKeyDown(Keys.S))
+                if (keyboard.IsKeyDown(Keys.S) && !_keyboard.IsKeyDown(Keys.S))
                     MapEditor.DrawOffset.Y++;
 
             if (MapEditor.DrawOffset.X < Width - 1)
-                if (keyboard.IsKeyDown(Keys.D))
+                if (keyboard.IsKeyDown(Keys.D) && !_keyboard.IsKeyDown(Keys.D))
                     MapEditor.DrawOffset.X++;
+
+            _keyboard = keyboard;
         }
 
         public void Draw()
@@ -85,7 +79,7 @@ namespace LoESoft.MapEditor.Core.Layer
                                         (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
                                     ), _bounds, Color.White);
 
-                                if (layer.Id == Layer.MAP_SOLID_LAYER)
+                                if (layer.MapLayer == MapLayer.ABSTRACT)
                                     MapEditor.SpriteBatch.Draw(MapEditor.MapSolid,
                                         new Vector2(
                                             (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
@@ -101,7 +95,7 @@ namespace LoESoft.MapEditor.Core.Layer
             catch { }
         }
 
-        public void LoadTileSet(int layer, Texture2D texture)
+        public void LoadTileSet(MapLayer layer, Texture2D texture)
         {
             var spritesx = texture.Width / Layer.TILE_SIZE;
             var spritesy = texture.Height / Layer.TILE_SIZE;
@@ -115,6 +109,8 @@ namespace LoESoft.MapEditor.Core.Layer
 
                     TileSets[layer].Add(_bounds);
                 }
+
+            App.Info($"- Layer {layer}: {TileSets[layer].Count} sprite{(TileSets[layer].Count > 1 ? "s" : "")}");
         }
 
         public void Save(string file)
