@@ -1,4 +1,4 @@
-﻿namespace LoESoft.MapEditor.Core.GUI.Forms
+﻿namespace LoESoft.MapEditor.Core.GUI
 {
     partial class NewMapForm
     {
@@ -45,18 +45,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 14);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Map Name:";
+            this.label1.Text = "Name:";
             // 
             // MapFileName
             // 
-            this.MapFileName.Location = new System.Drawing.Point(80, 12);
+            this.MapFileName.Location = new System.Drawing.Point(56, 12);
             this.MapFileName.MaxLength = 32;
             this.MapFileName.Name = "MapFileName";
-            this.MapFileName.Size = new System.Drawing.Size(234, 20);
+            this.MapFileName.Size = new System.Drawing.Size(258, 20);
             this.MapFileName.TabIndex = 2;
             this.MapFileName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -203,7 +203,7 @@
             this.SizeGroupBox.Size = new System.Drawing.Size(299, 88);
             this.SizeGroupBox.TabIndex = 11;
             this.SizeGroupBox.TabStop = false;
-            this.SizeGroupBox.Text = "Map Size";
+            this.SizeGroupBox.Text = "Size";
             // 
             // NewMapForm
             // 

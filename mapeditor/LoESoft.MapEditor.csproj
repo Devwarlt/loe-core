@@ -45,17 +45,30 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Core\GUI\Forms\NewMapForm.cs">
+    <Compile Include="Core\GUI\NewMapForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\GUI\Forms\NewMapForm.Designer.cs">
+    <Compile Include="Core\GUI\NewMapForm.Designer.cs">
       <DependentUpon>NewMapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\LoadMapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\LoadMapForm.Designer.cs">
+      <DependentUpon>LoadMapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\SaveMapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\SaveMapForm.Designer.cs">
+      <DependentUpon>SaveMapForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Layer\ChunkData.cs" />
     <Compile Include="Core\Layer\Layer.cs" />
     <Compile Include="Core\Layer\Map.cs" />
     <Compile Include="Core\Layer\MapLayer.cs" />
     <Compile Include="Core\Util\Utils.cs" />
+    <Compile Include="MapData.cs" />
     <Compile Include="MapEditor.cs" />
     <Compile Include="App.cs" />
     <Compile Include="MapSize.cs" />
@@ -203,14 +216,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\Assets\Sprite\solid-sprite.png" />
     <EmbeddedResource Include="Core\Assets\Sprite\sample-spritesheet-1.png" />
     <EmbeddedResource Include="Core\Assets\Sprite\sample-spritesheet-2.png" />
     <EmbeddedResource Include="Core\Assets\Sprite\sample-spritesheet-3.png" />
     <EmbeddedResource Include="Core\Assets\Sprite\sample-spritesheet-0.png" />
+    <EmbeddedResource Include="Core\Assets\Sprite\sample-grid.png" />
     <Content Include="Icon.ico" />
     <Content Include="loesoft-new.ico" />
-    <EmbeddedResource Include="Core\GUI\Forms\NewMapForm.resx">
+    <EmbeddedResource Include="Core\GUI\NewMapForm.resx">
       <DependentUpon>NewMapForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -222,6 +235,12 @@
     <None Include="Resources\DisposableDroidBB.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Core\GUI\LoadMapForm.resx">
+      <DependentUpon>LoadMapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\SaveMapForm.resx">
+      <DependentUpon>SaveMapForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

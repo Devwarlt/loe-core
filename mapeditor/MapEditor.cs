@@ -1,10 +1,11 @@
-﻿using LoESoft.MapEditor.Core.GUI.Forms;
+﻿using LoESoft.MapEditor.Core.GUI;
 using LoESoft.MapEditor.Core.Layer;
 using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
@@ -26,7 +27,7 @@ namespace LoESoft.MapEditor
         public static MapLayer CurrentLayer { get; set; }
         public static int CurrentIndex { get; set; }
         public static Dictionary<MapLayer, Texture2D> MapSprites { get; set; }
-        public static Texture2D MapSolid { get; set; }
+        public static bool ShowGrid { get; set; }
 
         public static Vector2 DrawOffset = Vector2.Zero;
 
@@ -38,7 +39,7 @@ namespace LoESoft.MapEditor
             GraphicsDeviceManager = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = 800,
-                PreferredBackBufferHeight = 600
+                PreferredBackBufferHeight = 608
             };
 
             Content.RootDirectory = "Content";
@@ -63,18 +64,18 @@ namespace LoESoft.MapEditor
 
             App.Info("Creating a sample map...");
 
+            ShowGrid = false;
             Map = new Map(MapSize.SIZE_128);
-
-            MapSolid = Utils.LoadEmbeddedTexture("solid-sprite.png");
             MapSprites = new Dictionary<MapLayer, Texture2D>(4);
 
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < 5; i++)
                 MapSprites.Add((MapLayer)i, new Texture2D(GraphicsDevice, 1, 1));
 
             MapSprites[MapLayer.UNDERGROUND] = Utils.LoadEmbeddedTexture("sample-spritesheet-0.png");
             MapSprites[MapLayer.GROUND] = Utils.LoadEmbeddedTexture("sample-spritesheet-1.png");
             MapSprites[MapLayer.OBJECT] = Utils.LoadEmbeddedTexture("sample-spritesheet-2.png");
             MapSprites[MapLayer.SKY] = Utils.LoadEmbeddedTexture("sample-spritesheet-3.png");
+            MapSprites[MapLayer.ABSTRACT] = Utils.LoadEmbeddedTexture("sample-grid.png");
 
             ActualMapName = "sample";
             ActualMapSize = MapSize.SIZE_128;
@@ -92,7 +93,7 @@ namespace LoESoft.MapEditor
             App.Info("Game Map Editor is loading... OK!\n");
         }
 
-        private void LoadTileSets(bool loading = true)
+        public static void LoadTileSets(bool loading = true)
         {
             App.Info($"{(loading ? "Loading" : "Reloading")} tile sets...");
 
@@ -134,6 +135,9 @@ namespace LoESoft.MapEditor
                 if (CurrentIndex > 0)
                     CurrentIndex--;
 
+            if (keyboard.IsKeyDown(Keys.G) && !KeyboardState.IsKeyDown(Keys.G))
+                ShowGrid = !ShowGrid;
+
             if (keyboard.IsKeyDown(Keys.N) && !KeyboardState.IsKeyDown(Keys.N))
             {
                 MapState = MapState.Inactive;
@@ -165,20 +169,40 @@ namespace LoESoft.MapEditor
                 MapState = MapState.Active;
             }
 
-            if (MapState == MapState.Active && MapSprites != null)
+            if (keyboard.IsKeyDown(Keys.S) && !KeyboardState.IsKeyDown(Keys.S))
+            {
+                MapState = MapState.Inactive;
+
+                var savemap = new SaveMapForm(ActualMapName, Map.Save());
+                savemap.ShowDialog();
+
+                if (savemap.DialogResult == DialogResult.OK)
+                    MessageBox.Show("Map saved!");
+
+                MapState = MapState.Active;
+            }
+
+            if (keyboard.IsKeyDown(Keys.L) && !KeyboardState.IsKeyDown(Keys.L))
+            {
+                MapState = MapState.Inactive;
+
+                var loadmap = new LoadMapForm();
+                loadmap.ShowDialog();
+
+                if (loadmap.DialogResult == DialogResult.OK)
+                    MessageBox.Show("Map loaded!");
+
+                MapState = MapState.Active;
+            }
+
+            if (MapState == MapState.Active && MapSprites != null && CurrentLayer != MapLayer.ABSTRACT)
             {
                 Map.CurrentLayer = CurrentLayer;
-
-                if (CurrentLayer == MapLayer.ABSTRACT)
-                    Map.Layers[(int)CurrentLayer].SetTiles(new ChunkData()
-                    {
-                        Coordinate = 1
-                    });
-                else
-                    Map.Layers[(int)CurrentLayer].SetTiles(new ChunkData()
-                    {
-                        Coordinate = CurrentIndex
-                    });
+                Map.Layers.FirstOrDefault(layer => layer.MapLayer == CurrentLayer).SetTiles(MouseState, new ChunkData()
+                {
+                    Layer = CurrentLayer,
+                    Index = CurrentIndex
+                });
             }
 
             MouseState = Mouse.GetState();
@@ -190,26 +214,23 @@ namespace LoESoft.MapEditor
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkGreen);
             SpriteBatch.Begin();
-            SpriteBatch.Draw(MapSolid, new Rectangle(
-                -(int)DrawOffset.X * Map.Width,
-                -(int)DrawOffset.Y * Map.Height,
-                Map.Width * Layer.TILE_SIZE,
-                Map.Height * Layer.TILE_SIZE
-                ), Color.White);
 
             Map.Draw();
 
             if (MapSprites != null && CurrentLayer != MapLayer.ABSTRACT)
-                SpriteBatch.Draw(MapSprites[CurrentLayer], new Vector2(
-                    MouseState.X - Layer.TILE_SIZE / 2,
-                    MouseState.Y - Layer.TILE_SIZE / 2
-                    ), Map.TileSets[CurrentLayer][CurrentIndex], Color.White);
+                DrawSpriteOnCursor();
 
             base.Draw(gameTime);
 
             SpriteBatch.End();
         }
+
+        private void DrawSpriteOnCursor()
+            => SpriteBatch.Draw(MapSprites[CurrentLayer], new Vector2(
+                MouseState.X - Layer.TILE_SIZE / 2,
+                MouseState.Y - Layer.TILE_SIZE / 2
+                ), Map.TileSets[CurrentLayer][CurrentIndex], Color.White);
     }
 }

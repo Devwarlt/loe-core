@@ -2,6 +2,7 @@
 {
     public class ChunkData
     {
-        public int Coordinate { get; set; }
+        public MapLayer Layer { get; set; }
+        public int Index { get; set; }
     }
 }

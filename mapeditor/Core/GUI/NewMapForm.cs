@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace LoESoft.MapEditor.Core.GUI.Forms
+namespace LoESoft.MapEditor.Core.GUI
 {
     public partial class NewMapForm : Form
     {
@@ -28,8 +28,7 @@ namespace LoESoft.MapEditor.Core.GUI.Forms
             DialogResult = DialogResult.OK;
         }
 
-        private void Cancel_Click(object sender, EventArgs e)
-            => DialogResult = DialogResult.Cancel;
+        private void Cancel_Click(object sender, EventArgs e) => DialogResult = DialogResult.Cancel;
 
         private void Size128_CheckedChanged(object sender, EventArgs e) => MapSize = MapSize.SIZE_128;
 

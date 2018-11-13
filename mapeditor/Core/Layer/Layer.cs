@@ -26,26 +26,35 @@ namespace LoESoft.MapEditor.Core.Layer
             Chunk = new ChunkData[_width, _height];
         }
 
-        public void SetTiles(ChunkData data)
+        public void SetTiles(MouseState mouse, ChunkData data)
         {
-            Vector2 mouse;
+            Vector2 mouseposition;
             double mousemapx;
             double mousemapy;
 
-            var currentmousestate = Mouse.GetState();
-            var leftbutton = currentmousestate.LeftButton;
-            var rightbutton = currentmousestate.RightButton;
+            var leftbutton = mouse.LeftButton;
+            var rightbutton = mouse.RightButton;
 
             try
             {
-                if (leftbutton == ButtonState.Pressed || leftbutton == ButtonState.Pressed)
+                if (leftbutton == ButtonState.Pressed)
                 {
-                    mouse = new Vector2(currentmousestate.X, currentmousestate.Y);
-                    mousemapx = ((int)mouse.X / TILE_SIZE) + MapEditor.DrawOffset.X;
-                    mousemapy = ((int)mouse.Y / TILE_SIZE) + MapEditor.DrawOffset.Y;
+                    mouseposition = new Vector2(mouse.X, mouse.Y);
+                    mousemapx = ((int)mouseposition.X / TILE_SIZE) + MapEditor.DrawOffset.X;
+                    mousemapy = ((int)mouseposition.Y / TILE_SIZE) + MapEditor.DrawOffset.Y;
 
-                    if (mousemapx < _width && mousemapy < _height && mousemapx >= 0 && mousemapy >= 0)
-                        Chunk[(int)mousemapx, (int)mousemapy] = leftbutton == ButtonState.Pressed ? data : null;
+                    if (mousemapx < _width && mousemapx >= 0 && mousemapy < _height && mousemapy >= 0)
+                        Chunk[(int)mousemapx, (int)mousemapy] = data;
+                }
+
+                if (rightbutton == ButtonState.Pressed)
+                {
+                    mouseposition = new Vector2(mouse.X, mouse.Y);
+                    mousemapx = ((int)mouseposition.X / TILE_SIZE) + MapEditor.DrawOffset.X;
+                    mousemapy = ((int)mouseposition.Y / TILE_SIZE) + MapEditor.DrawOffset.Y;
+
+                    if (mousemapx < _width && mousemapx >= 0 && mousemapy < _height && mousemapy >= 0)
+                        Chunk[(int)mousemapx, (int)mousemapy] = null;
                 }
             }
             catch { }
