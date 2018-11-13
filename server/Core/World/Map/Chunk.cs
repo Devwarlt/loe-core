@@ -50,7 +50,7 @@ namespace LoESoft.Server.Core.World.Map
             return null;
         }
 
-        Random rand = new Random();
+        private Random rand = new Random();
 
         public void RandomGen()
         {

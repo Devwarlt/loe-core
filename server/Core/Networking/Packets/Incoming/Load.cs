@@ -42,7 +42,6 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 });
                 //client.SendPacket(new ServerResponse()
                 //{
-
                 //});
 
                 client.Player = new Player(client.Manager, client, (int)client.Account.Id, getCharacterData.Class);

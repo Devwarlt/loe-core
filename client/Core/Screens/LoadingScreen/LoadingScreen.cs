@@ -34,7 +34,7 @@ namespace LoESoft.Client.Core.Screens
         public Screen ToLoadScreen { get; set; }
 
         public int TotalLoadCount { get; set; }
-        
+
         public LoadingScreen(ConcurrentQueue<Action> toDo, Screen changeScreen, string initText = "")
         {
             TotalLoadCount = toDo.Count;
@@ -51,7 +51,8 @@ namespace LoESoft.Client.Core.Screens
             spriteBatch.End();
         }
 
-        int _amount;
+        private int _amount;
+
         protected int Amount
         {
             get => _amount;
@@ -61,6 +62,7 @@ namespace LoESoft.Client.Core.Screens
                 _amount = value;
             }
         }
+
         public override void Update(GameTime gameTime)
         {
             if (LoadFunctions.Count > 0)
@@ -70,7 +72,8 @@ namespace LoESoft.Client.Core.Screens
                     action?.Invoke();
                     Amount++;
                 }
-            } else
+            }
+            else
             {
                 ScreenManager.DispatchScreen(ToLoadScreen);
             }

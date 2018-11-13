@@ -2,16 +2,16 @@
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Text;
-using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
 {
-    class UnlockedCharacterData
+    internal class UnlockedCharacterData
     {
         public int[] UnlockedClassTypes { get; set; }
     }
+
     public class CharacterSelectHUD : FilledRectangle
     {
         private List<CharacterRect> _classView;
@@ -24,8 +24,9 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
             _classView = new List<CharacterRect>();
             _unlockedClasses = new List<int>();
         }
-        
+
         private GameUser _gameUser;
+
         public void Init(GameUser user, string result)
         {
             _gameUser = user;
@@ -40,7 +41,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
                 int idx = data.UnlockedClassTypes[i];
                 int x = (i * 250) + (15 * i) + 5;
                 var character = new CharacterRect(x, 20);
-                
+
                 character.Init(user, idx, i);
 
                 _classView.Add(character);

@@ -22,7 +22,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
         public int ClassIndex { get; private set; }
         public int CharacterIndex { get; set; }
         public bool Selected { get; set; }
-        
+
         public CharacterRect(int x, int y) :
             base(x, y, 250, 250, AssetLibrary.Images["characterRect"])
         {
@@ -90,7 +90,8 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
                 _chooseCharacterBar.Init(_gameUser, this);
 
                 ParentSprite.AddChild(_chooseCharacterBar);
-            } else
+            }
+            else
             {
                 CharacterSettings.CurrentCharacterId = CharacterIndex;
             }

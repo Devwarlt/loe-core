@@ -1,5 +1,4 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using LoESoft.Server.Core.World.Entities.Player;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {

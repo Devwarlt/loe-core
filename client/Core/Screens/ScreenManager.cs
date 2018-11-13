@@ -34,11 +34,12 @@ namespace LoESoft.Client.Core.Screens
         public static void Close()
         {
             ActiveScreen = null;
-            _closeGame?.Invoke(); 
+            _closeGame?.Invoke();
             Environment.Exit(0);
         }
 
         private static Action _closeGame;
+
         public static event Action CloseGame
         {
             add { _closeGame += value; }

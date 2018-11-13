@@ -23,8 +23,9 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
             _mask = new Mask(new RGBColor(26, 13, 2), 0.75f);
         }
 
-        GameUser _gameUser;
-        CharacterRect _parent;
+        private GameUser _gameUser;
+        private CharacterRect _parent;
+
         public void Init(GameUser user, CharacterRect parent)
         {
             _gameUser = user;
@@ -38,7 +39,6 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
             spriteX += 130;
             _defenseClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[7]));
 
-            
             _meleeClass.AddEventListener(Event.CLICKLEFT, delegate
             {
                 CreateCharacter(5);
@@ -52,10 +52,10 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
                 CreateCharacter(6);
                 ParentSprite.RemoveChild(this);
             });
-            _rangeClass.AddEventListener(Event.MOUSEOUT, delegate {_rangeClass.SpriteColor = Color.White; });
+            _rangeClass.AddEventListener(Event.MOUSEOUT, delegate { _rangeClass.SpriteColor = Color.White; });
             _rangeClass.AddEventListener(Event.MOUSEOVER, delegate { _rangeClass.SpriteColor = Color.DarkSlateGray; });
 
-            _defenseClass.AddEventListener(Event.CLICKLEFT, delegate 
+            _defenseClass.AddEventListener(Event.CLICKLEFT, delegate
             {
                 CreateCharacter(7);
                 ParentSprite.RemoveChild(this);
@@ -78,7 +78,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
                 CharacterIndex = _parent.CharacterIndex
             });
         }
-        
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.StartClamp();

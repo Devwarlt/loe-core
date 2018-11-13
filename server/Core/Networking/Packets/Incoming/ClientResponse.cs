@@ -15,7 +15,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         public override void Handle(Client client)
         {
-            switch(From)
+            switch (From)
             {
                 case "Client.Character.GetUnlockedCharacters":
                     HandleUnlockedCharacters(client);
@@ -23,12 +23,13 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             }
         }
 
-        class UnlockedCharacterData
+        private class UnlockedCharacterData
         {
             public int[] UnlockedClassTypes { get; set; }
 
             public UnlockedCharacterData(int[] arr) => UnlockedClassTypes = arr;
         }
+
         private void HandleUnlockedCharacters(Client client)
         {
             try
@@ -53,7 +54,8 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     Result = 0,
                     Content = JsonConvert.SerializeObject(new UnlockedCharacterData(content.ToArray())) //Id's of classes
                 });
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 App.Warn(ex.ToString());
             }

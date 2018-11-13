@@ -1,5 +1,4 @@
-﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using LoESoft.Server.Core.World.Entities;
+﻿using LoESoft.Server.Core.World.Entities;
 using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
 using System;

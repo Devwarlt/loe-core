@@ -33,6 +33,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                 case "CreateNewCharacter":
                     CreateNewCharacter();
                     break;
+
                 case "LoadCharacter": // TODO.
                     break;
 
@@ -47,7 +48,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
             if (ScreenManager.ActiveScreen == GameApplication.CharacterScreen)
             {
                 var content = Content.Split(',');
-                
+
                 GameApplication.CharacterScreen.RefreshCharacterSelection(int.Parse(content[0]), int.Parse(content[1]));
             }
         }

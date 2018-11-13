@@ -1,7 +1,6 @@
 ﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
-using LoESoft.Client.Core.Screens.TitleScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

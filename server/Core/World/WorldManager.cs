@@ -1,5 +1,4 @@
 ﻿using LoESoft.Server.Core.Networking;
-using System.Threading;
 
 namespace LoESoft.Server.Core.World
 {

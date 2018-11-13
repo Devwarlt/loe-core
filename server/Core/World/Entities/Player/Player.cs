@@ -16,7 +16,6 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
         public void Save()
         {
-            
         }
 
         public override void Dispose() => Manager.TryRemovePlayer(Client);

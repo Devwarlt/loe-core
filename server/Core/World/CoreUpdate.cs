@@ -31,7 +31,7 @@ namespace LoESoft.Server.Core.World
             _updateThread.IsBackground = true;
             _updateThread.Start();
         }
-        
+
         public void Dispose()
         {
             ResetEvent.Close();
