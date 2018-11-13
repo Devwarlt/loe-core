@@ -100,6 +100,7 @@
             // 
             // TitleUnderLine
             // 
+            this.TitleUnderLine.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.TitleUnderLine.Location = new System.Drawing.Point(20, 50);
             this.TitleUnderLine.Name = "TitleUnderLine";
             this.TitleUnderLine.Size = new System.Drawing.Size(620, 2);
