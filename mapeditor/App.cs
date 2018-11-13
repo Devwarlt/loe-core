@@ -1,5 +1,4 @@
-﻿using LoESoft.MapEditor.Core.GUI;
-using LoESoft.MapEditor.Properties;
+﻿using LoESoft.MapEditor.Properties;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -35,6 +34,9 @@ namespace LoESoft.MapEditor
         // Unique IDs
         private static string RollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
+        // Map Editor
+        public static MapEditor MapEditor { get; set; }
+
         [STAThread]
         public static void Main(string[] args)
         {
@@ -67,8 +69,8 @@ namespace LoESoft.MapEditor
             {
                 LoadEmbeddedFonts();
 
-                using (var mapeditor = new MapEditor())
-                    mapeditor.Run();
+                using (MapEditor = new MapEditor())
+                    MapEditor.Run();
             }
             catch (Exception e)
             {

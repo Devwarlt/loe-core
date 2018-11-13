@@ -55,6 +55,12 @@ namespace LoESoft.MapEditor
             InterfaceForm.Show();
         }
 
+        protected override void OnActivated(object sender, EventArgs args)
+        {
+            InterfaceForm.BringToFront();
+            base.OnActivated(sender, args);
+        }
+
         protected override void Initialize()
         {
             MapState = MapState.Active;
@@ -62,7 +68,6 @@ namespace LoESoft.MapEditor
 
             var thisForm = (Form)Control.FromHandle(Window.Handle);
             thisForm.MinimizeBox = false;
-            thisForm.TopMost = true;
             thisForm.Move += ThisForm_Move;
             ThisForm_Move(null, null);
 

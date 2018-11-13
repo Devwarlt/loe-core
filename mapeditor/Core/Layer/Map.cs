@@ -16,6 +16,9 @@ namespace LoESoft.MapEditor.Core.Layer
         public List<Layer> Layers { get; set; }
         public MapLayer CurrentLayer { get; set; }
 
+        private int WIDTH_MAGIC_NUMBER => Width - Layer.TILE_SIZE * 3 - 2;
+        private int HEIGHT_MAGIC_NUMBER => Height - Layer.TILE_SIZE * 2 - 6;
+
         private Rectangle _bounds { get; set; }
 
         public Map(MapSize size)
@@ -31,7 +34,7 @@ namespace LoESoft.MapEditor.Core.Layer
 
             TileSets = new Dictionary<MapLayer, List<Rectangle>>(5);
 
-            _bounds = new Rectangle(0, 0, Width - Layer.TILE_SIZE * 3 - 2, Height - Layer.TILE_SIZE * 3 - 2);
+            _bounds = new Rectangle(0, 0, WIDTH_MAGIC_NUMBER, HEIGHT_MAGIC_NUMBER);
         }
 
         public void Update()
