@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TitleLabel = new System.Windows.Forms.Label();
-            this.OptionsGroup = new System.Windows.Forms.GroupBox();
             this.NewButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.LoadButton = new System.Windows.Forms.Button();
@@ -40,39 +38,14 @@
             this.LayerLabel = new System.Windows.Forms.Label();
             this.GridCheckBox = new System.Windows.Forms.CheckBox();
             this.MapOptionsGroup = new System.Windows.Forms.GroupBox();
-            this.OptionsGroup.SuspendLayout();
             this.EditorInformationGroup.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TitleLabel
-            // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
-            this.TitleLabel.Location = new System.Drawing.Point(12, 9);
-            this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(626, 37);
-            this.TitleLabel.TabIndex = 0;
-            this.TitleLabel.Text = "Editor Interface";
-            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // OptionsGroup
-            // 
-            this.OptionsGroup.Controls.Add(this.NewButton);
-            this.OptionsGroup.Controls.Add(this.SaveButton);
-            this.OptionsGroup.Controls.Add(this.LoadButton);
-            this.OptionsGroup.Location = new System.Drawing.Point(20, 528);
-            this.OptionsGroup.Name = "OptionsGroup";
-            this.OptionsGroup.Size = new System.Drawing.Size(250, 60);
-            this.OptionsGroup.TabIndex = 0;
-            this.OptionsGroup.TabStop = false;
-            this.OptionsGroup.Text = "Options";
-            // 
             // NewButton
             // 
-            this.NewButton.Location = new System.Drawing.Point(6, 19);
+            this.NewButton.Location = new System.Drawing.Point(12, 12);
             this.NewButton.Name = "NewButton";
-            this.NewButton.Size = new System.Drawing.Size(75, 33);
+            this.NewButton.Size = new System.Drawing.Size(75, 24);
             this.NewButton.TabIndex = 0;
             this.NewButton.Text = "New";
             this.NewButton.UseVisualStyleBackColor = true;
@@ -80,9 +53,9 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(168, 19);
+            this.SaveButton.Location = new System.Drawing.Point(174, 12);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 33);
+            this.SaveButton.Size = new System.Drawing.Size(75, 24);
             this.SaveButton.TabIndex = 0;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -90,9 +63,9 @@
             // 
             // LoadButton
             // 
-            this.LoadButton.Location = new System.Drawing.Point(87, 19);
+            this.LoadButton.Location = new System.Drawing.Point(93, 12);
             this.LoadButton.Name = "LoadButton";
-            this.LoadButton.Size = new System.Drawing.Size(75, 33);
+            this.LoadButton.Size = new System.Drawing.Size(75, 24);
             this.LoadButton.TabIndex = 0;
             this.LoadButton.Text = "Load";
             this.LoadButton.UseVisualStyleBackColor = true;
@@ -100,9 +73,9 @@
             // 
             // TitleUnderLine
             // 
-            this.TitleUnderLine.Location = new System.Drawing.Point(20, 50);
+            this.TitleUnderLine.Location = new System.Drawing.Point(14, 66);
             this.TitleUnderLine.Name = "TitleUnderLine";
-            this.TitleUnderLine.Size = new System.Drawing.Size(620, 2);
+            this.TitleUnderLine.Size = new System.Drawing.Size(234, 2);
             this.TitleUnderLine.TabIndex = 0;
             // 
             // EditorInformationGroup
@@ -110,13 +83,13 @@
             this.EditorInformationGroup.Controls.Add(this.MapLabel);
             this.EditorInformationGroup.Controls.Add(this.SizeLabel);
             this.EditorInformationGroup.Controls.Add(this.LayerLabel);
-            this.EditorInformationGroup.Controls.Add(this.GridCheckBox);
-            this.EditorInformationGroup.Location = new System.Drawing.Point(26, 69);
+            this.EditorInformationGroup.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.EditorInformationGroup.Location = new System.Drawing.Point(14, 74);
             this.EditorInformationGroup.Name = "EditorInformationGroup";
-            this.EditorInformationGroup.Size = new System.Drawing.Size(244, 453);
+            this.EditorInformationGroup.Size = new System.Drawing.Size(235, 76);
             this.EditorInformationGroup.TabIndex = 0;
             this.EditorInformationGroup.TabStop = false;
-            this.EditorInformationGroup.Text = "Editor Information";
+            this.EditorInformationGroup.Text = "Map Information";
             // 
             // MapLabel
             // 
@@ -148,7 +121,7 @@
             // GridCheckBox
             // 
             this.GridCheckBox.AutoSize = true;
-            this.GridCheckBox.Location = new System.Drawing.Point(156, 19);
+            this.GridCheckBox.Location = new System.Drawing.Point(22, 42);
             this.GridCheckBox.Name = "GridCheckBox";
             this.GridCheckBox.Size = new System.Drawing.Size(82, 17);
             this.GridCheckBox.TabIndex = 0;
@@ -158,9 +131,10 @@
             // 
             // MapOptionsGroup
             // 
-            this.MapOptionsGroup.Location = new System.Drawing.Point(276, 69);
+            this.MapOptionsGroup.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.MapOptionsGroup.Location = new System.Drawing.Point(14, 156);
             this.MapOptionsGroup.Name = "MapOptionsGroup";
-            this.MapOptionsGroup.Size = new System.Drawing.Size(362, 453);
+            this.MapOptionsGroup.Size = new System.Drawing.Size(234, 432);
             this.MapOptionsGroup.TabIndex = 1;
             this.MapOptionsGroup.TabStop = false;
             this.MapOptionsGroup.Text = "Map Options";
@@ -169,12 +143,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 600);
+            this.ClientSize = new System.Drawing.Size(262, 600);
+            this.Controls.Add(this.NewButton);
             this.Controls.Add(this.MapOptionsGroup);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.EditorInformationGroup);
+            this.Controls.Add(this.LoadButton);
             this.Controls.Add(this.TitleUnderLine);
-            this.Controls.Add(this.OptionsGroup);
-            this.Controls.Add(this.TitleLabel);
+            this.Controls.Add(this.GridCheckBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -184,17 +160,14 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Editor Interface";
             this.TopMost = true;
-            this.OptionsGroup.ResumeLayout(false);
             this.EditorInformationGroup.ResumeLayout(false);
             this.EditorInformationGroup.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.GroupBox OptionsGroup;
         private System.Windows.Forms.Panel TitleUnderLine;
         private System.Windows.Forms.Button NewButton;
         private System.Windows.Forms.Button SaveButton;

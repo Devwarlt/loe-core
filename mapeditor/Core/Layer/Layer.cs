@@ -43,7 +43,11 @@ namespace LoESoft.MapEditor.Core.Layer
                     mousemapx = ((int)mouseposition.X / TILE_SIZE) + MapEditor.DrawOffset.X;
                     mousemapy = ((int)mouseposition.Y / TILE_SIZE) + MapEditor.DrawOffset.Y;
 
-                    if (mousemapx < _width && mousemapx >= 0 && mousemapy < _height && mousemapy >= 0)
+                    if (mouseposition.X < MapEditor.GraphicsDeviceManager.PreferredBackBufferWidth && mouseposition.X >= 0
+                        && mouseposition.Y < MapEditor.GraphicsDeviceManager.PreferredBackBufferHeight && mouseposition.Y >= 0
+                        && mousemapx < _width && mousemapx >= 0
+                        && mousemapy < _height && mousemapy >= 0
+                        && App.MapEditor.IsActive)
                         Chunk[(int)mousemapx, (int)mousemapy] = data;
                 }
 
@@ -53,7 +57,11 @@ namespace LoESoft.MapEditor.Core.Layer
                     mousemapx = ((int)mouseposition.X / TILE_SIZE) + MapEditor.DrawOffset.X;
                     mousemapy = ((int)mouseposition.Y / TILE_SIZE) + MapEditor.DrawOffset.Y;
 
-                    if (mousemapx < _width && mousemapx >= 0 && mousemapy < _height && mousemapy >= 0)
+                    if (mouseposition.X < MapEditor.GraphicsDeviceManager.PreferredBackBufferWidth && mouseposition.X >= 0
+                        && mouseposition.Y < MapEditor.GraphicsDeviceManager.PreferredBackBufferHeight && mouseposition.Y >= 0
+                        && mousemapx < _width && mousemapx >= 0
+                        && mousemapy < _height && mousemapy >= 0
+                        && App.MapEditor.IsActive)
                         Chunk[(int)mousemapx, (int)mousemapy] = null;
                 }
             }

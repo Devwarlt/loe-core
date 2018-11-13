@@ -62,7 +62,7 @@ namespace LoESoft.MapEditor
 
             var thisForm = (Form)Control.FromHandle(Window.Handle);
             thisForm.MinimizeBox = false;
-            thisForm.TopMost = true;
+            thisForm.TopMost = false;
             thisForm.Move += ThisForm_Move;
             ThisForm_Move(null, null);
 
