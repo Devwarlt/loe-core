@@ -87,7 +87,7 @@ namespace LoESoft.MapEditor
 
             App.Info("Creating a sample map... OK!");
 
-            Window.Title = $"LoESoft - {App.Name}: {FormattedMapName}";
+            FormatWindowTitle();
 
             App.Info("Game Map Editor is loading... OK!\n");
         }
@@ -102,6 +102,9 @@ namespace LoESoft.MapEditor
             App.Info($"{(loading ? "Loading" : "Reloading")} tile sets... OK!");
         }
 
+        private void FormatWindowTitle()
+            => Window.Title = $"LoESoft - {App.Name} | (Layer: [({(int)CurrentLayer})] {CurrentLayer} / Sprite: {CurrentIndex}) | {FormattedMapName}";
+
         protected override void UnloadContent()
         {
         }
@@ -111,13 +114,12 @@ namespace LoESoft.MapEditor
             if (Quit)
                 Exit();
 
-            if (!string.IsNullOrEmpty(FormattedMapName))
-                Window.Title = $"LoESoft - {App.Name}: {FormattedMapName}";
+            FormatWindowTitle();
 
             var keyboard = Keyboard.GetState();
 
             if (keyboard.IsKeyDown(Keys.PageUp) && !KeyboardState.IsKeyDown(Keys.PageUp))
-                if ((int)CurrentLayer < (int)MapLayer.ABSTRACT)
+                if ((int)CurrentLayer < (int)MapLayer.ABSTRACT - 1)
                     CurrentLayer++;
 
             if (keyboard.IsKeyDown(Keys.PageDown) && !KeyboardState.IsKeyDown(Keys.PageDown))
