@@ -93,7 +93,7 @@ namespace LoESoft.Client.Core.Screens
 
         public void AddCharacterSelection(string response)
         {
-            CharacterSelect = new CharacterSelectHUD(0, 235);
+            CharacterSelect = new CharacterSelectHUD(0, 230);
             CharacterSelect.Init(_gameUser, response);
 
             Background.AddChild(CharacterSelect);

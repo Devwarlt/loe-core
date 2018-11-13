@@ -30,7 +30,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
         {
             _gameUser = user;
 
-            _chooseACharacter = new TextDisplay(20, 5, "Choose a character", 24, new RGBColor(105, 225, 125));
+            _chooseACharacter = new TextDisplay(20, 0, "Choose a character", 24, new RGBColor(105, 225, 125));
             _chooseACharacter.Outline = true;
 
             var data = JsonConvert.DeserializeObject<UnlockedCharacterData>(result);
@@ -39,7 +39,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
             {
                 int idx = data.UnlockedClassTypes[i];
                 int x = (i * 250) + (15 * i) + 5;
-                var character = new CharacterRect(x, 0);
+                var character = new CharacterRect(x, 20);
                 
                 character.Init(user, idx, i);
 
