@@ -34,8 +34,8 @@
             this.MapNameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.MapNameLabel = new System.Windows.Forms.Label();
             this.MapPathLabel = new System.Windows.Forms.Label();
+            this.MapNameLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,16 +96,6 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             // 
-            // MapNameLabel
-            // 
-            this.MapNameLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MapNameLabel.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.MapNameLabel.Location = new System.Drawing.Point(3, 16);
-            this.MapNameLabel.Name = "MapNameLabel";
-            this.MapNameLabel.Size = new System.Drawing.Size(290, 30);
-            this.MapNameLabel.TabIndex = 0;
-            this.MapNameLabel.Text = "Map Name: new_map.json";
-            // 
             // MapPathLabel
             // 
             this.MapPathLabel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -116,10 +106,21 @@
             this.MapPathLabel.TabIndex = 0;
             this.MapPathLabel.Text = "Map Path: empty";
             // 
+            // MapNameLabel
+            // 
+            this.MapNameLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.MapNameLabel.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.MapNameLabel.Location = new System.Drawing.Point(3, 16);
+            this.MapNameLabel.Name = "MapNameLabel";
+            this.MapNameLabel.Size = new System.Drawing.Size(290, 30);
+            this.MapNameLabel.TabIndex = 0;
+            this.MapNameLabel.Text = "Map Name: new_map.json";
+            // 
             // SaveMapForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(325, 157);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -131,10 +132,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SaveMapForm";
-            this.Opacity = 0.99D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.SaveMapForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);

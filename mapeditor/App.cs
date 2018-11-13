@@ -1,4 +1,5 @@
-﻿using LoESoft.MapEditor.Properties;
+﻿using LoESoft.MapEditor.Core.GUI;
+using LoESoft.MapEditor.Properties;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -35,7 +36,7 @@ namespace LoESoft.MapEditor
         private static string RollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
         [STAThread]
-        public static void Main()
+        public static void Main(string[] args)
         {
             Console.Title = $"{Name} - Build: {Version}";
 

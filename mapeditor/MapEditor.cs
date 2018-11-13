@@ -4,6 +4,7 @@ using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -28,6 +29,7 @@ namespace LoESoft.MapEditor
         public static int CurrentIndex { get; set; }
         public static Dictionary<MapLayer, Texture2D> MapSprites { get; set; }
         public static bool ShowGrid { get; set; }
+        public static InterfaceForm InterfaceForm { get; set; }
 
         public static Vector2 DrawOffset = Vector2.Zero;
 
@@ -48,6 +50,9 @@ namespace LoESoft.MapEditor
 
             CurrentLayer = MapLayer.UNDERGROUND;
             CurrentIndex = 0;
+
+            InterfaceForm = new InterfaceForm();
+            InterfaceForm.Show();
         }
 
         protected override void Initialize()
@@ -55,7 +60,18 @@ namespace LoESoft.MapEditor
             MapState = MapState.Active;
             ClientBounds = new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width);
 
+            var thisForm = (Form)Control.FromHandle(Window.Handle);
+            thisForm.MinimizeBox = false;
+            thisForm.TopMost = true;
+            thisForm.Move += ThisForm_Move;
+            ThisForm_Move(null, null);
+
             base.Initialize();
+        }
+
+        private void ThisForm_Move(object sender, EventArgs e)
+        {
+            InterfaceForm.Location = new System.Drawing.Point(Window.Position.X + GraphicsDeviceManager.DefaultBackBufferWidth + 10, Window.Position.Y);
         }
 
         protected override void LoadContent()
@@ -64,7 +80,7 @@ namespace LoESoft.MapEditor
 
             App.Info("Creating a sample map...");
 
-            ShowGrid = false;
+            ShowGrid = true;
             Map = new Map(MapSize.SIZE_128);
             MapSprites = new Dictionary<MapLayer, Texture2D>(4);
 
@@ -115,6 +131,7 @@ namespace LoESoft.MapEditor
             if (Quit)
                 Exit();
 
+            InterfaceForm.UpdateInfo();
             FormatWindowTitle();
 
             var keyboard = Keyboard.GetState();
@@ -137,63 +154,6 @@ namespace LoESoft.MapEditor
 
             if (keyboard.IsKeyDown(Keys.G) && !KeyboardState.IsKeyDown(Keys.G))
                 ShowGrid = !ShowGrid;
-
-            if (keyboard.IsKeyDown(Keys.N) && !KeyboardState.IsKeyDown(Keys.N))
-            {
-                MapState = MapState.Inactive;
-
-                var newmap = new NewMapForm();
-                newmap.ShowDialog();
-
-                if (newmap.DialogResult == DialogResult.OK)
-                {
-                    App.Info("Creating new map...");
-
-                    Map = new Map(newmap.MapSize);
-
-                    CurrentLayer = MapLayer.UNDERGROUND;
-                    CurrentIndex = 0;
-                    DrawOffset = Vector2.Zero;
-                    ActualMapName = newmap.MapName;
-                    ActualMapSize = newmap.MapSize;
-                    FormattedMapName = $"(Size: {(int)ActualMapSize} x {(int)ActualMapSize}) Map: {ActualMapName}";
-
-                    App.Info($"- Name: {newmap.MapName}");
-                    App.Info($"- Size: {(int)ActualMapSize} x {(int)ActualMapSize}");
-
-                    LoadTileSets(false);
-
-                    App.Info("Creating new map... OK!\n");
-                }
-
-                MapState = MapState.Active;
-            }
-
-            if (keyboard.IsKeyDown(Keys.S) && !KeyboardState.IsKeyDown(Keys.S))
-            {
-                MapState = MapState.Inactive;
-
-                var savemap = new SaveMapForm(ActualMapName, Map.Save());
-                savemap.ShowDialog();
-
-                if (savemap.DialogResult == DialogResult.OK)
-                    MessageBox.Show("Map saved!");
-
-                MapState = MapState.Active;
-            }
-
-            if (keyboard.IsKeyDown(Keys.L) && !KeyboardState.IsKeyDown(Keys.L))
-            {
-                MapState = MapState.Inactive;
-
-                var loadmap = new LoadMapForm();
-                loadmap.ShowDialog();
-
-                if (loadmap.DialogResult == DialogResult.OK)
-                    MessageBox.Show("Map loaded!");
-
-                MapState = MapState.Active;
-            }
 
             if (MapState == MapState.Active && MapSprites != null && CurrentLayer != MapLayer.ABSTRACT)
             {

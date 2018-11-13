@@ -209,6 +209,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(328, 168);
             this.Controls.Add(this.SizeGroupBox);
             this.Controls.Add(this.Cancel);
@@ -219,9 +220,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewMapForm";
-            this.Opacity = 0.99D;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.NewMapForm_Load);
             this.SizeGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);

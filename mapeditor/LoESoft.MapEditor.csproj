@@ -45,6 +45,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Core\GUI\InterfaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\InterfaceForm.Designer.cs">
+      <DependentUpon>InterfaceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\GUI\NewMapForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +229,9 @@
     <EmbeddedResource Include="Core\Assets\Sprite\sample-grid.png" />
     <Content Include="Icon.ico" />
     <Content Include="loesoft-new.ico" />
+    <EmbeddedResource Include="Core\GUI\InterfaceForm.resx">
+      <DependentUpon>InterfaceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\NewMapForm.resx">
       <DependentUpon>NewMapForm.cs</DependentUpon>
     </EmbeddedResource>
