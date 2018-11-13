@@ -32,10 +32,13 @@ namespace LoESoft.Client.Core.Screens
 
         public ConcurrentQueue<Action> LoadFunctions { get; set; }
         public Screen ToLoadScreen { get; set; }
+
+        public int TotalLoadCount { get; set; }
         
-        public LoadingScreen(ConcurrentQueue<Action> toDo, Screen changeScreen, string initText = "Loading...")
+        public LoadingScreen(ConcurrentQueue<Action> toDo, Screen changeScreen, string initText = "")
         {
-            LoadingText = initText;
+            TotalLoadCount = toDo.Count;
+            LoadingText = initText = $"Loading: 0/{TotalLoadCount}";
             LoadFunctions = toDo;
             ToLoadScreen = changeScreen;
         }
@@ -54,7 +57,7 @@ namespace LoESoft.Client.Core.Screens
             get => _amount;
             set
             {
-                LoadingText = $"Loading: {value}/{LoadFunctions.Count}";
+                LoadingText = $"Loading: {value}/{TotalLoadCount}";
                 _amount = value;
             }
         }
