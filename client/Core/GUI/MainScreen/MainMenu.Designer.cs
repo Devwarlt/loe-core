@@ -38,6 +38,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LoginBox = new LoESoft.Client.Core.GUI.MainScreen.LoginBox();
             this.RegisterBox = new LoESoft.Client.Core.GUI.MainScreen.RegisterBox();
+            this.GameDialog = new LoESoft.Client.Core.GUI.GameDialog.GameDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,11 +175,22 @@
             this.RegisterBox.TabIndex = 8;
             this.RegisterBox.Visible = false;
             // 
+            // GameDialog
+            // 
+            this.GameDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.GameDialog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.GameDialog.Location = new System.Drawing.Point(200, 80);
+            this.GameDialog.Name = "GameDialog";
+            this.GameDialog.Settings = null;
+            this.GameDialog.Size = new System.Drawing.Size(325, 265);
+            this.GameDialog.TabIndex = 11;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Controls.Add(this.GameDialog);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.LoginBox);
             this.Controls.Add(this.ExitButton);
@@ -209,5 +221,6 @@
         private RegisterBox RegisterBox;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private GameDialog.GameDialog GameDialog;
     }
 }
