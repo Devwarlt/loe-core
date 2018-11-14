@@ -3,7 +3,6 @@ using LoESoft.Client.Core.GUI.MainScreen;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using static LoESoft.Client.Core.Networking.Server;
 
@@ -34,7 +33,21 @@ namespace LoESoft.Client.Core.GUI
             });
         }
 
-        private void OnDisplay(object sender, bool e) => WindowState = e ? FormWindowState.Normal : FormWindowState.Minimized;
+        private void OnDisplay(object sender, bool e)
+        {
+            if (e)
+            {
+                WindowState = FormWindowState.Normal;
+                Opacity = 0.99D;
+                CenterToScreen();
+            }
+            else
+            {
+                WindowState = FormWindowState.Minimized;
+                Opacity = 0;
+                Location = new Point(-999, -999); // out of user window bounds
+            }
+        }
 
         private List<Control> GetAllControls(Control container) => GetAllControls(container, new List<Control>());
 
