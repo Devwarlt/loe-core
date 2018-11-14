@@ -95,12 +95,20 @@
     <Compile Include="Core\Game\PathFinder\PathNode.cs" />
     <Compile Include="Core\Game\PathFinder\Points.cs" />
     <Compile Include="Core\Game\User\GamePlayer.cs" />
+    <Compile Include="Core\GUI\GameDialog\GameDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\GameDialog\GameDialog.Designer.cs">
+      <DependentUpon>GameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\GameDialog\GameDialogSettings.cs" />
     <Compile Include="Core\GUI\Launcher.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Core\GUI\Launcher.Designer.cs">
       <DependentUpon>Launcher.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\GUI\MainScreen\InternalClock.cs" />
     <Compile Include="Core\GUI\MainScreen\LoginBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -342,6 +350,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Core\GUI\GameDialog\GameDialog.resx">
+      <DependentUpon>GameDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\Launcher.resx">
       <DependentUpon>Launcher.cs</DependentUpon>
     </EmbeddedResource>

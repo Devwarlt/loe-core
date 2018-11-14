@@ -1,35 +1,21 @@
 ﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.GUI.GameDialog;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LoESoft.Client.Core.GUI.MainScreen
 {
-    public class ActionClock
-    {
-        public System.Timers.Timer Timer { get; set; }
-
-        public ActionClock(int internalMs, Action action)
-        {
-            Timer = new System.Timers.Timer(internalMs) { AutoReset = true };
-            Timer.Elapsed += delegate
-            {
-                action?.Invoke();
-            };
-        }
-
-        public void Start() => Timer.Start();
-        public void Stop() => Timer.Stop();
-    }
     public partial class MainMenu : UserControl
     {
         public bool LoggedIn { get; set; }
         public GameUser GameUser { get; set; }
 
         public Queue<Action> ToggleActions;
-        public ActionClock Clock { get; set; }
+        public InternalClock Clock { get; set; }
 
         public delegate void ToggleDelegate(string type);
+
         public ToggleDelegate Toggle { get; set; }
 
         public MainMenu()
@@ -38,12 +24,20 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 
             ToggleActions = new Queue<Action>();
             Toggle = (text) => ToggleBox(text);
-            Clock = new ActionClock(500, delegate
+            Clock = new InternalClock(500, delegate
             {
                 if (ToggleActions.Count > 0)
                     ToggleActions.Dequeue()?.Invoke();
             });
             Clock.Start();
+        }
+
+        public void SetGameDialog(bool visible) => GameDialog.Visible = visible;
+
+        public void UpdateGameDialog(GameDialogSettings settings)
+        {
+            GameDialog.Settings = settings;
+            GameDialog.LoadSettings();
         }
 
         public void QueueAction(Action action) => ToggleActions.Enqueue(action);
@@ -54,7 +48,7 @@ namespace LoESoft.Client.Core.GUI.MainScreen
                 Invoke(Toggle, new object[] { type });
             else
             {
-                switch(type)
+                switch (type)
                 {
                     case "Login":
                         LoggedIn = true;
@@ -65,6 +59,7 @@ namespace LoESoft.Client.Core.GUI.MainScreen
                         PlayButton.Enabled = true;
                         ExitButton.Enabled = true;
                         break;
+
                     case "Register":
                         LoginButton.Enabled = true;
                         ExitButton.Enabled = true;
