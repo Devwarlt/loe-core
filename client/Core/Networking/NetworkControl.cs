@@ -121,7 +121,7 @@ namespace LoESoft.Client.Core.Networking
                         catch { }
                     }, null);
                 }
-                catch { }
+                catch (Exception ex) { App.Warn(ex.ToString()); }
             })
             { IsBackground = true }.Start();
 
@@ -176,10 +176,12 @@ namespace LoESoft.Client.Core.Networking
                     }
                 }, null);
             }
-            catch
+            catch (Exception ex)
             {
                 if (!Disconnected)
                     ReceivePacket();
+
+                App.Warn(ex.ToString());
             }
         }
 

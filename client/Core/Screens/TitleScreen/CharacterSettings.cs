@@ -3,6 +3,7 @@
     public static class CharacterSettings
     {
         public static int CurrentCharacterId = -1;
+        public static int CurrentCharacterType = -1;
         public static int MaxCharacter = 3;
     }
 }

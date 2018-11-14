@@ -38,15 +38,11 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
                 var content = new List<int>();
 
-                App.Warn(characters.Count.ToString() + $": {error}");
-
                 for (var i = 0; i < 3; i++)
                     if (i < client.Account.CurrentCharacterId)
                         content.Add(characters[i].Class);
                     else
                         content.Add(-1);
-
-                App.Warn(content.Count.ToString());
 
                 client.SendPacket(new ServerResponse()
                 {

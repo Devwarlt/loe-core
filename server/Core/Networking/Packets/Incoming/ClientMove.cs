@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
+using System;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
@@ -43,16 +44,22 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         //Repositions player and sends back a server move packet once it's done
         private void RepositionPlayer(Client client, int newX, int newY)
         {
-            if (client.Player == null)
-                return;
-
-            client.Player.Move(newX, newY);
-
-            client.SendPacket(new ServerMove()
+            try
             {
-                X = client.Player.X,
-                Y = client.Player.Y
-            });
+                if (client.Player == null)
+                    return;
+
+                client.Player.Move(newX, newY);
+
+                client.SendPacket(new ServerMove()
+                {
+                    X = client.Player.X,
+                    Y = client.Player.Y
+                });
+            } catch (Exception ex)
+            {
+                App.Warn($"Moving! {ex.ToString()}");
+            }
         }
     }
 }

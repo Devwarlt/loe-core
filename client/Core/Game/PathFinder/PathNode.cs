@@ -46,18 +46,18 @@ namespace LoESoft.Client.Core.Game.PathFinder
         {
             var points = new List<PathNode>();
 
-            if ((X - 1) > 0)
-                if (WorldMap.TileMap[(X - 1), Y] != null)
-                    points.Add(new PathNode(WorldMap.TileMap[(X - 1), Y].TileProperties, (X - 1), Y));
-            if ((X + 1) < WorldMap.MapWidth)
-                if (WorldMap.TileMap[(X + 1), Y] != null)
-                    points.Add(new PathNode(WorldMap.TileMap[(X + 1), Y].TileProperties, (X + 1), Y));
-            if ((Y - 1) > 0)
-                if (WorldMap.TileMap[X, (Y - 1)] != null)
-                    points.Add(new PathNode(WorldMap.TileMap[X, (Y - 1)].TileProperties, X, (Y - 1)));
-            if ((Y + 1) < WorldMap.MapHeight)
-                if (WorldMap.TileMap[X, (Y + 1)] != null)
-                    points.Add(new PathNode(WorldMap.TileMap[X, (Y + 1)].TileProperties, X, (Y + 1)));
+            //if ((X - 1) > 0)
+            //    if (WorldMap.TileMap[(X - 1), Y] != null)
+            //        points.Add(new PathNode(WorldMap.TileMap[(X - 1), Y].TileProperties, (X - 1), Y));
+            //if ((X + 1) < WorldMap.MapWidth)
+            //    if (WorldMap.TileMap[(X + 1), Y] != null)
+            //        points.Add(new PathNode(WorldMap.TileMap[(X + 1), Y].TileProperties, (X + 1), Y));
+            //if ((Y - 1) > 0)
+            //    if (WorldMap.TileMap[X, (Y - 1)] != null)
+            //        points.Add(new PathNode(WorldMap.TileMap[X, (Y - 1)].TileProperties, X, (Y - 1)));
+            //if ((Y + 1) < WorldMap.MapHeight)
+            //    if (WorldMap.TileMap[X, (Y + 1)] != null)
+            //        points.Add(new PathNode(WorldMap.TileMap[X, (Y + 1)].TileProperties, X, (Y + 1)));
 
             return points;
         }

@@ -11,8 +11,8 @@ namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        public static int WIDTH => 800;
-        public static int HEIGHT => 600;
+        public static int WIDTH => 1200;
+        public static int HEIGHT => 900;
 
         public static GameScreen GameScreen { get; set; }
         public static CharacterScreen CharacterScreen { get; set; }

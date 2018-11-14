@@ -19,7 +19,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
         private List<Entity> _removedObjects = new List<Entity>();
 
         private int ConnectionLostAttempts = 0;
-        private readonly int MaxConnectionListAttempts = 30;
+        private readonly int MaxConnectionListAttempts = 10;
 
         public override void Update()
         {
@@ -40,8 +40,8 @@ namespace LoESoft.Server.Core.World.Entities.Player
             else
                 ConnectionLostAttempts = 0;
 
-            var timer = new Stopwatch();
-            timer.Start();
+            //var timer = new Stopwatch();
+            //timer.Start();
 
             var sight = GetSightPoints().Where(_ => ((_.X >= 0 && _.X < WorldMap.WIDTH) &&
             (_.Y >= 0 && _.Y < WorldMap.HEIGHT)));
@@ -95,7 +95,8 @@ namespace LoESoft.Server.Core.World.Entities.Player
             _tilesToUpdateOrAdd.Clear();
             _objectsToUpdateOrAdd.Clear();
 
-            timer.Stop();
+            //App.Warn($"Update Time:{timer.ElapsedMilliseconds}");
+            //timer.Stop();
         }
     }
 }

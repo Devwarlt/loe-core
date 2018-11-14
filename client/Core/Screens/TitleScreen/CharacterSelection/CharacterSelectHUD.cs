@@ -19,7 +19,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
         private TextDisplay _chooseACharacter;
 
         public CharacterSelectHUD(int x, int y)
-            : base(x, y, GameApplication.WIDTH, 200, new RGBColor(0, 0, 0), alpha: 0f)
+            : base(x, y, 720, 200, new RGBColor(0, 0, 0), alpha: 0f)
         {
             _classView = new List<CharacterRect>();
             _unlockedClasses = new List<int>();

@@ -22,7 +22,6 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 });
                 return;
             }
-            App.Warn("TEST!2");
 
             var getCharacterData = App.Database.GetCharacterByAccountId(client.Account.Id, CharacterIndex);
 
@@ -35,14 +34,18 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 });
             else
             {
+                client.SendPacket(new ServerResponse()
+                {
+                    From = "LoadCharacter",
+                    Result = 0,
+                    Content = getCharacterData.Class.ToString()
+                });
+
                 client.SendPacket(new LoadMap()
                 {
                     MapWidth = WorldMap.WIDTH,
                     MapHeight = WorldMap.HEIGHT
                 });
-                //client.SendPacket(new ServerResponse()
-                //{
-                //});
 
                 client.Player = new Player(client.Manager, client, (int)client.Account.Id, getCharacterData.Class);
 

@@ -11,10 +11,10 @@ namespace LoESoft.Client.Core.Game.PathFinder
 
         public void CreateOrUpdate(Points start, Points end)
         {
-            _startNode = new PathNode(WorldMap.TileMap[start.X, start.Y].TileProperties, start.X, start.Y);
-            _startNode.SetCost(_startNode.X, _startNode.Y, _endNode.X, _endNode.Y, 0);
-            _endNode = new PathNode(WorldMap.TileMap[end.X, end.Y].TileProperties, start.X, start.Y);
-            _endNode.SetCost(_startNode.X, _startNode.Y, _endNode.X, _endNode.Y, 0);
+            //_startNode = new PathNode(WorldMap.TileMap[start.X, start.Y].TileProperties, start.X, start.Y);
+            //_startNode.SetCost(_startNode.X, _startNode.Y, _endNode.X, _endNode.Y, 0);
+            //_endNode = new PathNode(WorldMap.TileMap[end.X, end.Y].TileProperties, start.X, start.Y);
+            //_endNode.SetCost(_startNode.X, _startNode.Y, _endNode.X, _endNode.Y, 0);
         }
 
         private List<Points> GeneratePath()

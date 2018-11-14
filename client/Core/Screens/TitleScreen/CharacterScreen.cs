@@ -1,6 +1,7 @@
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
+using LoESoft.Client.Core.Game.Map;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Core.Screens.TitleScreen;
 using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection;
@@ -50,8 +51,14 @@ namespace LoESoft.Client.Core.Screens
             {
                 var loading = new ConcurrentQueue<Action>();
 
-                loading.Enqueue(delegate { _gameUser.SendPacket(new Load() { CharacterIndex = CharacterSettings.CurrentCharacterId }); });
+                loading.Enqueue(delegate 
+                {
+                    App.Warn($"Sending Load Packet: {CharacterSettings.CurrentCharacterId}");
+                    _gameUser.SendPacket(new Load() { CharacterIndex = CharacterSettings.CurrentCharacterId });
+                });
 
+                loading.Enqueue(delegate { while ((!WorldMap.MapLoaded) || (CharacterSettings.CurrentCharacterType == -1)) { } });
+                
                 ScreenManager.DispatchScreen(new LoadingScreen(loading, GameApplication.GameScreen = new GameScreen(_gameUser)));
             }
         }
@@ -61,14 +68,14 @@ namespace LoESoft.Client.Core.Screens
         public override void OnScreenCreate()
         {
             Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 0, 0));
-            Title.X = (GameApplication.WIDTH - Title.Width) / 2;
+            Title.X = DrawHelper.CenteredToScreenWidth(Title.Width);
             Title.Y = 20;
             Title.Outline = true;
 
             PlayButton = new TextButton("Play", 30);
-            PlayButton.X = (GameApplication.WIDTH - PlayButton.Width) / 2;
-            PlayButton.Y = (GameApplication.HEIGHT - PlayButton.Height) / 2;
-            PlayButton.Y = 525;
+            PlayButton.X = DrawHelper.CenteredToScreenWidth(PlayButton.Width);
+            PlayButton.Y = DrawHelper.CenteredToScreenHeight(PlayButton.Height);
+            PlayButton.Y = 700;
             PlayButton.TextDisplay.Outline = true;
             PlayButton.AddEventListener(Event.CLICKLEFT, OnPlay);
             PlayButton.AddEventListener(Event.MOUSEOVER, OnPlayButtonOver);
@@ -93,7 +100,7 @@ namespace LoESoft.Client.Core.Screens
 
         public void AddCharacterSelection(string response)
         {
-            CharacterSelect = new CharacterSelectHUD(0, 230);
+            CharacterSelect = new CharacterSelectHUD(DrawHelper.CenteredToScreenWidth(720), 400);
             CharacterSelect.Init(_gameUser, response);
 
             Background.AddChild(CharacterSelect);

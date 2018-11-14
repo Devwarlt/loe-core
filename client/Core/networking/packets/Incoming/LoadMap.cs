@@ -1,5 +1,6 @@
 ﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Map;
+using LoESoft.Client.Core.Screens.TitleScreen;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {

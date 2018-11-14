@@ -23,7 +23,8 @@ namespace LoESoft.Client.Core.Game.Objects
         public Entity(int id)
         {
             ObjectId = id;
-            Content = XmlLibrary.ObjectsXml[ObjectId];
+            if (ObjectId != -1)
+                Content = XmlLibrary.ObjectsXml[ObjectId];
         }
 
         public virtual void Update(GameTime gameTime)

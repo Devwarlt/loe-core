@@ -94,6 +94,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
             else
             {
                 CharacterSettings.CurrentCharacterId = CharacterIndex;
+                App.Warn($"Character Selected: {CharacterSettings.CurrentCharacterId}");
             }
         }
     }

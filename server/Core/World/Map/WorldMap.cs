@@ -9,8 +9,8 @@ namespace LoESoft.Server.Core.World
 {
     public class WorldMap
     {
-        public static int WIDTH = 256;
-        public static int HEIGHT = 256;
+        public static int WIDTH = 2560;
+        public static int HEIGHT = 2560;
 
         public WorldManager Manager { get; set; }
 
@@ -24,7 +24,7 @@ namespace LoESoft.Server.Core.World
         {
             Manager = manager;
 
-            Tiles = new Tile[256, 256];
+            Tiles = new Tile[WIDTH, HEIGHT];
             Chunks = new Dictionary<Tuple<int, int>, Chunk>();
             Players = new ConcurrentDictionary<int, Player>();
 
@@ -39,6 +39,7 @@ namespace LoESoft.Server.Core.World
             Chunks[new Tuple<int, int>(0, 0)].RandomGen();
 
             Loaded = true;
+            App.Warn("Map Successfully Initialized!");
         }
 
         public void Update()

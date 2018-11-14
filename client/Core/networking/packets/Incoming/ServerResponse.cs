@@ -1,6 +1,7 @@
 ﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.GUI.MainScreen;
 using LoESoft.Client.Core.Screens;
+using LoESoft.Client.Core.Screens.TitleScreen;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Windows.Forms;
@@ -37,12 +38,22 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     break;
 
                 case "LoadCharacter": // TODO.
+                    HandleCharacterLoad();
                     break;
 
                 case "Server.Character.UnlockedCharacters":
                     HandleUnlockedCharacters();
                     break;
             }
+        }
+
+        public void HandleCharacterLoad()
+        {
+            App.Warn($"{int.Parse(Content)}");
+            if (Result == 0)
+                CharacterSettings.CurrentCharacterType = int.Parse(Content);
+            else
+                App.Warn("Unable To Load Character");
         }
 
         public void CreateNewCharacter()

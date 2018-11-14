@@ -122,8 +122,6 @@ namespace LoESoft.Server.Core.Database
                 return false;
             }
 
-            account.CurrentCharacterId++;
-
             var character = new Character()
             {
                 Id = account.CurrentCharacterId,
@@ -138,6 +136,8 @@ namespace LoESoft.Server.Core.Database
                 },
                 Creation = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss UTC")
             };
+            
+            account.CurrentCharacterId++;
 
             error = null;
             return Characters.TryAdd(new KeyValuePair<long, long>(character.AccountId, character.Id), character);
