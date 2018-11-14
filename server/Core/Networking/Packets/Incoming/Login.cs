@@ -77,8 +77,6 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 });
 
                 client.Account = account; // do not change this
-
-                App.Warn("TEST");
             }
         }
     }

@@ -122,6 +122,14 @@ namespace LoESoft.Client
 
         public static void UpdateRPC() => DscordClient.SetPresence(DiscordRichPresence);
 
+        public static void ToggleLauncherElement(string type)
+        {
+            Launcher.MainMenu.QueueAction(delegate
+            {
+                Launcher.MainMenu.ToggleBox(type);
+            });
+        }
+
         public static void Info(string data) => Log.Info(data);
 
         public static void Warn(string data) => Log.Warn(data);

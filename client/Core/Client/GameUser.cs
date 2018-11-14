@@ -17,11 +17,7 @@ namespace LoESoft.Client.Core.Client
         }
 
         public bool IsConnected => NetworkControl.IsConnected;
-
-        /// <summary>
-        /// This method block current thread work until action is completed synchronously or when timeout in milliseconds is declared.
-        /// </summary>
-        /// <param name="outgoingPacket"></param>
+        
         public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
 
         public void SendSyncPacket(OutgoingPacket outgoingPacket, int timeout) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne(timeout, true);

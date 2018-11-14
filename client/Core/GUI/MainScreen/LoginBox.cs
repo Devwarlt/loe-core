@@ -1,4 +1,5 @@
-﻿using LoESoft.Client.Core.Networking.Packets.Outgoing;
+﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using System;
 using System.Windows.Forms;
 
@@ -45,15 +46,22 @@ namespace LoESoft.Client.Core.GUI.MainScreen
         private void LoginOKButton_Click(object sender, EventArgs e)
         {
             var gameuser = ((MainMenu)Parent).GameUser;
-            gameuser.SendPacket(new Login()
-            {
-                Name = AccountNameTextBox.Text,
-                Password = PasswordTextBox.Text
-            });
-
-            LoginCancelButton_Click(null, null);
+            Login(gameuser, AccountNameTextBox.Text, PasswordTextBox.Text);
         }
 
-        private void LoginCancelButton_Click(object sender, EventArgs e) => ((MainMenu)Parent).OnLoginBoxClose();
+        public void Login(GameUser user, string username, string password)
+        {
+            user.SendPacket(new Login()
+            {
+                Name = username,
+                Password = password
+            });
+        }
+
+        private void LoginCancelButton_Click(object sender, EventArgs e)
+        {
+            Toggle();
+            ((MainMenu)Parent).OnBoxClose();
+        }
     }
 }

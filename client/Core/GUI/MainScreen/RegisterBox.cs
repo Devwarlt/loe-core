@@ -79,7 +79,8 @@ namespace LoESoft.Client.Core.GUI.MainScreen
             PasswordTextBox.Text = null;
             ConfirmPasswordTextBox.Text = null;
 
-            ((MainMenu)Parent).OnRegisterBoxClose();
+            Toggle();
+            ((MainMenu)Parent).OnBoxClose();
         }
     }
 }

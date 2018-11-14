@@ -1,6 +1,8 @@
 ﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.GUI.MainScreen;
 using LoESoft.Client.Core.Screens;
 using Newtonsoft.Json;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
@@ -23,11 +25,11 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
             switch (From)
             {
                 case "Login":
-                    LoginHandler();
+                    LoginHandler(gameUser);
                     break;
 
                 case "Register":
-                    RegisterHandler();
+                    RegisterHandler(gameUser);
                     break;
 
                 case "CreateNewCharacter":
@@ -53,15 +55,20 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
             }
         }
 
-        private void RegisterHandler() => MessageBox.Show(Content, Result == 0 ? "Welcome" : "Register Denied");
-
-        private void LoginHandler()
+        private void RegisterHandler(GameUser gameUser)
         {
-            bool result = (Result == 0) ? true : false;
+            if (Result == 0)
+                App.ToggleLauncherElement(From);
+            else
+                MessageBox.Show("Register Denied");
+        }
 
-            App.Launcher.MainMenu.LoggedIn = result;
-
-            MessageBox.Show(Content, Result == 0 ? "Welcome" : "Login Denied");
+        private void LoginHandler(GameUser gameUser)
+        {
+            if (Result == 0)
+                App.ToggleLauncherElement(From);
+            else
+                MessageBox.Show("Login Denied");
         }
 
         private void HandleUnlockedCharacters()

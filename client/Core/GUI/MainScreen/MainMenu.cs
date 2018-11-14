@@ -1,15 +1,85 @@
 ﻿using LoESoft.Client.Core.Client;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LoESoft.Client.Core.GUI.MainScreen
 {
+    public class ActionClock
+    {
+        public System.Timers.Timer Timer { get; set; }
+
+        public ActionClock(int internalMs, Action action)
+        {
+            Timer = new System.Timers.Timer(internalMs) { AutoReset = true };
+            Timer.Elapsed += delegate
+            {
+                action?.Invoke();
+            };
+        }
+
+        public void Start() => Timer.Start();
+        public void Stop() => Timer.Stop();
+    }
     public partial class MainMenu : UserControl
     {
         public bool LoggedIn { get; set; }
         public GameUser GameUser { get; set; }
 
-        public MainMenu() => InitializeComponent();
+        public Queue<Action> ToggleActions;
+        public ActionClock Clock { get; set; }
+
+        public delegate void ToggleDelegate(string type);
+        public ToggleDelegate Toggle { get; set; }
+
+        public MainMenu()
+        {
+            InitializeComponent();
+
+            ToggleActions = new Queue<Action>();
+            Toggle = (text) => ToggleBox(text);
+            Clock = new ActionClock(500, delegate
+            {
+                if (ToggleActions.Count > 0)
+                    ToggleActions.Dequeue()?.Invoke();
+            });
+            Clock.Start();
+        }
+
+        public void QueueAction(Action action) => ToggleActions.Enqueue(action);
+
+        public void ToggleBox(string type)
+        {
+            if (LoginBox.InvokeRequired || RegisterBox.InvokeRequired || PlayButton.InvokeRequired || LoginBox.InvokeRequired)
+                Invoke(Toggle, new object[] { type });
+            else
+            {
+                switch(type)
+                {
+                    case "Login":
+                        LoggedIn = true;
+                        LoginBox.Toggle();
+                        LoginButton.Enabled = LoggedIn;
+                        LoginButton.Text = "Logout";
+
+                        PlayButton.Enabled = true;
+                        ExitButton.Enabled = true;
+                        break;
+                    case "Register":
+                        LoginButton.Enabled = true;
+                        ExitButton.Enabled = true;
+                        break;
+                }
+            }
+        }
+
+        public void OnBoxClose()
+        {
+            LoginButton.Enabled = true;
+            RegisterButton.Enabled = true;
+            ExitButton.Enabled = true;
+            PlayButton.Enabled = false;
+        }
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
@@ -17,37 +87,6 @@ namespace LoESoft.Client.Core.GUI.MainScreen
             PlayButton.Enabled = LoggedIn;
 
             BRMEVersion.Text = $"Version: {App.Version}";
-        }
-
-        public void ToggleLoginBox() => LoginBox.Enabled = !LoginBox.Enabled;
-
-        public void OnLoginBoxClose(bool success = false)
-        {
-            if (!success)
-                LoginBox.Toggle();
-
-            if (LoggedIn)
-                LoginButton.Text = "Logout";
-
-            LoginButton.Enabled = true;
-            RegisterButton.Enabled = !LoggedIn;
-            ExitButton.Enabled = true;
-
-            PlayButton.Enabled = !PlayButton.Enabled;
-
-            App.Warn($"{LoggedIn}");
-        }
-
-        public void ToggleRegisterBox() => RegisterBox.Enabled = !RegisterBox.Enabled;
-
-        public void OnRegisterBoxClose(bool success = false)
-        {
-            if (!success)
-                RegisterBox.Toggle();
-
-            LoginButton.Enabled = true;
-            RegisterButton.Enabled = true;
-            ExitButton.Enabled = true;
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
@@ -76,8 +115,6 @@ namespace LoESoft.Client.Core.GUI.MainScreen
             }
             else
             {
-                App.Info("You have been logged out!");
-
                 LoginButton.Text = "Login";
 
                 PlayButton.Enabled = false;
