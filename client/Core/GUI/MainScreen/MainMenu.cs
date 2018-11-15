@@ -32,7 +32,11 @@ namespace LoESoft.Client.Core.GUI.MainScreen
             Clock.Start();
         }
 
-        public void SetGameDialog(bool visible) => GameDialog.Visible = visible;
+        public void SetGameDialog(bool visible)
+        {
+            GameDialog.Visible = visible;
+            GameDialog.Enabled = visible;
+        }
 
         public void UpdateGameDialog(GameDialogSettings settings)
         {

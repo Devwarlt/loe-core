@@ -179,11 +179,13 @@
             // 
             this.GameDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.GameDialog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.GameDialog.Enabled = false;
             this.GameDialog.Location = new System.Drawing.Point(200, 80);
             this.GameDialog.Name = "GameDialog";
             this.GameDialog.Settings = null;
             this.GameDialog.Size = new System.Drawing.Size(325, 265);
             this.GameDialog.TabIndex = 11;
+            this.GameDialog.Visible = false;
             // 
             // MainMenu
             // 

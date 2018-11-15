@@ -29,7 +29,7 @@ namespace LoESoft.Client.Core.Screens
         public override void Update(GameTime gameTime)
         {
             Controller.Update(gameTime);
-            WorldMap.Update(gameTime);
+            WorldMap.Update(gameTime, (int)Controller.Player.X, (int)Controller.Player.Y);
 
             Camera.SetFocus(Controller.Player);
         }

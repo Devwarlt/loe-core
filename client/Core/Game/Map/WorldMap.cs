@@ -90,8 +90,6 @@ namespace LoESoft.Client.Core.Game.Map
 
             obj.Init();
             Objects.Add(data.ObjectId, pair);
-
-            App.Warn($"Entity Added {pos.X} {pos.Y}");
         }
 
         private static void HandlePlayer(ObjectData data)
@@ -115,12 +113,13 @@ namespace LoESoft.Client.Core.Game.Map
             Objects.Add(data.ObjectId, pair);
         }
         
-        public static void Update(GameTime gameTime)
+        public static void Update(GameTime gameTime, int x, int y)
         {
             if (!MapLoaded)
                 return;
 
-            foreach (var i in Objects.ToArray())
+            var sight = GetSightPoints(x, y);
+            foreach (var i in Objects.Where(_ => sight.Contains(_.Value.Pos)))
                 i.Value.Entity.Update(gameTime);
         }
         
@@ -150,7 +149,8 @@ namespace LoESoft.Client.Core.Game.Map
                     var sx = x * x;
                     var sy = y * y;
 
-                    if (sx + sy <= 30)
+                    if (sx + sy <= 30 && (x + X >= 0 && x + X < MapWidth) &&
+                        (y + Y >= 0 && y + Y < MapHeight))
                         points.Add(new Point(x + X, y + Y));
                 }
 
