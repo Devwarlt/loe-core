@@ -126,7 +126,7 @@ namespace LoESoft.Client
         {
             Launcher.MainMenu.QueueAction(delegate
             {
-                Launcher.MainMenu.ToggleBox(type);
+                Launcher.MainMenu.EnableBox(type);
             });
         }
 

@@ -6,6 +6,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Outgoing
     {
         public string Name { get; set; }
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
 
         [JsonIgnore]
         public override PacketID PacketID => PacketID.REGISTER;

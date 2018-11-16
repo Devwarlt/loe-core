@@ -32,7 +32,7 @@
             this.BRMEVersion = new System.Windows.Forms.Label();
             this.RegisterButton = new System.Windows.Forms.Button();
             this.LoginButton = new System.Windows.Forms.Button();
-            this.PlayButton = new System.Windows.Forms.Button();
+            this.LaunchButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -98,19 +98,19 @@
             // 
             // PlayButton
             // 
-            this.PlayButton.BackColor = System.Drawing.Color.DimGray;
-            this.PlayButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.PlayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PlayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PlayButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.PlayButton.Location = new System.Drawing.Point(23, 190);
-            this.PlayButton.Name = "PlayButton";
-            this.PlayButton.Size = new System.Drawing.Size(124, 36);
-            this.PlayButton.TabIndex = 5;
-            this.PlayButton.TabStop = false;
-            this.PlayButton.Text = "Launch";
-            this.PlayButton.UseVisualStyleBackColor = false;
-            this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
+            this.LaunchButton.BackColor = System.Drawing.Color.DimGray;
+            this.LaunchButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.LaunchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LaunchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LaunchButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.LaunchButton.Location = new System.Drawing.Point(23, 190);
+            this.LaunchButton.Name = "PlayButton";
+            this.LaunchButton.Size = new System.Drawing.Size(124, 36);
+            this.LaunchButton.TabIndex = 5;
+            this.LaunchButton.TabStop = false;
+            this.LaunchButton.Text = "Launch";
+            this.LaunchButton.UseVisualStyleBackColor = false;
+            this.LaunchButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
             // ExitButton
             // 
@@ -179,13 +179,11 @@
             // 
             this.GameDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.GameDialog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.GameDialog.Enabled = false;
             this.GameDialog.Location = new System.Drawing.Point(200, 80);
             this.GameDialog.Name = "GameDialog";
             this.GameDialog.Settings = null;
             this.GameDialog.Size = new System.Drawing.Size(325, 265);
             this.GameDialog.TabIndex = 11;
-            this.GameDialog.Visible = false;
             // 
             // MainMenu
             // 
@@ -196,7 +194,7 @@
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.LoginBox);
             this.Controls.Add(this.ExitButton);
-            this.Controls.Add(this.PlayButton);
+            this.Controls.Add(this.LaunchButton);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.RegisterButton);
             this.Controls.Add(this.BRMEVersion);
@@ -217,7 +215,7 @@
         private System.Windows.Forms.Label BRMEVersion;
         private System.Windows.Forms.Button RegisterButton;
         private System.Windows.Forms.Button LoginButton;
-        private System.Windows.Forms.Button PlayButton;
+        private System.Windows.Forms.Button LaunchButton;
         private System.Windows.Forms.Button ExitButton;
         private LoginBox LoginBox;
         private RegisterBox RegisterBox;

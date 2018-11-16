@@ -6,6 +6,10 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 {
     public partial class RegisterBox : UserControl
     {
+        private ToggleDelegate OnToggle { get; set; }
+
+        private delegate void ToggleDelegate();
+
         public RegisterBox()
         {
             InitializeComponent();
@@ -16,8 +20,16 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 
         public void Toggle()
         {
-            Enabled = !Enabled;
-            Visible = !Visible;
+            if (InvokeRequired)
+                Invoke(OnToggle);
+            else
+            {
+                AccountNameTextBox.Text = null;
+                PasswordTextBox.Text = null;
+
+                Enabled = !Enabled;
+                Visible = !Visible;
+            }
         }
 
         private void RegisterBox_Load(object sender, EventArgs e)
@@ -57,21 +69,12 @@ namespace LoESoft.Client.Core.GUI.MainScreen
         }
 
         private void RegisterCreateButton_Click(object sender, EventArgs e)
-        {
-            var gameuser = ((MainMenu)Parent).GameUser;
-            if (PasswordTextBox.Text == ConfirmPasswordTextBox.Text)
+            => ((MainMenu)Parent).GameUser.SendPacket(new Register()
             {
-                gameuser.SendPacket(new Register()
-                {
-                    Name = AccountNameTextBox.Text,
-                    Password = PasswordTextBox.Text
-                });
-
-                RegisterCancelButton_Click(null, null);
-            }
-            else
-                App.Info("Password doesn't match.");
-        }
+                Name = AccountNameTextBox.Text,
+                Password = PasswordTextBox.Text,
+                ConfirmPassword = ConfirmPasswordTextBox.Text
+            });
 
         private void RegisterCancelButton_Click(object sender, EventArgs e)
         {
@@ -80,6 +83,7 @@ namespace LoESoft.Client.Core.GUI.MainScreen
             ConfirmPasswordTextBox.Text = null;
 
             Toggle();
+
             ((MainMenu)Parent).OnBoxClose();
         }
     }
