@@ -130,7 +130,6 @@ namespace LoESoft.Server.Core.Database
                 Class = classType,
                 Position = new Position()
                 {
-                    Type = 0,
                     X = 0,
                     Y = 0
                 },

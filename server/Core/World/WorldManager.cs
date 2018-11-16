@@ -4,8 +4,6 @@ namespace LoESoft.Server.Core.World
 {
     public class WorldManager
     {
-        public bool CanUpdate = true;
-
         private GameClock _clock { get; set; }
 
         public CoreUpdate Core { get; set; }
@@ -43,10 +41,7 @@ namespace LoESoft.Server.Core.World
             if (ConnectionListener.Clients.Values.Contains(client))
             {
                 if (client.Player != null)
-                {
                     Core.Map.Remove(client.Player);
-                    App.Warn("Player removed!");
-                }
 
                 return true;
             }

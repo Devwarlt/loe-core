@@ -15,12 +15,13 @@ namespace LoESoft.Client.Core.Game.Map
             public Entity Entity;
             public Point Pos;
         }
+
         public static Dictionary<Point, Tile> TileMap;
 
         public static Dictionary<int, ValuePair> Objects { get; set; }
 
-        public static int MapWidth { get; private set; }
-        public static int MapHeight { get; private set; }
+        public static int WIDTH { get; private set; }
+        public static int HEIGHT { get; private set; }
 
         public static bool MapLoaded { get; set; }
 
@@ -33,8 +34,8 @@ namespace LoESoft.Client.Core.Game.Map
         public static void Initialize(int w, int h)
         {
             TileMap = new Dictionary<Point, Tile>(w * h);
-            MapWidth = w;
-            MapHeight = h;
+            WIDTH = w;
+            HEIGHT = h;
 
             MapLoaded = true;
         }
@@ -95,7 +96,7 @@ namespace LoESoft.Client.Core.Game.Map
         private static void HandlePlayer(ObjectData data)
         {
             var pos = new Point(data.X, data.Y);
-            var player = new Player(6)
+            var player = new Player(data.Id)
             {
                 X = pos.X,
                 Y = pos.Y,
@@ -119,6 +120,7 @@ namespace LoESoft.Client.Core.Game.Map
                 return;
 
             var sight = GetSightPoints(x, y);
+
             foreach (var i in Objects.Where(_ => sight.Contains(_.Value.Pos)))
                 i.Value.Entity.Update(gameTime);
         }
@@ -129,11 +131,11 @@ namespace LoESoft.Client.Core.Game.Map
                 return;
 
             var sight = GetSightPoints(x, y);
+
             foreach (var i in sight)
-            {
                 if (TileMap.ContainsKey(i))
                     TileMap[i].Draw(spriteBatch);
-            }
+            
 
             foreach (var i in Objects.Where(_ => sight.Contains(_.Value.Pos)))
                 i.Value.Entity.Draw(spriteBatch);
@@ -149,8 +151,8 @@ namespace LoESoft.Client.Core.Game.Map
                     var sx = x * x;
                     var sy = y * y;
 
-                    if (sx + sy <= 30 && (x + X >= 0 && x + X < MapWidth) &&
-                        (y + Y >= 0 && y + Y < MapHeight))
+                    if (sx + sy <= 30 && (x + X >= 0 && x + X < WIDTH) &&
+                        (y + Y >= 0 && y + Y < HEIGHT))
                         points.Add(new Point(x + X, y + Y));
                 }
 

@@ -19,6 +19,14 @@ namespace LoESoft.Client.Core.Game.Objects
         public Texture2D Texture { get; set; }
         public ObjectsContent Content { get; set; }
         public Color Color;
+        
+        public bool IsMoving
+        {
+            get { return (X != DistinationX || Y != DistinationY); }
+        }
+
+        public int DistinationX { get; set; }
+        public int DistinationY { get; set; }
 
         public Entity(int id)
         {
@@ -31,14 +39,6 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             HandleMovement(1f / gameTime.ElapsedGameTime.Milliseconds);
         }
-
-        public bool IsMoving
-        {
-            get { return (X != DistinationX || Y != DistinationY); }
-        }
-
-        public int DistinationX { get; set; }
-        public int DistinationY { get; set; }
 
         public virtual void HandleMovement(float dt)
         {

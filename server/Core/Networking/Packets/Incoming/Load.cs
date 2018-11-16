@@ -47,9 +47,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     MapHeight = WorldMap.HEIGHT
                 });
 
-                client.Player = new Player(client.Manager, client, (int)client.Account.Id, getCharacterData.Class);
-
-                client.Player.Move(getCharacterData.Position.X, getCharacterData.Position.Y);
+                client.Player = new Player(client.Manager, client, getCharacterData);
 
                 client.Manager.TryAddPlayer(client);
             }

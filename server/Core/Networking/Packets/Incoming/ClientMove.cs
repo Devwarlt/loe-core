@@ -1,17 +1,11 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
+using LoESoft.Server.Core.World;
 using System;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
     public class ClientMove : IncomingPacket
     {
-        /*
-            None = 0, //This value will never be recieved
-            Up = 1,
-            Down = 2,
-            Left = 3,
-            Right = 4
-         * */
         public int Direction { get; set; }
 
         public override PacketID PacketID => PacketID.CLIENTMOVE;
@@ -40,26 +34,20 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     return;
             }
         }
-
-        //Repositions player and sends back a server move packet once it's done
+        
         private void RepositionPlayer(Client client, int newX, int newY)
         {
-            try
-            {
-                if (client.Player == null)
-                    return;
+            if (client.Player == null)
+                return;
 
+            if (newX < 0 || newX >= WorldMap.WIDTH || newY < 0 || newY >= WorldMap.HEIGHT)
                 client.Player.Move(newX, newY);
-
-                client.SendPacket(new ServerMove()
-                {
-                    X = client.Player.X,
-                    Y = client.Player.Y
-                });
-            } catch (Exception ex)
+            
+            client.SendPacket(new ServerMove()
             {
-                App.Warn($"Moving! {ex.ToString()}");
-            }
+                X = client.Player.X,
+                Y = client.Player.Y
+            });
         }
     }
 }

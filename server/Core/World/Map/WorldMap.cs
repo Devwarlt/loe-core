@@ -39,6 +39,7 @@ namespace LoESoft.Server.Core.World
             Chunks[new Tuple<int, int>(0, 0)].RandomGen();
 
             Loaded = true;
+
             App.Warn("Map Successfully Initialized!");
         }
 

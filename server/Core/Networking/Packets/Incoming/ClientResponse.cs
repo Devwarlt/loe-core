@@ -32,29 +32,22 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         private void HandleUnlockedCharacters(Client client)
         {
-            try
+            var characters = App.Database.GetCharactersByAccountId(client.Account.Id, out string error);
+
+            var content = new List<int>();
+
+            for (var i = 0; i < 3; i++)
+                if (i < client.Account.CurrentCharacterId)
+                    content.Add(characters[i].Class);
+                else
+                    content.Add(-1);
+
+            client.SendPacket(new ServerResponse()
             {
-                var characters = App.Database.GetCharactersByAccountId(client.Account.Id, out string error);
-
-                var content = new List<int>();
-
-                for (var i = 0; i < 3; i++)
-                    if (i < client.Account.CurrentCharacterId)
-                        content.Add(characters[i].Class);
-                    else
-                        content.Add(-1);
-
-                client.SendPacket(new ServerResponse()
-                {
-                    From = "Server.Character.UnlockedCharacters",
-                    Result = 0,
-                    Content = JsonConvert.SerializeObject(new UnlockedCharacterData(content.ToArray())) //Id's of classes
-                });
-            }
-            catch (Exception ex)
-            {
-                App.Warn(ex.ToString());
-            }
+                From = "Server.Character.UnlockedCharacters",
+                Result = 0,
+                Content = JsonConvert.SerializeObject(new UnlockedCharacterData(content.ToArray())) //Id's of classes
+            });
         }
     }
 }

@@ -30,7 +30,6 @@ namespace LoESoft.Client.Core.Screens
         {
             Controller.Update(gameTime);
             WorldMap.Update(gameTime, (int)Controller.Player.X, (int)Controller.Player.Y);
-
             Camera.SetFocus(Controller.Player);
         }
 

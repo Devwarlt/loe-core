@@ -10,7 +10,6 @@ namespace LoESoft.Server.Core.World.Entities
         public int ChunkY => Y / Chunk.SIZE;
 
         private int _realX;
-
         public int X
         {
             get => _realX;
@@ -22,7 +21,6 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         private int _realY;
-
         public int Y
         {
             get => _realY;
@@ -46,10 +44,8 @@ namespace LoESoft.Server.Core.World.Entities
 
         public void Move(int x, int y)
         {
-            if (x >= 0 && X < WorldMap.WIDTH)
-                X = x;
-            if (Y >= 0 && Y < WorldMap.HEIGHT)
-                Y = y;
+            X = x;
+            Y = y;
         }
 
         public virtual void Update()
