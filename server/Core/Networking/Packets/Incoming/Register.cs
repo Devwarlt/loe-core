@@ -6,6 +6,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
     {
         public string Name { get; set; }
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
 
         public override PacketID PacketID => PacketID.REGISTER;
 
@@ -22,7 +23,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(Password))
+            if (string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(ConfirmPassword))
             {
                 client.SendPacket(new ServerResponse()
                 {
@@ -44,13 +45,24 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            if (Password.Length < 8)
+            if (Password.Length < 8 || ConfirmPassword.Length < 8)
             {
                 client.SendPacket(new ServerResponse()
                 {
                     From = "Register",
                     Result = -1,
                     Content = "Account password minimum length is 8."
+                });
+                return;
+            }
+
+            if (Password != ConfirmPassword)
+            {
+                client.SendPacket(new ServerResponse()
+                {
+                    From = "Register",
+                    Result = -1,
+                    Content = "Password doesn't match, try again."
                 });
                 return;
             }

@@ -1,10 +1,8 @@
 ﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.GUI.MainScreen;
 using LoESoft.Client.Core.Screens;
 using LoESoft.Client.Core.Screens.TitleScreen;
 using Newtonsoft.Json;
-using System.Linq;
-using System.Windows.Forms;
+using System.Drawing;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {
@@ -26,11 +24,11 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
             switch (From)
             {
                 case "Login":
-                    LoginHandler(gameUser);
+                    LoginHandler();
                     break;
 
                 case "Register":
-                    RegisterHandler(gameUser);
+                    RegisterHandler();
                     break;
 
                 case "CreateNewCharacter":
@@ -46,6 +44,34 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     break;
             }
         }
+
+        private void LoginHandler()
+            => App.Launcher.MainMenu.UpdateGameDialog("Welcome", "Login Denied", Content,
+                () =>
+                {
+                    App.Launcher.MainMenu.SetGameDialog(true);
+                    App.Launcher.MainMenu.EnableBox("login");
+                },
+                () =>
+                {
+                    App.Launcher.MainMenu.SetGameDialog(false);
+                    App.Launcher.MainMenu.OnBoxClose("login", Result == 0);
+                },
+                Result == 0, ContentAlignment.MiddleCenter);
+
+        private void RegisterHandler()
+            => App.Launcher.MainMenu.UpdateGameDialog("Welcome", "Register Denied", Content,
+                () =>
+                {
+                    App.Launcher.MainMenu.SetGameDialog(true);
+                    App.Launcher.MainMenu.EnableBox("register");
+                },
+                () =>
+                {
+                    App.Launcher.MainMenu.SetGameDialog(false);
+                    App.Launcher.MainMenu.OnBoxClose("register", Result == 0);
+                },
+                Result == 0, ContentAlignment.MiddleCenter);
 
         public void HandleCharacterLoad()
         {
@@ -64,22 +90,6 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
                 GameApplication.CharacterScreen.RefreshCharacterSelection(int.Parse(content[0]), int.Parse(content[1]));
             }
-        }
-
-        private void RegisterHandler(GameUser gameUser)
-        {
-            if (Result == 0)
-                App.ToggleLauncherElement(From);
-            else
-                MessageBox.Show("Register Denied");
-        }
-
-        private void LoginHandler(GameUser gameUser)
-        {
-            if (Result == 0)
-                App.ToggleLauncherElement(From);
-            else
-                MessageBox.Show("Login Denied");
         }
 
         private void HandleUnlockedCharacters()
