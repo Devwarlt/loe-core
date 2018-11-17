@@ -85,7 +85,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 {
                     From = "Register",
                     Result = 0,
-                    Content = $"You have successfully registered a brand-new account with token '{token}', enjoy the game!"
+                    Content = $"You have successfully registered a brand-new account! Now you can login in-game."
                 });
             else
                 client.SendPacket(new ServerResponse()
