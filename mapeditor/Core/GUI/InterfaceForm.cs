@@ -38,7 +38,6 @@ namespace LoESoft.MapEditor.Core.GUI
                 App.Info("Creating new map...");
 
                 MapEditor.Map = new Map(newmap.MapSize);
-
                 MapEditor.CurrentLayer = MapLayer.UNDERGROUND;
                 MapEditor.CurrentIndex = 0;
                 MapEditor.DrawOffset = Vector2.Zero;
@@ -65,7 +64,30 @@ namespace LoESoft.MapEditor.Core.GUI
             loadmap.ShowDialog();
 
             if (loadmap.DialogResult == DialogResult.OK)
-                MessageBox.Show("Map loaded!");
+            {
+                App.Info($"Loading '{loadmap.MapName}' map...");
+
+                var mapdata = Utils.GetMapData(File.ReadAllText(loadmap.MapPath));
+
+                MapEditor.Map = new Map(mapdata.Size) { AllowOverride = true };
+                MapEditor.Map.CachedLayers[MapLayer.UNDERGROUND] = mapdata.UndergroundData;
+                MapEditor.Map.CachedLayers[MapLayer.GROUND] = mapdata.GroundData;
+                MapEditor.Map.CachedLayers[MapLayer.OBJECT] = mapdata.ObjectData;
+                MapEditor.Map.CachedLayers[MapLayer.SKY] = mapdata.SkyData;
+                MapEditor.CurrentLayer = MapLayer.UNDERGROUND;
+                MapEditor.CurrentIndex = 0;
+                MapEditor.DrawOffset = Vector2.Zero;
+                MapEditor.ActualMapName = loadmap.MapName;
+                MapEditor.ActualMapSize = mapdata.Size;
+                MapEditor.FormattedMapName = $"(Size : {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}) Map: {MapEditor.ActualMapName}";
+
+                App.Info($"- Name: {loadmap.MapName}");
+                App.Info($"- Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}");
+
+                MapEditor.LoadTileSets(false);
+
+                App.Info($"Loading '{loadmap.MapName}' map... OK!\n");
+            }
 
             MapEditor.MapState = MapState.Active;
         }

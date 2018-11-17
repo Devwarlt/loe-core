@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Newtonsoft.Json;
-using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 
 namespace LoESoft.MapEditor.Core.Layer
@@ -12,7 +10,7 @@ namespace LoESoft.MapEditor.Core.Layer
         public const int TILE_SIZE = 16;
 
         public MapLayer MapLayer { get; set; }
-        public ChunkData[,] Chunk { get; set; }
+        public List<List<ChunkData>> Chunks { get; set; }
 
         private int _width { get; set; }
         private int _height { get; set; }
@@ -23,7 +21,14 @@ namespace LoESoft.MapEditor.Core.Layer
             _height = height;
 
             MapLayer = layer;
-            Chunk = new ChunkData[_width, _height];
+            Chunks = new List<List<ChunkData>>();
+
+            for (var x = 0; x < _width; x++)
+                Chunks.Add(new List<ChunkData>());
+
+            foreach (var chunk in Chunks)
+                for (var y = 0; y < _height; y++)
+                    chunk.Add(null);
         }
 
         public void SetTiles(MouseState mouse, ChunkData data)
@@ -48,7 +53,7 @@ namespace LoESoft.MapEditor.Core.Layer
                         && mousemapx < _width && mousemapx >= 0
                         && mousemapy < _height && mousemapy >= 0
                         && App.MapEditor.IsActive)
-                        Chunk[(int)mousemapx, (int)mousemapy] = data;
+                        Chunks[(int)mousemapx][(int)mousemapy] = data;
                 }
 
                 if (rightbutton == ButtonState.Pressed)
@@ -62,26 +67,10 @@ namespace LoESoft.MapEditor.Core.Layer
                         && mousemapx < _width && mousemapx >= 0
                         && mousemapy < _height && mousemapy >= 0
                         && App.MapEditor.IsActive)
-                        Chunk[(int)mousemapx, (int)mousemapy] = null;
+                        Chunks[(int)mousemapx][(int)mousemapy] = null;
                 }
             }
             catch { }
-        }
-
-        public string Save()
-        {
-            try
-            { return JsonConvert.SerializeObject(Chunk); }
-            catch (Exception e) { MessageBox.Show($"Save: {e}"); }
-
-            return null;
-        }
-
-        public void Load(string data)
-        {
-            try
-            { Chunk = JsonConvert.DeserializeObject<ChunkData[,]>(data); }
-            catch (Exception e) { MessageBox.Show($"Load: {e}"); }
         }
     }
 }

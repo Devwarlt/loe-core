@@ -1,7 +1,7 @@
 ﻿using LoESoft.MapEditor.Core.Layer;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace LoESoft.MapEditor.Core.Util
@@ -29,27 +29,29 @@ namespace LoESoft.MapEditor.Core.Util
             => JsonConvert.SerializeObject(new MapData()
             {
                 Size = map.Size,
-                Layers = map.Layers
+                UndergroundData = map.Layers[(int)MapLayer.UNDERGROUND].Chunks.Save(),
+                GroundData = map.Layers[(int)MapLayer.GROUND].Chunks.Save(),
+                ObjectData = map.Layers[(int)MapLayer.OBJECT].Chunks.Save(),
+                SkyData = map.Layers[(int)MapLayer.SKY].Chunks.Save()
             });
 
-        public static void Load(this Map map, string mapName, string content)
+        public static string Save(this List<List<ChunkData>> chunk)
         {
-            App.Info("Loading new map...");
+            try
+            { return JsonConvert.SerializeObject(chunk); }
+            catch { }
 
-            var mapdata = JsonConvert.DeserializeObject<MapData>(content);
-
-            MapEditor.Map = new Map(mapdata.Size);
-            MapEditor.Map.Layers = map.Layers;
-            MapEditor.CurrentLayer = MapLayer.UNDERGROUND;
-            MapEditor.CurrentIndex = 0;
-            MapEditor.DrawOffset = Vector2.Zero;
-            MapEditor.ActualMapName = mapName;
-            MapEditor.ActualMapSize = mapdata.Size;
-            MapEditor.FormattedMapName = $"(Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}) Map: {MapEditor.ActualMapName}";
-
-            MapEditor.LoadTileSets(false);
-
-            App.Info("Loading new map... OK!");
+            return null;
         }
+
+        public static void Load(this List<List<ChunkData>> chunk, string data)
+        {
+            try
+            { chunk = JsonConvert.DeserializeObject<List<List<ChunkData>>>(data); }
+            catch { }
+        }
+
+        public static MapData GetMapData(string data)
+            => JsonConvert.DeserializeObject<MapData>(data);
     }
 }

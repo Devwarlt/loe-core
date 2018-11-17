@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LoESoft.MapEditor.Core.Util;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -14,12 +15,15 @@ namespace LoESoft.MapEditor.Core.Layer
         public int Height { get; set; }
         public Dictionary<MapLayer, List<Rectangle>> TileSets { get; set; }
         public List<Layer> Layers { get; set; }
+        public Dictionary<MapLayer, string> CachedLayers { get; set; }
         public MapLayer CurrentLayer { get; set; }
+        public bool AllowOverride { get; set; }
 
         private int WIDTH_MAGIC_NUMBER => Width - Layer.TILE_SIZE * 3 - 2;
         private int HEIGHT_MAGIC_NUMBER => Height - Layer.TILE_SIZE * 2 - 6;
 
         private Rectangle _bounds { get; set; }
+        private bool _overrided { get; set; }
 
         public Map(MapSize size)
         {
@@ -27,10 +31,16 @@ namespace LoESoft.MapEditor.Core.Layer
             Width = (int)Size;
             Height = (int)Size;
             Layers = new List<Layer>(5);
+            CachedLayers = new Dictionary<MapLayer, string>();
             CurrentLayer = MapLayer.UNDERGROUND;
 
             for (var i = 0; i < 5; i++)
+            {
                 Layers.Add(new Layer((MapLayer)i, Width, Height));
+
+                if (i < 4)
+                    CachedLayers.Add((MapLayer)i, null);
+            }
 
             TileSets = new Dictionary<MapLayer, List<Rectangle>>(5);
 
@@ -60,34 +70,49 @@ namespace LoESoft.MapEditor.Core.Layer
 
         public void Draw()
         {
-            try
+            if (!_overrided && AllowOverride)
+                OverrideLayers();
+            else
             {
-                Layers.OrderBy(layer => layer.MapLayer).Select(layer =>
+                try
                 {
-                    for (var x = 0; x < Width; x++)
-                        for (var y = 0; y < Height; y++)
-                        {
-                            var chunk = layer.Chunk[y, x];
-
-                            if (chunk != null)
+                    Layers.OrderBy(layer => layer.MapLayer).Select(layer =>
+                    {
+                        for (var x = 0; x < Width; x++)
+                            for (var y = 0; y < Height; y++)
                             {
-                                MapEditor.SpriteBatch.Draw(MapEditor.MapSprites[layer.MapLayer], new Vector2(
-                                    (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
-                                    (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
-                                    ), TileSets[chunk.Layer][chunk.Index], Color.White);
+                                var chunk = layer.Chunks[y][x];
+
+                                if (chunk != null)
+                                {
+                                    MapEditor.SpriteBatch.Draw(MapEditor.MapSprites[layer.MapLayer], new Vector2(
+                                        (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
+                                        (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
+                                        ), TileSets[chunk.Layer][chunk.Index], Color.White);
+                                }
+
+                                if (layer.MapLayer == MapLayer.ABSTRACT && MapEditor.ShowGrid)
+                                    MapEditor.SpriteBatch.Draw(MapEditor.MapSprites[MapLayer.ABSTRACT], new Vector2(
+                                        (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
+                                        (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
+                                        ), TileSets[MapLayer.ABSTRACT][0], Color.White);
                             }
 
-                            if (layer.MapLayer == MapLayer.ABSTRACT && MapEditor.ShowGrid)
-                                MapEditor.SpriteBatch.Draw(MapEditor.MapSprites[MapLayer.ABSTRACT], new Vector2(
-                                    (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
-                                    (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
-                                    ), TileSets[MapLayer.ABSTRACT][0], Color.White);
-                        }
-
-                    return layer;
-                }).ToList();
+                        return layer;
+                    }).ToList();
+                }
+                catch { }
             }
-            catch { }
+        }
+
+        public void OverrideLayers()
+        {
+            foreach (var cachedlayer in CachedLayers)
+                Layers[(int)cachedlayer.Key].Chunks.Load(cachedlayer.Value);
+
+            _overrided = true;
+
+            App.Info("All cached chunks have been overrided!\n");
         }
 
         public void LoadTileSet(MapLayer layer, Texture2D texture)
