@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 
 namespace LoESoft.MapEditor.Core.Layer
@@ -10,25 +9,14 @@ namespace LoESoft.MapEditor.Core.Layer
         public const int TILE_SIZE = 16;
 
         public MapLayer MapLayer { get; set; }
-        public List<List<ChunkData>> Chunks { get; set; }
+        public MapSize MapSize { get; set; }
+        public ChunkData[,] Chunk { get; set; }
 
-        private int _width { get; set; }
-        private int _height { get; set; }
-
-        public Layer(MapLayer layer, int width, int height)
+        public Layer(MapLayer layer, MapSize size)
         {
-            _width = width;
-            _height = height;
-
             MapLayer = layer;
-            Chunks = new List<List<ChunkData>>();
-
-            for (var x = 0; x < _width; x++)
-                Chunks.Add(new List<ChunkData>());
-
-            foreach (var chunk in Chunks)
-                for (var y = 0; y < _height; y++)
-                    chunk.Add(null);
+            MapSize = size;
+            Chunk = new ChunkData[(int)MapSize, (int)MapSize];
         }
 
         public void SetTiles(MouseState mouse, ChunkData data)
@@ -50,10 +38,10 @@ namespace LoESoft.MapEditor.Core.Layer
 
                     if (mouseposition.X < MapEditor.GraphicsDeviceManager.PreferredBackBufferWidth && mouseposition.X >= 0
                         && mouseposition.Y < MapEditor.GraphicsDeviceManager.PreferredBackBufferHeight && mouseposition.Y >= 0
-                        && mousemapx < _width && mousemapx >= 0
-                        && mousemapy < _height && mousemapy >= 0
+                        && mousemapx < (int)MapSize && mousemapx >= 0
+                        && mousemapy < (int)MapSize && mousemapy >= 0
                         && App.MapEditor.IsActive)
-                        Chunks[(int)mousemapx][(int)mousemapy] = data;
+                        Chunk[(int)mousemapx, (int)mousemapy] = data;
                 }
 
                 if (rightbutton == ButtonState.Pressed)
@@ -64,10 +52,10 @@ namespace LoESoft.MapEditor.Core.Layer
 
                     if (mouseposition.X < MapEditor.GraphicsDeviceManager.PreferredBackBufferWidth && mouseposition.X >= 0
                         && mouseposition.Y < MapEditor.GraphicsDeviceManager.PreferredBackBufferHeight && mouseposition.Y >= 0
-                        && mousemapx < _width && mousemapx >= 0
-                        && mousemapy < _height && mousemapy >= 0
+                        && mousemapx < (int)MapSize && mousemapx >= 0
+                        && mousemapy < (int)MapSize && mousemapy >= 0
                         && App.MapEditor.IsActive)
-                        Chunks[(int)mousemapx][(int)mousemapy] = null;
+                        Chunk[(int)mousemapx, (int)mousemapy] = null;
                 }
             }
             catch { }

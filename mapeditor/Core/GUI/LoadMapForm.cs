@@ -1,41 +1,36 @@
-﻿using System;
+﻿using LoESoft.MapEditor.Core.Layer;
+using LoESoft.MapEditor.Core.Util;
+using System;
 using System.Windows.Forms;
 
 namespace LoESoft.MapEditor.Core.GUI
 {
     public partial class LoadMapForm : Form
     {
+        public Map Map { get; set; }
         public string MapName { get; set; }
-        public string MapPath { get; set; }
-
-        private bool _folderChoosen { get; set; }
 
         public LoadMapForm() => InitializeComponent();
 
-        private void BrowseFolder_Click(object sender, EventArgs e)
-        {
-            var browsedialog = new OpenFileDialog { Multiselect = false };
-
-            if (browsedialog.ShowDialog() == DialogResult.OK)
-            {
-                MapName = browsedialog.SafeFileName.Replace(".json", string.Empty);
-                MapPath = browsedialog.FileName;
-
-                _folderChoosen = true;
-
-                MapNameLabel.Text = $"Map Name: {MapName}";
-                MapPathLabel.Text = $"Map Path: {MapPath}";
-            }
-            else
-                _folderChoosen = false;
-        }
-
         private void Load_Click(object sender, EventArgs e)
         {
-            if (_folderChoosen)
-                DialogResult = DialogResult.OK;
+            if (string.IsNullOrEmpty(MapNameTextBox.Text))
+                MessageBox.Show("Map name is empty!");
             else
-                MessageBox.Show("You need to select folder to load map.");
+            {
+                var map = Utils.LoadMap(MapNameTextBox.Text);
+
+                if (map == null)
+                    MessageBox.Show($"Map '{MapNameTextBox.Text}' not found!");
+                else
+                {
+                    App.Info($"chunk [0, 0] of layer 0: {map.Layers[0].Chunk[0, 0]}");
+
+                    Map = map;
+                    MapName = MapNameTextBox.Text;
+                    DialogResult = DialogResult.OK;
+                }
+            }
         }
 
         private void Cancel_Click(object sender, EventArgs e) => DialogResult = DialogResult.Cancel;

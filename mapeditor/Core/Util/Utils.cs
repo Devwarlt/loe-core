@@ -1,13 +1,21 @@
 ﻿using LoESoft.MapEditor.Core.Layer;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
-using System.Collections.Generic;
+using System;
+using System.IO;
 using System.Reflection;
 
 namespace LoESoft.MapEditor.Core.Util
 {
     public static class Utils
     {
+        private static string MainDir => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        private static string BaseDir => "BRMEMaps";
+
+        public static string GetMapFolderPath => Path.Combine(MainDir, $"/{BaseDir}/");
+
+        public static string GetPath(string fileName) => Path.Combine(GetMapFolderPath, fileName);
+
         public static Texture2D LoadEmbeddedTexture(string file)
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -25,33 +33,31 @@ namespace LoESoft.MapEditor.Core.Util
             return texture2d;
         }
 
-        public static string Save(this Map map)
-            => JsonConvert.SerializeObject(new MapData()
-            {
-                Size = map.Size,
-                UndergroundData = map.Layers[(int)MapLayer.UNDERGROUND].Chunks.Save(),
-                GroundData = map.Layers[(int)MapLayer.GROUND].Chunks.Save(),
-                ObjectData = map.Layers[(int)MapLayer.OBJECT].Chunks.Save(),
-                SkyData = map.Layers[(int)MapLayer.SKY].Chunks.Save()
-            });
-
-        public static string Save(this List<List<ChunkData>> chunk)
+        public static void SaveMap(Map map, string name)
         {
-            try
-            { return JsonConvert.SerializeObject(chunk); }
-            catch { }
+            if (!Directory.Exists(GetMapFolderPath))
+                Directory.CreateDirectory(GetMapFolderPath);
 
-            return null;
+            App.Info($"Saving '{name}' map...");
+
+            File.WriteAllText(GetPath($"{name}.brmemap"), JsonConvert.SerializeObject(map, Formatting.Indented));
+
+            App.Info($"Saving '{name}' map... OK!");
         }
 
-        public static void Load(this List<List<ChunkData>> chunk, string data)
+        public static Map LoadMap(string name)
         {
-            try
-            { chunk = JsonConvert.DeserializeObject<List<List<ChunkData>>>(data); }
-            catch { }
+            if (!Directory.Exists(GetMapFolderPath))
+                Directory.CreateDirectory(GetMapFolderPath);
+
+            if (!File.Exists(GetPath($"{name}.brmemap")))
+                return null;
+
+            return JsonConvert.DeserializeObject<Map>(File.ReadAllText(GetPath($"{name}.brmemap")));
         }
 
-        public static MapData GetMapData(string data)
-            => JsonConvert.DeserializeObject<MapData>(data);
+        public static string ObjectToString<T>(T obj) => JsonConvert.SerializeObject(obj);
+
+        public static T StringToObject<T>(string data) => JsonConvert.DeserializeObject<T>(data);
     }
 }

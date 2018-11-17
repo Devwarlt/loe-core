@@ -1,8 +1,6 @@
 ﻿using LoESoft.MapEditor.Core.Layer;
-using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace LoESoft.MapEditor.Core.GUI
@@ -67,18 +65,12 @@ namespace LoESoft.MapEditor.Core.GUI
             {
                 App.Info($"Loading '{loadmap.MapName}' map...");
 
-                var mapdata = Utils.GetMapData(File.ReadAllText(loadmap.MapPath));
-
-                MapEditor.Map = new Map(mapdata.Size) { AllowOverride = true };
-                MapEditor.Map.CachedLayers[MapLayer.UNDERGROUND] = mapdata.UndergroundData;
-                MapEditor.Map.CachedLayers[MapLayer.GROUND] = mapdata.GroundData;
-                MapEditor.Map.CachedLayers[MapLayer.OBJECT] = mapdata.ObjectData;
-                MapEditor.Map.CachedLayers[MapLayer.SKY] = mapdata.SkyData;
+                MapEditor.Map = loadmap.Map;
                 MapEditor.CurrentLayer = MapLayer.UNDERGROUND;
                 MapEditor.CurrentIndex = 0;
                 MapEditor.DrawOffset = Vector2.Zero;
                 MapEditor.ActualMapName = loadmap.MapName;
-                MapEditor.ActualMapSize = mapdata.Size;
+                MapEditor.ActualMapSize = loadmap.Map.Size;
                 MapEditor.FormattedMapName = $"(Size : {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}) Map: {MapEditor.ActualMapName}";
 
                 App.Info($"- Name: {loadmap.MapName}");
@@ -96,7 +88,7 @@ namespace LoESoft.MapEditor.Core.GUI
         {
             MapEditor.MapState = MapState.Inactive;
 
-            var savemap = new SaveMapForm(MapEditor.ActualMapName, MapEditor.Map.Save());
+            var savemap = new SaveMapForm(MapEditor.ActualMapName);
             savemap.ShowDialog();
 
             if (savemap.DialogResult == DialogResult.OK)

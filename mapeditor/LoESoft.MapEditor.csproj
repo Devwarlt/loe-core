@@ -72,7 +72,6 @@
     <Compile Include="Core\Layer\ChunkData.cs" />
     <Compile Include="Core\Layer\Layer.cs" />
     <Compile Include="Core\Layer\Map.cs" />
-    <Compile Include="Core\Layer\MapData.cs" />
     <Compile Include="Core\Layer\MapLayer.cs" />
     <Compile Include="Core\Util\Utils.cs" />
     <Compile Include="MapEditor.cs" />
