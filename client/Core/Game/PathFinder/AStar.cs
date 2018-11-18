@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,9 +16,6 @@ namespace LoESoft.Client.Core.Game.PathFinder
 
             await Task.Factory.StartNew(() =>
             {
-                var stopWatch = new Stopwatch();
-                stopWatch.Start();
-
                 var closedList = new HashSet<PathNode>();
                 var openList = new HashSet<PathNode>();
                 var curNode = startNode;
@@ -63,9 +59,6 @@ namespace LoESoft.Client.Core.Game.PathFinder
 
                     curPathNode = curPathNode.Parent;
                 }
-                
-                App.Warn($"It took {stopWatch.Elapsed.Milliseconds} ms to find the path!");
-                stopWatch.Stop();
             });
 
             return path.Reverse().ToHashSet();
