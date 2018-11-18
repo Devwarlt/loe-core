@@ -1,35 +1,86 @@
-﻿using LoESoft.MapEditor.Core.Layer;
+﻿using LoESoft.MapEditor.Core.GUI.HUD;
+using LoESoft.MapEditor.Core.Layer;
+using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 
 namespace LoESoft.MapEditor.Core.GUI
 {
     public partial class InterfaceForm : Form
     {
-        public InterfaceForm() => InitializeComponent();
+        private Dictionary<string, SpriteItem[,]> _spriteAssets { get; set; }
+
+        public InterfaceForm()
+        {
+            App.Info("Loading interface...");
+
+            _spriteAssets = new Dictionary<string, SpriteItem[,]>();
+
+            InitializeComponent();
+        }
 
         public void UpdateInfo()
         {
             MapLabel.Text = $"Map: {MapEditor.ActualMapName}";
-
-            var size = MapEditor.ActualMapSize.ToString().Replace("SIZE_", "");
-            SizeLabel.Text = $"Size: {size} x {size}";
-            LayerLabel.Text = $"Layer: {MapEditor.CurrentLayer}[{(int)MapEditor.CurrentLayer}]";
+            SizeLabel.Text = $"Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}";
+            LayerLabel.Text = $"Layer: [{(int)MapEditor.CurrentLayer}] {MapEditor.CurrentLayer}";
             GridCheckBox.Checked = MapEditor.ShowGrid;
         }
 
         private void InterfaceForm_Load(object sender, EventArgs e)
         {
-            PalleteComboBox.Items.Insert(0, "spritesheet-0");
-            PalleteComboBox.Items.Insert(1, "spritesheet-1");
-            PalleteComboBox.Items.Insert(2, "spritesheet-2");
-            PalleteComboBox.Items.Insert(3, "spritesheet-3");
+            var spritesheets = new List<SpritesheetItem>()
+            {
+                new SpritesheetItem() { Index = 0, Name = "spritesheet-0" },
+                new SpritesheetItem() { Index = 1, Name = "spritesheet-1" },
+                new SpritesheetItem() { Index = 2, Name = "spritesheet-2" },
+                new SpritesheetItem() { Index = 3, Name = "spritesheet-3" }
+            };
+
+            foreach (var spritesheet in spritesheets)
+                PalleteComboBox.Items.Insert(spritesheet.Index, spritesheet);
+
+            foreach (var spritesheet in PalleteComboBox.Items)
+            {
+                var sprites = Utils.LoadEmbeddedSpritesheet((spritesheet as SpritesheetItem).Name);
+
+                _spriteAssets.Add(sprites.Key, Utils.CropSpritesheet(sprites.Value));
+            }
+
+            App.Info("Loading sprite assets...");
+
+            foreach (var spriteasset in _spriteAssets)
+                App.Info($"- Group '{spriteasset.Key}': {spriteasset.Value.Length} sprite{(spriteasset.Value.Length > 1 ? "s" : "")}");
+
+            App.Info("Loading sprite assets... OK!");
+            App.Info("Loading interface... OK!");
         }
 
         private void PalleteComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            App.Info($"index: {PalleteComboBox.SelectedIndex}");
+            PalletePanel.Controls.Clear();
+
+            var spriteitems = _spriteAssets[PalleteComboBox.SelectedItem.ToString()];
+
+            for (var x = 0; x < spriteitems[0, 0].MaximumX; x++)
+                for (var y = 0; y < spriteitems[0, 0].MaximumY; y++)
+                {
+                    var spritepallete = new SpritePallete
+                    {
+                        Location = new Point(3 + x * 39, 3 + y * 39),
+                        Name = $"spritePallete[{x}, {y}]",
+                        Size = new Size(33, 33),
+                        TabIndex = 0,
+                        SpriteItem = spriteitems[x, y]
+                    };
+                    spritepallete.SetImage();
+
+                    PalletePanel.Controls.Add(spritepallete);
+                }
         }
 
         private void GridCheckBox_CheckedChanged(object sender, EventArgs e) => MapEditor.ShowGrid = GridCheckBox.Checked;
@@ -51,7 +102,6 @@ namespace LoESoft.MapEditor.Core.GUI
                 MapEditor.DrawOffset = Vector2.Zero;
                 MapEditor.ActualMapName = newmap.MapName;
                 MapEditor.ActualMapSize = newmap.MapSize;
-                MapEditor.FormattedMapName = $"(Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}) Map: {MapEditor.ActualMapName}";
 
                 App.Info($"- Name: {newmap.MapName}");
                 App.Info($"- Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}");
@@ -81,7 +131,6 @@ namespace LoESoft.MapEditor.Core.GUI
                 MapEditor.DrawOffset = Vector2.Zero;
                 MapEditor.ActualMapName = loadmap.MapName;
                 MapEditor.ActualMapSize = loadmap.Map.Size;
-                MapEditor.FormattedMapName = $"(Size : {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}) Map: {MapEditor.ActualMapName}";
 
                 App.Info($"- Name: {loadmap.MapName}");
                 App.Info($"- Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}");

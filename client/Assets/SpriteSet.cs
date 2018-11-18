@@ -6,6 +6,8 @@ namespace LoESoft.Client.Assets
 {
     public class SpriteSet
     {
+        public const int SPRITE_SIZE = 16; // auto-scale sprite size
+
         public Texture2D[,] Textures { get; private set; }
         public int MAXX { get; private set; }
         public int MAXY { get; private set; }

@@ -21,7 +21,6 @@ namespace LoESoft.MapEditor
         public static bool Quit { get; set; }
         public static string ActualMapName { get; set; }
         public static MapSize ActualMapSize { get; set; }
-        public static string FormattedMapName { get; set; }
         public static string CurrentFileName { get; set; }
         public static string LoadFileName { get; set; }
         public static Map Map { get; set; }
@@ -94,7 +93,6 @@ namespace LoESoft.MapEditor
 
             ActualMapName = "sample";
             ActualMapSize = MapSize.SIZE_128;
-            FormattedMapName = $"(Size: {(int)ActualMapSize} x {(int)ActualMapSize}) Map: {ActualMapName}";
 
             App.Info($"- Name: {ActualMapName}");
             App.Info($"- Size: {(int)ActualMapSize} x {(int)ActualMapSize}");
@@ -102,9 +100,6 @@ namespace LoESoft.MapEditor
             LoadTileSets();
 
             App.Info("Creating a sample map... OK!");
-
-            FormatWindowTitle();
-
             App.Info("Game Map Editor is loading... OK!\n");
         }
 
@@ -118,9 +113,6 @@ namespace LoESoft.MapEditor
             App.Info($"{(loading ? "Loading" : "Reloading")} tile sets... OK!");
         }
 
-        private void FormatWindowTitle()
-            => Window.Title = $"LoESoft - {App.Name} | (Layer: [({(int)CurrentLayer})] {CurrentLayer} / Sprite: {CurrentIndex}) | {FormattedMapName}";
-
         protected override void UnloadContent()
         {
         }
@@ -131,7 +123,6 @@ namespace LoESoft.MapEditor
                 Exit();
 
             InterfaceForm.UpdateInfo();
-            FormatWindowTitle();
 
             if (!IsActive && Form.ActiveForm != InterfaceForm && InterfaceForm.Visible)
                 InterfaceForm.Visible = false;
@@ -194,8 +185,8 @@ namespace LoESoft.MapEditor
 
         private void DrawSpriteOnCursor()
             => SpriteBatch.Draw(MapSprites[CurrentLayer], new Vector2(
-                MouseState.X - Layer.TILE_SIZE / 2,
-                MouseState.Y - Layer.TILE_SIZE / 2
+                MouseState.X - Utils.TILE_SIZE / 2,
+                MouseState.Y - Utils.TILE_SIZE / 2
                 ), Map.TileSets[CurrentLayer][CurrentIndex], Color.White);
     }
 }

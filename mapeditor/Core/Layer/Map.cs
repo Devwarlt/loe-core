@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LoESoft.MapEditor.Core.Util;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace LoESoft.MapEditor.Core.Layer
         public Dictionary<MapLayer, List<Rectangle>> TileSets { get; set; }
         public MapLayer CurrentLayer { get; set; }
 
-        private int WIDTH_MAGIC_NUMBER => Width - Layer.TILE_SIZE * 3 - 2;
-        private int HEIGHT_MAGIC_NUMBER => Height - Layer.TILE_SIZE * 2 - 6;
+        private int WIDTH_MAGIC_NUMBER => Width - Utils.TILE_SIZE * 3 - 2;
+        private int HEIGHT_MAGIC_NUMBER => Height - Utils.TILE_SIZE * 2 - 6;
 
         private Rectangle _bounds { get; set; }
 
@@ -72,15 +73,15 @@ namespace LoESoft.MapEditor.Core.Layer
                             if (chunk != null)
                             {
                                 MapEditor.SpriteBatch.Draw(MapEditor.MapSprites[layer.MapLayer], new Vector2(
-                                    (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
-                                    (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
+                                    (y - MapEditor.DrawOffset.X) * Utils.TILE_SIZE,
+                                    (x - MapEditor.DrawOffset.Y) * Utils.TILE_SIZE
                                     ), TileSets[chunk.Layer][chunk.Index], Color.White);
                             }
 
                             if (layer.MapLayer == MapLayer.ABSTRACT && MapEditor.ShowGrid)
                                 MapEditor.SpriteBatch.Draw(MapEditor.MapSprites[MapLayer.ABSTRACT], new Vector2(
-                                    (y - MapEditor.DrawOffset.X) * Layer.TILE_SIZE,
-                                    (x - MapEditor.DrawOffset.Y) * Layer.TILE_SIZE
+                                    (y - MapEditor.DrawOffset.X) * Utils.TILE_SIZE,
+                                    (x - MapEditor.DrawOffset.Y) * Utils.TILE_SIZE
                                     ), TileSets[MapLayer.ABSTRACT][0], Color.White);
                         }
 
@@ -92,14 +93,14 @@ namespace LoESoft.MapEditor.Core.Layer
 
         public void LoadTileSet(MapLayer layer, Texture2D texture)
         {
-            var spritesx = texture.Width / Layer.TILE_SIZE;
-            var spritesy = texture.Height / Layer.TILE_SIZE;
+            var spritesx = texture.Width / Utils.TILE_SIZE;
+            var spritesy = texture.Height / Utils.TILE_SIZE;
 
             TileSets[layer] = new List<Rectangle>(spritesx * spritesy);
 
             for (var x = 0; x < spritesx; x++)
                 for (var y = 0; y < spritesy; y++)
-                    TileSets[layer].Add(new Rectangle(x * Layer.TILE_SIZE, y * Layer.TILE_SIZE, Layer.TILE_SIZE, Layer.TILE_SIZE));
+                    TileSets[layer].Add(new Rectangle(x * Utils.TILE_SIZE, y * Utils.TILE_SIZE, Utils.TILE_SIZE, Utils.TILE_SIZE));
 
             App.Info($"- Layer {layer}: {TileSets[layer].Count} sprite{(TileSets[layer].Count > 1 ? "s" : "")}");
         }

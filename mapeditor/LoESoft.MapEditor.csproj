@@ -45,6 +45,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Core\GUI\HUD\SpritePallete.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\SpritePallete.Designer.cs">
+      <DependentUpon>SpritePallete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\GUI\InterfaceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,8 @@
     <Compile Include="Core\Layer\Layer.cs" />
     <Compile Include="Core\Layer\Map.cs" />
     <Compile Include="Core\Layer\MapLayer.cs" />
+    <Compile Include="Core\Util\SpriteItem.cs" />
+    <Compile Include="Core\Util\SpritesheetItem.cs" />
     <Compile Include="Core\Util\Utils.cs" />
     <Compile Include="MapEditor.cs" />
     <Compile Include="App.cs" />
@@ -228,6 +236,9 @@
     <EmbeddedResource Include="Core\Assets\Sprite\sample-grid.png" />
     <Content Include="Icon.ico" />
     <Content Include="loesoft-new.ico" />
+    <EmbeddedResource Include="Core\GUI\HUD\SpritePallete.resx">
+      <DependentUpon>SpritePallete.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\InterfaceForm.resx">
       <DependentUpon>InterfaceForm.cs</DependentUpon>
     </EmbeddedResource>

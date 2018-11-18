@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LoESoft.MapEditor.Core.Util;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 
@@ -6,8 +7,6 @@ namespace LoESoft.MapEditor.Core.Layer
 {
     public class Layer
     {
-        public const int TILE_SIZE = 16;
-
         public MapLayer MapLayer { get; set; }
         public MapSize MapSize { get; set; }
         public ChunkData[,] Chunk { get; set; }
@@ -33,8 +32,8 @@ namespace LoESoft.MapEditor.Core.Layer
                 if (leftbutton == ButtonState.Pressed)
                 {
                     mouseposition = new Vector2(mouse.X, mouse.Y);
-                    mousemapx = ((int)mouseposition.X / TILE_SIZE) + MapEditor.DrawOffset.X;
-                    mousemapy = ((int)mouseposition.Y / TILE_SIZE) + MapEditor.DrawOffset.Y;
+                    mousemapx = ((int)mouseposition.X / Utils.TILE_SIZE) + MapEditor.DrawOffset.X;
+                    mousemapy = ((int)mouseposition.Y / Utils.TILE_SIZE) + MapEditor.DrawOffset.Y;
 
                     if (mouseposition.X < MapEditor.GraphicsDeviceManager.PreferredBackBufferWidth && mouseposition.X >= 0
                         && mouseposition.Y < MapEditor.GraphicsDeviceManager.PreferredBackBufferHeight && mouseposition.Y >= 0
@@ -47,8 +46,8 @@ namespace LoESoft.MapEditor.Core.Layer
                 if (rightbutton == ButtonState.Pressed)
                 {
                     mouseposition = new Vector2(mouse.X, mouse.Y);
-                    mousemapx = ((int)mouseposition.X / TILE_SIZE) + MapEditor.DrawOffset.X;
-                    mousemapy = ((int)mouseposition.Y / TILE_SIZE) + MapEditor.DrawOffset.Y;
+                    mousemapx = ((int)mouseposition.X / Utils.TILE_SIZE) + MapEditor.DrawOffset.X;
+                    mousemapy = ((int)mouseposition.Y / Utils.TILE_SIZE) + MapEditor.DrawOffset.Y;
 
                     if (mouseposition.X < MapEditor.GraphicsDeviceManager.PreferredBackBufferWidth && mouseposition.X >= 0
                         && mouseposition.Y < MapEditor.GraphicsDeviceManager.PreferredBackBufferHeight && mouseposition.Y >= 0

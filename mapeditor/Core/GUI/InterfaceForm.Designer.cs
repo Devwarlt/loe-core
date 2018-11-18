@@ -37,11 +37,11 @@
             this.LayerLabel = new System.Windows.Forms.Label();
             this.GridCheckBox = new System.Windows.Forms.CheckBox();
             this.MapOptionsGroup = new System.Windows.Forms.GroupBox();
+            this.PalletePanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.PalleteComboBox = new System.Windows.Forms.ComboBox();
             this.EditorLabel = new System.Windows.Forms.Label();
             this.TitleUnderLine = new System.Windows.Forms.Panel();
-            this.PalleteComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.PalletePanel = new System.Windows.Forms.Panel();
             this.EditorInformationGroup.SuspendLayout();
             this.MapOptionsGroup.SuspendLayout();
             this.SuspendLayout();
@@ -141,6 +141,34 @@
             this.MapOptionsGroup.TabStop = false;
             this.MapOptionsGroup.Text = "Options";
             // 
+            // PalletePanel
+            // 
+            this.PalletePanel.AutoScroll = true;
+            this.PalletePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PalletePanel.Location = new System.Drawing.Point(5, 46);
+            this.PalletePanel.Name = "PalletePanel";
+            this.PalletePanel.Size = new System.Drawing.Size(223, 380);
+            this.PalletePanel.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Pallete:";
+            // 
+            // PalleteComboBox
+            // 
+            this.PalleteComboBox.FormattingEnabled = true;
+            this.PalleteComboBox.Location = new System.Drawing.Point(58, 19);
+            this.PalleteComboBox.Name = "PalleteComboBox";
+            this.PalleteComboBox.Size = new System.Drawing.Size(170, 21);
+            this.PalleteComboBox.TabIndex = 0;
+            this.PalleteComboBox.Text = "---";
+            this.PalleteComboBox.SelectedIndexChanged += new System.EventHandler(this.PalleteComboBox_SelectedIndexChanged);
+            // 
             // EditorLabel
             // 
             this.EditorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -160,34 +188,6 @@
             this.TitleUnderLine.Name = "TitleUnderLine";
             this.TitleUnderLine.Size = new System.Drawing.Size(234, 2);
             this.TitleUnderLine.TabIndex = 3;
-            // 
-            // PalleteComboBox
-            // 
-            this.PalleteComboBox.FormattingEnabled = true;
-            this.PalleteComboBox.Location = new System.Drawing.Point(58, 19);
-            this.PalleteComboBox.Name = "PalleteComboBox";
-            this.PalleteComboBox.Size = new System.Drawing.Size(170, 21);
-            this.PalleteComboBox.TabIndex = 0;
-            this.PalleteComboBox.Text = "---";
-            this.PalleteComboBox.SelectedIndexChanged += new System.EventHandler(this.PalleteComboBox_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Pallete:";
-            // 
-            // PalletePanel
-            // 
-            this.PalletePanel.AutoScroll = true;
-            this.PalletePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PalletePanel.Location = new System.Drawing.Point(5, 46);
-            this.PalletePanel.Name = "PalletePanel";
-            this.PalletePanel.Size = new System.Drawing.Size(223, 380);
-            this.PalletePanel.TabIndex = 2;
             // 
             // InterfaceForm
             // 
