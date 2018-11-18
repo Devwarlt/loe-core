@@ -39,7 +39,11 @@
             this.MapOptionsGroup = new System.Windows.Forms.GroupBox();
             this.EditorLabel = new System.Windows.Forms.Label();
             this.TitleUnderLine = new System.Windows.Forms.Panel();
+            this.PalleteComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.PalletePanel = new System.Windows.Forms.Panel();
             this.EditorInformationGroup.SuspendLayout();
+            this.MapOptionsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // NewButton
@@ -84,34 +88,34 @@
             this.EditorInformationGroup.Size = new System.Drawing.Size(235, 76);
             this.EditorInformationGroup.TabIndex = 0;
             this.EditorInformationGroup.TabStop = false;
-            this.EditorInformationGroup.Text = "Editor Information";
+            this.EditorInformationGroup.Text = "Information";
             // 
             // MapLabel
             // 
             this.MapLabel.AutoSize = true;
             this.MapLabel.Location = new System.Drawing.Point(10, 20);
             this.MapLabel.Name = "MapLabel";
-            this.MapLabel.Size = new System.Drawing.Size(60, 13);
+            this.MapLabel.Size = new System.Drawing.Size(37, 13);
             this.MapLabel.TabIndex = 0;
-            this.MapLabel.Text = "Map: None";
+            this.MapLabel.Text = "Map: -";
             // 
             // SizeLabel
             // 
             this.SizeLabel.AutoSize = true;
             this.SizeLabel.Location = new System.Drawing.Point(10, 35);
             this.SizeLabel.Name = "SizeLabel";
-            this.SizeLabel.Size = new System.Drawing.Size(50, 13);
+            this.SizeLabel.Size = new System.Drawing.Size(36, 13);
             this.SizeLabel.TabIndex = 0;
-            this.SizeLabel.Text = "Size: 0x0";
+            this.SizeLabel.Text = "Size: -";
             // 
             // LayerLabel
             // 
             this.LayerLabel.AutoSize = true;
             this.LayerLabel.Location = new System.Drawing.Point(10, 50);
             this.LayerLabel.Name = "LayerLabel";
-            this.LayerLabel.Size = new System.Drawing.Size(45, 13);
+            this.LayerLabel.Size = new System.Drawing.Size(42, 13);
             this.LayerLabel.TabIndex = 0;
-            this.LayerLabel.Text = "Layer: 0";
+            this.LayerLabel.Text = "Layer: -";
             // 
             // GridCheckBox
             // 
@@ -126,31 +130,64 @@
             // 
             // MapOptionsGroup
             // 
+            this.MapOptionsGroup.Controls.Add(this.PalletePanel);
+            this.MapOptionsGroup.Controls.Add(this.label1);
+            this.MapOptionsGroup.Controls.Add(this.PalleteComboBox);
             this.MapOptionsGroup.ForeColor = System.Drawing.SystemColors.Desktop;
             this.MapOptionsGroup.Location = new System.Drawing.Point(14, 156);
             this.MapOptionsGroup.Name = "MapOptionsGroup";
             this.MapOptionsGroup.Size = new System.Drawing.Size(234, 432);
             this.MapOptionsGroup.TabIndex = 1;
             this.MapOptionsGroup.TabStop = false;
-            this.MapOptionsGroup.Text = "Map Options";
+            this.MapOptionsGroup.Text = "Options";
             // 
             // EditorLabel
             // 
-            this.EditorLabel.AutoSize = true;
-            this.EditorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditorLabel.Location = new System.Drawing.Point(85, 6);
+            this.EditorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditorLabel.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.EditorLabel.Location = new System.Drawing.Point(13, 1);
             this.EditorLabel.Name = "EditorLabel";
-            this.EditorLabel.Size = new System.Drawing.Size(91, 33);
+            this.EditorLabel.Size = new System.Drawing.Size(237, 36);
             this.EditorLabel.TabIndex = 2;
-            this.EditorLabel.Text = "Editor";
+            this.EditorLabel.Text = "Map Editor";
+            this.EditorLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // TitleUnderLine
             // 
             this.TitleUnderLine.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.TitleUnderLine.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.TitleUnderLine.Location = new System.Drawing.Point(16, 38);
             this.TitleUnderLine.Name = "TitleUnderLine";
             this.TitleUnderLine.Size = new System.Drawing.Size(234, 2);
             this.TitleUnderLine.TabIndex = 3;
+            // 
+            // PalleteComboBox
+            // 
+            this.PalleteComboBox.FormattingEnabled = true;
+            this.PalleteComboBox.Location = new System.Drawing.Point(58, 19);
+            this.PalleteComboBox.Name = "PalleteComboBox";
+            this.PalleteComboBox.Size = new System.Drawing.Size(170, 21);
+            this.PalleteComboBox.TabIndex = 0;
+            this.PalleteComboBox.Text = "---";
+            this.PalleteComboBox.SelectedIndexChanged += new System.EventHandler(this.PalleteComboBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Pallete:";
+            // 
+            // PalletePanel
+            // 
+            this.PalletePanel.AutoScroll = true;
+            this.PalletePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PalletePanel.Location = new System.Drawing.Point(5, 46);
+            this.PalletePanel.Name = "PalletePanel";
+            this.PalletePanel.Size = new System.Drawing.Size(223, 380);
+            this.PalletePanel.TabIndex = 2;
             // 
             // InterfaceForm
             // 
@@ -172,10 +209,12 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Editor Interface";
+            this.Load += new System.EventHandler(this.InterfaceForm_Load);
             this.EditorInformationGroup.ResumeLayout(false);
             this.EditorInformationGroup.PerformLayout();
+            this.MapOptionsGroup.ResumeLayout(false);
+            this.MapOptionsGroup.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -191,5 +230,8 @@
         private System.Windows.Forms.GroupBox MapOptionsGroup;
         private System.Windows.Forms.Label EditorLabel;
         private System.Windows.Forms.Panel TitleUnderLine;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox PalleteComboBox;
+        private System.Windows.Forms.Panel PalletePanel;
     }
 }

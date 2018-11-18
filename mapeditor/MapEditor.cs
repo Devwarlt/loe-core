@@ -71,9 +71,7 @@ namespace LoESoft.MapEditor
         }
 
         private void ThisForm_Move(object sender, EventArgs e)
-        {
-            InterfaceForm.Location = new System.Drawing.Point(Window.Position.X + GraphicsDeviceManager.DefaultBackBufferWidth + 10, Window.Position.Y);
-        }
+            => InterfaceForm.Location = new System.Drawing.Point(Window.Position.X + GraphicsDeviceManager.DefaultBackBufferWidth + 10, Window.Position.Y);
 
         protected override void LoadContent()
         {
@@ -134,6 +132,15 @@ namespace LoESoft.MapEditor
 
             InterfaceForm.UpdateInfo();
             FormatWindowTitle();
+
+            if (!IsActive && Form.ActiveForm != InterfaceForm && InterfaceForm.Visible)
+                InterfaceForm.Visible = false;
+
+            if (IsActive && !InterfaceForm.Visible)
+            {
+                InterfaceForm.Visible = true;
+                InterfaceForm.BringToFront();
+            }
 
             var keyboard = Keyboard.GetState();
 

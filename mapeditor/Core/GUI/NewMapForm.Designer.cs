@@ -216,12 +216,13 @@
             this.Controls.Add(this.Create);
             this.Controls.Add(this.MapFileName);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewMapForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "New Map";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.NewMapForm_Load);
             this.SizeGroupBox.ResumeLayout(false);

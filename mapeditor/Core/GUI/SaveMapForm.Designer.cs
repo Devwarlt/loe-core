@@ -80,13 +80,14 @@
             this.Controls.Add(this.MapNameTextBox);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.Save);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SaveMapForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Save Map";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SaveMapForm_Load);
             this.ResumeLayout(false);

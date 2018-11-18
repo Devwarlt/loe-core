@@ -80,7 +80,7 @@
             this.Controls.Add(this.MapNameTextBox);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.Load);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoadMapForm";
@@ -88,6 +88,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Load Map";
             this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -14,15 +14,25 @@ namespace LoESoft.MapEditor.Core.GUI
             MapLabel.Text = $"Map: {MapEditor.ActualMapName}";
 
             var size = MapEditor.ActualMapSize.ToString().Replace("SIZE_", "");
-            SizeLabel.Text = $"Size: {size}x{size}";
+            SizeLabel.Text = $"Size: {size} x {size}";
             LayerLabel.Text = $"Layer: {MapEditor.CurrentLayer}[{(int)MapEditor.CurrentLayer}]";
             GridCheckBox.Checked = MapEditor.ShowGrid;
         }
 
-        private void GridCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void InterfaceForm_Load(object sender, EventArgs e)
         {
-            MapEditor.ShowGrid = GridCheckBox.Checked;
+            PalleteComboBox.Items.Insert(0, "spritesheet-0");
+            PalleteComboBox.Items.Insert(1, "spritesheet-1");
+            PalleteComboBox.Items.Insert(2, "spritesheet-2");
+            PalleteComboBox.Items.Insert(3, "spritesheet-3");
         }
+
+        private void PalleteComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            App.Info($"index: {PalleteComboBox.SelectedIndex}");
+        }
+
+        private void GridCheckBox_CheckedChanged(object sender, EventArgs e) => MapEditor.ShowGrid = GridCheckBox.Checked;
 
         private void NewButton_Click(object sender, EventArgs e)
         {
