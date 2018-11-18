@@ -9,11 +9,14 @@ namespace LoESoft.Client.Assets
         public const int SPRITE_SIZE = 16; // auto-scale sprite size
 
         public Texture2D[,] Textures { get; private set; }
-        public int MAXX { get; private set; }
-        public int MAXY { get; private set; }
 
-        public SpriteSet(string fileName)
+        public int MaxX { get; private set; }
+        public int MaxY { get; private set; }
+        public int SpriteSize { get; private set; }
+
+        public SpriteSet(string fileName, int spriteSize)
         {
+            SpriteSize = spriteSize;
             Initialize(fileName);
         }
 
@@ -23,7 +26,7 @@ namespace LoESoft.Client.Assets
         {
             List<Texture2D> textures = new List<Texture2D>();
 
-            for (var x = 0; x < MAXX; x++)
+            for (var x = 0; x < MaxX; x++)
                 textures.Add(Textures[x, y]);
 
             return textures;
@@ -33,7 +36,7 @@ namespace LoESoft.Client.Assets
         {
             List<Texture2D> textures = new List<Texture2D>();
 
-            for (var y = 0; y < MAXY; y++)
+            for (var y = 0; y < MaxY; y++)
                 textures.Add(Textures[x, y]);
 
             return textures;
@@ -43,18 +46,19 @@ namespace LoESoft.Client.Assets
         {
             var asset = AssetLoader.LoadAsset<Texture2D>("sprites/" + fileName);
 
-            Textures = new Texture2D[asset.Width / 8, asset.Height / 8];
-            MAXX = asset.Width / 8;
-            MAXY = asset.Height / 8;
+            MaxX = asset.Width / SpriteSize;
+            MaxY = asset.Height / SpriteSize;
 
-            for (var x = 0; x < asset.Width / 8 && x < MAXX; x++)
+            Textures = new Texture2D[MaxX, MaxY];
+
+            for (var x = 0; x < asset.Width / SpriteSize && x < MaxX; x++)
             {
-                for (var y = 0; y < asset.Height / 8 && y < MAXY; y++)
+                for (var y = 0; y < asset.Height / SpriteSize && y < MaxY; y++)
                 {
-                    var data = new Color[64];
-                    asset.GetData(0, new Rectangle(x * 8, y * 8, 8, 8), data, 0, 64);
+                    var data = new Color[SpriteSize * SpriteSize];
+                    asset.GetData(0, new Rectangle(x * SpriteSize, y * SpriteSize, SpriteSize, SpriteSize), data, 0, SpriteSize * SpriteSize);
 
-                    var texture = new Texture2D(asset.GraphicsDevice, 8, 8);
+                    var texture = new Texture2D(asset.GraphicsDevice, SpriteSize, SpriteSize);
                     texture.SetData(data);
 
                     Textures[x, y] = texture;
@@ -62,7 +66,7 @@ namespace LoESoft.Client.Assets
             }
         }
 
-        public static SpriteSet LoadSet(string assetName) =>
-            new SpriteSet(assetName);
+        public static SpriteSet LoadSet(string assetName, int spriteSize = 8) =>
+            new SpriteSet(assetName, spriteSize);
     }
 }
