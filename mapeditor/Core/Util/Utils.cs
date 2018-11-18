@@ -1,13 +1,21 @@
 ﻿using LoESoft.MapEditor.Core.Layer;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Reflection;
 
 namespace LoESoft.MapEditor.Core.Util
 {
     public static class Utils
     {
+        private static string MainDir => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        private static string BaseDir => "BRMEMaps";
+
+        public static string GetMapFolderPath => Path.Combine(MainDir, $"/{BaseDir}/");
+
+        public static string GetPath(string fileName) => Path.Combine(GetMapFolderPath, fileName);
+
         public static Texture2D LoadEmbeddedTexture(string file)
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -25,31 +33,31 @@ namespace LoESoft.MapEditor.Core.Util
             return texture2d;
         }
 
-        public static string Save(this Map map)
-            => JsonConvert.SerializeObject(new MapData()
-            {
-                Size = map.Size,
-                Layers = map.Layers
-            });
-
-        public static void Load(this Map map, string mapName, string content)
+        public static void SaveMap(Map map, string name)
         {
-            App.Info("Loading new map...");
+            if (!Directory.Exists(GetMapFolderPath))
+                Directory.CreateDirectory(GetMapFolderPath);
 
-            var mapdata = JsonConvert.DeserializeObject<MapData>(content);
+            App.Info($"Saving '{name}' map...");
 
-            MapEditor.Map = new Map(mapdata.Size);
-            MapEditor.Map.Layers = map.Layers;
-            MapEditor.CurrentLayer = MapLayer.UNDERGROUND;
-            MapEditor.CurrentIndex = 0;
-            MapEditor.DrawOffset = Vector2.Zero;
-            MapEditor.ActualMapName = mapName;
-            MapEditor.ActualMapSize = mapdata.Size;
-            MapEditor.FormattedMapName = $"(Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}) Map: {MapEditor.ActualMapName}";
+            File.WriteAllText(GetPath($"{name}.brmemap"), JsonConvert.SerializeObject(map, Formatting.Indented));
 
-            MapEditor.LoadTileSets(false);
-
-            App.Info("Loading new map... OK!");
+            App.Info($"Saving '{name}' map... OK!");
         }
+
+        public static Map LoadMap(string name)
+        {
+            if (!Directory.Exists(GetMapFolderPath))
+                Directory.CreateDirectory(GetMapFolderPath);
+
+            if (!File.Exists(GetPath($"{name}.brmemap")))
+                return null;
+
+            return JsonConvert.DeserializeObject<Map>(File.ReadAllText(GetPath($"{name}.brmemap")));
+        }
+
+        public static string ObjectToString<T>(T obj) => JsonConvert.SerializeObject(obj);
+
+        public static T StringToObject<T>(string data) => JsonConvert.DeserializeObject<T>(data);
     }
 }

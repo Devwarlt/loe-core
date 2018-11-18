@@ -55,11 +55,7 @@ namespace LoESoft.MapEditor
             InterfaceForm.Show();
         }
 
-        protected override void OnActivated(object sender, EventArgs args)
-        {
-            InterfaceForm.BringToFront();
-            base.OnActivated(sender, args);
-        }
+        protected override void OnActivated(object sender, EventArgs args) => base.OnActivated(sender, args);
 
         protected override void Initialize()
         {
@@ -75,9 +71,7 @@ namespace LoESoft.MapEditor
         }
 
         private void ThisForm_Move(object sender, EventArgs e)
-        {
-            InterfaceForm.Location = new System.Drawing.Point(Window.Position.X + GraphicsDeviceManager.DefaultBackBufferWidth + 10, Window.Position.Y);
-        }
+            => InterfaceForm.Location = new System.Drawing.Point(Window.Position.X + GraphicsDeviceManager.DefaultBackBufferWidth + 10, Window.Position.Y);
 
         protected override void LoadContent()
         {
@@ -139,6 +133,15 @@ namespace LoESoft.MapEditor
             InterfaceForm.UpdateInfo();
             FormatWindowTitle();
 
+            if (!IsActive && Form.ActiveForm != InterfaceForm && InterfaceForm.Visible)
+                InterfaceForm.Visible = false;
+
+            if (IsActive && !InterfaceForm.Visible)
+            {
+                InterfaceForm.Visible = true;
+                InterfaceForm.BringToFront();
+            }
+
             var keyboard = Keyboard.GetState();
 
             if (keyboard.IsKeyDown(Keys.PageUp) && !KeyboardState.IsKeyDown(Keys.PageUp))
@@ -156,9 +159,6 @@ namespace LoESoft.MapEditor
             if (keyboard.IsKeyDown(Keys.Down) && !KeyboardState.IsKeyDown(Keys.Down))
                 if (CurrentIndex > 0)
                     CurrentIndex--;
-
-            if (keyboard.IsKeyDown(Keys.G) && !KeyboardState.IsKeyDown(Keys.G))
-                ShowGrid = !ShowGrid;
 
             if (MapState == MapState.Active && MapSprites != null && CurrentLayer != MapLayer.ABSTRACT)
             {

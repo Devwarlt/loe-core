@@ -1,47 +1,36 @@
-﻿using LoESoft.MapEditor.Core.Util;
+﻿using LoESoft.MapEditor.Core.Layer;
+using LoESoft.MapEditor.Core.Util;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace LoESoft.MapEditor.Core.GUI
 {
     public partial class LoadMapForm : Form
     {
-        private string _mapName { get; set; }
-        private string _folderPath { get; set; }
-        private bool _folderChoosen { get; set; }
+        public Map Map { get; set; }
+        public string MapName { get; set; }
 
         public LoadMapForm() => InitializeComponent();
 
-        private void BrowseFolder_Click(object sender, EventArgs e)
-        {
-            var browsedialog = new OpenFileDialog { Multiselect = false };
-
-            if (browsedialog.ShowDialog() == DialogResult.OK)
-            {
-                _mapName = browsedialog.SafeFileName;
-                _folderPath = browsedialog.FileName;
-                _folderChoosen = true;
-
-                MapNameLabel.Text = $"Map Name: {_mapName}";
-                MapPathLabel.Text = $"Map Path: {_folderPath}";
-            }
-            else
-                _folderChoosen = false;
-        }
-
         private void Load_Click(object sender, EventArgs e)
         {
-            if (_folderChoosen)
-            {
-                App.Info($"Loaded map from '{_folderPath}'.");
-
-                MapEditor.Map.Load(_mapName.Replace(".json", string.Empty), File.ReadAllText(_folderPath));
-
-                DialogResult = DialogResult.OK;
-            }
+            if (string.IsNullOrEmpty(MapNameTextBox.Text))
+                MessageBox.Show("Map name is empty!");
             else
-                MessageBox.Show("You need to select folder to load map.");
+            {
+                var map = Utils.LoadMap(MapNameTextBox.Text);
+
+                if (map == null)
+                    MessageBox.Show($"Map '{MapNameTextBox.Text}' not found!");
+                else
+                {
+                    App.Info($"chunk [0, 0] of layer 0: {map.Layers[0].Chunk[0, 0]}");
+
+                    Map = map;
+                    MapName = MapNameTextBox.Text;
+                    DialogResult = DialogResult.OK;
+                }
+            }
         }
 
         private void Cancel_Click(object sender, EventArgs e) => DialogResult = DialogResult.Cancel;

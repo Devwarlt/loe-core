@@ -10,10 +10,10 @@ namespace LoESoft.MapEditor.Core.Layer
     public class Map
     {
         public MapSize Size { get; set; }
+        public List<Layer> Layers { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public Dictionary<MapLayer, List<Rectangle>> TileSets { get; set; }
-        public List<Layer> Layers { get; set; }
         public MapLayer CurrentLayer { get; set; }
 
         private int WIDTH_MAGIC_NUMBER => Width - Layer.TILE_SIZE * 3 - 2;
@@ -30,7 +30,7 @@ namespace LoESoft.MapEditor.Core.Layer
             CurrentLayer = MapLayer.UNDERGROUND;
 
             for (var i = 0; i < 5; i++)
-                Layers.Add(new Layer((MapLayer)i, Width, Height));
+                Layers.Add(new Layer((MapLayer)i, Size));
 
             TileSets = new Dictionary<MapLayer, List<Rectangle>>(5);
 

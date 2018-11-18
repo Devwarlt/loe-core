@@ -14,6 +14,8 @@ namespace LoESoft.Client.Core.GUI.MainScreen
         {
             InitializeComponent();
 
+            OnToggle = () => Toggle();
+
             Enabled = false;
             Visible = false;
         }

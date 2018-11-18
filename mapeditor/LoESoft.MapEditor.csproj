@@ -74,7 +74,6 @@
     <Compile Include="Core\Layer\Map.cs" />
     <Compile Include="Core\Layer\MapLayer.cs" />
     <Compile Include="Core\Util\Utils.cs" />
-    <Compile Include="MapData.cs" />
     <Compile Include="MapEditor.cs" />
     <Compile Include="App.cs" />
     <Compile Include="MapSize.cs" />
