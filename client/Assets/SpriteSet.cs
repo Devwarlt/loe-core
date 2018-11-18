@@ -53,8 +53,8 @@ namespace LoESoft.Client.Assets
             {
                 for (var y = 0; y < asset.Height / SpriteSize && y < MaxY; y++)
                 {
-                    var data = new Color[64];
-                    asset.GetData(0, new Rectangle(x * SpriteSize, y * SpriteSize, SpriteSize, SpriteSize), data, 0, 64);
+                    var data = new Color[SpriteSize * SpriteSize];
+                    asset.GetData(0, new Rectangle(x * SpriteSize, y * SpriteSize, SpriteSize, SpriteSize), data, 0, SpriteSize * SpriteSize);
 
                     var texture = new Texture2D(asset.GraphicsDevice, SpriteSize, SpriteSize);
                     texture.SetData(data);
