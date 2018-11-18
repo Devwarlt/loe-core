@@ -40,7 +40,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             if (client.Player == null)
                 return;
 
-            if (newX < 0 || newX >= WorldMap.WIDTH || newY < 0 || newY >= WorldMap.HEIGHT)
+            if (newX >= 0 && newX <= WorldMap.WIDTH && newY >= 0 && newY <= WorldMap.HEIGHT)
                 client.Player.Move(newX, newY);
             
             client.SendPacket(new ServerMove()

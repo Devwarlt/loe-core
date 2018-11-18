@@ -1,69 +1,74 @@
-﻿using LoESoft.Client.Core.Game.Map;
+﻿
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.Game.PathFinder
 {
     public class AStar
     {
-        private PathNode _startNode;
-        private PathNode _endNode;
-
-        public void CreateOrUpdate(Points start, Points end)
+        public async Task<HashSet<PathNode>> GetPath(Point start, Point end)
         {
-            //_startNode = new PathNode(WorldMap.TileMap[start.X, start.Y].TileProperties, start.X, start.Y);
-            //_startNode.SetCost(_startNode.X, _startNode.Y, _endNode.X, _endNode.Y, 0);
-            //_endNode = new PathNode(WorldMap.TileMap[end.X, end.Y].TileProperties, start.X, start.Y);
-            //_endNode.SetCost(_startNode.X, _startNode.Y, _endNode.X, _endNode.Y, 0);
-        }
+            var startNode = new PathNode(start.X, start.Y, null, end);
 
-        private List<Points> GeneratePath()
-        {
-            var checkedList = new List<int>();
-            var closedList = new List<PathNode>();
-            var path = new List<Points>();
+            var path = new HashSet<PathNode>();
 
-            var currentNode = _startNode;
-
-            Loop();
-
-            void Loop()
+            await Task.Factory.StartNew(() =>
             {
-                closedList.Add(currentNode);
-                path.Add(new Points() { X = currentNode.X, Y = currentNode.Y });
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
 
-                var neighbor = currentNode.Neighbors();
+                var closedList = new HashSet<PathNode>();
+                var openList = new HashSet<PathNode>();
+                var curNode = startNode;
 
-                foreach (var i in neighbor)
-                    i.SetCost(_startNode.X, _startNode.Y, _endNode.X, _endNode.Y, 0);
+                openList.Add(curNode);
 
-                try
+                do
                 {
-                    currentNode = neighbor.OrderBy(_ => _.H).Select(e =>
+                    closedList.Add(curNode);
+                    openList.Remove(curNode);
+
+                    foreach (var i in curNode.Neighbors().OrderBy(_ => _.F))
                     {
-                        if (!e.Checked)
-                            return e;
-                        e.Checked = true;
-                        return null;
-                    }).Where(_ => _ != null).FirstOrDefault();
-                }
-                catch
+                        if (i.Point == end)
+                        {
+                            closedList.Add(i);
+                            goto AssignPath;
+                        }
+
+                        if (!openList.Contains(i) && !closedList.Contains(i))
+                            openList.Add(i);
+                    }
+
+                    curNode = openList.OrderBy(_ => _.F).OrderBy(_ => _.H).FirstOrDefault();
+                    
+                    if (curNode == null)
+                    {
+                        App.Warn("No path found!");
+                        return;
+                    }
+                } while (!(openList.ToList().Exists(_ => _.Point == end)));
+
+                AssignPath:
+
+                var endNode = closedList.Where(_ => _.Point == end).FirstOrDefault();
+                var curPathNode = endNode;
+
+                while (curPathNode != startNode)
                 {
-                    currentNode = null;
+                    path.Add(curPathNode);
+
+                    curPathNode = curPathNode.Parent;
                 }
+                
+                App.Warn($"It took {stopWatch.Elapsed.Milliseconds} ms to find the path!");
+                stopWatch.Stop();
+            });
 
-                if (!closedList.Exists(_ => _.H == _endNode.H) && currentNode != null)
-                {
-                    Loop();
-                    App.Warn("Looping!");
-                }
-
-                App.Warn("Path Found!");
-            };
-
-            return path;
+            return path.Reverse().ToHashSet();
         }
-
-        public List<Points> GetShortestRoute() => GeneratePath();
     }
 }

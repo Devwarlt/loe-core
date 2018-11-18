@@ -16,9 +16,9 @@ namespace LoESoft.Client.Core.Game.Map
             public Point Pos;
         }
 
-        public static Dictionary<Point, Tile> TileMap;
+        public static Dictionary<Point, Tile> TileMap { get; private set; }
 
-        public static Dictionary<int, ValuePair> Objects { get; set; }
+        public static Dictionary<int, ValuePair> Objects { get; private set; }
 
         public static int WIDTH { get; private set; }
         public static int HEIGHT { get; private set; }
@@ -34,6 +34,7 @@ namespace LoESoft.Client.Core.Game.Map
         public static void Initialize(int w, int h)
         {
             TileMap = new Dictionary<Point, Tile>(w * h);
+
             WIDTH = w;
             HEIGHT = h;
 
@@ -57,8 +58,7 @@ namespace LoESoft.Client.Core.Game.Map
             {
                 if (Objects.ContainsKey(i.ObjectId))
                 {
-                    Objects[i.ObjectId].Entity.DistinationX = i.X;
-                    Objects[i.ObjectId].Entity.DistinationY = i.Y;
+                    Objects[i.ObjectId].Entity.SetDistination(i.X, i.Y);
                     Objects[i.ObjectId].Pos.X = i.X;
                     Objects[i.ObjectId].Pos.Y = i.X;
                 }

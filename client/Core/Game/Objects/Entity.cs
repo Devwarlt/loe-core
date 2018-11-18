@@ -59,6 +59,12 @@ namespace LoESoft.Client.Core.Game.Objects
             }
         }
 
+        public virtual void SetDistination(int x, int y)
+        {
+            DistinationX = x;
+            DistinationY = y;
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch) => spriteBatch.DrawRectangle(new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color, 4);
     }
 }

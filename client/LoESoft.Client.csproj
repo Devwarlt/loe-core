@@ -93,7 +93,6 @@
     <Compile Include="Core\Game\Objects\Tile.cs" />
     <Compile Include="Core\Game\PathFinder\AStar.cs" />
     <Compile Include="Core\Game\PathFinder\PathNode.cs" />
-    <Compile Include="Core\Game\PathFinder\Points.cs" />
     <Compile Include="Core\Game\User\GamePlayer.cs" />
     <Compile Include="Core\GUI\GameDialog\GameDialog.cs">
       <SubType>UserControl</SubType>

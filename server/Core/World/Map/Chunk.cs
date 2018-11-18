@@ -54,11 +54,11 @@ namespace LoESoft.Server.Core.World.Map
 
         public void RandomGen()
         {
-            for (var i = 0; i < 25; i++)
+            for (var i = 0; i < 2; i++)
                 Add(new Entity(Manager, 8)
                 {
-                    X = rand.Next(StartX, StartX + 25),
-                    Y = rand.Next(StartY, StartY + 25)
+                    X = rand.Next(StartX, StartX + 5),
+                    Y = rand.Next(StartY, StartY + 5)
                 });
         }
 
@@ -66,6 +66,8 @@ namespace LoESoft.Server.Core.World.Map
 
         public void Update()
         {
+            foreach (var i in Entities)
+                i.Move(rand.Next(1, 10), rand.Next(1, 10));
         }
     }
 }

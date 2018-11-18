@@ -2,7 +2,7 @@
 using LoESoft.Client.Core.Game.PathFinder;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Game.Objects
 {
@@ -12,50 +12,54 @@ namespace LoESoft.Client.Core.Game.Objects
 
         private AStar PathFinder;
 
+        private Queue<Point> _astartPath;
+        private bool _isPathFinding;
+
         public EntityObject(int id) : base(id)
         {
+            _astartPath = new Queue<Point>();
+
             Animation = new ObjectAnimation();
             PathFinder = new AStar();
-            path = new ConcurrentQueue<Points>();
+            _isPathFinding = false;
         }
 
         public void Init()
         {
             Animation.InitOrUpdate(Content);
         }
-
-        private ConcurrentQueue<Points> path;
-        //public void SetNewDistination(int x, int y, int uid)
-        //{
-        //    lastPoint = new Points() { X = (int)X, Y = (int)Y };
-
-        //    var start = new Points() { X = (int)X, Y = (int)Y };
-        //    var end = new Points() { X = x, Y = y };
-
-        //    PathFinder.CreateOrUpdate(start, end);
-
-        //    foreach (var i in PathFinder.GetShortestRoute())
-        //    {
-        //        path.Enqueue(i);
-        //        App.Warn($"{i.X} {i.Y} {uid}");
-        //    }
-        //}
-
-        //Points lastPoint;
+        
         public override void HandleMovement(float dt)
         {
-            //if (path.Count > 0 && lastPoint.X == X && lastPoint.Y == Y)
-            //{
-            //    if (path.TryDequeue(out var point))
-            //    {
-            //        DistinationX = point.X;
-            //        DistinationY = point.Y;
+            if (_astartPath.Count > 0)
+            {
+                if (X == DistinationX && Y == DistinationY)
+                {
+                    var path = _astartPath.Dequeue();
 
-            //        lastPoint = point;
-            //    }
-            //}
+                    DistinationX = path.X;
+                    DistinationY = path.Y;
+                } else
+                {
+                    base.HandleMovement(dt);
+                }
+            } else
+            {
+                _isPathFinding = false;
+            }
+        }
+        
+        public override void SetDistination(int x, int y)
+        {
+            if (!_isPathFinding)
+            {
+                _isPathFinding = true;
 
-            base.HandleMovement(dt);
+                var nodes = PathFinder.GetPath(new Point((int)X, (int)Y), new Point(x, y)).Result;
+
+                foreach (var i in nodes)
+                    _astartPath.Enqueue(i.Point);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
