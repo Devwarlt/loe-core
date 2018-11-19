@@ -1,4 +1,5 @@
-﻿<Objects>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Objects>
   <Object type="0" id="5" name="Apprentice">
     <Texture x ="0" y="0">
       <FileName>playersEmbed</FileName>
@@ -6,11 +7,11 @@
     </Texture>
   </Object>
   <Object type="0" id="6" name="ApprenticBlue">
-      <Texture x ="0" y="1">
-        <FileName>playersEmbed</FileName>
-        <Animated />
-      </Texture>
-   </Object>
+    <Texture x ="0" y="1">
+      <FileName>playersEmbed</FileName>
+      <Animated />
+    </Texture>
+  </Object>
   <Object type="0" id="7" name="ApprenticeRed">
     <Texture x ="0" y="2">
       <FileName>playersEmbed</FileName>

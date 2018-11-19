@@ -1,9 +1,13 @@
-﻿using LoESoft.MapEditor.Core.GUI.HUD;
+﻿using LoESoft.MapEditor.Core.Assets;
+using LoESoft.MapEditor.Core.Assets.Structure;
+using LoESoft.MapEditor.Core.Assets.Structure.Exclusive;
+using LoESoft.MapEditor.Core.GUI.HUD;
 using LoESoft.MapEditor.Core.Layer;
 using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
@@ -13,12 +17,20 @@ namespace LoESoft.MapEditor.Core.GUI
     public partial class InterfaceForm : Form
     {
         private Dictionary<string, SpriteItem[,]> _spriteAssets { get; set; }
+        private Dictionary<int, InteractiveObject> _interactiveObjects { get; set; }
+        private Dictionary<int, TextureData> _itemDatas { get; set; }
+        private Dictionary<int, TextureData> _objectDatas { get; set; }
+        private Dictionary<int, TextureData> _tileDatas { get; set; }
 
         public InterfaceForm()
         {
             App.Info("Loading interface...");
 
             _spriteAssets = new Dictionary<string, SpriteItem[,]>();
+            _interactiveObjects = new Dictionary<int, InteractiveObject>();
+            _itemDatas = new Dictionary<int, TextureData>();
+            _objectDatas = new Dictionary<int, TextureData>();
+            _tileDatas = new Dictionary<int, TextureData>();
 
             InitializeComponent();
         }
@@ -33,23 +45,47 @@ namespace LoESoft.MapEditor.Core.GUI
 
         private void InterfaceForm_Load(object sender, EventArgs e)
         {
-            var spritesheets = new List<SpritesheetItem>()
+            var groups = new List<string>();
+
+            // load items
+            foreach (var xml in XmlLibrary.ItemsXml.Values)
             {
-                new SpritesheetItem() { Index = 0, Name = "spritesheet-0" },
-                new SpritesheetItem() { Index = 1, Name = "spritesheet-1" },
-                new SpritesheetItem() { Index = 2, Name = "spritesheet-2" },
-                new SpritesheetItem() { Index = 3, Name = "spritesheet-3" }
-            };
+                if (!groups.Contains(xml.LayerData.Group))
+                    groups.Add(xml.LayerData.Group);
 
-            foreach (var spritesheet in spritesheets)
-                PalleteComboBox.Items.Insert(spritesheet.Index, spritesheet);
+                if (!_spriteAssets.Keys.Contains(xml.TextureData.File))
+                    AddSpritesheet(xml.TextureData.File);
 
-            foreach (var spritesheet in PalleteComboBox.Items)
-            {
-                var sprites = Utils.LoadEmbeddedSpritesheet((spritesheet as SpritesheetItem).Name);
+                AddInteractiveObject(xml);
 
-                _spriteAssets.Add(sprites.Key, Utils.CropSpritesheet(sprites.Value));
+                _itemDatas.Add(xml.Id, xml.TextureData);
             }
+
+            // load objects
+            foreach (var xml in XmlLibrary.ObjectsXml.Values)
+            {
+                if (!groups.Contains(xml.LayerData.Group))
+                    groups.Add(xml.LayerData.Group);
+
+                if (!_spriteAssets.Keys.Contains(xml.TextureData.File))
+                    AddSpritesheet(xml.TextureData.File);
+
+                AddInteractiveObject(xml);
+            }
+
+            // load tiles
+            foreach (var xml in XmlLibrary.TilesXml.Values)
+            {
+                if (!groups.Contains(xml.LayerData.Group))
+                    groups.Add(xml.LayerData.Group);
+
+                if (!_spriteAssets.Keys.Contains(xml.TextureData.File))
+                    AddSpritesheet(xml.TextureData.File);
+
+                AddInteractiveObject(xml);
+            }
+
+            PalleteComboBox.Items.AddRange(groups.OrderBy(group => group).ToArray());
 
             App.Info("Loading sprite assets...");
 
@@ -60,16 +96,35 @@ namespace LoESoft.MapEditor.Core.GUI
             App.Info("Loading interface... OK!");
         }
 
+        private void AddSpritesheet(string file)
+        {
+            var sprites = Utils.LoadEmbeddedSpritesheetToImage(file);
+
+            _spriteAssets.Add(sprites.Key, Utils.CropSpritesheet(sprites.Value));
+        }
+
+        private void AddInteractiveObject(XmlContent xml)
+            => _interactiveObjects.Add(xml.Id, new InteractiveObject()
+            {
+                Id = xml.Id,
+                Type = xml.Type,
+                Name = xml.Name,
+                LayerData = xml.LayerData,
+                TextureData = xml.TextureData
+            });
+
         private void PalleteComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             PalletePanel.Controls.Clear();
+
+            var currentspritesheet = _spriteAssets[PalleteComboBox.SelectedItem.ToString()];
 
             var spriteitems = _spriteAssets[PalleteComboBox.SelectedItem.ToString()];
 
             for (var x = 0; x < spriteitems[0, 0].MaximumX; x++)
                 for (var y = 0; y < spriteitems[0, 0].MaximumY; y++)
                 {
-                    var spritepallete = new SpritePallete
+                    var spritepallete = new SpritePallete()
                     {
                         Location = new Point(3 + x * 39, 3 + y * 39),
                         Name = $"spritePallete[{x}, {y}]",
@@ -106,8 +161,6 @@ namespace LoESoft.MapEditor.Core.GUI
                 App.Info($"- Name: {newmap.MapName}");
                 App.Info($"- Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}");
 
-                MapEditor.LoadTileSets(false);
-
                 App.Info("Creating new map... OK!\n");
             }
 
@@ -134,8 +187,6 @@ namespace LoESoft.MapEditor.Core.GUI
 
                 App.Info($"- Name: {loadmap.MapName}");
                 App.Info($"- Size: {(int)MapEditor.ActualMapSize} x {(int)MapEditor.ActualMapSize}");
-
-                MapEditor.LoadTileSets(false);
 
                 App.Info($"Loading '{loadmap.MapName}' map... OK!\n");
             }
