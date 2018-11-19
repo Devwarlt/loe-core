@@ -37,7 +37,24 @@ namespace LoESoft.MapEditor.Core.Util
             return texture2d;
         }
 
-        public static KeyValuePair<string, Image> LoadEmbeddedSpritesheet(string file)
+        public static KeyValuePair<string, Texture2D> LoadEmbeddedSpritesheetToTexture2D(string file)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var spritedata = new KeyValuePair<string, Texture2D>();
+
+            foreach (var name in assembly.GetManifestResourceNames())
+                if (name.Contains(file))
+                {
+                    using (var stream = assembly.GetManifestResourceStream(name))
+                        if (stream != null)
+                            spritedata = new KeyValuePair<string, Texture2D>(file, Texture2D.FromStream(MapEditor.GraphicsDeviceManager.GraphicsDevice, stream));
+                    break;
+                }
+
+            return spritedata;
+        }
+
+        public static KeyValuePair<string, Image> LoadEmbeddedSpritesheetToImage(string file)
         {
             var assembly = Assembly.GetExecutingAssembly();
             var spritedata = new KeyValuePair<string, Image>();

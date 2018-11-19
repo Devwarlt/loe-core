@@ -1,5 +1,16 @@
-﻿<Objects>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <Layer type="type" group="Group" />
+
+    Available types to fit map editor:
+      - 0: underground
+      - 1: ground (above underground layer)
+      - 2: object (above ground layer)
+      - 3: sky (above object layer)
+-->
+<Objects>
   <Object type="0" id="8" name="Dummy">
+    <Layer type="2" group="Entities" />
     <Texture x ="0" y="0">
       <FileName>objectsEmbed</FileName>
       <Animated />

@@ -45,6 +45,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
+    <Compile Include="Core\Assets\Structure\Exclusive\LayerData.cs" />
+    <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
+    <Compile Include="Core\Assets\Structure\Exclusive\TextureData.cs" />
+    <Compile Include="Core\Assets\Structure\TilesContent.cs" />
+    <Compile Include="Core\Assets\Structure\XmlContent.cs" />
+    <Compile Include="Core\Assets\XmlLibrary.cs" />
+    <Compile Include="Core\Assets\XmlLoader.cs" />
     <Compile Include="Core\GUI\HUD\SpritePallete.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -79,6 +87,7 @@
     <Compile Include="Core\Layer\Layer.cs" />
     <Compile Include="Core\Layer\Map.cs" />
     <Compile Include="Core\Layer\MapLayer.cs" />
+    <Compile Include="Core\Util\InteractiveObject.cs" />
     <Compile Include="Core\Util\SpriteItem.cs" />
     <Compile Include="Core\Util\SpritesheetItem.cs" />
     <Compile Include="Core\Util\Utils.cs" />
@@ -226,14 +235,17 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\Assets\Sprite\sample-spritesheet-1.png" />
-    <EmbeddedResource Include="Core\Assets\Sprite\sample-spritesheet-2.png" />
-    <EmbeddedResource Include="Core\Assets\Sprite\sample-spritesheet-3.png" />
-    <EmbeddedResource Include="Core\Assets\Sprite\sample-spritesheet-0.png" />
-    <EmbeddedResource Include="Core\Assets\Sprite\sample-grid.png" />
+    <EmbeddedResource Include="Core\GUI\HUD\sample-grid.png" />
+    <EmbeddedResource Include="Core\Assets\Xml\Tiles.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Assets\Xml\TestObjects.xml" />
+    <EmbeddedResource Include="Core\Assets\Sprite\objectsEmbed.png" />
+    <EmbeddedResource Include="Core\Assets\Sprite\tilesEmbed.png" />
     <Content Include="Icon.ico" />
     <Content Include="loesoft-new.ico" />
     <EmbeddedResource Include="Core\GUI\HUD\SpritePallete.resx">
@@ -250,6 +262,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <Compile Include="Core\Assets\Structure\XmlContent.ContentType.cs" />
     <None Include="packages.config" />
     <None Include="Resources\DisposableDroidBB.ttf" />
   </ItemGroup>
@@ -265,9 +278,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Assets\Xml\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

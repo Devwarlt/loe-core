@@ -19,6 +19,11 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
 
         private void SpriteBox_Click(object sender, System.EventArgs e)
         {
+            // TODO!
+            MapEditor.InteractiveObject = new InteractiveObject()
+            {
+            };
+
             MapEditor.CurrentLayer = MapLayer.UNDERGROUND;
             MapEditor.CurrentIndex = SpriteItem.ActualIndex;
         }
