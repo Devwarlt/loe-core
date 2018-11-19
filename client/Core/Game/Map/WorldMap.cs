@@ -89,6 +89,8 @@ namespace LoESoft.Client.Core.Game.Map
                 Entity = obj
             };
 
+            App.Warn(data.Stats);
+
             obj.Init();
             Objects.Add(data.ObjectId, pair);
         }

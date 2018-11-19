@@ -59,7 +59,6 @@ namespace LoESoft.Server.Core.World
 
         public void Add(Player player)
         {
-            player.ObjectId = EntityManager.GetNextId();
             Players.TryAdd(player.ObjectId, player);
         }
 

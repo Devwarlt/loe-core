@@ -256,6 +256,9 @@
     <Compile Include="Core\World\Map\Data\TileData.cs" />
     <Compile Include="Core\World\Map\WorldMap.cs" />
     <Compile Include="Core\World\Map\Chunk.cs" />
+    <Compile Include="Core\World\Stats\Stat.cs" />
+    <Compile Include="Core\World\Stats\StatExportManager.cs" />
+    <Compile Include="Core\World\Stats\StatType.cs" />
     <Compile Include="Core\World\WorldManager.cs" />
     <Compile Include="Core\World\WorldSettings.cs" />
     <Compile Include="App.cs" />

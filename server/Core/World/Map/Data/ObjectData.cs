@@ -7,17 +7,20 @@ namespace LoESoft.Server.Core.World.Map.Data
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public string Stats { get; set; }
+
         public int Id { get; set; }
         public int ObjectId { get; set; }
         public bool IsPlayer { get; set; }
 
         public static ObjectData GetData(Entity entity) => new ObjectData()
         {
+            Id = entity.Id,
+            ObjectId = entity.ObjectId,
             X = entity.X,
             Y = entity.Y,
-            Id = entity.Id,
-            IsPlayer = (entity is Player),
-            ObjectId = entity.ObjectId
+            Stats = entity.ExportStat(),
+            IsPlayer = (entity is Player)
         };
     }
 }

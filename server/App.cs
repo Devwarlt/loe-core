@@ -63,15 +63,16 @@ namespace LoESoft.Server
 
             try
             {
-                XmlLibrary.Init();
-
                 Database = new Database();
-
+                
+                XmlLibrary.Init();
+                
                 var manager = new WorldManager();
-                manager.BeginUpdate();
-
                 var connection = new ConnectionListener(manager);
+
                 connection.StartAccept();
+
+                manager.BeginUpdate();
 
                 Info("Game Server is loading... OK!");
 

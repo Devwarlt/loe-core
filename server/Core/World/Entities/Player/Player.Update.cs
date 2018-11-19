@@ -2,7 +2,6 @@
 using LoESoft.Server.Core.World.Map.Data;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace LoESoft.Server.Core.World.Entities.Player

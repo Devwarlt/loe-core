@@ -29,11 +29,7 @@ namespace LoESoft.Server.Core.World.Map
 
         #region METHODS
 
-        public void Add(Entity entity)
-        {
-            entity.ObjectId = EntityManager.GetNextId();
-            Entities.Add(entity);
-        }
+        public void Add(Entity entity) => Entities.Add(entity);
 
         public void Remove(Entity entity) => Entities.Remove(entity);
 
