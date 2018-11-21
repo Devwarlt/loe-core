@@ -1,7 +1,6 @@
 ﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
-using LoESoft.Client.Core.Screens.TitleScreen;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,7 +23,7 @@ namespace LoESoft.Client.Core.Game.User
         {
             CanMove = true;
             User = user;
-            
+
             HpText = new TextDisplay(10, 10, "Hp:", 16, new Drawing.RGBColor(255, 0, 0));
 
             Player = new Player(classType);

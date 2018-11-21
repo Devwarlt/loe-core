@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Server.Core.World.Entities.Interfaces
 {
-    interface IUpdatable
+    internal interface IUpdatable
     {
         int UpdateCount { get; set; }
 

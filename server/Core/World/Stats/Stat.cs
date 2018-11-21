@@ -18,6 +18,7 @@ namespace LoESoft.Server.Core.World.Stats
 
         [JsonIgnore]
         private object _val;
+
         [JsonIgnore]
         public bool ShouldUpdate { get; set; }
 

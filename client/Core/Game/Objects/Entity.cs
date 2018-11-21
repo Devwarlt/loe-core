@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Game.Objects
@@ -23,15 +22,16 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             get { return (X != DistinationX || Y != DistinationY); }
         }
-        
+
         public Texture2D Texture { get; set; }
         public ObjectsContent Content { get; set; }
         public Color Color { get; set; }
         public int Id { get; set; }
         public int ObjectId { get; set; }
-        
+
         //Stats
         public int Size = 8;
+
         public int Health { get; set; }
 
         public Entity(int id)
@@ -60,7 +60,7 @@ namespace LoESoft.Client.Core.Game.Objects
         private void ChangeStat(int type, object value)
         {
             var val = value.ToString();
-            switch(type)
+            switch (type)
             {
                 case StatType.HEALTH: Health = int.Parse(val); return;
                 case StatType.SIZE: Size = int.Parse(val); return;

@@ -14,13 +14,15 @@ namespace LoESoft.Client.Core.Game
         public static float Y { get; set; }
 
         private static int _rotationIncrement = 0;
+
         public static void RotateRight() => _rotationIncrement++;
+
         public static void RotateLeft() => _rotationIncrement--;
 
         public static void SetFocus(Entity focus) => Focus = focus;
 
         public static Vector2 CameraToWorldPosition(int x, int y) => Vector2.Transform(new Vector2(x, y), GetMatrix());
-        
+
         public static Matrix GetMatrix()
         {
             if (Focus == null)

@@ -6,7 +6,7 @@
         public int Y { get; set; }
         public int LastDirection { get; set; }
         public string Stats { get; set; }
-        
+
         public int Id { get; set; }
         public bool IsPlayer { get; set; }
         public int ObjectId { get; set; }

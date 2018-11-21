@@ -1,6 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming

@@ -7,7 +7,7 @@ namespace LoESoft.Server.Core.World.Stats
     public class StatExportManager
     {
         public ConcurrentDictionary<int, Stat> StatsToExport { get; private set; }
-        
+
         public StatExportManager() => StatsToExport = new ConcurrentDictionary<int, Stat>();
 
         public void AddOrUpdate<T>(int type, T value)

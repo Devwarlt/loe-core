@@ -10,7 +10,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
         public int CurrentDirection { get; set; }
 
-        public Player(WorldManager manager, Client client, Character character) 
+        public Player(WorldManager manager, Client client, Character character)
             : base(manager, character.Class)
         {
             Client = client;

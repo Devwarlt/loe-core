@@ -5,6 +5,7 @@
         public int StatType { get; set; }
         public object Value { get; set; }
     }
+
     public class StatType
     {
         public const int HEALTH = 0;

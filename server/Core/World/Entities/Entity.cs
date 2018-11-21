@@ -23,9 +23,11 @@ namespace LoESoft.Server.Core.World.Entities
 
         //Stats
         public int ChunkX => X / Chunk.SIZE;
+
         public int ChunkY => Y / Chunk.SIZE;
 
         private int _realX;
+
         public int X
         {
             get => _realX;
@@ -33,12 +35,15 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         private int _realY;
+
         public int Y
         {
             get => _realY;
             set => IncrementVar<int>(ref _realY, value);
         }
+
         private int _hp;
+
         public int Health
         {
             get => _hp;

@@ -1,5 +1,4 @@
-﻿
-using LoESoft.Server.Utils;
+﻿using LoESoft.Server.Utils;
 using System.Diagnostics;
 using System.Threading;
 
@@ -40,7 +39,7 @@ namespace LoESoft.Server.Core.World
                     _worldTime.TickCount = tickCount;
 
                     Map.Update(_worldTime);
-                    
+
                     ResetEvent.WaitOne();
                     tickCount++;
                 }
@@ -52,7 +51,7 @@ namespace LoESoft.Server.Core.World
         }
 
         public void Set() => ResetEvent.Set();
-        
+
         public void Dispose()
         {
             _watch.Stop();

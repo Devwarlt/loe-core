@@ -17,7 +17,7 @@ namespace LoESoft.Client.Core.Client
         }
 
         public bool IsConnected => NetworkControl.IsConnected;
-        
+
         public void SendSyncPacket(OutgoingPacket outgoingPacket) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne();
 
         public void SendSyncPacket(OutgoingPacket outgoingPacket, int timeout) => ((IAsyncResult)Task.Run(() => SendPacket(outgoingPacket))).AsyncWaitHandle.WaitOne(timeout, true);

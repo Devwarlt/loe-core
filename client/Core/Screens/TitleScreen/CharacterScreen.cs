@@ -1,7 +1,6 @@
 using LoESoft.Client.Assets;
 using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
-using LoESoft.Client.Core.Game.Map;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Core.Screens.TitleScreen;
 using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection;
@@ -55,7 +54,7 @@ namespace LoESoft.Client.Core.Screens
         {
             var loading = new ConcurrentQueue<Action>();
 
-            ScreenManager.DispatchScreen(new LoadingScreen(loading, 
+            ScreenManager.DispatchScreen(new LoadingScreen(loading,
                 GameApplication.GameScreen = new GameScreen(_gameUser, objectId, classType)));
         }
 

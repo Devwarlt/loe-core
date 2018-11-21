@@ -32,7 +32,7 @@ namespace LoESoft.Client.Core.Game.PathFinder
         {
             var neighbor = new List<PathNode>();
 
-            neighbor.Add((WorldMap.TileMap.ContainsKey(new Point(Point.X, Point.Y + 1)) ? 
+            neighbor.Add((WorldMap.TileMap.ContainsKey(new Point(Point.X, Point.Y + 1)) ?
                 new PathNode(Point.X, Point.Y + 1, this, End) : null));
             neighbor.Add((WorldMap.TileMap.ContainsKey(new Point(Point.X, Point.Y + 1)) ?
                 new PathNode(Point.X, Point.Y - 1, this, End) : null));

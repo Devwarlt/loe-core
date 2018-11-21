@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ namespace LoESoft.Client.Core.Game.PathFinder
                     }
 
                     curNode = openList.OrderBy(_ => _.F).OrderBy(_ => _.H).FirstOrDefault();
-                    
+
                     if (curNode == null)
                     {
                         App.Warn("No path found!");
@@ -48,7 +47,7 @@ namespace LoESoft.Client.Core.Game.PathFinder
                     }
                 } while (!(openList.ToList().Exists(_ => _.Point == end)));
 
-                AssignPath:
+            AssignPath:
 
                 var endNode = closedList.Where(_ => _.Point == end).FirstOrDefault();
                 var curPathNode = endNode;

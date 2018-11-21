@@ -20,7 +20,9 @@ namespace LoESoft.Client.Drawing
         }
 
         public static int CenteredPosition(int v1, int v2) => (v1 / 2) - (v2 / 2);
+
         public static int CenteredToScreenWidth(int v1) => (GameApplication.WIDTH / 2) - (v1 / 2);
+
         public static int CenteredToScreenHeight(int v1) => (GameApplication.HEIGHT / 2) - (v1 / 2);
 
         public static void Clear(this SpriteBatch spriteBatch) => ClearColor(spriteBatch, Color.Black);

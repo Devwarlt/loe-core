@@ -44,9 +44,9 @@ namespace LoESoft.Server.Core.World
 
                 Chunks.Add(new Tuple<int, int>(0, 0), new Chunk(Manager, 0, 0));
                 Chunks[new Tuple<int, int>(0, 0)].RandomGen();
-                
+
                 Loaded = true;
-                
+
                 App.Warn("Map Successfully Initialized!");
             });
         }
@@ -77,7 +77,7 @@ namespace LoESoft.Server.Core.World
 
         public Player GetPlayer(int objId) => Players[objId];
 
-        public void Add(Entity entity) => 
+        public void Add(Entity entity) =>
             Chunks[new Tuple<int, int>(entity.ChunkX, entity.ChunkY)].Add(entity);
 
         public void Remove(Player player)

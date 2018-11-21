@@ -15,8 +15,8 @@ namespace LoESoft.Server.Core.World.Map.Data
         public bool IsPlayer { get; set; }
 
         public int LastDirection { get; set; }
-        //public bool ShouldSerializeLastDirection() => IsPlayer; 
-        
+        //public bool ShouldSerializeLastDirection() => IsPlayer;
+
         public static ObjectData GetData(Entity entity) => new ObjectData()
         {
             Id = entity.Id,

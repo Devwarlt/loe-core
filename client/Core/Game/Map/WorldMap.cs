@@ -2,7 +2,6 @@
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using static LoESoft.Client.Core.Game.Objects.Player;
@@ -44,7 +43,7 @@ namespace LoESoft.Client.Core.Game.Map
 
         public static void AddOrUpdate(TileData[] tilesAddOrUpdate, ObjectData[] objAddOrUpdate)
         {
-            foreach(var i in tilesAddOrUpdate)
+            foreach (var i in tilesAddOrUpdate)
             {
                 var pos = new Point(i.X, i.Y);
                 var tile = new Tile(pos.X, pos.Y, i.Id);
@@ -108,7 +107,7 @@ namespace LoESoft.Client.Core.Game.Map
                 DistinationX = pos.X,
                 DistinationY = pos.Y
             };
-            
+
             player.Init();
             player.CurrentDirection = (Direction)data.LastDirection;
             player.ImportStat(data.Stats);
@@ -119,7 +118,7 @@ namespace LoESoft.Client.Core.Game.Map
                 Entity = player
             });
         }
-        
+
         public static void Update(GameTime gameTime, int x, int y)
         {
             if (!MapLoaded)
@@ -130,7 +129,7 @@ namespace LoESoft.Client.Core.Game.Map
             foreach (var i in Objects.Where(_ => sight.Contains(_.Value.Pos)))
                 i.Value.Entity.Update(gameTime);
         }
-        
+
         public static void Draw(SpriteBatch spriteBatch, int x, int y)
         {
             if (!MapLoaded)
@@ -141,7 +140,6 @@ namespace LoESoft.Client.Core.Game.Map
             foreach (var i in sight)
                 if (TileMap.ContainsKey(i))
                     TileMap[i].Draw(spriteBatch);
-            
 
             foreach (var i in Objects.Where(_ => sight.Contains(_.Value.Pos)))
                 i.Value.Entity.Draw(spriteBatch);

@@ -135,7 +135,7 @@ namespace LoESoft.Server.Core.Database
                 },
                 Creation = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss UTC")
             };
-            
+
             account.CurrentCharacterId++;
 
             error = null;

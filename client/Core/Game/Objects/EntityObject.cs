@@ -28,7 +28,7 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             Animation.InitOrUpdate(Content);
         }
-        
+
         public override void HandleMovement(float dt)
         {
             if (_astartPath.Count > 0)
@@ -39,16 +39,18 @@ namespace LoESoft.Client.Core.Game.Objects
 
                     DistinationX = path.X;
                     DistinationY = path.Y;
-                } else
+                }
+                else
                 {
                     base.HandleMovement(dt);
                 }
-            } else
+            }
+            else
             {
                 _isPathFinding = false;
             }
         }
-        
+
         public override void SetDistination(int x, int y)
         {
             if (!_isPathFinding)

@@ -1,6 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using LoESoft.Server.Core.World;
-using System;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
@@ -34,7 +33,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     return;
             }
         }
-        
+
         private void RepositionPlayer(Client client, int newX, int newY)
         {
             if (client.Player == null)
@@ -45,7 +44,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 client.Player.Move(newX, newY);
                 client.Player.CurrentDirection = Direction;
             }
-            
+
             client.SendPacket(new ServerMove()
             {
                 X = client.Player.X,

@@ -28,7 +28,7 @@ namespace LoESoft.Client.Core.Screens
         }
 
         public override void OnScreenDispatch() => GameUser.Disconnect();
-        
+
         public override void Update(GameTime gameTime)
         {
             Controller.Update(gameTime);
@@ -51,7 +51,7 @@ namespace LoESoft.Client.Core.Screens
                 }
             }
             catch (InvalidOperationException) { }
-            
+
             spriteBatch.End();
         }
     }
