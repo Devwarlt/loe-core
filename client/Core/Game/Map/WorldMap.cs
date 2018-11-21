@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static LoESoft.Client.Core.Game.Objects.Player;
 
 namespace LoESoft.Client.Core.Game.Map
 {
@@ -61,6 +62,9 @@ namespace LoESoft.Client.Core.Game.Map
                     Objects[i.ObjectId].Entity.SetDistination(i.X, i.Y);
                     Objects[i.ObjectId].Pos.X = i.X;
                     Objects[i.ObjectId].Pos.Y = i.X;
+                    Objects[i.ObjectId].Entity.ImportStat(i.Stats);
+                    if (i.LastDirection != -1)
+                        (Objects[i.ObjectId].Entity as Player).CurrentDirection = (Direction)i.LastDirection;
                 }
                 else
                 {
@@ -79,20 +83,18 @@ namespace LoESoft.Client.Core.Game.Map
             {
                 X = pos.X,
                 Y = pos.Y,
+                ObjectId = data.ObjectId,
                 DistinationX = pos.X,
                 DistinationY = pos.Y
             };
 
-            var pair = new ValuePair()
+            obj.Init();
+            obj.ImportStat(data.Stats);
+            Objects.Add(data.ObjectId, new ValuePair()
             {
                 Pos = pos,
                 Entity = obj
-            };
-
-            App.Warn(data.Stats);
-
-            obj.Init();
-            Objects.Add(data.ObjectId, pair);
+            });
         }
 
         private static void HandlePlayer(ObjectData data)
@@ -102,18 +104,20 @@ namespace LoESoft.Client.Core.Game.Map
             {
                 X = pos.X,
                 Y = pos.Y,
+                ObjectId = data.ObjectId,
                 DistinationX = pos.X,
                 DistinationY = pos.Y
             };
+            
+            player.Init();
+            player.CurrentDirection = (Direction)data.LastDirection;
+            player.ImportStat(data.Stats);
 
-            var pair = new ValuePair()
+            Objects.Add(data.ObjectId, new ValuePair()
             {
                 Pos = pos,
                 Entity = player
-            };
-
-            player.Init();
-            Objects.Add(data.ObjectId, pair);
+            });
         }
         
         public static void Update(GameTime gameTime, int x, int y)

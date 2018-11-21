@@ -4,6 +4,7 @@
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public int LastDirection { get; set; }
         public string Stats { get; set; }
         
         public int Id { get; set; }

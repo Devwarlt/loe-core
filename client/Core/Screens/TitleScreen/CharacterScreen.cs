@@ -48,19 +48,15 @@ namespace LoESoft.Client.Core.Screens
         private void OnPlay(object sender, EventArgs e)
         {
             if (CharacterSettings.CurrentCharacterId != -1)
-            {
-                var loading = new ConcurrentQueue<Action>();
+                _gameUser.SendPacket(new Load() { CharacterIndex = CharacterSettings.CurrentCharacterId });
+        }
 
-                loading.Enqueue(delegate 
-                {
-                    App.Warn($"Sending Load Packet: {CharacterSettings.CurrentCharacterId}");
-                    _gameUser.SendPacket(new Load() { CharacterIndex = CharacterSettings.CurrentCharacterId });
-                });
+        public void LoadGame(int objectId, int classType)
+        {
+            var loading = new ConcurrentQueue<Action>();
 
-                loading.Enqueue(delegate { while ((!WorldMap.MapLoaded) || (CharacterSettings.CurrentCharacterType == -1)) { } });
-                
-                ScreenManager.DispatchScreen(new LoadingScreen(loading, GameApplication.GameScreen = new GameScreen(_gameUser)));
-            }
+            ScreenManager.DispatchScreen(new LoadingScreen(loading, 
+                GameApplication.GameScreen = new GameScreen(_gameUser, objectId, classType)));
         }
 
         private void OnExit(object sender, EventArgs e) => ScreenManager.Close();

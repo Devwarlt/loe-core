@@ -41,7 +41,10 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
 
             if (newX >= 0 && newX <= WorldMap.WIDTH && newY >= 0 && newY <= WorldMap.HEIGHT)
+            {
                 client.Player.Move(newX, newY);
+                client.Player.CurrentDirection = Direction;
+            }
             
             client.SendPacket(new ServerMove()
             {

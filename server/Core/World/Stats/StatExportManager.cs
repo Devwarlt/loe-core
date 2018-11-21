@@ -14,7 +14,7 @@ namespace LoESoft.Server.Core.World.Stats
         {
             StatsToExport.AddOrUpdate(type, new Stat(type, value), (k, v) =>
             {
-                if (v.Value != (object)value)
+                if (v.Value.Equals(value))
                     v.Value = value;
 
                 return v;
@@ -22,6 +22,6 @@ namespace LoESoft.Server.Core.World.Stats
         }
 
         public string Serialize() => 
-            JsonConvert.SerializeObject(StatsToExport.Where(_ => _.Value.ShouldUpdate == true).Select(_ => _.Value).ToList());
+            JsonConvert.SerializeObject(StatsToExport.Where(_ => _.Value.ShouldUpdate == true).Select(_ => _.Value.Serialize()).ToList());
     }
 }

@@ -1,16 +1,18 @@
 ﻿using LoESoft.Server.Core.World.Entities;
 using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
+using LoESoft.Server.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LoESoft.Server.Core.World
 {
     public class WorldMap
     {
-        public static int WIDTH = 2560;
-        public static int HEIGHT = 2560;
+        public static int WIDTH = 256;
+        public static int HEIGHT = 256;
 
         public WorldManager Manager { get; set; }
 
@@ -18,10 +20,11 @@ namespace LoESoft.Server.Core.World
         public Dictionary<Tuple<int, int>, Chunk> Chunks { get; private set; }
         public ConcurrentDictionary<int, Player> Players { get; private set; }
 
-        private readonly bool Loaded = false;
+        private bool Loaded { get; set; }
 
         public WorldMap(WorldManager manager)
         {
+            Loaded = false;
             Manager = manager;
 
             Tiles = new Tile[WIDTH, HEIGHT];
@@ -31,19 +34,24 @@ namespace LoESoft.Server.Core.World
             //Temporary Initiazation
             var rand = new Random();
 
-            for (var x = 0; x < WIDTH; x++)
-                for (var y = 0; y < HEIGHT; y++)
-                    Tiles[x, y] = new Tile(Manager, rand.Next(0, 4)) { X = x, Y = y };
+            Task.Factory.StartNew(() =>
+            {
+                for (var x = 0; x < WIDTH; x++)
+                {
+                    for (var y = 0; y < HEIGHT; y++)
+                        Tiles[x, y] = new Tile(Manager, rand.Next(0, 4)) { X = x, Y = y };
+                }
 
-            Chunks.Add(new Tuple<int, int>(0, 0), new Chunk(Manager, 0, 0));
-            Chunks[new Tuple<int, int>(0, 0)].RandomGen();
-
-            Loaded = true;
-
-            App.Warn("Map Successfully Initialized!");
+                Chunks.Add(new Tuple<int, int>(0, 0), new Chunk(Manager, 0, 0));
+                Chunks[new Tuple<int, int>(0, 0)].RandomGen();
+                
+                Loaded = true;
+                
+                App.Warn("Map Successfully Initialized!");
+            });
         }
 
-        public void Update()
+        public void Update(WorldTime time)
         {
             if (Loaded)
             {
@@ -57,10 +65,7 @@ namespace LoESoft.Server.Core.World
 
         public bool IsValidPosition(int x, int y) => (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT);
 
-        public void Add(Player player)
-        {
-            Players.TryAdd(player.ObjectId, player);
-        }
+        public void Add(Player player) => Players.TryAdd(player.ObjectId, player);
 
         public Player GetPlayer(int x, int y)
         {
@@ -72,7 +77,8 @@ namespace LoESoft.Server.Core.World
 
         public Player GetPlayer(int objId) => Players[objId];
 
-        public void Add(Entity entity) => Chunks[new Tuple<int, int>(entity.ChunkX, entity.ChunkY)].Add(entity);
+        public void Add(Entity entity) => 
+            Chunks[new Tuple<int, int>(entity.ChunkX, entity.ChunkY)].Add(entity);
 
         public void Remove(Player player)
         {

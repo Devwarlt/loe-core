@@ -39,9 +39,6 @@ namespace LoESoft.Server.Core.World.Entities.Player
             else
                 ConnectionLostAttempts = 0;
 
-            //var timer = new Stopwatch();
-            //timer.Start();
-
             var sight = GetSightPoints().Where(_ => ((_.X >= 0 && _.X < WorldMap.WIDTH) &&
             (_.Y >= 0 && _.Y < WorldMap.HEIGHT)));
 
@@ -55,7 +52,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
                 if (!_addedTile.Contains(tile))
                     _addedTile.Add(tile);
 
-                tile.UpdateCount = 0;
+                tile.OnUpdate();
 
                 var entity = Manager.Core.Map.Chunks[new Tuple<int, int>(ChunkX, ChunkY)].GetEntity(i.X, i.Y);
 
@@ -67,12 +64,12 @@ namespace LoESoft.Server.Core.World.Entities.Player
                     if (!_addedObjects.Contains(entity))
                         _addedObjects.Add(entity);
 
-                    entity.UpdateCount = 0;
+                    entity.OnUpdate();
                 }
 
                 var player = Manager.Core.Map.GetPlayer(i.X, i.Y);
 
-                if (player != null && player.ObjectId != ObjectId)
+                if (player != null)
                 {
                     if ((_addedObjects.Contains(player) && player.UpdateCount > 0) || !_addedObjects.Contains(player))
                         _objectsToUpdateOrAdd.Add(player);
@@ -80,7 +77,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
                     if (!_addedObjects.Contains(player))
                         _addedObjects.Add(player);
 
-                    player.UpdateCount = 0;
+                    player.OnUpdate();
                 }
             }
 
@@ -93,9 +90,6 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
             _tilesToUpdateOrAdd.Clear();
             _objectsToUpdateOrAdd.Clear();
-
-            //App.Warn($"Update Time:{timer.ElapsedMilliseconds}");
-            //timer.Stop();
         }
     }
 }

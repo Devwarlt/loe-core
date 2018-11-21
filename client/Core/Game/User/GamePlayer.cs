@@ -2,6 +2,7 @@
 using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Core.Screens.TitleScreen;
+using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,12 +16,20 @@ namespace LoESoft.Client.Core.Game.User
 
         public Player Player { get; private set; }
 
-        public GamePlayer(GameUser user)
+        public int ObjectId { get; private set; }
+
+        public TextDisplay HpText;
+
+        public GamePlayer(GameUser user, int objId, int classType)
         {
             CanMove = true;
             User = user;
+            
+            HpText = new TextDisplay(10, 10, "Hp:", 16, new Drawing.RGBColor(255, 0, 0));
 
-            Player = new Player(CharacterSettings.CurrentCharacterType);
+            Player = new Player(classType);
+            ObjectId = objId;
+            Player.ObjectId = ObjectId;
             Player.Init();
         }
 
@@ -29,6 +38,14 @@ namespace LoESoft.Client.Core.Game.User
             HandlePlayerInput();
 
             Player.Update(gameTime);
+
+            HpText.Text = "Hp:" + Player.Health;
+            HpText.Update(gameTime);
+        }
+
+        public void ImportStat(string export)
+        {
+            Player.ImportStat(export);
         }
 
         public bool CanMove { get; set; }
@@ -58,6 +75,7 @@ namespace LoESoft.Client.Core.Game.User
         public void Draw(SpriteBatch spriteBatch)
         {
             Player.Draw(spriteBatch);
+            HpText.Draw(spriteBatch);
         }
 
         private void SendMovePacket() => User.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });
