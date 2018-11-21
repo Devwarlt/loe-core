@@ -12,10 +12,8 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public override void Handle(GameUser gameUser)
         {
-            App.Warn("Moving!");
-            var game = (ScreenManager.ActiveScreen as GameScreen);
-
-            game.Controller?.SetDistination(X, Y);
+            if (ScreenManager.ActiveScreen == GameApplication.GameScreen)
+                GameApplication.GameScreen.Controller?.SetDistination(X, Y);
         }
     }
 }

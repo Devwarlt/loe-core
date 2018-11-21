@@ -34,12 +34,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 });
             else
             {
-                client.SendPacket(new ServerResponse()
-                {
-                    From = "LoadCharacter",
-                    Result = 0,
-                    Content = getCharacterData.Class.ToString()
-                });
+                client.Player = new Player(client.Manager, client, getCharacterData);
 
                 client.SendPacket(new LoadMap()
                 {
@@ -47,7 +42,12 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     MapHeight = WorldMap.HEIGHT
                 });
 
-                client.Player = new Player(client.Manager, client, getCharacterData);
+                client.SendPacket(new ServerResponse()
+                {
+                    From = "LoadCharacter",
+                    Result = 0,
+                    Content = client.Player.ObjectId + "," + getCharacterData.Class.ToString()
+                });
 
                 client.Manager.TryAddPlayer(client);
             }

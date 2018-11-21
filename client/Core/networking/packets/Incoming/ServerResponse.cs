@@ -75,9 +75,17 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public void HandleCharacterLoad()
         {
-            App.Warn($"{int.Parse(Content)}");
             if (Result == 0)
-                CharacterSettings.CurrentCharacterType = int.Parse(Content);
+            {
+                if (ScreenManager.ActiveScreen == GameApplication.CharacterScreen)
+                {
+                    var content = Content.Split(',');
+                    var id = int.Parse(content[0]);
+                    var type = int.Parse(content[1]);
+
+                    GameApplication.CharacterScreen.LoadGame(id, type);
+                }
+            }
             else
                 App.Warn("Unable To Load Character");
         }

@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
+using System.Linq;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
@@ -76,7 +77,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     Content = "You have successfully logged in, enjoy the game!"
                 });
 
-                client.Account = account; // do not change this
+                client.Account = account; 
             }
         }
     }

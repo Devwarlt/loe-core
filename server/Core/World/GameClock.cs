@@ -9,7 +9,7 @@ namespace LoESoft.Server.Core.World
 
         public GameClock(Action action)
         {
-            Timer = new Timer(WorldSettings.UPDATEMS) { AutoReset = true };
+            Timer = new Timer(WorldSettings.UPDATE_MS) { AutoReset = true };
             Timer.Elapsed += delegate
             {
                 action?.Invoke();

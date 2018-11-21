@@ -17,11 +17,14 @@ namespace LoESoft.Client.Core.Screens
 
         private GameUser GameUser { get; set; }
 
-        public GameScreen(GameUser gameUser) => GameUser = gameUser;
+        public GameScreen(GameUser gameUser, int objId, int classType)
+        {
+            GameUser = gameUser;
+            Controller = new GamePlayer(GameUser, objId, classType);
+        }
 
         public override void OnScreenCreate()
         {
-            Controller = new GamePlayer(GameUser);
         }
 
         public override void OnScreenDispatch() => GameUser.Disconnect();

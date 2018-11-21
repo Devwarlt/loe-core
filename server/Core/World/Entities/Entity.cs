@@ -1,10 +1,11 @@
-﻿using LoESoft.Server.Core.World.Map;
+﻿using LoESoft.Server.Core.World.Entities.Interfaces;
+using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Core.World.Stats;
 using System;
 
 namespace LoESoft.Server.Core.World.Entities
 {
-    public class Entity
+    public class Entity : IUpdatable
     {
         public WorldManager Manager { get; private set; }
         public StatExportManager Export { get; private set; }
@@ -17,6 +18,7 @@ namespace LoESoft.Server.Core.World.Entities
 
         public int Id { get; private set; }
         public int ObjectId { get; private set; }
+
         public int UpdateCount { get; set; }
 
         //Stats
@@ -83,6 +85,11 @@ namespace LoESoft.Server.Core.World.Entities
             };
 
             return entity;
+        }
+
+        public void OnUpdate()
+        {
+            UpdateCount = 0;
         }
     }
 }

@@ -8,6 +8,8 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public Client Client { get; private set; }
         public Character Character { get; private set; }
 
+        public int CurrentDirection { get; set; }
+
         public Player(WorldManager manager, Client client, Character character) 
             : base(manager, character.Class)
         {
@@ -19,13 +21,15 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
         public void Save()
         {
+            Character.Position.X = X;
+            Character.Position.Y = Y;
             App.Database.SaveCharacter(Character);
         }
 
         public override void Dispose()
         {
-            Save();
             Manager.TryRemovePlayer(Client);
+            Save();
         }
     }
 }

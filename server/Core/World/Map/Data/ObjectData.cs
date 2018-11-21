@@ -11,14 +11,19 @@ namespace LoESoft.Server.Core.World.Map.Data
 
         public int Id { get; set; }
         public int ObjectId { get; set; }
+
         public bool IsPlayer { get; set; }
 
+        public int LastDirection { get; set; }
+        //public bool ShouldSerializeLastDirection() => IsPlayer; 
+        
         public static ObjectData GetData(Entity entity) => new ObjectData()
         {
             Id = entity.Id,
             ObjectId = entity.ObjectId,
             X = entity.X,
             Y = entity.Y,
+            LastDirection = (entity is Player) ? (entity as Player).CurrentDirection : -1,
             Stats = entity.ExportStat(),
             IsPlayer = (entity is Player)
         };

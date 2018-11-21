@@ -90,6 +90,7 @@
     <Compile Include="Core\Game\Objects\EntityObject.cs" />
     <Compile Include="Core\Game\Objects\Player.cs" />
     <Compile Include="Core\Game\Objects\Player.Direction.cs" />
+    <Compile Include="Core\Game\Objects\Stats\Stat.cs" />
     <Compile Include="Core\Game\Objects\Tile.cs" />
     <Compile Include="Core\Game\PathFinder\AStar.cs" />
     <Compile Include="Core\Game\PathFinder\PathNode.cs" />

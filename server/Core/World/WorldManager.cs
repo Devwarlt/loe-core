@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking;
+using System.Linq;
 
 namespace LoESoft.Server.Core.World
 {
@@ -12,7 +13,7 @@ namespace LoESoft.Server.Core.World
         {
             Core = new CoreUpdate(this);
 
-            _clock = new GameClock(() => Core.ResetEvent.Set());
+            _clock = new GameClock(() => Core.Set());
         }
 
         public void BeginUpdate()
@@ -40,8 +41,8 @@ namespace LoESoft.Server.Core.World
         {
             if (ConnectionListener.Clients.Values.Contains(client))
             {
-                if (client.Player != null)
-                    Core.Map.Remove(client.Player);
+                if (ConnectionListener.Clients.TryRemove(client.Id, out var newclient))
+                    Core.Map.Remove(newclient.Player);
 
                 return true;
             }
@@ -51,6 +52,8 @@ namespace LoESoft.Server.Core.World
 
         public void Stop()
         {
+            ConnectionListener.Clients.Select(client => { client.Value.Disconnect(); return client; }).ToList();
+
             _clock.Stop();
 
             Core.Dispose();

@@ -63,7 +63,7 @@ namespace LoESoft.Server.Core.World.Map
         public void Update()
         {
             foreach (var i in Entities)
-                i.Move(rand.Next(1, 10), rand.Next(1, 10));
+                i.Move(rand.Next(1, 3), rand.Next(1, 3));
         }
     }
 }
