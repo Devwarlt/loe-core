@@ -1,31 +1,24 @@
-﻿using LoESoft.MapEditor.Core.Layer;
-using LoESoft.MapEditor.Core.Util;
+﻿using LoESoft.MapEditor.Core.Util;
+using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LoESoft.MapEditor.Core.GUI.HUD
 {
     public partial class SpritePallete : UserControl
     {
-        public SpriteItem SpriteItem { get; set; }
+        public Image Image { get; set; }
+        public InteractiveObject InteractiveObject { get; set; }
 
         public SpritePallete() => InitializeComponent();
 
         public void SetImage()
         {
-            SpriteBox.Image = SpriteItem.Image;
+            SpriteBox.Image = Image;
             SpriteBox.SizeMode = PictureBoxSizeMode.StretchImage;
             SpriteBox.Refresh();
         }
 
-        private void SpriteBox_Click(object sender, System.EventArgs e)
-        {
-            // TODO!
-            MapEditor.InteractiveObject = new InteractiveObject()
-            {
-            };
-
-            MapEditor.CurrentLayer = MapLayer.UNDERGROUND;
-            MapEditor.CurrentIndex = SpriteItem.ActualIndex;
-        }
+        private void SpriteBox_Click(object sender, EventArgs e) => MapEditor.InteractiveObject = InteractiveObject;
     }
 }

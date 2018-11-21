@@ -32,9 +32,8 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.LoadButton = new System.Windows.Forms.Button();
             this.EditorInformationGroup = new System.Windows.Forms.GroupBox();
-            this.MapLabel = new System.Windows.Forms.Label();
-            this.SizeLabel = new System.Windows.Forms.Label();
-            this.LayerLabel = new System.Windows.Forms.Label();
+            this.MapNameLabel = new System.Windows.Forms.Label();
+            this.MapSizeLabel = new System.Windows.Forms.Label();
             this.GridCheckBox = new System.Windows.Forms.CheckBox();
             this.MapOptionsGroup = new System.Windows.Forms.GroupBox();
             this.PalletePanel = new System.Windows.Forms.Panel();
@@ -78,9 +77,8 @@
             // 
             // EditorInformationGroup
             // 
-            this.EditorInformationGroup.Controls.Add(this.MapLabel);
-            this.EditorInformationGroup.Controls.Add(this.SizeLabel);
-            this.EditorInformationGroup.Controls.Add(this.LayerLabel);
+            this.EditorInformationGroup.Controls.Add(this.MapNameLabel);
+            this.EditorInformationGroup.Controls.Add(this.MapSizeLabel);
             this.EditorInformationGroup.Controls.Add(this.GridCheckBox);
             this.EditorInformationGroup.ForeColor = System.Drawing.SystemColors.Desktop;
             this.EditorInformationGroup.Location = new System.Drawing.Point(14, 74);
@@ -88,39 +86,28 @@
             this.EditorInformationGroup.Size = new System.Drawing.Size(235, 76);
             this.EditorInformationGroup.TabIndex = 0;
             this.EditorInformationGroup.TabStop = false;
-            this.EditorInformationGroup.Text = "Information";
+            this.EditorInformationGroup.Text = "Map";
             // 
-            // MapLabel
+            // MapNameLabel
             // 
-            this.MapLabel.AutoSize = true;
-            this.MapLabel.Location = new System.Drawing.Point(10, 20);
-            this.MapLabel.Name = "MapLabel";
-            this.MapLabel.Size = new System.Drawing.Size(37, 13);
-            this.MapLabel.TabIndex = 0;
-            this.MapLabel.Text = "Map: -";
+            this.MapNameLabel.Location = new System.Drawing.Point(6, 16);
+            this.MapNameLabel.Name = "MapNameLabel";
+            this.MapNameLabel.Size = new System.Drawing.Size(44, 13);
+            this.MapNameLabel.TabIndex = 0;
+            this.MapNameLabel.Text = "Name: -";
             // 
-            // SizeLabel
+            // MapSizeLabel
             // 
-            this.SizeLabel.AutoSize = true;
-            this.SizeLabel.Location = new System.Drawing.Point(10, 35);
-            this.SizeLabel.Name = "SizeLabel";
-            this.SizeLabel.Size = new System.Drawing.Size(36, 13);
-            this.SizeLabel.TabIndex = 0;
-            this.SizeLabel.Text = "Size: -";
-            // 
-            // LayerLabel
-            // 
-            this.LayerLabel.AutoSize = true;
-            this.LayerLabel.Location = new System.Drawing.Point(10, 50);
-            this.LayerLabel.Name = "LayerLabel";
-            this.LayerLabel.Size = new System.Drawing.Size(42, 13);
-            this.LayerLabel.TabIndex = 0;
-            this.LayerLabel.Text = "Layer: -";
+            this.MapSizeLabel.Location = new System.Drawing.Point(6, 37);
+            this.MapSizeLabel.Name = "MapSizeLabel";
+            this.MapSizeLabel.Size = new System.Drawing.Size(36, 13);
+            this.MapSizeLabel.TabIndex = 0;
+            this.MapSizeLabel.Text = "Size: -";
             // 
             // GridCheckBox
             // 
             this.GridCheckBox.AutoSize = true;
-            this.GridCheckBox.Location = new System.Drawing.Point(147, 19);
+            this.GridCheckBox.Location = new System.Drawing.Point(147, 53);
             this.GridCheckBox.Name = "GridCheckBox";
             this.GridCheckBox.Size = new System.Drawing.Size(82, 17);
             this.GridCheckBox.TabIndex = 0;
@@ -224,9 +211,8 @@
         private System.Windows.Forms.Button LoadButton;
         private System.Windows.Forms.GroupBox EditorInformationGroup;
         private System.Windows.Forms.CheckBox GridCheckBox;
-        private System.Windows.Forms.Label LayerLabel;
-        private System.Windows.Forms.Label SizeLabel;
-        private System.Windows.Forms.Label MapLabel;
+        private System.Windows.Forms.Label MapSizeLabel;
+        private System.Windows.Forms.Label MapNameLabel;
         private System.Windows.Forms.GroupBox MapOptionsGroup;
         private System.Windows.Forms.Label EditorLabel;
         private System.Windows.Forms.Panel TitleUnderLine;

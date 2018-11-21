@@ -13,7 +13,6 @@ namespace LoESoft.MapEditor.Core.Layer
         public List<Layer> Layers { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public MapLayer CurrentLayer { get; set; }
 
         private int WIDTH_MAGIC_NUMBER => Width - Utils.TILE_SIZE * 3 - 2;
         private int HEIGHT_MAGIC_NUMBER => Height - Utils.TILE_SIZE * 2 - 6;
@@ -26,7 +25,6 @@ namespace LoESoft.MapEditor.Core.Layer
             Width = (int)Size;
             Height = (int)Size;
             Layers = new List<Layer>(5);
-            CurrentLayer = MapLayer.UNDERGROUND;
 
             for (var i = 0; i < 5; i++)
                 Layers.Add(new Layer((MapLayer)i, Size));
@@ -67,19 +65,16 @@ namespace LoESoft.MapEditor.Core.Layer
                             var chunk = layer.Chunk[y, x];
 
                             if (chunk != null)
-                            {
-                                // TODO.
-                                MapEditor.SpriteBatch.Draw(MapEditor.MapSpritesheets[chunk.File], new Vector2(
+                                MapEditor.SpriteBatch.Draw(MapEditor.Textures[chunk.Group], new Vector2(
                                     (y - MapEditor.DrawOffset.X) * Utils.TILE_SIZE,
                                     (x - MapEditor.DrawOffset.Y) * Utils.TILE_SIZE
-                                    ), new Rectangle(0 / Utils.TILE_SIZE, 0 / Utils.TILE_SIZE, Utils.TILE_SIZE, Utils.TILE_SIZE), Color.White);
-                            }
+                                    ), Utils.JamesBounds(chunk.BoundX, chunk.BoundY), Color.White);
 
                             if (layer.MapLayer == MapLayer.ABSTRACT && MapEditor.ShowGrid)
                                 MapEditor.SpriteBatch.Draw(MapEditor.GridTexture, new Vector2(
                                     (y - MapEditor.DrawOffset.X) * Utils.TILE_SIZE,
                                     (x - MapEditor.DrawOffset.Y) * Utils.TILE_SIZE
-                                    ), new Rectangle(0, 0, Utils.TILE_SIZE, Utils.TILE_SIZE), Color.White);
+                                    ), Utils.JamesBounds(0, 0), Color.White);
                         }
 
                     return layer;

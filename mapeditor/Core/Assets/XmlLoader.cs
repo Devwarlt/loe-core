@@ -12,7 +12,7 @@ namespace LoESoft.MapEditor.Core.Assets
             var xmls = new List<XElement>();
 
             foreach (var i in assembly.GetManifestResourceNames())
-                if (i.Contains($"{typeof(XmlLoader).Namespace}.Embeds."))
+                if (i.Contains($"{typeof(XmlLoader).Namespace}.Xml."))
                     using (var stream = assembly.GetManifestResourceStream(i))
                         if (stream != null)
                             xmls.Add(XElement.Load(stream));
