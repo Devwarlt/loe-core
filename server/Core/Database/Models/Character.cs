@@ -1,4 +1,6 @@
-﻿namespace LoESoft.Server.Core.Database.Models
+﻿using LoESoft.Server.Core.World.Entities.Player.Attribute;
+
+namespace LoESoft.Server.Core.Database.Models
 {
     public class Character
     {
@@ -8,5 +10,7 @@
         public Position Position { get; set; }
         public string Creation { get; set; }
         public long AccountId { get; set; }
+
+        public Inventory Inventory { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using LoESoft.LCBase;
 using LoESoft.Server.Core.Database.Models;
 using LoESoft.Server.Core.Utils;
+using LoESoft.Server.Core.World.Entities.Player.Attribute;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -133,7 +134,8 @@ namespace LoESoft.Server.Core.Database
                     X = 0,
                     Y = 0
                 },
-                Creation = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss UTC")
+                Creation = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss UTC"),
+                Inventory = new Inventory()
             };
 
             account.CurrentCharacterId++;

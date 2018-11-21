@@ -51,11 +51,7 @@ namespace LoESoft.Server.Core.World.Map
         public void RandomGen()
         {
             for (var i = 0; i < 2; i++)
-                Add(new Entity(Manager, 8)
-                {
-                    X = rand.Next(StartX, StartX + 5),
-                    Y = rand.Next(StartY, StartY + 5)
-                });
+                Add(Entity.Create(Manager, StartX + 5, StartY + 5, 8));
         }
 
         #endregion METHODS

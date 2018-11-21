@@ -30,8 +30,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public int ObjectId { get; set; }
 
         //Stats
-        public int Size = 8;
-
+        public int Size { get; set; } = 8;
         public int Health { get; set; }
 
         public Entity(int id)

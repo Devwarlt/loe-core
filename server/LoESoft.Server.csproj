@@ -248,6 +248,7 @@
     <Compile Include="Core\World\Entities\Interfaces\IUpdatable.cs" />
     <Compile Include="Core\World\Entities\Item.cs" />
     <Compile Include="Core\World\Entities\Player\Attribute\Inventory.cs" />
+    <Compile Include="Core\World\Entities\Player\Player.Export.cs" />
     <Compile Include="Core\World\Entities\Player\Player.Sight.cs" />
     <Compile Include="Core\World\Entities\Player\Player.Update.cs" />
     <Compile Include="Core\World\Entities\Player\Points.cs" />
@@ -283,6 +284,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Assets\Xml\Embeds\TestObjects.xml" />
+    <Content Include="Assets\Xml\Embeds\Items.xml" />
     <Content Include="loesoft-new.ico" />
     <Content Include="Settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

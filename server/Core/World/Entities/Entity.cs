@@ -1,4 +1,5 @@
-﻿using LoESoft.Server.Core.World.Entities.Interfaces;
+﻿using LoESoft.Server.Assets.Xml;
+using LoESoft.Server.Core.World.Entities.Interfaces;
 using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Core.World.Stats;
 using System;
@@ -27,7 +28,6 @@ namespace LoESoft.Server.Core.World.Entities
         public int ChunkY => Y / Chunk.SIZE;
 
         private int _realX;
-
         public int X
         {
             get => _realX;
@@ -35,7 +35,6 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         private int _realY;
-
         public int Y
         {
             get => _realY;
@@ -43,18 +42,24 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         private int _hp;
-
         public int Health
         {
             get => _hp;
             set => IncrementVar<int>(ref _hp, value);
         }
 
+        private int _size;
+        public int Size
+        {
+            get => _size;
+            set => IncrementVar<int>(ref _size, value);
+        }
+
         public Entity(WorldManager manager, int id)
         {
             Manager = manager;
-            ObjectId = EntityManager.GetNextId();
             Id = id;
+            ObjectId = EntityManager.GetNextId();
             Export = new StatExportManager();
             Health = new Random().Next(10, 100);
         }
@@ -68,6 +73,7 @@ namespace LoESoft.Server.Core.World.Entities
         public virtual string ExportStat()
         {
             Export.AddOrUpdate(StatType.HEALTH, Health);
+            Export.AddOrUpdate(StatType.SIZE, Size);
 
             return Export.Serialize();
         }
@@ -81,20 +87,23 @@ namespace LoESoft.Server.Core.World.Entities
             Manager.Core.Map.Chunks[new Tuple<int, int>(ChunkX, ChunkY)].Remove(this);
         }
 
-        public static Entity Create(WorldManager manager, int x, int y, int id)
-        {
-            var entity = new Entity(manager, id)
-            {
-                X = x,
-                Y = y
-            };
-
-            return entity;
-        }
-
         public void OnUpdate()
         {
             UpdateCount = 0;
+        }
+
+        public static Entity Create(WorldManager manager, int x, int y, int id)
+        {
+            var properties = XmlLibrary.ObjectsXml[id];
+
+            var entity = new Entity(manager, id)
+            {
+                X = x,
+                Y = y,
+                Size = 8
+            };
+
+            return entity;
         }
     }
 }
