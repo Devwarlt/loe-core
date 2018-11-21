@@ -1,4 +1,5 @@
 ﻿using LoESoft.MapEditor.Core.Assets.Structure;
+using LoESoft.MapEditor.Core.Util;
 using System.Collections.Generic;
 using System.Xml.XPath;
 using static LoESoft.MapEditor.Core.Assets.Structure.XmlContent;
@@ -7,6 +8,7 @@ namespace LoESoft.MapEditor.Core.Assets
 {
     public static class XmlLibrary
     {
+        public static Dictionary<int, InteractiveObject> AllXmls = new Dictionary<int, InteractiveObject>();
         public static Dictionary<int, ObjectsContent> ObjectsXml = new Dictionary<int, ObjectsContent>();
         public static Dictionary<int, ItemsContent> ItemsXml = new Dictionary<int, ItemsContent>();
         public static Dictionary<int, TilesContent> TilesXml = new Dictionary<int, TilesContent>();
@@ -16,6 +18,7 @@ namespace LoESoft.MapEditor.Core.Assets
             App.Info("Loading embedded files...");
 
             LoadContents();
+            DisplayFormattedAmount(AllXmls, "element", "elements");
             DisplayFormattedAmount(ObjectsXml, "object", "objects");
             DisplayFormattedAmount(ItemsXml, "item", "items");
             DisplayFormattedAmount(TilesXml, "tile", "tiles");
@@ -31,30 +34,24 @@ namespace LoESoft.MapEditor.Core.Assets
             foreach (var elements in XmlLoader.GetEmbeddedGameAssets())
                 foreach (var elem in elements.XPathSelectElements("//Object"))
                 {
-                    XmlContent content;
+                    var content = new XmlContent(elem);
+
+                    AllXmls.Add(content.Id, new InteractiveObject()
+                    {
+                        Id = content.Id,
+                        Name = content.Name,
+                        Type = content.Type,
+                        LayerData = content.LayerData,
+                        TextureData = content.TextureData
+                    });
 
                     switch ((ContentType)int.Parse(elem.Attribute("type").Value))
                     {
-                        case ContentType.Objects:
-                            {
-                                content = new ObjectsContent(elem);
-                                ObjectsXml.Add(content.Id, (ObjectsContent)content);
-                            }
-                            break;
+                        case ContentType.Objects: ObjectsXml.Add(content.Id, new ObjectsContent(elem)); break;
 
-                        case ContentType.Items:
-                            {
-                                content = new ItemsContent(elem);
-                                ItemsXml.Add(content.Id, (ItemsContent)content);
-                            }
-                            break;
+                        case ContentType.Items: ItemsXml.Add(content.Id, new ItemsContent(elem)); break;
 
-                        case ContentType.Tiles:
-                            {
-                                content = new TilesContent(elem);
-                                TilesXml.Add(content.Id, (TilesContent)content);
-                            }
-                            break;
+                        case ContentType.Tiles: TilesXml.Add(content.Id, new TilesContent(elem)); break;
                     }
                 }
         }

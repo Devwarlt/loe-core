@@ -24,8 +24,6 @@ namespace LoESoft.MapEditor.Core.GUI
                     MessageBox.Show($"Map '{MapNameTextBox.Text}' not found!");
                 else
                 {
-                    App.Info($"chunk [0, 0] of layer 0: {map.Layers[0].Chunk[0, 0]}");
-
                     Map = map;
                     MapName = MapNameTextBox.Text;
                     DialogResult = DialogResult.OK;

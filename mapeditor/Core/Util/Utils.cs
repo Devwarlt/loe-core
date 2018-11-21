@@ -2,10 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using XnaRectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace LoESoft.MapEditor.Core.Util
 {
@@ -16,6 +16,8 @@ namespace LoESoft.MapEditor.Core.Util
         public static string GetMapFolderPath => Path.Combine(MainDir, $"/{BaseDir}/");
 
         public static string GetPath(string fileName) => Path.Combine(GetMapFolderPath, fileName);
+
+        public static XnaRectangle JamesBounds(int x, int y) => new XnaRectangle(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
         private static string MainDir => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private static string BaseDir => "BRMEMaps";
@@ -37,62 +39,53 @@ namespace LoESoft.MapEditor.Core.Util
             return texture2d;
         }
 
-        public static KeyValuePair<string, Texture2D> LoadEmbeddedSpritesheetToTexture2D(string file)
+        public static Texture2D LoadEmbeddedSpritesheetToTexture2D(string file)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var spritedata = new KeyValuePair<string, Texture2D>();
 
             foreach (var name in assembly.GetManifestResourceNames())
                 if (name.Contains(file))
                 {
                     using (var stream = assembly.GetManifestResourceStream(name))
                         if (stream != null)
-                            spritedata = new KeyValuePair<string, Texture2D>(file, Texture2D.FromStream(MapEditor.GraphicsDeviceManager.GraphicsDevice, stream));
+                            return Texture2D.FromStream(MapEditor.GraphicsDeviceManager.GraphicsDevice, stream);
                     break;
                 }
 
-            return spritedata;
+            return null;
         }
 
-        public static KeyValuePair<string, Image> LoadEmbeddedSpritesheetToImage(string file)
+        public static Image LoadEmbeddedSpritesheetToImage(string file)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var spritedata = new KeyValuePair<string, Image>();
 
             foreach (var name in assembly.GetManifestResourceNames())
                 if (name.Contains(file))
                 {
                     using (var stream = assembly.GetManifestResourceStream(name))
                         if (stream != null)
-                            spritedata = new KeyValuePair<string, Image>(file, Image.FromStream(stream));
+                            return Image.FromStream(stream);
                     break;
                 }
 
-            return spritedata;
+            return null;
         }
 
-        public static SpriteItem[,] CropSpritesheet(Image image)
+        public static Image[,] CropSpritesheet(Image image)
         {
             try
             {
                 var width = image.Width / TILE_SIZE;
                 var height = image.Height / TILE_SIZE;
-                var spriteitems = new SpriteItem[width, height];
+                var spriteitems = new Image[width, height];
                 var actualindex = 0;
 
                 for (var x = 0; x < width; x++)
                     for (var y = 0; y < height; y++)
                     {
-                        spriteitems[x, y] = new SpriteItem
-                        {
-                            MaximumX = width,
-                            MaximumY = height,
-                            Index = new int[x, y],
-                            ActualIndex = actualindex,
-                            Image = new Bitmap(TILE_SIZE, TILE_SIZE)
-                        };
+                        spriteitems[x, y] = new Bitmap(TILE_SIZE, TILE_SIZE);
 
-                        var graphics = Graphics.FromImage(spriteitems[x, y].Image);
+                        var graphics = Graphics.FromImage(spriteitems[x, y]);
                         graphics.DrawImage(image, new Rectangle(0, 0, TILE_SIZE, TILE_SIZE), new Rectangle(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE), GraphicsUnit.Pixel);
                         graphics.Dispose();
 
@@ -113,7 +106,7 @@ namespace LoESoft.MapEditor.Core.Util
 
             App.Info($"Saving '{name}' map...");
 
-            File.WriteAllText(GetPath($"{name}.brmemap"), JsonConvert.SerializeObject(map, Formatting.Indented));
+            File.WriteAllText(GetPath($"{name}.brmemap"), JsonConvert.SerializeObject(map));
 
             App.Info($"Saving '{name}' map... OK!");
         }
