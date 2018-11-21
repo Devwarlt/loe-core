@@ -25,13 +25,13 @@ namespace LoESoft.Client
         public GameApplication(GameUser gameUser)
         {
             GameUser = gameUser;
-
+            
             GraphicsDeviceManager = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = WIDTH,
                 PreferredBackBufferHeight = HEIGHT
             };
-
+            
             IsMouseVisible = true;
 
             Content.RootDirectory = "Content";
