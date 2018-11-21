@@ -1,1 +1,0 @@
-"$(SolutionDir)\plugins\tt-14.exe" -a !!build!true "$(ProjectDir)Properties\AssemblyInfo.tt"
