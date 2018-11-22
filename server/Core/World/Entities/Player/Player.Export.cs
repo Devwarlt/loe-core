@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Core.World.Stats;
+using System;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
@@ -38,7 +39,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
             Export.AddOrUpdate<Item>(StatType.INVENTORY_29, Inventory.Items[29]);
             Export.AddOrUpdate<Item>(StatType.INVENTORY_30, Inventory.Items[30]);
             Export.AddOrUpdate<Item>(StatType.INVENTORY_31, Inventory.Items[31]);
-            
+
             return base.ExportStat();
         }
 

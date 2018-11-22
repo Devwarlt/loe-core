@@ -123,6 +123,8 @@ namespace LoESoft.Server.Core.Database
                 return false;
             }
 
+            var inv = new Inventory();
+
             var character = new Character()
             {
                 Id = account.CurrentCharacterId,
@@ -135,7 +137,7 @@ namespace LoESoft.Server.Core.Database
                     Y = 0
                 },
                 Creation = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss UTC"),
-                Inventory = new Inventory()
+                Inventory = inv
             };
 
             account.CurrentCharacterId++;

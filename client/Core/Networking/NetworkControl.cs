@@ -34,6 +34,8 @@ namespace LoESoft.Client.Core.Networking
         private bool Disconnected { get; set; }
         private bool Reconnecting { get; set; }
 
+        private Zipper _zipper;
+
         public NetworkControl(GameUser gameUser, Server server)
         {
             GameUser = gameUser;
@@ -46,6 +48,7 @@ namespace LoESoft.Client.Core.Networking
                 ReceiveTimeout = 1000
             };
             Reconnecting = true;
+            _zipper = new Zipper();
         }
 
         public void Connect()
@@ -106,7 +109,7 @@ namespace LoESoft.Client.Core.Networking
                     return;
                 }
 
-                var buffer = Encoding.UTF8.GetBytes(IO.ExportPacket(new PacketData()
+                var buffer = _zipper.Zip(IO.ExportPacket(new PacketData()
                 {
                     PacketID = outgoingPacket.PacketID,
                     Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
@@ -162,7 +165,7 @@ namespace LoESoft.Client.Core.Networking
 
                         Array.Copy(Buffer, buffer, len);
 
-                        var data = Encoding.UTF8.GetString(buffer);
+                        var data = Encoding.UTF8.GetString(_zipper.Unzip(buffer));
                         var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
                         GetIncomingPacket(packetData).Handle(GameUser);

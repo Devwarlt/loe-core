@@ -5,10 +5,10 @@ namespace LoESoft.Server.Core.World.Entities.Player.Attribute
     public class Inventory
     {
         public Item[] Items { get; set; }
-        
+
         public Inventory()
         {
-            Items = new Item[32]; //Why not?
+            Items = new Item[32];
 
             for (var i = 0; i < Items.Length; i++)
                 SetItem(i, Item.Create(XmlLibrary.ItemsXml[9]));

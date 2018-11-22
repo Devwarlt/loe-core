@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
+using System;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {

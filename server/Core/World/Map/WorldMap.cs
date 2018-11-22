@@ -37,11 +37,9 @@ namespace LoESoft.Server.Core.World
             Task.Factory.StartNew(() =>
             {
                 for (var x = 0; x < WIDTH; x++)
-                {
                     for (var y = 0; y < HEIGHT; y++)
                         Tiles[x, y] = new Tile(Manager, rand.Next(0, 4)) { X = x, Y = y };
-                }
-
+                
                 Chunks.Add(new Tuple<int, int>(0, 0), new Chunk(Manager, 0, 0));
                 Chunks[new Tuple<int, int>(0, 0)].RandomGen();
 

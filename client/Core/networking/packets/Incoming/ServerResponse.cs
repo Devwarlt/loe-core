@@ -96,6 +96,9 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                 var content = Content.Split(',');
 
                 GameApplication.CharacterScreen.RefreshCharacterSelection(int.Parse(content[0]), int.Parse(content[1]));
+            }else
+            {
+                App.Warn(Content);
             }
         }
 

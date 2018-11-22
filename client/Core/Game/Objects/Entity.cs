@@ -62,7 +62,7 @@ namespace LoESoft.Client.Core.Game.Objects
             switch (type)
             {
                 case StatType.HEALTH: Health = int.Parse(val); return;
-                case StatType.SIZE: Size = int.Parse(val); return;
+                //case StatType.SIZE: Size = int.Parse(val); return;
             }
         }
 

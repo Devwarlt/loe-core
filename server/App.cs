@@ -63,9 +63,8 @@ namespace LoESoft.Server
 
             try
             {
-                Database = new Database();
-
                 XmlLibrary.Init();
+                Database = new Database();
 
                 var manager = new WorldManager();
                 var connection = new ConnectionListener(manager);
