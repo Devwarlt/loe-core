@@ -72,7 +72,8 @@
     <Compile Include="Assets\Xml\Structure\ItemsContent.cs" />
     <Compile Include="Assets\Xml\Structure\ObjectsContent.cs" />
     <Compile Include="Assets\Xml\Structure\TilesContent.cs" />
-    <Compile Include="Assets\Xml\Structure\ContentType.cs" />
+    <Compile Include="Assets\Xml\Structure\XmlContent.ContentType.cs" />
+    <Compile Include="Assets\Xml\Structure\XmlContent.XmlTexture.cs" />
     <Compile Include="Assets\Xml\XmlLibrary.cs" />
     <Compile Include="Assets\Xml\XmlLoader.cs" />
     <Compile Include="Core\Client\GameUser.cs" />
@@ -101,8 +102,6 @@
     <Compile Include="Core\Game\User\GUI\UI\Elements\InventoryView.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\ItemCell.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\StatView.cs" />
-    <Compile Include="Core\Game\User\GUI\UI\MiniMap.cs" />
-    <Compile Include="Core\Game\User\GUI\UI\OptionsTable.cs" />
     <Compile Include="Core\Game\User\GUI\UI\PlayerInfoTable.cs" />
     <Compile Include="Core\GUI\GameDialog\GameDialog.cs">
       <SubType>UserControl</SubType>
