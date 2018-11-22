@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Server", "server\Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Client", "client\LoESoft.Client.csproj", "{F63BAB16-ADF3-48C8-B4B7-24EF00EA9211}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.LCBase", "lcbase\LoESoft.LCBase.csproj", "{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Dlls", "dllassets\LoESoft.Dlls.csproj", "{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.MapEditor", "mapeditor\LoESoft.MapEditor.csproj", "{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}"
 EndProject

@@ -7,9 +7,9 @@
     <ProjectGuid>{A5AB35CC-6BC4-4F34-8269-529ACA701CA4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LoESoft.LCBase</RootNamespace>
-    <AssemblyName>LoESoft.LCBase</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>LoESoft.Dlls</RootNamespace>
+    <AssemblyName>LoESoft.Dlls</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -45,12 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base.cs" />
+    <Compile Include="Database\LoEDb.cs" />
+    <Compile Include="Database\LoEDb.Directory.cs" />
+    <Compile Include="Database\LoEDb.IO.cs" />
+    <Compile Include="GZip\GZipCompression.cs" />
+    <Compile Include="GZip\GZipCompression.Utils.cs" />
+    <Compile Include="MapEditor\LoEMapper.cs" />
+    <Compile Include="MapEditor\LoEMapper.Directory.cs" />
+    <Compile Include="MapEditor\LoEMapper.IO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
