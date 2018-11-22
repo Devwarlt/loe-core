@@ -10,7 +10,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
         public Sprite ItemSprite { get; set; }
 
         public ItemCell(int x, int y) 
-            : base(x, y, 50, 50, new RGBColor(200, 100, 0), 1)
+            : base(x, y, 50, 50, new RGBColor(26, 100, 0), 1)
         {
         }
 

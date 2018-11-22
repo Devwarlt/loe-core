@@ -19,8 +19,8 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         protected ExitButton ExitBtn;
         protected Mask GrayMask;
 
-        public Panel(int x, int y, string title, int width = 400, int height = 400, RGBColor color = null)
-            : base(x, y, width, height, color)
+        public Panel(int x, int y, string title, int width = 400, int height = 400, RGBColor color = null, float opacity = 1f)
+            : base(x, y, width, height, color, opacity)
         {
             Title = new TextDisplay((width / 2) - ((int)TextDisplay.MeasureString(title).X / 2), 5, title);
             ExitBtn = new ExitButton(width - 23, 3, 20, 20);

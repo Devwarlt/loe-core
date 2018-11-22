@@ -31,6 +31,8 @@ namespace LoESoft.Client.Assets
             AddSprites("playersEmbed");
             AddSprites("tilesEmbed");
             AddSprites("objectsEmbed");
+            AddSprites("itemsEmbed");
+            AddSprites("iconSprites");
         }
 
         public static void AddSprites(string filename) =>

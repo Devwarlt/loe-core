@@ -62,6 +62,7 @@ namespace LoESoft.Server.Core.World.Entities
             ObjectId = EntityManager.GetNextId();
             Export = new StatExportManager();
             Health = new Random().Next(10, 100);
+            Size = 8;
         }
 
         public void Move(int x, int y)
@@ -82,15 +83,10 @@ namespace LoESoft.Server.Core.World.Entities
         {
         }
 
-        public virtual void Dispose()
-        {
+        public virtual void Dispose() =>
             Manager.Core.Map.Chunks[new Tuple<int, int>(ChunkX, ChunkY)].Remove(this);
-        }
 
-        public void OnUpdate()
-        {
-            UpdateCount = 0;
-        }
+        public virtual void OnUpdate() => UpdateCount = 0;
 
         public static Entity Create(WorldManager manager, int x, int y, int id)
         {
@@ -99,8 +95,7 @@ namespace LoESoft.Server.Core.World.Entities
             var entity = new Entity(manager, id)
             {
                 X = x,
-                Y = y,
-                Size = 8
+                Y = y
             };
 
             return entity;

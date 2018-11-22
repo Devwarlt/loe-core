@@ -1,10 +1,15 @@
 ﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.Objects;
+using LoESoft.Client.Core.Game.Objects.Stats;
+using LoESoft.Client.Core.Game.User.Data;
 using LoESoft.Client.Core.Game.User.GUI;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LoESoft.Client.Core.Game.User
@@ -14,7 +19,8 @@ namespace LoESoft.Client.Core.Game.User
         public GameUser User { get; private set; }
 
         public Player Player { get; private set; }
-        //public PlayerHUD HUD { get; private set; }
+        public Inventory Inventory { get; private set; }
+        public PlayerHUD HUD { get; set; }
 
         public int ObjectId { get; private set; }
 
@@ -23,14 +29,40 @@ namespace LoESoft.Client.Core.Game.User
             CanMove = true;
             User = user;
             ObjectId = objId;
+
+            Inventory = new Inventory();
+            HUD = new PlayerHUD();
             Player = new Player(classType);
+
             Player.ObjectId = ObjectId;
             Player.Init();
         }
-        
+
         public void ImportStat(string export)
         {
-            Player.ImportStat(export);
+            var stats = JsonConvert.DeserializeObject<List<string>>(export);
+
+            foreach (var i in stats)
+            {
+                var stat = JsonConvert.DeserializeObject<Stat>(i);
+                ChangeStat(stat.StatType, stat.Value);
+            }
+        }
+
+        private void ChangeStat(int type, object value)
+        {
+            switch (type)
+            {
+                case StatType.HEALTH: Player.Health = int.Parse(value.ToString()); break;
+                case StatType.SIZE: Player.Size = int.Parse(value.ToString()); break;
+                case StatType.INVENTORY:
+                    {
+                        var inv = JsonConvert.DeserializeObject<Inventory>(value.ToString());
+                        Inventory.Init(inv.Items);
+                        HUD.InfoTable.Init(Inventory);
+                    }
+                    break;
+            }
         }
 
         public bool CanMove { get; set; }
@@ -59,14 +91,18 @@ namespace LoESoft.Client.Core.Game.User
 
         public void Update(GameTime gameTime)
         {
+            HUD.Update(gameTime);
             HandlePlayerInput();
 
             Player.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Matrix matrix)
         {
             Player.Draw(spriteBatch);
+            spriteBatch.End();
+            spriteBatch.Begin();
+            HUD.Draw(spriteBatch);
         }
 
         private void SendMovePacket() => User.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });

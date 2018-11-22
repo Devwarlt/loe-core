@@ -94,6 +94,8 @@
     <Compile Include="Core\Game\Objects\Tile.cs" />
     <Compile Include="Core\Game\PathFinder\AStar.cs" />
     <Compile Include="Core\Game\PathFinder\PathNode.cs" />
+    <Compile Include="Core\Game\User\Data\Inventory.cs" />
+    <Compile Include="Core\Game\User\Data\Item.cs" />
     <Compile Include="Core\Game\User\GamePlayer.cs" />
     <Compile Include="Core\Game\User\GUI\Icon\IconTab.cs" />
     <Compile Include="Core\Game\User\GUI\PlayerHUD.cs" />

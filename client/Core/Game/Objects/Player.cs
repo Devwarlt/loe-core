@@ -25,10 +25,7 @@ namespace LoESoft.Client.Core.Game.Objects
             DistinationY = (int)Y;
         }
 
-        public void Init()
-        {
-            Animation.UpdateOrAdd(Content);
-        }
+        public void Init() => Animation.UpdateOrAdd(Content);
 
         public override void Update(GameTime gameTime)
         {

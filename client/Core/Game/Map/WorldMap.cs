@@ -126,7 +126,7 @@ namespace LoESoft.Client.Core.Game.Map
 
             var sight = GetSightPoints(x, y);
 
-            foreach (var i in Objects.Where(_ => sight.Contains(_.Value.Pos)))
+            foreach (var i in Objects.ToArray().Where(_ => sight.Contains(_.Value.Pos)))
                 i.Value.Entity.Update(gameTime);
         }
 

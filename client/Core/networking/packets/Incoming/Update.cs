@@ -23,7 +23,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
                 if (gameplayer != null)
                     GameApplication.GameScreen.Controller.ImportStat(gameplayer.Stats);
-
+                
                 objects.RemoveAll(_ => _.ObjectId == player.ObjectId);
             }
 

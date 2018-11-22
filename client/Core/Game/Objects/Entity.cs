@@ -30,7 +30,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public int ObjectId { get; set; }
 
         //Stats
-        public int Size { get; set; } = 8;
+        public int Size { get; set; }
         public int Health { get; set; }
 
         public Entity(int id)
@@ -38,6 +38,7 @@ namespace LoESoft.Client.Core.Game.Objects
             Id = id;
             if (Id != -1)
                 Content = XmlLibrary.ObjectsXml[Id];
+            Size = 8;
         }
 
         public virtual void Update(GameTime gameTime)
@@ -56,19 +57,17 @@ namespace LoESoft.Client.Core.Game.Objects
             }
         }
 
-        private void ChangeStat(int type, object value)
+        public virtual void ChangeStat(int type, object value)
         {
-            var val = value.ToString();
             switch (type)
             {
-                case StatType.HEALTH: Health = int.Parse(val); return;
-                //case StatType.SIZE: Size = int.Parse(val); return;
+                case StatType.HEALTH: Health = int.Parse(value.ToString()); break;
+                case StatType.SIZE: Size = int.Parse(value.ToString()); break;
             }
         }
 
         public virtual void HandleMovement(float dt)
         {
-            //TODO: Pathfinding
             if (DistinationX != X)
             {
                 if (DistinationX > X)
