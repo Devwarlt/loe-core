@@ -1,4 +1,4 @@
-﻿using LoESoft.LCBase;
+﻿using LoESoft.Dlls.Database;
 using LoESoft.Server.Core.Database.Models;
 using LoESoft.Server.Core.Utils;
 using LoESoft.Server.Core.World.Entities.Player.Attribute;
@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace LoESoft.Server.Core.Database
 {
-    public class Database : Base, IDisposable
+    public class Database : LoEDb, IDisposable
     {
         public static long LastAccountId = 0;
         public static string AccountsPath => "accounts";
