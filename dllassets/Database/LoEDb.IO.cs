@@ -19,11 +19,11 @@ namespace LoESoft.Dlls.Database
         public void Save<T>(string folder, string target, T data)
         {
             if (data == null)
-                Logger($"(SaveException) Missing data from path: /{MainDir}/{BaseDir}/{folder}/{target}.json");
+                Logger($"(SaveException) Missing data from path: {MainDir}\\{BaseDir}\\{folder}\\{target}.json");
             else
             {
                 File.WriteAllText(Path.Combine(MainDir, $"/{BaseDir}/{folder}/{target}.json"), JsonConvert.SerializeObject(data));
-                Logger($"Saved data to '/{MainDir}/{BaseDir}/{folder}/{target}.json'.");
+                Logger($"Saved data to '{MainDir}\\{BaseDir}\\{folder}\\{target}.json'.");
             }
         }
 
@@ -48,9 +48,9 @@ namespace LoESoft.Dlls.Database
             try
             {
                 data = JsonConvert.DeserializeObject<T>(File.ReadAllText(Path.Combine(MainDir, $"{BaseDir}/{folder}/{target}.json")));
-                Logger($"Loaded data from '/{MainDir}/{BaseDir}/{folder}/{target}.json'.");
+                Logger($"Loaded data from '{MainDir}\\{BaseDir}\\{folder}\\{target}.json'.");
             }
-            catch { Logger($"(LoadException) Missing data from path: /{MainDir}/{BaseDir}/{folder}/{target}.json"); }
+            catch { Logger($"(LoadException) Missing data from path: {MainDir}\\{BaseDir}\\{folder}\\{target}.json"); }
 
             return (T)data;
         }

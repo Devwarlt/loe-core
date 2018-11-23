@@ -1,6 +1,4 @@
-﻿using LoESoft.MapEditor.Core.Layer;
-using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Drawing;
 using System.IO;
@@ -98,32 +96,5 @@ namespace LoESoft.MapEditor.Core.Util
 
             return null;
         }
-
-        public static void SaveMap(Map map, string name)
-        {
-            if (!Directory.Exists(GetMapFolderPath))
-                Directory.CreateDirectory(GetMapFolderPath);
-
-            App.Info($"Saving '{name}' map...");
-
-            File.WriteAllText(GetPath($"{name}.brmemap"), JsonConvert.SerializeObject(map));
-
-            App.Info($"Saving '{name}' map... OK!");
-        }
-
-        public static Map LoadMap(string name)
-        {
-            if (!Directory.Exists(GetMapFolderPath))
-                Directory.CreateDirectory(GetMapFolderPath);
-
-            if (!File.Exists(GetPath($"{name}.brmemap")))
-                return null;
-
-            return JsonConvert.DeserializeObject<Map>(File.ReadAllText(GetPath($"{name}.brmemap")));
-        }
-
-        public static string ObjectToString<T>(T obj) => JsonConvert.SerializeObject(obj);
-
-        public static T StringToObject<T>(string data) => JsonConvert.DeserializeObject<T>(data);
     }
 }

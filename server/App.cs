@@ -1,7 +1,9 @@
-﻿using LoESoft.Server.Assets.Xml;
+﻿using LoESoft.Dlls.Utils;
+using LoESoft.Server.Assets.Xml;
 using LoESoft.Server.Core.Database;
 using LoESoft.Server.Core.Networking;
 using LoESoft.Server.Core.World;
+using LoESoft.Server.Core.World.Map.Structure;
 using LoESoft.Server.Settings;
 using LoESoft.Server.Utils;
 using NLog;
@@ -9,6 +11,7 @@ using NLog.Config;
 using NLog.Targets;
 using Rollbar;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 
@@ -33,6 +36,9 @@ namespace LoESoft.Server
 
         // Database
         public static Database Database { get; set; }
+
+        // DLL Utils
+        public static Util LoEUtils { get; set; }
 
         public static void Main(string[] args)
         {
@@ -61,10 +67,15 @@ namespace LoESoft.Server
 
             Info("Game Server is loading...");
 
+            Database = new Database();
+            LoEUtils = new Util((message) => Warn(message));
+
             try
             {
                 XmlLibrary.Init();
-                Database = new Database();
+
+                Map.BinaryMapsCache = new List<KeyValuePair<bool, byte[]>>();
+                Map.LoadEmbeddedMaps();
 
                 var manager = new WorldManager();
                 var connection = new ConnectionListener(manager);

@@ -69,6 +69,8 @@ namespace LoESoft.MapEditor.Core.GUI
 
         private void GridCheckBox_CheckedChanged(object sender, EventArgs e) => MapEditor.ShowGrid = GridCheckBox.Checked;
 
+        private void CompressionCheckBox_CheckedChanged(object sender, EventArgs e) => MapEditor.Mapper.EnableCompression = CompressionCheckBox.Checked;
+
         private void NewButton_Click(object sender, EventArgs e)
         {
             MapEditor.MapState = MapState.Inactive;

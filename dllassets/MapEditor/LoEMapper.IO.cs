@@ -9,7 +9,7 @@ namespace LoESoft.Dlls.MapEditor
     {
         public void SaveMap(Map map, string name)
         {
-            var path = Path.Combine(MainDir, $"{name}.{_format}");
+            var path = Path.Combine(MainDir, $"/{BaseDir}/{name}.{_format}");
 
             if (map == null)
                 Logger($"(SaveException) Missing data from path: {path}");
@@ -22,13 +22,13 @@ namespace LoESoft.Dlls.MapEditor
                 else
                     File.WriteAllText(path, content);
 
-                Logger($"Saved map data to '/{MainDir}/{name}.{_format}'.");
+                Logger($"Saved map data to '{MainDir}\\{BaseDir}\\{name}.{_format}'.");
             }
         }
 
         public Map LoadMap(string name)
         {
-            var path = Path.Combine(MainDir, $"{name}.{_fileFormatCompressed}");
+            var path = Path.Combine(MainDir, $"/{BaseDir}/{name}.{FileFormatCompressed}");
 
             if (!File.Exists(path))
             {
@@ -44,7 +44,7 @@ namespace LoESoft.Dlls.MapEditor
             else
                 content = JsonConvert.DeserializeObject<Map>(File.ReadAllText(path));
 
-            Logger($"Loaded data from '/{MainDir}/{name}.{_format}'.");
+            Logger($"Loaded data from '{MainDir}\\{BaseDir}\\{name}.{_format}'.");
 
             return content;
         }

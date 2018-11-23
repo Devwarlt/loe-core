@@ -1,4 +1,5 @@
-﻿using LoESoft.MapEditor.Core.Assets;
+﻿using LoESoft.Dlls.MapEditor;
+using LoESoft.MapEditor.Core.Assets;
 using LoESoft.MapEditor.Core.GUI;
 using LoESoft.MapEditor.Core.Layer;
 using LoESoft.MapEditor.Core.Util;
@@ -33,6 +34,7 @@ namespace LoESoft.MapEditor
         public static Dictionary<string, List<InteractiveObject>> InteractiveObjects { get; set; }
         public static Dictionary<string, Texture2D> Textures { get; set; }
         public static Dictionary<string, Image> Images { get; set; }
+        public static LoEMapper<Map> Mapper { get; set; }
 
         public static Vector2 DrawOffset = Vector2.Zero;
 
@@ -67,6 +69,9 @@ namespace LoESoft.MapEditor
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             XmlLibrary.Init();
+
+            Mapper = new LoEMapper<Map>("BRMEMaps", (message) => App.Warn(message));
+            Mapper.CreateMainDirectory();
 
             InteractiveObjects = new Dictionary<string, List<InteractiveObject>>();
             Textures = new Dictionary<string, Texture2D>();
@@ -165,6 +170,8 @@ namespace LoESoft.MapEditor
                 if (InteractiveObject.LayerData.Type != MapLayer.ABSTRACT)
                     Map.Layers.FirstOrDefault(layer => layer.MapLayer == InteractiveObject.LayerData.Type).SetTiles(MouseState, new ChunkData()
                     {
+                        ContentType = InteractiveObject.Type,
+                        Id = InteractiveObject.Id,
                         Group = InteractiveObject.LayerData.Group,
                         BoundX = InteractiveObject.TextureData.X,
                         BoundY = InteractiveObject.TextureData.Y

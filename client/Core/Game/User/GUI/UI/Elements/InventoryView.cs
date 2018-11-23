@@ -8,13 +8,13 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
 
         private int _globalX = 5;
         private int _globalY = 5;
-        
-        public InventoryView(int x, int y) 
+
+        public InventoryView(int x, int y)
             : base(x, y, 445, 225, new Drawing.RGBColor(255, 255, 255))
         {
             Items = new ItemCell[32];
 
-            for(var i = 0; i < Items.Length; i++)
+            for (var i = 0; i < Items.Length; i++)
             {
                 Items[i] = new ItemCell(_globalX, _globalY);
                 var newX = _globalX + 55;

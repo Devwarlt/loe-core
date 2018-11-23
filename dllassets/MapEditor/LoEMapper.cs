@@ -4,18 +4,25 @@ namespace LoESoft.Dlls.MapEditor
 {
     public partial class LoEMapper<Map>
     {
-        public string MainDir { get; }
-        public bool EnableCompression { get; }
+        public const string FileFormatCompressed = "lscmap";
+        public const string FileFormatNonCompressed = "lsmap";
 
-        private string _format { get; }
+        public string MainDir { get; }
+        public string BaseDir { get; }
+
+        public bool EnableCompression { get; set; }
+
+        private string _format { get => EnableCompression ? FileFormatCompressed : FileFormatNonCompressed; }
 
         private readonly Action<string> _log;
-        private readonly string _fileFormatCompressed = "lscmap";
-        private readonly string _fileFormatNonCompressed = "lsmap";
 
         private void Logger(string message) => _log?.Invoke(message);
 
         public LoEMapper(string basedir) : this(basedir, false, null)
+        {
+        }
+
+        public LoEMapper(string basedir, Action<string> log) : this(basedir, false, log)
         {
         }
 
@@ -26,10 +33,10 @@ namespace LoESoft.Dlls.MapEditor
         public LoEMapper(string basedir, bool enableCompression, Action<string> log)
         {
             MainDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            BaseDir = basedir;
             EnableCompression = enableCompression;
 
             _log = log;
-            _format = EnableCompression ? _fileFormatCompressed : _fileFormatNonCompressed;
         }
     }
 }

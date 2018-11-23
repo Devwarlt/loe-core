@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Assets.Xml;
+using LoESoft.Server.Assets.Xml.Structure;
 
 namespace LoESoft.Server.Core.World.Entities.Player.Attribute
 {
@@ -11,7 +12,7 @@ namespace LoESoft.Server.Core.World.Entities.Player.Attribute
             Items = new Item[32];
 
             for (var i = 0; i < Items.Length; i++)
-                SetItem(i, Item.Create(XmlLibrary.ItemsXml[9]));
+                SetItem(i, Item.Create(XmlLibrary.ItemsXml[9] as ItemsContent));
         }
 
         public void SetItem(int idx, Item item) => Items[idx] = item;

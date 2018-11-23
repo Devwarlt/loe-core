@@ -1,4 +1,5 @@
 ﻿using LoESoft.Server.Assets.Xml;
+using LoESoft.Server.Assets.Xml.Structure;
 using LoESoft.Server.Core.World.Entities.Interfaces;
 using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Core.World.Stats;
@@ -29,6 +30,7 @@ namespace LoESoft.Server.Core.World.Entities
         public int ChunkY => Y / Chunk.SIZE;
 
         private int _realX;
+
         public int X
         {
             get => _realX;
@@ -36,6 +38,7 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         private int _realY;
+
         public int Y
         {
             get => _realY;
@@ -43,6 +46,7 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         private int _hp;
+
         public int Health
         {
             get => _hp;
@@ -50,6 +54,7 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         private int _size;
+
         public int Size
         {
             get => _size;
@@ -91,7 +96,7 @@ namespace LoESoft.Server.Core.World.Entities
 
         public static Entity Create(WorldManager manager, int x, int y, int id)
         {
-            var properties = XmlLibrary.ObjectsXml[id];
+            var properties = XmlLibrary.ObjectsXml[id] as ObjectsContent;
 
             var entity = new Entity(manager, id)
             {

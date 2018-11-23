@@ -31,6 +31,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         //Stats
         public int Size { get; set; }
+
         public int Health { get; set; }
 
         public Entity(int id)

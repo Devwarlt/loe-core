@@ -1,5 +1,4 @@
 ﻿using LoESoft.Server.Core.World.Entities;
-using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Utils;
 using System;
 using System.Collections.Generic;

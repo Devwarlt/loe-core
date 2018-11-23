@@ -1,6 +1,6 @@
-﻿using static LoESoft.MapEditor.Core.Assets.Structure.XmlContent;
+﻿using static LoESoft.Server.Assets.Xml.Structure.XmlContent;
 
-namespace LoESoft.MapEditor.Core.Layer
+namespace LoESoft.Server.Core.World.Map.Structure
 {
     public class ChunkData
     {

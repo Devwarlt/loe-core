@@ -31,7 +31,7 @@ namespace LoESoft.Client.Core.Game
             X = MathHelper.Lerp(X, Focus.DrawX, 1f);
             Y = MathHelper.Lerp(Y, Focus.DrawY, 1f);
 
-            return Matrix.CreateTranslation(-X - (Focus.Size / 2), -Y - (Focus.Size / 2), 0) * 
+            return Matrix.CreateTranslation(-X - (Focus.Size / 2), -Y - (Focus.Size / 2), 0) *
                 Matrix.CreateScale((float)SCALE) *
                 Matrix.CreateRotationZ(_rotationIncrement * (float)(Math.PI / 2)) *
                 Matrix.CreateTranslation(GameApplication.WIDTH / 2, GameApplication.HEIGHT / 2, 0);

@@ -5,7 +5,7 @@ using LoESoft.Server.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace LoESoft.Server.Core.World
 {
@@ -34,19 +34,22 @@ namespace LoESoft.Server.Core.World
             //Temporary Initiazation
             var rand = new Random();
 
-            Task.Factory.StartNew(() =>
-            {
-                for (var x = 0; x < WIDTH; x++)
-                    for (var y = 0; y < HEIGHT; y++)
-                        Tiles[x, y] = new Tile(Manager, rand.Next(0, 4)) { X = x, Y = y };
-                
-                Chunks.Add(new Point(0, 0), new Chunk(Manager, 0, 0));
-                Chunks[new Point(0, 0)].RandomGen();
+            for (var x = 0; x < WIDTH; x++)
+                for (var y = 0; y < HEIGHT; y++)
+                    Tiles[x, y] = new Tile(Manager, rand.Next(0, 4)) { X = x, Y = y };
 
-                Loaded = true;
+            var entrypoint = new Point(0, 0);
 
-                App.Warn("Map Successfully Initialized!");
-            });
+            Chunks.Add(entrypoint, new Chunk(Manager, 0, 0));
+
+            do Thread.Sleep(500);
+            while (!Chunks.ContainsKey(entrypoint));
+
+            Chunks[entrypoint].RandomGen();
+
+            Loaded = true;
+
+            App.Warn("Map Successfully Initialized!");
         }
 
         public void Update(WorldTime time)

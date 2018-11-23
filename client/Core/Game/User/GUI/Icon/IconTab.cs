@@ -11,7 +11,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.Icon
     {
         public class IconBar : Sprite
         {
-            public IconBar(int x, int y, Texture2D texture) 
+            public IconBar(int x, int y, Texture2D texture)
                 : base(x, y, 45, 45, texture, new RGBColor(255, 255, 255), 0.9f)
             {
                 AddEventListener(Drawing.Events.Event.CLICKLEFT, delegate
@@ -29,7 +29,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.Icon
         public IconBar ChatIcon { get; set; } //To toggle chat
 
         public IconTab(int x, int y, Action onInfo, Action onOption = null, Action onMiniMap = null, Action onChat = null)
-            :base (x, y, 225, 50, new RGBColor(25, 25, 75), 0.7f)
+            : base(x, y, 225, 50, new RGBColor(25, 25, 75), 0.7f)
         {
             var iconSet = AssetLibrary.Sprites["iconSprites"];
 

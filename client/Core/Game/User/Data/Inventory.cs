@@ -4,7 +4,9 @@
     {
         public Item[] Items { get; set; }
 
-        public Inventory() { }
+        public Inventory()
+        {
+        }
 
         public void Init(Item[] items)
         {

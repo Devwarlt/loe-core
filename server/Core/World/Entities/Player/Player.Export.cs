@@ -11,6 +11,5 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
             return base.ExportStat();
         }
-
     }
 }

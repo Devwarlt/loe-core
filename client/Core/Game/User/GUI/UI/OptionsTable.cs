@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.Client.Core.Game.User.GUI.UI
 {
-    class OptionsTable
+    internal class OptionsTable
     {
     }
 }

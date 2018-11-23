@@ -41,6 +41,7 @@
             this.PalleteComboBox = new System.Windows.Forms.ComboBox();
             this.EditorLabel = new System.Windows.Forms.Label();
             this.TitleUnderLine = new System.Windows.Forms.Panel();
+            this.CompressionCheckBox = new System.Windows.Forms.CheckBox();
             this.EditorInformationGroup.SuspendLayout();
             this.MapOptionsGroup.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             this.EditorInformationGroup.Controls.Add(this.MapNameLabel);
             this.EditorInformationGroup.Controls.Add(this.MapSizeLabel);
+            this.EditorInformationGroup.Controls.Add(this.CompressionCheckBox);
             this.EditorInformationGroup.Controls.Add(this.GridCheckBox);
             this.EditorInformationGroup.ForeColor = System.Drawing.SystemColors.Desktop;
             this.EditorInformationGroup.Location = new System.Drawing.Point(14, 74);
@@ -92,7 +94,7 @@
             // 
             this.MapNameLabel.Location = new System.Drawing.Point(6, 16);
             this.MapNameLabel.Name = "MapNameLabel";
-            this.MapNameLabel.Size = new System.Drawing.Size(44, 13);
+            this.MapNameLabel.Size = new System.Drawing.Size(222, 13);
             this.MapNameLabel.TabIndex = 0;
             this.MapNameLabel.Text = "Name: -";
             // 
@@ -100,7 +102,7 @@
             // 
             this.MapSizeLabel.Location = new System.Drawing.Point(6, 37);
             this.MapSizeLabel.Name = "MapSizeLabel";
-            this.MapSizeLabel.Size = new System.Drawing.Size(36, 13);
+            this.MapSizeLabel.Size = new System.Drawing.Size(222, 13);
             this.MapSizeLabel.TabIndex = 0;
             this.MapSizeLabel.Text = "Size: -";
             // 
@@ -176,6 +178,17 @@
             this.TitleUnderLine.Size = new System.Drawing.Size(234, 2);
             this.TitleUnderLine.TabIndex = 3;
             // 
+            // CompressionCheckBox
+            // 
+            this.CompressionCheckBox.AutoSize = true;
+            this.CompressionCheckBox.Location = new System.Drawing.Point(13, 53);
+            this.CompressionCheckBox.Name = "CompressionCheckBox";
+            this.CompressionCheckBox.Size = new System.Drawing.Size(122, 17);
+            this.CompressionCheckBox.TabIndex = 0;
+            this.CompressionCheckBox.Text = "Enable Compression";
+            this.CompressionCheckBox.UseVisualStyleBackColor = true;
+            this.CompressionCheckBox.CheckedChanged += new System.EventHandler(this.CompressionCheckBox_CheckedChanged);
+            // 
             // InterfaceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,5 +232,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox PalleteComboBox;
         private System.Windows.Forms.Panel PalletePanel;
+        private System.Windows.Forms.CheckBox CompressionCheckBox;
     }
 }

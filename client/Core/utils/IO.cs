@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
-using System.IO.Compression;
 using System.Text;
 
 namespace LoESoft.Client.Core.Utils

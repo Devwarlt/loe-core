@@ -6,10 +6,12 @@ namespace LoESoft.Dlls.MapEditor
     {
         public void CreateMainDirectory()
         {
-            if (!Directory.Exists(MainDir))
+            var basedir = Path.Combine(MainDir, BaseDir);
+
+            if (!Directory.Exists(basedir))
             {
-                Directory.CreateDirectory(MainDir);
-                Logger($"Directory '{MainDir}' has been created!");
+                Directory.CreateDirectory(basedir);
+                Logger($"Directory '{basedir}' has been created!");
             }
         }
     }

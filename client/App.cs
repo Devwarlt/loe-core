@@ -4,7 +4,6 @@ using LoESoft.Client.Properties;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
-using Rollbar;
 using System;
 using System.Drawing;
 using System.Drawing.Text;

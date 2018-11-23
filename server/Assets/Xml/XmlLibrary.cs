@@ -7,9 +7,9 @@ namespace LoESoft.Server.Assets.Xml
 {
     public static class XmlLibrary
     {
-        public static Dictionary<int, ObjectsContent> ObjectsXml = new Dictionary<int, ObjectsContent>();
-        public static Dictionary<int, ItemsContent> ItemsXml = new Dictionary<int, ItemsContent>();
-        public static Dictionary<int, TilesContent> TilesXml = new Dictionary<int, TilesContent>();
+        public static Dictionary<int, IXmlContent> ObjectsXml = new Dictionary<int, IXmlContent>();
+        public static Dictionary<int, IXmlContent> ItemsXml = new Dictionary<int, IXmlContent>();
+        public static Dictionary<int, IXmlContent> TilesXml = new Dictionary<int, IXmlContent>();
 
         public static void Init()
         {
@@ -25,6 +25,17 @@ namespace LoESoft.Server.Assets.Xml
 
         private static void DisplayFormattedAmount<T>(Dictionary<int, T> data, string singular, string plural)
             => App.Info($"- Loaded {data.Keys.Count} {(data.Keys.Count > 1 ? plural : singular)}.");
+
+        public static Dictionary<int, IXmlContent> GetXmlsByContentType(ContentType type)
+        {
+            switch (type)
+            {
+                case ContentType.Items: return ItemsXml;
+                case ContentType.Objects: return ObjectsXml;
+                case ContentType.Tiles: return TilesXml;
+                default: return null;
+            }
+        }
 
         private static void LoadContents()
         {

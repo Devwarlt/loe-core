@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Xml.XPath;
-using static LoESoft.Client.Assets.Xml.Structure.XmlContent;
 
 namespace LoESoft.Client.Assets.Xml
 {

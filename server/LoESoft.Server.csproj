@@ -202,6 +202,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Xml\IXmlContent.cs" />
     <Compile Include="Assets\Xml\Structure\ItemsContent.cs" />
     <Compile Include="Assets\Xml\Structure\ObjectsContent.cs" />
     <Compile Include="Assets\Xml\Structure\TilesContent.cs" />
@@ -248,6 +249,12 @@
     <Compile Include="Core\World\GameClock.cs" />
     <Compile Include="Core\World\Map\Data\ObjectData.cs" />
     <Compile Include="Core\World\Map\Data\TileData.cs" />
+    <Compile Include="Core\World\Map\Structure\ChunkData.cs" />
+    <Compile Include="Core\World\Map\Structure\ChunkObject.cs" />
+    <Compile Include="Core\World\Map\Structure\Layer.cs" />
+    <Compile Include="Core\World\Map\Structure\Map.cs" />
+    <Compile Include="Core\World\Map\Structure\MapLayer.cs" />
+    <Compile Include="Core\World\Map\Structure\MapSize.cs" />
     <Compile Include="Core\World\Map\WorldMap.cs" />
     <Compile Include="Core\World\Map\Chunk.cs" />
     <Compile Include="Core\World\Stats\Stat.cs" />
@@ -266,6 +273,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\Maps\map1.lscmap" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\Maps\map2.lscmap" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\Maps\map3.lscmap" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\Maps\map4.lscmap" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\Maps\map5.lscmap" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Assets\Xml\Embeds\Players.xml">
       <SubType>Designer</SubType>

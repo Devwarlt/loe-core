@@ -2,7 +2,7 @@
 
 namespace LoESoft.Server.Assets.Xml.Structure
 {
-    public partial class XmlContent
+    public partial class XmlContent : IXmlContent
     {
         public ContentType Type { get; set; }
         public int Id { get; set; }

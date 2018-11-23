@@ -5,6 +5,7 @@
         public int TickCount { get; set; }
         public int TotalElapsedMs { get; set; }
     }
+
     public class Point
     {
         public int X { get; set; }
