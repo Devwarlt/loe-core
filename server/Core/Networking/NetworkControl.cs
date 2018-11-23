@@ -1,4 +1,5 @@
-﻿using LoESoft.Server.Core.Networking.Packets;
+﻿using LoESoft.Dlls.GZip;
+using LoESoft.Server.Core.Networking.Packets;
 using LoESoft.Server.Core.Networking.Packets.Incoming;
 using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using LoESoft.Server.Utils;
@@ -26,13 +27,10 @@ namespace LoESoft.Server.Core.Networking
         private Dictionary<PacketID, IncomingPacket> IncomingPackets { get; set; }
         private bool Disconnected { get; set; }
 
-        private Zipper _zipper;
-
         public NetworkControl(Client client, Socket tcpSocket)
         {
             Client = client;
             TcpSocket = tcpSocket;
-            _zipper = new Zipper();
         }
 
         public void SendPacket(OutgoingPacket outgoingPacket)
@@ -47,7 +45,7 @@ namespace LoESoft.Server.Core.Networking
                 return;
             }
 
-            var buffer = _zipper.Zip(IO.ExportPacket(new PacketData()
+            var buffer = GZipCompression.Zip(IO.ExportPacket(new PacketData()
             {
                 PacketID = outgoingPacket.PacketID,
                 Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
@@ -112,7 +110,7 @@ namespace LoESoft.Server.Core.Networking
 
                         Array.Copy(Buffer, buffer, len);
 
-                        var data = Encoding.UTF8.GetString(_zipper.Unzip(buffer));
+                        var data = Encoding.UTF8.GetString(GZipCompression.UnZip(buffer));
                         var packetData = JsonConvert.DeserializeObject<PacketData>(data);
 
                         if (Client != null)

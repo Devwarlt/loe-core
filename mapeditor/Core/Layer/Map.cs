@@ -11,9 +11,9 @@ namespace LoESoft.MapEditor.Core.Layer
     {
         public MapSize Size { get; set; }
         public List<Layer> Layers { get; set; }
+
         public int Width { get; set; }
         public int Height { get; set; }
-
         private int WIDTH_MAGIC_NUMBER => Width - Utils.TILE_SIZE * 3 - 2;
         private int HEIGHT_MAGIC_NUMBER => Height - Utils.TILE_SIZE * 2 - 6;
 
