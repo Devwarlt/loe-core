@@ -2,6 +2,7 @@
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static LoESoft.Client.Core.Game.Objects.Player;
@@ -124,10 +125,8 @@ namespace LoESoft.Client.Core.Game.Map
             if (!MapLoaded)
                 return;
 
-            var sight = GetSightPoints(x, y);
-
-            foreach (var i in Objects.ToArray().Where(_ => sight.Contains(_.Value.Pos)))
-                i.Value.Entity.Update(gameTime);
+            foreach (var i in GetEntitiesInSight(x, y))
+                i.Update(gameTime);
         }
 
         public static void Draw(SpriteBatch spriteBatch, int x, int y)
@@ -135,27 +134,39 @@ namespace LoESoft.Client.Core.Game.Map
             if (!MapLoaded)
                 return;
 
-            var sight = GetSightPoints(x, y);
+            foreach (var i in GetTilesInSight(x, y))
+                i.Draw(spriteBatch);
 
-            foreach (var i in sight)
-                if (TileMap.ContainsKey(i))
-                    TileMap[i].Draw(spriteBatch);
-
-            foreach (var i in Objects.Where(_ => sight.Contains(_.Value.Pos)))
-                i.Value.Entity.Draw(spriteBatch);
+            foreach (var i in GetEntitiesInSight(x, y))
+                i.Draw(spriteBatch);
         }
 
+        public static Tile[] GetTilesInSight(int x, int y)
+        {
+            var sight = GetSightPoints(x, y);
+
+            return TileMap.Where(_ => sight.Contains(_.Key)).Select(_ => _.Value).ToArray();
+        }
+
+        public static Entity[] GetEntitiesInSight(int x, int y)
+        {
+            var sight = GetSightPoints(x, y);
+
+            return Objects.Where(_ => sight.Contains(_.Value.Pos)).Select(_ => _.Value.Entity).ToArray();
+        }
+
+        private static int _areaOfSight = (int)(Math.PI * 5 * 5 + 1);
         public static Point[] GetSightPoints(int X, int Y)
         {
             var points = new List<Point>();
 
-            for (var x = -30; x < 30; x++)
-                for (var y = -30; y < 30; y++)
+            for (var x = -_areaOfSight; x < _areaOfSight; x++)
+                for (var y = -_areaOfSight; y < _areaOfSight; y++)
                 {
                     var sx = x * x;
                     var sy = y * y;
 
-                    if (sx + sy <= 30 && (x + X >= 0 && x + X < WIDTH) &&
+                    if (sx + sy <= _areaOfSight && (x + X >= 0 && x + X < WIDTH) &&
                         (y + Y >= 0 && y + Y < HEIGHT))
                         points.Add(new Point(x + X, y + Y));
                 }

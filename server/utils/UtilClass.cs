@@ -16,5 +16,19 @@
             X = x;
             Y = y;
         }
+
+        public override bool Equals(object obj)
+        {
+            var compareTo = (Point)obj;
+            return (X == compareTo.X && Y == compareTo.Y);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1861411795;
+            hashCode = hashCode * -1521134295 + X.GetHashCode();
+            hashCode = hashCode * -1521134295 + Y.GetHashCode();
+            return hashCode;
+        }
     }
 }

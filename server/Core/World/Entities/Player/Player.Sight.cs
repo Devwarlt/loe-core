@@ -1,21 +1,23 @@
 ﻿using LoESoft.Server.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
     public partial class Player
     {
-        public Point[] GetSightPoints(int radius = 30)
+        public Point[] GetSightPoints(int radius = 5)
         {
+            int areaOfSight = (int)(Math.PI * radius * radius + 1);
             var points = new List<Point>();
 
-            for (var x = -radius; x < radius; x++)
-                for (var y = -radius; y < radius; y++)
+            for (var x = -areaOfSight; x < areaOfSight; x++)
+                for (var y = -areaOfSight; y < areaOfSight; y++)
                 {
                     var sx = x * x;
                     var sy = y * y;
 
-                    if (sx + sy <= radius)
+                    if (sx + sy <= areaOfSight)
                         points.Add(new Point(x + X, y + Y));
                 }
 

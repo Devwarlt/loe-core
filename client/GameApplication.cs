@@ -11,8 +11,8 @@ namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        public static int WIDTH => 1200;
-        public static int HEIGHT => 900;
+        public static int WIDTH { get; set; } = 1200;
+        public static int HEIGHT { get; set; } = 900;
 
         public static GameScreen GameScreen { get; set; }
         public static CharacterScreen CharacterScreen { get; set; }
@@ -32,9 +32,23 @@ namespace LoESoft.Client
                 PreferredBackBufferHeight = HEIGHT
             };
 
+            Window.AllowUserResizing = false;
+            Window.ClientSizeChanged += Window_ClientSizeChanged;
+            
             IsMouseVisible = true;
 
             Content.RootDirectory = "Content";
+        }
+
+        private void Window_ClientSizeChanged(object sender, System.EventArgs e)
+        {
+            int newWidth = Window.ClientBounds.Width;
+            int newHeight = Window.ClientBounds.Height;
+
+            GraphicsDeviceManager.PreferredBackBufferWidth = newWidth;
+            GraphicsDeviceManager.PreferredBackBufferHeight = newHeight;
+            WIDTH = newWidth;
+            HEIGHT = newHeight;
         }
 
         protected override void Initialize()
