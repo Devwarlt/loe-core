@@ -242,7 +242,6 @@
     <Compile Include="Core\World\Entities\Player\Player.Export.cs" />
     <Compile Include="Core\World\Entities\Player\Player.Sight.cs" />
     <Compile Include="Core\World\Entities\Player\Player.Update.cs" />
-    <Compile Include="Core\World\Entities\Player\Points.cs" />
     <Compile Include="Core\World\Entities\Tile.cs" />
     <Compile Include="Core\World\Entities\Entity.cs" />
     <Compile Include="Core\World\Entities\Player\Player.cs" />

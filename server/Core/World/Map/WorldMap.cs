@@ -17,7 +17,7 @@ namespace LoESoft.Server.Core.World
         public WorldManager Manager { get; set; }
 
         public Tile[,] Tiles { get; private set; }
-        public Dictionary<Tuple<int, int>, Chunk> Chunks { get; private set; }
+        public Dictionary<Point, Chunk> Chunks { get; private set; }
         public ConcurrentDictionary<int, Player> Players { get; private set; }
 
         private bool Loaded { get; set; }
@@ -28,7 +28,7 @@ namespace LoESoft.Server.Core.World
             Manager = manager;
 
             Tiles = new Tile[WIDTH, HEIGHT];
-            Chunks = new Dictionary<Tuple<int, int>, Chunk>();
+            Chunks = new Dictionary<Point, Chunk>();
             Players = new ConcurrentDictionary<int, Player>();
 
             //Temporary Initiazation
@@ -40,8 +40,8 @@ namespace LoESoft.Server.Core.World
                     for (var y = 0; y < HEIGHT; y++)
                         Tiles[x, y] = new Tile(Manager, rand.Next(0, 4)) { X = x, Y = y };
                 
-                Chunks.Add(new Tuple<int, int>(0, 0), new Chunk(Manager, 0, 0));
-                Chunks[new Tuple<int, int>(0, 0)].RandomGen();
+                Chunks.Add(new Point(0, 0), new Chunk(Manager, 0, 0));
+                Chunks[new Point(0, 0)].RandomGen();
 
                 Loaded = true;
 
@@ -76,7 +76,7 @@ namespace LoESoft.Server.Core.World
         public Player GetPlayer(int objId) => Players[objId];
 
         public void Add(Entity entity) =>
-            Chunks[new Tuple<int, int>(entity.ChunkX, entity.ChunkY)].Add(entity);
+            Chunks[new Point(entity.ChunkX, entity.ChunkY)].Add(entity);
 
         public void Remove(Player player)
         {

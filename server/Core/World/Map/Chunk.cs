@@ -1,5 +1,6 @@
 ﻿using LoESoft.Server.Core.World.Entities;
 using LoESoft.Server.Core.World.Entities.Player;
+using LoESoft.Server.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace LoESoft.Server.Core.World.Map
 
         public void Contains(Entity entity) => Entities.Contains(entity);
 
-        public List<Entity> GetEntities(IEnumerable<Points> radius) =>
+        public List<Entity> GetEntities(IEnumerable<Point> radius) =>
             radius.Select(_ => Entities.Where(e => e.X == _.X && e.Y == _.Y).First()).ToList();
 
         public Entity GetEntity(int x, int y)

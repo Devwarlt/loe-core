@@ -1,6 +1,6 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using LoESoft.Server.Core.World.Map.Data;
-using System;
+using LoESoft.Server.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -53,7 +53,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
                 tile.OnUpdate();
 
-                var entity = Manager.Core.Map.Chunks[new Tuple<int, int>(ChunkX, ChunkY)].GetEntity(i.X, i.Y);
+                var entity = Manager.Core.Map.Chunks[new Point(ChunkX, ChunkY)].GetEntity(i.X, i.Y);
 
                 if (entity != null)
                 {

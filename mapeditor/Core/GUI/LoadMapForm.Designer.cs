@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Cancel = new System.Windows.Forms.Button();
-            this.Load = new System.Windows.Forms.Button();
+            this.LoadBtn = new System.Windows.Forms.Button();
             this.MapNameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -46,13 +46,13 @@
             // 
             // Load
             // 
-            this.Load.Location = new System.Drawing.Point(12, 38);
-            this.Load.Name = "Load";
-            this.Load.Size = new System.Drawing.Size(138, 25);
-            this.Load.TabIndex = 6;
-            this.Load.Text = "Load";
-            this.Load.UseVisualStyleBackColor = true;
-            this.Load.Click += new System.EventHandler(this.Load_Click);
+            this.LoadBtn.Location = new System.Drawing.Point(12, 38);
+            this.LoadBtn.Name = "Load";
+            this.LoadBtn.Size = new System.Drawing.Size(138, 25);
+            this.LoadBtn.TabIndex = 6;
+            this.LoadBtn.Text = "Load";
+            this.LoadBtn.UseVisualStyleBackColor = true;
+            this.LoadBtn.Click += new System.EventHandler(this.Load_Click);
             // 
             // MapNameTextBox
             // 
@@ -79,7 +79,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MapNameTextBox);
             this.Controls.Add(this.Cancel);
-            this.Controls.Add(this.Load);
+            this.Controls.Add(this.LoadBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -98,7 +98,7 @@
         #endregion
 
         private System.Windows.Forms.Button Cancel;
-        private System.Windows.Forms.Button Load;
+        private System.Windows.Forms.Button LoadBtn;
         private System.Windows.Forms.TextBox MapNameTextBox;
         private System.Windows.Forms.Label label1;
     }

@@ -2,6 +2,7 @@
 using LoESoft.Server.Core.World.Entities.Interfaces;
 using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Core.World.Stats;
+using LoESoft.Server.Utils;
 using System;
 
 namespace LoESoft.Server.Core.World.Entities
@@ -84,7 +85,7 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         public virtual void Dispose() =>
-            Manager.Core.Map.Chunks[new Tuple<int, int>(ChunkX, ChunkY)].Remove(this);
+            Manager.Core.Map.Chunks[new Point(ChunkX, ChunkY)].Remove(this);
 
         public virtual void OnUpdate() => UpdateCount = 0;
 
