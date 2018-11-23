@@ -1,5 +1,4 @@
-﻿using LoESoft.Dlls.MapEditor;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
@@ -24,13 +23,17 @@ namespace LoESoft.Dlls.Utils
             return xmls;
         }
 
-        public List<KeyValuePair<bool, byte[]>> GetEmbeddedMaps<Map>(string @namespace, string compressedFormat = LoEMapper<Map>.FileFormatCompressed, string nonCompressedFormat = LoEMapper<Map>.FileFormatNonCompressed)
+        public Dictionary<string, KeyValuePair<bool, byte[]>> GetEmbeddedMaps<Map>(Assembly assembly, string compressedFormat = "lscmap", string nonCompressedFormat = "lsmap")
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var maps = new List<KeyValuePair<bool, byte[]>>();
+            var maps = new Dictionary<string, KeyValuePair<bool, byte[]>>();
+
+            Logger("Loading embedded maps...");
 
             foreach (var i in assembly.GetManifestResourceNames())
-                if (i.Contains(@namespace) && (i.Contains($".{compressedFormat}") || i.Contains($".{nonCompressedFormat}")))
+                if (i.Contains($".{compressedFormat}") || i.Contains($".{nonCompressedFormat}"))
+                {
+                    Logger($"- Loading data from '{i}'.");
+
                     using (var stream = assembly.GetManifestResourceStream(i))
                         if (stream != null)
                             using (var memorystream = new MemoryStream())
@@ -38,12 +41,14 @@ namespace LoESoft.Dlls.Utils
                                 stream.CopyTo(memorystream);
 
                                 if (i.Contains($".{compressedFormat}"))
-                                    maps.Add(new KeyValuePair<bool, byte[]>(true, memorystream.ToArray()));
+                                    maps.Add(i, new KeyValuePair<bool, byte[]>(true, memorystream.ToArray()));
                                 else
-                                    maps.Add(new KeyValuePair<bool, byte[]>(false, memorystream.ToArray()));
+                                    maps.Add(i, new KeyValuePair<bool, byte[]>(false, memorystream.ToArray()));
                             }
+                }
 
             Logger($"Loaded {maps.Count} embedded Map file{(maps.Count > 1 ? "s" : "")}.");
+            Logger("Loading embedded maps... OK!");
 
             return maps;
         }

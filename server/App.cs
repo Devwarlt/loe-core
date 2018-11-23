@@ -74,7 +74,7 @@ namespace LoESoft.Server
             {
                 XmlLibrary.Init();
 
-                Map.BinaryMapsCache = new List<KeyValuePair<bool, byte[]>>();
+                Map.BinaryMapsCache = new Dictionary<string, KeyValuePair<bool, byte[]>>();
                 Map.LoadEmbeddedMaps();
 
                 var manager = new WorldManager();

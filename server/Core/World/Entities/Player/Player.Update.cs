@@ -39,7 +39,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
             else
                 ConnectionLostAttempts = 0;
 
-            var sight = GetSightPoints().Where(_ => ((_.X >= 0 && _.X < WorldMap.WIDTH) && (_.Y >= 0 && _.Y < WorldMap.HEIGHT)));
+            var sight = GetSightPoints().Where(_ => _.X >= 0 && _.X < WorldMap.WIDTH && _.Y >= 0 && _.Y < WorldMap.HEIGHT);
 
             foreach (var i in sight)
             {

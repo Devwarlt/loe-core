@@ -20,7 +20,7 @@
         public override bool Equals(object obj)
         {
             var compareTo = (Point)obj;
-            return (X == compareTo.X && Y == compareTo.Y);
+            return X == compareTo.X && Y == compareTo.Y;
         }
 
         public override int GetHashCode()

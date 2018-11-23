@@ -45,7 +45,7 @@ namespace LoESoft.Client.Core.Game.PathFinder
                         App.Warn("No path found!");
                         return;
                     }
-                } while (!(openList.ToList().Exists(_ => _.Point == end)));
+                } while (!openList.ToList().Exists(_ => _.Point == end));
 
             AssignPath:
 

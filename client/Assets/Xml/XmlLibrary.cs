@@ -79,7 +79,7 @@ namespace LoESoft.Client.Assets.Xml
         public static Dictionary<int, List<Texture2D>> GetPlayerAnimation(XmlContent content)
         {
             var spriteSet = AssetLibrary.Sprites[content.Texture.FileName];
-            var yOffset = (content.Texture.ImageIndex.Item2 * 4);
+            var yOffset = content.Texture.ImageIndex.Item2 * 4;
 
             var offSetList = new List<int>();
 

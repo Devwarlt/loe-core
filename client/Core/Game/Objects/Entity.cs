@@ -20,7 +20,7 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public bool IsMoving
         {
-            get { return (X != DistinationX || Y != DistinationY); }
+            get { return X != DistinationX || Y != DistinationY; }
         }
 
         public Texture2D Texture { get; set; }

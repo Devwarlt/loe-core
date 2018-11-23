@@ -80,7 +80,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             }
             else
             {
-                KeyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).Where(_ => (Text.Length <= Limit && Selected)).Select(_ =>
+                KeyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).Where(_ => Text.Length <= Limit && Selected).Select(_ =>
                 {
                     Text.Append(_.ToString());
 

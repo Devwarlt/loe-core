@@ -156,6 +156,7 @@ namespace LoESoft.Client.Core.Game.Map
         }
 
         private static int _areaOfSight = (int)(Math.PI * 5 * 5 + 1);
+
         public static Point[] GetSightPoints(int X, int Y)
         {
             var points = new List<Point>();
@@ -166,8 +167,8 @@ namespace LoESoft.Client.Core.Game.Map
                     var sx = x * x;
                     var sy = y * y;
 
-                    if (sx + sy <= _areaOfSight && (x + X >= 0 && x + X < WIDTH) &&
-                        (y + Y >= 0 && y + Y < HEIGHT))
+                    if (sx + sy <= _areaOfSight && x + X >= 0 && x + X < WIDTH &&
+                        y + Y >= 0 && y + Y < HEIGHT)
                         points.Add(new Point(x + X, y + Y));
                 }
 

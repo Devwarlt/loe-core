@@ -33,7 +33,7 @@ namespace LoESoft.Client.Drawing.Events
         }
 
         public static bool IsValid(SpriteNode node)
-            => (CurrentNode != null && CurrentNode.SpriteLevel == node.SpriteLevel && CurrentNode.Index == node.Index);
+            => CurrentNode != null && CurrentNode.SpriteLevel == node.SpriteLevel && CurrentNode.Index == node.Index;
 
         public static void Update()
         {
@@ -52,7 +52,7 @@ namespace LoESoft.Client.Drawing.Events
             var gameProcess = Process.GetProcesses().Where(_ => _.ProcessName == "BRMEClient").First();
             var curProcess = Process.GetCurrentProcess();
 
-            isClientActive = (gameProcess.Id == curProcess.Id);
+            isClientActive = gameProcess.Id == curProcess.Id;
         }
     }
 }

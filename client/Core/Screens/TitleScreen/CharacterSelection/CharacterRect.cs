@@ -70,7 +70,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
 
         public override void Update(GameTime gameTime)
         {
-            if ((Selected = (CharacterSettings.CurrentCharacterId == CharacterIndex)))
+            if (Selected = CharacterSettings.CurrentCharacterId == CharacterIndex)
                 SpriteColor = Color.RoyalBlue;
 
             base.Update(gameTime);

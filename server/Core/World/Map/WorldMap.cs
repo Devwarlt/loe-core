@@ -64,7 +64,7 @@ namespace LoESoft.Server.Core.World
             }
         }
 
-        public bool IsValidPosition(int x, int y) => (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT);
+        public bool IsValidPosition(int x, int y) => x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT;
 
         public void Add(Player player) => Players.TryAdd(player.ObjectId, player);
 

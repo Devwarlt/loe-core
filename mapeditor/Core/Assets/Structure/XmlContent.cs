@@ -17,7 +17,7 @@ namespace LoESoft.MapEditor.Core.Assets.Structure
 
         public XmlContent(XElement elem)
         {
-            Type = (ContentType)(int.Parse(elem.Attribute("type").Value));
+            Type = (ContentType)int.Parse(elem.Attribute("type").Value);
             Id = int.Parse(elem.Attribute("id").Value);
             Name = elem.Attribute("name").Value;
 
