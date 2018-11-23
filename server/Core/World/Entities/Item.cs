@@ -7,6 +7,7 @@ namespace LoESoft.Server.Core.World.Entities
         public int MaximumDamage { get; set; }
         public int MinimumDamage { get; set; }
         public int AttackFrequency { get; set; }
+        public int Armor { get; set; }
 
         public string Name { get; set; }
 
