@@ -28,21 +28,22 @@ namespace LoESoft.Dlls.MapEditor
 
         public Map LoadMap(string name)
         {
-            var path = Path.Combine(MainDir, $"/{BaseDir}/{name}.{FileFormatCompressed}");
+            var path1 = Path.Combine(MainDir, $"/{BaseDir}/{name}.{FileFormatCompressed}");
+            var path2 = Path.Combine(MainDir, $"/{BaseDir}/{name}.{FileFormatNonCompressed}");
 
-            if (!File.Exists(path))
+            if (!File.Exists(path1) && !File.Exists(path2))
             {
-                Logger($"(LoadException) Missing data from path: {path}");
+                Logger($"(LoadException) Missing data from path: {Path.Combine(MainDir, $"/{BaseDir}/{name}.*")}");
 
                 return default(Map);
             }
 
             Map content = default(Map);
 
-            if (EnableCompression)
-                content = JsonConvert.DeserializeObject<Map>(Encoding.UTF8.GetString(GZipCompression.UnZip(File.ReadAllBytes(path))));
+            if (File.Exists(path1))
+                content = JsonConvert.DeserializeObject<Map>(Encoding.UTF8.GetString(GZipCompression.UnZip(File.ReadAllBytes(path1))));
             else
-                content = JsonConvert.DeserializeObject<Map>(File.ReadAllText(path));
+                content = JsonConvert.DeserializeObject<Map>(File.ReadAllText(path2));
 
             Logger($"Loaded data from '{MainDir}\\{BaseDir}\\{name}.{_format}'.");
 
