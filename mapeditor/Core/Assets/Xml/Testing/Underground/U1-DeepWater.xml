@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <Object type="contentType" id="id" name="Name">
+
+    Available content types to fit object:
+      - 0: Objects
+      - 1: Items
+      - 2: Tiles
+
+    ...
+
+    <Layer type="type" group="Group" />
+
+    Available types to fit map editor:
+      - 0: underground
+      - 1: ground (above underground layer)
+      - 2: object (above ground layer)
+      - 3: sky (above object layer)
+-->
+<Objects>
+  <Object type="2" id="1000" name="Deep Water">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="1" y="16">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1001" name="Deep Water">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="2" y="16">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1002" name="Deep Water">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="1" y="17">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1003" name="Deep Water">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="2" y="17">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+</Objects>

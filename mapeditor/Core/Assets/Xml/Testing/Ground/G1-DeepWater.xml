@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <Object type="contentType" id="id" name="Name">
+
+    Available content types to fit object:
+      - 0: Objects
+      - 1: Items
+      - 2: Tiles
+
+    ...
+
+    <Layer type="type" group="Group" />
+
+    Available types to fit map editor:
+      - 0: underground
+      - 1: ground (above underground layer)
+      - 2: object (above ground layer)
+      - 3: sky (above object layer)
+-->
+<Objects>
+  <Object type="2" id="1020" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="0" y="15">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1021" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="1" y="15">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1022" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="2" y="15">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1023" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="3" y="15">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1024" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="0" y="16">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1025" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="3" y="16">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1026" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="0" y="17">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1027" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="3" y="17">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1028" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="0" y="18">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1029" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="1" y="18">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1030" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="2" y="18">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1031" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="3" y="18">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1032" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="4" y="15">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1033" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="5" y="15">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1034" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="4" y="16">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1035" name="Deep Water Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="5" y="16">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+</Objects>

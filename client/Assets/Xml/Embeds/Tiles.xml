@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
+    <Object type="contentType" id="id" name="Name">
+
+    Available content types to fit object:
+      - 0: Objects
+      - 1: Items
+      - 2: Tiles
+
+    ...
+
     <Layer type="type" group="Group" />
 
     Available types to fit map editor:

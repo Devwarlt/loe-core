@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <Object type="contentType" id="id" name="Name">
+
+    Available content types to fit object:
+      - 0: Objects
+      - 1: Items
+      - 2: Tiles
+
+    ...
+
+    <Layer type="type" group="Group" />
+
+    Available types to fit map editor:
+      - 0: underground
+      - 1: ground (above underground layer)
+      - 2: object (above ground layer)
+      - 3: sky (above object layer)
+-->
+<Objects>
+  <Object type="2" id="1008" name="Grass">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="8" y="5">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1009" name="Trampled Grass">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="7" y="4">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1010" name="Light Grass">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="8" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1011" name="Trampled Light Grass">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="7" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+</Objects>

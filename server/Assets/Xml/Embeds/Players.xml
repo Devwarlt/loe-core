@@ -1,4 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <Object type="contentType" id="id" name="Name">
+
+    Available content types to fit object:
+      - 0: Objects
+      - 1: Items
+      - 2: Tiles
+
+    ...
+
+    <Layer type="type" group="Group" />
+
+    Available types to fit map editor:
+      - 0: underground
+      - 1: ground (above underground layer)
+      - 2: object (above ground layer)
+      - 3: sky (above object layer)
+-->
 <Objects>
   <Object type="0" id="5" name="Apprentice">
     <Texture x ="0" y="0">

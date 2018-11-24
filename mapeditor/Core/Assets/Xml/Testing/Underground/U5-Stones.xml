@@ -18,22 +18,10 @@
       - 3: sky (above object layer)
 -->
 <Objects>
-  <Object type="0" id="5" name="Apprentice">
-    <Texture x ="0" y="0">
-      <FileName>playersEmbed</FileName>
-      <Animated />
-    </Texture>
-  </Object>
-  <Object type="0" id="6" name="ApprenticBlue">
-    <Texture x ="0" y="1">
-      <FileName>playersEmbed</FileName>
-      <Animated />
-    </Texture>
-  </Object>
-  <Object type="0" id="7" name="ApprenticeRed">
-    <Texture x ="0" y="2">
-      <FileName>playersEmbed</FileName>
-      <Animated />
+  <Object type="2" id="1019" name="Stone Floor">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="14" y="0">
+      <FileName>tileSet16x16</FileName>
     </Texture>
   </Object>
 </Objects>
