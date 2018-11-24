@@ -174,8 +174,8 @@
     <Compile Include="Drawing\Events\EventsManager.cs" />
     <Compile Include="Drawing\Events\EventsHandler.cs" />
     <Compile Include="Drawing\Events\Event.cs" />
-    <Compile Include="Drawing\Events\EventsHandler.KeyBoard.cs" />
     <Compile Include="Drawing\Events\EventsHandler.Mouse.cs" />
+    <Compile Include="Drawing\Events\KeyBoardHandler.cs" />
     <Compile Include="Drawing\RGBColor.cs" />
     <Compile Include="Drawing\Sprites\Forms\Button.cs" />
     <Compile Include="Drawing\Sprites\Forms\Complex\ExitButton.cs" />

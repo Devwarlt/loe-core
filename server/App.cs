@@ -66,14 +66,14 @@ namespace LoESoft.Server
             RollbarLocator.RollbarInstance.Configure(new RollbarConfig(RollbarId));
 
             Info("Game Server is loading...");
+            
+            XmlLibrary.Init();
 
             Database = new Database();
             LoEUtils = new Util((message) => Warn(message));
 
             try
             {
-                XmlLibrary.Init();
-
                 Map.BinaryMapsCache = new Dictionary<string, KeyValuePair<bool, byte[]>>();
                 Map.LoadEmbeddedMaps();
 

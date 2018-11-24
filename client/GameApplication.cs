@@ -6,6 +6,7 @@ using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace LoESoft.Client
 {
@@ -21,6 +22,8 @@ namespace LoESoft.Client
         protected SpriteBatch SpriteBatch { get; set; }
 
         public GameUser GameUser { get; set; }
+
+        public KeyBoardHandler KeyBoard;
 
         public GameApplication(GameUser gameUser)
         {
@@ -74,6 +77,14 @@ namespace LoESoft.Client
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
             TextDisplay.LoadSpriteFont(Content);
 
+            KeyBoard = new KeyBoardHandler();
+
+            KeyBoard.BindKey(new KeyBoardHandler.LoEKey()
+            {
+                Key = Keys.A,
+                Event = delegate { App.Warn("A"); }
+            });
+
             ScreenManager.CloseGame += () =>
             {
                 App.DscordClient.ClearPresence();
@@ -91,6 +102,8 @@ namespace LoESoft.Client
             EventsHandler.Update();
             EventsManager.Update();
             ScreenManager.Update(gameTime);
+
+            KeyBoard.Update(gameTime);
 
             base.Update(gameTime);
         }

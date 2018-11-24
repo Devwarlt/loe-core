@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static LoESoft.Client.Drawing.Events.KeyBoardHandler;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 {
@@ -31,9 +32,9 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
         public TextDisplay TitleText { get; private set; }
         public TextDisplay TextField { get; private set; }
 
-        private FilledRectangle SelectedMarket;
+        protected KeyBoardHandler KeyBoardHandler;
 
-        protected EventsHandler KeyEvents;
+        private FilledRectangle SelectedMarket;
 
         public TextBox(int x, int y, int width = 100, string name = "", int tsize = 12, int limit = 16, bool encoded = false)
             : base(x, y, width, TextDisplay.GetHeight(12) + 4, new RGBColor(255, 255, 255))
@@ -41,8 +42,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             Limit = limit;
             Selected = false;
             Encoded = encoded;
-
-            KeyEvents = new EventsHandler();
+            
             Text = new StringBuilder();
             TitleText = new TextDisplay(2, -20, name, color: new RGBColor(10, 10, 10));
             TextField = new TextDisplay(2, 2, "", size: tsize, color: new RGBColor(10, 10, 10));
@@ -51,6 +51,18 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             {
                 Visible = false
             };
+
+            KeyBoardHandler = new KeyBoardHandler();
+
+            KeyBoardHandler.BindKey(new LoEKey()
+            {
+                Key = Keys.Back,
+                Event = delegate
+                {
+                    if (Text.Length > 0)
+                        Text.Length--;
+                }
+            });
 
             AddChild(SelectedMarket);
             AddChild(TitleText);
@@ -73,20 +85,19 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
 
             Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (KeyEvents.HandleBackSpace(gameTime))
-            {
-                if (Text.Length > 0)
-                    Text.Length--;
-            }
-            else
-            {
-                KeyEvents.HandleKeyBoard(Event.GETPRESSEDKEYS).Where(_ => Text.Length <= Limit && Selected).Select(_ =>
-                {
-                    Text.Append(_.ToString());
-
-                    return _;
-                }).ToList();
-            }
+            foreach (var i in Keyboard.GetState().GetPressedKeys())
+                if (!KeyBoardHandler.ContainsKey(i))
+                    KeyBoardHandler.BindKey(new LoEKey()
+                    {
+                        Key = i,
+                        Event = delegate
+                        {
+                            if (Encoded)
+                                Text.Append("*");
+                            else
+                                Text.Append(i.ToString());
+                        }
+                    });
 
             TextField.Text = Encoded ? GetEncodedString(Text.ToString()) : Text.ToString();
 
