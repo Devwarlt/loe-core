@@ -3,7 +3,6 @@ using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using static LoESoft.Client.Drawing.Events.KeyBoardHandler;
 
@@ -42,7 +41,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms.Complex
             Limit = limit;
             Selected = false;
             Encoded = encoded;
-            
+
             Text = new StringBuilder();
             TitleText = new TextDisplay(2, -20, name, color: new RGBColor(10, 10, 10));
             TextField = new TextDisplay(2, 2, "", size: tsize, color: new RGBColor(10, 10, 10));

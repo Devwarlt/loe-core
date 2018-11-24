@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace LoESoft.Client.Drawing.Events
 {
@@ -13,7 +12,7 @@ namespace LoESoft.Client.Drawing.Events
             public int MsKeyHold { get; set; }
             public Keys Key { get; set; }
             public Action Event { get; set; }
-            
+
             public void Handle(GameTime gameTime, KeyboardState oldState, KeyboardState newState)
             {
                 if (oldState.IsKeyDown(Key))
@@ -39,10 +38,13 @@ namespace LoESoft.Client.Drawing.Events
         {
             BindedKeys = new List<LoEKey>();
         }
-        
+
         public void BindKey(LoEKey key) => BindedKeys.Add(key);
+
         public void UnBindKey(LoEKey key) => BindedKeys.Remove(key);
+
         public bool Contains(LoEKey key) => BindedKeys.Contains(key);
+
         public bool ContainsKey(Keys key) => BindedKeys.Exists(_ => _.Key == key);
 
         private KeyboardState _newState;

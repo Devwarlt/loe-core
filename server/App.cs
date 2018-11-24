@@ -66,7 +66,7 @@ namespace LoESoft.Server
             RollbarLocator.RollbarInstance.Configure(new RollbarConfig(RollbarId));
 
             Info("Game Server is loading...");
-            
+
             XmlLibrary.Init();
 
             Database = new Database();
