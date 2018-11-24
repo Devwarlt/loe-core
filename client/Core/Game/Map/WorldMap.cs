@@ -152,27 +152,27 @@ namespace LoESoft.Client.Core.Game.Map
         {
             var sight = GetSightPoints(x, y);
 
-            return Objects.Where(_ => sight.Contains(_.Value.Pos)).Select(_ => _.Value.Entity).ToArray();
+            return Objects.ToArray().Where(_ => sight.Contains(_.Value.Pos)).Select(_ => _.Value.Entity).ToArray();
         }
+        
+        public static int SightRadius = 10;
+        public static int SightBound = SightRadius * 2;
 
-        private static int _areaOfSight = (int)(Math.PI * 5 * 5 + 1);
-
-        public static Point[] GetSightPoints(int X, int Y)
+        public static HashSet<Point> GetSightPoints(int X, int Y)
         {
-            var points = new List<Point>();
+            var points = new HashSet<Point>();
 
-            for (var x = -_areaOfSight; x < _areaOfSight; x++)
-                for (var y = -_areaOfSight; y < _areaOfSight; y++)
+            for (var x = -SightRadius; x < SightRadius; x++)
+                for (var y = -SightRadius; y < SightRadius; y++)
                 {
-                    var sx = x * x;
-                    var sy = y * y;
+                    var px = X + x;
+                    var py = Y + y;
 
-                    if (sx + sy <= _areaOfSight && x + X >= 0 && x + X < WIDTH &&
-                        y + Y >= 0 && y + Y < HEIGHT)
-                        points.Add(new Point(x + X, y + Y));
+                    if (px >= 0 && px <= WIDTH && py >= 0 && py <= HEIGHT)
+                        points.Add(new Point(px, py));
                 }
 
-            return points.ToArray();
+            return points;
         }
     }
 }

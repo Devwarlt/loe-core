@@ -15,13 +15,13 @@ namespace LoESoft.Server.Core.World.Map
 
         public WorldManager Manager { get; private set; }
 
-        public List<Entity> Entities { get; private set; }
+        public HashSet<Entity> Entities { get; private set; }
 
         public Chunk(WorldManager manager, int x, int y)
         {
             Manager = manager;
 
-            Entities = new List<Entity>();
+            Entities = new HashSet<Entity>();
 
             StartX = x * SIZE;
             StartX = y * SIZE;
@@ -50,14 +50,17 @@ namespace LoESoft.Server.Core.World.Map
 
         public void RandomGen()
         {
-            for (var i = 0; i < 10; i++)
-                Add(Entity.Create(Manager, StartX + rand.Next(0, 10), StartY + rand.Next(0, 10), 8));
+            for (var i = 0; i < 400; i++)
+                Add(Entity.Create(Manager, StartX + rand.Next(0, 20), StartY + rand.Next(0, 20), 8));
         }
 
         #endregion METHODS
 
-        public void Update()
+        public void Update(WorldTime time)
         {
+            if (time.TotalElapsedMs % 1000 == 0)
+                foreach (var i in Entities)
+                    i.Move(rand.Next(0, 20), rand.Next(0, 20));
         }
     }
 }

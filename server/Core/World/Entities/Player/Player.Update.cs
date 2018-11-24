@@ -8,14 +8,14 @@ namespace LoESoft.Server.Core.World.Entities.Player
 {
     public partial class Player
     {
-        private List<Tile> _addedTile = new List<Tile>();
-        private List<Entity> _addedObjects = new List<Entity>();
+        private HashSet<Tile> _addedTile = new HashSet<Tile>();
+        private HashSet<Entity> _addedObjects = new HashSet<Entity>();
 
-        private List<Entity> _objectsToUpdateOrAdd = new List<Entity>();
-        private List<Tile> _tilesToUpdateOrAdd = new List<Tile>();
+        private HashSet<Entity> _objectsToUpdateOrAdd = new HashSet<Entity>();
+        private HashSet<Tile> _tilesToUpdateOrAdd = new HashSet<Tile>();
 
         //unused atm
-        private List<Entity> _removedObjects = new List<Entity>();
+        private HashSet<Entity> _removedObjects = new HashSet<Entity>();
 
         private int ConnectionLostAttempts = 0;
         private readonly int MaxConnectionListAttempts = 10;

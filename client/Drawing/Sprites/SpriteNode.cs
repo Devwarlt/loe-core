@@ -10,13 +10,9 @@ namespace LoESoft.Client.Drawing.Sprites
     public class SpriteNode
     {
         public bool Visible = true;
+        public bool IsZeroApplicaple = false;
 
-        public bool IsZeroApplicaple { get; set; } = false;
         public int Index { get; set; }
-
-        public List<SpriteNode> ChildList { get; set; }
-        public Dictionary<Event, EventHandler> EventDictionary { get; set; }
-        public SpriteNode ParentSprite { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public int X { get; set; }
@@ -24,8 +20,13 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public int StageX => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X;
         public int StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
-        public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
         public int SpriteLevel => ParentSprite != null ? ParentSprite.SpriteLevel + 1 : 0;
+
+        public HashSet<SpriteNode> ChildList { get; set; }
+        public Dictionary<Event, EventHandler> EventDictionary { get; set; }
+
+        public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
+        public SpriteNode ParentSprite { get; set; }
 
         protected EventsHandler EventsHandler;
 
@@ -37,7 +38,7 @@ namespace LoESoft.Client.Drawing.Sprites
             Height = height;
             Index = 0;
 
-            ChildList = new List<SpriteNode>();
+            ChildList = new HashSet<SpriteNode>();
             EventDictionary = new Dictionary<Event, EventHandler>();
             EventsHandler = new EventsHandler();
         }

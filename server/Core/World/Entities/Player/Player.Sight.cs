@@ -1,27 +1,25 @@
 ﻿using LoESoft.Server.Utils;
-using System;
 using System.Collections.Generic;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
     public partial class Player
     {
-        public Point[] GetSightPoints(int radius = 5)
+        public HashSet<Point> GetSightPoints(int bound = 10)
         {
-            int areaOfSight = (int)(Math.PI * radius * radius + 1);
-            var points = new List<Point>();
+            var points = new HashSet<Point>();
 
-            for (var x = -areaOfSight; x < areaOfSight; x++)
-                for (var y = -areaOfSight; y < areaOfSight; y++)
+            for (var x = -bound; x < bound; x++)
+                for (var y = -bound; y < bound; y++)
                 {
-                    var sx = x * x;
-                    var sy = y * y;
+                    var px = X + x;
+                    var py = Y + y;
 
-                    if (sx + sy <= areaOfSight)
-                        points.Add(new Point(x + X, y + Y));
+                    if (px >= 0 && px <= WorldMap.WIDTH && py >= 0 && py <= WorldMap.HEIGHT)
+                        points.Add(new Point(px, py));
                 }
 
-            return points.ToArray();
+            return points;
         }
     }
 }

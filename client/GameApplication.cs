@@ -23,8 +23,6 @@ namespace LoESoft.Client
 
         public GameUser GameUser { get; set; }
 
-        public KeyBoardHandler KeyBoard;
-
         public GameApplication(GameUser gameUser)
         {
             GameUser = gameUser;
@@ -45,13 +43,6 @@ namespace LoESoft.Client
 
         private void Window_ClientSizeChanged(object sender, System.EventArgs e)
         {
-            int newWidth = Window.ClientBounds.Width;
-            int newHeight = Window.ClientBounds.Height;
-
-            GraphicsDeviceManager.PreferredBackBufferWidth = newWidth;
-            GraphicsDeviceManager.PreferredBackBufferHeight = newHeight;
-            WIDTH = newWidth;
-            HEIGHT = newHeight;
         }
 
         protected override void Initialize()
@@ -77,14 +68,6 @@ namespace LoESoft.Client
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
             TextDisplay.LoadSpriteFont(Content);
 
-            KeyBoard = new KeyBoardHandler();
-
-            KeyBoard.BindKey(new KeyBoardHandler.LoEKey()
-            {
-                Key = Keys.A,
-                Event = delegate { App.Warn("A"); }
-            });
-
             ScreenManager.CloseGame += () =>
             {
                 App.DscordClient.ClearPresence();
@@ -102,8 +85,6 @@ namespace LoESoft.Client
             EventsHandler.Update();
             EventsManager.Update();
             ScreenManager.Update(gameTime);
-
-            KeyBoard.Update(gameTime);
 
             base.Update(gameTime);
         }

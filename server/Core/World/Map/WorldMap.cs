@@ -25,12 +25,12 @@ namespace LoESoft.Server.Core.World
         {
             Loaded = false;
             Manager = manager;
-
-            Tiles = new Tile[WIDTH, HEIGHT];
+            
             Chunks = new Dictionary<Point, Chunk>();
             Players = new ConcurrentDictionary<int, Player>();
 
-            //Temporary Initiazation
+            Tiles = new Tile[WIDTH, HEIGHT];
+
             var rand = new Random();
 
             for (var x = 0; x < WIDTH; x++)
@@ -53,7 +53,7 @@ namespace LoESoft.Server.Core.World
             if (Loaded)
             {
                 foreach (var i in Chunks.Values)
-                    i.Update();
+                    i.Update(time);
 
                 foreach (var i in Players.ToArray())
                     i.Value.Update();

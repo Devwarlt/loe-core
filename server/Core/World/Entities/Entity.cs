@@ -8,7 +8,7 @@ using System;
 
 namespace LoESoft.Server.Core.World.Entities
 {
-    public class Entity : IUpdatable
+    public class Entity : Comparable, IUpdatable
     {
         public WorldManager Manager { get; private set; }
         public StatExportManager Export { get; private set; }
@@ -20,7 +20,6 @@ namespace LoESoft.Server.Core.World.Entities
         }
 
         public int Id { get; private set; }
-        public int ObjectId { get; private set; }
 
         public int UpdateCount { get; set; }
 
@@ -64,8 +63,8 @@ namespace LoESoft.Server.Core.World.Entities
         public Entity(WorldManager manager, int id)
         {
             Manager = manager;
-            Id = id;
             ObjectId = EntityManager.GetNextId();
+            Id = id;
             Export = new StatExportManager();
             Health = new Random().Next(10, 100);
             Size = 8;

@@ -9,7 +9,8 @@ namespace LoESoft.Server.Core.World.Map.Structure
         public MapSize MapSize { get; set; }
         public ChunkData[,] Chunk { get; set; } // used to read-only
 
-        [JsonIgnore] public ChunkObject[,] Chunks { get; set; }
+        [JsonIgnore]
+        public ChunkObject[,] Chunks { get; set; }
 
         public Layer(MapLayer layer, MapSize size)
         {

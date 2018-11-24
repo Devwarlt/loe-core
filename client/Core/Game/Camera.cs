@@ -6,7 +6,7 @@ namespace LoESoft.Client.Core.Game
 {
     public static class Camera
     {
-        public const double SCALE = Tile.TILE_SIZE / .75; //.75 is the magic number
+        public const double SCALE = Tile.TILE_SIZE;
 
         public static Entity Focus { get; set; }
 
