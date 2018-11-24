@@ -1,4 +1,5 @@
-﻿using LoESoft.MapEditor.Core.Util;
+﻿using LoESoft.MapEditor.Core.GUI.HUD;
+using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
@@ -32,28 +33,28 @@ namespace LoESoft.MapEditor.Core.Layer
                 if (leftbutton == ButtonState.Pressed)
                 {
                     mouseposition = new Vector2(mouse.X, mouse.Y);
-                    mousemapx = ((int)mouseposition.X / Utils.TILE_SIZE) + MapEditor.DrawOffset.X;
-                    mousemapy = ((int)mouseposition.Y / Utils.TILE_SIZE) + MapEditor.DrawOffset.Y;
+                    mousemapx = ((int)mouseposition.X / Utils.TILE_SIZE) + MEGameControl.DrawOffset.X;
+                    mousemapy = ((int)mouseposition.Y / Utils.TILE_SIZE) + MEGameControl.DrawOffset.Y;
 
-                    if (mouseposition.X < MapEditor.GraphicsDeviceManager.PreferredBackBufferWidth && mouseposition.X >= 0
-                        && mouseposition.Y < MapEditor.GraphicsDeviceManager.PreferredBackBufferHeight && mouseposition.Y >= 0
+                    if (mouseposition.X < App.MapControl.Width && mouseposition.X >= 0
+                        && mouseposition.Y < App.MapControl.Height && mouseposition.Y >= 0
                         && mousemapx < (int)MapSize && mousemapx >= 0
                         && mousemapy < (int)MapSize && mousemapy >= 0
-                        && App.MapEditor.IsActive)
+                        && App.MapControl.Focused)
                         Chunk[(int)mousemapx, (int)mousemapy] = data;
                 }
 
                 if (rightbutton == ButtonState.Pressed)
                 {
                     mouseposition = new Vector2(mouse.X, mouse.Y);
-                    mousemapx = ((int)mouseposition.X / Utils.TILE_SIZE) + MapEditor.DrawOffset.X;
-                    mousemapy = ((int)mouseposition.Y / Utils.TILE_SIZE) + MapEditor.DrawOffset.Y;
+                    mousemapx = ((int)mouseposition.X / Utils.TILE_SIZE) + MEGameControl.DrawOffset.X;
+                    mousemapy = ((int)mouseposition.Y / Utils.TILE_SIZE) + MEGameControl.DrawOffset.Y;
 
-                    if (mouseposition.X < MapEditor.GraphicsDeviceManager.PreferredBackBufferWidth && mouseposition.X >= 0
-                        && mouseposition.Y < MapEditor.GraphicsDeviceManager.PreferredBackBufferHeight && mouseposition.Y >= 0
+                    if (mouseposition.X < App.MapControl.Width && mouseposition.X >= 0
+                        && mouseposition.Y < App.MapControl.Height && mouseposition.Y >= 0
                         && mousemapx < (int)MapSize && mousemapx >= 0
                         && mousemapy < (int)MapSize && mousemapy >= 0
-                        && App.MapEditor.IsActive)
+                        && App.MapControl.Focused)
                         Chunk[(int)mousemapx, (int)mousemapy] = null;
                 }
             }

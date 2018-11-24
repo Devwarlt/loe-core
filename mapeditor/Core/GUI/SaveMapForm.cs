@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoESoft.MapEditor.Core.GUI.HUD;
+using System;
 using System.Windows.Forms;
 
 namespace LoESoft.MapEditor.Core.GUI
@@ -22,7 +23,7 @@ namespace LoESoft.MapEditor.Core.GUI
                 MessageBox.Show("Map name is empty!");
             else
             {
-                MapEditor.Mapper.SaveMap(MapEditor.Map, MapNameTextBox.Text);
+                MEGameControl.Mapper.SaveMap(MEGameControl.Map, MapNameTextBox.Text);
 
                 DialogResult = DialogResult.OK;
             }

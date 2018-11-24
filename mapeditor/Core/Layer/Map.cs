@@ -1,5 +1,7 @@
-﻿using LoESoft.MapEditor.Core.Util;
+﻿using LoESoft.MapEditor.Core.GUI.HUD;
+using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace LoESoft.MapEditor.Core.Layer
 
         public int Width { get; set; }
         public int Height { get; set; }
-        private int WIDTH_MAGIC_NUMBER => Width - Utils.TILE_SIZE * 3 - 2;
+        private int WIDTH_MAGIC_NUMBER => Width - Utils.TILE_SIZE * 2 - 6;
         private int HEIGHT_MAGIC_NUMBER => Height - Utils.TILE_SIZE * 2 - 6;
 
         private Rectangle _bounds { get; set; }
@@ -36,24 +38,24 @@ namespace LoESoft.MapEditor.Core.Layer
         {
             var keyboard = Keyboard.GetState();
 
-            if (MapEditor.DrawOffset.Y > _bounds.Y)
+            if (MEGameControl.DrawOffset.Y > _bounds.Y)
                 if (keyboard.IsKeyDown(Keys.W))
-                    MapEditor.DrawOffset.Y--;
+                    MEGameControl.DrawOffset.Y--;
 
-            if (MapEditor.DrawOffset.X > _bounds.X)
+            if (MEGameControl.DrawOffset.X > _bounds.X)
                 if (keyboard.IsKeyDown(Keys.A))
-                    MapEditor.DrawOffset.X--;
+                    MEGameControl.DrawOffset.X--;
 
-            if (MapEditor.DrawOffset.Y < _bounds.Height)
+            if (MEGameControl.DrawOffset.Y < _bounds.Height)
                 if (keyboard.IsKeyDown(Keys.S))
-                    MapEditor.DrawOffset.Y++;
+                    MEGameControl.DrawOffset.Y++;
 
-            if (MapEditor.DrawOffset.X < _bounds.Width)
+            if (MEGameControl.DrawOffset.X < _bounds.Width)
                 if (keyboard.IsKeyDown(Keys.D))
-                    MapEditor.DrawOffset.X++;
+                    MEGameControl.DrawOffset.X++;
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             try
             {
@@ -65,15 +67,15 @@ namespace LoESoft.MapEditor.Core.Layer
                             var chunk = layer.Chunk[y, x];
 
                             if (chunk != null)
-                                MapEditor.SpriteBatch.Draw(MapEditor.Textures[chunk.Group], new Vector2(
-                                    (y - MapEditor.DrawOffset.X) * Utils.TILE_SIZE,
-                                    (x - MapEditor.DrawOffset.Y) * Utils.TILE_SIZE
+                                spriteBatch.Draw(MEGameControl.Textures[chunk.Group], new Vector2(
+                                    (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,
+                                    (x - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE
                                     ), Utils.JamesBounds(chunk.BoundX, chunk.BoundY), Color.White);
 
-                            if (layer.MapLayer == MapLayer.ABSTRACT && MapEditor.ShowGrid)
-                                MapEditor.SpriteBatch.Draw(MapEditor.GridTexture, new Vector2(
-                                    (y - MapEditor.DrawOffset.X) * Utils.TILE_SIZE,
-                                    (x - MapEditor.DrawOffset.Y) * Utils.TILE_SIZE
+                            if (layer.MapLayer == MapLayer.ABSTRACT && MEGameControl.ShowGrid)
+                                spriteBatch.Draw(MEGameControl.GridTexture, new Vector2(
+                                    (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,
+                                    (x - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE
                                     ), Utils.JamesBounds(0, 0), Color.White);
                         }
 

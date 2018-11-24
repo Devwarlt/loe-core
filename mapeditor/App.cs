@@ -1,4 +1,6 @@
-﻿using LoESoft.MapEditor.Properties;
+﻿using LoESoft.MapEditor.Core.GUI;
+using LoESoft.MapEditor.Core.GUI.HUD;
+using LoESoft.MapEditor.Properties;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -9,6 +11,7 @@ using System.Drawing.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace LoESoft.MapEditor
 {
@@ -34,8 +37,11 @@ namespace LoESoft.MapEditor
         // Unique IDs
         private static string RollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
-        // Map Editor
-        public static MapEditor MapEditor { get; set; }
+        // Map Editor Form
+        public static MapEditorForm MapEditor { get; set; }
+
+        // Map Editor Game Control
+        public static MEGameControl MapControl { get; set; }
 
         [STAThread]
         public static void Main(string[] args)
@@ -69,8 +75,9 @@ namespace LoESoft.MapEditor
             {
                 LoadEmbeddedFonts();
 
-                using (MapEditor = new MapEditor())
-                    MapEditor.Run();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(MapEditor = new MapEditorForm());
             }
             catch (Exception e)
             {

@@ -15,6 +15,8 @@
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -53,17 +55,26 @@
     <Compile Include="Core\Assets\Structure\XmlContent.cs" />
     <Compile Include="Core\Assets\XmlLibrary.cs" />
     <Compile Include="Core\Assets\XmlLoader.cs" />
+    <Compile Include="Core\GUI\HUD\HUD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\HUD.Designer.cs">
+      <DependentUpon>HUD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\MEGameControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Core\GUI\HUD\SpritePallete.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\GUI\HUD\SpritePallete.Designer.cs">
       <DependentUpon>SpritePallete.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\GUI\InterfaceForm.cs">
+    <Compile Include="Core\GUI\MapEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\GUI\InterfaceForm.Designer.cs">
-      <DependentUpon>InterfaceForm.cs</DependentUpon>
+    <Compile Include="Core\GUI\MapEditorForm.Designer.cs">
+      <DependentUpon>MapEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\GUI\NewMapForm.cs">
       <SubType>Form</SubType>
@@ -90,7 +101,6 @@
     <Compile Include="Core\Util\InteractiveObject.cs" />
     <Compile Include="Core\Util\SpritesheetItem.cs" />
     <Compile Include="Core\Util\Utils.cs" />
-    <Compile Include="MapEditor.cs" />
     <Compile Include="App.cs" />
     <Compile Include="MapSize.cs" />
     <Compile Include="MapState.cs" />
@@ -115,8 +125,11 @@
     <Reference Include="Microsoft.Win32.SystemEvents, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.SystemEvents.4.5.0\lib\net461\Microsoft.Win32.SystemEvents.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    <Reference Include="MonoGame.Forms.DX, Version=2.1.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\MonoGame.Forms.DX.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.7.0.1114, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -126,6 +139,15 @@
     </Reference>
     <Reference Include="Rollbar, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rollbar.1.6.2\lib\net472\Rollbar.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -236,7 +258,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\GUI\HUD\sample-grid.png" />
+    <EmbeddedResource Include="Core\GUI\HUD\Assets\sample-grid.png" />
     <EmbeddedResource Include="Core\Assets\Xml\Tiles.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -245,11 +267,14 @@
     <EmbeddedResource Include="Core\Assets\Sprite\tilesEmbed.png" />
     <Content Include="Icon.ico" />
     <Content Include="loesoft-new.ico" />
+    <EmbeddedResource Include="Core\GUI\HUD\HUD.resx">
+      <DependentUpon>HUD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\HUD\SpritePallete.resx">
       <DependentUpon>SpritePallete.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\InterfaceForm.resx">
-      <DependentUpon>InterfaceForm.cs</DependentUpon>
+    <EmbeddedResource Include="Core\GUI\MapEditorForm.resx">
+      <DependentUpon>MapEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\NewMapForm.resx">
       <DependentUpon>NewMapForm.cs</DependentUpon>

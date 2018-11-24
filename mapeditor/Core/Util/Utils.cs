@@ -20,7 +20,7 @@ namespace LoESoft.MapEditor.Core.Util
         private static string MainDir => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private static string BaseDir => "BRMEMaps";
 
-        public static Texture2D LoadEmbeddedTexture(string file)
+        public static Texture2D LoadEmbeddedTexture(GraphicsDevice graphics, string file)
         {
             var assembly = Assembly.GetExecutingAssembly();
             Texture2D texture2d = null;
@@ -30,14 +30,14 @@ namespace LoESoft.MapEditor.Core.Util
                 {
                     using (var stream = assembly.GetManifestResourceStream(name))
                         if (stream != null)
-                            texture2d = Texture2D.FromStream(MapEditor.GraphicsDeviceManager.GraphicsDevice, stream);
+                            texture2d = Texture2D.FromStream(graphics, stream);
                     break;
                 }
 
             return texture2d;
         }
 
-        public static Texture2D LoadEmbeddedSpritesheetToTexture2D(string file)
+        public static Texture2D LoadEmbeddedSpritesheetToTexture2D(GraphicsDevice graphics, string file)
         {
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -46,7 +46,7 @@ namespace LoESoft.MapEditor.Core.Util
                 {
                     using (var stream = assembly.GetManifestResourceStream(name))
                         if (stream != null)
-                            return Texture2D.FromStream(MapEditor.GraphicsDeviceManager.GraphicsDevice, stream);
+                            return Texture2D.FromStream(graphics, stream);
                     break;
                 }
 

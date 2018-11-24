@@ -1,4 +1,5 @@
-﻿using LoESoft.MapEditor.Core.Layer;
+﻿using LoESoft.MapEditor.Core.GUI.HUD;
+using LoESoft.MapEditor.Core.Layer;
 using System;
 using System.Windows.Forms;
 
@@ -17,7 +18,7 @@ namespace LoESoft.MapEditor.Core.GUI
                 MessageBox.Show("Map name is empty!");
             else
             {
-                var map = MapEditor.Mapper.LoadMap(MapNameTextBox.Text);
+                var map = MEGameControl.Mapper.LoadMap(MapNameTextBox.Text);
 
                 if (map == default(Map))
                     MessageBox.Show($"Map '{MapNameTextBox.Text}' not found!");

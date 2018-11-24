@@ -19,6 +19,6 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             SpriteBox.Refresh();
         }
 
-        private void SpriteBox_Click(object sender, EventArgs e) => MapEditor.InteractiveObject = InteractiveObject;
+        private void SpriteBox_Click(object sender, EventArgs e) => MEGameControl.InteractiveObject = InteractiveObject;
     }
 }
