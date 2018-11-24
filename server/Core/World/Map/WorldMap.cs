@@ -5,7 +5,6 @@ using LoESoft.Server.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace LoESoft.Server.Core.World
 {
@@ -41,9 +40,6 @@ namespace LoESoft.Server.Core.World
             var entrypoint = new Point(0, 0);
 
             Chunks.Add(entrypoint, new Chunk(Manager, 0, 0));
-
-            do Thread.Sleep(500);
-            while (!Chunks.ContainsKey(entrypoint));
 
             Chunks[entrypoint].RandomGen();
 

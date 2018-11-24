@@ -6,9 +6,6 @@
         CLICKRIGT = 1,
         MOUSEOVER = 2,
         MOUSEOUT = 3,
-        GETPRESSEDKEYS = 4,
-        GETPRESSEDKEYSHOLDABLE = 5,
-        HANDLEBACKSPACE = 6,
-        CLICKOUTLEFT = 7
+        CLICKOUTLEFT = 4
     }
 }
