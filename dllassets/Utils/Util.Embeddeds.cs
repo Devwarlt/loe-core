@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
@@ -23,7 +24,7 @@ namespace LoESoft.Dlls.Utils
             return xmls;
         }
 
-        public Dictionary<string, KeyValuePair<bool, byte[]>> GetEmbeddedMaps<Map>(Assembly assembly, string compressedFormat = "lscmap", string nonCompressedFormat = "lsmap")
+        public Dictionary<string, KeyValuePair<bool, byte[]>> GetEmbeddedMaps(Assembly assembly, string compressedFormat = "lscmap", string nonCompressedFormat = "lsmap")
         {
             var maps = new Dictionary<string, KeyValuePair<bool, byte[]>>();
 
@@ -40,10 +41,13 @@ namespace LoESoft.Dlls.Utils
                             {
                                 stream.CopyTo(memorystream);
 
+                                var location = i.Split('.');
+                                var filename = string.Join(".", location.Skip(location.Length - 2));
+
                                 if (i.Contains($".{compressedFormat}"))
-                                    maps.Add(i, new KeyValuePair<bool, byte[]>(true, memorystream.ToArray()));
+                                    maps.Add(filename.Replace($".{compressedFormat}", string.Empty), new KeyValuePair<bool, byte[]>(true, memorystream.ToArray()));
                                 else
-                                    maps.Add(i, new KeyValuePair<bool, byte[]>(false, memorystream.ToArray()));
+                                    maps.Add(filename.Replace($".{nonCompressedFormat}", string.Empty), new KeyValuePair<bool, byte[]>(false, memorystream.ToArray()));
                             }
                 }
 

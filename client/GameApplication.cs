@@ -6,7 +6,6 @@ using LoESoft.Client.Drawing.Events;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace LoESoft.Client
 {

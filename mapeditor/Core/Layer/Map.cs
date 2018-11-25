@@ -66,6 +66,18 @@ namespace LoESoft.MapEditor.Core.Layer
                         {
                             var chunk = layer.Chunk[y, x];
 
+                            if (layer.MapLayer == MapLayer.UNDERGROUND && !MEGameControl.ShowUndergroundLayer)
+                                break;
+
+                            if (layer.MapLayer == MapLayer.GROUND && !MEGameControl.ShowGroundLayer)
+                                break;
+
+                            if (layer.MapLayer == MapLayer.OBJECT && !MEGameControl.ShowObjectLayer)
+                                break;
+
+                            if (layer.MapLayer == MapLayer.SKY && !MEGameControl.ShowSkyLayer)
+                                break;
+
                             if (chunk != null)
                                 spriteBatch.Draw(MEGameControl.Textures[chunk.Group], new Vector2(
                                     (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,

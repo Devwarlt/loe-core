@@ -12,5 +12,15 @@ namespace LoESoft.MapEditor.Core.GUI
             App.MapControl = monoGameWindow1;
             MEGameControl.HUD = hud1;
         }
+
+        private void MapEditorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var box = MessageBox.Show("Do you want to exit?", "Exit", MessageBoxButtons.YesNo);
+
+            if (box == DialogResult.Yes)
+                Application.ExitThread();
+
+            e.Cancel = true;
+        }
     }
 }

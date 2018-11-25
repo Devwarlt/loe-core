@@ -66,4 +66,52 @@
       <FileName>tileSet16x16</FileName>
     </Texture>
   </Object>
+  <Object type="2" id="1060" name="Grassy Dirty Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="0" y="12">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1061" name="Grassy Dirty Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="1" y="12">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1062" name="Grassy Dirty Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="2" y="12">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1063" name="Grassy Dirty Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="0" y="13">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1064" name="Grassy Dirty Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="2" y="13">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1065" name="Grassy Dirty Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="0" y="14">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1066" name="Grassy Dirty Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="1" y="14">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1067" name="Grassy Dirty Border">
+    <Layer type="1" group="Sample - Grounds" />
+    <Texture x="2" y="14">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
 </Objects>

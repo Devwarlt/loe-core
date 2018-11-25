@@ -1,4 +1,6 @@
-﻿using static LoESoft.Server.Assets.Xml.Structure.XmlContent;
+﻿using LoESoft.Server.Assets.Xml;
+using Newtonsoft.Json;
+using static LoESoft.Server.Assets.Xml.Structure.XmlContent;
 
 namespace LoESoft.Server.Core.World.Map.Structure
 {
@@ -9,5 +11,6 @@ namespace LoESoft.Server.Core.World.Map.Structure
         public string Group { get; set; }
         public int BoundX { get; set; }
         public int BoundY { get; set; }
+        [JsonIgnore] public IXmlContent XmlContent { get; set; }
     }
 }

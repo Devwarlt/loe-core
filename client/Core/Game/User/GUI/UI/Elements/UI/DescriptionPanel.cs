@@ -9,7 +9,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements.UI
     {
         public TextDisplay Description { get; set; }
 
-        public DescriptionPanel(int x, int y, string title) 
+        public DescriptionPanel(int x, int y, string title)
             : base(x, y, title, 400, 400, new RGBColor(25, 25, 70), 0.75f)
         {
             Description = new TextDisplay(5, 30, "This is a sample description Test sample hey");
