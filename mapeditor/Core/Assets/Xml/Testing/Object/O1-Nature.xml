@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <Object type="contentType" id="id" name="Name">
+
+    Available content types to fit object:
+      - 0: Objects
+      - 1: Items
+      - 2: Tiles
+
+    ...
+
+    <Layer type="type" group="Group" />
+
+    Available types to fit map editor:
+      - 0: underground
+      - 1: ground (above underground layer)
+      - 2: object (above ground layer)
+      - 3: sky (above object layer)
+-->
+<Objects>
+  <Object type="0" id="1068" name="Small Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="4" y="7">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1069" name="Small Tree (Body)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="4" y="8">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1070" name="Tree Stump">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="7" y="6">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1071" name="Tree Stump">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="8" y="7">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1072" name="Tree Stump">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="9" y="6">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1073" name="Medium Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="4">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1074" name="Medium Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="4">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1075" name="Medium Tree (Body)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="5">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1076" name="Medium Tree (Body)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="5">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1077" name="Big Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="6">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1078" name="Big Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="6">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1079" name="Big Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="7">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1080" name="Big Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="7">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1081" name="Big Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="8">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1082" name="Big Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="8">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1083" name="Big Tree (Body)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="9">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1084" name="Big Tree (Body)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="9">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1085" name="Pine Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="15" y="6">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1086" name="Pine Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="16" y="6">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1087" name="Pine Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="15" y="7">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1088" name="Pine Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="16" y="7">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1089" name="Pine Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="15" y="8">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1090" name="Pine Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="16" y="8">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1091" name="Pine Tree (Body)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="15" y="9">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1092" name="Pine Tree (Body)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="16" y="9">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1093" name="Small Pine Tree (Top)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="13" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1094" name="Small Pine Tree (Body)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="14" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1095" name="Bush">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="15" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1096" name="Watering Hole">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="16" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1097" name="Stone">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="7" y="8">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1098" name="Stone">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="8" y="9">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1099" name="Stone">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="9" y="8">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1100" name="Stone">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="10" y="9">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1122" name="Small Bush">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="7" y="10">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1123" name="Small Bush">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="8" y="11">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1124" name="Plant">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="9" y="10">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1125" name="Grass">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="10" y="11">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1126" name="Grass">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="10">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1127" name="Grass">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="11">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+</Objects>

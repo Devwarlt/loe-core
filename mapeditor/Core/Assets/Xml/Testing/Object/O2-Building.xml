@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <Object type="contentType" id="id" name="Name">
+
+    Available content types to fit object:
+      - 0: Objects
+      - 1: Items
+      - 2: Tiles
+
+    ...
+
+    <Layer type="type" group="Group" />
+
+    Available types to fit map editor:
+      - 0: underground
+      - 1: ground (above underground layer)
+      - 2: object (above ground layer)
+      - 3: sky (above object layer)
+-->
+<Objects>
+  <Object type="0" id="1101" name="Stone Wall">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="7" y="0">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1102" name="Stone Opened Door">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="8" y="0">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1103" name="Stone Closed Door">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="9" y="0">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1104" name="Stone Opened Window">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="10" y="0">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1105" name="Stone Closed Window">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="0">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1106" name="Last Stone Wall (Left)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="0">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1107" name="Last Stone Wall (Right)">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="13" y="0">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1108" name="Barrel">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="9" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1109" name="Closed Chest">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="10" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1110" name="Wooden Sign">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1111" name="Artesian Well">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="1">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1112" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="7" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1113" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="8" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1114" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="9" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1115" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="10" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1116" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="11" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1117" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="12" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1118" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="13" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1119" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="14" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1120" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="15" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="0" id="1121" name="Building Red Roof">
+    <Layer type="2" group="Sample - Objects" />
+    <Texture x="16" y="2">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+</Objects>

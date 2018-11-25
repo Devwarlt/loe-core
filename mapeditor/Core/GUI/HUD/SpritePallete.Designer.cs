@@ -34,6 +34,7 @@
             // 
             // SpriteBox
             // 
+            this.SpriteBox.BackColor = System.Drawing.Color.Magenta;
             this.SpriteBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.SpriteBox.Location = new System.Drawing.Point(1, 1);
             this.SpriteBox.Name = "SpriteBox";
