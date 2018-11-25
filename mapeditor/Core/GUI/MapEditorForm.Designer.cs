@@ -62,6 +62,7 @@ namespace LoESoft.MapEditor.Core.GUI
             this.MaximizeBox = false;
             this.Name = "MapEditorForm";
             this.Text = "LoESoft Games - BRME Map Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MapEditorForm_FormClosing);
             this.ResumeLayout(false);
 
         }
