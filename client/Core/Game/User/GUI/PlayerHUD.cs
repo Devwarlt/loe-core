@@ -2,6 +2,7 @@
 using LoESoft.Client.Core.Game.User.GUI.UI;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Forms;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LoESoft.Client.Core.Game.User.GUI
 {
@@ -25,10 +26,10 @@ namespace LoESoft.Client.Core.Game.User.GUI
             AddChild(Icons);
         }
 
-        public void UpdateUI(GamePlayer player)
+        public void DrawMinimap(SpriteBatch spriteBatch, GamePlayer player)
         {
-            if (player.Player.IsMoving && Icons.ChildList.Contains(MiniMapView))
-                MiniMapView.ReloadMap((int)player.Player.X, (int)player.Player.Y);
+            if (Icons.ChildList.Contains(MiniMapView))
+                MiniMapView.DrawMap(spriteBatch, (int)player.Player.X, (int)player.Player.Y);
         }
 
         private void toggleOptions()

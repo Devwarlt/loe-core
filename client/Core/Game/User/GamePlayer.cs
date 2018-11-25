@@ -90,19 +90,18 @@ namespace LoESoft.Client.Core.Game.User
 
         public void Update(GameTime gameTime)
         {
-            HUD.Update(gameTime);
             HandlePlayerInput();
-
             Player.Update(gameTime);
-            HUD.UpdateUI(this);
+            HUD.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch, Matrix matrix)
+        public void Draw(SpriteBatch spriteBatch)
         {
             Player.Draw(spriteBatch);
             spriteBatch.End();
             spriteBatch.Begin();
             HUD.Draw(spriteBatch);
+            HUD.DrawMinimap(spriteBatch, this);
         }
 
         private void SendMovePacket() => User.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });
