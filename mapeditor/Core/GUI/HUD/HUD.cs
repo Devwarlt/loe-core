@@ -23,11 +23,12 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             InitializeComponent();
         }
 
-        public void UpdateInfo(int fps)
+        public void UpdateInfo(int fps, string objectName = null)
         {
             MapNameLabel.Text = $"Name: {MEGameControl.ActualMapName}";
             MapSizeLabel.Text = $"Size: {(int)MEGameControl.ActualMapSize} x {(int)MEGameControl.ActualMapSize}";
             MapFPSLabel.Text = $"FPS: {fps}";
+            MapObjectLabel.Text = $"Object: {objectName ?? "-"}";
             GridCheckBox.Checked = MEGameControl.ShowGrid;
         }
 
@@ -47,7 +48,7 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
 
             try
             {
-                var interactiveobjects = MEGameControl.InteractiveObjects[selecteditem];
+                var interactiveobjects = MEGameControl.InteractiveObjects[selecteditem].OrderBy(interactiveobject => interactiveobject.Name);
                 var image = MEGameControl.Images[selecteditem];
                 var images = Utils.CropSpritesheet(image);
                 var maxWidth = image.Width / Utils.TILE_SIZE;
@@ -57,35 +58,29 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                 var row = 0;
                 var column = 0;
 
-                for (var x = 0; x < maxWidth; x++)
-                    for (var y = 0; y < maxHeight; y++)
+                foreach (var interactiveobject in interactiveobjects)
+                {
+                    var spritepallete = new SpritePallete()
                     {
-                        var interactiveobject = interactiveobjects.FirstOrDefault(sample => sample.TextureData.X == x && sample.TextureData.Y == y);
+                        Location = new Point(1 + columns[column], 2 + row * 33),
+                        Name = $"spritePallete[{row}, {column}]",
+                        Size = new Size(33, 33),
+                        TabIndex = 0,
+                        Image = images[interactiveobject.TextureData.X, interactiveobject.TextureData.Y],
+                        InteractiveObject = interactiveobject
+                    };
+                    spritepallete.SetImage();
 
-                        if (interactiveobject != null)
-                        {
-                            var spritepallete = new SpritePallete()
-                            {
-                                Location = new Point(1 + columns[column], 2 + row * 33),
-                                Name = $"spritePallete[{x}, {y}]",
-                                Size = new Size(33, 33),
-                                TabIndex = 0,
-                                Image = images[x, y],
-                                InteractiveObject = interactiveobject
-                            };
-                            spritepallete.SetImage();
+                    PalletePanel.Controls.Add(spritepallete);
 
-                            PalletePanel.Controls.Add(spritepallete);
+                    column++;
 
-                            column++;
-
-                            if (column == 5)
-                            {
-                                column = 0;
-                                row++;
-                            }
-                        }
+                    if (column == 5)
+                    {
+                        column = 0;
+                        row++;
                     }
+                }
             }
             catch (KeyNotFoundException) { App.Warn($"Spritesheet '{selecteditem}' was not found in collection."); }
         }

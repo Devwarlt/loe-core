@@ -42,6 +42,7 @@
             this.PalleteComboBox = new System.Windows.Forms.ComboBox();
             this.PalletePanel = new System.Windows.Forms.Panel();
             this.TitleUnderLine = new System.Windows.Forms.Panel();
+            this.MapObjectLabel = new System.Windows.Forms.Label();
             this.MapOptionsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +128,7 @@
             // MapOptionsGroup
             // 
             this.MapOptionsGroup.Controls.Add(this.MapFPSLabel);
+            this.MapOptionsGroup.Controls.Add(this.MapObjectLabel);
             this.MapOptionsGroup.Controls.Add(this.label1);
             this.MapOptionsGroup.Controls.Add(this.PalleteComboBox);
             this.MapOptionsGroup.Controls.Add(this.CompressionCheckBox);
@@ -134,7 +136,7 @@
             this.MapOptionsGroup.ForeColor = System.Drawing.SystemColors.Desktop;
             this.MapOptionsGroup.Location = new System.Drawing.Point(3, 112);
             this.MapOptionsGroup.Name = "MapOptionsGroup";
-            this.MapOptionsGroup.Size = new System.Drawing.Size(194, 94);
+            this.MapOptionsGroup.Size = new System.Drawing.Size(194, 112);
             this.MapOptionsGroup.TabIndex = 8;
             this.MapOptionsGroup.TabStop = false;
             this.MapOptionsGroup.Text = "Options";
@@ -173,9 +175,9 @@
             // 
             this.PalletePanel.AutoScroll = true;
             this.PalletePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PalletePanel.Location = new System.Drawing.Point(3, 212);
+            this.PalletePanel.Location = new System.Drawing.Point(3, 230);
             this.PalletePanel.Name = "PalletePanel";
-            this.PalletePanel.Size = new System.Drawing.Size(194, 393);
+            this.PalletePanel.Size = new System.Drawing.Size(194, 375);
             this.PalletePanel.TabIndex = 2;
             // 
             // TitleUnderLine
@@ -186,6 +188,15 @@
             this.TitleUnderLine.Name = "TitleUnderLine";
             this.TitleUnderLine.Size = new System.Drawing.Size(180, 2);
             this.TitleUnderLine.TabIndex = 10;
+            // 
+            // ObjectLabel
+            // 
+            this.MapObjectLabel.AutoSize = true;
+            this.MapObjectLabel.Location = new System.Drawing.Point(6, 88);
+            this.MapObjectLabel.Name = "ObjectLabel";
+            this.MapObjectLabel.Size = new System.Drawing.Size(47, 13);
+            this.MapObjectLabel.TabIndex = 1;
+            this.MapObjectLabel.Text = "Object: -";
             // 
             // HUD
             // 
@@ -224,5 +235,6 @@
         private System.Windows.Forms.ComboBox PalleteComboBox;
         private System.Windows.Forms.Panel TitleUnderLine;
         private System.Windows.Forms.Label MapFPSLabel;
+        private System.Windows.Forms.Label MapObjectLabel;
     }
 }

@@ -104,7 +104,6 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             App.Info("Creating a sample map...");
 
             Map = new Map(MapSize.SIZE_128);
-            ShowGrid = true;
             GridTexture = Utils.LoadEmbeddedTexture(GraphicsDevice, "sample-grid.png");
             InteractiveObject = null;
             HUD.UpdatePalleteComboBox(InteractiveObjects.Keys.OrderBy(group => group).ToArray());
@@ -127,7 +126,7 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             if (Quit)
                 Environment.Exit(0);
 
-            HUD.UpdateInfo(Editor.GetFrameRate);
+            HUD.UpdateInfo(Editor.GetFrameRate, InteractiveObject?.Name);
 
             MouseState = Mouse.GetState();
 
