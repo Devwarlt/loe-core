@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    <Object type="contentType" id="id" name="Name">
+
+    Available content types to fit object:
+      - 0: Objects
+      - 1: Items
+      - 2: Tiles
+
+    ...
+
+    <Layer type="type" group="Group" />
+
+    Available types to fit map editor:
+      - 0: underground
+      - 1: ground (above underground layer)
+      - 2: object (above ground layer)
+      - 3: sky (above object layer)
+-->
+<Objects>
+  <Object type="2" id="1012" name="Dirty">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="1" y="10">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1013" name="Dirty">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="3" y="9">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1014" name="Dirty">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="4" y="9">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1015" name="Dirty">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="3" y="10">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1016" name="Dirty">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="4" y="10">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1017" name="Dirty">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="3" y="11">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+  <Object type="2" id="1018" name="Dirty">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="4" y="11">
+      <FileName>tileSet16x16</FileName>
+    </Texture>
+  </Object>
+</Objects>

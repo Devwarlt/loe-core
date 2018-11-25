@@ -18,22 +18,10 @@
       - 3: sky (above object layer)
 -->
 <Objects>
-  <Object type="1" id="9" name="Broad Sword">
-    <Texture x ="0" y="0">
-      <FileName>itemsEmbed</FileName>
-      <Animated />
-    </Texture>
-  </Object>
-  <Object type="1" id="10" name="Iron Sword">
-    <Texture x ="1" y="0">
-      <FileName>itemsEmbed</FileName>
-      <Animated />
-    </Texture>
-  </Object>
-  <Object type="1" id="11" name="Mithril Sword">
-    <Texture x ="2" y="0">
-      <FileName>itemsEmbed</FileName>
-      <Animated />
+  <Object type="2" id="1019" name="Stone Floor">
+    <Layer type="0" group="Sample - Undergrounds" />
+    <Texture x="14" y="0">
+      <FileName>tileSet16x16</FileName>
     </Texture>
   </Object>
 </Objects>

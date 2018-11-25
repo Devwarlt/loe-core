@@ -58,7 +58,11 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                 var group = interactiveobject.LayerData.Group;
 
                 if (!InteractiveObjects.ContainsKey(group))
+                {
+                    App.Info($"- Added group: '{group}'.");
+
                     InteractiveObjects.Add(group, new List<InteractiveObject>() { interactiveobject });
+                }
                 else
                     InteractiveObjects[group].Add(interactiveobject);
             }
@@ -70,10 +74,10 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             foreach (var interactiveobjects in InteractiveObjects.Values)
                 foreach (var interactiveobject in interactiveobjects)
                 {
-                    var filename = interactiveobject.TextureData.File;
+                    var group = interactiveobject.LayerData.Group;
 
-                    if (!spritesheets.ContainsValue(filename))
-                        spritesheets.Add(interactiveobject.LayerData.Group, filename);
+                    if (!spritesheets.ContainsKey(interactiveobject.LayerData.Group))
+                        spritesheets.Add(interactiveobject.LayerData.Group, interactiveobject.TextureData.File);
                 }
 
             foreach (var spritesheet in spritesheets)
@@ -90,6 +94,8 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
 
                 if (texture != null && image != null)
                 {
+                    App.Info($"- Added spritsheet '{spritesheet.Value}' to group '{spritesheet.Key}'.");
+
                     Textures.Add(spritesheet.Key, texture);
                     Images.Add(spritesheet.Key, image);
                 }
