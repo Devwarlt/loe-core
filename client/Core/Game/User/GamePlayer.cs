@@ -94,6 +94,7 @@ namespace LoESoft.Client.Core.Game.User
             HandlePlayerInput();
 
             Player.Update(gameTime);
+            HUD.UpdateUI(this);
         }
 
         public void Draw(SpriteBatch spriteBatch, Matrix matrix)

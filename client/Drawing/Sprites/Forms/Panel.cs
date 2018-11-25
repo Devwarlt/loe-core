@@ -1,5 +1,6 @@
 ﻿using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using LoESoft.Client.Drawing.Sprites.Text;
+using Microsoft.Xna.Framework;
 using System;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms
@@ -22,13 +23,18 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
             : base(x, y, width, height, color, opacity)
         {
             Title = new TextDisplay(5, 5, title);
-            Title.X = DrawHelper.CenteredPosition(width, Title.Width);
 
             ExitBtn = new ExitButton(width - 23, 3, 20, 20);
             ExitBtn.Exit += OnExit;
             
             AddChild(Title);
             AddChild(ExitBtn);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            Title.X = DrawHelper.CenteredPosition(Width, Title.Width);
+            base.Update(gameTime);
         }
 
         public virtual void OnExit()

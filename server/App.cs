@@ -101,7 +101,7 @@ namespace LoESoft.Server
             {
                 Database.Dispose();
 
-                Info("An error occurred!");
+                Warn($"An error occurred! {e.ToString()}");
 
                 Error(e);
 

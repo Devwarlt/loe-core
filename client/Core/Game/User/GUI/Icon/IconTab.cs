@@ -28,7 +28,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.Icon
         public IconBar MiniMapIcon { get; set; } //To toggle minimap
         public IconBar ChatIcon { get; set; } //To toggle chat
 
-        public IconTab(int x, int y, Action onInfo, Action onOption = null, Action onMiniMap = null, Action onChat = null)
+        public IconTab(int x, int y, Action onInfo, Action onOption, Action onMiniMap, Action onChat = null)
             : base(x, y, 225, 50, new RGBColor(25, 25, 75), 0.7f)
         {
             var iconSet = AssetLibrary.Sprites["iconSprites"];

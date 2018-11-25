@@ -22,7 +22,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
 
             AddEventListener(Event.CLICKLEFT, delegate
             {
-                AddChild(Description);
+                ParentSprite.AddChild(Description);
             });
         }
 

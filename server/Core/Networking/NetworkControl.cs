@@ -62,18 +62,18 @@ namespace LoESoft.Server.Core.Networking
                     { TcpSocket.EndAccept(result); }
                     catch (SocketException) { }
                     catch (ArgumentException) { }
-                    catch
+                    catch (Exception ex)
                     {
                         if (!Disconnected)
-                            App.Warn("Something went wrong!");
+                            App.Warn("Something went wrong!" + ex.ToString());
                     }
                 }, null);
             }
             catch (SocketException) { }
-            catch
+            catch (Exception ex)
             {
                 if (!Disconnected)
-                    App.Warn("Something went wrong!");
+                    App.Warn("Something went wrong!" + ex.ToString());
             }
         }
 
@@ -121,22 +121,22 @@ namespace LoESoft.Server.Core.Networking
                     catch (SocketException) { }
                     catch (JsonReaderException) { }
                     catch (NullReferenceException) { }
-                    catch
+                    catch (Exception ex)
                     {
                         if (!Disconnected)
                         {
-                            App.Warn("Something went wrong!");
+                            App.Warn("Something went wrong!" + ex.ToString());
 
                             ReceivePacket();
                         }
                     }
                 }, null);
             }
-            catch
+            catch (Exception ex)
             {
                 if (!Disconnected)
                 {
-                    App.Warn("Something went wrong!");
+                    App.Warn("Something went wrong!" + ex.ToString());
 
                     ReceivePacket();
                 }

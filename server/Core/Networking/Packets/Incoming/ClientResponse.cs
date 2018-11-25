@@ -36,10 +36,12 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             var content = new List<int>();
 
             for (var i = 0; i < 3; i++)
-                if (i < client.Account.CurrentCharacterId)
+            {
+                if (i < characters.Count)
                     content.Add(characters[i].Class);
                 else
                     content.Add(-1);
+            }
 
             client.SendPacket(new ServerResponse()
             {

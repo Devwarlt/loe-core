@@ -6,13 +6,8 @@ namespace LoESoft.Client.Drawing.Events
 {
     public partial class EventsHandler
     {
-        private float timer = 0f;
-
         private MouseState previousMouse;
         private MouseState currentMouse;
-
-        private KeyboardState previousKeyBoard;
-        private KeyboardState currentKeyBoard;
 
         public static Rectangle MouseRectangle { get; private set; }
 

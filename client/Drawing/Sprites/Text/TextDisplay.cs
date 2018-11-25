@@ -2,8 +2,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace LoESoft.Client.Drawing.Sprites.Text
 {
@@ -17,18 +19,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public bool Bold { get; set; }
         public bool Outline { get; set; }
 
-        private int _perLineWidth = 0;
-
-        public int PerLineWidth
-        {
-            get => _perLineWidth;
-            set
-            {
-                _perLineWidth = value;
-                TextByLine = DetectPerLine(Text);
-            }
-        }
-
         private string _text;
 
         public string Text
@@ -40,18 +30,35 @@ namespace LoESoft.Client.Drawing.Sprites.Text
                 Height = (int)MeasureString(value, (int)Size).Y;
 
                 _text = value;
+            }
+        }
 
-                if (PerLineWidth > 0)
-                    TextByLine = DetectPerLine(value);
+        public  List<string> TextByLine;
+
+        private int _warpwidth;
+        public int WrapWidth
+        {
+            get => _warpwidth;
+            set
+            {
+                _warpwidth = value;
+
+                if (_warpwidth > 0)
+                {
+                    Text = WrapText(Text, WrapWidth);
+                    detectLinePerString(_text);
+                }
             }
         }
 
         public TextDisplay(int x, int y, string text, float size = 12, RGBColor color = null, float alpha = 1, bool bold = false)
             : base(x, y, 0, 0, null, color, alpha)
         {
+            TextByLine = new List<string>();
             Size = size;
             Bold = bold;
             Text = text;
+            TextHeight = GetHeight((int)size);
         }
 
         public static void LoadSpriteFont(ContentManager contentManager)
@@ -60,14 +67,22 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         public static Vector2 MeasureString(string text, int size = 12)
             => new Vector2(Font.MeasureString(text).X * (size / 100f), Font.MeasureString(text).Y * (size / 100f));
 
+        //public static Vector2 MeasureString(string text, int size = 12, )
+
         public override void Update(GameTime gameTime)
         {
+            if (TextByLine.Count > 0)
+                TextHeight = (GetHeight((int)Size) * TextByLine.Count);
+            else
+                TextHeight = GetHeight((int)Size);
             base.Update(gameTime);
         }
 
+        public int TextHeight { get; set; } 
+
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (PerLineWidth != 0)
+            if (TextByLine.Count > 0)
             {
                 var offset = 0;
 
@@ -101,30 +116,32 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             base.Draw(spriteBatch);
         }
 
-        private List<string> TextByLine;
-
-        public List<string> DetectPerLine(string text)
+        private void detectLinePerString(string text) => TextByLine = text.Split(new string[] { "/n" }, StringSplitOptions.None).ToList();
+        
+        public string WrapText(string text, float maxLineWidth)
         {
-            if (PerLineWidth == 0)
-                return null;
+            string[] words = text.Split(' ');
+            StringBuilder sb = new StringBuilder();
+            float lineWidth = 0f;
+            float spaceWidth = MeasureString(" ", (int)Size).X;
 
-            var cWidth = 0;
-            var cSize = 0;
-
-            foreach (var i in text)
+            foreach (string word in words)
             {
-                cWidth += (int)MeasureString(i.ToString(), (int)Size).X;
+                Vector2 size = MeasureString(word, (int)Size);
 
-                if (cWidth >= PerLineWidth)
-                    break;
-
-                cSize++;
+                if (lineWidth + size.X < maxLineWidth)
+                {
+                    sb.Append(word + " ");
+                    lineWidth += size.X + spaceWidth;
+                }
+                else
+                {
+                    sb.Append("\n" + word + " ");
+                    lineWidth = size.X + spaceWidth;
+                }
             }
 
-            return Split(Text, cSize).ToList();
+            return sb.ToString();
         }
-
-        private static IEnumerable<string> Split(string str, int chunkSize)
-            => Enumerable.Range(0, str.Length / chunkSize).Select(i => str.Substring(i * chunkSize, chunkSize));
     }
 }
