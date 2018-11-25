@@ -23,13 +23,17 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             InitializeComponent();
         }
 
-        public void UpdateInfo(int fps, string objectName = null)
+        public void Update(int fps, string objectName = null)
         {
             MapNameLabel.Text = $"Name: {MEGameControl.ActualMapName}";
             MapSizeLabel.Text = $"Size: {(int)MEGameControl.ActualMapSize} x {(int)MEGameControl.ActualMapSize}";
             MapFPSLabel.Text = $"FPS: {fps}";
             MapObjectLabel.Text = $"Object: {objectName ?? "-"}";
             GridCheckBox.Checked = MEGameControl.ShowGrid;
+            UndergroundCheckBox.Checked = MEGameControl.ShowUndergroundLayer;
+            GroundCheckBox.Checked = MEGameControl.ShowGroundLayer;
+            ObjectCheckBox.Checked = MEGameControl.ShowObjectLayer;
+            SkyCheckBox.Checked = MEGameControl.ShowSkyLayer;
         }
 
         public void UpdatePalleteComboBox(object[] items)
@@ -88,6 +92,14 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
         private void GridCheckBox_CheckedChanged(object sender, EventArgs e) => MEGameControl.ShowGrid = GridCheckBox.Checked;
 
         private void CompressionCheckBox_CheckedChanged(object sender, EventArgs e) => MEGameControl.Mapper.EnableCompression = CompressionCheckBox.Checked;
+
+        private void UndergroundCheckBox_CheckedChanged(object sender, EventArgs e) => MEGameControl.ShowUndergroundLayer = UndergroundCheckBox.Checked;
+
+        private void GroundCheckBox_CheckedChanged(object sender, EventArgs e) => MEGameControl.ShowGroundLayer = GroundCheckBox.Checked;
+
+        private void ObjectCheckBox_CheckedChanged(object sender, EventArgs e) => MEGameControl.ShowObjectLayer = ObjectCheckBox.Checked;
+
+        private void SkyCheckBox_CheckedChanged(object sender, EventArgs e) => MEGameControl.ShowSkyLayer = SkyCheckBox.Checked;
 
         private void NewButton_Click(object sender, EventArgs e)
         {

@@ -25,6 +25,10 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
         public static string LoadFileName { get; set; }
         public static Map Map { get; set; }
         public static bool ShowGrid { get; set; }
+        public static bool ShowUndergroundLayer { get; set; }
+        public static bool ShowGroundLayer { get; set; }
+        public static bool ShowObjectLayer { get; set; }
+        public static bool ShowSkyLayer { get; set; }
         public static Texture2D GridTexture { get; set; }
         public static InteractiveObject InteractiveObject { get; set; }
         public static Dictionary<string, List<InteractiveObject>> InteractiveObjects { get; set; }
@@ -104,6 +108,10 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             App.Info("Creating a sample map...");
 
             Map = new Map(MapSize.SIZE_128);
+            ShowUndergroundLayer = true;
+            ShowGroundLayer = true;
+            ShowObjectLayer = true;
+            ShowSkyLayer = true;
             GridTexture = Utils.LoadEmbeddedTexture(GraphicsDevice, "sample-grid.png");
             InteractiveObject = null;
             HUD.UpdatePalleteComboBox(InteractiveObjects.Keys.OrderBy(group => group).ToArray());
@@ -126,7 +134,7 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             if (Quit)
                 Environment.Exit(0);
 
-            HUD.UpdateInfo(Editor.GetFrameRate, InteractiveObject?.Name);
+            HUD.Update(Editor.GetFrameRate, InteractiveObject?.Name);
 
             MouseState = Mouse.GetState();
 
