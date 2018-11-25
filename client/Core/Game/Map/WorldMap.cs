@@ -141,18 +141,18 @@ namespace LoESoft.Client.Core.Game.Map
                 i.Draw(spriteBatch);
         }
 
-        public static Tile[] GetTilesInSight(int x, int y)
+        public static HashSet<Tile> GetTilesInSight(int x, int y)
         {
             var sight = GetSightPoints(x, y);
 
-            return TileMap.Where(_ => sight.Contains(_.Key)).Select(_ => _.Value).ToArray();
+            return TileMap.Where(_ => sight.Contains(_.Key)).Select(_ => _.Value).ToHashSet();
         }
 
-        public static Entity[] GetEntitiesInSight(int x, int y)
+        public static HashSet<Entity> GetEntitiesInSight(int x, int y)
         {
             var sight = GetSightPoints(x, y);
 
-            return Objects.ToArray().Where(_ => sight.Contains(_.Value.Pos)).Select(_ => _.Value.Entity).ToArray();
+            return Objects.ToArray().Where(_ => sight.Contains(_.Value.Pos)).Select(_ => _.Value.Entity).ToHashSet();
         }
         
         public static int SightRadius = 10;

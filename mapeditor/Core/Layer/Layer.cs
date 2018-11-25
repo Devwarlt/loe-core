@@ -19,46 +19,25 @@ namespace LoESoft.MapEditor.Core.Layer
             Chunk = new ChunkData[(int)MapSize, (int)MapSize];
         }
 
-        public void SetTiles(MouseState mouse, ChunkData data)
+        public void SetTiles(double mx, double my, ChunkData data)
         {
-            Vector2 mouseposition;
-            double mousemapx;
-            double mousemapy;
+            double mousemapx = mx;
+            double mousemapy = my;
 
-            var leftbutton = mouse.LeftButton;
-            var rightbutton = mouse.RightButton;
-
-            try
-            {
-                if (leftbutton == ButtonState.Pressed)
-                {
-                    mouseposition = new Vector2(mouse.X, mouse.Y);
-                    mousemapx = ((int)mouseposition.X / Utils.TILE_SIZE) + MEGameControl.DrawOffset.X;
-                    mousemapy = ((int)mouseposition.Y / Utils.TILE_SIZE) + MEGameControl.DrawOffset.Y;
-
-                    if (mouseposition.X < App.MapControl.Width && mouseposition.X >= 0
-                        && mouseposition.Y < App.MapControl.Height && mouseposition.Y >= 0
-                        && mousemapx < (int)MapSize && mousemapx >= 0
-                        && mousemapy < (int)MapSize && mousemapy >= 0
+            if (mousemapx < (int)MapSize && mousemapx >= 0 && mousemapy < (int)MapSize && mousemapy >= 0
                         && App.MapControl.Focused)
-                        Chunk[(int)mousemapx, (int)mousemapy] = data;
-                }
+                Chunk[(int)mousemapx, (int)mousemapy] = data;
+        }
 
-                if (rightbutton == ButtonState.Pressed)
-                {
-                    mouseposition = new Vector2(mouse.X, mouse.Y);
-                    mousemapx = ((int)mouseposition.X / Utils.TILE_SIZE) + MEGameControl.DrawOffset.X;
-                    mousemapy = ((int)mouseposition.Y / Utils.TILE_SIZE) + MEGameControl.DrawOffset.Y;
-
-                    if (mouseposition.X < App.MapControl.Width && mouseposition.X >= 0
-                        && mouseposition.Y < App.MapControl.Height && mouseposition.Y >= 0
-                        && mousemapx < (int)MapSize && mousemapx >= 0
-                        && mousemapy < (int)MapSize && mousemapy >= 0
-                        && App.MapControl.Focused)
-                        Chunk[(int)mousemapx, (int)mousemapy] = null;
-                }
-            }
-            catch { }
+        public void RemoveTiles(double mx, double my)
+        {
+            double mousemapx = mx;
+            double mousemapy = my;
+            
+            if (mousemapx < (int)MapSize && mousemapx >= 0
+                && mousemapy < (int)MapSize && mousemapy >= 0
+                && App.MapControl.Focused)
+                Chunk[(int)mousemapx, (int)mousemapy] = null;
         }
     }
 }

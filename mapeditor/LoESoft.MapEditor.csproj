@@ -61,7 +61,7 @@
     <Compile Include="Core\GUI\HUD\HUD.Designer.cs">
       <DependentUpon>HUD.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\GUI\HUD\MEGameControl.cs">
+    <Compile Include="Core\GUI\HUD\Assets\MEGameControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Core\GUI\HUD\SpritePallete.cs">

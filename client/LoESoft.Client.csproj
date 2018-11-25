@@ -100,6 +100,7 @@
     <Compile Include="Core\Game\User\GUI\PlayerHUD.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\InventoryView.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\ItemCell.cs" />
+    <Compile Include="Core\Game\User\GUI\UI\Elements\UI\DescriptionPanel.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\StatView.cs" />
     <Compile Include="Core\Game\User\GUI\UI\MiniMap.cs" />
     <Compile Include="Core\Game\User\GUI\UI\OptionsTable.cs" />

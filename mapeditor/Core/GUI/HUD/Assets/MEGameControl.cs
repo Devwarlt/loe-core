@@ -122,19 +122,35 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                 Environment.Exit(0);
 
             HUD.UpdateInfo(Editor.GetFrameRate);
+            
+            MouseState = Mouse.GetState();
 
             if (MapState == MapState.Active && InteractiveObject != null && InteractiveObjects != null)
                 if (InteractiveObject.LayerData.Type != MapLayer.ABSTRACT && Focused)
-                    Map.Layers.FirstOrDefault(layer => layer.MapLayer == InteractiveObject.LayerData.Type).SetTiles(MouseState, new ChunkData()
-                    {
-                        ContentType = InteractiveObject.Type,
-                        Id = InteractiveObject.Id,
-                        Group = InteractiveObject.LayerData.Group,
-                        BoundX = InteractiveObject.TextureData.X,
-                        BoundY = InteractiveObject.TextureData.Y
-                    });
+                {
+                    var mx = (MouseState.X / Utils.TILE_SIZE) + DrawOffset.X;
+                    var my = (MouseState.Y / Utils.TILE_SIZE) + DrawOffset.Y;
 
-            MouseState = Mouse.GetState();
+                    if (MouseState.X < App.MapControl.Width && MouseState.X >= 0
+                        && MouseState.Y < App.MapControl.Height && MouseState.Y >= 0)
+                    {
+                        if (MouseState.LeftButton == ButtonState.Pressed)
+                        {
+                            Map.Layers[(int)InteractiveObject.LayerData.Type].SetTiles(mx, my, new ChunkData()
+                            {
+                                ContentType = InteractiveObject.Type,
+                                Id = InteractiveObject.Id,
+                                Group = InteractiveObject.LayerData.Group,
+                                BoundX = InteractiveObject.TextureData.X,
+                                BoundY = InteractiveObject.TextureData.Y
+                            });
+                        } else if (MouseState.RightButton == ButtonState.Pressed)
+                        {
+                            Map.Layers[(int)InteractiveObject.LayerData.Type].RemoveTiles(mx, my);
+                        }
+                    }
+                }
+
             Map.Update();
 
             base.Update(gameTime);

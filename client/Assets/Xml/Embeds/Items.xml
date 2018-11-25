@@ -6,4 +6,16 @@
       <Animated />
     </Texture>
   </Object>
+  <Object type="1" id="10" name="Iron Sword">
+    <Texture x ="1" y="0">
+      <FileName>itemsEmbed</FileName>
+      <Animated />
+    </Texture>
+  </Object>
+  <Object type="1" id="11" name="Mithril Sword">
+    <Texture x ="2" y="0">
+      <FileName>itemsEmbed</FileName>
+      <Animated />
+    </Texture>
+  </Object>
 </Objects>

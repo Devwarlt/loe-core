@@ -1,5 +1,4 @@
 ﻿using LoESoft.Client.Core.Game.Map;
-using LoESoft.Client.Drawing.Sprites;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
@@ -19,10 +18,10 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
 
             int drawX = 0;
             int drawY = 0;
-            foreach (var i in getTiles(x, y))
-            {
-                var sprite = new Sprite(drawX, drawY, 10, 10);
-            }
+
+            var tiles = getTiles(x, y);
+            var entities = getEntities(x, y);
+            
         }
 
         private static Texture2D[] getTiles(int x, int y) => WorldMap.GetTilesInSight(x, y).Select(_ => _.Texture).ToArray();
