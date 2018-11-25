@@ -43,14 +43,15 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
         private HashSet<Sprite> getEntities(int x, int y)
         {
             var hashSet = new HashSet<Sprite>();
-            var tiles = WorldMap.GetEntitiesInSight(x, y);
+            var entities = WorldMap.GetEntitiesInSight(x, y);
 
             var iX = 0;
             var iY = 0;
-            foreach (var i in tiles)
+            foreach (var i in entities)
             {
                 int tx = (int)(i.X - (x - 10)) * 15;
                 int ty = (int)(i.Y - (y - 10)) * 15;
+
                 hashSet.Add(new Sprite(tx + X + iX, ty + Y + iY, 15, 15, i.Texture));
             }
 
