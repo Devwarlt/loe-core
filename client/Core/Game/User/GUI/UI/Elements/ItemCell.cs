@@ -19,7 +19,6 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
             Description = new DescriptionPanel(DrawHelper.CenteredToScreenWidth(300), DrawHelper.CenteredToScreenHeight(400), "");
             Description.IsZeroApplicaple = true;
 
-
             AddEventListener(Event.CLICKLEFT, delegate
             {
                 ParentSprite.AddChild(Description);

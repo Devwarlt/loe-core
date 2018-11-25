@@ -7,7 +7,8 @@ namespace LoESoft.Server.Core.World.Entities.Player.Attribute
     public class Inventory
     {
         public Item[] Items { get; set; }
-        Random _rand = new Random();
+        private Random _rand = new Random();
+
         public Inventory()
         {
             Items = new Item[32];

@@ -28,7 +28,7 @@ namespace LoESoft.Server.Core.World.Map.Structure
                 Layers.Add(new Layer((MapLayer)i, Size));
         }
 
-        public ChunkObject[,] GetChunksByLayer(MapLayer layer) => Layers[(int)layer].Chunks;
+        public ChunkData[,] GetChunksByLayer(MapLayer layer) => Layers[(int)layer].Chunk;
 
         public static Map GetMapByName(string name)
         {
@@ -45,7 +45,7 @@ namespace LoESoft.Server.Core.World.Map.Structure
             throw new Exception($"Map {name} not found!");
         }
 
-        public static void LoadEmbeddedMaps() => BinaryMapsCache = App.LoEUtils.GetEmbeddedMaps<int>(Assembly.GetExecutingAssembly());
+        public static void LoadEmbeddedMaps() => BinaryMapsCache = App.LoEUtils.GetEmbeddedMaps(Assembly.GetExecutingAssembly());
 
         private static Map GetMapFromBytes(bool compressed, byte[] data)
             => compressed ? JsonConvert.DeserializeObject<Map>(Encoding.UTF8.GetString(GZipCompression.UnZip(data))) :

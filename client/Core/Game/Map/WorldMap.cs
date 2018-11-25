@@ -2,7 +2,6 @@
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using static LoESoft.Client.Core.Game.Objects.Player;
@@ -154,7 +153,7 @@ namespace LoESoft.Client.Core.Game.Map
 
             return Objects.ToArray().Where(_ => sight.Contains(_.Value.Pos)).Select(_ => _.Value.Entity).ToHashSet();
         }
-        
+
         public static int SightRadius = 10;
         public static int SightBound = SightRadius * 2;
 

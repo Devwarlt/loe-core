@@ -1,5 +1,4 @@
 ﻿using LoESoft.Client.Core.Game.Map;
-using LoESoft.Client.Drawing.Sprites;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
@@ -16,7 +15,6 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
 
         public void ReloadMap(int x, int y)
         {
-
         }
 
         private static Texture2D[] getTiles(int x, int y) => WorldMap.GetTilesInSight(x, y).Select(_ => _.Texture).ToArray();

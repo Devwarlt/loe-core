@@ -33,9 +33,10 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             }
         }
 
-        public  List<string> TextByLine;
+        public List<string> TextByLine;
 
         private int _warpwidth;
+
         public int WrapWidth
         {
             get => _warpwidth;
@@ -78,7 +79,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             base.Update(gameTime);
         }
 
-        public int TextHeight { get; set; } 
+        public int TextHeight { get; set; }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -117,7 +118,7 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         }
 
         private void detectLinePerString(string text) => TextByLine = text.Split(new string[] { "/n" }, StringSplitOptions.None).ToList();
-        
+
         public string WrapText(string text, float maxLineWidth)
         {
             string[] words = text.Split(' ');

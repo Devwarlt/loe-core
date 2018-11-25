@@ -25,7 +25,7 @@ namespace LoESoft.Server.Core.World
         {
             Loaded = false;
             Manager = manager;
-            
+
             Chunks = new Dictionary<Point, Chunk>();
             Players = new ConcurrentDictionary<int, Player>();
 

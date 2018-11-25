@@ -26,7 +26,7 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
 
             ExitBtn = new ExitButton(width - 23, 3, 20, 20);
             ExitBtn.Exit += OnExit;
-            
+
             AddChild(Title);
             AddChild(ExitBtn);
         }

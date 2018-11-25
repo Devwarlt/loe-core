@@ -128,7 +128,7 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                 Environment.Exit(0);
 
             HUD.UpdateInfo(Editor.GetFrameRate);
-            
+
             MouseState = Mouse.GetState();
 
             if (MapState == MapState.Active && InteractiveObject != null && InteractiveObjects != null)
@@ -150,7 +150,8 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                                 BoundX = InteractiveObject.TextureData.X,
                                 BoundY = InteractiveObject.TextureData.Y
                             });
-                        } else if (MouseState.RightButton == ButtonState.Pressed)
+                        }
+                        else if (MouseState.RightButton == ButtonState.Pressed)
                         {
                             Map.Layers[(int)InteractiveObject.LayerData.Type].RemoveTiles(mx, my);
                         }
