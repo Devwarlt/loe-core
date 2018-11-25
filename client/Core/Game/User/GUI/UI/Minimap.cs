@@ -29,7 +29,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
 
             var iX = 0;
             var iY = 0;
-            foreach(var i in tiles)
+            foreach (var i in tiles)
             {
                 var tx = (i.X - (x - 10)) * 15;
                 var ty = (i.Y - (y - 10)) * 15;
