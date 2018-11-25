@@ -47,7 +47,7 @@ namespace LoESoft.Client.Core.Screens
                 {
                     WorldMap.Draw(spriteBatch, (int)Controller.Player.X, (int)Controller.Player.Y);
 
-                    Controller.Draw(spriteBatch, Camera.GetMatrix());
+                    Controller.Draw(spriteBatch);
                 }
             }
             catch (InvalidOperationException) { }
