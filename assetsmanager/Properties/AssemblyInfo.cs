@@ -2,16 +2,16 @@
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("LoESoft - MapEditor")]
-[assembly: AssemblyProduct("MapEditor")]
+[assembly: AssemblyTitle("LoESoft - AssetsManager")]
+[assembly: AssemblyProduct("AssetsManager")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyDescription("A BRME map game editor application.")]
+[assembly: AssemblyDescription("A BRME game assets application.")]
 [assembly: AssemblyCompany("LoESoft Games")]
 [assembly: AssemblyCopyright("Copyright © LoESoft Games 2018")]
 [assembly: AssemblyTrademark("BRME")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("6d72bbee-701a-403a-bf82-458f44c74dec")]
+[assembly: Guid("3155b7b4-98ce-435b-9f19-ed476be03757")]
 [assembly: AssemblyVersion("0.1.6")]
 [assembly: AssemblyFileVersion("0.1.6")]
 [assembly: NeutralResourcesLanguage("en-US")]

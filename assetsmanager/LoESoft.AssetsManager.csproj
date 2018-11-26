@@ -1,121 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3155B7B4-98CE-435B-9F19-ED476BE03757}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LoESoft.MapEditor</RootNamespace>
-    <AssemblyName>BRMEMapEditor</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <MonoGamePlatform>Windows</MonoGamePlatform>
+    <RootNamespace>LoESoft.AssetsManager</RootNamespace>
+    <AssemblyName>BRMEAssetsManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>loesoft-new.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>loesoft-new.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
-    <Compile Include="Core\Assets\Structure\Exclusive\LayerData.cs" />
-    <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
-    <Compile Include="Core\Assets\Structure\Exclusive\TextureData.cs" />
-    <Compile Include="Core\Assets\Structure\TilesContent.cs" />
-    <Compile Include="Core\Assets\Structure\XmlContent.cs" />
-    <Compile Include="Core\Assets\XmlLibrary.cs" />
-    <Compile Include="Core\Assets\XmlLoader.cs" />
-    <Compile Include="Core\GUI\HUD\HUD.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\HUD\HUD.Designer.cs">
-      <DependentUpon>HUD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\HUD\Assets\MEGameControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\HUD\SpritePallete.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\HUD\SpritePallete.Designer.cs">
-      <DependentUpon>SpritePallete.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\MapEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\MapEditorForm.Designer.cs">
-      <DependentUpon>MapEditorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\NewMapForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\NewMapForm.Designer.cs">
-      <DependentUpon>NewMapForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\LoadMapForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\LoadMapForm.Designer.cs">
-      <DependentUpon>LoadMapForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\SaveMapForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\SaveMapForm.Designer.cs">
-      <DependentUpon>SaveMapForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\Layer\ChunkData.cs" />
-    <Compile Include="Core\Layer\Layer.cs" />
-    <Compile Include="Core\Layer\Map.cs" />
-    <Compile Include="Core\Layer\MapLayer.cs" />
-    <Compile Include="Core\Util\InteractiveObject.cs" />
-    <Compile Include="Core\Util\SpritesheetItem.cs" />
-    <Compile Include="Core\Util\Utils.cs" />
-    <Compile Include="App.cs" />
-    <Compile Include="MapSize.cs" />
-    <Compile Include="MapState.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="LoESoft.Dlls">
-      <HintPath>..\dlls\LoESoft.Dlls.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
@@ -125,29 +48,14 @@
     <Reference Include="Microsoft.Win32.SystemEvents, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.SystemEvents.4.5.0\lib\net461\Microsoft.Win32.SystemEvents.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Forms.DX, Version=2.1.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\MonoGame.Forms.DX.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.7.0.1114, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\MonoGame.Framework.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.5.11\lib\net45\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="Rollbar, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rollbar.1.6.2\lib\net472\Rollbar.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D11, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\SharpDX.Direct3D11.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.DXGI, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Forms.DX.2.1.0.2\lib\net451\SharpDX.DXGI.dll</HintPath>
+    <Reference Include="Rollbar, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rollbar.2.0.0\lib\net472\Rollbar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -158,8 +66,7 @@
     <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Data.Odbc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.Odbc.4.5.0\lib\net461\System.Data.Odbc.dll</HintPath>
     </Reference>
@@ -176,7 +83,6 @@
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.DirectoryServices.Protocols" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Common.4.5.0\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
@@ -184,6 +90,11 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.FileSystem.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.AccessControl.4.5.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.IO.Packaging, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Packaging.4.5.0\lib\net46\System.IO.Packaging.dll</HintPath>
@@ -196,7 +107,6 @@
     </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
@@ -252,96 +162,98 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\GUI\HUD\Assets\sample-grid.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Tiles.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\TestObjects.xml" />
-    <EmbeddedResource Include="Core\Assets\Sprite\objectsEmbed.png" />
-    <EmbeddedResource Include="Core\Assets\Sprite\tilesEmbed.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U1-DeepWater.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Sprite\Testing\tileSet16x16.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U2-Water.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U3-Grass.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U4-Dirty.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U5-Stones.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Ground\G1-DeepWater.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Ground\G2-Water.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Ground\G3-Dirty.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Object\O1-Nature.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Object\O2-Building.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Content Include="Icon.ico" />
-    <Content Include="loesoft-new.ico" />
-    <EmbeddedResource Include="Core\GUI\HUD\HUD.resx">
-      <DependentUpon>HUD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\HUD\SpritePallete.resx">
-      <DependentUpon>SpritePallete.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\MapEditorForm.resx">
-      <DependentUpon>MapEditorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\NewMapForm.resx">
-      <DependentUpon>NewMapForm.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="app.config" />
-    <None Include="app.manifest" />
+    <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
+    <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
+    <Compile Include="Core\Assets\Structure\TilesContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlContent.ContentType.cs" />
-    <None Include="packages.config" />
-    <None Include="Resources\DisposableDroidBB.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Core\GUI\LoadMapForm.resx">
-      <DependentUpon>LoadMapForm.cs</DependentUpon>
+    <Compile Include="Core\Assets\Structure\XmlContent.cs" />
+    <Compile Include="Core\Assets\XmlLibrary.cs" />
+    <Compile Include="Core\GUI\HUD\HelpObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\HelpObject.Designer.cs">
+      <DependentUpon>HelpObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\PngObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\PngObject.Designer.cs">
+      <DependentUpon>PngObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\XmlObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\XmlObject.Designer.cs">
+      <DependentUpon>XmlObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\Manager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\Manager.Designer.cs">
+      <DependentUpon>Manager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App.cs" />
+    <EmbeddedResource Include="Core\Help\Hints.json" />
+    <Compile Include="Core\Structure\HelpHint.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Core\GUI\HUD\HelpObject.resx">
+      <DependentUpon>HelpObject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\SaveMapForm.resx">
-      <DependentUpon>SaveMapForm.cs</DependentUpon>
+    <EmbeddedResource Include="Core\GUI\HUD\PngObject.resx">
+      <DependentUpon>PngObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\HUD\XmlObject.resx">
+      <DependentUpon>XmlObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\Manager.resx">
+      <DependentUpon>Manager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="loesoft-new.ico" />
+    <None Include="xml-icon.png" />
+    <None Include="png-icon.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties Core_4Help_4Hints_1json__JSONSchema="http://json.schemastore.org/bowerrc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
