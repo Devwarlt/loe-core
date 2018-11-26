@@ -30,7 +30,7 @@ namespace LoESoft.Server.Core.World
             Players = new ConcurrentDictionary<int, Player>();
 
             Tiles = new Tile[WIDTH, HEIGHT];
-
+            
             var rand = new Random();
 
             for (var x = 0; x < WIDTH; x++)
