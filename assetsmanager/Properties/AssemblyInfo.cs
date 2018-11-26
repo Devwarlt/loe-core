@@ -2,8 +2,8 @@
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("LoESoft - XmlManager")]
-[assembly: AssemblyProduct("MapEditor")]
+[assembly: AssemblyTitle("LoESoft - AssetsManager")]
+[assembly: AssemblyProduct("AssetsManager")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("A BRME game assets application.")]
 [assembly: AssemblyCompany("LoESoft Games")]

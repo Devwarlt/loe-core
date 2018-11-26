@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3155B7B4-98CE-435B-9F19-ED476BE03757}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LoESoft.XmlManager</RootNamespace>
-    <AssemblyName>LoESoft.XmlManager</AssemblyName>
+    <RootNamespace>LoESoft.AssetsManager</RootNamespace>
+    <AssemblyName>LoESoft.AssetsManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -231,7 +231,6 @@
     <Content Include="loesoft-new.ico" />
     <None Include="xml-icon.png" />
     <None Include="png-icon.png" />
-    <None Include="XML.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

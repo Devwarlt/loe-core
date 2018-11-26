@@ -1,4 +1,4 @@
-﻿namespace LoESoft.XmlManager.Core.GUI.HUD
+﻿namespace LoESoft.AssetsManager.Core.GUI.HUD
 {
     partial class XmlObject
     {
@@ -36,7 +36,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::LoESoft.XmlManager.Properties.Resources.xml_icon;
+            this.pictureBox1.Image = global::LoESoft.AssetsManager.Properties.Resources.xml_icon;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(38, 38);

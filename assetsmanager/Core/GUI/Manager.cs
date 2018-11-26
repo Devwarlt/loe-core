@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace LoESoft.XmlManager.Core.GUI
+namespace LoESoft.AssetsManager.Core.GUI
 {
     public partial class Manager : Form
     {

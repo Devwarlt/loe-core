@@ -1,4 +1,4 @@
-﻿namespace LoESoft.XmlManager.Core.GUI
+﻿namespace LoESoft.AssetsManager.Core.GUI
 {
     partial class Manager
     {
@@ -30,26 +30,26 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Manager));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.xmlObject5 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
+            this.xmlObject4 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
+            this.xmlObject3 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
+            this.xmlObject2 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
+            this.xmlObject1 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pngObject5 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
+            this.pngObject4 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
+            this.pngObject3 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
+            this.pngObject2 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
+            this.pngObject1 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.xmlObject5 = new LoESoft.XmlManager.Core.GUI.HUD.XmlObject();
-            this.xmlObject4 = new LoESoft.XmlManager.Core.GUI.HUD.XmlObject();
-            this.xmlObject3 = new LoESoft.XmlManager.Core.GUI.HUD.XmlObject();
-            this.xmlObject2 = new LoESoft.XmlManager.Core.GUI.HUD.XmlObject();
-            this.xmlObject1 = new LoESoft.XmlManager.Core.GUI.HUD.XmlObject();
-            this.pngObject1 = new LoESoft.XmlManager.Core.GUI.HUD.PngObject();
-            this.pngObject2 = new LoESoft.XmlManager.Core.GUI.HUD.PngObject();
-            this.pngObject3 = new LoESoft.XmlManager.Core.GUI.HUD.PngObject();
-            this.pngObject4 = new LoESoft.XmlManager.Core.GUI.HUD.PngObject();
-            this.pngObject5 = new LoESoft.XmlManager.Core.GUI.HUD.PngObject();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -66,27 +66,6 @@
             this.groupBox1.Size = new System.Drawing.Size(218, 40);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Spritesheet:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label4
-            // 
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(87, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "0";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
             // 
@@ -108,6 +87,27 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Xml:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Spritesheet:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(87, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "0";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // button1
             // 
@@ -131,48 +131,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(220, 200);
             this.panel1.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            this.panel2.AutoScroll = true;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.pngObject5);
-            this.panel2.Controls.Add(this.pngObject4);
-            this.panel2.Controls.Add(this.pngObject3);
-            this.panel2.Controls.Add(this.pngObject2);
-            this.panel2.Controls.Add(this.pngObject1);
-            this.panel2.Location = new System.Drawing.Point(554, 350);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(220, 200);
-            this.panel2.TabIndex = 1;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox2.Location = new System.Drawing.Point(554, 304);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(218, 40);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Location = new System.Drawing.Point(554, 297);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(218, 4);
-            this.panel3.TabIndex = 2;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Location = new System.Drawing.Point(12, 12);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(536, 538);
-            this.panel4.TabIndex = 3;
             // 
             // xmlObject5
             // 
@@ -214,29 +172,27 @@
             this.xmlObject1.Size = new System.Drawing.Size(190, 38);
             this.xmlObject1.TabIndex = 0;
             // 
-            // pngObject1
+            // panel2
             // 
-            this.pngObject1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject1.Location = new System.Drawing.Point(3, 3);
-            this.pngObject1.Name = "pngObject1";
-            this.pngObject1.Size = new System.Drawing.Size(188, 36);
-            this.pngObject1.TabIndex = 0;
+            this.panel2.AutoScroll = true;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.pngObject5);
+            this.panel2.Controls.Add(this.pngObject4);
+            this.panel2.Controls.Add(this.pngObject3);
+            this.panel2.Controls.Add(this.pngObject2);
+            this.panel2.Controls.Add(this.pngObject1);
+            this.panel2.Location = new System.Drawing.Point(554, 350);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(220, 200);
+            this.panel2.TabIndex = 1;
             // 
-            // pngObject2
+            // pngObject5
             // 
-            this.pngObject2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject2.Location = new System.Drawing.Point(3, 45);
-            this.pngObject2.Name = "pngObject2";
-            this.pngObject2.Size = new System.Drawing.Size(188, 36);
-            this.pngObject2.TabIndex = 0;
-            // 
-            // pngObject3
-            // 
-            this.pngObject3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject3.Location = new System.Drawing.Point(3, 87);
-            this.pngObject3.Name = "pngObject3";
-            this.pngObject3.Size = new System.Drawing.Size(188, 36);
-            this.pngObject3.TabIndex = 0;
+            this.pngObject5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pngObject5.Location = new System.Drawing.Point(4, 171);
+            this.pngObject5.Name = "pngObject5";
+            this.pngObject5.Size = new System.Drawing.Size(188, 36);
+            this.pngObject5.TabIndex = 0;
             // 
             // pngObject4
             // 
@@ -246,13 +202,57 @@
             this.pngObject4.Size = new System.Drawing.Size(188, 36);
             this.pngObject4.TabIndex = 0;
             // 
-            // pngObject5
+            // pngObject3
             // 
-            this.pngObject5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject5.Location = new System.Drawing.Point(4, 171);
-            this.pngObject5.Name = "pngObject5";
-            this.pngObject5.Size = new System.Drawing.Size(188, 36);
-            this.pngObject5.TabIndex = 0;
+            this.pngObject3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pngObject3.Location = new System.Drawing.Point(3, 87);
+            this.pngObject3.Name = "pngObject3";
+            this.pngObject3.Size = new System.Drawing.Size(188, 36);
+            this.pngObject3.TabIndex = 0;
+            // 
+            // pngObject2
+            // 
+            this.pngObject2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pngObject2.Location = new System.Drawing.Point(3, 45);
+            this.pngObject2.Name = "pngObject2";
+            this.pngObject2.Size = new System.Drawing.Size(188, 36);
+            this.pngObject2.TabIndex = 0;
+            // 
+            // pngObject1
+            // 
+            this.pngObject1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pngObject1.Location = new System.Drawing.Point(3, 3);
+            this.pngObject1.Name = "pngObject1";
+            this.pngObject1.Size = new System.Drawing.Size(188, 36);
+            this.pngObject1.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.groupBox2.Location = new System.Drawing.Point(554, 304);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(218, 40);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Location = new System.Drawing.Point(554, 297);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(218, 4);
+            this.panel3.TabIndex = 2;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Location = new System.Drawing.Point(12, 12);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(536, 538);
+            this.panel4.TabIndex = 3;
             // 
             // Manager
             // 
@@ -270,7 +270,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Manager";
-            this.Text = "LoESoft - Xml Manager";
+            this.Text = "LoESoft - Assets Manager";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);

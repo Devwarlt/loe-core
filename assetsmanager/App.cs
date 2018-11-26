@@ -1,4 +1,4 @@
-﻿using LoESoft.XmlManager.Core.GUI;
+﻿using LoESoft.AssetsManager.Core.GUI;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace LoESoft.XmlManager
+namespace LoESoft.AssetsManager
 {
     public static class App
     {
@@ -39,7 +39,7 @@ namespace LoESoft.XmlManager
             var developerFile = new FileTarget()
             {
                 Name = "developer-file",
-                FileName = "../../../logs/xmlmanager/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
+                FileName = "../../../logs/assetsmanager/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
                 Layout = @"[${date:format=HH\:mm\:ss}] [${level}] ${message} ${exception}"
             };
             config.AddTarget(developerLog);

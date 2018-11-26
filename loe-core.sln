@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.Dlls", "dllassets\L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.MapEditor", "mapeditor\LoESoft.MapEditor.csproj", "{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.XmlManager", "xmlmanager\LoESoft.XmlManager.csproj", "{3155B7B4-98CE-435B-9F19-ED476BE03757}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoESoft.AssetsManager", "assetsmanager\LoESoft.AssetsManager.csproj", "{3155B7B4-98CE-435B-9F19-ED476BE03757}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
