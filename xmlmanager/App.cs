@@ -1,29 +1,16 @@
-﻿using LoESoft.MapEditor.Core.GUI;
-using LoESoft.MapEditor.Core.GUI.HUD;
-using LoESoft.MapEditor.Properties;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Rollbar;
 using System;
-using System.Drawing;
-using System.Drawing.Text;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace LoESoft.MapEditor
+namespace LoESoft.XmlManager
 {
     public static class App
     {
-        // Font Cache DLL
-        [DllImport("gdi32.dll")]
-        private static extern IntPtr AddFontMemResourceEx(IntPtr pbfont, uint cbfont, IntPtr pdv, [In] ref uint pcFonts);
-
-        // Embedded Font
-        public static FontFamily DisposableDroidBB;
-
         // Assembly's Data
         public static string Name => Assembly.GetExecutingAssembly().GetName().Name;
 
@@ -37,14 +24,8 @@ namespace LoESoft.MapEditor
         // Unique IDs
         private static string RollbarId => "ca02c5d9fb834c33880af31a6407fa18";
 
-        // Map Editor Form
-        public static MapEditorForm MapEditor { get; set; }
-
-        // Map Editor Game Control
-        public static MEGameControl MapControl { get; set; }
-
         [STAThread]
-        public static void Main(string[] args)
+        private static void Main()
         {
             Console.Title = $"{Name} - Build: {Version}";
 
@@ -57,7 +38,7 @@ namespace LoESoft.MapEditor
             var developerFile = new FileTarget()
             {
                 Name = "developer-file",
-                FileName = "../../../../../logs/mapeditor/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
+                FileName = "../../../logs/xmlmanager/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
                 Layout = @"[${date:format=HH\:mm\:ss}] [${level}] ${message} ${exception}"
             };
             config.AddTarget(developerLog);
@@ -69,15 +50,13 @@ namespace LoESoft.MapEditor
 
             RollbarLocator.RollbarInstance.Configure(new RollbarConfig(RollbarId));
 
-            Info("Game Map Editor is loading...");
+            Info("Game Xml Manager is loading...");
 
             try
             {
-                LoadEmbeddedFonts();
-
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(MapEditor = new MapEditorForm());
+                Application.Run(new XmlManager());
             }
             catch (Exception e)
             {
@@ -108,26 +87,6 @@ namespace LoESoft.MapEditor
             // Rollbar error analytics for developers only.
             RollbarLocator.RollbarInstance.Error(e);
 #endif
-        }
-
-        private static void LoadEmbeddedFonts()
-        {
-            var buffer = Resources.DisposableDroidBB;
-            var len = buffer.Length;
-            var data = Marshal.AllocCoTaskMem(len);
-
-            Marshal.Copy(buffer, 0, data, len);
-
-            uint pcFonts = 0;
-
-            AddFontMemResourceEx(data, (uint)buffer.Length, IntPtr.Zero, ref pcFonts);
-
-            var fontcollection = new PrivateFontCollection();
-            fontcollection.AddMemoryFont(data, len);
-
-            Marshal.FreeCoTaskMem(data);
-
-            DisposableDroidBB = fontcollection.Families[0];
         }
     }
 }

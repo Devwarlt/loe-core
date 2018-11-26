@@ -1,6 +1,6 @@
 ﻿namespace LoESoft.XmlManager
 {
-    partial class Form1
+    partial class XmlManager
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XmlManager));
             this.SuspendLayout();
             // 
             // Form1
