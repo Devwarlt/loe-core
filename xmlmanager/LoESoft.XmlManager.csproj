@@ -174,16 +174,34 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="XmlManager.cs">
+    <Compile Include="Core\GUI\HUD\PngObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\PngObject.Designer.cs">
+      <DependentUpon>PngObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\XmlObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\XmlObject.Designer.cs">
+      <DependentUpon>XmlObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\Manager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="XmlManager.Designer.cs">
-      <DependentUpon>XmlManager.cs</DependentUpon>
+    <Compile Include="Core\GUI\Manager.Designer.cs">
+      <DependentUpon>Manager.cs</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="XmlManager.resx">
-      <DependentUpon>XmlManager.cs</DependentUpon>
+    <EmbeddedResource Include="Core\GUI\HUD\PngObject.resx">
+      <DependentUpon>PngObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\HUD\XmlObject.resx">
+      <DependentUpon>XmlObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\Manager.resx">
+      <DependentUpon>Manager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -193,6 +211,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -210,6 +229,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="loesoft-new.ico" />
+    <None Include="xml-icon.png" />
+    <None Include="png-icon.png" />
+    <None Include="XML.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

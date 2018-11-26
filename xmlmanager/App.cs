@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using LoESoft.XmlManager.Core.GUI;
+using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Rollbar;
@@ -56,7 +57,7 @@ namespace LoESoft.XmlManager
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new XmlManager());
+                Application.Run(new Manager());
             }
             catch (Exception e)
             {

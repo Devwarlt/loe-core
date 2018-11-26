@@ -1,10 +1,10 @@
 ﻿using System.Windows.Forms;
 
-namespace LoESoft.XmlManager
+namespace LoESoft.XmlManager.Core.GUI
 {
-    public partial class XmlManager : Form
+    public partial class Manager : Form
     {
-        public XmlManager()
+        public Manager()
         {
             InitializeComponent();
 
