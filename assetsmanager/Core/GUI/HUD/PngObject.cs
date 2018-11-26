@@ -4,9 +4,6 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 {
     public partial class PngObject : UserControl
     {
-        public PngObject()
-        {
-            InitializeComponent();
-        }
+        public PngObject() => InitializeComponent();
     }
 }
