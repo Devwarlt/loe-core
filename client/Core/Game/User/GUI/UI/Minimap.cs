@@ -1,5 +1,4 @@
 ﻿using LoESoft.Client.Core.Game.Map;
-using LoESoft.Client.Drawing.Sprites;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
