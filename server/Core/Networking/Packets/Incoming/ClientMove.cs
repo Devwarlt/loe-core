@@ -1,5 +1,6 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using LoESoft.Server.Core.World;
+using LoESoft.Server.Utils;
 
 namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
@@ -13,19 +14,19 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         {
             switch (Direction)
             {
-                case 1:
+                case 0:
                     RepositionPlayer(client, client.Player.X, client.Player.Y - 1);
                     return;
 
-                case 2:
+                case 1:
                     RepositionPlayer(client, client.Player.X, client.Player.Y + 1);
                     return;
 
-                case 3:
+                case 2:
                     RepositionPlayer(client, client.Player.X - 1, client.Player.Y);
                     return;
 
-                case 4:
+                case 3:
                     RepositionPlayer(client, client.Player.X + 1, client.Player.Y);
                     return;
 
@@ -42,7 +43,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             if (newX >= 0 && newX <= WorldMap.WIDTH && newY >= 0 && newY <= WorldMap.HEIGHT)
             {
                 client.Player.Move(newX, newY);
-                client.Player.CurrentDirection = Direction;
+                client.Player.Direction = (Direction)Direction;
             }
 
             client.SendPacket(new ServerMove()

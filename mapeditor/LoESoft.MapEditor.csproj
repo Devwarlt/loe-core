@@ -281,15 +281,6 @@
     <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U5-Stones.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Ground\G1-DeepWater.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Ground\G2-Water.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Ground\G3-Dirty.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Core\Assets\Xml\Testing\Object\O1-Nature.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -13,7 +13,7 @@ namespace LoESoft.Server.Core.World.Entities
         public WorldManager Manager { get; private set; }
         public StatExportManager Export { get; private set; }
 
-        private void IncrementVar<T>(ref T stat, T value)
+        protected void IncrementVar<T>(ref T stat, T value)
         {
             stat = value;
             UpdateCount++;
@@ -44,14 +44,6 @@ namespace LoESoft.Server.Core.World.Entities
             set => IncrementVar<int>(ref _realY, value);
         }
 
-        private int _hp;
-
-        public int Health
-        {
-            get => _hp;
-            set => IncrementVar<int>(ref _hp, value);
-        }
-
         private int _size;
 
         public int Size
@@ -66,7 +58,6 @@ namespace LoESoft.Server.Core.World.Entities
             ObjectId = EntityManager.GetNextId();
             Id = id;
             Export = new StatExportManager();
-            Health = new Random().Next(10, 100);
             Size = 8;
         }
 
@@ -78,7 +69,6 @@ namespace LoESoft.Server.Core.World.Entities
 
         public virtual string ExportStat()
         {
-            Export.AddOrUpdate(StatType.HEALTH, Health);
             Export.AddOrUpdate(StatType.SIZE, Size);
 
             return Export.Serialize();
@@ -88,22 +78,11 @@ namespace LoESoft.Server.Core.World.Entities
         {
         }
 
+        public Chunk GetChunk() => Manager.Core.Map.Chunks[new Point(ChunkX, ChunkY)];
+            
         public virtual void Dispose() =>
             Manager.Core.Map.Chunks[new Point(ChunkX, ChunkY)].Remove(this);
 
         public virtual void OnUpdate() => UpdateCount = 0;
-
-        public static Entity Create(WorldManager manager, int x, int y, int id)
-        {
-            var properties = XmlLibrary.ObjectsXml[id] as ObjectsContent;
-
-            var entity = new Entity(manager, id)
-            {
-                X = x,
-                Y = y
-            };
-
-            return entity;
-        }
     }
 }

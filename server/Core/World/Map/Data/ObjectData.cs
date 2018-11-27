@@ -21,7 +21,7 @@ namespace LoESoft.Server.Core.World.Map.Data
             ObjectId = entity.ObjectId,
             X = entity.X,
             Y = entity.Y,
-            LastDirection = (entity is Player) ? ((Player)entity).CurrentDirection : -1,
+            LastDirection = (entity is EntityObject || entity is Player) ? (int)(entity as EntityObject).Direction : -1,
             Stats = entity.ExportStat(),
             IsPlayer = entity is Player
         };

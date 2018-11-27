@@ -12,12 +12,16 @@ namespace LoESoft.Client.Core.Game.Objects
 
         private AStar PathFinder;
 
-        private Queue<Point> _astartPath;
+        private Queue<Point> _astarPath;
         private bool _isPathFinding;
+
+        public Direction CurrentDirection { get; set; }
 
         public EntityObject(int id) : base(id)
         {
-            _astartPath = new Queue<Point>();
+            CurrentDirection = Direction.Down;
+
+            _astarPath = new Queue<Point>();
 
             Animation = new ObjectAnimation();
             PathFinder = new AStar();
@@ -26,42 +30,67 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public void Init()
         {
-            Animation.InitOrUpdate(Content);
+            Animation.UpdateOrAdd(Content);
         }
 
         public override void HandleMovement(float dt)
         {
-            if (_astartPath.Count > 0)
-            {
-                if (X == DistinationX && Y == DistinationY)
-                {
-                    var path = _astartPath.Dequeue();
+            //if (_astartPath.Count > 0)
+            //{
+            //    //if (X == DistinationX && Y == DistinationY)
+            //    //{
+            //    //    var path = _astartPath.Dequeue();
 
-                    DistinationX = path.X;
-                    DistinationY = path.Y;
-                }
-                else
+            //    //    DistinationX = path.X;
+            //    //    DistinationY = path.Y;
+            //    //}
+            //    //else
+            //    //{
+            //    //    base.HandleMovement(dt);
+            //    //}
+            //}
+
+            //foreach(var i in _astarPath)
+            //{
+            //    DistinationX = i.X;
+            //    DistinationY = i.Y;
+            //    App.Warn($"{_astarPath.Count}");
+            //}
+
+            if (DistinationY != Y)
+            {
+                if (DistinationY > Y)
                 {
-                    base.HandleMovement(dt);
+                    Y += dt;
+                    CurrentDirection = Direction.Down;
+                }
+                else if (DistinationY < Y)
+                {
+                    Y -= dt;
+                    CurrentDirection = Direction.Up;
                 }
             }
-            else
+            else if (DistinationX != X)
             {
-                _isPathFinding = false;
+                if (DistinationX > X)
+                {
+                    X += dt;
+                    CurrentDirection = Direction.Right;
+                }
+                else if (DistinationX < X)
+                {
+                    X -= dt;
+                    CurrentDirection = Direction.Left;
+                }
             }
         }
 
         public override void SetDistination(int x, int y)
         {
-            if (!_isPathFinding)
-            {
-                _isPathFinding = true;
+            //var nodes = PathFinder.GetPath(new Point((int)X, (int)Y), new Point(x, y)).Result;
 
-                var nodes = PathFinder.GetPath(new Point((int)X, (int)Y), new Point(x, y)).Result;
-
-                foreach (var i in nodes)
-                    _astartPath.Enqueue(i.Point);
-            }
+            //foreach (var i in nodes)
+            //    _astarPath.Enqueue(i.Point);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

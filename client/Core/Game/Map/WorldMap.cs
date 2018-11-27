@@ -4,21 +4,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
-using static LoESoft.Client.Core.Game.Objects.Player;
 
 namespace LoESoft.Client.Core.Game.Map
 {
     public static class WorldMap
     {
-        public class ValuePair
-        {
-            public Entity Entity;
-            public Point Pos;
-        }
-
         public static Dictionary<Point, Tile> TileMap { get; private set; }
-
-        public static Dictionary<int, ValuePair> Objects { get; private set; }
+        public static Dictionary<int, Entity> Objects { get; private set; }
 
         public static int WIDTH { get; private set; }
         public static int HEIGHT { get; private set; }
@@ -27,7 +19,7 @@ namespace LoESoft.Client.Core.Game.Map
 
         static WorldMap()
         {
-            Objects = new Dictionary<int, ValuePair>();
+            Objects = new Dictionary<int, Entity>();
             MapLoaded = false;
         }
 
@@ -41,8 +33,11 @@ namespace LoESoft.Client.Core.Game.Map
             MapLoaded = true;
         }
 
-        public static void AddOrUpdate(TileData[] tilesAddOrUpdate, ObjectData[] objAddOrUpdate)
+        public static void AddOrUpdate(TileData[] tilesAddOrUpdate, ObjectData[] objAddOrUpdate, int[] removedObjects)
         {
+            foreach (var i in removedObjects)
+                Objects.Remove(i);
+
             foreach (var i in tilesAddOrUpdate)
             {
                 var pos = new Point(i.X, i.Y);
@@ -58,12 +53,16 @@ namespace LoESoft.Client.Core.Game.Map
             {
                 if (Objects.ContainsKey(i.ObjectId))
                 {
-                    Objects[i.ObjectId].Entity.SetDistination(i.X, i.Y);
-                    Objects[i.ObjectId].Pos.X = i.X;
-                    Objects[i.ObjectId].Pos.Y = i.X;
-                    Objects[i.ObjectId].Entity.ImportStat(i.Stats);
+                    Objects[i.ObjectId].SetDistination(i.X, i.Y);
+                    Objects[i.ObjectId].ImportStat(i.Stats);
+
                     if (i.LastDirection != -1)
-                        (Objects[i.ObjectId].Entity as Player).CurrentDirection = (Direction)i.LastDirection;
+                    {
+                        if (Objects[i.ObjectId] is Player)
+                            ((Player)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
+                        else
+                            ((EntityObject)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
+                    }
                 }
                 else
                 {
@@ -77,46 +76,36 @@ namespace LoESoft.Client.Core.Game.Map
 
         private static void HandleEntity(ObjectData data)
         {
-            var pos = new Point(data.X, data.Y);
             var obj = new EntityObject(data.Id)
             {
-                X = pos.X,
-                Y = pos.Y,
+                X = data.X,
+                Y = data.Y,
                 ObjectId = data.ObjectId,
-                DistinationX = pos.X,
-                DistinationY = pos.Y
+                DistinationX = data.X,
+                DistinationY = data.Y
             };
 
             obj.Init();
             obj.ImportStat(data.Stats);
-            Objects.Add(data.ObjectId, new ValuePair()
-            {
-                Pos = pos,
-                Entity = obj
-            });
+            Objects.Add(data.ObjectId, obj);
         }
 
         private static void HandlePlayer(ObjectData data)
         {
-            var pos = new Point(data.X, data.Y);
             var player = new Player(data.Id)
             {
-                X = pos.X,
-                Y = pos.Y,
+                X = data.X,
+                Y = data.Y,
                 ObjectId = data.ObjectId,
-                DistinationX = pos.X,
-                DistinationY = pos.Y
+                DistinationX = data.X,
+                DistinationY = data.Y
             };
 
             player.Init();
             player.CurrentDirection = (Direction)data.LastDirection;
             player.ImportStat(data.Stats);
 
-            Objects.Add(data.ObjectId, new ValuePair()
-            {
-                Pos = pos,
-                Entity = player
-            });
+            Objects.Add(data.ObjectId, player);
         }
 
         public static void Update(GameTime gameTime, int x, int y)
@@ -136,8 +125,8 @@ namespace LoESoft.Client.Core.Game.Map
             foreach (var i in GetTilesInSight(x, y))
                 i.Draw(spriteBatch);
 
-            foreach (var i in GetEntitiesInSight(x, y))
-                i.Draw(spriteBatch);
+            foreach (var i in Objects)
+                i.Value.Draw(spriteBatch);
         }
 
         public static HashSet<Tile> GetTilesInSight(int x, int y)
@@ -147,12 +136,10 @@ namespace LoESoft.Client.Core.Game.Map
             return TileMap.Where(_ => sight.Contains(_.Key)).Select(_ => _.Value).ToHashSet();
         }
 
-        public static HashSet<Entity> GetEntitiesInSight(int x, int y)
-        {
-            var sight = GetSightPoints(x, y);
-
-            return Objects.ToArray().Where(_ => sight.Contains(_.Value.Pos)).Select(_ => _.Value.Entity).ToHashSet();
-        }
+        public static HashSet<Entity> GetEntitiesInSight(int x, int y) =>
+            Objects.Where(_ => _.Value.X > x - SightRadius && _.Value.X < x + SightRadius
+            && _.Value.Y > y - SightRadius && _.Value.Y < y + SightRadius).Select(_ => _.Value).ToHashSet();
+        
 
         public static int SightRadius = 10;
         public static int SightBound = SightRadius * 2;

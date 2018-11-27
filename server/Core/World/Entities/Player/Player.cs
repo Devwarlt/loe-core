@@ -4,13 +4,11 @@ using LoESoft.Server.Core.World.Entities.Player.Attribute;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
-    public partial class Player : Entity
+    public partial class Player : EntityObject
     {
         public Client Client { get; private set; }
         public Character Character { get; private set; }
         public Inventory Inventory { get; private set; }
-
-        public int CurrentDirection { get; set; }
 
         public Player(WorldManager manager, Client client, Character character)
             : base(manager, character.Class)

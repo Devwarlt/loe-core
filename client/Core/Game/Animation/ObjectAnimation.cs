@@ -8,23 +8,38 @@ namespace LoESoft.Client.Core.Game.Animation
 {
     public class ObjectAnimation : Animation
     {
+        private int curDirection;
+        private int preDirection;
+
         public ObjectAnimation()
-            : base(0.1f)
+            : base(0.1f, AnimationType.Forward)
         {
+            curDirection = 1;
+            preDirection = curDirection;
         }
 
-        public void InitOrUpdate(ObjectsContent content)
+        public void UpdateOrAdd(ObjectsContent content)
         {
-            var animation = XmlLibrary.GetObjectAnimation(content);
+            var animation = XmlLibrary.GetAnimation(content);
 
-            AddAnimation(AnimationType.Singular, animation);
+            AddAnimation(AnimationType.Forward, animation[0]);
+            AddAnimation(AnimationType.Backward, animation[1]);
+            AddAnimation(AnimationType.Left, animation[2]);
+            AddAnimation(AnimationType.Right, animation[3]);
         }
 
-        public override void Update(GameTime gameTime, Entity basicObject) => base.Update(gameTime, basicObject);
-
-        public override void Draw(SpriteBatch spriteBatch, Entity entity)
+        public override void Update(GameTime gameTime, Entity basicObject)
         {
-            Frames[AnimationType.Singular][CurrentFrame].Draw(spriteBatch, entity);
+            preDirection = curDirection;
+            curDirection = (int)((EntityObject)basicObject).CurrentDirection + 1;
+
+            if (curDirection != preDirection)
+                ChangeAnimationType((AnimationType)curDirection);
+
+            base.Update(gameTime, basicObject);
         }
+
+        public override void Draw(SpriteBatch spriteBatch, Entity entity) =>
+            Frames[(AnimationType)curDirection][CurrentFrame].Draw(spriteBatch, entity);
     }
 }

@@ -14,7 +14,6 @@ namespace LoESoft.Client.Core.Game.Objects
 
             KeysToDirection = new Dictionary<Keys, Direction>()
             {
-                { Keys.None, Direction.None },
                 { Keys.W, Direction.Up }, { Keys.Up, Direction.Up },
                 { Keys.S, Direction.Down }, { Keys.Down, Direction.Down },
                 { Keys.A, Direction.Left }, { Keys.Left, Direction.Left },

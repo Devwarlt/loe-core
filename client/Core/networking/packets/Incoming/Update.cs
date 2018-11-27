@@ -9,6 +9,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
     {
         public TileData[] AddOrUpdateTile { get; set; }
         public ObjectData[] AddOrUpdateObject { get; set; }
+        public int[] RemovedObjects { get; set; }
 
         public override PacketID PacketID => PacketID.UPDATE;
 
@@ -22,12 +23,13 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                 var gameplayer = objects.Where(_ => _.ObjectId == player.ObjectId).FirstOrDefault();
 
                 if (gameplayer != null)
+                {
                     GameApplication.GameScreen.Controller.ImportStat(gameplayer.Stats);
-
-                objects.RemoveAll(_ => _.ObjectId == player.ObjectId);
+                    objects.Remove(gameplayer);
+                }
             }
 
-            WorldMap.AddOrUpdate(AddOrUpdateTile, objects.ToArray());
+            WorldMap.AddOrUpdate(AddOrUpdateTile, objects.ToArray(), RemovedObjects);
         }
     }
 }

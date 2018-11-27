@@ -28,11 +28,12 @@ namespace LoESoft.Client.Assets
 
         private static void InitSprites()
         {
+            AddSprites("iconSprites");
             AddSprites("playersEmbed");
             AddSprites("tilesEmbed");
             AddSprites("objectsEmbed");
             AddSprites("itemsEmbed");
-            AddSprites("iconSprites");
+            AddSprites("tileSet16x16");
         }
 
         public static void AddSprites(string filename) =>

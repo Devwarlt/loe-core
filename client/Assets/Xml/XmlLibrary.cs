@@ -69,14 +69,7 @@ namespace LoESoft.Client.Assets.Xml
             return spriteSet.GetSprite(content.Texture.ImageIndex.Item1, content.Texture.ImageIndex.Item2);
         }
 
-        public static List<Texture2D> GetObjectAnimation(XmlContent content)
-        {
-            var spriteSet = AssetLibrary.Sprites[content.Texture.FileName];
-
-            return spriteSet.GetSpritesByWidth(content.Texture.ImageIndex.Item2);
-        }
-
-        public static Dictionary<int, List<Texture2D>> GetPlayerAnimation(XmlContent content)
+        public static Dictionary<int, List<Texture2D>> GetAnimation(XmlContent content)
         {
             var spriteSet = AssetLibrary.Sprites[content.Texture.FileName];
             var yOffset = content.Texture.ImageIndex.Item2 * 4;

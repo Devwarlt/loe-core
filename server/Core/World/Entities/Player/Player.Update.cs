@@ -13,22 +13,21 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
         private HashSet<Entity> _objectsToUpdateOrAdd = new HashSet<Entity>();
         private HashSet<Tile> _tilesToUpdateOrAdd = new HashSet<Tile>();
+        
+        private HashSet<int> _removedObjects = new HashSet<int>();
 
-        //unused atm
-        private HashSet<Entity> _removedObjects = new HashSet<Entity>();
+        private int _connectionLostAttempts = 0;
+        private readonly int _maxConnectionListAttempts = 10;
 
-        private int ConnectionLostAttempts = 0;
-        private readonly int MaxConnectionListAttempts = 10;
-
-        public override void Update()
+        private void testConnection()
         {
             if (!Client.IsConnected)
             {
-                ConnectionLostAttempts++;
+                _connectionLostAttempts++;
 
-                App.Info($"[Attempt {ConnectionLostAttempts}/{MaxConnectionListAttempts}] Client {Client.Id} dropped connection, retrying...");
+                App.Info($"[Attempt {_connectionLostAttempts}/{_maxConnectionListAttempts}] Client {Client.Id} dropped connection, retrying...");
 
-                if (ConnectionLostAttempts == MaxConnectionListAttempts)
+                if (_connectionLostAttempts == _maxConnectionListAttempts)
                 {
                     Client.Disconnect();
                     return;
@@ -37,9 +36,18 @@ namespace LoESoft.Server.Core.World.Entities.Player
                 return;
             }
             else
-                ConnectionLostAttempts = 0;
+                _connectionLostAttempts = 0;
+        }
+
+        public override void Update()
+        {
+            testConnection();
 
             var sight = GetSightPoints().Where(_ => _.X >= 0 && _.X < WorldMap.WIDTH && _.Y >= 0 && _.Y < WorldMap.HEIGHT);
+            var chunk = GetChunk();
+            
+            foreach(var i in chunk.RemovedEntities)
+                _removedObjects.Add(i);
 
             foreach (var i in sight)
             {
@@ -53,7 +61,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
                 tile.OnUpdate();
 
-                var entity = Manager.Core.Map.Chunks[new Point(ChunkX, ChunkY)].GetEntity(i.X, i.Y);
+                var entity = chunk.GetEntity(i.X, i.Y);
 
                 if (entity != null)
                 {
@@ -80,15 +88,22 @@ namespace LoESoft.Server.Core.World.Entities.Player
                 }
             }
 
+            sendAndClear();
+        }
+
+        private void sendAndClear()
+        {
             if (_tilesToUpdateOrAdd.Count > 0 || _objectsToUpdateOrAdd.Count > 0)
                 Client.SendPacket(new Update()
                 {
                     AddOrUpdateTile = _tilesToUpdateOrAdd.Select(_ => TileData.GetData(_)).ToArray(),
-                    AddOrUpdateObject = _objectsToUpdateOrAdd.Select(_ => ObjectData.GetData(_)).ToArray()
+                    AddOrUpdateObject = _objectsToUpdateOrAdd.Select(_ => ObjectData.GetData(_)).ToArray(),
+                    RemovedObjects = _removedObjects.ToArray()
                 });
 
             _tilesToUpdateOrAdd.Clear();
             _objectsToUpdateOrAdd.Clear();
+            _removedObjects.Clear();
         }
     }
 }

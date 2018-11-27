@@ -16,12 +16,14 @@ namespace LoESoft.Server.Core.World.Map
         public WorldManager Manager { get; private set; }
 
         public HashSet<Entity> Entities { get; private set; }
+        public HashSet<int> RemovedEntities { get; private set; }
 
         public Chunk(WorldManager manager, int x, int y)
         {
             Manager = manager;
 
             Entities = new HashSet<Entity>();
+            RemovedEntities = new HashSet<int>();
 
             StartX = x * SIZE;
             StartX = y * SIZE;
@@ -31,7 +33,11 @@ namespace LoESoft.Server.Core.World.Map
 
         public void Add(Entity entity) => Entities.Add(entity);
 
-        public void Remove(Entity entity) => Entities.Remove(entity);
+        public void Remove(Entity entity)
+        {
+            RemovedEntities.Add(entity.ObjectId);
+            Entities.Remove(entity);
+        }
 
         public void Contains(Entity entity) => Entities.Contains(entity);
 
@@ -50,17 +56,25 @@ namespace LoESoft.Server.Core.World.Map
 
         public void RandomGen()
         {
-            for (var i = 0; i < 400; i++)
-                Add(Entity.Create(Manager, StartX + rand.Next(0, 20), StartY + rand.Next(0, 20), 8));
+            for (var i = 0; i < 5; i++)
+                Add(EntityManager.CreateEntityObject(Manager, StartX + rand.Next(0, 20), StartY + rand.Next(0, 20), 8));
         }
 
         #endregion METHODS
 
         public void Update(WorldTime time)
         {
-            if (time.TotalElapsedMs % 1000 == 0)
-                foreach (var i in Entities)
-                    i.Move(rand.Next(0, 20), rand.Next(0, 20));
+            if (time.TickCount % 10 == 0)
+            {
+                foreach (var i in Entities.ToArray())
+                {
+                    if (Manager.Core.Map.Players.FirstOrDefault().Value != null)
+                    {
+                        var player = Manager.Core.Map.Players.FirstOrDefault();
+                        i.Move(player.Value.X, player.Value.Y);
+                    }
+                }
+            }
         }
     }
 }

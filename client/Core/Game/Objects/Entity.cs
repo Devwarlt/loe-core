@@ -69,19 +69,19 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public virtual void HandleMovement(float dt)
         {
-            if (DistinationX != X)
-            {
-                if (DistinationX > X)
-                    X += dt;
-                else if (DistinationX < X)
-                    X -= dt;
-            }
-            else if (DistinationY != Y)
+            if (DistinationY != Y)
             {
                 if (DistinationY > Y)
                     Y += dt;
                 else if (DistinationY < Y)
                     Y -= dt;
+            }
+            else if (DistinationX != X)
+            {
+                if (DistinationX > X)
+                    X += dt;
+                else if (DistinationX < X)
+                    X -= dt;
             }
         }
 

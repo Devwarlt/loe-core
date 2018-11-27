@@ -5,7 +5,13 @@
         public int TickCount { get; set; }
         public int TotalElapsedMs { get; set; }
     }
-
+    public enum Direction
+    {
+        Up = 0,
+        Down = 1,
+        Left = 2,
+        Right = 3
+    }
     public class Point
     {
         public int X { get; set; }

@@ -9,7 +9,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
 {
     public class MiniMap : FilledRectangle
     {
-        public MiniMap(int x, int y) : base(x, y, 300, 300, new RGBColor(0, 0, 0), 0.75f) => IsZeroApplicaple = true;
+        public MiniMap(int x, int y) : base(x, y, 300, 300, new RGBColor(0, 0, 0), 1f) => IsZeroApplicaple = true;
 
         public void DrawMap(SpriteBatch spriteBatch, int x, int y)
         {

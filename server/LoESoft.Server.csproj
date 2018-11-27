@@ -236,6 +236,7 @@
     <Compile Include="Core\Networking\Packets\PacketData.cs" />
     <Compile Include="Core\Networking\Packets\PacketID.cs" />
     <Compile Include="Core\World\CoreUpdate.cs" />
+    <Compile Include="Core\World\Entities\EntityObject.cs" />
     <Compile Include="Core\World\Entities\EntityManager.cs" />
     <Compile Include="Core\World\Entities\Interfaces\Comparable.cs" />
     <Compile Include="Core\World\Entities\Interfaces\IUpdatable.cs" />
