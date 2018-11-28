@@ -1,4 +1,5 @@
 ﻿using LoESoft.AssetsManager.Core.Assets;
+using LoESoft.AssetsManager.Core.Assets.Structure;
 using LoESoft.AssetsManager.Core.GUI.HUD;
 using LoESoft.AssetsManager.Core.Structure;
 using Newtonsoft.Json;
@@ -96,7 +97,7 @@ namespace LoESoft.AssetsManager.Core.GUI
         private void LoadAssetsButton_Click(object sender, EventArgs e)
         {
             LoadXmls();
-            //LoadSpritesheets();
+            LoadSpritesheets();
         }
 
         private void LoadXmls()
@@ -111,13 +112,25 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             XmlLibrary.Init(xmls);
 
+            XmlCountLabel.Text = xmls.Count.ToString();
+
             App.Info($"Loading remote xmls... OK!");
         }
 
-        // TODO!
         private void LoadSpritesheets()
         {
             App.Info($"Loading remote spritesheets...");
+
+            var spritesheets = Directory.EnumerateFiles(SpritesheetDir, "*.png").Select(spritesheet => new Spritesheet()
+            {
+                File = spritesheet,
+                Image = Image.FromFile(spritesheet)
+            }).ToList();
+
+            SpritesheetCountLabel.Text = spritesheets.Count.ToString();
+
+            SpriteLibrary.Init(spritesheets);
+
             App.Info($"Loading remote spritesheets... OK!");
         }
     }

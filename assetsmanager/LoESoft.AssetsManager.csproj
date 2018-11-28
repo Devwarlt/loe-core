@@ -174,8 +174,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Assets\SpriteLibrary.cs" />
     <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
     <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
+    <Compile Include="Core\Assets\Structure\Spritesheet.cs" />
     <Compile Include="Core\Assets\Structure\TilesContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlContent.ContentType.cs" />
     <Compile Include="Core\Assets\Structure\XmlContent.cs" />
