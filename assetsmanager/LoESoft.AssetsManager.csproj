@@ -177,10 +177,11 @@
     <Compile Include="Core\Assets\SpriteLibrary.cs" />
     <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
     <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
-    <Compile Include="Core\Assets\Structure\Spritesheet.cs" />
+    <Compile Include="Core\Assets\Structure\SpritesheetFile.cs" />
     <Compile Include="Core\Assets\Structure\TilesContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlContent.ContentType.cs" />
     <Compile Include="Core\Assets\Structure\XmlContent.cs" />
+    <Compile Include="Core\Assets\Structure\XmlFile.cs" />
     <Compile Include="Core\Assets\XmlLibrary.cs" />
     <Compile Include="Core\GUI\HUD\HelpObject.cs">
       <SubType>UserControl</SubType>
@@ -248,6 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="loesoft-new.ico" />
+    <None Include="save-icon.png" />
     <None Include="xml-icon.png" />
     <None Include="png-icon.png" />
   </ItemGroup>

@@ -79,7 +79,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                     Answer = string.Join("\n", helphint.Value)
                 };
 
-                tabPage2.Controls.Add(hint);
+                HelpTab.Controls.Add(hint);
 
                 i++;
             };
@@ -98,6 +98,44 @@ namespace LoESoft.AssetsManager.Core.GUI
         {
             LoadXmls();
             LoadSpritesheets();
+
+            var i = 0;
+
+            foreach (var xml in XmlLibrary.Xmls.OrderBy(name => name.Key))
+            {
+                var xmlobject = new XmlObject()
+                {
+                    Location = new Point(3, 3 + i * 42),
+                    Name = $"xmlobject{i}",
+                    Size = new Size(188, 36),
+                    TabIndex = 2
+                };
+                xmlobject.SetFileName(xml.Key);
+                xmlobject.SetFileSize(xml.Value.Key);
+
+                XmlPanel.Controls.Add(xmlobject);
+
+                i++;
+            }
+
+            i = 0;
+
+            foreach (var spritesheet in SpriteLibrary.Spritesheets.OrderBy(name => name.Key))
+            {
+                var pngobject = new PngObject()
+                {
+                    Location = new Point(3, 3 + i * 42),
+                    Name = $"pngobject{i}",
+                    Size = new Size(188, 36),
+                    TabIndex = 2
+                };
+                pngobject.SetFileName(spritesheet.Key);
+                pngobject.SetFileSize(spritesheet.Value.Key);
+
+                SpritesheetPanel.Controls.Add(pngobject);
+
+                i++;
+            }
         }
 
         private void LoadXmls()
@@ -106,8 +144,15 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             var xmls = Directory.EnumerateFiles(XmlDir, "*.xml").Select(file =>
             {
+                var fileparams = file.Split('/');
+
                 using (var stream = File.OpenRead(file))
-                    return XElement.Load(stream);
+                    return new XmlFile()
+                    {
+                        File = fileparams[fileparams.Length - 1],
+                        Size = GetFileSize(file),
+                        XElement = XElement.Load(stream)
+                    };
             }).ToList();
 
             XmlLibrary.Init(xmls);
@@ -121,10 +166,16 @@ namespace LoESoft.AssetsManager.Core.GUI
         {
             App.Info($"Loading remote spritesheets...");
 
-            var spritesheets = Directory.EnumerateFiles(SpritesheetDir, "*.png").Select(spritesheet => new Spritesheet()
+            var spritesheets = Directory.EnumerateFiles(SpritesheetDir, "*.png").Select(spritesheet =>
             {
-                File = spritesheet,
-                Image = Image.FromFile(spritesheet)
+                var fileparams = spritesheet.Split('/');
+
+                return new SpritesheetFile()
+                {
+                    File = fileparams[fileparams.Length - 1],
+                    Size = GetFileSize(spritesheet),
+                    Image = Image.FromFile(spritesheet)
+                };
             }).ToList();
 
             SpritesheetCountLabel.Text = spritesheets.Count.ToString();
@@ -132,6 +183,20 @@ namespace LoESoft.AssetsManager.Core.GUI
             SpriteLibrary.Init(spritesheets);
 
             App.Info($"Loading remote spritesheets... OK!");
+        }
+
+        private string GetFileSize(string path)
+        {
+            var file = new FileInfo(path);
+
+            if (file.Length < 1024)
+                return file.Length + " B";
+            else if (file.Length >= 1024 && file.Length < 1024 * 1024)
+                return file.Length / 1024 + " KB";
+            else if (file.Length >= 1024 * 1024 && file.Length < 1024 * 1024 * 1024)
+                return file.Length / (1024 * 1024) + " MB";
+            else
+                return file.Length / (1024 * 1024 * 1024) + " GB";
         }
     }
 }

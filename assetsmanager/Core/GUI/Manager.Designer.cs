@@ -35,29 +35,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.SpritesheetCountLabel = new System.Windows.Forms.Label();
             this.LoadAssetsButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.xmlObject5 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
-            this.xmlObject4 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
-            this.xmlObject3 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
-            this.xmlObject2 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
-            this.xmlObject1 = new LoESoft.AssetsManager.Core.GUI.HUD.XmlObject();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pngObject5 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
-            this.pngObject4 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
-            this.pngObject3 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
-            this.pngObject2 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
-            this.pngObject1 = new LoESoft.AssetsManager.Core.GUI.HUD.PngObject();
+            this.XmlPanel = new System.Windows.Forms.Panel();
+            this.SpritesheetPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.TextContent = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SaveIcon = new System.Windows.Forms.PictureBox();
+            this.HelpTab = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -115,123 +107,33 @@
             // 
             // LoadAssetsButton
             // 
-            this.LoadAssetsButton.Location = new System.Drawing.Point(550, 6);
+            this.LoadAssetsButton.Location = new System.Drawing.Point(581, 6);
             this.LoadAssetsButton.Name = "LoadAssetsButton";
-            this.LoadAssetsButton.Size = new System.Drawing.Size(218, 24);
+            this.LoadAssetsButton.Size = new System.Drawing.Size(187, 24);
             this.LoadAssetsButton.TabIndex = 0;
             this.LoadAssetsButton.Text = "Load Assets";
             this.LoadAssetsButton.UseVisualStyleBackColor = true;
             this.LoadAssetsButton.Click += new System.EventHandler(this.LoadAssetsButton_Click);
             // 
-            // panel1
+            // XmlPanel
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.xmlObject5);
-            this.panel1.Controls.Add(this.xmlObject4);
-            this.panel1.Controls.Add(this.xmlObject3);
-            this.panel1.Controls.Add(this.xmlObject2);
-            this.panel1.Controls.Add(this.xmlObject1);
-            this.panel1.Location = new System.Drawing.Point(550, 81);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(220, 200);
-            this.panel1.TabIndex = 1;
+            this.XmlPanel.AutoScroll = true;
+            this.XmlPanel.BackColor = System.Drawing.SystemColors.Info;
+            this.XmlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.XmlPanel.Location = new System.Drawing.Point(550, 81);
+            this.XmlPanel.Name = "XmlPanel";
+            this.XmlPanel.Size = new System.Drawing.Size(220, 200);
+            this.XmlPanel.TabIndex = 1;
             // 
-            // xmlObject5
+            // SpritesheetPanel
             // 
-            this.xmlObject5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.xmlObject5.Location = new System.Drawing.Point(3, 179);
-            this.xmlObject5.Name = "xmlObject5";
-            this.xmlObject5.Size = new System.Drawing.Size(190, 38);
-            this.xmlObject5.TabIndex = 0;
-            // 
-            // xmlObject4
-            // 
-            this.xmlObject4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.xmlObject4.Location = new System.Drawing.Point(3, 135);
-            this.xmlObject4.Name = "xmlObject4";
-            this.xmlObject4.Size = new System.Drawing.Size(190, 38);
-            this.xmlObject4.TabIndex = 0;
-            // 
-            // xmlObject3
-            // 
-            this.xmlObject3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.xmlObject3.Location = new System.Drawing.Point(3, 91);
-            this.xmlObject3.Name = "xmlObject3";
-            this.xmlObject3.Size = new System.Drawing.Size(190, 38);
-            this.xmlObject3.TabIndex = 0;
-            // 
-            // xmlObject2
-            // 
-            this.xmlObject2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.xmlObject2.Location = new System.Drawing.Point(3, 47);
-            this.xmlObject2.Name = "xmlObject2";
-            this.xmlObject2.Size = new System.Drawing.Size(190, 38);
-            this.xmlObject2.TabIndex = 0;
-            // 
-            // xmlObject1
-            // 
-            this.xmlObject1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.xmlObject1.Location = new System.Drawing.Point(3, 3);
-            this.xmlObject1.Name = "xmlObject1";
-            this.xmlObject1.Size = new System.Drawing.Size(190, 38);
-            this.xmlObject1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.AutoScroll = true;
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.pngObject5);
-            this.panel2.Controls.Add(this.pngObject4);
-            this.panel2.Controls.Add(this.pngObject3);
-            this.panel2.Controls.Add(this.pngObject2);
-            this.panel2.Controls.Add(this.pngObject1);
-            this.panel2.Location = new System.Drawing.Point(550, 333);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(220, 200);
-            this.panel2.TabIndex = 1;
-            // 
-            // pngObject5
-            // 
-            this.pngObject5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject5.Location = new System.Drawing.Point(4, 171);
-            this.pngObject5.Name = "pngObject5";
-            this.pngObject5.Size = new System.Drawing.Size(188, 36);
-            this.pngObject5.TabIndex = 0;
-            // 
-            // pngObject4
-            // 
-            this.pngObject4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject4.Location = new System.Drawing.Point(3, 129);
-            this.pngObject4.Name = "pngObject4";
-            this.pngObject4.Size = new System.Drawing.Size(188, 36);
-            this.pngObject4.TabIndex = 0;
-            // 
-            // pngObject3
-            // 
-            this.pngObject3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject3.Location = new System.Drawing.Point(3, 87);
-            this.pngObject3.Name = "pngObject3";
-            this.pngObject3.Size = new System.Drawing.Size(188, 36);
-            this.pngObject3.TabIndex = 0;
-            // 
-            // pngObject2
-            // 
-            this.pngObject2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject2.Location = new System.Drawing.Point(3, 45);
-            this.pngObject2.Name = "pngObject2";
-            this.pngObject2.Size = new System.Drawing.Size(188, 36);
-            this.pngObject2.TabIndex = 0;
-            // 
-            // pngObject1
-            // 
-            this.pngObject1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pngObject1.Location = new System.Drawing.Point(3, 3);
-            this.pngObject1.Name = "pngObject1";
-            this.pngObject1.Size = new System.Drawing.Size(188, 36);
-            this.pngObject1.TabIndex = 0;
+            this.SpritesheetPanel.AutoScroll = true;
+            this.SpritesheetPanel.BackColor = System.Drawing.SystemColors.Info;
+            this.SpritesheetPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SpritesheetPanel.Location = new System.Drawing.Point(550, 333);
+            this.SpritesheetPanel.Name = "SpritesheetPanel";
+            this.SpritesheetPanel.Size = new System.Drawing.Size(220, 200);
+            this.SpritesheetPanel.TabIndex = 1;
             // 
             // groupBox2
             // 
@@ -246,17 +148,30 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.TextContent);
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(544, 538);
             this.panel4.TabIndex = 3;
             // 
+            // TextContent
+            // 
+            this.TextContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextContent.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.TextContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextContent.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextContent.Location = new System.Drawing.Point(0, 0);
+            this.TextContent.Name = "TextContent";
+            this.TextContent.Size = new System.Drawing.Size(540, 534);
+            this.TextContent.TabIndex = 0;
+            this.TextContent.Text = "";
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.HelpTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -267,12 +182,13 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.SaveIcon);
             this.tabPage1.Controls.Add(this.LoadAssetsButton);
             this.tabPage1.Controls.Add(this.panel4);
-            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Controls.Add(this.SpritesheetPanel);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Controls.Add(this.XmlPanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -280,17 +196,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             // 
-            // tabPage2
+            // SaveIcon
             // 
-            this.tabPage2.AutoScroll = true;
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(776, 536);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Help";
+            this.SaveIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SaveIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.save_icon;
+            this.SaveIcon.Location = new System.Drawing.Point(550, 6);
+            this.SaveIcon.Name = "SaveIcon";
+            this.SaveIcon.Size = new System.Drawing.Size(27, 24);
+            this.SaveIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.SaveIcon.TabIndex = 4;
+            this.SaveIcon.TabStop = false;
+            // 
+            // HelpTab
+            // 
+            this.HelpTab.AutoScroll = true;
+            this.HelpTab.BackColor = System.Drawing.SystemColors.Control;
+            this.HelpTab.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.HelpTab.Location = new System.Drawing.Point(4, 22);
+            this.HelpTab.Name = "HelpTab";
+            this.HelpTab.Padding = new System.Windows.Forms.Padding(3);
+            this.HelpTab.Size = new System.Drawing.Size(776, 536);
+            this.HelpTab.TabIndex = 1;
+            this.HelpTab.Text = "Help";
             // 
             // Manager
             // 
@@ -306,12 +233,12 @@
             this.Load += new System.EventHandler(this.Manager_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SaveIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -324,23 +251,15 @@
         private System.Windows.Forms.Label SpritesheetCountLabel;
         private System.Windows.Forms.Label XmlCountLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-        private HUD.XmlObject xmlObject5;
-        private HUD.XmlObject xmlObject4;
-        private HUD.XmlObject xmlObject3;
-        private HUD.XmlObject xmlObject2;
-        private HUD.XmlObject xmlObject1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel XmlPanel;
+        private System.Windows.Forms.Panel SpritesheetPanel;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel4;
-        private HUD.PngObject pngObject5;
-        private HUD.PngObject pngObject4;
-        private HUD.PngObject pngObject3;
-        private HUD.PngObject pngObject2;
-        private HUD.PngObject pngObject1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage HelpTab;
+        private System.Windows.Forms.RichTextBox TextContent;
+        private System.Windows.Forms.PictureBox SaveIcon;
     }
 }
 

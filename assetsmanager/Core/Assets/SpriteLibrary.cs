@@ -6,9 +6,9 @@ namespace LoESoft.AssetsManager.Core.Assets
 {
     public class SpriteLibrary
     {
-        public static readonly Dictionary<string, Image> Spritesheets = new Dictionary<string, Image>();
+        public static readonly Dictionary<string, KeyValuePair<string, Image>> Spritesheets = new Dictionary<string, KeyValuePair<string, Image>>();
 
-        public static void Init(List<Spritesheet> spritesheets)
+        public static void Init(List<SpritesheetFile> spritesheets)
         {
             LoadContents(spritesheets);
 
@@ -18,10 +18,10 @@ namespace LoESoft.AssetsManager.Core.Assets
         private static void DisplayFormattedAmount<T>(Dictionary<string, T> data, string singular, string plural)
             => App.Info($"- Loaded {data.Keys.Count} {(data.Keys.Count > 1 ? plural : singular)}.");
 
-        private static void LoadContents(List<Spritesheet> spritesheets)
+        private static void LoadContents(List<SpritesheetFile> spritesheets)
         {
             foreach (var spritesheet in spritesheets)
-                Spritesheets.Add(spritesheet.File, spritesheet.Image);
+                Spritesheets.Add(spritesheet.File, new KeyValuePair<string, Image>(spritesheet.Size, spritesheet.Image));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LoESoft.AssetsManager.Core.Assets.Structure;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using static LoESoft.AssetsManager.Core.Assets.Structure.XmlContent;
@@ -8,13 +9,17 @@ namespace LoESoft.AssetsManager.Core.Assets
 {
     public static class XmlLibrary
     {
+        public static Dictionary<string, KeyValuePair<string, XElement>> Xmls = new Dictionary<string, KeyValuePair<string, XElement>>();
         public static Dictionary<int, ObjectsContent> ObjectsXml = new Dictionary<int, ObjectsContent>();
         public static Dictionary<int, ItemsContent> ItemsXml = new Dictionary<int, ItemsContent>();
         public static Dictionary<int, TilesContent> TilesXml = new Dictionary<int, TilesContent>();
 
-        public static void Init(List<XElement> xmls)
+        public static void Init(List<XmlFile> xmls)
         {
-            LoadContents(xmls);
+            foreach (var xml in xmls)
+                Xmls.Add(xml.File, new KeyValuePair<string, XElement>(xml.Size, xml.XElement));
+
+            LoadContents(xmls.Select(xml => xml.XElement).ToList());
 
             DisplayFormattedAmount(ObjectsXml, "object", "objects");
             DisplayFormattedAmount(ItemsXml, "item", "items");
