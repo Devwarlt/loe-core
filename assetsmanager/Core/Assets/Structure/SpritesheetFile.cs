@@ -6,6 +6,7 @@ namespace LoESoft.AssetsManager.Core.Assets.Structure
     {
         public string File { get; set; }
         public string Size { get; set; }
+        public string Path { get; set; }
         public Image Image { get; set; }
     }
 }

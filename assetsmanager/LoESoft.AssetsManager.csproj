@@ -248,6 +248,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="folder-icon.png" />
     <Content Include="loesoft-new.ico" />
     <None Include="save-icon.png" />
     <None Include="xml-icon.png" />
