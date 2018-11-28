@@ -11,13 +11,13 @@
             return CurrentId;
         }
 
-        public static Entity CreateEntity(WorldManager manager, int x, int y, int id) => new Entity(manager, id)
+        public static GameObject CreateObject(WorldManager manager, int x, int y, int id) => new GameObject(manager, id)
         {
             X = x,
             Y = y
         };
 
-        public static EntityObject CreateEntityObject(WorldManager manager, int x, int y, int id) => new EntityObject(manager, id)
+        public static Entity CreateEntity(WorldManager manager, int x, int y, int id) => new Entity(manager, id)
         {
             X = x,
             Y = y

@@ -50,10 +50,7 @@ namespace LoESoft.Server.Core.Networking
                 PacketID = outgoingPacket.PacketID,
                 Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
-
-            if (outgoingPacket is Update)
-                App.Warn($"Update: {buffer.Length}");
-
+            
             try
             {
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, result =>

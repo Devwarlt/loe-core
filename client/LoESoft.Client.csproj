@@ -85,8 +85,8 @@
     <Compile Include="Core\Game\Map\Data\ObjectData.cs" />
     <Compile Include="Core\Game\Map\Data\TileData.cs" />
     <Compile Include="Core\Game\Map\WorldMap.cs" />
+    <Compile Include="Core\Game\Objects\GameObject.cs" />
     <Compile Include="Core\Game\Objects\Entity.cs" />
-    <Compile Include="Core\Game\Objects\EntityObject.cs" />
     <Compile Include="Core\Game\Objects\Player.cs" />
     <Compile Include="Core\Game\Objects\Direction.cs" />
     <Compile Include="Core\Game\Objects\Stats\Stat.cs" />

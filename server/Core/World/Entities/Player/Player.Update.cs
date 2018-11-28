@@ -1,6 +1,5 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using LoESoft.Server.Core.World.Map.Data;
-using LoESoft.Server.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,9 +8,9 @@ namespace LoESoft.Server.Core.World.Entities.Player
     public partial class Player
     {
         private HashSet<Tile> _addedTile = new HashSet<Tile>();
-        private HashSet<Entity> _addedObjects = new HashSet<Entity>();
+        private HashSet<GameObject> _addedObjects = new HashSet<GameObject>();
 
-        private HashSet<Entity> _objectsToUpdateOrAdd = new HashSet<Entity>();
+        private HashSet<GameObject> _objectsToUpdateOrAdd = new HashSet<GameObject>();
         private HashSet<Tile> _tilesToUpdateOrAdd = new HashSet<Tile>();
         
         private HashSet<int> _removedObjects = new HashSet<int>();

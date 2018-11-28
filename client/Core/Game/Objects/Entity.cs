@@ -1,64 +1,104 @@
 ﻿using LoESoft.Client.Assets.Xml;
-using LoESoft.Client.Assets.Xml.Structure;
+using LoESoft.Client.Core.Game.Animation;
 using LoESoft.Client.Core.Game.Objects.Stats;
+using LoESoft.Client.Core.Game.PathFinder;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Game.Objects
 {
-    public class Entity
+    public class Entity : GameObject
     {
-        public int DistinationX { get; set; }
-        public int DistinationY { get; set; }
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float DrawX => X * 8;
-        public float DrawY => Y * 8;
+        private ObjectAnimation Animation;
 
-        public bool IsMoving
-        {
-            get { return X != DistinationX || Y != DistinationY; }
-        }
+        private AStar PathFinder;
 
-        public Texture2D Texture { get; set; }
-        public ObjectsContent Content { get; set; }
-        public Color Color { get; set; }
-        public int Id { get; set; }
-        public int ObjectId { get; set; }
+        private Queue<Point> _astarPath;
+        //private bool _isPathFinding;
 
-        //Stats
-        public int Size { get; set; }
+        public Direction CurrentDirection { get; set; }
 
         public int Health { get; set; }
 
-        public Entity(int id)
+        public Entity(int id) : base(id)
         {
-            Id = id;
-            if (Id != -1)
-                Content = XmlLibrary.ObjectsXml[Id];
-            Size = 8;
+            CurrentDirection = Direction.Down;
+            Animation = new ObjectAnimation();
+
+            _astarPath = new Queue<Point>();
+            PathFinder = new AStar();
+            //_isPathFinding = false;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public override void Init()
         {
-            HandleMovement(1f / gameTime.ElapsedGameTime.Milliseconds);
+            Animation.UpdateOrAdd(Content);
+            Texture = XmlLibrary.GetSpriteFromContent(Content, 0, 1);
         }
 
-        public virtual void ImportStat(string export)
+        public override void HandleMovement(float dt)
         {
-            var stats = JsonConvert.DeserializeObject<List<string>>(export);
+            //if (_astartPath.Count > 0)
+            //{
+            //    //if (X == DistinationX && Y == DistinationY)
+            //    //{
+            //    //    var path = _astartPath.Dequeue();
 
-            foreach (var i in stats)
+            //    //    DistinationX = path.X;
+            //    //    DistinationY = path.Y;
+            //    //}
+            //    //else
+            //    //{
+            //    //    base.HandleMovement(dt);
+            //    //}
+            //}
+
+            //foreach(var i in _astarPath)
+            //{
+            //    DistinationX = i.X;
+            //    DistinationY = i.Y;
+            //    App.Warn($"{_astarPath.Count}");
+            //}
+
+            if (DistinationY != Y)
             {
-                var stat = JsonConvert.DeserializeObject<Stat>(i);
-                ChangeStat(stat.StatType, stat.Value);
+                if (DistinationY > Y)
+                {
+                    Y += dt;
+                    CurrentDirection = Direction.Down;
+                }
+                else if (DistinationY < Y)
+                {
+                    Y -= dt;
+                    CurrentDirection = Direction.Up;
+                }
+            }
+            else if (DistinationX != X)
+            {
+                if (DistinationX > X)
+                {
+                    X += dt;
+                    CurrentDirection = Direction.Right;
+                }
+                else if (DistinationX < X)
+                {
+                    X -= dt;
+                    CurrentDirection = Direction.Left;
+                }
             }
         }
 
-        public virtual void ChangeStat(int type, object value)
+        public override void SetDistination(int x, int y)
+        {
+            //var nodes = PathFinder.GetPath(new Point((int)X, (int)Y), new Point(x, y)).Result;
+
+            //foreach (var i in nodes)
+            //    _astarPath.Enqueue(i.Point);
+            base.SetDistination(x, y);
+        }
+
+        public override void ChangeStat(int type, object value)
         {
             switch (type)
             {
@@ -67,30 +107,15 @@ namespace LoESoft.Client.Core.Game.Objects
             }
         }
 
-        public virtual void HandleMovement(float dt)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            if (DistinationY != Y)
-            {
-                if (DistinationY > Y)
-                    Y += dt;
-                else if (DistinationY < Y)
-                    Y -= dt;
-            }
-            else if (DistinationX != X)
-            {
-                if (DistinationX > X)
-                    X += dt;
-                else if (DistinationX < X)
-                    X -= dt;
-            }
+            Animation.Draw(spriteBatch, this);
         }
 
-        public virtual void SetDistination(int x, int y)
+        public override void Update(GameTime gameTime)
         {
-            DistinationX = x;
-            DistinationY = y;
+            base.Update(gameTime);
+            Animation.Update(gameTime, this);
         }
-
-        public virtual void Draw(SpriteBatch spriteBatch) => spriteBatch.DrawRectangle(new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color, 4);
     }
 }

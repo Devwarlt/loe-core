@@ -1,16 +1,22 @@
-﻿using LoESoft.Client.Core.Game.Animation;
+﻿using LoESoft.Client.Assets.Xml;
+using LoESoft.Client.Core.Game.Animation;
+using LoESoft.Client.Core.Game.Objects.Stats;
+using LoESoft.Client.Core.Game.User.Data;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Game.Objects
 {
-    public partial class Player : Entity
+    public partial class Player : GameObject
     {
         public Player(int id) : base(id)
         {
             Animation = new PlayerAnimation();
+
+            Inventory = new Inventory();
 
             KeysToDirection = new Dictionary<Keys, Direction>()
             {
@@ -24,7 +30,27 @@ namespace LoESoft.Client.Core.Game.Objects
             DistinationY = (int)Y;
         }
 
-        public void Init() => Animation.UpdateOrAdd(Content);
+        public override void Init()
+        {
+            Animation.UpdateOrAdd(Content);
+            Texture = XmlLibrary.GetSpriteFromContent(Content, 0, 1);
+        }
+
+        public override void ChangeStat(int type, object value)
+        {
+            switch (type)
+            {
+                case StatType.HEALTH: Health = int.Parse(value.ToString()); break;
+                case StatType.SIZE: Size = int.Parse(value.ToString()); break;
+                case StatType.INVENTORY:
+                    {
+                        var inv = JsonConvert.DeserializeObject<Inventory>(value.ToString());
+                        Inventory.Init(inv.Items);
+                        //HUD.InfoTable.Init(Inventory);
+                    }
+                    break;
+            }
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -39,6 +65,10 @@ namespace LoESoft.Client.Core.Game.Objects
         public Dictionary<Keys, Direction> KeysToDirection { get; private set; }
 
         public Direction CurrentDirection { get; set; }
+
+        public Inventory Inventory { get; set; }
+
+        public int Health { get; set; }
 
         private PlayerAnimation Animation;
 

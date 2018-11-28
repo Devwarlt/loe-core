@@ -4,7 +4,7 @@ using LoESoft.Server.Core.World.Entities.Player.Attribute;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
-    public partial class Player : EntityObject
+    public partial class Player : Entity
     {
         public Client Client { get; private set; }
         public Character Character { get; private set; }
@@ -13,6 +13,8 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public Player(WorldManager manager, Client client, Character character)
             : base(manager, character.Class)
         {
+            IsPlayer = true;
+
             Client = client;
             Character = character;
             X = Character.Position.X;

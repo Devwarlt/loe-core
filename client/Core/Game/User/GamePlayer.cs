@@ -18,7 +18,6 @@ namespace LoESoft.Client.Core.Game.User
         public GameUser User { get; private set; }
 
         public Player Player { get; private set; }
-        public Inventory Inventory { get; private set; }
         public PlayerHUD HUD { get; set; }
 
         public int ObjectId { get; private set; }
@@ -28,8 +27,7 @@ namespace LoESoft.Client.Core.Game.User
             CanMove = true;
             User = user;
             ObjectId = objId;
-
-            Inventory = new Inventory();
+            
             HUD = new PlayerHUD();
             Player = new Player(classType);
 
@@ -44,26 +42,14 @@ namespace LoESoft.Client.Core.Game.User
             foreach (var i in stats)
             {
                 var stat = JsonConvert.DeserializeObject<Stat>(i);
-                ChangeStat(stat.StatType, stat.Value);
+
+                Player.ChangeStat(stat.StatType, stat.Value);
+
+                if (stat.StatType == StatType.INVENTORY)
+                    HUD.InfoTable.Init(Player.Inventory);
             }
         }
-
-        private void ChangeStat(int type, object value)
-        {
-            switch (type)
-            {
-                case StatType.HEALTH: Player.Health = int.Parse(value.ToString()); break;
-                case StatType.SIZE: Player.Size = int.Parse(value.ToString()); break;
-                case StatType.INVENTORY:
-                    {
-                        var inv = JsonConvert.DeserializeObject<Inventory>(value.ToString());
-                        Inventory.Init(inv.Items);
-                        HUD.InfoTable.Init(Inventory);
-                    }
-                    break;
-            }
-        }
-
+        
         public bool CanMove { get; set; }
 
         private void HandlePlayerInput()

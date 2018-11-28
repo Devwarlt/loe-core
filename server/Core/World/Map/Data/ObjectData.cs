@@ -1,5 +1,4 @@
 ﻿using LoESoft.Server.Core.World.Entities;
-using LoESoft.Server.Core.World.Entities.Player;
 
 namespace LoESoft.Server.Core.World.Map.Data
 {
@@ -14,16 +13,18 @@ namespace LoESoft.Server.Core.World.Map.Data
         public string Stats { get; set; }
 
         public bool IsPlayer { get; set; }
+        public bool IsEntity { get; set; }
 
-        public static ObjectData GetData(Entity entity) => new ObjectData()
-        {
-            Id = entity.Id,
-            ObjectId = entity.ObjectId,
-            X = entity.X,
-            Y = entity.Y,
-            LastDirection = (entity is EntityObject || entity is Player) ? (int)(entity as EntityObject).Direction : -1,
-            Stats = entity.ExportStat(),
-            IsPlayer = entity is Player
-        };
+        public static ObjectData GetData(GameObject entity) => new ObjectData()
+            {
+                Id = entity.Id,
+                ObjectId = entity.ObjectId,
+                X = entity.X,
+                Y = entity.Y,
+                IsPlayer = entity.IsPlayer,
+                IsEntity = entity.IsEntity,
+                LastDirection = (entity.IsPlayer || entity.IsEntity) ? (int)(entity as Entity).Direction : -1,
+                Stats = entity.ExportStat()
+            };
     }
 }

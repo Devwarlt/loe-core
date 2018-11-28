@@ -62,7 +62,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
         {
             RemoveChild(CharacterView);
 
-            CharacterView = new Sprite(50, 15, 150, 150, XmlLibrary.GetSpriteFromContent(Content));
+            CharacterView = new Sprite(50, 15, 150, 150, XmlLibrary.GetSpriteFromContent(Content, 0, 1));
             CharacterView.IsEventApplicable = false;
 
             AddChild(CharacterView);

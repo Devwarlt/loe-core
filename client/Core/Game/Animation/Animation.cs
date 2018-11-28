@@ -32,18 +32,12 @@ namespace LoESoft.Client.Core.Game.Animation
             TypeAnimation = type;
         }
 
-        public virtual void Update(GameTime gameTime, Entity basicObject)
+        public virtual void Update(GameTime gameTime, GameObject basicObject)
         {
             Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (Timer >= CoolDown)
+            if (Timer >= CoolDown && basicObject.IsMoving)
             {
-                if (!basicObject.IsMoving)
-                {
-                    CurrentFrame = 0;
-                    return;
-                }
-
                 CurrentFrame++;
 
                 if (CurrentFrame >= Frames[TypeAnimation].Count)
@@ -53,6 +47,6 @@ namespace LoESoft.Client.Core.Game.Animation
             }
         }
 
-        public abstract void Draw(SpriteBatch spriteBatch, Entity entity); //Draw should differentuate between types: Enemy, Player, Animated tiles / effects
+        public abstract void Draw(SpriteBatch spriteBatch, GameObject entity); //Draw should differentuate between types: Enemy, Player, Animated tiles / effects
     }
 }

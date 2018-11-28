@@ -74,7 +74,7 @@ namespace LoESoft.Server.Core.World
 
         public Player GetPlayer(int objId) => Players[objId];
 
-        public void Add(Entity entity) =>
+        public void Add(GameObject entity) =>
             Chunks[new Point(entity.ChunkX, entity.ChunkY)].Add(entity);
 
         public void Remove(Player player)

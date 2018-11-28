@@ -15,14 +15,14 @@ namespace LoESoft.Server.Core.World.Map
 
         public WorldManager Manager { get; private set; }
 
-        public HashSet<Entity> Entities { get; private set; }
+        public HashSet<GameObject> Entities { get; private set; }
         public HashSet<int> RemovedEntities { get; private set; }
 
         public Chunk(WorldManager manager, int x, int y)
         {
             Manager = manager;
 
-            Entities = new HashSet<Entity>();
+            Entities = new HashSet<GameObject>();
             RemovedEntities = new HashSet<int>();
 
             StartX = x * SIZE;
@@ -31,20 +31,20 @@ namespace LoESoft.Server.Core.World.Map
 
         #region METHODS
 
-        public void Add(Entity entity) => Entities.Add(entity);
+        public void Add(GameObject entity) => Entities.Add(entity);
 
-        public void Remove(Entity entity)
+        public void Remove(GameObject entity)
         {
             RemovedEntities.Add(entity.ObjectId);
             Entities.Remove(entity);
         }
 
-        public void Contains(Entity entity) => Entities.Contains(entity);
+        public void Contains(GameObject entity) => Entities.Contains(entity);
 
-        public List<Entity> GetEntities(IEnumerable<Point> radius) =>
-            radius.Select(_ => Entities.Where(e => e.X == _.X && e.Y == _.Y).First()).ToList();
+        public HashSet<GameObject> GetEntities(IEnumerable<Point> radius) =>
+            radius.Select(_ => Entities.Where(e => e.X == _.X && e.Y == _.Y).First()).ToHashSet();
 
-        public Entity GetEntity(int x, int y)
+        public GameObject GetEntity(int x, int y)
         {
             foreach (var i in Entities)
                 if (i.X == x && i.Y == y)
@@ -56,15 +56,15 @@ namespace LoESoft.Server.Core.World.Map
 
         public void RandomGen()
         {
-            for (var i = 0; i < 5; i++)
-                Add(EntityManager.CreateEntityObject(Manager, StartX + rand.Next(0, 20), StartY + rand.Next(0, 20), 8));
+            for (var i = 0; i < 1; i++)
+                Add(EntityManager.CreateEntity(Manager, StartX + rand.Next(0, 20), StartY + rand.Next(0, 20), 8));
         }
 
         #endregion METHODS
 
         public void Update(WorldTime time)
         {
-            if (time.TickCount % 10 == 0)
+            if (time.TickCount % 5 == 0)
             {
                 foreach (var i in Entities.ToArray())
                 {

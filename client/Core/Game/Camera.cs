@@ -8,7 +8,7 @@ namespace LoESoft.Client.Core.Game
     {
         public const double SCALE = Tile.TILE_SIZE;
 
-        public static Entity Focus { get; set; }
+        public static GameObject Focus { get; set; }
 
         public static float X { get; set; }
         public static float Y { get; set; }
@@ -19,7 +19,7 @@ namespace LoESoft.Client.Core.Game
 
         public static void RotateLeft() => _rotationIncrement--;
 
-        public static void SetFocus(Entity focus) => Focus = focus;
+        public static void SetFocus(GameObject focus) => Focus = focus;
 
         public static Vector2 CameraToWorldPosition(int x, int y) => Vector2.Transform(new Vector2(x, y), GetMatrix());
 

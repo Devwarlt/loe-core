@@ -49,7 +49,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
             {
                 int tx = (int)(i.X - (x - 10)) * 15;
                 int ty = (int)(i.Y - (y - 10)) * 15;
-
+                
                 hashSet.Add(new Sprite(tx + X + iX, ty + Y + iY, 15, 15, i.Texture));
             }
 

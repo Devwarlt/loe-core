@@ -10,7 +10,7 @@ namespace LoESoft.Client.Core.Game.Map
     public static class WorldMap
     {
         public static Dictionary<Point, Tile> TileMap { get; private set; }
-        public static Dictionary<int, Entity> Objects { get; private set; }
+        public static Dictionary<int, GameObject> Objects { get; private set; }
 
         public static int WIDTH { get; private set; }
         public static int HEIGHT { get; private set; }
@@ -19,7 +19,7 @@ namespace LoESoft.Client.Core.Game.Map
 
         static WorldMap()
         {
-            Objects = new Dictionary<int, Entity>();
+            Objects = new Dictionary<int, GameObject>();
             MapLoaded = false;
         }
 
@@ -61,22 +61,24 @@ namespace LoESoft.Client.Core.Game.Map
                         if (Objects[i.ObjectId] is Player)
                             ((Player)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
                         else
-                            ((EntityObject)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
+                            ((Entity)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
                     }
                 }
                 else
                 {
                     if (i.IsPlayer)
                         HandlePlayer(i);
-                    else
+                    else if (i.IsEntity)
                         HandleEntity(i);
+                    else
+                        HandleObject(i);
                 }
             }
         }
 
-        private static void HandleEntity(ObjectData data)
+        private static void HandleObject(ObjectData data)
         {
-            var obj = new EntityObject(data.Id)
+            var obj = new GameObject(data.Id)
             {
                 X = data.X,
                 Y = data.Y,
@@ -87,6 +89,25 @@ namespace LoESoft.Client.Core.Game.Map
 
             obj.Init();
             obj.ImportStat(data.Stats);
+
+            Objects.Add(data.ObjectId, obj);
+        }
+
+        private static void HandleEntity(ObjectData data)
+        {
+            var obj = new Entity(data.Id)
+            {
+                X = data.X,
+                Y = data.Y,
+                ObjectId = data.ObjectId,
+                DistinationX = data.X,
+                DistinationY = data.Y
+            };
+
+            obj.Init();
+            obj.CurrentDirection = (Direction)data.LastDirection;
+            obj.ImportStat(data.Stats);
+
             Objects.Add(data.ObjectId, obj);
         }
 
@@ -113,8 +134,8 @@ namespace LoESoft.Client.Core.Game.Map
             if (!MapLoaded)
                 return;
 
-            foreach (var i in GetEntitiesInSight(x, y))
-                i.Update(gameTime);
+            foreach (var i in Objects)
+                i.Value.Update(gameTime);
         }
 
         public static void Draw(SpriteBatch spriteBatch, int x, int y)
@@ -125,8 +146,8 @@ namespace LoESoft.Client.Core.Game.Map
             foreach (var i in GetTilesInSight(x, y))
                 i.Draw(spriteBatch);
 
-            foreach (var i in Objects)
-                i.Value.Draw(spriteBatch);
+            foreach (var i in GetEntitiesInSight(x, y))
+                i.Draw(spriteBatch);
         }
 
         public static HashSet<Tile> GetTilesInSight(int x, int y)
@@ -136,7 +157,7 @@ namespace LoESoft.Client.Core.Game.Map
             return TileMap.Where(_ => sight.Contains(_.Key)).Select(_ => _.Value).ToHashSet();
         }
 
-        public static HashSet<Entity> GetEntitiesInSight(int x, int y) =>
+        public static HashSet<GameObject> GetEntitiesInSight(int x, int y) =>
             Objects.Where(_ => _.Value.X > x - SightRadius && _.Value.X < x + SightRadius
             && _.Value.Y > y - SightRadius && _.Value.Y < y + SightRadius).Select(_ => _.Value).ToHashSet();
         

@@ -69,17 +69,25 @@ namespace LoESoft.Client.Assets.Xml
             return spriteSet.GetSprite(content.Texture.ImageIndex.Item1, content.Texture.ImageIndex.Item2);
         }
 
+        public static Texture2D GetSpriteFromContent(XmlContent content, int x, int y)
+        {
+            var spriteSet = AssetLibrary.Sprites[content.Texture.FileName];
+
+            var spriteX = x;
+            var spriteY = (content.Texture.ImageIndex.Item2 * 4) + y;
+
+            return spriteSet.GetSprite(spriteX, spriteY);
+        }
+
         public static Dictionary<int, List<Texture2D>> GetAnimation(XmlContent content)
         {
             var spriteSet = AssetLibrary.Sprites[content.Texture.FileName];
             var yOffset = content.Texture.ImageIndex.Item2 * 4;
 
-            var offSetList = new List<int>();
-
-            offSetList.Add(yOffset);
-            offSetList.Add(yOffset + 1);
-            offSetList.Add(yOffset + 2);
-            offSetList.Add(yOffset + 3);
+            var offSetList = new List<int>()
+            {
+                yOffset, yOffset + 1, yOffset + 2, yOffset + 3
+            };
 
             var dictionary = new Dictionary<int, List<Texture2D>>();
             int idx = 0;
