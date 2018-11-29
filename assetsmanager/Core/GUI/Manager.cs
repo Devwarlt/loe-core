@@ -12,6 +12,8 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Xml.XPath;
+using static LoESoft.AssetsManager.Core.Assets.Structure.XmlContent;
 
 namespace LoESoft.AssetsManager.Core.GUI
 {
@@ -23,6 +25,10 @@ namespace LoESoft.AssetsManager.Core.GUI
         public string SpritesheetDir => Path.Combine(MainDir, $"/{BaseDir}/spritesheets/");
 
         private readonly Dictionary<string, string[]> HelpHints = new Dictionary<string, string[]>();
+        private Dictionary<string, List<ObjectsContent>> XmlObjects { get; set; }
+        private Dictionary<string, List<ItemsContent>> XmlItems { get; set; }
+        private Dictionary<string, List<TilesContent>> XmlTiles { get; set; }
+        private Dictionary<string, Image[,]> Spritesheets { get; set; }
 
         public Manager()
         {
@@ -96,6 +102,11 @@ namespace LoESoft.AssetsManager.Core.GUI
 
         private void LoadAssetsButton_Click(object sender, EventArgs e)
         {
+            XmlObjects = new Dictionary<string, List<ObjectsContent>>();
+            XmlItems = new Dictionary<string, List<ItemsContent>>();
+            XmlTiles = new Dictionary<string, List<TilesContent>>();
+            Spritesheets = new Dictionary<string, Image[,]>();
+
             LoadXmls();
             LoadSpritesheets();
 
@@ -115,9 +126,95 @@ namespace LoESoft.AssetsManager.Core.GUI
                 xmlobject.SetFileSize(xml.Value.Key);
                 xmlobject.Action = () =>
                 {
+                    var xobjects = XmlObjects[xml.Key];
+                    var xitems = XmlItems[xml.Key];
+                    var xtiles = XmlTiles[xml.Key];
+                    var palletes = new List<KeyValuePair<int, SpritePallete>>();
+
+                    foreach (var xobject in xobjects)
+                    {
+                        var xobjectpallete = new SpritePallete()
+                        {
+                            Name = xobject.Name,
+                            Size = new Size(33, 33),
+                            TabIndex = 2
+                        };
+                        xobjectpallete.SetImage(Spritesheets[xobject.TextureData.File][xobject.TextureData.X, xobject.TextureData.Y]);
+
+                        palletes.Add(new KeyValuePair<int, SpritePallete>(xobject.Id, xobjectpallete));
+                    }
+
+                    foreach (var xitem in xitems)
+                    {
+                        var xitempallete = new SpritePallete()
+                        {
+                            Name = xitem.Name,
+                            Size = new Size(33, 33),
+                            TabIndex = 2
+                        };
+                        xitempallete.SetImage(Spritesheets[xitem.TextureData.File][xitem.TextureData.X, xitem.TextureData.Y]);
+
+                        palletes.Add(new KeyValuePair<int, SpritePallete>(xitem.Id, xitempallete));
+                    }
+
+                    foreach (var xtile in xtiles)
+                    {
+                        var xtilepallete = new SpritePallete()
+                        {
+                            Name = xtile.Name,
+                            Size = new Size(33, 33),
+                            TabIndex = 2
+                        };
+                        xtilepallete.SetImage(Spritesheets[xtile.TextureData.File][xtile.TextureData.X, xtile.TextureData.Y]);
+
+                        palletes.Add(new KeyValuePair<int, SpritePallete>(xtile.Id, xtilepallete));
+                    }
+
+                    var columns = new List<int>() { 4, 43, 82, 121, 160, 199 };
+                    var row = 0;
+                    var column = 0;
+
+                    SplitPanels.Panel1.Controls.Clear();
+
+                    foreach (var pallete in palletes.OrderBy(id => id.Key))
+                    {
+                        pallete.Value.Location = new Point(columns[column], 3 + row * 39);
+
+                        SplitPanels.Panel1.Controls.Add(pallete.Value);
+
+                        column++;
+
+                        if (column == columns.Count)
+                        {
+                            column = 0;
+                            row++;
+                        }
+                    }
+
+                    WorkingTitleLabel.Text = "Working on...";
+                    WorkingContentLabel.Text = xml.Key;
                 };
 
                 XmlPanel.Controls.Add(xmlobject);
+
+                var objects = new List<ObjectsContent>();
+                var items = new List<ItemsContent>();
+                var tiles = new List<TilesContent>();
+                var name = xml.Key;
+
+                foreach (var elem in xmlobject.XmlContent.XPathSelectElements("//Object"))
+                {
+                    switch ((ContentType)int.Parse(elem.Attribute("type").Value))
+                    {
+                        case ContentType.Objects: objects.Add(new ObjectsContent(elem)); break;
+                        case ContentType.Items: items.Add(new ItemsContent(elem)); break;
+                        case ContentType.Tiles: tiles.Add(new TilesContent(elem)); break;
+                    }
+                }
+
+                XmlObjects.Add(name, objects);
+                XmlItems.Add(name, items);
+                XmlTiles.Add(name, tiles);
 
                 i++;
             }
@@ -138,6 +235,8 @@ namespace LoESoft.AssetsManager.Core.GUI
 
                 SpritesheetPanel.Controls.Add(pngobject);
 
+                Spritesheets.Add(spritesheet.Key, CropSpritesheet(spritesheet.Value.Value));
+
                 i++;
             }
         }
@@ -148,13 +247,12 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             var xmls = Directory.EnumerateFiles(XmlDir, "*.xml").Select(file =>
             {
-                var fileparams = file.Split('/');
                 var fileinfo = new FileInfo(file);
 
                 using (var stream = File.OpenRead(file))
                     return new XmlFile()
                     {
-                        File = fileparams[fileparams.Length - 1],
+                        File = Path.GetFileNameWithoutExtension(fileinfo.Name),
                         Size = GetFileSize(fileinfo.Length),
                         Path = fileinfo.FullName,
                         XElement = XElement.Load(stream)
@@ -174,12 +272,11 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             var spritesheets = Directory.EnumerateFiles(SpritesheetDir, "*.png").Select(spritesheet =>
             {
-                var fileparams = spritesheet.Split('/');
                 var fileinfo = new FileInfo(spritesheet);
 
                 return new SpritesheetFile()
                 {
-                    File = fileparams[fileparams.Length - 1],
+                    File = Path.GetFileNameWithoutExtension(fileinfo.Name),
                     Size = GetFileSize(fileinfo.Length),
                     Path = fileinfo.FullName,
                     Image = Image.FromFile(spritesheet)
@@ -203,6 +300,31 @@ namespace LoESoft.AssetsManager.Core.GUI
                 return size / (1024 * 1024) + " MB";
             else
                 return size / (1024 * 1024 * 1024) + " GB";
+        }
+
+        public static Image[,] CropSpritesheet(Image image)
+        {
+            try
+            {
+                var width = image.Width / 16;
+                var height = image.Height / 16;
+                var spriteitems = new Image[width, height];
+
+                for (var x = 0; x < width; x++)
+                    for (var y = 0; y < height; y++)
+                    {
+                        spriteitems[x, y] = new Bitmap(16, 16);
+
+                        var graphics = Graphics.FromImage(spriteitems[x, y]);
+                        graphics.DrawImage(image, new Rectangle(0, 0, 16, 16), new Rectangle(x * 16, y * 16, 16, 16), GraphicsUnit.Pixel);
+                        graphics.Dispose();
+                    }
+
+                return spriteitems;
+            }
+            catch (Exception e) { App.Error(e); }
+
+            return null;
         }
     }
 }

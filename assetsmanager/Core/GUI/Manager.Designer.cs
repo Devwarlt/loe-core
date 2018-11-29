@@ -42,9 +42,12 @@
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
-            this.HelpTab = new System.Windows.Forms.TabPage();
             this.FolderIcon = new System.Windows.Forms.PictureBox();
             this.SaveIcon = new System.Windows.Forms.PictureBox();
+            this.HelpTab = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.WorkingContentLabel = new System.Windows.Forms.Label();
+            this.WorkingTitleLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.ContentPanel.SuspendLayout();
@@ -54,6 +57,7 @@
             this.MainTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveIcon)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -61,9 +65,9 @@
             this.groupBox1.Controls.Add(this.XmlCountLabel);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox1.Location = new System.Drawing.Point(550, 35);
+            this.groupBox1.Location = new System.Drawing.Point(550, 110);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(218, 40);
+            this.groupBox1.Size = new System.Drawing.Size(220, 40);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -125,9 +129,9 @@
             this.XmlPanel.AutoScroll = true;
             this.XmlPanel.BackColor = System.Drawing.SystemColors.Info;
             this.XmlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.XmlPanel.Location = new System.Drawing.Point(550, 81);
+            this.XmlPanel.Location = new System.Drawing.Point(550, 156);
             this.XmlPanel.Name = "XmlPanel";
-            this.XmlPanel.Size = new System.Drawing.Size(220, 200);
+            this.XmlPanel.Size = new System.Drawing.Size(220, 160);
             this.XmlPanel.TabIndex = 1;
             // 
             // SpritesheetPanel
@@ -135,9 +139,9 @@
             this.SpritesheetPanel.AutoScroll = true;
             this.SpritesheetPanel.BackColor = System.Drawing.SystemColors.Info;
             this.SpritesheetPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SpritesheetPanel.Location = new System.Drawing.Point(550, 333);
+            this.SpritesheetPanel.Location = new System.Drawing.Point(550, 368);
             this.SpritesheetPanel.Name = "SpritesheetPanel";
-            this.SpritesheetPanel.Size = new System.Drawing.Size(220, 200);
+            this.SpritesheetPanel.Size = new System.Drawing.Size(220, 160);
             this.SpritesheetPanel.TabIndex = 1;
             // 
             // groupBox2
@@ -145,9 +149,9 @@
             this.groupBox2.Controls.Add(this.SpritesheetCountLabel);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox2.Location = new System.Drawing.Point(552, 287);
+            this.groupBox2.Location = new System.Drawing.Point(550, 322);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(218, 40);
+            this.groupBox2.Size = new System.Drawing.Size(220, 40);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -177,7 +181,7 @@
             // 
             this.SplitPanels.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.SplitPanels.Size = new System.Drawing.Size(540, 534);
-            this.SplitPanels.SplitterDistance = 273;
+            this.SplitPanels.SplitterDistance = 240;
             this.SplitPanels.TabIndex = 0;
             this.SplitPanels.TabStop = false;
             // 
@@ -202,6 +206,7 @@
             this.MainTab.Controls.Add(this.ContentPanel);
             this.MainTab.Controls.Add(this.SpritesheetPanel);
             this.MainTab.Controls.Add(this.groupBox2);
+            this.MainTab.Controls.Add(this.groupBox3);
             this.MainTab.Controls.Add(this.groupBox1);
             this.MainTab.Controls.Add(this.XmlPanel);
             this.MainTab.Location = new System.Drawing.Point(4, 22);
@@ -210,18 +215,6 @@
             this.MainTab.Size = new System.Drawing.Size(776, 536);
             this.MainTab.TabIndex = 0;
             this.MainTab.Text = "Main";
-            // 
-            // HelpTab
-            // 
-            this.HelpTab.AutoScroll = true;
-            this.HelpTab.BackColor = System.Drawing.SystemColors.Control;
-            this.HelpTab.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.HelpTab.Location = new System.Drawing.Point(4, 22);
-            this.HelpTab.Name = "HelpTab";
-            this.HelpTab.Padding = new System.Windows.Forms.Padding(3);
-            this.HelpTab.Size = new System.Drawing.Size(776, 536);
-            this.HelpTab.TabIndex = 1;
-            this.HelpTab.Text = "Help";
             // 
             // FolderIcon
             // 
@@ -244,6 +237,49 @@
             this.SaveIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.SaveIcon.TabIndex = 4;
             this.SaveIcon.TabStop = false;
+            // 
+            // HelpTab
+            // 
+            this.HelpTab.AutoScroll = true;
+            this.HelpTab.BackColor = System.Drawing.SystemColors.Control;
+            this.HelpTab.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.HelpTab.Location = new System.Drawing.Point(4, 22);
+            this.HelpTab.Name = "HelpTab";
+            this.HelpTab.Padding = new System.Windows.Forms.Padding(3);
+            this.HelpTab.Size = new System.Drawing.Size(776, 536);
+            this.HelpTab.TabIndex = 1;
+            this.HelpTab.Text = "Help";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.WorkingContentLabel);
+            this.groupBox3.Controls.Add(this.WorkingTitleLabel);
+            this.groupBox3.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.groupBox3.Location = new System.Drawing.Point(550, 36);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(220, 68);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Info";
+            // 
+            // WorkingContentLabel
+            // 
+            this.WorkingContentLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WorkingContentLabel.Location = new System.Drawing.Point(9, 29);
+            this.WorkingContentLabel.Name = "WorkingContentLabel";
+            this.WorkingContentLabel.Size = new System.Drawing.Size(205, 36);
+            this.WorkingContentLabel.TabIndex = 1;
+            this.WorkingContentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // WorkingTitleLabel
+            // 
+            this.WorkingTitleLabel.AutoSize = true;
+            this.WorkingTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WorkingTitleLabel.Location = new System.Drawing.Point(6, 16);
+            this.WorkingTitleLabel.Name = "WorkingTitleLabel";
+            this.WorkingTitleLabel.Size = new System.Drawing.Size(0, 13);
+            this.WorkingTitleLabel.TabIndex = 1;
+            this.WorkingTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Manager
             // 
@@ -268,6 +304,8 @@
             this.MainTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveIcon)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -290,6 +328,9 @@
         private System.Windows.Forms.PictureBox SaveIcon;
         private System.Windows.Forms.SplitContainer SplitPanels;
         private System.Windows.Forms.PictureBox FolderIcon;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label WorkingContentLabel;
+        private System.Windows.Forms.Label WorkingTitleLabel;
     }
 }
 
