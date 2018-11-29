@@ -99,7 +99,6 @@
     <Compile Include="Core\Layer\Map.cs" />
     <Compile Include="Core\Layer\MapLayer.cs" />
     <Compile Include="Core\Util\InteractiveObject.cs" />
-    <Compile Include="Core\Util\SpritesheetItem.cs" />
     <Compile Include="Core\Util\Utils.cs" />
     <Compile Include="App.cs" />
     <Compile Include="MapSize.cs" />

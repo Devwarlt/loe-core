@@ -28,22 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.XmlIcon = new System.Windows.Forms.PictureBox();
             this.FileNameLabel = new System.Windows.Forms.Label();
             this.FileSizeLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XmlIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::LoESoft.AssetsManager.Properties.Resources.xml_icon;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(38, 38);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.XmlIcon.BackColor = System.Drawing.Color.Transparent;
+            this.XmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.xml_icon;
+            this.XmlIcon.Location = new System.Drawing.Point(0, 0);
+            this.XmlIcon.Name = "pictureBox1";
+            this.XmlIcon.Size = new System.Drawing.Size(38, 38);
+            this.XmlIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.XmlIcon.TabIndex = 0;
+            this.XmlIcon.TabStop = false;
+            this.XmlIcon.DoubleClick += new System.EventHandler(this.XmlIcon_DoubleClick);
             // 
             // FileNameLabel
             // 
@@ -69,17 +70,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.FileSizeLabel);
             this.Controls.Add(this.FileNameLabel);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.XmlIcon);
             this.Name = "XmlObject";
             this.Size = new System.Drawing.Size(190, 38);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XmlIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox XmlIcon;
         private System.Windows.Forms.Label FileNameLabel;
         private System.Windows.Forms.Label FileSizeLabel;
     }

@@ -79,7 +79,7 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
 
                     column++;
 
-                    if (column == 5)
+                    if (column == columns.Count)
                     {
                         column = 0;
                         row++;

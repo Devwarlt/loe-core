@@ -39,9 +39,7 @@ namespace LoESoft.AssetsManager.Core.Assets
                     switch ((ContentType)int.Parse(elem.Attribute("type").Value))
                     {
                         case ContentType.Objects: ObjectsXml.Add(content.Id, new ObjectsContent(elem)); break;
-
                         case ContentType.Items: ItemsXml.Add(content.Id, new ItemsContent(elem)); break;
-
                         case ContentType.Tiles: TilesXml.Add(content.Id, new TilesContent(elem)); break;
                     }
                 }

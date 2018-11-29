@@ -38,18 +38,24 @@
             this.XmlPanel = new System.Windows.Forms.Panel();
             this.SpritesheetPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.TextContent = new System.Windows.Forms.RichTextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.SaveIcon = new System.Windows.Forms.PictureBox();
+            this.ContentPanel = new System.Windows.Forms.Panel();
+            this.SplitPanels = new System.Windows.Forms.SplitContainer();
+            this.TabControl = new System.Windows.Forms.TabControl();
+            this.MainTab = new System.Windows.Forms.TabPage();
+            this.FolderIcon = new System.Windows.Forms.PictureBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.WorkingContentLabel = new System.Windows.Forms.Label();
+            this.WorkingTitleLabel = new System.Windows.Forms.Label();
             this.HelpTab = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveIcon)).BeginInit();
+            this.ContentPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitPanels)).BeginInit();
+            this.SplitPanels.SuspendLayout();
+            this.TabControl.SuspendLayout();
+            this.MainTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -57,9 +63,9 @@
             this.groupBox1.Controls.Add(this.XmlCountLabel);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox1.Location = new System.Drawing.Point(550, 35);
+            this.groupBox1.Location = new System.Drawing.Point(550, 110);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(218, 40);
+            this.groupBox1.Size = new System.Drawing.Size(220, 40);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -107,10 +113,11 @@
             // 
             // LoadAssetsButton
             // 
-            this.LoadAssetsButton.Location = new System.Drawing.Point(581, 6);
+            this.LoadAssetsButton.Location = new System.Drawing.Point(580, 6);
             this.LoadAssetsButton.Name = "LoadAssetsButton";
-            this.LoadAssetsButton.Size = new System.Drawing.Size(187, 24);
+            this.LoadAssetsButton.Size = new System.Drawing.Size(190, 24);
             this.LoadAssetsButton.TabIndex = 0;
+            this.LoadAssetsButton.TabStop = false;
             this.LoadAssetsButton.Text = "Load Assets";
             this.LoadAssetsButton.UseVisualStyleBackColor = true;
             this.LoadAssetsButton.Click += new System.EventHandler(this.LoadAssetsButton_Click);
@@ -120,9 +127,9 @@
             this.XmlPanel.AutoScroll = true;
             this.XmlPanel.BackColor = System.Drawing.SystemColors.Info;
             this.XmlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.XmlPanel.Location = new System.Drawing.Point(550, 81);
+            this.XmlPanel.Location = new System.Drawing.Point(550, 156);
             this.XmlPanel.Name = "XmlPanel";
-            this.XmlPanel.Size = new System.Drawing.Size(220, 200);
+            this.XmlPanel.Size = new System.Drawing.Size(220, 160);
             this.XmlPanel.TabIndex = 1;
             // 
             // SpritesheetPanel
@@ -130,9 +137,9 @@
             this.SpritesheetPanel.AutoScroll = true;
             this.SpritesheetPanel.BackColor = System.Drawing.SystemColors.Info;
             this.SpritesheetPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SpritesheetPanel.Location = new System.Drawing.Point(550, 333);
+            this.SpritesheetPanel.Location = new System.Drawing.Point(550, 368);
             this.SpritesheetPanel.Name = "SpritesheetPanel";
-            this.SpritesheetPanel.Size = new System.Drawing.Size(220, 200);
+            this.SpritesheetPanel.Size = new System.Drawing.Size(220, 160);
             this.SpritesheetPanel.TabIndex = 1;
             // 
             // groupBox2
@@ -140,72 +147,112 @@
             this.groupBox2.Controls.Add(this.SpritesheetCountLabel);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox2.Location = new System.Drawing.Point(552, 287);
+            this.groupBox2.Location = new System.Drawing.Point(550, 322);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(218, 40);
+            this.groupBox2.Size = new System.Drawing.Size(220, 40);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
-            // panel4
+            // ContentPanel
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.TextContent);
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(544, 538);
-            this.panel4.TabIndex = 3;
+            this.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ContentPanel.Controls.Add(this.SplitPanels);
+            this.ContentPanel.Location = new System.Drawing.Point(0, 0);
+            this.ContentPanel.Name = "ContentPanel";
+            this.ContentPanel.Size = new System.Drawing.Size(544, 538);
+            this.ContentPanel.TabIndex = 3;
             // 
-            // TextContent
+            // SplitPanels
             // 
-            this.TextContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextContent.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextContent.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextContent.Location = new System.Drawing.Point(0, 0);
-            this.TextContent.Name = "TextContent";
-            this.TextContent.Size = new System.Drawing.Size(540, 534);
-            this.TextContent.TabIndex = 0;
-            this.TextContent.Text = "";
+            this.SplitPanels.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitPanels.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SplitPanels.IsSplitterFixed = true;
+            this.SplitPanels.Location = new System.Drawing.Point(0, 0);
+            this.SplitPanels.Name = "SplitPanels";
             // 
-            // tabControl1
+            // SplitPanels.Panel1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.HelpTab);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(784, 562);
-            this.tabControl1.TabIndex = 4;
+            this.SplitPanels.Panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             // 
-            // tabPage1
+            // SplitPanels.Panel2
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.SaveIcon);
-            this.tabPage1.Controls.Add(this.LoadAssetsButton);
-            this.tabPage1.Controls.Add(this.panel4);
-            this.tabPage1.Controls.Add(this.SpritesheetPanel);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.XmlPanel);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(776, 536);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Main";
+            this.SplitPanels.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SplitPanels.Size = new System.Drawing.Size(544, 538);
+            this.SplitPanels.SplitterDistance = 241;
+            this.SplitPanels.TabIndex = 0;
+            this.SplitPanels.TabStop = false;
             // 
-            // SaveIcon
+            // TabControl
             // 
-            this.SaveIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SaveIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.save_icon;
-            this.SaveIcon.Location = new System.Drawing.Point(550, 6);
-            this.SaveIcon.Name = "SaveIcon";
-            this.SaveIcon.Size = new System.Drawing.Size(27, 24);
-            this.SaveIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.SaveIcon.TabIndex = 4;
-            this.SaveIcon.TabStop = false;
+            this.TabControl.Controls.Add(this.MainTab);
+            this.TabControl.Controls.Add(this.HelpTab);
+            this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabControl.Location = new System.Drawing.Point(0, 0);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(784, 562);
+            this.TabControl.TabIndex = 4;
+            this.TabControl.TabStop = false;
+            // 
+            // MainTab
+            // 
+            this.MainTab.BackColor = System.Drawing.SystemColors.Control;
+            this.MainTab.Controls.Add(this.FolderIcon);
+            this.MainTab.Controls.Add(this.LoadAssetsButton);
+            this.MainTab.Controls.Add(this.ContentPanel);
+            this.MainTab.Controls.Add(this.SpritesheetPanel);
+            this.MainTab.Controls.Add(this.groupBox2);
+            this.MainTab.Controls.Add(this.groupBox3);
+            this.MainTab.Controls.Add(this.groupBox1);
+            this.MainTab.Controls.Add(this.XmlPanel);
+            this.MainTab.Location = new System.Drawing.Point(4, 22);
+            this.MainTab.Name = "MainTab";
+            this.MainTab.Padding = new System.Windows.Forms.Padding(3);
+            this.MainTab.Size = new System.Drawing.Size(776, 536);
+            this.MainTab.TabIndex = 0;
+            this.MainTab.Text = "Main";
+            // 
+            // FolderIcon
+            // 
+            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
+            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
+            this.FolderIcon.Name = "FolderIcon";
+            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
+            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FolderIcon.TabIndex = 4;
+            this.FolderIcon.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.WorkingContentLabel);
+            this.groupBox3.Controls.Add(this.WorkingTitleLabel);
+            this.groupBox3.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.groupBox3.Location = new System.Drawing.Point(550, 36);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(220, 68);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Info";
+            // 
+            // WorkingContentLabel
+            // 
+            this.WorkingContentLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WorkingContentLabel.Location = new System.Drawing.Point(9, 29);
+            this.WorkingContentLabel.Name = "WorkingContentLabel";
+            this.WorkingContentLabel.Size = new System.Drawing.Size(205, 36);
+            this.WorkingContentLabel.TabIndex = 1;
+            this.WorkingContentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // WorkingTitleLabel
+            // 
+            this.WorkingTitleLabel.AutoSize = true;
+            this.WorkingTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WorkingTitleLabel.Location = new System.Drawing.Point(6, 16);
+            this.WorkingTitleLabel.Name = "WorkingTitleLabel";
+            this.WorkingTitleLabel.Size = new System.Drawing.Size(0, 13);
+            this.WorkingTitleLabel.TabIndex = 1;
+            this.WorkingTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // HelpTab
             // 
@@ -224,7 +271,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.TabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -235,10 +282,14 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SaveIcon)).EndInit();
+            this.ContentPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitPanels)).EndInit();
+            this.SplitPanels.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
+            this.MainTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -254,12 +305,15 @@
         private System.Windows.Forms.Panel XmlPanel;
         private System.Windows.Forms.Panel SpritesheetPanel;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Panel ContentPanel;
+        private System.Windows.Forms.TabControl TabControl;
+        private System.Windows.Forms.TabPage MainTab;
         private System.Windows.Forms.TabPage HelpTab;
-        private System.Windows.Forms.RichTextBox TextContent;
-        private System.Windows.Forms.PictureBox SaveIcon;
+        private System.Windows.Forms.SplitContainer SplitPanels;
+        private System.Windows.Forms.PictureBox FolderIcon;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label WorkingContentLabel;
+        private System.Windows.Forms.Label WorkingTitleLabel;
     }
 }
 

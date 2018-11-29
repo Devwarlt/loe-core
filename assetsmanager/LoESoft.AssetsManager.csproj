@@ -175,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Assets\SpriteLibrary.cs" />
+    <Compile Include="Core\Assets\Structure\Exclusive\TextureData.cs" />
     <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
     <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
     <Compile Include="Core\Assets\Structure\SpritesheetFile.cs" />
@@ -183,17 +184,32 @@
     <Compile Include="Core\Assets\Structure\XmlContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlFile.cs" />
     <Compile Include="Core\Assets\XmlLibrary.cs" />
+    <Compile Include="Core\GUI\HUD\CustomTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Core\GUI\HUD\HelpObject.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\GUI\HUD\HelpObject.Designer.cs">
       <DependentUpon>HelpObject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\GUI\HUD\ItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\ItemControl.Designer.cs">
+      <DependentUpon>ItemControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\GUI\HUD\PngObject.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\GUI\HUD\PngObject.Designer.cs">
       <DependentUpon>PngObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\SpritePallete.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\SpritePallete.Designer.cs">
+      <DependentUpon>SpritePallete.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\GUI\HUD\XmlObject.cs">
       <SubType>UserControl</SubType>
@@ -208,6 +224,12 @@
       <DependentUpon>Manager.cs</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
+    <EmbeddedResource Include="Core\GUI\HUD\ItemControl.resx">
+      <DependentUpon>ItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\HUD\SpritePallete.resx">
+      <DependentUpon>SpritePallete.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\Help\Hints.json" />
     <Compile Include="Core\Structure\HelpHint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -248,6 +270,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="folder-icon.png" />
     <Content Include="loesoft-new.ico" />
     <None Include="save-icon.png" />
     <None Include="xml-icon.png" />
