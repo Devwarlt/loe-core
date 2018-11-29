@@ -41,8 +41,6 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
 
         private static MouseState MouseState { get; set; }
 
-        private readonly string WelcomeMessage = "Hello MonoGame.Forms!";
-
         protected override void Initialize()
         {
             MapState = MapState.Active;
