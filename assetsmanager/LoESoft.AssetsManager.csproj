@@ -190,6 +190,12 @@
     <Compile Include="Core\GUI\HUD\HelpObject.Designer.cs">
       <DependentUpon>HelpObject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\GUI\HUD\ItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\HUD\ItemControl.Designer.cs">
+      <DependentUpon>ItemControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\GUI\HUD\PngObject.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -215,6 +221,9 @@
       <DependentUpon>Manager.cs</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
+    <EmbeddedResource Include="Core\GUI\HUD\ItemControl.resx">
+      <DependentUpon>ItemControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\HUD\SpritePallete.resx">
       <DependentUpon>SpritePallete.cs</DependentUpon>
     </EmbeddedResource>

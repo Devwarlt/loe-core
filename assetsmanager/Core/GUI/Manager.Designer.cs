@@ -42,12 +42,11 @@
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
-            this.FolderIcon = new System.Windows.Forms.PictureBox();
-            this.SaveIcon = new System.Windows.Forms.PictureBox();
             this.HelpTab = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.WorkingContentLabel = new System.Windows.Forms.Label();
             this.WorkingTitleLabel = new System.Windows.Forms.Label();
+            this.FolderIcon = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.ContentPanel.SuspendLayout();
@@ -55,9 +54,8 @@
             this.SplitPanels.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveIcon)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -115,9 +113,9 @@
             // 
             // LoadAssetsButton
             // 
-            this.LoadAssetsButton.Location = new System.Drawing.Point(618, 6);
+            this.LoadAssetsButton.Location = new System.Drawing.Point(580, 6);
             this.LoadAssetsButton.Name = "LoadAssetsButton";
-            this.LoadAssetsButton.Size = new System.Drawing.Size(152, 24);
+            this.LoadAssetsButton.Size = new System.Drawing.Size(190, 24);
             this.LoadAssetsButton.TabIndex = 0;
             this.LoadAssetsButton.TabStop = false;
             this.LoadAssetsButton.Text = "Load Assets";
@@ -201,7 +199,6 @@
             // 
             this.MainTab.BackColor = System.Drawing.SystemColors.Control;
             this.MainTab.Controls.Add(this.FolderIcon);
-            this.MainTab.Controls.Add(this.SaveIcon);
             this.MainTab.Controls.Add(this.LoadAssetsButton);
             this.MainTab.Controls.Add(this.ContentPanel);
             this.MainTab.Controls.Add(this.SpritesheetPanel);
@@ -215,28 +212,6 @@
             this.MainTab.Size = new System.Drawing.Size(776, 536);
             this.MainTab.TabIndex = 0;
             this.MainTab.Text = "Main";
-            // 
-            // FolderIcon
-            // 
-            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
-            this.FolderIcon.Location = new System.Drawing.Point(585, 6);
-            this.FolderIcon.Name = "FolderIcon";
-            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
-            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.FolderIcon.TabIndex = 4;
-            this.FolderIcon.TabStop = false;
-            // 
-            // SaveIcon
-            // 
-            this.SaveIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SaveIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.save_icon;
-            this.SaveIcon.Location = new System.Drawing.Point(550, 6);
-            this.SaveIcon.Name = "SaveIcon";
-            this.SaveIcon.Size = new System.Drawing.Size(24, 24);
-            this.SaveIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.SaveIcon.TabIndex = 4;
-            this.SaveIcon.TabStop = false;
             // 
             // HelpTab
             // 
@@ -281,6 +256,17 @@
             this.WorkingTitleLabel.TabIndex = 1;
             this.WorkingTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // FolderIcon
+            // 
+            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
+            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
+            this.FolderIcon.Name = "FolderIcon";
+            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
+            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FolderIcon.TabIndex = 4;
+            this.FolderIcon.TabStop = false;
+            // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,10 +288,9 @@
             this.SplitPanels.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveIcon)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -325,7 +310,6 @@
         private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage MainTab;
         private System.Windows.Forms.TabPage HelpTab;
-        private System.Windows.Forms.PictureBox SaveIcon;
         private System.Windows.Forms.SplitContainer SplitPanels;
         private System.Windows.Forms.PictureBox FolderIcon;
         private System.Windows.Forms.GroupBox groupBox3;

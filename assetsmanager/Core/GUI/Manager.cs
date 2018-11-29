@@ -19,15 +19,16 @@ namespace LoESoft.AssetsManager.Core.GUI
 {
     public partial class Manager : Form
     {
+        public static Dictionary<string, List<ObjectsContent>> XmlObjects { get; set; }
+        public static Dictionary<string, List<ItemsContent>> XmlItems { get; set; }
+        public static Dictionary<string, List<TilesContent>> XmlTiles { get; set; }
+
         public string MainDir => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         public string BaseDir => App.Name;
         public string XmlDir => Path.Combine(MainDir, $"/{BaseDir}/xmls/");
         public string SpritesheetDir => Path.Combine(MainDir, $"/{BaseDir}/spritesheets/");
 
         private readonly Dictionary<string, string[]> HelpHints = new Dictionary<string, string[]>();
-        private Dictionary<string, List<ObjectsContent>> XmlObjects { get; set; }
-        private Dictionary<string, List<ItemsContent>> XmlItems { get; set; }
-        private Dictionary<string, List<TilesContent>> XmlTiles { get; set; }
         private Dictionary<string, Image[,]> Spritesheets { get; set; }
 
         public Manager()
@@ -178,6 +179,46 @@ namespace LoESoft.AssetsManager.Core.GUI
 
                     foreach (var pallete in palletes.OrderBy(id => id.Key))
                     {
+                        pallete.Value.Action = () =>
+                        {
+                            SplitPanels.Panel2.Controls.Clear();
+
+                            var sampleobject = XmlObjects[xml.Key].FirstOrDefault(sample => sample.Id == pallete.Key);
+                            var sampleitem = XmlItems[xml.Key].FirstOrDefault(sample => sample.Id == pallete.Key);
+                            var sampletile = XmlTiles[xml.Key].FirstOrDefault(sample => sample.Id == pallete.Key);
+
+                            ItemControl itemcontrol = null;
+
+                            if (sampleobject != null)
+                                itemcontrol = new ItemControl(xml.Key, ContentType.Objects, sampleobject.Id, sampleobject.Name)
+                                {
+                                    Location = new Point(0, 0),
+                                    Name = "itemControl1",
+                                    Size = new Size(292, 530),
+                                    TabIndex = 2
+                                };
+
+                            if (sampleitem != null)
+                                itemcontrol = new ItemControl(xml.Key, ContentType.Items, sampleitem.Id, sampleitem.Name)
+                                {
+                                    Location = new Point(0, 0),
+                                    Name = "itemControl1",
+                                    Size = new Size(292, 530),
+                                    TabIndex = 2
+                                };
+
+                            if (sampletile != null)
+                                itemcontrol = new ItemControl(xml.Key, ContentType.Tiles, sampletile.Id, sampletile.Name)
+                                {
+                                    Location = new Point(0, 0),
+                                    Name = "itemControl1",
+                                    Size = new Size(292, 530),
+                                    TabIndex = 2
+                                };
+
+                            if (itemcontrol != null)
+                                SplitPanels.Panel2.Controls.Add(itemcontrol);
+                        };
                         pallete.Value.Location = new Point(columns[column], 3 + row * 39);
 
                         SplitPanels.Panel1.Controls.Add(pallete.Value);
