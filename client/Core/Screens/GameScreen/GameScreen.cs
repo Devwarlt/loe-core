@@ -17,10 +17,14 @@ namespace LoESoft.Client.Core.Screens
 
         private GameUser GameUser { get; set; }
 
+        private GameCamera Camera { get; set; }
+
         public GameScreen(GameUser gameUser, int objId, int classType)
         {
             GameUser = gameUser;
             Controller = new GamePlayer(GameUser, objId, classType);
+            Camera = new GameCamera();
+            Camera.Update(Controller.Player);
         }
 
         public override void OnScreenCreate()
@@ -33,7 +37,7 @@ namespace LoESoft.Client.Core.Screens
         {
             Controller.Update(gameTime);
             WorldMap.Update(gameTime, (int)Controller.Player.X, (int)Controller.Player.Y);
-            Camera.SetFocus(Controller.Player);
+            Camera.Update(Controller.Player);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -173,7 +173,7 @@ namespace LoESoft.Client.Core.Game.Map
                 for (var y = -SightRadius; y < SightRadius; y++)
                 {
                     var px = (X + 1) + x;
-                    var py = (Y) + y;
+                    var py = (Y + 1) + y;
 
                     if (px >= 0 && px <= WIDTH && py >= 0 && py <= HEIGHT)
                         points.Add(new Point(px, py));
