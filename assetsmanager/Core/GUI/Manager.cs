@@ -113,155 +113,6 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             var i = 0;
 
-            foreach (var xml in XmlLibrary.Xmls.OrderBy(name => name.Key))
-            {
-                var xmlobject = new XmlObject()
-                {
-                    Location = new Point(3, 3 + i * 42),
-                    Name = $"xmlobject{i}",
-                    Size = new Size(188, 36),
-                    TabIndex = 2,
-                    XmlContent = xml.Value.Value
-                };
-                xmlobject.SetFileName(xml.Key);
-                xmlobject.SetFileSize(xml.Value.Key);
-                xmlobject.Action = () =>
-                {
-                    var xobjects = XmlObjects[xml.Key];
-                    var xitems = XmlItems[xml.Key];
-                    var xtiles = XmlTiles[xml.Key];
-                    var palletes = new List<KeyValuePair<int, SpritePallete>>();
-
-                    foreach (var xobject in xobjects)
-                    {
-                        var xobjectpallete = new SpritePallete()
-                        {
-                            Name = xobject.Name,
-                            Size = new Size(33, 33),
-                            TabIndex = 2
-                        };
-                        xobjectpallete.SetImage(Spritesheets[xobject.TextureData.File][xobject.TextureData.X, xobject.TextureData.Y]);
-
-                        palletes.Add(new KeyValuePair<int, SpritePallete>(xobject.Id, xobjectpallete));
-                    }
-
-                    foreach (var xitem in xitems)
-                    {
-                        var xitempallete = new SpritePallete()
-                        {
-                            Name = xitem.Name,
-                            Size = new Size(33, 33),
-                            TabIndex = 2
-                        };
-                        xitempallete.SetImage(Spritesheets[xitem.TextureData.File][xitem.TextureData.X, xitem.TextureData.Y]);
-
-                        palletes.Add(new KeyValuePair<int, SpritePallete>(xitem.Id, xitempallete));
-                    }
-
-                    foreach (var xtile in xtiles)
-                    {
-                        var xtilepallete = new SpritePallete()
-                        {
-                            Name = xtile.Name,
-                            Size = new Size(33, 33),
-                            TabIndex = 2
-                        };
-                        xtilepallete.SetImage(Spritesheets[xtile.TextureData.File][xtile.TextureData.X, xtile.TextureData.Y]);
-
-                        palletes.Add(new KeyValuePair<int, SpritePallete>(xtile.Id, xtilepallete));
-                    }
-
-                    var columns = new List<int>() { 4, 43, 82, 121, 160, 199 };
-                    var row = 0;
-                    var column = 0;
-
-                    SplitPanels.Panel1.Controls.Clear();
-
-                    foreach (var pallete in palletes.OrderBy(id => id.Key))
-                    {
-                        pallete.Value.Action = () =>
-                        {
-                            SplitPanels.Panel2.Controls.Clear();
-
-                            var sampleobject = XmlObjects[xml.Key].FirstOrDefault(sample => sample.Id == pallete.Key);
-                            var sampleitem = XmlItems[xml.Key].FirstOrDefault(sample => sample.Id == pallete.Key);
-                            var sampletile = XmlTiles[xml.Key].FirstOrDefault(sample => sample.Id == pallete.Key);
-
-                            ItemControl itemcontrol = null;
-
-                            if (sampleobject != null)
-                                itemcontrol = new ItemControl(xml.Key, ContentType.Objects, sampleobject.Id, sampleobject.Name)
-                                {
-                                    Location = new Point(0, 0),
-                                    Name = "itemControl1",
-                                    Size = new Size(292, 530),
-                                    TabIndex = 2
-                                };
-
-                            if (sampleitem != null)
-                                itemcontrol = new ItemControl(xml.Key, ContentType.Items, sampleitem.Id, sampleitem.Name)
-                                {
-                                    Location = new Point(0, 0),
-                                    Name = "itemControl1",
-                                    Size = new Size(292, 530),
-                                    TabIndex = 2
-                                };
-
-                            if (sampletile != null)
-                                itemcontrol = new ItemControl(xml.Key, ContentType.Tiles, sampletile.Id, sampletile.Name)
-                                {
-                                    Location = new Point(0, 0),
-                                    Name = "itemControl1",
-                                    Size = new Size(292, 530),
-                                    TabIndex = 2
-                                };
-
-                            if (itemcontrol != null)
-                                SplitPanels.Panel2.Controls.Add(itemcontrol);
-                        };
-                        pallete.Value.Location = new Point(columns[column], 3 + row * 39);
-
-                        SplitPanels.Panel1.Controls.Add(pallete.Value);
-
-                        column++;
-
-                        if (column == columns.Count)
-                        {
-                            column = 0;
-                            row++;
-                        }
-                    }
-
-                    WorkingTitleLabel.Text = "Working on...";
-                    WorkingContentLabel.Text = xml.Key;
-                };
-
-                XmlPanel.Controls.Add(xmlobject);
-
-                var objects = new List<ObjectsContent>();
-                var items = new List<ItemsContent>();
-                var tiles = new List<TilesContent>();
-                var name = xml.Key;
-
-                foreach (var elem in xmlobject.XmlContent.XPathSelectElements("//Object"))
-                {
-                    switch ((ContentType)int.Parse(elem.Attribute("type").Value))
-                    {
-                        case ContentType.Objects: objects.Add(new ObjectsContent(elem)); break;
-                        case ContentType.Items: items.Add(new ItemsContent(elem)); break;
-                        case ContentType.Tiles: tiles.Add(new TilesContent(elem)); break;
-                    }
-                }
-
-                XmlObjects.Add(name, objects);
-                XmlItems.Add(name, items);
-                XmlTiles.Add(name, tiles);
-
-                i++;
-            }
-
-            i = 0;
-
             foreach (var spritesheet in SpriteLibrary.Spritesheets.OrderBy(name => name.Key))
             {
                 var pngobject = new PngObject()
@@ -277,6 +128,158 @@ namespace LoESoft.AssetsManager.Core.GUI
                 SpritesheetPanel.Controls.Add(pngobject);
 
                 Spritesheets.Add(spritesheet.Key, CropSpritesheet(spritesheet.Value.Value));
+
+                i++;
+            }
+
+            i = 0;
+
+            foreach (var xml in XmlLibrary.Xmls.OrderBy(name => name.Key))
+            {
+                var objects = new List<ObjectsContent>();
+                var items = new List<ItemsContent>();
+                var tiles = new List<TilesContent>();
+                var name = xml.Key;
+                var xmlcontent = xml.Value.Value;
+
+                foreach (var elem in xmlcontent.XPathSelectElements("//Object"))
+                {
+                    switch ((ContentType)int.Parse(elem.Attribute("type").Value))
+                    {
+                        case ContentType.Objects: objects.Add(new ObjectsContent(elem)); break;
+                        case ContentType.Items: items.Add(new ItemsContent(elem)); break;
+                        case ContentType.Tiles: tiles.Add(new TilesContent(elem)); break;
+                    }
+                }
+
+                XmlObjects.Add(name, objects);
+                XmlItems.Add(name, items);
+                XmlTiles.Add(name, tiles);
+
+                var xobjects = XmlObjects[name];
+                var xitems = XmlItems[name];
+                var xtiles = XmlTiles[name];
+                var palletes = new List<KeyValuePair<int, SpritePallete>>();
+                var columns = new List<int>() { 4, 43, 82, 121, 160, 199 };
+                var row = 0;
+                var column = 0;
+
+                foreach (var xobject in xobjects)
+                {
+                    var xobjectpallete = new SpritePallete()
+                    {
+                        Name = xobject.Name,
+                        Size = new Size(33, 33),
+                        TabIndex = 2
+                    };
+                    xobjectpallete.SetImage(Spritesheets[xobject.TextureData.File][xobject.TextureData.X, xobject.TextureData.Y]);
+
+                    palletes.Add(new KeyValuePair<int, SpritePallete>(xobject.Id, xobjectpallete));
+                }
+
+                foreach (var xitem in xitems)
+                {
+                    var xitempallete = new SpritePallete()
+                    {
+                        Name = xitem.Name,
+                        Size = new Size(33, 33),
+                        TabIndex = 2
+                    };
+                    xitempallete.SetImage(Spritesheets[xitem.TextureData.File][xitem.TextureData.X, xitem.TextureData.Y]);
+
+                    palletes.Add(new KeyValuePair<int, SpritePallete>(xitem.Id, xitempallete));
+                }
+
+                foreach (var xtile in xtiles)
+                {
+                    var xtilepallete = new SpritePallete()
+                    {
+                        Name = xtile.Name,
+                        Size = new Size(33, 33),
+                        TabIndex = 2
+                    };
+                    xtilepallete.SetImage(Spritesheets[xtile.TextureData.File][xtile.TextureData.X, xtile.TextureData.Y]);
+
+                    palletes.Add(new KeyValuePair<int, SpritePallete>(xtile.Id, xtilepallete));
+                }
+
+                foreach (var pallete in palletes.OrderBy(id => id.Key))
+                {
+                    var sampleobject = xobjects.FirstOrDefault(sample => sample.Id == pallete.Key);
+                    var sampleitem = xitems.FirstOrDefault(sample => sample.Id == pallete.Key);
+                    var sampletile = xtiles.FirstOrDefault(sample => sample.Id == pallete.Key);
+
+                    ItemControl itemcontrol = null;
+
+                    if (sampleobject != null)
+                        itemcontrol = new ItemControl(pallete.Value, xml.Key, ContentType.Objects, sampleobject.Id, sampleobject.Name)
+                        {
+                            Location = new Point(0, 0),
+                            Name = "itemControl1",
+                            Size = new Size(295, 534),
+                            TabIndex = 2
+                        };
+
+                    if (sampleitem != null)
+                        itemcontrol = new ItemControl(pallete.Value, xml.Key, ContentType.Items, sampleitem.Id, sampleitem.Name)
+                        {
+                            Location = new Point(0, 0),
+                            Name = "itemControl1",
+                            Size = new Size(295, 534),
+                            TabIndex = 2
+                        };
+
+                    if (sampletile != null)
+                        itemcontrol = new ItemControl(pallete.Value, xml.Key, ContentType.Tiles, sampletile.Id, sampletile.Name)
+                        {
+                            Location = new Point(0, 0),
+                            Name = "itemControl1",
+                            Size = new Size(295, 534),
+                            TabIndex = 2
+                        };
+
+                    pallete.Value.Location = new Point(columns[column], 3 + row * 39);
+                    pallete.Value.ItemControl = itemcontrol;
+                    pallete.Value.Action = () =>
+                    {
+                        SplitPanels.Panel2.Controls.Clear();
+
+                        if (pallete.Value.ItemControl != null)
+                            SplitPanels.Panel2.Controls.Add(pallete.Value.ItemControl);
+                    };
+
+                    column++;
+
+                    if (column == columns.Count)
+                    {
+                        column = 0;
+                        row++;
+                    }
+                }
+
+                var xmlobject = new XmlObject()
+                {
+                    Location = new Point(3, 3 + i * 42),
+                    Name = $"xmlobject{i}",
+                    Size = new Size(188, 36),
+                    TabIndex = 2,
+                    Id = i,
+                    XmlContent = xml.Value.Value
+                };
+                xmlobject.SetFileName(xml.Key);
+                xmlobject.SetFileSize(xml.Value.Key);
+                xmlobject.Action = () =>
+                {
+                    SplitPanels.Panel1.Controls.Clear();
+
+                    foreach (var pallete in xmlobject.Palletes)
+                        SplitPanels.Panel1.Controls.Add(pallete);
+
+                    WorkingTitleLabel.Text = "Working on...";
+                    WorkingContentLabel.Text = xml.Key;
+                };
+
+                XmlPanel.Controls.Add(xmlobject);
 
                 i++;
             }

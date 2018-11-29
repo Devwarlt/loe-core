@@ -7,6 +7,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 {
     public partial class ItemControl : UserControl
     {
+        private SpritePallete _spritePallete { get; set; }
         private string _origin { get; set; }
         private ContentType _contentType { get; set; }
         private int _firstId { get; set; }
@@ -14,8 +15,9 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         private string _firstName { get; set; }
         private string _name { get; set; }
 
-        public ItemControl(string origin, ContentType type, int id, string name)
+        public ItemControl(SpritePallete spritePallete, string origin, ContentType type, int id, string name)
         {
+            _spritePallete = spritePallete;
             _origin = origin;
             _contentType = type;
             _firstId = id;
@@ -36,13 +38,13 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            var sampleobject = Manager.XmlObjects[_origin].FirstOrDefault(sample => sample.Id == _id);
-            var sampleitem = Manager.XmlItems[_origin].FirstOrDefault(sample => sample.Id == _id);
-            var sampletile = Manager.XmlTiles[_origin].FirstOrDefault(sample => sample.Id == _id);
+            var sampleobject = Manager.XmlObjects.Values.Select(values => values.FirstOrDefault(sample => sample.Id == _id)).ToList()?.First();
+            var sampleitem = Manager.XmlItems.Values.Select(values => values.FirstOrDefault(sample => sample.Id == _id)).ToList()?.First();
+            var sampletile = Manager.XmlTiles.Values.Select(values => values.FirstOrDefault(sample => sample.Id == _id)).ToList()?.First();
 
             if (sampleobject != null)
             {
-                MessageBox.Show($"Object '{sampleobject.Name}' has same ID, consider to change.", "Error!");
+                MessageBox.Show($"Object '{sampleobject.TextureData.File}' has same ID, consider to change.", "Error!");
                 return;
             }
 
@@ -58,13 +60,11 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                 return;
             }
 
-            // TODO: issue with save method, require review
             switch (_contentType)
             {
                 case ContentType.Objects:
                     {
-                        var index = Manager.XmlObjects[_origin].FindIndex(sample => sample.Id == _firstId);
-                        var xmlobject = Manager.XmlObjects[_origin][index];
+                        var xmlobject = Manager.XmlObjects[_origin].FirstOrDefault(sample => sample.Id == _firstId);
                         xmlobject.Id = _id;
                         xmlobject.Name = _name;
                     }
@@ -72,8 +72,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
                 case ContentType.Items:
                     {
-                        var index = Manager.XmlItems[_origin].FindIndex(sample => sample.Id == _firstId);
-                        var xmlitem = Manager.XmlItems[_origin][index];
+                        var xmlitem = Manager.XmlItems[_origin].FirstOrDefault(sample => sample.Id == _firstId);
                         xmlitem.Id = _id;
                         xmlitem.Name = _name;
                     }
@@ -81,13 +80,14 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
                 case ContentType.Tiles:
                     {
-                        var index = Manager.XmlTiles[_origin].FindIndex(sample => sample.Id == _firstId);
-                        var xmltile = Manager.XmlTiles[_origin][index];
+                        var xmltile = Manager.XmlTiles[_origin].FirstOrDefault(sample => sample.Id == _firstId);
                         xmltile.Id = _id;
                         xmltile.Name = _name;
                     }
                     break;
             }
+
+            _spritePallete.ItemControl = this;
 
             MessageBox.Show("You have been saved your progress!", "Success!");
         }

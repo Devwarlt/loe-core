@@ -35,8 +35,8 @@
             this.IDNumeric = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.NameTextBox = new System.Windows.Forms.TextBox();
             this.SaveButton = new System.Windows.Forms.PictureBox();
+            this.NameTextBox = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IDNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).BeginInit();
@@ -51,7 +51,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Desktop;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(248, 46);
+            this.groupBox1.Size = new System.Drawing.Size(253, 46);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Content Type";
@@ -105,7 +105,7 @@
             0,
             0});
             this.IDNumeric.Name = "IDNumeric";
-            this.IDNumeric.Size = new System.Drawing.Size(196, 20);
+            this.IDNumeric.Size = new System.Drawing.Size(201, 20);
             this.IDNumeric.TabIndex = 2;
             this.IDNumeric.TabStop = false;
             this.IDNumeric.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -134,22 +134,10 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Name";
             // 
-            // NameTextBox
-            // 
-            this.NameTextBox.BackColor = System.Drawing.SystemColors.Info;
-            this.NameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.NameTextBox.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.NameTextBox.Location = new System.Drawing.Point(55, 81);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(196, 20);
-            this.NameTextBox.TabIndex = 4;
-            this.NameTextBox.TabStop = false;
-            this.NameTextBox.WordWrap = false;
-            // 
             // SaveButton
             // 
             this.SaveButton.Image = global::LoESoft.AssetsManager.Properties.Resources.save_icon;
-            this.SaveButton.Location = new System.Drawing.Point(260, 15);
+            this.SaveButton.Location = new System.Drawing.Point(265, 15);
             this.SaveButton.Margin = new System.Windows.Forms.Padding(6);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(24, 24);
@@ -158,19 +146,30 @@
             this.SaveButton.TabStop = false;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // NameTextBox
+            // 
+            this.NameTextBox.BackColor = System.Drawing.SystemColors.Info;
+            this.NameTextBox.BorderColor = System.Drawing.Color.DarkGray;
+            this.NameTextBox.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.NameTextBox.Location = new System.Drawing.Point(55, 81);
+            this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.Size = new System.Drawing.Size(201, 20);
+            this.NameTextBox.TabIndex = 6;
+            this.NameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // ItemControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.NameTextBox);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.IDNumeric);
             this.Controls.Add(this.groupBox1);
             this.Name = "ItemControl";
-            this.Size = new System.Drawing.Size(292, 530);
+            this.Size = new System.Drawing.Size(295, 534);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IDNumeric)).EndInit();
@@ -189,7 +188,7 @@
         private System.Windows.Forms.NumericUpDown IDNumeric;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.PictureBox SaveButton;
+        private CustomTextBox NameTextBox;
     }
 }

@@ -42,11 +42,11 @@
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
-            this.HelpTab = new System.Windows.Forms.TabPage();
+            this.FolderIcon = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.WorkingContentLabel = new System.Windows.Forms.Label();
             this.WorkingTitleLabel = new System.Windows.Forms.Label();
-            this.FolderIcon = new System.Windows.Forms.PictureBox();
+            this.HelpTab = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.ContentPanel.SuspendLayout();
@@ -54,8 +54,8 @@
             this.SplitPanels.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -156,7 +156,6 @@
             // ContentPanel
             // 
             this.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ContentPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.ContentPanel.Controls.Add(this.SplitPanels);
             this.ContentPanel.Location = new System.Drawing.Point(0, 0);
             this.ContentPanel.Name = "ContentPanel";
@@ -178,8 +177,8 @@
             // SplitPanels.Panel2
             // 
             this.SplitPanels.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.SplitPanels.Size = new System.Drawing.Size(540, 534);
-            this.SplitPanels.SplitterDistance = 240;
+            this.SplitPanels.Size = new System.Drawing.Size(544, 538);
+            this.SplitPanels.SplitterDistance = 241;
             this.SplitPanels.TabIndex = 0;
             this.SplitPanels.TabStop = false;
             // 
@@ -213,17 +212,16 @@
             this.MainTab.TabIndex = 0;
             this.MainTab.Text = "Main";
             // 
-            // HelpTab
+            // FolderIcon
             // 
-            this.HelpTab.AutoScroll = true;
-            this.HelpTab.BackColor = System.Drawing.SystemColors.Control;
-            this.HelpTab.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.HelpTab.Location = new System.Drawing.Point(4, 22);
-            this.HelpTab.Name = "HelpTab";
-            this.HelpTab.Padding = new System.Windows.Forms.Padding(3);
-            this.HelpTab.Size = new System.Drawing.Size(776, 536);
-            this.HelpTab.TabIndex = 1;
-            this.HelpTab.Text = "Help";
+            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
+            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
+            this.FolderIcon.Name = "FolderIcon";
+            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
+            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FolderIcon.TabIndex = 4;
+            this.FolderIcon.TabStop = false;
             // 
             // groupBox3
             // 
@@ -256,16 +254,17 @@
             this.WorkingTitleLabel.TabIndex = 1;
             this.WorkingTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // FolderIcon
+            // HelpTab
             // 
-            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
-            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
-            this.FolderIcon.Name = "FolderIcon";
-            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
-            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.FolderIcon.TabIndex = 4;
-            this.FolderIcon.TabStop = false;
+            this.HelpTab.AutoScroll = true;
+            this.HelpTab.BackColor = System.Drawing.SystemColors.Control;
+            this.HelpTab.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.HelpTab.Location = new System.Drawing.Point(4, 22);
+            this.HelpTab.Name = "HelpTab";
+            this.HelpTab.Padding = new System.Windows.Forms.Padding(3);
+            this.HelpTab.Size = new System.Drawing.Size(776, 536);
+            this.HelpTab.TabIndex = 1;
+            this.HelpTab.Text = "Help";
             // 
             // Manager
             // 
@@ -288,9 +287,9 @@
             this.SplitPanels.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
             this.ResumeLayout(false);
 
         }

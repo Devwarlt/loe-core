@@ -6,6 +6,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 {
     public partial class XmlObject : UserControl
     {
+        public int Id { get; set; }
         public XElement XmlContent { get; set; }
         public Action Action { get; set; }
 
@@ -15,6 +16,6 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
         public void SetFileSize(string size) => FileSizeLabel.Text = size;
 
-        private void pictureBox1_DoubleClick(object sender, EventArgs e) => Action?.Invoke();
+        private void XmlIcon_DoubleClick(object sender, EventArgs e) => Action?.Invoke();
     }
 }

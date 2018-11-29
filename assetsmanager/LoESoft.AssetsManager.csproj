@@ -184,6 +184,9 @@
     <Compile Include="Core\Assets\Structure\XmlContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlFile.cs" />
     <Compile Include="Core\Assets\XmlLibrary.cs" />
+    <Compile Include="Core\GUI\HUD\CustomTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Core\GUI\HUD\HelpObject.cs">
       <SubType>UserControl</SubType>
     </Compile>
