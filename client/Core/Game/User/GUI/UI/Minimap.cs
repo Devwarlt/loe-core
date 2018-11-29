@@ -2,7 +2,9 @@
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites;
 using LoESoft.Client.Drawing.Sprites.Forms;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using System.Collections.Generic;
 
 namespace LoESoft.Client.Core.Game.User.GUI.UI
@@ -11,26 +13,28 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
     {
         public MiniMap(int x, int y) : base(x, y, 300, 300, new RGBColor(0, 0, 0), 1f) => IsZeroApplicaple = true;
 
-        public void DrawMap(SpriteBatch spriteBatch, int x, int y)
+        public void DrawMap(SpriteBatch spriteBatch, float x, float y)
         {
             foreach (var i in GetTiles(x, y))
                 i.Draw(spriteBatch);
 
             foreach (var i in GetEntities(x, y))
                 i.Draw(spriteBatch);
+
+            spriteBatch.FillRectangle(new RectangleF(X + (300 / 2 - 15 / 2), Y - (300 / 2 - 15 / 2), 15, 15), Color.Green);
         }
 
-        private HashSet<Sprite> GetTiles(int x, int y)
+        private HashSet<Sprite> GetTiles(float x, float y)
         {
             var hashSet = new HashSet<Sprite>();
-            var tiles = WorldMap.GetTilesInSight(x, y);
+            var tiles = WorldMap.GetTilesInSight((int)x, (int)y);
             var iX = 0;
             var iY = 0;
 
             foreach (var i in tiles)
             {
-                var tx = (i.X - (x - 10)) * 15;
-                var ty = (i.Y - (y - 10)) * 15;
+                float tx = (i.X - (x - 10)) * 15;
+                float ty = (i.Y - (y - 10)) * 15;
 
                 hashSet.Add(new Sprite(tx + X + iX, ty + Y + iY, 15, 15, i.Texture));
             }
@@ -38,17 +42,17 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
             return hashSet;
         }
 
-        private HashSet<Sprite> GetEntities(int x, int y)
+        private HashSet<Sprite> GetEntities(float x, float y)
         {
             var hashSet = new HashSet<Sprite>();
-            var entities = WorldMap.GetEntitiesInSight(x, y);
+            var entities = WorldMap.GetEntitiesInSight((int)x, (int)y);
             var iX = 0;
             var iY = 0;
 
             foreach (var i in entities)
             {
-                int tx = (int)(i.X - (x - 10)) * 15;
-                int ty = (int)(i.Y - (y - 10)) * 15;
+                float tx = (i.X - (x - 10)) * 15;
+                float ty = (i.Y - (y - 10)) * 15;
                 
                 hashSet.Add(new Sprite(tx + X + iX, ty + Y + iY, 15, 15, i.Texture));
             }

@@ -162,7 +162,7 @@ namespace LoESoft.Client.Core.Game.Map
             && _.Value.Y > y - SightRadius && _.Value.Y < y + SightRadius).Select(_ => _.Value).ToHashSet();
         
 
-        public static int SightRadius = 10;
+        public static int SightRadius = 8;
         public static int SightBound = SightRadius * 2;
 
         public static HashSet<Point> GetSightPoints(int X, int Y)
@@ -172,8 +172,8 @@ namespace LoESoft.Client.Core.Game.Map
             for (var x = -SightRadius; x < SightRadius; x++)
                 for (var y = -SightRadius; y < SightRadius; y++)
                 {
-                    var px = X + x;
-                    var py = Y + y;
+                    var px = (X + 1) + x;
+                    var py = (Y) + y;
 
                     if (px >= 0 && px <= WIDTH && py >= 0 && py <= HEIGHT)
                         points.Add(new Point(px, py));

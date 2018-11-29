@@ -5,7 +5,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 {
     public partial class Player
     {
-        public HashSet<Point> GetSightPoints(int bound = 10)
+        public HashSet<Point> GetSightPoints(int bound = 8)
         {
             var points = new HashSet<Point>();
 

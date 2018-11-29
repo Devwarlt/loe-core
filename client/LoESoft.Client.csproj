@@ -81,7 +81,7 @@
     <Compile Include="Core\Game\Animation\AnimationType.cs" />
     <Compile Include="Core\Game\Animation\ObjectAnimation.cs" />
     <Compile Include="Core\Game\Animation\PlayerAnimation.cs" />
-    <Compile Include="Core\Game\Camera.cs" />
+    <Compile Include="Core\Game\GameCamera.cs" />
     <Compile Include="Core\Game\Map\Data\ObjectData.cs" />
     <Compile Include="Core\Game\Map\Data\TileData.cs" />
     <Compile Include="Core\Game\Map\WorldMap.cs" />
@@ -200,6 +200,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Comora, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Comora.0.5.0\lib\portable-net45+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Comora.dll</HintPath>
+    </Reference>
     <Reference Include="Discord RPC">
       <HintPath>..\dlls\Discord RPC.dll</HintPath>
     </Reference>

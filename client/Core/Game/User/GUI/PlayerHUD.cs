@@ -29,7 +29,7 @@ namespace LoESoft.Client.Core.Game.User.GUI
         public void DrawMinimap(SpriteBatch spriteBatch, GamePlayer player)
         {
             if (Icons.ChildList.Contains(MiniMapView))
-                MiniMapView.DrawMap(spriteBatch, (int)player.Player.X, (int)player.Player.Y);
+                MiniMapView.DrawMap(spriteBatch, player.Player.X, player.Player.Y);
         }
 
         private void toggleOptions()

@@ -15,21 +15,22 @@ namespace LoESoft.Client.Drawing.Sprites
         public int Index { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
 
-        public int StageX => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X;
-        public int StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
+        public float StageX => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X;
+        public float StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
         public int SpriteLevel => ParentSprite != null ? ParentSprite.SpriteLevel + 1 : 0;
 
         public HashSet<SpriteNode> ChildList { get; set; }
         public Dictionary<Event, EventHandler> EventDictionary { get; set; }
 
-        public Rectangle SpriteRectangle => new Rectangle(StageX, StageY, Width, Height);
+        public Rectangle SpriteRectangle => new Rectangle((int)StageX, (int)StageY, Width, Height);
         public SpriteNode ParentSprite { get; set; }
 
         protected EventsHandler EventsHandler;
 
+        #region Constructors
         public SpriteNode(int x, int y, int width, int height)
         {
             X = x;
@@ -42,6 +43,20 @@ namespace LoESoft.Client.Drawing.Sprites
             EventDictionary = new Dictionary<Event, EventHandler>();
             EventsHandler = new EventsHandler();
         }
+
+        public SpriteNode(float x, float y, int width, int height)
+        {
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
+            Index = 0;
+
+            ChildList = new HashSet<SpriteNode>();
+            EventDictionary = new Dictionary<Event, EventHandler>();
+            EventsHandler = new EventsHandler();
+        }
+        #endregion Constructors
 
         public bool IsEventApplicable { get; set; } = true;
 
