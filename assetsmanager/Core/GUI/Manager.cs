@@ -268,6 +268,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                 };
                 xmlobject.SetFileName(xml.Key);
                 xmlobject.SetFileSize(xml.Value.Key);
+                xmlobject.SetSpritePalletes(palletes.OrderBy(id => id.Key).Select(pallete => pallete.Value).ToList());
                 xmlobject.Action = () =>
                 {
                     SplitPanels.Panel1.Controls.Clear();
