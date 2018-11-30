@@ -5,6 +5,7 @@ using LoESoft.AssetsManager.Core.Structure;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -23,10 +24,10 @@ namespace LoESoft.AssetsManager.Core.GUI
         public static Dictionary<string, List<ItemsContent>> XmlItems { get; set; }
         public static Dictionary<string, List<TilesContent>> XmlTiles { get; set; }
 
-        public string MainDir => Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        public string BaseDir => App.Name;
-        public string XmlDir => Path.Combine(MainDir, $"/{BaseDir}/xmls/");
-        public string SpritesheetDir => Path.Combine(MainDir, $"/{BaseDir}/spritesheets/");
+        public string MainDir => Path.GetPathRoot(Environment.SystemDirectory);
+        public string BaseDir => Path.Combine(MainDir, App.Name);
+        public string XmlDir => Path.Combine(BaseDir, "Xmls");
+        public string SpritesheetDir => Path.Combine(BaseDir, "Spritesheets");
 
         private readonly Dictionary<string, string[]> HelpHints = new Dictionary<string, string[]>();
         private Dictionary<string, Image[,]> Spritesheets { get; set; }
@@ -42,32 +43,6 @@ namespace LoESoft.AssetsManager.Core.GUI
             App.Info($"- Loaded {HelpHints.Keys.Count} help hint{(HelpHints.Keys.Count > 1 ? "s" : "")}.");
             App.Info("Loading embedded help hints... OK!");
             App.Info("Game Xml Manager is loading... OK!");
-        }
-
-        private void LoadEmbeddedHelpHints()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-
-            foreach (var i in assembly.GetManifestResourceNames())
-                if (i.Contains(".Help.") && i.Contains(".json"))
-                    using (var stream = assembly.GetManifestResourceStream(i))
-                        if (stream != null)
-                            using (var memorystream = new MemoryStream())
-                            {
-                                stream.CopyTo(memorystream);
-
-                                var buffer = memorystream.ToArray();
-                                var data = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-
-                                try
-                                {
-                                    var helphints = JsonConvert.DeserializeObject<List<HelpHint>>(data.Substring(1));
-
-                                    foreach (var helphint in helphints)
-                                        HelpHints.Add(helphint.Question, helphint.Answer);
-                                }
-                                catch (Exception e) { App.Warn($"\n- Resource: {i};\n- Data: {data}\n- Error:\n{e}"); }
-                            }
         }
 
         private void Manager_Load(object sender, EventArgs e)
@@ -99,6 +74,13 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             if (!Directory.Exists(SpritesheetDir))
                 Directory.CreateDirectory(SpritesheetDir);
+        }
+
+        private void FolderIcon_Click(object sender, EventArgs e)
+        {
+            try
+            { Process.Start($"{Path.Combine(BaseDir)}"); }
+            catch (Exception ex) { App.Warn(ex.ToString()); }
         }
 
         private void LoadAssetsButton_Click(object sender, EventArgs e)
@@ -301,56 +283,30 @@ namespace LoESoft.AssetsManager.Core.GUI
             }
         }
 
-        public void RemoveItemFromXmlPanel(int id)
+        private void LoadEmbeddedHelpHints()
         {
-            var xmlobjects = new List<XmlObject>();
-            var i = 0;
-            var target = string.Empty;
+            var assembly = Assembly.GetExecutingAssembly();
 
-            foreach (var xmlobject in Array.ConvertAll(XmlPanel.Controls.Find("xmlobject", true), xmlobject => (XmlObject)xmlobject))
-            {
-                if (xmlobject.Id != id)
-                {
-                    xmlobjects.Add(new XmlObject()
-                    {
-                        Location = new Point(3, 3 + i * 42),
-                        Name = "xmlobject",
-                        Size = new Size(188, 36),
-                        TabIndex = 2,
-                        Id = xmlobject.Id,
-                        XmlContent = xmlobject.XmlContent,
-                        FileName = xmlobject.FileName,
-                        FileSize = xmlobject.FileSize,
-                        Palletes = xmlobject.Palletes
-                    });
+            foreach (var i in assembly.GetManifestResourceNames())
+                if (i.Contains(".Help.") && i.Contains(".json"))
+                    using (var stream = assembly.GetManifestResourceStream(i))
+                        if (stream != null)
+                            using (var memorystream = new MemoryStream())
+                            {
+                                stream.CopyTo(memorystream);
 
-                    i++;
-                }
-                else
-                    target = xmlobject.FileName;
-            }
+                                var buffer = memorystream.ToArray();
+                                var data = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
 
-            MainTab.Controls.Remove(XmlPanel);
+                                try
+                                {
+                                    var helphints = JsonConvert.DeserializeObject<List<HelpHint>>(data.Substring(1));
 
-            XmlPanel = new Panel()
-            {
-                AutoScroll = true,
-                BackColor = SystemColors.Info,
-                BorderStyle = BorderStyle.Fixed3D,
-                Location = new Point(550, 156),
-                Name = "XmlPanel",
-                Size = new Size(220, 160),
-                TabIndex = 1
-            };
-
-            MainTab.Controls.Add(XmlPanel);
-
-            foreach (var xmlobject in xmlobjects)
-                XmlPanel.Controls.Add(xmlobject);
-
-            XmlCountLabel.Text = XmlPanel.Controls.Count.ToString();
-
-            XmlLibrary.Xmls.Remove(target);
+                                    foreach (var helphint in helphints)
+                                        HelpHints.Add(helphint.Question, helphint.Answer);
+                                }
+                                catch (Exception e) { App.Warn($"\n- Resource: {i};\n- Data: {data}\n- Error:\n{e}"); }
+                            }
         }
 
         private void LoadXmls()
@@ -414,7 +370,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                 return size / (1024 * 1024 * 1024) + " GB";
         }
 
-        public static Image[,] CropSpritesheet(Image image)
+        private static Image[,] CropSpritesheet(Image image)
         {
             try
             {
@@ -437,6 +393,58 @@ namespace LoESoft.AssetsManager.Core.GUI
             catch (Exception e) { App.Error(e); }
 
             return null;
+        }
+
+        public void RemoveItemFromXmlPanel(int id)
+        {
+            var xmlobjects = new List<XmlObject>();
+            var i = 0;
+            var target = string.Empty;
+
+            foreach (var xmlobject in Array.ConvertAll(XmlPanel.Controls.Find("xmlobject", true), xmlobject => (XmlObject)xmlobject))
+            {
+                if (xmlobject.Id != id)
+                {
+                    xmlobjects.Add(new XmlObject()
+                    {
+                        Location = new Point(3, 3 + i * 42),
+                        Name = "xmlobject",
+                        Size = new Size(188, 36),
+                        TabIndex = 2,
+                        Id = xmlobject.Id,
+                        XmlContent = xmlobject.XmlContent,
+                        FileName = xmlobject.FileName,
+                        FileSize = xmlobject.FileSize,
+                        Palletes = xmlobject.Palletes
+                    });
+
+                    i++;
+                }
+                else
+                    target = xmlobject.FileName;
+            }
+
+            MainTab.Controls.Remove(XmlPanel);
+
+            XmlPanel = new Panel()
+            {
+                AutoScroll = true,
+                BackColor = SystemColors.Info,
+                BorderStyle = BorderStyle.Fixed3D,
+                Location = new Point(550, 156),
+                Name = "XmlPanel",
+                Size = new Size(220, 160),
+                TabIndex = 1
+            };
+
+            MainTab.Controls.Add(XmlPanel);
+
+            foreach (var xmlobject in xmlobjects)
+                XmlPanel.Controls.Add(xmlobject);
+
+            XmlCountLabel.Text = XmlPanel.Controls.Count.ToString();
+
+            XmlLibrary.Xmls.Remove(target);
         }
     }
 }

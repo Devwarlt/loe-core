@@ -42,12 +42,12 @@
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
+            this.AddXmlIcon = new System.Windows.Forms.PictureBox();
+            this.FolderIcon = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.WorkingContentLabel = new System.Windows.Forms.Label();
             this.WorkingTitleLabel = new System.Windows.Forms.Label();
             this.HelpTab = new System.Windows.Forms.TabPage();
-            this.FolderIcon = new System.Windows.Forms.PictureBox();
-            this.AddXmlIcon = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.ContentPanel.SuspendLayout();
@@ -55,9 +55,9 @@
             this.SplitPanels.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddXmlIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -215,6 +215,29 @@
             this.MainTab.TabIndex = 0;
             this.MainTab.Text = "Main";
             // 
+            // AddXmlIcon
+            // 
+            this.AddXmlIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddXmlIcon.Image = ((System.Drawing.Image)(resources.GetObject("AddXmlIcon.Image")));
+            this.AddXmlIcon.Location = new System.Drawing.Point(550, 120);
+            this.AddXmlIcon.Name = "AddXmlIcon";
+            this.AddXmlIcon.Size = new System.Drawing.Size(24, 24);
+            this.AddXmlIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.AddXmlIcon.TabIndex = 4;
+            this.AddXmlIcon.TabStop = false;
+            // 
+            // FolderIcon
+            // 
+            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FolderIcon.Image = ((System.Drawing.Image)(resources.GetObject("FolderIcon.Image")));
+            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
+            this.FolderIcon.Name = "FolderIcon";
+            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
+            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FolderIcon.TabIndex = 4;
+            this.FolderIcon.TabStop = false;
+            this.FolderIcon.Click += new System.EventHandler(this.FolderIcon_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.WorkingContentLabel);
@@ -258,28 +281,6 @@
             this.HelpTab.TabIndex = 1;
             this.HelpTab.Text = "Help";
             // 
-            // FolderIcon
-            // 
-            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
-            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
-            this.FolderIcon.Name = "FolderIcon";
-            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
-            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.FolderIcon.TabIndex = 4;
-            this.FolderIcon.TabStop = false;
-            // 
-            // AddXmlIcon
-            // 
-            this.AddXmlIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddXmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.plus_icon;
-            this.AddXmlIcon.Location = new System.Drawing.Point(550, 120);
-            this.AddXmlIcon.Name = "AddXmlIcon";
-            this.AddXmlIcon.Size = new System.Drawing.Size(24, 24);
-            this.AddXmlIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.AddXmlIcon.TabIndex = 4;
-            this.AddXmlIcon.TabStop = false;
-            // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -301,10 +302,10 @@
             this.SplitPanels.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.AddXmlIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AddXmlIcon)).EndInit();
             this.ResumeLayout(false);
 
         }

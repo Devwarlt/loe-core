@@ -36,7 +36,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>loesoft-new.ico</ApplicationIcon>
+    <ApplicationIcon>Core\Assets\Sprites\loesoft-new.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -270,15 +270,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="plus-icon.png" />
-    <None Include="minus-icon.png" />
-    <None Include="folder-icon.png" />
-    <None Include="check-mark-icon.png" />
-    <None Include="cross-mark-icon.png" />
-    <Content Include="loesoft-new.ico" />
-    <None Include="save-icon.png" />
-    <None Include="xml-icon.png" />
-    <None Include="png-icon.png" />
+    <None Include="Core\Assets\Sprites\plus-icon.png" />
+    <None Include="Core\Assets\Sprites\minus-icon.png" />
+    <None Include="Core\Assets\Sprites\folder-icon.png" />
+    <None Include="Core\Assets\Sprites\check-mark-icon.png" />
+    <None Include="Core\Assets\Sprites\cross-mark-icon.png" />
+    <Content Include="Core\Assets\Sprites\loesoft-new.ico" />
+    <None Include="Core\Assets\Sprites\save-icon.png" />
+    <None Include="Core\Assets\Sprites\xml-icon.png" />
+    <None Include="Core\Assets\Sprites\png-icon.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
