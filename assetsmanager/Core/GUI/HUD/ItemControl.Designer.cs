@@ -36,10 +36,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.PictureBox();
+            this.ProgressMainLabel = new System.Windows.Forms.Label();
+            this.ProgressStatusLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.NameTextBox = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IDNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -109,6 +113,8 @@
             this.IDNumeric.TabIndex = 2;
             this.IDNumeric.TabStop = false;
             this.IDNumeric.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.IDNumeric.Validating += new System.ComponentModel.CancelEventHandler(this.IDNumeric_Validating);
+            this.IDNumeric.Validated += new System.EventHandler(this.IDNumeric_Validated);
             // 
             // label1
             // 
@@ -144,7 +150,47 @@
             this.SaveButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.SaveButton.TabIndex = 5;
             this.SaveButton.TabStop = false;
+            this.SaveButton.Visible = false;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // ProgressMainLabel
+            // 
+            this.ProgressMainLabel.AutoSize = true;
+            this.ProgressMainLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProgressMainLabel.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ProgressMainLabel.Location = new System.Drawing.Point(3, 3);
+            this.ProgressMainLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.ProgressMainLabel.Name = "ProgressMainLabel";
+            this.ProgressMainLabel.Size = new System.Drawing.Size(60, 13);
+            this.ProgressMainLabel.TabIndex = 3;
+            this.ProgressMainLabel.Text = "Progress:";
+            this.ProgressMainLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ProgressMainLabel.Visible = false;
+            // 
+            // ProgressStatusLabel
+            // 
+            this.ProgressStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProgressStatusLabel.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ProgressStatusLabel.Location = new System.Drawing.Point(69, 3);
+            this.ProgressStatusLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.ProgressStatusLabel.Name = "ProgressStatusLabel";
+            this.ProgressStatusLabel.Size = new System.Drawing.Size(219, 13);
+            this.ProgressStatusLabel.TabIndex = 3;
+            this.ProgressStatusLabel.Text = "status";
+            this.ProgressStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ProgressStatusLabel.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.ProgressMainLabel);
+            this.panel1.Controls.Add(this.ProgressStatusLabel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 513);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(295, 21);
+            this.panel1.TabIndex = 7;
             // 
             // NameTextBox
             // 
@@ -162,6 +208,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
@@ -170,10 +217,13 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ItemControl";
             this.Size = new System.Drawing.Size(295, 534);
+            this.Load += new System.EventHandler(this.ItemControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IDNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,5 +240,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox SaveButton;
         private CustomTextBox NameTextBox;
+        private System.Windows.Forms.Label ProgressMainLabel;
+        private System.Windows.Forms.Label ProgressStatusLabel;
+        private System.Windows.Forms.Panel panel1;
     }
 }

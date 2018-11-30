@@ -1,27 +1,42 @@
-﻿using System;
+﻿using LoESoft.AssetsManager.Core.Assets.Structure;
+using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using static LoESoft.AssetsManager.Core.Assets.Structure.XmlContent;
+using Timer = System.Timers.Timer;
 
 namespace LoESoft.AssetsManager.Core.GUI.HUD
 {
     public partial class ItemControl : UserControl
     {
+        private Timer _clock { get; set; }
         private SpritePallete _spritePallete { get; set; }
         private string _origin { get; set; }
         private ContentType _contentType { get; set; }
-        private int _firstId { get; set; }
         private int _id { get; set; }
-        private string _firstName { get; set; }
         private string _name { get; set; }
+
+        private SaveButtonVisibilityDelegate SaveButtonVisibility;
+        private IDNumericValueDelegate IDNumericValue;
+        private NameTextValueDelegate NameTextValue;
+
+        private delegate void SaveButtonVisibilityDelegate(bool id, bool name);
+
+        private delegate int IDNumericValueDelegate();
+
+        private delegate string NameTextValueDelegate();
 
         public ItemControl(SpritePallete spritePallete, string origin, ContentType type, int id, string name)
         {
             _spritePallete = spritePallete;
             _origin = origin;
             _contentType = type;
-            _firstId = id;
-            _firstName = name;
+            _id = id;
+            _name = name;
+            _clock = new Timer(1000) { AutoReset = true };
+            _clock.Elapsed += delegate
+            { SaveButtonVisibility(IDNumeric.Value != _id, NameTextBox.Text != _name); };
 
             InitializeComponent();
 
@@ -34,62 +49,176 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
             IDNumeric.Value = id;
             NameTextBox.Text = name;
+
+            SaveButtonVisibility += OnSaveButtonVisibility;
+            IDNumericValue += OnIDNumericValue;
+            NameTextValue += OnNameTextValue;
+            LostFocus += ItemControl_LostFocus;
         }
+
+        private void ItemControl_LostFocus(object sender, EventArgs e)
+        {
+            IDNumeric.Value = _id;
+            NameTextBox.Text = _name;
+        }
+
+        private void OnSaveButtonVisibility(bool id, bool name)
+        {
+            if (SaveButton.InvokeRequired)
+                Invoke(SaveButtonVisibility, new object[] { id, name });
+            else
+                SaveButton.Visible = id || name;
+        }
+
+        private int OnIDNumericValue()
+        {
+            if (IDNumeric.InvokeRequired)
+                Invoke(IDNumericValue);
+            else
+                return (int)IDNumeric.Value;
+
+            return -1;
+        }
+
+        private string OnNameTextValue()
+        {
+            if (NameTextBox.InvokeRequired)
+                Invoke(NameTextValue);
+            else
+                return NameTextBox.Text;
+
+            return null;
+        }
+
+        private void ItemControl_Load(object sender, EventArgs e) => _clock.Start();
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            var sampleobject = Manager.XmlObjects.Values.Select(values => values.FirstOrDefault(sample => sample.Id == _id)).ToList()?.First();
-            var sampleitem = Manager.XmlItems.Values.Select(values => values.FirstOrDefault(sample => sample.Id == _id)).ToList()?.First();
-            var sampletile = Manager.XmlTiles.Values.Select(values => values.FirstOrDefault(sample => sample.Id == _id)).ToList()?.First();
+            ObjectsContent sampleobject = null;
+            ItemsContent sampleitem = null;
+            TilesContent sampletile = null;
+
+            var id = (int)IDNumeric.Value;
+            var name = NameTextBox.Text;
+
+            foreach (var samples in Manager.XmlObjects.Values.Select(values => values).ToList())
+                foreach (var sample in samples)
+                    if (sample.Id == id)
+                    {
+                        sampleobject = sample;
+                        break;
+                    }
+
+            foreach (var samples in Manager.XmlItems.Values.Select(values => values).ToList())
+                foreach (var sample in samples)
+                    if (sample.Id == id)
+                    {
+                        sampleitem = sample;
+                        break;
+                    }
+
+            foreach (var samples in Manager.XmlTiles.Values.Select(values => values).ToList())
+                foreach (var sample in samples)
+                    if (sample.Id == id)
+                    {
+                        sampletile = sample;
+                        break;
+                    }
+
+            if (id <= 0 || id >= int.MaxValue)
+            {
+                MessageBox.Show("Invalid ID, consider to change.", "Error!");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                MessageBox.Show("Name must be not null or empty, consider to change.", "Error!");
+                return;
+            }
 
             if (sampleobject != null)
             {
-                MessageBox.Show($"Object '{sampleobject.TextureData.File}' has same ID, consider to change.", "Error!");
-                return;
+                if (sampleobject.Name != _name)
+                {
+                    MessageBox.Show($"Object '{sampleobject.Name}' has same ID '{sampleobject.Id}', consider to change.", "Error!");
+                    return;
+                }
             }
 
             if (sampleitem != null)
             {
-                MessageBox.Show($"Item '{sampleitem.Name}' has same ID, consider to change.", "Error!");
-                return;
+                if (sampleitem.Name != _name)
+                {
+                    MessageBox.Show($"Item '{sampleitem.Name}' has same ID '{sampleitem.Id}', consider to change.", "Error!");
+                    return;
+                }
             }
 
             if (sampletile != null)
             {
-                MessageBox.Show($"Tile '{sampletile.Name}' has same ID, consider to change.", "Error!");
-                return;
+                if (sampletile.Name != _name)
+                {
+                    MessageBox.Show($"Tile '{sampletile.Name}' has same ID '{sampletile.Id}', consider to change.", "Error!");
+                    return;
+                }
             }
 
             switch (_contentType)
             {
                 case ContentType.Objects:
                     {
-                        var xmlobject = Manager.XmlObjects[_origin].FirstOrDefault(sample => sample.Id == _firstId);
-                        xmlobject.Id = _id;
-                        xmlobject.Name = _name;
+                        var xmlobject = Manager.XmlObjects[_origin].FirstOrDefault(sample => sample.Id == _id);
+                        xmlobject.Id = id;
+                        xmlobject.Name = name;
                     }
                     break;
 
                 case ContentType.Items:
                     {
-                        var xmlitem = Manager.XmlItems[_origin].FirstOrDefault(sample => sample.Id == _firstId);
-                        xmlitem.Id = _id;
-                        xmlitem.Name = _name;
+                        var xmlitem = Manager.XmlItems[_origin].FirstOrDefault(sample => sample.Id == _id);
+                        xmlitem.Id = id;
+                        xmlitem.Name = name;
                     }
                     break;
 
                 case ContentType.Tiles:
                     {
-                        var xmltile = Manager.XmlTiles[_origin].FirstOrDefault(sample => sample.Id == _firstId);
-                        xmltile.Id = _id;
-                        xmltile.Name = _name;
+                        var xmltile = Manager.XmlTiles[_origin].FirstOrDefault(sample => sample.Id == _id);
+                        xmltile.Id = id;
+                        xmltile.Name = name;
                     }
                     break;
             }
 
+            _id = id;
+            _name = name;
             _spritePallete.ItemControl = this;
 
             MessageBox.Show("You have been saved your progress!", "Success!");
         }
+
+        private void IDNumeric_Validating(object sender, CancelEventArgs e)
+        {
+            SaveButton.Enabled = false;
+
+            SetStatus("...updating ID value.");
+            ToggleProgressLabels();
+        }
+
+        private void IDNumeric_Validated(object sender, EventArgs e)
+        {
+            SaveButton.Enabled = true;
+
+            ToggleProgressLabels();
+        }
+
+        private void ToggleProgressLabels()
+        {
+            ProgressMainLabel.Visible = !ProgressMainLabel.Visible;
+            ProgressStatusLabel.Visible = !ProgressStatusLabel.Visible;
+        }
+
+        private void SetStatus(string text) => ProgressStatusLabel.Text = text;
     }
 }
