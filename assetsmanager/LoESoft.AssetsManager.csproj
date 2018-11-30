@@ -270,7 +270,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="plus-icon.png" />
+    <None Include="minus-icon.png" />
     <None Include="folder-icon.png" />
+    <None Include="check-mark-icon.png" />
+    <None Include="cross-mark-icon.png" />
     <Content Include="loesoft-new.ico" />
     <None Include="save-icon.png" />
     <None Include="xml-icon.png" />

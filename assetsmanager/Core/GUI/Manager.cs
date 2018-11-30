@@ -134,6 +134,21 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             i = 0;
 
+            MainTab.Controls.Remove(XmlPanel);
+
+            XmlPanel = new Panel()
+            {
+                AutoScroll = true,
+                BackColor = SystemColors.Info,
+                BorderStyle = BorderStyle.Fixed3D,
+                Location = new Point(550, 156),
+                Name = "XmlPanel",
+                Size = new Size(220, 160),
+                TabIndex = 1
+            };
+
+            MainTab.Controls.Add(XmlPanel);
+
             foreach (var xml in XmlLibrary.Xmls.OrderBy(name => name.Key))
             {
                 var objects = new List<ObjectsContent>();
@@ -260,15 +275,15 @@ namespace LoESoft.AssetsManager.Core.GUI
                 var xmlobject = new XmlObject()
                 {
                     Location = new Point(3, 3 + i * 42),
-                    Name = $"xmlobject{i}",
+                    Name = "xmlobject",
                     Size = new Size(188, 36),
                     TabIndex = 2,
                     Id = i,
-                    XmlContent = xml.Value.Value
+                    XmlContent = xml.Value.Value,
+                    FileName = xml.Key,
+                    FileSize = xml.Value.Key,
+                    Palletes = palletes.OrderBy(id => id.Key).Select(pallete => pallete.Value).ToList()
                 };
-                xmlobject.SetFileName(xml.Key);
-                xmlobject.SetFileSize(xml.Value.Key);
-                xmlobject.SetSpritePalletes(palletes.OrderBy(id => id.Key).Select(pallete => pallete.Value).ToList());
                 xmlobject.Action = () =>
                 {
                     SplitPanels.Panel1.Controls.Clear();
@@ -284,6 +299,58 @@ namespace LoESoft.AssetsManager.Core.GUI
 
                 i++;
             }
+        }
+
+        public void RemoveItemFromXmlPanel(int id)
+        {
+            var xmlobjects = new List<XmlObject>();
+            var i = 0;
+            var target = string.Empty;
+
+            foreach (var xmlobject in Array.ConvertAll(XmlPanel.Controls.Find("xmlobject", true), xmlobject => (XmlObject)xmlobject))
+            {
+                if (xmlobject.Id != id)
+                {
+                    xmlobjects.Add(new XmlObject()
+                    {
+                        Location = new Point(3, 3 + i * 42),
+                        Name = "xmlobject",
+                        Size = new Size(188, 36),
+                        TabIndex = 2,
+                        Id = xmlobject.Id,
+                        XmlContent = xmlobject.XmlContent,
+                        FileName = xmlobject.FileName,
+                        FileSize = xmlobject.FileSize,
+                        Palletes = xmlobject.Palletes
+                    });
+
+                    i++;
+                }
+                else
+                    target = xmlobject.FileName;
+            }
+
+            MainTab.Controls.Remove(XmlPanel);
+
+            XmlPanel = new Panel()
+            {
+                AutoScroll = true,
+                BackColor = SystemColors.Info,
+                BorderStyle = BorderStyle.Fixed3D,
+                Location = new Point(550, 156),
+                Name = "XmlPanel",
+                Size = new Size(220, 160),
+                TabIndex = 1
+            };
+
+            MainTab.Controls.Add(XmlPanel);
+
+            foreach (var xmlobject in xmlobjects)
+                XmlPanel.Controls.Add(xmlobject);
+
+            XmlCountLabel.Text = XmlPanel.Controls.Count.ToString();
+
+            XmlLibrary.Xmls.Remove(target);
         }
 
         private void LoadXmls()

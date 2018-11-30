@@ -42,11 +42,12 @@
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
-            this.FolderIcon = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.WorkingContentLabel = new System.Windows.Forms.Label();
             this.WorkingTitleLabel = new System.Windows.Forms.Label();
             this.HelpTab = new System.Windows.Forms.TabPage();
+            this.FolderIcon = new System.Windows.Forms.PictureBox();
+            this.AddXmlIcon = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.ContentPanel.SuspendLayout();
@@ -54,8 +55,9 @@
             this.SplitPanels.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddXmlIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -63,9 +65,9 @@
             this.groupBox1.Controls.Add(this.XmlCountLabel);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox1.Location = new System.Drawing.Point(550, 110);
+            this.groupBox1.Location = new System.Drawing.Point(578, 110);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(220, 40);
+            this.groupBox1.Size = new System.Drawing.Size(190, 40);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -74,7 +76,7 @@
             this.XmlCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.XmlCountLabel.Location = new System.Drawing.Point(43, 16);
             this.XmlCountLabel.Name = "XmlCountLabel";
-            this.XmlCountLabel.Size = new System.Drawing.Size(169, 13);
+            this.XmlCountLabel.Size = new System.Drawing.Size(141, 13);
             this.XmlCountLabel.TabIndex = 1;
             this.XmlCountLabel.Text = "0";
             this.XmlCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -197,6 +199,7 @@
             // MainTab
             // 
             this.MainTab.BackColor = System.Drawing.SystemColors.Control;
+            this.MainTab.Controls.Add(this.AddXmlIcon);
             this.MainTab.Controls.Add(this.FolderIcon);
             this.MainTab.Controls.Add(this.LoadAssetsButton);
             this.MainTab.Controls.Add(this.ContentPanel);
@@ -211,17 +214,6 @@
             this.MainTab.Size = new System.Drawing.Size(776, 536);
             this.MainTab.TabIndex = 0;
             this.MainTab.Text = "Main";
-            // 
-            // FolderIcon
-            // 
-            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
-            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
-            this.FolderIcon.Name = "FolderIcon";
-            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
-            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.FolderIcon.TabIndex = 4;
-            this.FolderIcon.TabStop = false;
             // 
             // groupBox3
             // 
@@ -266,6 +258,28 @@
             this.HelpTab.TabIndex = 1;
             this.HelpTab.Text = "Help";
             // 
+            // FolderIcon
+            // 
+            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
+            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
+            this.FolderIcon.Name = "FolderIcon";
+            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
+            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FolderIcon.TabIndex = 4;
+            this.FolderIcon.TabStop = false;
+            // 
+            // AddXmlIcon
+            // 
+            this.AddXmlIcon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddXmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.plus_icon;
+            this.AddXmlIcon.Location = new System.Drawing.Point(550, 120);
+            this.AddXmlIcon.Name = "AddXmlIcon";
+            this.AddXmlIcon.Size = new System.Drawing.Size(24, 24);
+            this.AddXmlIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.AddXmlIcon.TabIndex = 4;
+            this.AddXmlIcon.TabStop = false;
+            // 
             // Manager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,9 +301,10 @@
             this.SplitPanels.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddXmlIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,6 +329,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label WorkingContentLabel;
         private System.Windows.Forms.Label WorkingTitleLabel;
+        private System.Windows.Forms.PictureBox AddXmlIcon;
     }
 }
 

@@ -17,7 +17,8 @@ namespace LoESoft.AssetsManager.Core.Assets
         public static void Init(List<XmlFile> xmls)
         {
             foreach (var xml in xmls)
-                Xmls.Add(xml.File, new KeyValuePair<string, XElement>(xml.Size, xml.XElement));
+                if (!Xmls.ContainsKey(xml.File))
+                    Xmls.Add(xml.File, new KeyValuePair<string, XElement>(xml.Size, xml.XElement));
 
             LoadContents(xmls.Select(xml => xml.XElement).ToList());
 
@@ -38,9 +39,26 @@ namespace LoESoft.AssetsManager.Core.Assets
 
                     switch ((ContentType)int.Parse(elem.Attribute("type").Value))
                     {
-                        case ContentType.Objects: ObjectsXml.Add(content.Id, new ObjectsContent(elem)); break;
-                        case ContentType.Items: ItemsXml.Add(content.Id, new ItemsContent(elem)); break;
-                        case ContentType.Tiles: TilesXml.Add(content.Id, new TilesContent(elem)); break;
+                        case ContentType.Objects:
+                            {
+                                if (!ObjectsXml.ContainsKey(content.Id))
+                                    ObjectsXml.Add(content.Id, new ObjectsContent(elem));
+                            }
+                            break;
+
+                        case ContentType.Items:
+                            {
+                                if (!ItemsXml.ContainsKey(content.Id))
+                                    ItemsXml.Add(content.Id, new ItemsContent(elem));
+                            }
+                            break;
+
+                        case ContentType.Tiles:
+                            {
+                                if (!TilesXml.ContainsKey(content.Id))
+                                    TilesXml.Add(content.Id, new TilesContent(elem));
+                            }
+                            break;
                     }
                 }
         }
