@@ -76,12 +76,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                 Directory.CreateDirectory(SpritesheetDir);
         }
 
-        private void FolderIcon_Click(object sender, EventArgs e)
-        {
-            try
-            { Process.Start($"{Path.Combine(BaseDir)}"); }
-            catch (Exception ex) { App.Warn(ex.ToString()); }
-        }
+        private void FolderIcon_Click(object sender, EventArgs e) => Process.Start($"{Path.Combine(BaseDir)}");
 
         private void LoadAssetsButton_Click(object sender, EventArgs e)
         {
