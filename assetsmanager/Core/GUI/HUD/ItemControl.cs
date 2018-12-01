@@ -36,7 +36,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             _name = name;
             _clock = new Timer(1000) { AutoReset = true };
             _clock.Elapsed += delegate
-            { SaveButtonVisibility(IDNumeric.Value != _id, NameTextBox.Text != _name); };
+            { SaveButtonVisibility(ItemId.Value != _id, ItemName.Text != _name); };
 
             InitializeComponent();
 
@@ -47,8 +47,8 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                 case ContentType.Tiles: TilesButton.Checked = true; break;
             }
 
-            IDNumeric.Value = id;
-            NameTextBox.Text = name;
+            ItemId.Value = id;
+            ItemName.Text = name;
 
             SaveButtonVisibility += OnSaveButtonVisibility;
             IDNumericValue += OnIDNumericValue;
@@ -58,8 +58,8 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
         private void ItemControl_LostFocus(object sender, EventArgs e)
         {
-            IDNumeric.Value = _id;
-            NameTextBox.Text = _name;
+            ItemId.Value = _id;
+            ItemName.Text = _name;
         }
 
         private void OnSaveButtonVisibility(bool id, bool name)
@@ -72,20 +72,20 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
         private int OnIDNumericValue()
         {
-            if (IDNumeric.InvokeRequired)
+            if (ItemId.InvokeRequired)
                 Invoke(IDNumericValue);
             else
-                return (int)IDNumeric.Value;
+                return (int)ItemId.Value;
 
             return -1;
         }
 
         private string OnNameTextValue()
         {
-            if (NameTextBox.InvokeRequired)
+            if (ItemName.InvokeRequired)
                 Invoke(NameTextValue);
             else
-                return NameTextBox.Text;
+                return ItemName.Text;
 
             return null;
         }
@@ -98,8 +98,8 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             ItemsContent sampleitem = null;
             TilesContent sampletile = null;
 
-            var id = (int)IDNumeric.Value;
-            var name = NameTextBox.Text;
+            var id = (int)ItemId.Value;
+            var name = ItemName.Text;
 
             foreach (var samples in Manager.XmlObjects.Values.Select(values => values).ToList())
                 foreach (var sample in samples)

@@ -63,9 +63,9 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap check_mark_icon {
+        internal static System.Drawing.Bitmap hud_check {
             get {
-                object obj = ResourceManager.GetObject("check_mark_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("hud_check", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cross_mark_icon {
+        internal static System.Drawing.Bitmap hud_cross {
             get {
-                object obj = ResourceManager.GetObject("cross_mark_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("hud_cross", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,59 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap folder_icon {
+        internal static System.Drawing.Bitmap hud_folder {
             get {
-                object obj = ResourceManager.GetObject("folder_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("hud_folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_minus {
+            get {
+                object obj = ResourceManager.GetObject("hud_minus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_plus {
+            get {
+                object obj = ResourceManager.GetObject("hud_plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_png {
+            get {
+                object obj = ResourceManager.GetObject("hud_png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_save {
+            get {
+                object obj = ResourceManager.GetObject("hud_save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_xml {
+            get {
+                object obj = ResourceManager.GetObject("hud_xml", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,60 +143,10 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Icon semelhante a (Ícone).
         /// </summary>
-        internal static System.Drawing.Icon loesoft_new {
+        internal static System.Drawing.Icon loesoft {
             get {
-                object obj = ResourceManager.GetObject("loesoft_new", resourceCulture);
+                object obj = ResourceManager.GetObject("loesoft", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap minus_icon {
-            get {
-                object obj = ResourceManager.GetObject("minus_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap plus_icon {
-            get {
-                object obj = ResourceManager.GetObject("plus_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap png_icon {
-            get {
-                object obj = ResourceManager.GetObject("png_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap save_icon {
-            get {
-                object obj = ResourceManager.GetObject("save_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap xml_icon {
-            get {
-                object obj = ResourceManager.GetObject("xml_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

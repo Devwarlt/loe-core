@@ -36,7 +36,8 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Core\Assets\Sprites\loesoft-new.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -247,19 +248,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -270,17 +271,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Core\Assets\Sprites\plus-icon.png" />
-    <None Include="Core\Assets\Sprites\minus-icon.png" />
-    <None Include="Core\Assets\Sprites\folder-icon.png" />
-    <None Include="Core\Assets\Sprites\check-mark-icon.png" />
-    <None Include="Core\Assets\Sprites\cross-mark-icon.png" />
-    <Content Include="Core\Assets\Sprites\loesoft-new.ico" />
-    <None Include="Core\Assets\Sprites\save-icon.png" />
-    <None Include="Core\Assets\Sprites\xml-icon.png" />
-    <None Include="Core\Assets\Sprites\png-icon.png" />
+    <Content Include="Core\Assets\Sprites\hud-check.png" />
+    <Content Include="Core\Assets\Sprites\hud-cross.png" />
+    <Content Include="Core\Assets\Sprites\hud-folder.png" />
+    <Content Include="Core\Assets\Sprites\hud-minus.png" />
+    <Content Include="Core\Assets\Sprites\hud-plus.png" />
+    <Content Include="Core\Assets\Sprites\hud-png.png" />
+    <Content Include="Core\Assets\Sprites\hud-save.png" />
+    <Content Include="Core\Assets\Sprites\hud-xml.png" />
+    <Content Include="Core\Assets\Sprites\loesoft.ico" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

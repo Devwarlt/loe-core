@@ -37,7 +37,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::LoESoft.AssetsManager.Properties.Resources.png_icon;
+            this.pictureBox1.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_png;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(38, 38);

@@ -32,18 +32,29 @@
             this.TilesButton = new System.Windows.Forms.RadioButton();
             this.ItemsButton = new System.Windows.Forms.RadioButton();
             this.ObjectsButton = new System.Windows.Forms.RadioButton();
-            this.IDNumeric = new System.Windows.Forms.NumericUpDown();
+            this.ItemId = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.PictureBox();
             this.ProgressMainLabel = new System.Windows.Forms.Label();
             this.ProgressStatusLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.NameTextBox = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ItemFile = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.ItemName = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
+            this.spritePallete1 = new LoESoft.AssetsManager.Core.GUI.HUD.SpritePallete();
+            this.ItemY = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
+            this.ItemX = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IDNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -96,25 +107,25 @@
             this.ObjectsButton.Text = "Objects";
             this.ObjectsButton.UseVisualStyleBackColor = true;
             // 
-            // IDNumeric
+            // ItemId
             // 
-            this.IDNumeric.BackColor = System.Drawing.SystemColors.Info;
-            this.IDNumeric.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.IDNumeric.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IDNumeric.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.IDNumeric.Location = new System.Drawing.Point(55, 55);
-            this.IDNumeric.Maximum = new decimal(new int[] {
+            this.ItemId.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ItemId.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ItemId.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemId.Location = new System.Drawing.Point(55, 55);
+            this.ItemId.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
-            this.IDNumeric.Name = "IDNumeric";
-            this.IDNumeric.Size = new System.Drawing.Size(201, 20);
-            this.IDNumeric.TabIndex = 2;
-            this.IDNumeric.TabStop = false;
-            this.IDNumeric.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.IDNumeric.Validating += new System.ComponentModel.CancelEventHandler(this.IDNumeric_Validating);
-            this.IDNumeric.Validated += new System.EventHandler(this.IDNumeric_Validated);
+            this.ItemId.Name = "ItemId";
+            this.ItemId.Size = new System.Drawing.Size(201, 20);
+            this.ItemId.TabIndex = 2;
+            this.ItemId.TabStop = false;
+            this.ItemId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ItemId.Validating += new System.ComponentModel.CancelEventHandler(this.IDNumeric_Validating);
+            this.ItemId.Validated += new System.EventHandler(this.IDNumeric_Validated);
             // 
             // label1
             // 
@@ -142,7 +153,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Image = global::LoESoft.AssetsManager.Properties.Resources.save_icon;
+            this.SaveButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_save;
             this.SaveButton.Location = new System.Drawing.Point(265, 15);
             this.SaveButton.Margin = new System.Windows.Forms.Padding(6);
             this.SaveButton.Name = "SaveButton";
@@ -192,38 +203,148 @@
             this.panel1.Size = new System.Drawing.Size(295, 21);
             this.panel1.TabIndex = 7;
             // 
-            // NameTextBox
+            // groupBox2
             // 
-            this.NameTextBox.BackColor = System.Drawing.SystemColors.Info;
-            this.NameTextBox.BorderColor = System.Drawing.Color.DarkGray;
-            this.NameTextBox.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.NameTextBox.Location = new System.Drawing.Point(55, 81);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(201, 20);
-            this.NameTextBox.TabIndex = 6;
-            this.NameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.groupBox2.Controls.Add(this.spritePallete1);
+            this.groupBox2.Controls.Add(this.ItemFile);
+            this.groupBox2.Controls.Add(this.ItemY);
+            this.groupBox2.Controls.Add(this.ItemX);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.groupBox2.Location = new System.Drawing.Point(3, 107);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(253, 79);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Texture Data";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label3.Location = new System.Drawing.Point(52, 26);
+            this.label3.Margin = new System.Windows.Forms.Padding(3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "File";
+            // 
+            // ItemFile
+            // 
+            this.ItemFile.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemFile.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ItemFile.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemFile.FormattingEnabled = true;
+            this.ItemFile.Location = new System.Drawing.Point(85, 23);
+            this.ItemFile.Name = "ItemFile";
+            this.ItemFile.Size = new System.Drawing.Size(157, 21);
+            this.ItemFile.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label4.Location = new System.Drawing.Point(64, 53);
+            this.label4.Margin = new System.Windows.Forms.Padding(3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "X";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label5.Location = new System.Drawing.Point(161, 53);
+            this.label5.Margin = new System.Windows.Forms.Padding(3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(15, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Y";
+            // 
+            // ItemName
+            // 
+            this.ItemName.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemName.BorderColor = System.Drawing.Color.DarkGray;
+            this.ItemName.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemName.Location = new System.Drawing.Point(55, 81);
+            this.ItemName.Name = "ItemName";
+            this.ItemName.Size = new System.Drawing.Size(201, 20);
+            this.ItemName.TabIndex = 6;
+            this.ItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // spritePallete1
+            // 
+            this.spritePallete1.Action = null;
+            this.spritePallete1.ItemControl = null;
+            this.spritePallete1.Location = new System.Drawing.Point(13, 30);
+            this.spritePallete1.Name = "spritePallete1";
+            this.spritePallete1.Size = new System.Drawing.Size(33, 33);
+            this.spritePallete1.TabIndex = 7;
+            // 
+            // ItemY
+            // 
+            this.ItemY.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemY.BorderColor = System.Drawing.Color.DarkGray;
+            this.ItemY.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemY.Location = new System.Drawing.Point(182, 50);
+            this.ItemY.Name = "ItemY";
+            this.ItemY.Size = new System.Drawing.Size(60, 20);
+            this.ItemY.TabIndex = 6;
+            this.ItemY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // ItemX
+            // 
+            this.ItemX.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemX.BorderColor = System.Drawing.Color.DarkGray;
+            this.ItemX.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemX.Location = new System.Drawing.Point(85, 50);
+            this.ItemX.Name = "ItemX";
+            this.ItemX.Size = new System.Drawing.Size(60, 20);
+            this.ItemX.TabIndex = 6;
+            this.ItemX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(144, 246);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
             // 
             // ItemControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.NameTextBox);
+            this.Controls.Add(this.ItemName);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.IDNumeric);
+            this.Controls.Add(this.ItemId);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ItemControl";
             this.Size = new System.Drawing.Size(295, 534);
             this.Load += new System.EventHandler(this.ItemControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IDNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,13 +356,22 @@
         private System.Windows.Forms.RadioButton TilesButton;
         private System.Windows.Forms.RadioButton ItemsButton;
         private System.Windows.Forms.RadioButton ObjectsButton;
-        private System.Windows.Forms.NumericUpDown IDNumeric;
+        private System.Windows.Forms.NumericUpDown ItemId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox SaveButton;
-        private CustomTextBox NameTextBox;
+        private CustomTextBox ItemName;
         private System.Windows.Forms.Label ProgressMainLabel;
         private System.Windows.Forms.Label ProgressStatusLabel;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private SpritePallete spritePallete1;
+        private System.Windows.Forms.ComboBox ItemFile;
+        private CustomTextBox ItemY;
+        private CustomTextBox ItemX;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

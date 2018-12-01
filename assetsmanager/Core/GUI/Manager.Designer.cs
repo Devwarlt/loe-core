@@ -218,7 +218,7 @@
             // AddXmlIcon
             // 
             this.AddXmlIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddXmlIcon.Image = ((System.Drawing.Image)(resources.GetObject("AddXmlIcon.Image")));
+            this.AddXmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_plus;
             this.AddXmlIcon.Location = new System.Drawing.Point(550, 120);
             this.AddXmlIcon.Name = "AddXmlIcon";
             this.AddXmlIcon.Size = new System.Drawing.Size(24, 24);
@@ -229,7 +229,7 @@
             // FolderIcon
             // 
             this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FolderIcon.Image = ((System.Drawing.Image)(resources.GetObject("FolderIcon.Image")));
+            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_folder;
             this.FolderIcon.Location = new System.Drawing.Point(550, 6);
             this.FolderIcon.Name = "FolderIcon";
             this.FolderIcon.Size = new System.Drawing.Size(24, 24);

@@ -57,7 +57,7 @@
             // XmlIcon
             // 
             this.XmlIcon.BackColor = System.Drawing.Color.Transparent;
-            this.XmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.xml_icon;
+            this.XmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_xml;
             this.XmlIcon.Location = new System.Drawing.Point(0, 0);
             this.XmlIcon.Name = "XmlIcon";
             this.XmlIcon.Size = new System.Drawing.Size(38, 38);
@@ -70,7 +70,7 @@
             // 
             this.RemoveXmlIcon.BackColor = System.Drawing.Color.Transparent;
             this.RemoveXmlIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RemoveXmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.minus_icon;
+            this.RemoveXmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_minus;
             this.RemoveXmlIcon.Location = new System.Drawing.Point(163, 7);
             this.RemoveXmlIcon.Name = "RemoveXmlIcon";
             this.RemoveXmlIcon.Size = new System.Drawing.Size(24, 24);
