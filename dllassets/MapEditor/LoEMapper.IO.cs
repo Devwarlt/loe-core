@@ -1,5 +1,6 @@
 ﻿using LoESoft.Dlls.GZip;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Text;
 
@@ -7,47 +8,57 @@ namespace LoESoft.Dlls.MapEditor
 {
     public partial class LoEMapper<Map>
     {
-        public void SaveMap(Map map, string name)
+        public void SaveMap(string filename, Map map)
         {
-            var path = Path.Combine(MainDir, $"/{BaseDir}/{name}.{_format}");
-
             if (map == null)
-                Logger($"(SaveException) Missing data from path: {path}");
+                Logger($"Content data is empty and being ignored.");
             else
             {
-                var content = JsonConvert.SerializeObject(map);
+                try
+                {
+                    var filepath = Path.Combine(BaseDir, $"{filename}.{_format}");
+                    var data = JsonConvert.SerializeObject(map);
 
-                if (EnableCompression)
-                    File.WriteAllBytes(path, GZipCompression.Zip(content));
-                else
-                    File.WriteAllText(path, content);
-
-                Logger($"Saved map data to '{MainDir}\\{BaseDir}\\{name}.{_format}'.");
+                    if (EnableCompression)
+                        File.WriteAllBytes(filepath, GZipCompression.Zip(data));
+                    else
+                        File.WriteAllText(filepath, data);
+                }
+                catch (Exception e) { Logger($"(SaveException) An error occurred along save method:\n{e}"); }
             }
         }
 
         public Map LoadMap(string name)
         {
-            var path1 = Path.Combine(MainDir, $"/{BaseDir}/{name}.{FileFormatCompressed}");
-            var path2 = Path.Combine(MainDir, $"/{BaseDir}/{name}.{FileFormatNonCompressed}");
+            var filepath1 = Path.Combine(BaseDir, $"{name}.{FileFormatCompressed}");
+            var filepath2 = Path.Combine(BaseDir, $"{name}.{FileFormatNonCompressed}");
+            var file1exist = File.Exists(filepath1);
+            var file2exist = File.Exists(filepath2);
 
-            if (!File.Exists(path1) && !File.Exists(path2))
+            object data = null;
+
+            if (!file1exist && !file2exist)
             {
-                Logger($"(LoadException) Missing data from path: {Path.Combine(MainDir, $"/{BaseDir}/{name}.*")}");
+                Logger($"Content data is empty and being ignored.");
 
-                return default(Map);
+                return (Map)data;
             }
 
-            Map content = default(Map);
+            try
+            {
+                data = file1exist ? JsonConvert.DeserializeObject<Map>(Encoding.UTF8.GetString(GZipCompression.UnZip(File.ReadAllBytes(filepath1))))
+                    : JsonConvert.DeserializeObject<Map>(File.ReadAllText(filepath2));
 
-            if (File.Exists(path1))
-                content = JsonConvert.DeserializeObject<Map>(Encoding.UTF8.GetString(GZipCompression.UnZip(File.ReadAllBytes(path1))));
-            else
-                content = JsonConvert.DeserializeObject<Map>(File.ReadAllText(path2));
+                Logger($"Loaded from path: '{(file1exist ? filepath1 : filepath2)}'");
+            }
+            catch (Exception e)
+            {
+                Logger($"(LoadException) An error occurred along load method:" +
+                    $"\n- File: '{(file1exist ? filepath1 : filepath2)}'" +
+                    $"\n- Error: {e}");
+            }
 
-            Logger($"Loaded data from '{MainDir}\\{BaseDir}\\{name}.{_format}'.");
-
-            return content;
+            return (Map)data;
         }
     }
 }

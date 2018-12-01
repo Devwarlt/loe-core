@@ -1,56 +1,54 @@
-﻿using Newtonsoft.Json;
+﻿using LoESoft.Dlls.GZip;
+using Newtonsoft.Json;
+using System;
 using System.IO;
+using System.Text;
 
 namespace LoESoft.Dlls.Database
 {
     public partial class LoEDb
     {
-        public void Save<T>(string path, T data)
+        public void Save<T>(string subfolder, string filename, T data)
         {
             if (data == null)
-                Logger($"(SaveException) Missing data from path: {path}.json");
+                Logger($"Content data is empty and being ignored.");
             else
             {
-                File.WriteAllText(Path.Combine(MainDir, $"{path}.json"), JsonConvert.SerializeObject(data));
-                Logger($"Saved data to '{path}.json'.");
+                try
+                {
+                    var filepath = Path.Combine(GetSubDirectory(subfolder), $"{filename}.{Format}");
+                    var content = JsonConvert.SerializeObject(data);
+
+                    if (EnableCompression)
+                        File.WriteAllBytes(filepath, GZipCompression.Zip(content));
+                    else
+                        File.WriteAllText(filepath, content);
+
+                    Logger($"[SubDir: '{subfolder}'] Saved to path: '{filepath}'");
+                }
+                catch (Exception e) { Logger($"(SaveException) An error occurred along save method:\n{e}"); }
             }
         }
 
-        public void Save<T>(string folder, string target, T data)
+        public T Load<T>(string subfolder, string filename)
         {
-            if (data == null)
-                Logger($"(SaveException) Missing data from path: {MainDir}\\{BaseDir}\\{folder}\\{target}.json");
-            else
-            {
-                File.WriteAllText(Path.Combine(MainDir, $"/{BaseDir}/{folder}/{target}.json"), JsonConvert.SerializeObject(data));
-                Logger($"Saved data to '{MainDir}\\{BaseDir}\\{folder}\\{target}.json'.");
-            }
-        }
+            var filepath = Path.Combine(GetSubDirectory(subfolder), $"{filename}.{Format}");
 
-        public T Load<T>(string path)
-        {
             object data = null;
 
             try
             {
-                data = JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
-                Logger($"Loaded data from '{path}'.");
+                data = EnableCompression ? JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(GZipCompression.UnZip(File.ReadAllBytes(filepath))))
+                    : JsonConvert.DeserializeObject<T>(File.ReadAllText(filepath));
+
+                Logger($"[SubDir: '{subfolder}'] Loaded from path: '{filepath}'");
             }
-            catch { Logger($"(LoadException) Missing data from path: {path}"); }
-
-            return (T)data;
-        }
-
-        public T Load<T>(string folder, string target)
-        {
-            object data = null;
-
-            try
+            catch (Exception e)
             {
-                data = JsonConvert.DeserializeObject<T>(File.ReadAllText(Path.Combine(MainDir, $"{BaseDir}/{folder}/{target}.json")));
-                Logger($"Loaded data from '{MainDir}\\{BaseDir}\\{folder}\\{target}.json'.");
+                Logger($"(LoadException) An error occurred along load method:" +
+                    $"\n- File: '{filepath}'" +
+                    $"\n- Error: {e}");
             }
-            catch { Logger($"(LoadException) Missing data from path: {MainDir}\\{BaseDir}\\{folder}\\{target}.json"); }
 
             return (T)data;
         }
