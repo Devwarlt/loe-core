@@ -6,9 +6,10 @@ namespace LoESoft.AssetsManager.Core.Assets.Structure
     {
         public bool Walkable { get; set; }
 
-        public TilesContent(XElement elem) : base(elem)
+        public TilesContent()
         {
-            Walkable = elem.Element("UnWalkable") != null;
         }
+
+        public TilesContent(XElement elem) : base(elem) => Walkable = elem.Element("UnWalkable") != null;
     }
 }

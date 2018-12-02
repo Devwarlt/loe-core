@@ -13,6 +13,10 @@ namespace LoESoft.AssetsManager.Core.Assets.Structure
 
         public TextureData TextureData { get; set; }
 
+        public XmlContent()
+        {
+        }
+
         public XmlContent(XElement elem)
         {
             Type = (ContentType)int.Parse(elem.Attribute("type").Value);

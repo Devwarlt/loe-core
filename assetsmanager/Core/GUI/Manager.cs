@@ -20,6 +20,7 @@ namespace LoESoft.AssetsManager.Core.GUI
 {
     public partial class Manager : Form
     {
+        public static Dictionary<string, Image[,]> Spritesheets { get; set; }
         public static Dictionary<string, List<ObjectsContent>> XmlObjects { get; set; }
         public static Dictionary<string, List<ItemsContent>> XmlItems { get; set; }
         public static Dictionary<string, List<TilesContent>> XmlTiles { get; set; }
@@ -30,7 +31,6 @@ namespace LoESoft.AssetsManager.Core.GUI
         public string SpritesheetDir => Path.Combine(BaseDir, "Spritesheets");
 
         private readonly Dictionary<string, string[]> HelpHints = new Dictionary<string, string[]>();
-        private Dictionary<string, Image[,]> Spritesheets { get; set; }
 
         public Manager()
         {
@@ -204,7 +204,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                     ItemControl itemcontrol = null;
 
                     if (sampleobject != null)
-                        itemcontrol = new ItemControl(pallete.Value, xml.Key, ContentType.Objects, sampleobject.Id, sampleobject.Name)
+                        itemcontrol = new ItemControl(pallete.Value, xml.Key, sampleobject)
                         {
                             Location = new Point(0, 0),
                             Name = "itemControl1",
@@ -213,7 +213,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                         };
 
                     if (sampleitem != null)
-                        itemcontrol = new ItemControl(pallete.Value, xml.Key, ContentType.Items, sampleitem.Id, sampleitem.Name)
+                        itemcontrol = new ItemControl(pallete.Value, xml.Key, sampleitem)
                         {
                             Location = new Point(0, 0),
                             Name = "itemControl1",
@@ -222,7 +222,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                         };
 
                     if (sampletile != null)
-                        itemcontrol = new ItemControl(pallete.Value, xml.Key, ContentType.Tiles, sampletile.Id, sampletile.Name)
+                        itemcontrol = new ItemControl(pallete.Value, xml.Key, sampletile)
                         {
                             Location = new Point(0, 0),
                             Name = "itemControl1",

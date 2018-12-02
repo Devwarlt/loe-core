@@ -36,8 +36,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Core\Assets\Sprites\loesoft.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -280,6 +279,12 @@
     <Content Include="Core\Assets\Sprites\hud-save.png" />
     <Content Include="Core\Assets\Sprites\hud-xml.png" />
     <Content Include="Core\Assets\Sprites\loesoft.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\server\LoESoft.Server.csproj">
+      <Project>{728A3882-9A81-4556-862D-C5F356679289}</Project>
+      <Name>LoESoft.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
