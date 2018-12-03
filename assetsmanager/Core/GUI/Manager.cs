@@ -74,12 +74,27 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             if (!Directory.Exists(SpritesheetDir))
                 Directory.CreateDirectory(SpritesheetDir);
+
+            AddButton.Image = Properties.Resources.hud_plus_inactive;
+            AddButton.Enabled = false;
         }
 
-        private void FolderIcon_Click(object sender, EventArgs e) => Process.Start($"{Path.Combine(BaseDir)}");
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            var addform = new AddForm() { Manager = this };
+            addform.ShowDialog();
+        }
+
+        private void FolderButton_Click(object sender, EventArgs e) => Process.Start($"{Path.Combine(BaseDir)}");
 
         private void LoadAssetsButton_Click(object sender, EventArgs e)
         {
+            WorkingTitleLabel.Text = string.Empty;
+            WorkingContentLabel.Text = string.Empty;
+
+            SplitPanels.Panel1.Controls.Clear();
+            SplitPanels.Panel2.Controls.Clear();
+
             XmlObjects = new Dictionary<string, List<ObjectsContent>>();
             XmlItems = new Dictionary<string, List<ItemsContent>>();
             XmlTiles = new Dictionary<string, List<TilesContent>>();
@@ -258,6 +273,9 @@ namespace LoESoft.AssetsManager.Core.GUI
 
                 i++;
             }
+
+            AddButton.Image = Properties.Resources.hud_plus;
+            AddButton.Enabled = true;
         }
 
         private void LoadEmbeddedHelpHints()
@@ -377,7 +395,7 @@ namespace LoESoft.AssetsManager.Core.GUI
             return null;
         }
 
-        public void RemoveItemFromSplitPanels(int parentId, int id)
+        public void UpdateSplitPanels(int parentId, int id)
         {
             var palletes = new List<SpritePallete>();
             var columns = new List<int>() { 4, 43, 82, 121, 160, 199 };
@@ -485,7 +503,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                 }
         }
 
-        public void RemoveItemFromXmlPanel(int id)
+        public void UpdateXmlPanel(int id, string name = null)
         {
             var xmlobjects = new List<XmlObject>();
             var i = 0;
@@ -495,7 +513,7 @@ namespace LoESoft.AssetsManager.Core.GUI
             {
                 if (xmlobject.Id != id)
                 {
-                    xmlobjects.Add(new XmlObject()
+                    var newxmlobject = new XmlObject()
                     {
                         Location = new Point(3, 3 + i * 42),
                         Name = "xmlobject",
@@ -506,12 +524,52 @@ namespace LoESoft.AssetsManager.Core.GUI
                         FileName = xmlobject.FileName,
                         FileSize = xmlobject.FileSize,
                         Palletes = xmlobject.Palletes
-                    });
+                    };
+                    newxmlobject.Action = () =>
+                    {
+                        SplitPanels.Panel1.Controls.Clear();
+
+                        foreach (var pallete in newxmlobject.Palletes)
+                        {
+                            pallete.ParentId = newxmlobject.Id;
+
+                            SplitPanels.Panel1.Controls.Add(pallete);
+                        }
+
+                        WorkingTitleLabel.Text = "Working on...";
+                        WorkingContentLabel.Text = newxmlobject.FileName;
+                    };
+                    xmlobjects.Add(newxmlobject);
 
                     i++;
                 }
                 else
                     target = xmlobject.FileName;
+            }
+
+            if (name != null)
+            {
+                var xmlobject = new XmlObject()
+                {
+                    Location = new Point(3, 3 + i * 42),
+                    Name = "xmlobject",
+                    Size = new Size(188, 36),
+                    TabIndex = 2,
+                    Id = i,
+                    XmlContent = null,
+                    FileName = name,
+                    FileSize = "<new>",
+                    Palletes = new List<SpritePallete>()
+                };
+                xmlobject.Action = () =>
+                {
+                    SplitPanels.Panel1.Controls.Clear();
+
+                    WorkingTitleLabel.Text = string.Empty;
+                    WorkingContentLabel.Text = "This XML document is empty!";
+                };
+
+                xmlobjects.Add(xmlobject);
             }
 
             MainTab.Controls.Remove(XmlPanel);
@@ -529,12 +587,23 @@ namespace LoESoft.AssetsManager.Core.GUI
 
             MainTab.Controls.Add(XmlPanel);
 
-            foreach (var xmlobject in xmlobjects)
+            i = 0;
+
+            foreach (var xmlobject in xmlobjects.OrderBy(xml => xml.FileName))
+            {
+                xmlobject.Location = new Point(3, 3 + i * 42);
+
                 XmlPanel.Controls.Add(xmlobject);
 
+                i++;
+            }
+
+            WorkingTitleLabel.Text = string.Empty;
+            WorkingContentLabel.Text = string.Empty;
             XmlCountLabel.Text = XmlPanel.Controls.Count.ToString();
 
-            XmlLibrary.Xmls.Remove(target);
+            if (target != string.Empty)
+                XmlLibrary.Xmls.Remove(target);
         }
     }
 }

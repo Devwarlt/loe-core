@@ -408,7 +408,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             var box = MessageBox.Show("Do you want to delete this item?", "Delete", MessageBoxButtons.YesNo);
 
             if (box == DialogResult.Yes)
-                ((Manager)Parent.Parent.Parent.Parent.Parent.Parent).RemoveItemFromSplitPanels(_spritePallete.ParentId, _spritePallete.Id);
+                ((Manager)Parent.Parent.Parent.Parent.Parent.Parent).UpdateSplitPanels(_spritePallete.ParentId, _spritePallete.Id);
         }
 
         private void ObjectsButton_CheckedChanged(object sender, EventArgs e)

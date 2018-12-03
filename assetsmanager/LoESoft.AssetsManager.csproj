@@ -186,6 +186,24 @@
     <Compile Include="Core\Assets\Structure\XmlContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlFile.cs" />
     <Compile Include="Core\Assets\XmlLibrary.cs" />
+    <Compile Include="Core\GUI\AddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\AddForm.Designer.cs">
+      <DependentUpon>AddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\AddItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\AddItemForm.Designer.cs">
+      <DependentUpon>AddItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\AddXmlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\AddXmlForm.Designer.cs">
+      <DependentUpon>AddXmlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\GUI\HUD\CustomTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -223,6 +241,15 @@
       <DependentUpon>Manager.cs</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
+    <EmbeddedResource Include="Core\GUI\AddForm.resx">
+      <DependentUpon>AddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\AddItemForm.resx">
+      <DependentUpon>AddItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\AddXmlForm.resx">
+      <DependentUpon>AddXmlForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\HUD\ItemControl.resx">
       <DependentUpon>ItemControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +308,7 @@
     <Content Include="Core\Assets\Sprites\hud-cross.png" />
     <Content Include="Core\Assets\Sprites\hud-folder.png" />
     <Content Include="Core\Assets\Sprites\hud-minus.png" />
+    <Content Include="Core\Assets\Sprites\hud-plus-inactive.png" />
     <Content Include="Core\Assets\Sprites\hud-plus.png" />
     <Content Include="Core\Assets\Sprites\hud-save.png" />
     <Content Include="Core\Assets\Sprites\hud-xml.png" />

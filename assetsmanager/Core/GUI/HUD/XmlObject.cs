@@ -34,11 +34,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             var box = MessageBox.Show($"Do you want to remove '{FileNameLabel.Text}' XML file?", "Confirm delete action", MessageBoxButtons.YesNo);
 
             if (box == DialogResult.Yes)
-                ((Manager)Parent.Parent.Parent.Parent).RemoveItemFromXmlPanel(Id);
-        }
-
-        private void XmlIcon_DoubleClick(object sender, EventArgs e)
-        {
+                ((Manager)Parent.Parent.Parent.Parent).UpdateXmlPanel(Id);
         }
     }
 }

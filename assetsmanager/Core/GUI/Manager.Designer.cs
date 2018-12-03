@@ -41,8 +41,8 @@
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
-            this.AddXmlIcon = new System.Windows.Forms.PictureBox();
-            this.FolderIcon = new System.Windows.Forms.PictureBox();
+            this.AddButton = new System.Windows.Forms.PictureBox();
+            this.FolderButton = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.WorkingContentLabel = new System.Windows.Forms.Label();
             this.WorkingTitleLabel = new System.Windows.Forms.Label();
@@ -54,8 +54,8 @@
             this.SplitPanels.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AddXmlIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderButton)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +66,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Desktop;
             this.groupBox1.Location = new System.Drawing.Point(550, 110);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(190, 40);
+            this.groupBox1.Size = new System.Drawing.Size(220, 40);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -75,7 +75,7 @@
             this.XmlCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.XmlCountLabel.Location = new System.Drawing.Point(43, 16);
             this.XmlCountLabel.Name = "XmlCountLabel";
-            this.XmlCountLabel.Size = new System.Drawing.Size(141, 13);
+            this.XmlCountLabel.Size = new System.Drawing.Size(169, 13);
             this.XmlCountLabel.TabIndex = 1;
             this.XmlCountLabel.Text = "0";
             this.XmlCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -114,13 +114,18 @@
             // 
             // LoadAssetsButton
             // 
+            this.LoadAssetsButton.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.LoadAssetsButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LoadAssetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoadAssetsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoadAssetsButton.ForeColor = System.Drawing.Color.Transparent;
             this.LoadAssetsButton.Location = new System.Drawing.Point(550, 6);
             this.LoadAssetsButton.Name = "LoadAssetsButton";
-            this.LoadAssetsButton.Size = new System.Drawing.Size(190, 24);
+            this.LoadAssetsButton.Size = new System.Drawing.Size(160, 24);
             this.LoadAssetsButton.TabIndex = 0;
             this.LoadAssetsButton.TabStop = false;
             this.LoadAssetsButton.Text = "Load Assets";
-            this.LoadAssetsButton.UseVisualStyleBackColor = true;
+            this.LoadAssetsButton.UseVisualStyleBackColor = false;
             this.LoadAssetsButton.Click += new System.EventHandler(this.LoadAssetsButton_Click);
             // 
             // XmlPanel
@@ -188,8 +193,8 @@
             // MainTab
             // 
             this.MainTab.BackColor = System.Drawing.SystemColors.Control;
-            this.MainTab.Controls.Add(this.AddXmlIcon);
-            this.MainTab.Controls.Add(this.FolderIcon);
+            this.MainTab.Controls.Add(this.AddButton);
+            this.MainTab.Controls.Add(this.FolderButton);
             this.MainTab.Controls.Add(this.groupBox2);
             this.MainTab.Controls.Add(this.LoadAssetsButton);
             this.MainTab.Controls.Add(this.ContentPanel);
@@ -203,32 +208,33 @@
             this.MainTab.TabIndex = 0;
             this.MainTab.Text = "Main";
             // 
-            // AddXmlIcon
+            // AddButton
             // 
-            this.AddXmlIcon.BackColor = System.Drawing.SystemColors.Desktop;
-            this.AddXmlIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AddXmlIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddXmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_plus;
-            this.AddXmlIcon.Location = new System.Drawing.Point(746, 121);
-            this.AddXmlIcon.Name = "AddXmlIcon";
-            this.AddXmlIcon.Size = new System.Drawing.Size(24, 24);
-            this.AddXmlIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.AddXmlIcon.TabIndex = 4;
-            this.AddXmlIcon.TabStop = false;
+            this.AddButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.AddButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AddButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_plus;
+            this.AddButton.Location = new System.Drawing.Point(716, 6);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(24, 24);
+            this.AddButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.AddButton.TabIndex = 4;
+            this.AddButton.TabStop = false;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // FolderIcon
+            // FolderButton
             // 
-            this.FolderIcon.BackColor = System.Drawing.SystemColors.Desktop;
-            this.FolderIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_folder;
-            this.FolderIcon.Location = new System.Drawing.Point(746, 6);
-            this.FolderIcon.Name = "FolderIcon";
-            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
-            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.FolderIcon.TabIndex = 4;
-            this.FolderIcon.TabStop = false;
-            this.FolderIcon.Click += new System.EventHandler(this.FolderIcon_Click);
+            this.FolderButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.FolderButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.FolderButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FolderButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_folder;
+            this.FolderButton.Location = new System.Drawing.Point(746, 6);
+            this.FolderButton.Name = "FolderButton";
+            this.FolderButton.Size = new System.Drawing.Size(24, 24);
+            this.FolderButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FolderButton.TabIndex = 4;
+            this.FolderButton.TabStop = false;
+            this.FolderButton.Click += new System.EventHandler(this.FolderButton_Click);
             // 
             // groupBox3
             // 
@@ -295,8 +301,8 @@
             this.SplitPanels.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.AddXmlIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderButton)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -318,11 +324,11 @@
         private System.Windows.Forms.TabPage MainTab;
         private System.Windows.Forms.TabPage HelpTab;
         private System.Windows.Forms.SplitContainer SplitPanels;
-        private System.Windows.Forms.PictureBox FolderIcon;
+        private System.Windows.Forms.PictureBox FolderButton;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label WorkingContentLabel;
         private System.Windows.Forms.Label WorkingTitleLabel;
-        private System.Windows.Forms.PictureBox AddXmlIcon;
+        private System.Windows.Forms.PictureBox AddButton;
     }
 }
 
