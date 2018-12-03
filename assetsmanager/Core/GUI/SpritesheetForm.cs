@@ -48,7 +48,8 @@ namespace LoESoft.AssetsManager.Core.GUI
                         Location = new Point(2 + x * 33, 2 + y * 33),
                         Name = "spritepallete",
                         Size = new Size(33, 33),
-                        TabIndex = 2
+                        TabIndex = 2,
+                        Image = image
                     };
                     spritepallete.Action = () => Invoke((MethodInvoker)delegate ()
                         {
@@ -59,7 +60,6 @@ namespace LoESoft.AssetsManager.Core.GUI
 
                             DialogResult = DialogResult.OK;
                         });
-                    spritepallete.SetImage(image);
 
                     _spritedatas.Add(id, new SpriteData()
                     {

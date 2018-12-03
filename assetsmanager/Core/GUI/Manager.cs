@@ -142,11 +142,14 @@ namespace LoESoft.AssetsManager.Core.GUI
                 {
                     var xobjectpallete = new SpritePallete()
                     {
-                        Name = xobject.Name,
+                        Origin = name,
+                        Type = ContentType.Objects,
+                        Id = xobject.Id,
+                        Name = "spritepallete",
                         Size = new Size(33, 33),
-                        TabIndex = 2
+                        TabIndex = 2,
+                        Image = Spritesheets[xobject.TextureData.File].Image[xobject.TextureData.X, xobject.TextureData.Y]
                     };
-                    xobjectpallete.SetImage(Spritesheets[xobject.TextureData.File].Image[xobject.TextureData.X, xobject.TextureData.Y]);
 
                     palletes.Add(new KeyValuePair<int, SpritePallete>(xobject.Id, xobjectpallete));
                 }
@@ -155,11 +158,14 @@ namespace LoESoft.AssetsManager.Core.GUI
                 {
                     var xitempallete = new SpritePallete()
                     {
-                        Name = xitem.Name,
+                        Origin = name,
+                        Type = ContentType.Items,
+                        Id = xitem.Id,
+                        Name = "spritepallete",
                         Size = new Size(33, 33),
-                        TabIndex = 2
+                        TabIndex = 2,
+                        Image = Spritesheets[xitem.TextureData.File].Image[xitem.TextureData.X, xitem.TextureData.Y]
                     };
-                    xitempallete.SetImage(Spritesheets[xitem.TextureData.File].Image[xitem.TextureData.X, xitem.TextureData.Y]);
 
                     palletes.Add(new KeyValuePair<int, SpritePallete>(xitem.Id, xitempallete));
                 }
@@ -168,11 +174,14 @@ namespace LoESoft.AssetsManager.Core.GUI
                 {
                     var xtilepallete = new SpritePallete()
                     {
-                        Name = xtile.Name,
+                        Origin = name,
+                        Type = ContentType.Tiles,
+                        Id = xtile.Id,
+                        Name = "spritepallete",
                         Size = new Size(33, 33),
-                        TabIndex = 2
+                        TabIndex = 2,
+                        Image = Spritesheets[xtile.TextureData.File].Image[xtile.TextureData.X, xtile.TextureData.Y]
                     };
-                    xtilepallete.SetImage(Spritesheets[xtile.TextureData.File].Image[xtile.TextureData.X, xtile.TextureData.Y]);
 
                     palletes.Add(new KeyValuePair<int, SpritePallete>(xtile.Id, xtilepallete));
                 }
@@ -186,31 +195,18 @@ namespace LoESoft.AssetsManager.Core.GUI
                     ItemControl itemcontrol = null;
 
                     if (sampleobject != null)
-                        itemcontrol = new ItemControl(pallete.Value, xml.Key, sampleobject)
-                        {
-                            Location = new Point(0, 0),
-                            Name = "itemControl1",
-                            Size = new Size(295, 534),
-                            TabIndex = 2
-                        };
+                        itemcontrol = new ItemControl(pallete.Value, name, sampleobject);
 
                     if (sampleitem != null)
-                        itemcontrol = new ItemControl(pallete.Value, xml.Key, sampleitem)
-                        {
-                            Location = new Point(0, 0),
-                            Name = "itemControl1",
-                            Size = new Size(295, 534),
-                            TabIndex = 2
-                        };
+                        itemcontrol = new ItemControl(pallete.Value, name, sampleitem);
 
                     if (sampletile != null)
-                        itemcontrol = new ItemControl(pallete.Value, xml.Key, sampletile)
-                        {
-                            Location = new Point(0, 0),
-                            Name = "itemControl1",
-                            Size = new Size(295, 534),
-                            TabIndex = 2
-                        };
+                        itemcontrol = new ItemControl(pallete.Value, name, sampletile);
+
+                    itemcontrol.Location = new Point(0, 0);
+                    itemcontrol.Name = "itemcontrol";
+                    itemcontrol.Size = new Size(295, 534);
+                    itemcontrol.TabIndex = 2;
 
                     pallete.Value.Location = new Point(columns[column], 3 + row * 39);
                     pallete.Value.ItemControl = itemcontrol;
@@ -248,7 +244,11 @@ namespace LoESoft.AssetsManager.Core.GUI
                     SplitPanels.Panel1.Controls.Clear();
 
                     foreach (var pallete in xmlobject.Palletes)
+                    {
+                        pallete.ParentId = xmlobject.Id;
+
                         SplitPanels.Panel1.Controls.Add(pallete);
+                    }
 
                     WorkingTitleLabel.Text = "Working on...";
                     WorkingContentLabel.Text = xml.Key;
@@ -375,6 +375,114 @@ namespace LoESoft.AssetsManager.Core.GUI
             catch (Exception e) { App.Error(e); }
 
             return null;
+        }
+
+        public void RemoveItemFromSplitPanels(int parentId, int id)
+        {
+            var palletes = new List<SpritePallete>();
+            var columns = new List<int>() { 4, 43, 82, 121, 160, 199 };
+            var row = 0;
+            var column = 0;
+            var target = new KeyValuePair<string, ContentType>();
+
+            foreach (var pallete in Array.ConvertAll(SplitPanels.Panel1.Controls.Find("spritepallete", true), pallete => (SpritePallete)pallete))
+            {
+                if (pallete.Id != id)
+                {
+                    var newpallete = new SpritePallete()
+                    {
+                        Origin = pallete.Origin,
+                        Type = pallete.Type,
+                        Id = pallete.Id,
+                        Name = "spritepallete",
+                        Size = new Size(33, 33),
+                        TabIndex = 2,
+                        Image = pallete.Image
+                    };
+
+                    var sampleobject = pallete.ItemControl.ObjectsContent;
+                    var sampleitem = pallete.ItemControl.ItemsContent;
+                    var sampletile = pallete.ItemControl.TilesContent;
+
+                    if (sampleobject != null)
+                        newpallete.ItemControl = new ItemControl(newpallete, newpallete.Origin, sampleobject);
+
+                    if (sampleitem != null)
+                        newpallete.ItemControl = new ItemControl(newpallete, newpallete.Origin, sampleobject);
+
+                    if (sampletile != null)
+                        newpallete.ItemControl = new ItemControl(newpallete, newpallete.Origin, sampletile);
+
+                    newpallete.ItemControl.Location = new Point(0, 0);
+                    newpallete.ItemControl.Name = "itemcontrol";
+                    newpallete.ItemControl.Size = new Size(295, 534);
+                    newpallete.ItemControl.TabIndex = 2;
+
+                    pallete.ItemControl.Dispose();
+                    pallete.Dispose();
+
+                    palletes.Add(newpallete);
+                }
+                else
+                    target = new KeyValuePair<string, ContentType>(pallete.Origin, pallete.Type);
+            }
+
+            SplitPanels.Panel1.Controls.Clear();
+            SplitPanels.Panel2.Controls.Clear();
+
+            foreach (var pallete in palletes.OrderBy(i => i.Id))
+            {
+                pallete.Location = new Point(columns[column], 3 + row * 39);
+                pallete.Action = () =>
+                {
+                    SplitPanels.Panel2.Controls.Clear();
+
+                    if (pallete.ItemControl != null)
+                        SplitPanels.Panel2.Controls.Add(pallete.ItemControl);
+                };
+
+                SplitPanels.Panel1.Controls.Add(pallete);
+
+                column++;
+
+                if (column == columns.Count)
+                {
+                    column = 0;
+                    row++;
+                }
+            }
+
+            try
+            {
+                switch (target.Value)
+                {
+                    case ContentType.Objects: XmlObjects[target.Key].RemoveAt(XmlObjects[target.Key].FindIndex(xobject => xobject.Id == id)); break;
+                    case ContentType.Items: XmlItems[target.Key].RemoveAt(XmlItems[target.Key].FindIndex(xitem => xitem.Id == id)); break;
+                    case ContentType.Tiles: XmlTiles[target.Key].RemoveAt(XmlTiles[target.Key].FindIndex(xtile => xtile.Id == id)); break;
+                }
+            }
+            catch (Exception e) { App.Warn($"An error occurred along SpritePallete remotion:\n{e}"); }
+
+            foreach (var xmlobject in Array.ConvertAll(XmlPanel.Controls.Find("xmlobject", true), xmlobject => (XmlObject)xmlobject))
+                if (xmlobject.Id == parentId)
+                {
+                    xmlobject.Palletes = palletes;
+                    xmlobject.Action = () =>
+                    {
+                        SplitPanels.Panel1.Controls.Clear();
+
+                        foreach (var pallete in xmlobject.Palletes)
+                        {
+                            pallete.ParentId = xmlobject.Id;
+
+                            SplitPanels.Panel1.Controls.Add(pallete);
+                        }
+
+                        WorkingTitleLabel.Text = "Working on...";
+                        WorkingContentLabel.Text = target.Key;
+                    };
+                    break;
+                }
         }
 
         public void RemoveItemFromXmlPanel(int id)

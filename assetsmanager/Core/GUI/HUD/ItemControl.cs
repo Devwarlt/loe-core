@@ -10,6 +10,10 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 {
     public partial class ItemControl : UserControl
     {
+        public ObjectsContent ObjectsContent { get; }
+        public ItemsContent ItemsContent { get; }
+        public TilesContent TilesContent { get; }
+
         private ControlState _state { get; set; }
         private Timer _clock { get; set; }
         private SpritePallete _spritePallete { get; set; }
@@ -26,20 +30,17 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         public ItemControl(SpritePallete spritePallete, string origin, ObjectsContent objectsContent)
             : this(spritePallete, origin, ContentType.Objects, objectsContent.Id, objectsContent.Name,
                   objectsContent.TextureData.File, objectsContent.TextureData.X, objectsContent.TextureData.Y, objectsContent.Blocked, false)
-        {
-        }
+            => ObjectsContent = objectsContent;
 
         public ItemControl(SpritePallete spritePallete, string origin, ItemsContent itemsContent)
             : this(spritePallete, origin, ContentType.Items, itemsContent.Id, itemsContent.Name,
                   itemsContent.TextureData.File, itemsContent.TextureData.X, itemsContent.TextureData.Y, false, false)
-        {
-        }
+            => ItemsContent = ItemsContent;
 
         public ItemControl(SpritePallete spritePallete, string origin, TilesContent tilesContent)
             : this(spritePallete, origin, ContentType.Tiles, tilesContent.Id, tilesContent.Name,
                   tilesContent.TextureData.File, tilesContent.TextureData.X, tilesContent.TextureData.Y, false, tilesContent.Walkable)
-        {
-        }
+            => TilesContent = tilesContent;
 
         private ItemControl(SpritePallete spritePallete, string origin, ContentType type, int id, string name,
             string file, int x, int y, bool blocked, bool walkable)
@@ -97,7 +98,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                 {
                     _x[1] = spritesheetform.X;
                     _y[1] = spritesheetform.Y;
-                    ItemSprite.SetImage(spritesheetform.Image);
+                    ItemSprite.Image = spritesheetform.Image;
                 }
 
                 ItemX.Value = _x[1];
@@ -105,7 +106,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
                 _state = ControlState.Normal;
             });
-            ItemSprite.SetImage(Manager.Spritesheets[file].Image[_x[1], _y[1]]);
+            ItemSprite.Image = Manager.Spritesheets[file].Image[_x[1], _y[1]];
             ItemBlocked.Checked = blocked;
             ItemWalkable.Checked = walkable;
 
@@ -151,7 +152,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                 ItemFile.SelectedItem = _file[0];
                 ItemX.Value = _x[0];
                 ItemY.Value = _y[0];
-                ItemSprite.SetImage(Manager.Spritesheets[_file[0]].Image[_x[0], _y[0]]);
+                ItemSprite.Image = Manager.Spritesheets[_file[0]].Image[_x[0], _y[0]];
                 ItemBlocked.Checked = _blocked[0];
                 ItemWalkable.Checked = _walkable[0];
             }
@@ -402,6 +403,14 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             MessageBox.Show("You have been saved your progress!", "Success!");
         }
 
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            var box = MessageBox.Show("Do you want to delete this item?", "Delete", MessageBoxButtons.YesNo);
+
+            if (box == DialogResult.Yes)
+                ((Manager)Parent.Parent.Parent.Parent.Parent.Parent).RemoveItemFromSplitPanels(_spritePallete.ParentId, _spritePallete.Id);
+        }
+
         private void ObjectsButton_CheckedChanged(object sender, EventArgs e)
         {
             _type[1] = ContentType.Objects;
@@ -477,7 +486,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                 {
                     _x[1] = spritesheetform.X;
                     _y[1] = spritesheetform.Y;
-                    ItemSprite.SetImage(spritesheetform.Image);
+                    ItemSprite.Image = spritesheetform.Image;
                 }
 
                 ItemX.Value = _x[1];
@@ -485,11 +494,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
                 _state = ControlState.Normal;
             });
-            ItemSprite.SetImage(Manager.Spritesheets[_file[1]].Image[_x[1], _y[1]]);
-        }
-
-        private void DefaultIcon_Click(object sender, EventArgs e)
-        {
+            ItemSprite.Image = Manager.Spritesheets[_file[1]].Image[_x[1], _y[1]];
         }
     }
 }

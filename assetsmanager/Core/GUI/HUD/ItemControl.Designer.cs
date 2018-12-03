@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ItemSprite = new LoESoft.AssetsManager.Core.GUI.HUD.SpritePallete();
             this.ItemFile = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@
             this.DefaultButton = new System.Windows.Forms.PictureBox();
             this.SaveButton = new System.Windows.Forms.PictureBox();
             this.ItemName = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
-            this.ItemSprite = new LoESoft.AssetsManager.Core.GUI.HUD.SpritePallete();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemId)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -176,6 +176,16 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Texture Data";
+            // 
+            // ItemSprite
+            // 
+            this.ItemSprite.Action = null;
+            this.ItemSprite.Id = 0;
+            this.ItemSprite.ItemControl = null;
+            this.ItemSprite.Location = new System.Drawing.Point(13, 30);
+            this.ItemSprite.Name = "ItemSprite";
+            this.ItemSprite.Size = new System.Drawing.Size(33, 33);
+            this.ItemSprite.TabIndex = 7;
             // 
             // ItemFile
             // 
@@ -353,6 +363,7 @@
             this.DeleteButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.DeleteButton.TabIndex = 8;
             this.DeleteButton.TabStop = false;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // DefaultButton
             // 
@@ -398,16 +409,6 @@
             this.ItemName.TabStop = false;
             this.ItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ItemName.TextChanged += new System.EventHandler(this.ItemName_TextChanged);
-            // 
-            // ItemSprite
-            // 
-            this.ItemSprite.Action = null;
-            this.ItemSprite.Id = 0;
-            this.ItemSprite.ItemControl = null;
-            this.ItemSprite.Location = new System.Drawing.Point(13, 30);
-            this.ItemSprite.Name = "ItemSprite";
-            this.ItemSprite.Size = new System.Drawing.Size(33, 33);
-            this.ItemSprite.TabIndex = 7;
             // 
             // ItemControl
             // 
