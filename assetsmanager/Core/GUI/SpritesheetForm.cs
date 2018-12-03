@@ -11,6 +11,7 @@ namespace LoESoft.AssetsManager.Core.GUI
     {
         private const int X_MAGIC_NUMBER = 3;
         private const int Y_MAGIC_NUMBER = 33 / 2 + 3;
+        private const int MAX_SIZE = 400;
 
         public string File { get; set; }
         public int X { get; set; }
@@ -30,10 +31,10 @@ namespace LoESoft.AssetsManager.Core.GUI
             Width = _sprites.Width * 17 * 2 + X_MAGIC_NUMBER;
             Height = _sprites.Height * 17 * 2 + Y_MAGIC_NUMBER;
 
-            if (Width > 400)
-                Width = 400;
-            if (Height > 400)
-                Height = 400;
+            if (Width >= MAX_SIZE)
+                Width = MAX_SIZE;
+            if (Height >= MAX_SIZE)
+                Height = MAX_SIZE;
 
             var id = 0;
 

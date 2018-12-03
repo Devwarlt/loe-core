@@ -114,27 +114,31 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             _clock = new Timer(300) { AutoReset = true };
             _clock.Elapsed += delegate
             {
-                Invoke((MethodInvoker)delegate ()
+                try
                 {
-                    var changes = _type[0] != _type[1] || _id[0] != _id[1] || _name[0] != _name[1]
-                    || _file[0] != _file[1] || _x[0] != _x[1] || _y[0] != _y[1] || _blocked[0] != _blocked[1]
-                    || _walkable[0] != _walkable[1];
+                    Invoke((MethodInvoker)delegate ()
+                    {
+                        var changes = _type[0] != _type[1] || _id[0] != _id[1] || _name[0] != _name[1]
+                        || _file[0] != _file[1] || _x[0] != _x[1] || _y[0] != _y[1] || _blocked[0] != _blocked[1]
+                        || _walkable[0] != _walkable[1];
 
-                    if (changes)
-                    {
-                        DefaultButton.Enabled = true;
-                        DefaultButton.Image = Properties.Resources.hud_cross;
-                        SaveButton.Enabled = true;
-                        SaveButton.Image = Properties.Resources.hud_check;
-                    }
-                    else
-                    {
-                        DefaultButton.Enabled = false;
-                        DefaultButton.Image = Properties.Resources.hud_cross_inactive;
-                        SaveButton.Enabled = false;
-                        SaveButton.Image = Properties.Resources.hud_check_inactive;
-                    }
-                });
+                        if (changes)
+                        {
+                            DefaultButton.Enabled = true;
+                            DefaultButton.Image = Properties.Resources.hud_cross;
+                            SaveButton.Enabled = true;
+                            SaveButton.Image = Properties.Resources.hud_check;
+                        }
+                        else
+                        {
+                            DefaultButton.Enabled = false;
+                            DefaultButton.Image = Properties.Resources.hud_cross_inactive;
+                            SaveButton.Enabled = false;
+                            SaveButton.Image = Properties.Resources.hud_check_inactive;
+                        }
+                    });
+                }
+                catch { }
             };
         }
 
