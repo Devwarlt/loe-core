@@ -6,6 +6,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 {
     public partial class SpritePallete : UserControl
     {
+        public int Id { get; set; }
         public ItemControl ItemControl { get; set; }
         public Action Action { get; set; }
 

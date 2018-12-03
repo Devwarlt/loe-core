@@ -178,6 +178,8 @@
     <Compile Include="Core\Assets\Structure\Exclusive\TextureData.cs" />
     <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
     <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
+    <Compile Include="Core\Assets\Structure\SpriteData.cs" />
+    <Compile Include="Core\Assets\Structure\SpritesContent.cs" />
     <Compile Include="Core\Assets\Structure\SpritesheetFile.cs" />
     <Compile Include="Core\Assets\Structure\TilesContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlContent.ContentType.cs" />
@@ -193,17 +195,14 @@
     <Compile Include="Core\GUI\HUD\HelpObject.Designer.cs">
       <DependentUpon>HelpObject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\GUI\HUD\ItemControl.ControlState.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Core\GUI\HUD\ItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\GUI\HUD\ItemControl.Designer.cs">
       <DependentUpon>ItemControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\HUD\PngObject.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\HUD\PngObject.Designer.cs">
-      <DependentUpon>PngObject.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\GUI\HUD\SpritePallete.cs">
       <SubType>UserControl</SubType>
@@ -230,14 +229,20 @@
     <EmbeddedResource Include="Core\GUI\HUD\SpritePallete.resx">
       <DependentUpon>SpritePallete.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\SpritesheetForm.resx">
+      <DependentUpon>SpritesheetForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\Help\Hints.json" />
+    <Compile Include="Core\GUI\SpritesheetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\SpritesheetForm.Designer.cs">
+      <DependentUpon>SpritesheetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Structure\HelpHint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Core\GUI\HUD\HelpObject.resx">
       <DependentUpon>HelpObject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\HUD\PngObject.resx">
-      <DependentUpon>PngObject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\HUD\XmlObject.resx">
       <DependentUpon>XmlObject.cs</DependentUpon>
@@ -270,12 +275,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Core\Assets\Sprites\hud-check-inactive.png" />
     <Content Include="Core\Assets\Sprites\hud-check.png" />
+    <Content Include="Core\Assets\Sprites\hud-cross-inactive.png" />
     <Content Include="Core\Assets\Sprites\hud-cross.png" />
     <Content Include="Core\Assets\Sprites\hud-folder.png" />
     <Content Include="Core\Assets\Sprites\hud-minus.png" />
     <Content Include="Core\Assets\Sprites\hud-plus.png" />
-    <Content Include="Core\Assets\Sprites\hud-png.png" />
     <Content Include="Core\Assets\Sprites\hud-save.png" />
     <Content Include="Core\Assets\Sprites\hud-xml.png" />
     <Content Include="Core\Assets\Sprites\loesoft.ico" />

@@ -27,7 +27,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
         public XmlObject() => InitializeComponent();
 
-        private void XmlIcon_DoubleClick(object sender, EventArgs e) => Action?.Invoke();
+        private void XmlIcon_Click(object sender, EventArgs e) => Action?.Invoke();
 
         private void RemoveXmlIcon_Click(object sender, EventArgs e)
         {
@@ -35,6 +35,10 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
             if (box == DialogResult.Yes)
                 ((Manager)Parent.Parent.Parent.Parent).RemoveItemFromXmlPanel(Id);
+        }
+
+        private void XmlIcon_DoubleClick(object sender, EventArgs e)
+        {
         }
     }
 }

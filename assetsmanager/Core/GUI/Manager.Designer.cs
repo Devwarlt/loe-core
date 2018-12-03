@@ -36,7 +36,6 @@
             this.SpritesheetCountLabel = new System.Windows.Forms.Label();
             this.LoadAssetsButton = new System.Windows.Forms.Button();
             this.XmlPanel = new System.Windows.Forms.Panel();
-            this.SpritesheetPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ContentPanel = new System.Windows.Forms.Panel();
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
@@ -65,7 +64,7 @@
             this.groupBox1.Controls.Add(this.XmlCountLabel);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox1.Location = new System.Drawing.Point(578, 110);
+            this.groupBox1.Location = new System.Drawing.Point(550, 110);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(190, 40);
             this.groupBox1.TabIndex = 0;
@@ -115,7 +114,7 @@
             // 
             // LoadAssetsButton
             // 
-            this.LoadAssetsButton.Location = new System.Drawing.Point(580, 6);
+            this.LoadAssetsButton.Location = new System.Drawing.Point(550, 6);
             this.LoadAssetsButton.Name = "LoadAssetsButton";
             this.LoadAssetsButton.Size = new System.Drawing.Size(190, 24);
             this.LoadAssetsButton.TabIndex = 0;
@@ -129,27 +128,17 @@
             this.XmlPanel.AutoScroll = true;
             this.XmlPanel.BackColor = System.Drawing.SystemColors.Info;
             this.XmlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.XmlPanel.Location = new System.Drawing.Point(550, 156);
+            this.XmlPanel.Location = new System.Drawing.Point(550, 202);
             this.XmlPanel.Name = "XmlPanel";
-            this.XmlPanel.Size = new System.Drawing.Size(220, 160);
+            this.XmlPanel.Size = new System.Drawing.Size(220, 335);
             this.XmlPanel.TabIndex = 1;
-            // 
-            // SpritesheetPanel
-            // 
-            this.SpritesheetPanel.AutoScroll = true;
-            this.SpritesheetPanel.BackColor = System.Drawing.SystemColors.Info;
-            this.SpritesheetPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SpritesheetPanel.Location = new System.Drawing.Point(550, 368);
-            this.SpritesheetPanel.Name = "SpritesheetPanel";
-            this.SpritesheetPanel.Size = new System.Drawing.Size(220, 160);
-            this.SpritesheetPanel.TabIndex = 1;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.SpritesheetCountLabel);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox2.Location = new System.Drawing.Point(550, 322);
+            this.groupBox2.Location = new System.Drawing.Point(550, 156);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(220, 40);
             this.groupBox2.TabIndex = 0;
@@ -201,10 +190,9 @@
             this.MainTab.BackColor = System.Drawing.SystemColors.Control;
             this.MainTab.Controls.Add(this.AddXmlIcon);
             this.MainTab.Controls.Add(this.FolderIcon);
+            this.MainTab.Controls.Add(this.groupBox2);
             this.MainTab.Controls.Add(this.LoadAssetsButton);
             this.MainTab.Controls.Add(this.ContentPanel);
-            this.MainTab.Controls.Add(this.SpritesheetPanel);
-            this.MainTab.Controls.Add(this.groupBox2);
             this.MainTab.Controls.Add(this.groupBox3);
             this.MainTab.Controls.Add(this.groupBox1);
             this.MainTab.Controls.Add(this.XmlPanel);
@@ -217,9 +205,11 @@
             // 
             // AddXmlIcon
             // 
+            this.AddXmlIcon.BackColor = System.Drawing.SystemColors.Desktop;
+            this.AddXmlIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AddXmlIcon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AddXmlIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_plus;
-            this.AddXmlIcon.Location = new System.Drawing.Point(550, 120);
+            this.AddXmlIcon.Location = new System.Drawing.Point(746, 121);
             this.AddXmlIcon.Name = "AddXmlIcon";
             this.AddXmlIcon.Size = new System.Drawing.Size(24, 24);
             this.AddXmlIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -228,9 +218,11 @@
             // 
             // FolderIcon
             // 
+            this.FolderIcon.BackColor = System.Drawing.SystemColors.Desktop;
+            this.FolderIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_folder;
-            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
+            this.FolderIcon.Location = new System.Drawing.Point(746, 6);
             this.FolderIcon.Name = "FolderIcon";
             this.FolderIcon.Size = new System.Drawing.Size(24, 24);
             this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -287,10 +279,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.TabControl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Manager";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoESoft - Assets Manager";
             this.Load += new System.EventHandler(this.Manager_Load);
             this.groupBox1.ResumeLayout(false);
@@ -319,7 +312,6 @@
         private System.Windows.Forms.Label XmlCountLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel XmlPanel;
-        private System.Windows.Forms.Panel SpritesheetPanel;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel ContentPanel;
         private System.Windows.Forms.TabControl TabControl;

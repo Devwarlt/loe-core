@@ -35,7 +35,6 @@
             this.ItemId = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.SaveButton = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ItemFile = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -48,16 +47,22 @@
             this.ItemBlocked = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.ItemWalkable = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.DeleteButton = new System.Windows.Forms.PictureBox();
+            this.DefaultButton = new System.Windows.Forms.PictureBox();
+            this.SaveButton = new System.Windows.Forms.PictureBox();
             this.ItemName = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
-            this.spritePallete1 = new LoESoft.AssetsManager.Core.GUI.HUD.SpritePallete();
+            this.ItemSprite = new LoESoft.AssetsManager.Core.GUI.HUD.SpritePallete();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemId)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemY)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DeleteButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DefaultButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -67,9 +72,9 @@
             this.groupBox1.Controls.Add(this.ObjectsButton);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(3, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(253, 46);
+            this.groupBox1.Size = new System.Drawing.Size(286, 46);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Content Type";
@@ -78,7 +83,7 @@
             // 
             this.TilesButton.AutoSize = true;
             this.TilesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TilesButton.Location = new System.Drawing.Point(195, 19);
+            this.TilesButton.Location = new System.Drawing.Point(193, 19);
             this.TilesButton.Name = "TilesButton";
             this.TilesButton.Size = new System.Drawing.Size(47, 17);
             this.TilesButton.TabIndex = 0;
@@ -90,7 +95,7 @@
             // 
             this.ItemsButton.AutoSize = true;
             this.ItemsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ItemsButton.Location = new System.Drawing.Point(108, 19);
+            this.ItemsButton.Location = new System.Drawing.Point(110, 19);
             this.ItemsButton.Name = "ItemsButton";
             this.ItemsButton.Size = new System.Drawing.Size(50, 17);
             this.ItemsButton.TabIndex = 0;
@@ -116,14 +121,14 @@
             this.ItemId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ItemId.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItemId.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.ItemId.Location = new System.Drawing.Point(55, 55);
+            this.ItemId.Location = new System.Drawing.Point(55, 91);
             this.ItemId.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
             this.ItemId.Name = "ItemId";
-            this.ItemId.Size = new System.Drawing.Size(201, 20);
+            this.ItemId.Size = new System.Drawing.Size(234, 20);
             this.ItemId.TabIndex = 2;
             this.ItemId.TabStop = false;
             this.ItemId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -134,7 +139,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label1.Location = new System.Drawing.Point(29, 57);
+            this.label1.Location = new System.Drawing.Point(29, 93);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 13);
@@ -146,30 +151,16 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label2.Location = new System.Drawing.Point(10, 84);
+            this.label2.Location = new System.Drawing.Point(10, 120);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Name";
             // 
-            // SaveButton
-            // 
-            this.SaveButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SaveButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_save;
-            this.SaveButton.Location = new System.Drawing.Point(265, 15);
-            this.SaveButton.Margin = new System.Windows.Forms.Padding(6);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(24, 24);
-            this.SaveButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.SaveButton.TabIndex = 5;
-            this.SaveButton.TabStop = false;
-            this.SaveButton.Visible = false;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.spritePallete1);
+            this.groupBox2.Controls.Add(this.ItemSprite);
             this.groupBox2.Controls.Add(this.ItemFile);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
@@ -179,9 +170,9 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox2.Location = new System.Drawing.Point(3, 107);
+            this.groupBox2.Location = new System.Drawing.Point(3, 143);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(253, 79);
+            this.groupBox2.Size = new System.Drawing.Size(286, 79);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Texture Data";
@@ -194,8 +185,9 @@
             this.ItemFile.FormattingEnabled = true;
             this.ItemFile.Location = new System.Drawing.Point(85, 23);
             this.ItemFile.Name = "ItemFile";
-            this.ItemFile.Size = new System.Drawing.Size(157, 21);
+            this.ItemFile.Size = new System.Drawing.Size(195, 21);
             this.ItemFile.TabIndex = 4;
+            this.ItemFile.TabStop = false;
             this.ItemFile.SelectedIndexChanged += new System.EventHandler(this.ItemFile_SelectedIndexChanged);
             // 
             // label5
@@ -203,7 +195,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label5.Location = new System.Drawing.Point(161, 53);
+            this.label5.Location = new System.Drawing.Point(190, 53);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(15, 13);
@@ -259,7 +251,7 @@
             this.ItemY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ItemY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItemY.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.ItemY.Location = new System.Drawing.Point(177, 50);
+            this.ItemY.Location = new System.Drawing.Point(215, 50);
             this.ItemY.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -289,9 +281,9 @@
             this.groupBox3.Controls.Add(this.ItemBlocked);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox3.Location = new System.Drawing.Point(3, 192);
+            this.groupBox3.Location = new System.Drawing.Point(3, 228);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(253, 46);
+            this.groupBox3.Size = new System.Drawing.Size(286, 46);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Objects Content";
@@ -305,6 +297,7 @@
             this.ItemBlocked.Name = "ItemBlocked";
             this.ItemBlocked.Size = new System.Drawing.Size(65, 17);
             this.ItemBlocked.TabIndex = 0;
+            this.ItemBlocked.TabStop = false;
             this.ItemBlocked.Text = "Blocked";
             this.ItemBlocked.UseVisualStyleBackColor = true;
             this.ItemBlocked.CheckedChanged += new System.EventHandler(this.ItemBlocked_CheckedChanged);
@@ -314,9 +307,9 @@
             this.groupBox4.Controls.Add(this.ItemWalkable);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox4.Location = new System.Drawing.Point(3, 244);
+            this.groupBox4.Location = new System.Drawing.Point(3, 280);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(253, 46);
+            this.groupBox4.Size = new System.Drawing.Size(286, 46);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tiles Content";
@@ -330,39 +323,103 @@
             this.ItemWalkable.Name = "ItemWalkable";
             this.ItemWalkable.Size = new System.Drawing.Size(71, 17);
             this.ItemWalkable.TabIndex = 0;
+            this.ItemWalkable.TabStop = false;
             this.ItemWalkable.Text = "Walkable";
             this.ItemWalkable.UseVisualStyleBackColor = true;
             this.ItemWalkable.CheckedChanged += new System.EventHandler(this.ItemWalkable_CheckedChanged);
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label7.Location = new System.Drawing.Point(3, 3);
+            this.label7.Margin = new System.Windows.Forms.Padding(3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(184, 30);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Item Editor";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.DeleteButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DeleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DeleteButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_minus;
+            this.DeleteButton.Location = new System.Drawing.Point(193, 6);
+            this.DeleteButton.Margin = new System.Windows.Forms.Padding(6);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(24, 24);
+            this.DeleteButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DeleteButton.TabIndex = 8;
+            this.DeleteButton.TabStop = false;
+            // 
+            // DefaultButton
+            // 
+            this.DefaultButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.DefaultButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DefaultButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DefaultButton.Enabled = false;
+            this.DefaultButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_cross;
+            this.DefaultButton.Location = new System.Drawing.Point(265, 6);
+            this.DefaultButton.Margin = new System.Windows.Forms.Padding(6);
+            this.DefaultButton.Name = "DefaultButton";
+            this.DefaultButton.Size = new System.Drawing.Size(24, 24);
+            this.DefaultButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DefaultButton.TabIndex = 7;
+            this.DefaultButton.TabStop = false;
+            this.DefaultButton.Click += new System.EventHandler(this.DefaultButton_Click);
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.SaveButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SaveButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SaveButton.Enabled = false;
+            this.SaveButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_check;
+            this.SaveButton.Location = new System.Drawing.Point(229, 6);
+            this.SaveButton.Margin = new System.Windows.Forms.Padding(6);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(24, 24);
+            this.SaveButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.SaveButton.TabIndex = 5;
+            this.SaveButton.TabStop = false;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // ItemName
             // 
             this.ItemName.BackColor = System.Drawing.SystemColors.Info;
             this.ItemName.BorderColor = System.Drawing.Color.DarkGray;
             this.ItemName.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.ItemName.Location = new System.Drawing.Point(55, 81);
+            this.ItemName.Location = new System.Drawing.Point(55, 117);
             this.ItemName.Name = "ItemName";
-            this.ItemName.Size = new System.Drawing.Size(201, 20);
+            this.ItemName.Size = new System.Drawing.Size(234, 20);
             this.ItemName.TabIndex = 6;
+            this.ItemName.TabStop = false;
             this.ItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ItemName.TextChanged += new System.EventHandler(this.ItemName_TextChanged);
             // 
-            // spritePallete1
+            // ItemSprite
             // 
-            this.spritePallete1.Action = null;
-            this.spritePallete1.ItemControl = null;
-            this.spritePallete1.Location = new System.Drawing.Point(13, 30);
-            this.spritePallete1.Name = "spritePallete1";
-            this.spritePallete1.Size = new System.Drawing.Size(33, 33);
-            this.spritePallete1.TabIndex = 7;
+            this.ItemSprite.Action = null;
+            this.ItemSprite.Id = 0;
+            this.ItemSprite.ItemControl = null;
+            this.ItemSprite.Location = new System.Drawing.Point(13, 30);
+            this.ItemSprite.Name = "ItemSprite";
+            this.ItemSprite.Size = new System.Drawing.Size(33, 33);
+            this.ItemSprite.TabIndex = 7;
             // 
             // ItemControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.DefaultButton);
             this.Controls.Add(this.ItemName);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ItemId);
             this.Controls.Add(this.groupBox2);
@@ -375,7 +432,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemId)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemX)).EndInit();
@@ -384,6 +440,9 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DeleteButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DefaultButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,7 +460,7 @@
         private System.Windows.Forms.PictureBox SaveButton;
         private CustomTextBox ItemName;
         private System.Windows.Forms.GroupBox groupBox2;
-        private SpritePallete spritePallete1;
+        private SpritePallete ItemSprite;
         private System.Windows.Forms.ComboBox ItemFile;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -413,5 +472,8 @@
         private System.Windows.Forms.CheckBox ItemBlocked;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox ItemWalkable;
+        private System.Windows.Forms.PictureBox DefaultButton;
+        private System.Windows.Forms.PictureBox DeleteButton;
+        private System.Windows.Forms.Label label7;
     }
 }

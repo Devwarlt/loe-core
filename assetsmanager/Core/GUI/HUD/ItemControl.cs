@@ -10,6 +10,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 {
     public partial class ItemControl : UserControl
     {
+        private ControlState _state { get; set; }
         private Timer _clock { get; set; }
         private SpritePallete _spritePallete { get; set; }
         private string _origin { get; set; }
@@ -43,6 +44,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         private ItemControl(SpritePallete spritePallete, string origin, ContentType type, int id, string name,
             string file, int x, int y, bool blocked, bool walkable)
         {
+            _state = ControlState.Normal;
             _spritePallete = spritePallete;
             _origin = origin;
             _type = new ContentType[] { type, type };
@@ -74,42 +76,100 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                     break;
             }
 
-            ItemFile.Items.AddRange(Manager.Spritesheets.Keys.Select(key => key).ToArray());
-
             ItemId.Value = id;
             ItemName.Text = name;
+            ItemFile.Items.AddRange(Manager.Spritesheets.Keys.Select(key => key).ToArray());
             ItemFile.SelectedItem = file;
+            ItemX.Minimum = 0;
+            ItemX.Maximum = Manager.Spritesheets[file].Width - 1;
             ItemX.Value = x;
+            ItemY.Minimum = 0;
+            ItemY.Maximum = Manager.Spritesheets[file].Height - 1;
             ItemY.Value = y;
+            ItemSprite.Action = () => Invoke((MethodInvoker)delegate ()
+            {
+                _state = ControlState.Updating;
+
+                var spritesheetform = new SpritesheetForm() { File = file };
+                spritesheetform.ShowDialog();
+
+                if (spritesheetform.DialogResult == DialogResult.OK)
+                {
+                    _x[1] = spritesheetform.X;
+                    _y[1] = spritesheetform.Y;
+                    ItemSprite.SetImage(spritesheetform.Image);
+                }
+
+                ItemX.Value = _x[1];
+                ItemY.Value = _y[1];
+
+                _state = ControlState.Normal;
+            });
+            ItemSprite.SetImage(Manager.Spritesheets[file].Image[_x[1], _y[1]]);
             ItemBlocked.Checked = blocked;
             ItemWalkable.Checked = walkable;
 
             LostFocus += ItemControl_LostFocus;
 
-            _clock = new Timer(1000) { AutoReset = true };
+            _clock = new Timer(300) { AutoReset = true };
             _clock.Elapsed += delegate
             {
                 Invoke((MethodInvoker)delegate ()
                 {
-                    SaveButton.Visible = _type[0] != _type[1] || _id[0] != _id[1] || _name[0] != _name[1]
+                    var changes = _type[0] != _type[1] || _id[0] != _id[1] || _name[0] != _name[1]
                     || _file[0] != _file[1] || _x[0] != _x[1] || _y[0] != _y[1] || _blocked[0] != _blocked[1]
                     || _walkable[0] != _walkable[1];
+
+                    if (changes)
+                    {
+                        DefaultButton.Enabled = true;
+                        DefaultButton.Image = Properties.Resources.hud_cross;
+                        SaveButton.Enabled = true;
+                        SaveButton.Image = Properties.Resources.hud_check;
+                    }
+                    else
+                    {
+                        DefaultButton.Enabled = false;
+                        DefaultButton.Image = Properties.Resources.hud_cross_inactive;
+                        SaveButton.Enabled = false;
+                        SaveButton.Image = Properties.Resources.hud_check_inactive;
+                    }
                 });
             };
         }
 
         private void ItemControl_LostFocus(object sender, EventArgs e)
         {
-            ItemId.Value = _id[0];
-            ItemName.Text = _name[0];
-            ItemFile.SelectedItem = _file[0];
-            ItemX.Value = _x[0];
-            ItemY.Value = _y[0];
-            ItemBlocked.Checked = _blocked[0];
-            ItemWalkable.Checked = _walkable[0];
+            if (_state == ControlState.Normal)
+            {
+                ItemId.Value = _id[0];
+                ItemName.Text = _name[0];
+                ItemFile.SelectedItem = _file[0];
+                ItemX.Value = _x[0];
+                ItemY.Value = _y[0];
+                ItemSprite.SetImage(Manager.Spritesheets[_file[0]].Image[_x[0], _y[0]]);
+                ItemBlocked.Checked = _blocked[0];
+                ItemWalkable.Checked = _walkable[0];
+            }
         }
 
         private void ItemControl_Load(object sender, EventArgs e) => _clock.Start();
+
+        private void DefaultButton_Click(object sender, EventArgs e)
+        {
+            var box = MessageBox.Show("Do you want to restore to default values?", "Default", MessageBoxButtons.YesNo);
+
+            _state = ControlState.Updating;
+
+            if (box == DialogResult.Yes)
+            {
+                _state = ControlState.Normal;
+
+                ItemControl_LostFocus(sender, e);
+            }
+            else
+                _state = ControlState.Normal;
+        }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
@@ -366,14 +426,66 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
         private void ItemName_TextChanged(object sender, EventArgs e) => _name[1] = ItemName.Text;
 
-        private void ItemFile_SelectedIndexChanged(object sender, EventArgs e) => _file[1] = (string)ItemFile.SelectedItem;
+        private void ItemFile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _file[1] = (string)ItemFile.SelectedItem;
+            _x[1] = 0;
+            _y[1] = 0;
 
-        private void ItemX_ValueChanged(object sender, EventArgs e) => _x[1] = (int)ItemX.Value;
+            ItemX.Minimum = 0;
+            ItemX.Maximum = Manager.Spritesheets[_file[1]].Width - 1;
+            ItemX.Value = 0;
+            ItemY.Minimum = 0;
+            ItemY.Maximum = Manager.Spritesheets[_file[1]].Height - 1;
+            ItemY.Value = 0;
 
-        private void ItemY_ValueChanged(object sender, EventArgs e) => _y[1] = (int)ItemY.Value;
+            ItemSpriteUpdate();
+        }
+
+        private void ItemX_ValueChanged(object sender, EventArgs e)
+        {
+            _x[1] = (int)ItemX.Value;
+
+            ItemSpriteUpdate();
+        }
+
+        private void ItemY_ValueChanged(object sender, EventArgs e)
+        {
+            _y[1] = (int)ItemY.Value;
+
+            ItemSpriteUpdate();
+        }
 
         private void ItemBlocked_CheckedChanged(object sender, EventArgs e) => _blocked[1] = ItemBlocked.Checked;
 
         private void ItemWalkable_CheckedChanged(object sender, EventArgs e) => _walkable[1] = ItemWalkable.Checked;
+
+        private void ItemSpriteUpdate()
+        {
+            ItemSprite.Action = () => Invoke((MethodInvoker)delegate ()
+            {
+                _state = ControlState.Updating;
+
+                var spritesheetform = new SpritesheetForm() { File = _file[1] };
+                spritesheetform.ShowDialog();
+
+                if (spritesheetform.DialogResult == DialogResult.OK)
+                {
+                    _x[1] = spritesheetform.X;
+                    _y[1] = spritesheetform.Y;
+                    ItemSprite.SetImage(spritesheetform.Image);
+                }
+
+                ItemX.Value = _x[1];
+                ItemY.Value = _y[1];
+
+                _state = ControlState.Normal;
+            });
+            ItemSprite.SetImage(Manager.Spritesheets[_file[1]].Image[_x[1], _y[1]]);
+        }
+
+        private void DefaultIcon_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

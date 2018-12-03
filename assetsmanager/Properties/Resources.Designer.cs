@@ -73,9 +73,29 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hud_check_inactive {
+            get {
+                object obj = ResourceManager.GetObject("hud_check_inactive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hud_cross {
             get {
                 object obj = ResourceManager.GetObject("hud_cross", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_cross_inactive {
+            get {
+                object obj = ResourceManager.GetObject("hud_cross_inactive", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,16 +126,6 @@ namespace LoESoft.AssetsManager.Properties {
         internal static System.Drawing.Bitmap hud_plus {
             get {
                 object obj = ResourceManager.GetObject("hud_plus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap hud_png {
-            get {
-                object obj = ResourceManager.GetObject("hud_png", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

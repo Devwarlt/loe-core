@@ -20,7 +20,7 @@ namespace LoESoft.AssetsManager.Core.GUI
 {
     public partial class Manager : Form
     {
-        public static Dictionary<string, Image[,]> Spritesheets { get; set; }
+        public static Dictionary<string, SpritesContent> Spritesheets { get; set; }
         public static Dictionary<string, List<ObjectsContent>> XmlObjects { get; set; }
         public static Dictionary<string, List<ItemsContent>> XmlItems { get; set; }
         public static Dictionary<string, List<TilesContent>> XmlTiles { get; set; }
@@ -83,33 +83,15 @@ namespace LoESoft.AssetsManager.Core.GUI
             XmlObjects = new Dictionary<string, List<ObjectsContent>>();
             XmlItems = new Dictionary<string, List<ItemsContent>>();
             XmlTiles = new Dictionary<string, List<TilesContent>>();
-            Spritesheets = new Dictionary<string, Image[,]>();
+            Spritesheets = new Dictionary<string, SpritesContent>();
 
             LoadXmls();
             LoadSpritesheets();
 
-            var i = 0;
-
-            foreach (var spritesheet in SpriteLibrary.Spritesheets.OrderBy(name => name.Key))
-            {
-                var pngobject = new PngObject()
-                {
-                    Location = new Point(3, 3 + i * 42),
-                    Name = $"pngobject{i}",
-                    Size = new Size(188, 36),
-                    TabIndex = 2
-                };
-                pngobject.SetFileName(spritesheet.Key);
-                pngobject.SetFileSize(spritesheet.Value.Key);
-
-                SpritesheetPanel.Controls.Add(pngobject);
-
+            foreach (var spritesheet in SpriteLibrary.Spritesheets)
                 Spritesheets.Add(spritesheet.Key, CropSpritesheet(spritesheet.Value.Value));
 
-                i++;
-            }
-
-            i = 0;
+            var i = 0;
 
             MainTab.Controls.Remove(XmlPanel);
 
@@ -118,9 +100,9 @@ namespace LoESoft.AssetsManager.Core.GUI
                 AutoScroll = true,
                 BackColor = SystemColors.Info,
                 BorderStyle = BorderStyle.Fixed3D,
-                Location = new Point(550, 156),
+                Location = new Point(550, 202),
                 Name = "XmlPanel",
-                Size = new Size(220, 160),
+                Size = new Size(220, 335),
                 TabIndex = 1
             };
 
@@ -164,7 +146,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                         Size = new Size(33, 33),
                         TabIndex = 2
                     };
-                    xobjectpallete.SetImage(Spritesheets[xobject.TextureData.File][xobject.TextureData.X, xobject.TextureData.Y]);
+                    xobjectpallete.SetImage(Spritesheets[xobject.TextureData.File].Image[xobject.TextureData.X, xobject.TextureData.Y]);
 
                     palletes.Add(new KeyValuePair<int, SpritePallete>(xobject.Id, xobjectpallete));
                 }
@@ -177,7 +159,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                         Size = new Size(33, 33),
                         TabIndex = 2
                     };
-                    xitempallete.SetImage(Spritesheets[xitem.TextureData.File][xitem.TextureData.X, xitem.TextureData.Y]);
+                    xitempallete.SetImage(Spritesheets[xitem.TextureData.File].Image[xitem.TextureData.X, xitem.TextureData.Y]);
 
                     palletes.Add(new KeyValuePair<int, SpritePallete>(xitem.Id, xitempallete));
                 }
@@ -190,7 +172,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                         Size = new Size(33, 33),
                         TabIndex = 2
                     };
-                    xtilepallete.SetImage(Spritesheets[xtile.TextureData.File][xtile.TextureData.X, xtile.TextureData.Y]);
+                    xtilepallete.SetImage(Spritesheets[xtile.TextureData.File].Image[xtile.TextureData.X, xtile.TextureData.Y]);
 
                     palletes.Add(new KeyValuePair<int, SpritePallete>(xtile.Id, xtilepallete));
                 }
@@ -365,25 +347,30 @@ namespace LoESoft.AssetsManager.Core.GUI
                 return size / (1024 * 1024 * 1024) + " GB";
         }
 
-        private static Image[,] CropSpritesheet(Image image)
+        private static SpritesContent CropSpritesheet(Image image)
         {
             try
             {
                 var width = image.Width / 16;
                 var height = image.Height / 16;
-                var spriteitems = new Image[width, height];
+                var spritecontent = new SpritesContent()
+                {
+                    Width = width,
+                    Height = height,
+                    Image = new Image[width, height]
+                };
 
                 for (var x = 0; x < width; x++)
                     for (var y = 0; y < height; y++)
                     {
-                        spriteitems[x, y] = new Bitmap(16, 16);
+                        spritecontent.Image[x, y] = new Bitmap(16, 16);
 
-                        var graphics = Graphics.FromImage(spriteitems[x, y]);
+                        var graphics = Graphics.FromImage(spritecontent.Image[x, y]);
                         graphics.DrawImage(image, new Rectangle(0, 0, 16, 16), new Rectangle(x * 16, y * 16, 16, 16), GraphicsUnit.Pixel);
                         graphics.Dispose();
                     }
 
-                return spriteitems;
+                return spritecontent;
             }
             catch (Exception e) { App.Error(e); }
 
@@ -426,9 +413,9 @@ namespace LoESoft.AssetsManager.Core.GUI
                 AutoScroll = true,
                 BackColor = SystemColors.Info,
                 BorderStyle = BorderStyle.Fixed3D,
-                Location = new Point(550, 156),
+                Location = new Point(550, 202),
                 Name = "XmlPanel",
-                Size = new Size(220, 160),
+                Size = new Size(220, 335),
                 TabIndex = 1
             };
 

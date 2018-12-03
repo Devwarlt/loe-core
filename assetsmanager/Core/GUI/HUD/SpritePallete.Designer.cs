@@ -36,10 +36,11 @@
             // 
             this.SpriteBox.BackColor = System.Drawing.Color.Magenta;
             this.SpriteBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SpriteBox.Cursor = System.Windows.Forms.Cursors.Cross;
             this.SpriteBox.Location = new System.Drawing.Point(1, 1);
             this.SpriteBox.Name = "SpriteBox";
             this.SpriteBox.Size = new System.Drawing.Size(32, 32);
-            this.SpriteBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.SpriteBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.SpriteBox.TabIndex = 0;
             this.SpriteBox.TabStop = false;
             this.SpriteBox.Click += new System.EventHandler(this.SpriteBox_Click);

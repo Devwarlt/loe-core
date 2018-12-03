@@ -121,8 +121,14 @@
   <data name="hud_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\core\assets\sprites\hud-check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="hud_check_inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\core\assets\sprites\hud-check-inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="hud_cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\core\assets\sprites\hud-cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hud_cross_inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\core\assets\sprites\hud-cross-inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hud_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\core\assets\sprites\hud-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -132,9 +138,6 @@
   </data>
   <data name="hud_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\core\assets\sprites\hud-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="hud_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\core\assets\sprites\hud-save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
