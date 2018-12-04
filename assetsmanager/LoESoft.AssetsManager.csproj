@@ -269,6 +269,7 @@
       <DependentUpon>SpritesheetForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Structure\HelpHint.cs" />
+    <Compile Include="Core\Structure\XmlData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Core\GUI\HUD\HelpObject.resx">
       <DependentUpon>HelpObject.cs</DependentUpon>

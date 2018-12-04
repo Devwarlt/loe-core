@@ -1,6 +1,7 @@
 ﻿using LoESoft.AssetsManager.Core.Assets.Structure;
 using LoESoft.AssetsManager.Core.Assets.Structure.Exclusive;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using static LoESoft.AssetsManager.Core.Assets.Structure.Exclusive.LayerData;
@@ -34,48 +35,54 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         public ItemControl(SpritePallete spritePallete, string origin, ObjectsContent objectsContent)
             : this(spritePallete, origin, ContentType.Objects, objectsContent.LayerData?.Type ?? MapLayer.ABSTRACT, objectsContent.LayerData?.Group ?? string.Empty,
                   objectsContent.Id, objectsContent.Name, objectsContent.TextureData.File, objectsContent.TextureData.X,
-                  objectsContent.TextureData.Y, objectsContent.Blocked, false)
+                  objectsContent.TextureData.Y, objectsContent.TextureData?.Animated ?? false, objectsContent.Blocked, false)
             => ObjectsContent = objectsContent;
 
         public ItemControl(SpritePallete spritePallete, string origin, ItemsContent itemsContent)
             : this(spritePallete, origin, ContentType.Items, MapLayer.ABSTRACT, string.Empty,
                   itemsContent.Id, itemsContent.Name, itemsContent.TextureData.File, itemsContent.TextureData.X,
-                  itemsContent.TextureData.Y, false, false)
+                  itemsContent.TextureData.Y, false, false, false)
             => ItemsContent = ItemsContent;
 
         public ItemControl(SpritePallete spritePallete, string origin, TilesContent tilesContent)
             : this(spritePallete, origin, ContentType.Tiles, tilesContent.LayerData?.Type ?? MapLayer.ABSTRACT, tilesContent.LayerData?.Group ?? string.Empty,
                   tilesContent.Id, tilesContent.Name, tilesContent.TextureData.File, tilesContent.TextureData.X,
-                  tilesContent.TextureData.Y, false, tilesContent.Walkable)
+                  tilesContent.TextureData.Y, false, false, tilesContent.Walkable)
             => TilesContent = tilesContent;
 
         private ItemControl(SpritePallete spritePallete, string origin, ContentType type, MapLayer layer, string group, int id, string name,
-            string file, int x, int y, bool blocked, bool walkable)
+            string file, int x, int y, bool animated, bool blocked, bool walkable)
         {
             _state = ControlState.Normal;
             _spritePallete = spritePallete;
             _origin = origin;
             _type = new ContentType[] { type, type };
+            _layer = new MapLayer[] { layer, layer };
+            _group = new string[] { group, group };
             _id = new int[] { id, id };
             _name = new string[] { name, name };
             _file = new string[] { file, file };
             _x = new int[] { x, x };
             _y = new int[] { y, y };
+            _animated = new bool[] { animated, animated };
             _blocked = new bool[] { blocked, blocked };
             _walkable = new bool[] { walkable, walkable };
 
             InitializeComponent();
 
-            switch (_type[0])
+            switch (type)
             {
                 case ContentType.Objects:
                     {
                         ObjectsButton.Checked = true;
+                        ItemAnimated.Enabled = true;
+                        ItemAnimated.Checked = animated;
                         ItemBlocked.Enabled = true;
                     }
                     break;
 
                 case ContentType.Items: ItemsButton.Checked = true; break;
+
                 case ContentType.Tiles:
                     {
                         TilesButton.Checked = true;
@@ -83,6 +90,20 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                     }
                     break;
             }
+
+            switch (layer)
+            {
+                case MapLayer.UNDERGROUND: UndergroundButton.Checked = true; break;
+                case MapLayer.GROUND: GroundButton.Checked = true; break;
+                case MapLayer.OBJECT: ObjectButton.Checked = true; break;
+                case MapLayer.SKY: SkyButton.Checked = true; break;
+                default: break;
+            }
+
+            if (layer != MapLayer.ABSTRACT)
+                ItemGroup.Text = group;
+            else
+                ItemGroup.Enabled = false;
 
             ItemId.Value = id;
             ItemName.Text = name;
@@ -113,7 +134,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
                 _state = ControlState.Normal;
             });
-            ItemSprite.Image = Manager.Spritesheets[file].Image[_x[1], _y[1]];
+            ItemSprite.Image = Manager.Spritesheets[file].Image[x, y];
             ItemBlocked.Checked = blocked;
             ItemWalkable.Checked = walkable;
 
@@ -126,9 +147,16 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                 {
                     Invoke((MethodInvoker)delegate ()
                     {
-                        var changes = _type[0] != _type[1] || _id[0] != _id[1] || _name[0] != _name[1]
-                        || _file[0] != _file[1] || _x[0] != _x[1] || _y[0] != _y[1] || _blocked[0] != _blocked[1]
-                        || _walkable[0] != _walkable[1];
+                        if ((UndergroundButton.Checked || GroundButton.Checked || ObjectButton.Checked || SkyButton.Checked) && !ItemGroup.Enabled)
+                        {
+                            ItemGroup.Enabled = true;
+                            ItemGroup.Text = string.Empty;
+                        }
+
+                        var changes = _type[0] != _type[1] || _layer[0] != _layer[1] || _group[0] != _group[1] ||
+                        _id[0] != _id[1] || _name[0] != _name[1] || _file[0] != _file[1] || _x[0] != _x[1] ||
+                        _y[0] != _y[1] || _animated[0] != _animated[1] || _blocked[0] != _blocked[1] ||
+                        _walkable[0] != _walkable[1];
 
                         DefaultButton.Enabled = changes;
                         DefaultButton.Image = changes ? Properties.Resources.hud_cross : Properties.Resources.hud_cross_inactive;
@@ -144,6 +172,50 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         {
             if (_state == ControlState.Normal)
             {
+                ObjectsButton.Checked = false;
+                ItemsButton.Checked = false;
+                TilesButton.Checked = false;
+
+                switch (_type[0])
+                {
+                    case ContentType.Objects:
+                        {
+                            ObjectsButton.Checked = true;
+                            ItemAnimated.Enabled = true;
+                            ItemAnimated.Checked = _animated[0];
+                            ItemBlocked.Enabled = true;
+                        }
+                        break;
+
+                    case ContentType.Items: ItemsButton.Checked = true; break;
+
+                    case ContentType.Tiles:
+                        {
+                            TilesButton.Checked = true;
+                            ItemWalkable.Enabled = true;
+                        }
+                        break;
+                }
+
+                UndergroundButton.Checked = false;
+                GroundButton.Checked = false;
+                ObjectButton.Checked = false;
+                SkyButton.Checked = false;
+
+                switch (_layer[0])
+                {
+                    case MapLayer.UNDERGROUND: UndergroundButton.Checked = true; break;
+                    case MapLayer.GROUND: GroundButton.Checked = true; break;
+                    case MapLayer.OBJECT: ObjectButton.Checked = true; break;
+                    case MapLayer.SKY: SkyButton.Checked = true; break;
+                    default: break;
+                }
+
+                if (_layer[0] != MapLayer.ABSTRACT)
+                    ItemGroup.Text = _group[0];
+                else
+                    ItemGroup.Enabled = false;
+
                 ItemId.Value = _id[0];
                 ItemName.Text = _name[0];
                 ItemFile.SelectedItem = _file[0];
@@ -260,12 +332,21 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                 }
             }
 
+            var layerdata = new LayerData()
+            {
+                Type = _layer[1],
+                Group = _group[1]
+            };
+
             var texturedata = new TextureData()
             {
                 File = _file[1],
                 X = _x[1],
                 Y = _y[1]
             };
+
+            if (_type[1] == ContentType.Objects)
+                texturedata.Animated = _animated[1];
 
             switch (_type[0])
             {
@@ -279,6 +360,11 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                                 {
                                     xmlobject.Id = _id[1];
                                     xmlobject.Name = _name[1];
+
+                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                        xmlobject.LayerData = layerdata;
+
+                                    xmlobject.TextureData = texturedata;
                                     xmlobject.Blocked = _blocked[1];
                                 }
                                 return;
@@ -294,14 +380,21 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                                 break;
 
                             case ContentType.Tiles:
-                                Manager.XmlTiles[_origin].Add(new TilesContent()
                                 {
-                                    Type = _type[1],
-                                    Id = _id[1],
-                                    Name = _name[1],
-                                    TextureData = texturedata,
-                                    Walkable = _walkable[1],
-                                });
+                                    var xmltile = new TilesContent()
+                                    {
+                                        Type = _type[1],
+                                        Id = _id[1],
+                                        Name = _name[1],
+                                        TextureData = texturedata,
+                                        Walkable = _walkable[1],
+                                    };
+
+                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                        xmltile.LayerData = layerdata;
+
+                                    Manager.XmlTiles[_origin].Add(xmltile);
+                                }
                                 break;
                         }
 
@@ -316,32 +409,47 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                         switch (_type[1])
                         {
                             case ContentType.Objects:
-                                Manager.XmlObjects[_origin].Add(new ObjectsContent()
                                 {
-                                    Type = _type[1],
-                                    Id = _id[1],
-                                    Name = _name[1],
-                                    TextureData = texturedata,
-                                    Blocked = _blocked[1]
-                                });
+                                    var xmlobject = new ObjectsContent()
+                                    {
+                                        Type = _type[1],
+                                        Id = _id[1],
+                                        Name = _name[1],
+                                        TextureData = texturedata,
+                                        Blocked = _blocked[1]
+                                    };
+
+                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                        xmlobject.LayerData = layerdata;
+
+                                    Manager.XmlObjects[_origin].Add(xmlobject);
+                                }
                                 break;
 
                             case ContentType.Items:
                                 {
                                     xmlitem.Id = _id[1];
                                     xmlitem.Name = _name[1];
+                                    xmlitem.TextureData = texturedata;
                                 }
                                 return;
 
                             case ContentType.Tiles:
-                                Manager.XmlTiles[_origin].Add(new TilesContent()
                                 {
-                                    Type = _type[1],
-                                    Id = _id[1],
-                                    Name = _name[1],
-                                    TextureData = texturedata,
-                                    Walkable = _walkable[1]
-                                });
+                                    var xmltile = new TilesContent()
+                                    {
+                                        Type = _type[1],
+                                        Id = _id[1],
+                                        Name = _name[1],
+                                        TextureData = texturedata,
+                                        Walkable = _walkable[1],
+                                    };
+
+                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                        xmltile.LayerData = layerdata;
+
+                                    Manager.XmlTiles[_origin].Add(xmltile);
+                                }
                                 break;
                         }
 
@@ -356,14 +464,21 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                         switch (_type[1])
                         {
                             case ContentType.Objects:
-                                Manager.XmlObjects[_origin].Add(new ObjectsContent()
                                 {
-                                    Type = _type[1],
-                                    Id = _id[1],
-                                    Name = _name[1],
-                                    TextureData = texturedata,
-                                    Blocked = _blocked[1]
-                                });
+                                    var xmlobject = new ObjectsContent()
+                                    {
+                                        Type = _type[1],
+                                        Id = _id[1],
+                                        Name = _name[1],
+                                        TextureData = texturedata,
+                                        Blocked = _blocked[1]
+                                    };
+
+                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                        xmlobject.LayerData = layerdata;
+
+                                    Manager.XmlObjects[_origin].Add(xmlobject);
+                                }
                                 break;
 
                             case ContentType.Items:
@@ -380,6 +495,11 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                                 {
                                     xmltile.Id = _id[1];
                                     xmltile.Name = _name[1];
+
+                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                        xmltile.LayerData = layerdata;
+
+                                    xmltile.TextureData = texturedata;
                                     xmltile.Walkable = _walkable[1];
                                 }
                                 return;
@@ -391,8 +511,14 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             }
 
             _type[0] = _type[1];
+            _layer[0] = _layer[1];
+            _group[0] = _group[1];
             _id[0] = _id[1];
             _name[0] = _name[1];
+            _file[0] = _file[1];
+            _x[0] = _x[1];
+            _y[0] = _x[1];
+            _animated[0] = _animated[1];
             _blocked[0] = _blocked[1];
             _walkable[0] = _walkable[1];
             _spritePallete.ItemControl = this;
@@ -412,6 +538,8 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         {
             _type[1] = ContentType.Objects;
 
+            ItemAnimated.Enabled = true;
+            ItemAnimated.Checked = false;
             ItemBlocked.Enabled = true;
             ItemBlocked.Checked = false;
             ItemWalkable.Enabled = false;
@@ -422,6 +550,8 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         {
             _type[1] = ContentType.Items;
 
+            ItemAnimated.Enabled = false;
+            ItemAnimated.Checked = false;
             ItemBlocked.Enabled = false;
             ItemBlocked.Checked = false;
             ItemWalkable.Enabled = false;
@@ -432,11 +562,23 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         {
             _type[1] = ContentType.Tiles;
 
+            ItemAnimated.Enabled = false;
+            ItemAnimated.Checked = false;
             ItemBlocked.Enabled = false;
             ItemBlocked.Checked = false;
             ItemWalkable.Enabled = true;
             ItemWalkable.Checked = false;
         }
+
+        private void UndergroundButton_CheckedChanged(object sender, EventArgs e) => _layer[1] = MapLayer.UNDERGROUND;
+
+        private void GroundButton_CheckedChanged(object sender, EventArgs e) => _layer[1] = MapLayer.GROUND;
+
+        private void ObjectButton_CheckedChanged(object sender, EventArgs e) => _layer[1] = MapLayer.OBJECT;
+
+        private void SkyButton_CheckedChanged(object sender, EventArgs e) => _layer[1] = MapLayer.SKY;
+
+        private void ItemGroup_TextChanged(object sender, EventArgs e) => _group[1] = ItemGroup.Text;
 
         private void ItemId_ValueChanged(object sender, EventArgs e) => _id[1] = (int)ItemId.Value;
 
@@ -458,6 +600,8 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             ItemSpriteUpdate();
         }
 
+        private void ItemFile_DrawItem(object sender, DrawItemEventArgs e) => CenterComboBoxItems(sender, e);
+
         private void ItemX_ValueChanged(object sender, EventArgs e)
         {
             _x[1] = (int)ItemX.Value;
@@ -471,6 +615,8 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
             ItemSpriteUpdate();
         }
+
+        private void ItemAnimated_CheckedChanged(object sender, EventArgs e) => _animated[1] = ItemAnimated.Checked;
 
         private void ItemBlocked_CheckedChanged(object sender, EventArgs e) => _blocked[1] = ItemBlocked.Checked;
 
@@ -500,28 +646,28 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
             ItemSprite.Image = Manager.Spritesheets[_file[1]].Image[_x[1], _y[1]];
         }
 
-        private void UndergroundButton_CheckedChanged(object sender, EventArgs e)
+        public static void CenterComboBoxItems(object sender, DrawItemEventArgs e)
         {
-        }
+            if (sender is ComboBox cbx)
+            {
+                e.DrawBackground();
 
-        private void GroundButton_CheckedChanged(object sender, EventArgs e)
-        {
-        }
+                if (e.Index >= 0)
+                {
+                    var sf = new StringFormat
+                    {
+                        LineAlignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Center
+                    };
 
-        private void ObjectButton_CheckedChanged(object sender, EventArgs e)
-        {
-        }
+                    var brush = new SolidBrush(cbx.ForeColor);
 
-        private void SkyButton_CheckedChanged(object sender, EventArgs e)
-        {
-        }
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                        brush = (SolidBrush)SystemBrushes.HighlightText;
 
-        private void ItemGroup_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void ItemAnimated_CheckedChanged(object sender, EventArgs e)
-        {
+                    e.Graphics.DrawString(cbx.Items[e.Index].ToString(), cbx.Font, brush, e.Bounds, sf);
+                }
+            }
         }
     }
 }

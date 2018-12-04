@@ -1,6 +1,7 @@
 ﻿using LoESoft.AssetsManager.Core.Assets;
 using LoESoft.AssetsManager.Core.Assets.Structure;
 using LoESoft.AssetsManager.Core.Assets.Structure.Exclusive;
+using LoESoft.AssetsManager.Core.GUI.HUD;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -293,5 +294,9 @@ namespace LoESoft.AssetsManager.Core.GUI
             });
             ItemSprite.Image = Manager.Spritesheets[(string)ItemFile.SelectedItem].Image[(int)ItemX.Value, (int)ItemY.Value];
         }
+
+        private void ItemXml_DrawItem(object sender, DrawItemEventArgs e) => ItemControl.CenterComboBoxItems(sender, e);
+
+        private void ItemFile_DrawItem(object sender, DrawItemEventArgs e) => ItemControl.CenterComboBoxItems(sender, e);
     }
 }

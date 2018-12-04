@@ -121,10 +121,21 @@ namespace LoESoft.AssetsManager.Core.GUI
                 File.Move(oldpath, newpath);
             }
 
-            var xmls = new List<string>();
+            var xmls = new Dictionary<string, List<XDocument>>();
 
             foreach (var xml in XmlLibrary.Xmls)
-                xmls.Add(xml.Key);
+                xmls.Add(xml.Key, new List<XDocument>());
+
+            foreach (var xmlobject in XmlObjects)
+            {
+                XDocument xmlobjects = null;
+
+                foreach (var objectscontent in xmlobject.Value)
+                    ;
+
+                if (xmlobjects != null)
+                    xmls[xmlobject.Key].Add(xmlobjects);
+            }
         }
 
         private void FolderButton_Click(object sender, EventArgs e) => Process.Start($"{Path.Combine(BaseDir)}");

@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ItemName = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
             this.SaveButton = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ItemId = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ItemSprite = new LoESoft.AssetsManager.Core.GUI.HUD.SpritePallete();
+            this.ItemAnimated = new System.Windows.Forms.CheckBox();
             this.ItemFile = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -56,11 +55,12 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.SkyButton = new System.Windows.Forms.RadioButton();
             this.ObjectButton = new System.Windows.Forms.RadioButton();
-            this.ItemGroup = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
             this.GroundButton = new System.Windows.Forms.RadioButton();
             this.UndergroundButton = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
-            this.ItemAnimated = new System.Windows.Forms.CheckBox();
+            this.ItemGroup = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
+            this.ItemName = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
+            this.ItemSprite = new LoESoft.AssetsManager.Core.GUI.HUD.SpritePallete();
             ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemId)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -71,18 +71,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ItemName
-            // 
-            this.ItemName.BackColor = System.Drawing.SystemColors.Info;
-            this.ItemName.BorderColor = System.Drawing.Color.DarkGray;
-            this.ItemName.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.ItemName.Location = new System.Drawing.Point(97, 249);
-            this.ItemName.Name = "ItemName";
-            this.ItemName.Size = new System.Drawing.Size(195, 20);
-            this.ItemName.TabIndex = 18;
-            this.ItemName.TabStop = false;
-            this.ItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // SaveButton
             // 
@@ -174,33 +162,34 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Texture Data";
             // 
-            // ItemSprite
+            // ItemAnimated
             // 
-            this.ItemSprite.Action = null;
-            this.ItemSprite.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.ItemSprite.Id = 0;
-            this.ItemSprite.Image = null;
-            this.ItemSprite.ItemControl = null;
-            this.ItemSprite.Location = new System.Drawing.Point(13, 30);
-            this.ItemSprite.Name = "ItemSprite";
-            this.ItemSprite.Origin = null;
-            this.ItemSprite.ParentId = 0;
-            this.ItemSprite.Size = new System.Drawing.Size(33, 33);
-            this.ItemSprite.TabIndex = 7;
-            this.ItemSprite.Type = LoESoft.AssetsManager.Core.Assets.Structure.XmlContent.ContentType.Objects;
+            this.ItemAnimated.AutoSize = true;
+            this.ItemAnimated.Enabled = false;
+            this.ItemAnimated.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ItemAnimated.Location = new System.Drawing.Point(23, 80);
+            this.ItemAnimated.Name = "ItemAnimated";
+            this.ItemAnimated.Size = new System.Drawing.Size(70, 17);
+            this.ItemAnimated.TabIndex = 0;
+            this.ItemAnimated.TabStop = false;
+            this.ItemAnimated.Text = "Animated";
+            this.ItemAnimated.UseVisualStyleBackColor = true;
             // 
             // ItemFile
             // 
             this.ItemFile.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemFile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ItemFile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ItemFile.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.ItemFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ItemFile.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.ItemFile.ForeColor = System.Drawing.SystemColors.Desktop;
             this.ItemFile.FormattingEnabled = true;
             this.ItemFile.Location = new System.Drawing.Point(85, 23);
             this.ItemFile.Name = "ItemFile";
             this.ItemFile.Size = new System.Drawing.Size(195, 21);
             this.ItemFile.TabIndex = 4;
             this.ItemFile.TabStop = false;
+            this.ItemFile.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ItemFile_DrawItem);
             this.ItemFile.SelectedIndexChanged += new System.EventHandler(this.ItemFile_SelectedIndexChanged);
             // 
             // label5
@@ -392,6 +381,8 @@
             // ItemXml
             // 
             this.ItemXml.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemXml.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ItemXml.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ItemXml.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItemXml.ForeColor = System.Drawing.SystemColors.Desktop;
             this.ItemXml.FormattingEnabled = true;
@@ -399,6 +390,7 @@
             this.ItemXml.Name = "ItemXml";
             this.ItemXml.Size = new System.Drawing.Size(195, 21);
             this.ItemXml.TabIndex = 19;
+            this.ItemXml.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ItemXml_DrawItem);
             // 
             // label8
             // 
@@ -451,18 +443,6 @@
             this.ObjectButton.Text = "Object";
             this.ObjectButton.UseVisualStyleBackColor = true;
             // 
-            // ItemGroup
-            // 
-            this.ItemGroup.BackColor = System.Drawing.SystemColors.Info;
-            this.ItemGroup.BorderColor = System.Drawing.Color.DarkGray;
-            this.ItemGroup.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.ItemGroup.Location = new System.Drawing.Point(85, 65);
-            this.ItemGroup.Name = "ItemGroup";
-            this.ItemGroup.Size = new System.Drawing.Size(195, 20);
-            this.ItemGroup.TabIndex = 6;
-            this.ItemGroup.TabStop = false;
-            this.ItemGroup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // GroundButton
             // 
             this.GroundButton.AutoSize = true;
@@ -497,18 +477,44 @@
             this.label9.TabIndex = 3;
             this.label9.Text = "Group";
             // 
-            // ItemAnimated
+            // ItemGroup
             // 
-            this.ItemAnimated.AutoSize = true;
-            this.ItemAnimated.Enabled = false;
-            this.ItemAnimated.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ItemAnimated.Location = new System.Drawing.Point(23, 80);
-            this.ItemAnimated.Name = "ItemAnimated";
-            this.ItemAnimated.Size = new System.Drawing.Size(70, 17);
-            this.ItemAnimated.TabIndex = 0;
-            this.ItemAnimated.TabStop = false;
-            this.ItemAnimated.Text = "Animated";
-            this.ItemAnimated.UseVisualStyleBackColor = true;
+            this.ItemGroup.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemGroup.BorderColor = System.Drawing.Color.DarkGray;
+            this.ItemGroup.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemGroup.Location = new System.Drawing.Point(85, 65);
+            this.ItemGroup.Name = "ItemGroup";
+            this.ItemGroup.Size = new System.Drawing.Size(195, 20);
+            this.ItemGroup.TabIndex = 6;
+            this.ItemGroup.TabStop = false;
+            this.ItemGroup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // ItemName
+            // 
+            this.ItemName.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemName.BorderColor = System.Drawing.Color.DarkGray;
+            this.ItemName.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemName.Location = new System.Drawing.Point(97, 249);
+            this.ItemName.Name = "ItemName";
+            this.ItemName.Size = new System.Drawing.Size(195, 20);
+            this.ItemName.TabIndex = 18;
+            this.ItemName.TabStop = false;
+            this.ItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // ItemSprite
+            // 
+            this.ItemSprite.Action = null;
+            this.ItemSprite.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.ItemSprite.Id = 0;
+            this.ItemSprite.Image = null;
+            this.ItemSprite.ItemControl = null;
+            this.ItemSprite.Location = new System.Drawing.Point(13, 30);
+            this.ItemSprite.Name = "ItemSprite";
+            this.ItemSprite.Origin = null;
+            this.ItemSprite.ParentId = 0;
+            this.ItemSprite.Size = new System.Drawing.Size(33, 33);
+            this.ItemSprite.TabIndex = 7;
+            this.ItemSprite.Type = LoESoft.AssetsManager.Core.Assets.Structure.XmlContent.ContentType.Objects;
             // 
             // AddItemForm
             // 
