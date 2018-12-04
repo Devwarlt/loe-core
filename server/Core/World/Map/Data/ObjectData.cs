@@ -23,8 +23,8 @@ namespace LoESoft.Server.Core.World.Map.Data
                 Y = entity.Y,
                 IsPlayer = entity.IsPlayer,
                 IsEntity = entity.IsEntity,
-                LastDirection = (entity.IsPlayer || entity.IsEntity) ? (int)(entity as Entity).Direction : -1,
-                Stats = entity.ExportStat()
+                Stats = entity.ExportStat(),
+                LastDirection = (entity.IsPlayer || entity.IsEntity) ? (int)(entity as Entity).Direction : -1
             };
     }
 }

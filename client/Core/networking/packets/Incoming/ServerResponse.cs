@@ -1,6 +1,8 @@
 ﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Screens;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Concurrent;
 using System.Drawing;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
@@ -13,9 +15,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         [JsonIgnore]
         public override PacketID PacketID => PacketID.SERVER_RESPONSE;
-
-        // result '-1' -> error
-        // result '0' -> success
+        
         public override void Handle(GameUser gameUser)
         {
             App.Info($"({From} [{Result}]) {Content}");
@@ -34,11 +34,11 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     CreateNewCharacter();
                     break;
 
-                case "LoadCharacter": // TODO.
-                    HandleCharacterLoad();
+                case "LoadCharacter":
+                    HandleCharacterLoad(gameUser);
                     break;
 
-                case "Server.Character.UnlockedCharacters":
+                case "UnlockedCharacters":
                     HandleUnlockedCharacters();
                     break;
             }
@@ -72,7 +72,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                 },
                 Result == 0, ContentAlignment.MiddleCenter);
 
-        public void HandleCharacterLoad()
+        public void HandleCharacterLoad(GameUser user)
         {
             if (Result == 0)
             {
@@ -82,7 +82,8 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     var id = int.Parse(content[0]);
                     var type = int.Parse(content[1]);
 
-                    GameApplication.CharacterScreen.LoadGame(id, type);
+                    ScreenManager.DispatchScreen(new LoadingScreen(new ConcurrentQueue<Action>(),
+                    GameApplication.GameScreen = new GameScreen(user, id, type)));
                 }
             }
             else

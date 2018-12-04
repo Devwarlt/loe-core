@@ -13,6 +13,8 @@
         CREATE_NEW_CHARACTER = 8,
         SERVER_RESPONSE = 9,
         LOAD_MAP = 10,
-        CLIENT_REPONSE = 11
+        CLIENT_REPONSE = 11,
+        INVENTORY_SWAP = 12,
+        PLAYER_UPDATE = 13
     }
 }

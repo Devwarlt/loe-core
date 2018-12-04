@@ -89,17 +89,17 @@
     <Compile Include="Core\Game\Objects\Entity.cs" />
     <Compile Include="Core\Game\Objects\Player.cs" />
     <Compile Include="Core\Game\Objects\Direction.cs" />
-    <Compile Include="Core\Game\Objects\Stats\Stat.cs" />
+    <Compile Include="Core\Game\Objects\Stats\StatType.cs" />
     <Compile Include="Core\Game\Objects\Tile.cs" />
     <Compile Include="Core\Game\PathFinder\AStar.cs" />
     <Compile Include="Core\Game\PathFinder\PathNode.cs" />
-    <Compile Include="Core\Game\User\Data\Inventory.cs" />
     <Compile Include="Core\Game\User\Data\Item.cs" />
     <Compile Include="Core\Game\User\GamePlayer.cs" />
     <Compile Include="Core\Game\User\GUI\Icon\IconTab.cs" />
     <Compile Include="Core\Game\User\GUI\PlayerHUD.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\InventoryView.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\ItemCell.cs" />
+    <Compile Include="Core\Game\User\GUI\UI\Elements\UI\ActiveDescriptionBox.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\UI\DescriptionPanel.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\StatView.cs" />
     <Compile Include="Core\Game\User\GUI\UI\MiniMap.cs" />
@@ -139,12 +139,14 @@
     </Compile>
     <Compile Include="Core\Models\Position.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\GamePlayerUpdate.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\LoadMap.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ServerResponse.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ServerMove.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Update.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\CreateNewCharacter.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\ClientResponse.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\InventorySwap.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Load.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\ClientMove.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Register.cs" />

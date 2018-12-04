@@ -26,7 +26,7 @@ namespace LoESoft.Client.Core.Screens
             Camera = new GameCamera();
             Camera.Update(Controller.Player);
         }
-
+        
         public override void OnScreenCreate()
         {
         }

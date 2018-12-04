@@ -38,25 +38,21 @@ namespace LoESoft.Server.Core.Networking
             {
                 TcpSocket.BeginAccept(result =>
                 {
-                    try
+                    var tcpSocket = TcpSocket.EndAccept(result);
+
+                    if (tcpSocket != null)
                     {
-                        var tcpSocket = TcpSocket.EndAccept(result);
-
-                        if (tcpSocket != null)
+                        var client = new Client(Manager)
                         {
-                            var client = new Client(Manager)
-                            {
-                                Id = Interlocked.Increment(ref Client.LatestId),
-                                TcpSocket = tcpSocket
-                            };
+                            Id = Interlocked.Increment(ref Client.LatestId),
+                            TcpSocket = tcpSocket
+                        };
 
-                            if (Clients.TryAdd(client.Id, client))
-                                client.Handle();
-                        }
-
-                        StartAccept();
+                        if (Clients.TryAdd(client.Id, client))
+                            client.Handle();
                     }
-                    catch (ObjectDisposedException) { }
+
+                    StartAccept();
                 }, null);
             }
             catch (ObjectDisposedException) { }

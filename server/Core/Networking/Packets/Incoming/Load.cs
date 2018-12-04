@@ -34,19 +34,19 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 });
             else
             {
-                client.Player = new Player(client.Manager, client, getCharacterData);
-
                 client.SendPacket(new LoadMap()
                 {
                     MapWidth = WorldMap.WIDTH,
                     MapHeight = WorldMap.HEIGHT
                 });
 
+                client.Player = new Player(client.Manager, client, getCharacterData);
+
                 client.SendPacket(new ServerResponse()
                 {
                     From = "LoadCharacter",
                     Result = 0,
-                    Content = client.Player.ObjectId + "," + getCharacterData.Class.ToString()
+                    Content = $"{client.Player.ObjectId},{getCharacterData.Class.ToString()}",
                 });
 
                 client.Manager.TryAddPlayer(client);

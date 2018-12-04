@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
+﻿using LoESoft.Client.Assets;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms
 {
@@ -9,14 +9,6 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
             : base(0, 0, GameApplication.WIDTH, GameApplication.HEIGHT, texture2D) { }
 
         public FilledRectangle(int x, int y, int width, int height, RGBColor color = null, float alpha = 1)
-            : base(x, y, width, height, null, color, alpha) { }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if (Visible)
-                spriteBatch.FillRectangle(SpriteRectangle, SpriteColor);
-
-            base.Draw(spriteBatch);
-        }
+            : base(x, y, width, height, AssetLibrary.Images["rectImage"], color, alpha) { }
     }
 }

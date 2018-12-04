@@ -53,13 +53,10 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public virtual void ImportStat(string export)
         {
-            var stats = JsonConvert.DeserializeObject<List<string>>(export);
+            var stats = JsonConvert.DeserializeObject<IEnumerable<KeyValuePair<int, object>>>(export);
 
             foreach (var i in stats)
-            {
-                var stat = JsonConvert.DeserializeObject<Stat>(i);
-                ChangeStat(stat.StatType, stat.Value);
-            }
+                ChangeStat(i.Key, i.Value);
         }
 
         public virtual void ChangeStat(int type, object value)

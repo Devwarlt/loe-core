@@ -1,4 +1,6 @@
-﻿namespace LoESoft.Server.Utils
+﻿using System;
+
+namespace LoESoft.Server.Utils
 {
     public class WorldTime
     {
@@ -11,6 +13,12 @@
         Down = 1,
         Left = 2,
         Right = 3
+    }
+    public static class LoERandom
+    {
+        static Random rand = new Random();
+
+        public static int Next(int min, int max) => rand.Next(min, max);
     }
     public class Point
     {

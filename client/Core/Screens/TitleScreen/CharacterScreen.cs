@@ -47,15 +47,10 @@ namespace LoESoft.Client.Core.Screens
         private void OnPlay(object sender, EventArgs e)
         {
             if (CharacterSettings.CurrentCharacterId != -1)
+            {
                 _gameUser.SendPacket(new Load() { CharacterIndex = CharacterSettings.CurrentCharacterId });
-        }
-
-        public void LoadGame(int objectId, int classType)
-        {
-            var loading = new ConcurrentQueue<Action>();
-
-            ScreenManager.DispatchScreen(new LoadingScreen(loading,
-                GameApplication.GameScreen = new GameScreen(_gameUser, objectId, classType)));
+                App.Warn("Send Load");
+            }
         }
 
         private void OnExit(object sender, EventArgs e) => ScreenManager.Close();
@@ -87,7 +82,7 @@ namespace LoESoft.Client.Core.Screens
 
             _gameUser.SendPacket(new ClientResponse()
             {
-                From = "Client.Character.GetUnlockedCharacters",
+                From = "GetUnlockedCharacters",
                 Result = 0,
                 Content = ""
             });

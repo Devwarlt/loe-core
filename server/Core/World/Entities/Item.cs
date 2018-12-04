@@ -1,4 +1,5 @@
-﻿using LoESoft.Server.Assets.Xml.Structure;
+﻿using LoESoft.Server.Assets.Xml;
+using LoESoft.Server.Assets.Xml.Structure;
 
 namespace LoESoft.Server.Core.World.Entities
 {
@@ -25,9 +26,14 @@ namespace LoESoft.Server.Core.World.Entities
         public int Id { get; set; }
         public ItemData Data { get; set; }
 
-        public static Item Create(ItemsContent content) => new Item()
+        public Item(int id)
         {
-            Id = content.Id,
+            Id = id;
+            Data = ItemData.Default((ItemsContent)XmlLibrary.ItemsXml[Id]);
+        }
+
+        public static Item Create(ItemsContent content) => new Item(content.Id)
+        {
             Data = ItemData.Default(content)
         };
     }
