@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace LoESoft.Dlls.MapEditor
 {
@@ -32,8 +33,8 @@ namespace LoESoft.Dlls.MapEditor
 
         public LoEMapper(string basedir, bool enableCompression, Action<string> log)
         {
-            MainDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            BaseDir = basedir;
+            MainDir = Path.GetPathRoot(Environment.SystemDirectory);
+            BaseDir = Path.Combine(MainDir, basedir);
             EnableCompression = enableCompression;
 
             _log = log;

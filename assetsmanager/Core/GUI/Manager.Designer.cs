@@ -36,13 +36,13 @@
             this.SpritesheetCountLabel = new System.Windows.Forms.Label();
             this.LoadAssetsButton = new System.Windows.Forms.Button();
             this.XmlPanel = new System.Windows.Forms.Panel();
-            this.SpritesheetPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ContentPanel = new System.Windows.Forms.Panel();
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
-            this.FolderIcon = new System.Windows.Forms.PictureBox();
+            this.AddButton = new System.Windows.Forms.PictureBox();
+            this.FolderButton = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.WorkingContentLabel = new System.Windows.Forms.Label();
             this.WorkingTitleLabel = new System.Windows.Forms.Label();
@@ -54,7 +54,8 @@
             this.SplitPanels.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderButton)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,13 +114,18 @@
             // 
             // LoadAssetsButton
             // 
-            this.LoadAssetsButton.Location = new System.Drawing.Point(580, 6);
+            this.LoadAssetsButton.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.LoadAssetsButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LoadAssetsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoadAssetsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoadAssetsButton.ForeColor = System.Drawing.Color.Transparent;
+            this.LoadAssetsButton.Location = new System.Drawing.Point(550, 6);
             this.LoadAssetsButton.Name = "LoadAssetsButton";
-            this.LoadAssetsButton.Size = new System.Drawing.Size(190, 24);
+            this.LoadAssetsButton.Size = new System.Drawing.Size(160, 24);
             this.LoadAssetsButton.TabIndex = 0;
             this.LoadAssetsButton.TabStop = false;
             this.LoadAssetsButton.Text = "Load Assets";
-            this.LoadAssetsButton.UseVisualStyleBackColor = true;
+            this.LoadAssetsButton.UseVisualStyleBackColor = false;
             this.LoadAssetsButton.Click += new System.EventHandler(this.LoadAssetsButton_Click);
             // 
             // XmlPanel
@@ -127,27 +133,17 @@
             this.XmlPanel.AutoScroll = true;
             this.XmlPanel.BackColor = System.Drawing.SystemColors.Info;
             this.XmlPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.XmlPanel.Location = new System.Drawing.Point(550, 156);
+            this.XmlPanel.Location = new System.Drawing.Point(550, 202);
             this.XmlPanel.Name = "XmlPanel";
-            this.XmlPanel.Size = new System.Drawing.Size(220, 160);
+            this.XmlPanel.Size = new System.Drawing.Size(220, 335);
             this.XmlPanel.TabIndex = 1;
-            // 
-            // SpritesheetPanel
-            // 
-            this.SpritesheetPanel.AutoScroll = true;
-            this.SpritesheetPanel.BackColor = System.Drawing.SystemColors.Info;
-            this.SpritesheetPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SpritesheetPanel.Location = new System.Drawing.Point(550, 368);
-            this.SpritesheetPanel.Name = "SpritesheetPanel";
-            this.SpritesheetPanel.Size = new System.Drawing.Size(220, 160);
-            this.SpritesheetPanel.TabIndex = 1;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.SpritesheetCountLabel);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox2.Location = new System.Drawing.Point(550, 322);
+            this.groupBox2.Location = new System.Drawing.Point(550, 156);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(220, 40);
             this.groupBox2.TabIndex = 0;
@@ -197,11 +193,11 @@
             // MainTab
             // 
             this.MainTab.BackColor = System.Drawing.SystemColors.Control;
-            this.MainTab.Controls.Add(this.FolderIcon);
+            this.MainTab.Controls.Add(this.AddButton);
+            this.MainTab.Controls.Add(this.FolderButton);
+            this.MainTab.Controls.Add(this.groupBox2);
             this.MainTab.Controls.Add(this.LoadAssetsButton);
             this.MainTab.Controls.Add(this.ContentPanel);
-            this.MainTab.Controls.Add(this.SpritesheetPanel);
-            this.MainTab.Controls.Add(this.groupBox2);
             this.MainTab.Controls.Add(this.groupBox3);
             this.MainTab.Controls.Add(this.groupBox1);
             this.MainTab.Controls.Add(this.XmlPanel);
@@ -212,16 +208,33 @@
             this.MainTab.TabIndex = 0;
             this.MainTab.Text = "Main";
             // 
-            // FolderIcon
+            // AddButton
             // 
-            this.FolderIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FolderIcon.Image = global::LoESoft.AssetsManager.Properties.Resources.folder_icon;
-            this.FolderIcon.Location = new System.Drawing.Point(550, 6);
-            this.FolderIcon.Name = "FolderIcon";
-            this.FolderIcon.Size = new System.Drawing.Size(24, 24);
-            this.FolderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.FolderIcon.TabIndex = 4;
-            this.FolderIcon.TabStop = false;
+            this.AddButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.AddButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AddButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_plus;
+            this.AddButton.Location = new System.Drawing.Point(716, 6);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(24, 24);
+            this.AddButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.AddButton.TabIndex = 4;
+            this.AddButton.TabStop = false;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // FolderButton
+            // 
+            this.FolderButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.FolderButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.FolderButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FolderButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_folder;
+            this.FolderButton.Location = new System.Drawing.Point(746, 6);
+            this.FolderButton.Name = "FolderButton";
+            this.FolderButton.Size = new System.Drawing.Size(24, 24);
+            this.FolderButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.FolderButton.TabIndex = 4;
+            this.FolderButton.TabStop = false;
+            this.FolderButton.Click += new System.EventHandler(this.FolderButton_Click);
             // 
             // groupBox3
             // 
@@ -272,10 +285,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.TabControl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Manager";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoESoft - Assets Manager";
             this.Load += new System.EventHandler(this.Manager_Load);
             this.groupBox1.ResumeLayout(false);
@@ -287,7 +301,8 @@
             this.SplitPanels.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.FolderIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddButton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FolderButton)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -303,17 +318,17 @@
         private System.Windows.Forms.Label XmlCountLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel XmlPanel;
-        private System.Windows.Forms.Panel SpritesheetPanel;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel ContentPanel;
         private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage MainTab;
         private System.Windows.Forms.TabPage HelpTab;
         private System.Windows.Forms.SplitContainer SplitPanels;
-        private System.Windows.Forms.PictureBox FolderIcon;
+        private System.Windows.Forms.PictureBox FolderButton;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label WorkingContentLabel;
         private System.Windows.Forms.Label WorkingTitleLabel;
+        private System.Windows.Forms.PictureBox AddButton;
     }
 }
 

@@ -36,7 +36,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>loesoft-new.ico</ApplicationIcon>
+    <ApplicationIcon>Core\Assets\Sprites\loesoft.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -178,12 +178,32 @@
     <Compile Include="Core\Assets\Structure\Exclusive\TextureData.cs" />
     <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
     <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
+    <Compile Include="Core\Assets\Structure\SpriteData.cs" />
+    <Compile Include="Core\Assets\Structure\SpritesContent.cs" />
     <Compile Include="Core\Assets\Structure\SpritesheetFile.cs" />
     <Compile Include="Core\Assets\Structure\TilesContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlContent.ContentType.cs" />
     <Compile Include="Core\Assets\Structure\XmlContent.cs" />
     <Compile Include="Core\Assets\Structure\XmlFile.cs" />
     <Compile Include="Core\Assets\XmlLibrary.cs" />
+    <Compile Include="Core\GUI\AddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\AddForm.Designer.cs">
+      <DependentUpon>AddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\AddItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\AddItemForm.Designer.cs">
+      <DependentUpon>AddItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GUI\AddXmlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\AddXmlForm.Designer.cs">
+      <DependentUpon>AddXmlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\GUI\HUD\CustomTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -193,17 +213,14 @@
     <Compile Include="Core\GUI\HUD\HelpObject.Designer.cs">
       <DependentUpon>HelpObject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\GUI\HUD\ItemControl.ControlState.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Core\GUI\HUD\ItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Core\GUI\HUD\ItemControl.Designer.cs">
       <DependentUpon>ItemControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Core\GUI\HUD\PngObject.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Core\GUI\HUD\PngObject.Designer.cs">
-      <DependentUpon>PngObject.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\GUI\HUD\SpritePallete.cs">
       <SubType>UserControl</SubType>
@@ -224,20 +241,35 @@
       <DependentUpon>Manager.cs</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
+    <EmbeddedResource Include="Core\GUI\AddForm.resx">
+      <DependentUpon>AddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\AddItemForm.resx">
+      <DependentUpon>AddItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\AddXmlForm.resx">
+      <DependentUpon>AddXmlForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\HUD\ItemControl.resx">
       <DependentUpon>ItemControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\HUD\SpritePallete.resx">
       <DependentUpon>SpritePallete.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Core\GUI\SpritesheetForm.resx">
+      <DependentUpon>SpritesheetForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\Help\Hints.json" />
+    <Compile Include="Core\GUI\SpritesheetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\GUI\SpritesheetForm.Designer.cs">
+      <DependentUpon>SpritesheetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Structure\HelpHint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Core\GUI\HUD\HelpObject.resx">
       <DependentUpon>HelpObject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\GUI\HUD\PngObject.resx">
-      <DependentUpon>PngObject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\GUI\HUD\XmlObject.resx">
       <DependentUpon>XmlObject.cs</DependentUpon>
@@ -247,19 +279,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -270,13 +302,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="folder-icon.png" />
-    <Content Include="loesoft-new.ico" />
-    <None Include="save-icon.png" />
-    <None Include="xml-icon.png" />
-    <None Include="png-icon.png" />
+    <Content Include="Core\Assets\Sprites\hud-check-inactive.png" />
+    <Content Include="Core\Assets\Sprites\hud-check.png" />
+    <Content Include="Core\Assets\Sprites\hud-cross-inactive.png" />
+    <Content Include="Core\Assets\Sprites\hud-cross.png" />
+    <Content Include="Core\Assets\Sprites\hud-folder.png" />
+    <Content Include="Core\Assets\Sprites\hud-minus.png" />
+    <Content Include="Core\Assets\Sprites\hud-plus-inactive.png" />
+    <Content Include="Core\Assets\Sprites\hud-plus.png" />
+    <Content Include="Core\Assets\Sprites\hud-save.png" />
+    <Content Include="Core\Assets\Sprites\hud-xml.png" />
+    <Content Include="Core\Assets\Sprites\loesoft.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\server\LoESoft.Server.csproj">
+      <Project>{728A3882-9A81-4556-862D-C5F356679289}</Project>
+      <Name>LoESoft.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

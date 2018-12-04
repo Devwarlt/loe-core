@@ -15,19 +15,25 @@ namespace LoESoft.Server.Core.Database
     public class Database : LoEDb, IDisposable
     {
         public static long LastAccountId = 0;
-        public static string AccountsPath => "accounts";
-        public static string CharactersPath => "characters";
+
         public static ConcurrentDictionary<KeyValuePair<string, string>, Account> Accounts { get; set; }
         public static ConcurrentDictionary<KeyValuePair<long, long>, Character> Characters { get; set; }
 
-        public Database() : base($"{App.Name}-base", (message) => App.Warn(message))
+        public const string AccountSubFolder = "Accounts";
+        public const string CharacterSubFolder = "Characters";
+
+        public string AccountsDir => GetSubDirectory(AccountSubFolder);
+        public string CharactersDir => GetSubDirectory(CharacterSubFolder);
+
+        public Database()
+            : base(App.Name, true, (message) => App.Warn(message))
         {
             Accounts = new ConcurrentDictionary<KeyValuePair<string, string>, Account>();
             Characters = new ConcurrentDictionary<KeyValuePair<long, long>, Character>();
 
             CreateMainDirectory();
-            CreateSubDirectory(AccountsPath);
-            CreateSubDirectory(CharactersPath);
+            CreateSubDirectory(AccountSubFolder);
+            CreateSubDirectory(CharacterSubFolder);
 
             LoadAccounts();
             LoadCharacters();
@@ -36,37 +42,37 @@ namespace LoESoft.Server.Core.Database
         }
 
         private void LoadAccounts()
-        {
-            foreach (var i in Directory.EnumerateFiles(Path.Combine(MainDir, $"/{BaseDir}/{AccountsPath}/"), "*.json"))
+            => Directory.EnumerateFiles(AccountsDir, Format).Select(file =>
             {
-                var account = Load<Account>(i);
+                var account = Load<Account>(AccountsDir, Path.GetFileNameWithoutExtension(new FileInfo(file).Name));
 
                 if (account != null)
                     Accounts.TryAdd(new KeyValuePair<string, string>(account.Name, account.Password), account);
-            }
-        }
+
+                return file;
+            }).ToList();
 
         private void LoadCharacters()
-        {
-            foreach (var i in Directory.EnumerateFiles(Path.Combine(MainDir, $"/{BaseDir}/{CharactersPath}/"), "*.json"))
+            => Directory.EnumerateFiles(CharactersDir, Format).Select(file =>
             {
-                var character = Load<Character>(i);
+                var character = Load<Character>(CharactersDir, Path.GetFileNameWithoutExtension(new FileInfo(file).Name));
 
                 if (character != null)
                     Characters.TryAdd(new KeyValuePair<long, long>(character.AccountId, character.Id), character);
-            }
-        }
+
+                return file;
+            }).ToList();
 
         private void SaveAccounts()
         {
             foreach (var i in Accounts.Values)
-                Save(AccountsPath, $"account.{i.Id}", i);
+                Save(AccountsDir, $"account.{i.Id}", i);
         }
 
         private void SaveCharacters()
         {
             foreach (var i in Characters.Values)
-                Save(CharactersPath, $"character.{i.Id}", i);
+                Save(CharactersDir, $"character.{i.Id}", i);
         }
 
         public Account GetAccountByCredentials(string name, string password)

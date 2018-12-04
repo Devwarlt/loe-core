@@ -21,7 +21,8 @@ namespace LoESoft.AssetsManager.Core.Assets
         private static void LoadContents(List<SpritesheetFile> spritesheets)
         {
             foreach (var spritesheet in spritesheets)
-                Spritesheets.Add(spritesheet.File, new KeyValuePair<string, Image>(spritesheet.Size, spritesheet.Image));
+                if (!Spritesheets.ContainsKey(spritesheet.File))
+                    Spritesheets.Add(spritesheet.File, new KeyValuePair<string, Image>(spritesheet.Size, spritesheet.Image));
         }
     }
 }

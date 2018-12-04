@@ -23,7 +23,7 @@ namespace LoESoft.MapEditor.Core.GUI
                 MessageBox.Show("Map name is empty!");
             else
             {
-                MEGameControl.Mapper.SaveMap(MEGameControl.Map, MapNameTextBox.Text);
+                MEGameControl.Mapper.SaveMap(MapNameTextBox.Text, MEGameControl.Map);
 
                 DialogResult = DialogResult.OK;
             }

@@ -6,9 +6,10 @@ namespace LoESoft.AssetsManager.Core.Assets.Structure
     {
         public bool Blocked { get; set; }
 
-        public ObjectsContent(XElement elem) : base(elem)
+        public ObjectsContent()
         {
-            Blocked = elem.Element("Blocked") != null;
         }
+
+        public ObjectsContent(XElement elem) : base(elem) => Blocked = elem.Element("Blocked") != null;
     }
 }

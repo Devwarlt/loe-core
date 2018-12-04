@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace LoESoft.Dlls.Database
 {
@@ -6,24 +7,28 @@ namespace LoESoft.Dlls.Database
     {
         public void CreateMainDirectory()
         {
-            var basedir = Path.Combine(MainDir, BaseDir);
-
-            if (!Directory.Exists(basedir))
+            if (!Directory.Exists(BaseDir))
             {
-                Directory.CreateDirectory(basedir);
-                Logger($"Directory '{basedir}' has been created!");
+                Directory.CreateDirectory(BaseDir);
+
+                Logger($"Directory '{BaseDir}' has been created!");
             }
         }
 
         public void CreateSubDirectory(string subfolder)
         {
-            var subdir = Path.Combine(MainDir, $"/{BaseDir}/{subfolder}/");
+            var subdir = Path.Combine(BaseDir, subfolder);
+
+            SubFolders.Add(subdir);
 
             if (!Directory.Exists(subdir))
             {
                 Directory.CreateDirectory(subdir);
+
                 Logger($"Directory '{subdir}' has been created!");
             }
         }
+
+        public string GetSubDirectory(string subfolder) => SubFolders.FirstOrDefault(sf => sf.Contains(subfolder));
     }
 }

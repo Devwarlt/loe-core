@@ -63,9 +63,9 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap folder_icon {
+        internal static System.Drawing.Bitmap hud_check {
             get {
-                object obj = ResourceManager.GetObject("folder_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("hud_check", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap png_icon {
+        internal static System.Drawing.Bitmap hud_check_inactive {
             get {
-                object obj = ResourceManager.GetObject("png_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("hud_check_inactive", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap save_icon {
+        internal static System.Drawing.Bitmap hud_cross {
             get {
-                object obj = ResourceManager.GetObject("save_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("hud_cross", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,10 +93,80 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap xml_icon {
+        internal static System.Drawing.Bitmap hud_cross_inactive {
             get {
-                object obj = ResourceManager.GetObject("xml_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("hud_cross_inactive", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_folder {
+            get {
+                object obj = ResourceManager.GetObject("hud_folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_minus {
+            get {
+                object obj = ResourceManager.GetObject("hud_minus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_plus {
+            get {
+                object obj = ResourceManager.GetObject("hud_plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_plus_inactive {
+            get {
+                object obj = ResourceManager.GetObject("hud_plus_inactive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_save {
+            get {
+                object obj = ResourceManager.GetObject("hud_save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_xml {
+            get {
+                object obj = ResourceManager.GetObject("hud_xml", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Icon semelhante a (Ícone).
+        /// </summary>
+        internal static System.Drawing.Icon loesoft {
+            get {
+                object obj = ResourceManager.GetObject("loesoft", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

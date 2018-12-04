@@ -11,16 +11,30 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         public XElement XmlContent { get; set; }
         public Action Action { get; set; }
 
-        public List<SpritePallete> Palletes { get; private set; }
+        public string FileName
+        {
+            get => FileNameLabel.Text;
+            set => FileNameLabel.Text = value;
+        }
+
+        public string FileSize
+        {
+            get => FileSizeLabel.Text;
+            set => FileSizeLabel.Text = value;
+        }
+
+        public List<SpritePallete> Palletes { get; set; }
 
         public XmlObject() => InitializeComponent();
 
-        public void SetFileName(string name) => FileNameLabel.Text = name;
+        private void XmlIcon_Click(object sender, EventArgs e) => Action?.Invoke();
 
-        public void SetFileSize(string size) => FileSizeLabel.Text = size;
+        private void RemoveXmlIcon_Click(object sender, EventArgs e)
+        {
+            var box = MessageBox.Show($"Do you want to remove '{FileNameLabel.Text}' XML file?", "Confirm delete action", MessageBoxButtons.YesNo);
 
-        public void SetSpritePalletes(List<SpritePallete> palletes) => Palletes = palletes;
-
-        private void XmlIcon_DoubleClick(object sender, EventArgs e) => Action?.Invoke();
+            if (box == DialogResult.Yes)
+                ((Manager)Parent.Parent.Parent.Parent).UpdateXmlPanel(Id);
+        }
     }
 }

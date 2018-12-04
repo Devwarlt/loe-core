@@ -117,38 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="hud_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_check_inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-check-inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_cross_inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-cross-inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_plus_inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-plus-inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hud_xml" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\hud-xml.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="loesoft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\core\assets\sprites\loesoft.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>
