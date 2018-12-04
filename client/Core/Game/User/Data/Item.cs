@@ -1,4 +1,6 @@
-﻿namespace LoESoft.Client.Core.Game.User.Data
+﻿using Newtonsoft.Json;
+
+namespace LoESoft.Client.Core.Game.User.Data
 {
     public class ItemData
     {
@@ -13,5 +15,7 @@
     {
         public int Id { get; set; }
         public ItemData Data { get; set; }
+
+        public static Item Deserailize(string val) => JsonConvert.DeserializeObject<Item>(val);
     }
 }

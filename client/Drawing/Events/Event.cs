@@ -6,6 +6,8 @@
         CLICKRIGT = 1,
         MOUSEOVER = 2,
         MOUSEOUT = 3,
-        CLICKOUTLEFT = 4
+        CLICKOUTLEFT = 4,
+        HOLDLEFT = 5,
+        HOLDRIGHT = 6
     }
 }

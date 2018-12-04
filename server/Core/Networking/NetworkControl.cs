@@ -56,17 +56,12 @@ namespace LoESoft.Server.Core.Networking
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, result =>
                 {
                     try
-                    { TcpSocket.EndAccept(result); }
-                    catch (SocketException) { }
-                    catch (ArgumentException) { }
-                    catch (Exception ex)
                     {
-                        if (!Disconnected)
-                            App.Warn("Something went wrong!" + ex.ToString());
+                        TcpSocket.EndAccept(result);
                     }
+                    catch { }
                 }, null);
             }
-            catch (SocketException) { }
             catch (Exception ex)
             {
                 if (!Disconnected)
@@ -115,9 +110,6 @@ namespace LoESoft.Server.Core.Networking
 
                         ReceivePacket();
                     }
-                    catch (SocketException) { }
-                    catch (JsonReaderException) { }
-                    catch (NullReferenceException) { }
                     catch (Exception ex)
                     {
                         if (!Disconnected)

@@ -1,4 +1,4 @@
-﻿namespace LoESoft.Server.Core.World.Stats
+﻿namespace LoESoft.Client.Core.Game.Objects.Stats
 {
     public class StatType
     {

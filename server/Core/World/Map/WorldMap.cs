@@ -10,8 +10,8 @@ namespace LoESoft.Server.Core.World
 {
     public class WorldMap
     {
-        public static int WIDTH = 256;
-        public static int HEIGHT = 256;
+        public const int WIDTH = 256;
+        public const int HEIGHT = 256;
 
         public WorldManager Manager { get; set; }
 
@@ -19,11 +19,10 @@ namespace LoESoft.Server.Core.World
         public Dictionary<Point, Chunk> Chunks { get; private set; }
         public ConcurrentDictionary<int, Player> Players { get; private set; }
 
-        private bool Loaded { get; set; }
+        private bool _loaded = false;
 
         public WorldMap(WorldManager manager)
         {
-            Loaded = false;
             Manager = manager;
 
             Chunks = new Dictionary<Point, Chunk>();
@@ -43,14 +42,14 @@ namespace LoESoft.Server.Core.World
 
             Chunks[entrypoint].RandomGen();
 
-            Loaded = true;
+            _loaded = true;
 
-            App.Warn("Map Successfully Initialized!");
+            App.Warn("Map Initialized!");
         }
 
         public void Update(WorldTime time)
         {
-            if (Loaded)
+            if (_loaded)
             {
                 foreach (var i in Chunks.Values)
                     i.Update(time);

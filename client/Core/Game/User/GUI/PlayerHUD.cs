@@ -1,4 +1,5 @@
-﻿using LoESoft.Client.Core.Game.User.GUI.Icon;
+﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Game.User.GUI.Icon;
 using LoESoft.Client.Core.Game.User.GUI.UI;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Forms;
@@ -13,13 +14,13 @@ namespace LoESoft.Client.Core.Game.User.GUI
         public MiniMap MiniMapView { get; set; }
         public IconTab Icons { get; set; }
 
-        public PlayerHUD()
+        public PlayerHUD(GameUser user)
             : base(new RGBColor(0, 0, 0), 0f)
         {
             IsEventApplicable = false;
 
             Icons = new IconTab(975, 5, toggleInfoTable, toggleOptions, toggleMinimap);
-            InfoTable = new PlayerInfoTable();
+            InfoTable = new PlayerInfoTable(user);
             OptionTable = new OptionsTable();
             MiniMapView = new MiniMap(900, 60);
 
@@ -28,13 +29,13 @@ namespace LoESoft.Client.Core.Game.User.GUI
 
         public void DrawMinimap(SpriteBatch spriteBatch, GamePlayer player)
         {
-            if (Icons.ChildList.Contains(MiniMapView))
+            if (Icons.Contains(MiniMapView))
                 MiniMapView.DrawMap(spriteBatch, player.Player.X, player.Player.Y);
         }
 
         private void toggleOptions()
         {
-            if (Icons.ChildList.Contains(OptionTable))
+            if (Icons.Contains(OptionTable))
                 Icons.RemoveChild(OptionTable);
             else
                 Icons.AddChild(OptionTable);
@@ -42,7 +43,7 @@ namespace LoESoft.Client.Core.Game.User.GUI
 
         private void toggleMinimap()
         {
-            if (Icons.ChildList.Contains(MiniMapView))
+            if (Icons.Contains(MiniMapView))
                 Icons.RemoveChild(MiniMapView);
             else
                 Icons.AddChild(MiniMapView);
@@ -50,7 +51,7 @@ namespace LoESoft.Client.Core.Game.User.GUI
 
         private void toggleInfoTable()
         {
-            if (Icons.ChildList.Contains(InfoTable))
+            if (Icons.Contains(InfoTable))
                 Icons.RemoveChild(InfoTable);
             else
                 Icons.AddChild(InfoTable);

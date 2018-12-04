@@ -1,7 +1,8 @@
 ﻿using LoESoft.Dlls.Database;
 using LoESoft.Server.Core.Database.Models;
 using LoESoft.Server.Core.Utils;
-using LoESoft.Server.Core.World.Entities.Player.Attribute;
+using LoESoft.Server.Core.World.Entities;
+using LoESoft.Server.Utils;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -106,7 +107,7 @@ namespace LoESoft.Server.Core.Database
                 Creation = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss UTC")
             });
         }
-
+        
         public bool CreateNewCharacter(long accountId, int world, int classType, out string error)
         {
             var account = Accounts.Values.FirstOrDefault(acc => acc.Id == accountId);
@@ -123,7 +124,9 @@ namespace LoESoft.Server.Core.Database
                 return false;
             }
 
-            var inv = new Inventory();
+            var inv = new Item[32];
+            for (var i = 0; i < 32; i++)
+                inv[i] = new Item(LoERandom.Next(9, 11));
 
             var character = new Character()
             {

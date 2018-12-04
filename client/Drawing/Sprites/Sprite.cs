@@ -34,10 +34,12 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (SpriteTexture != null)
-                spriteBatch.Draw(SpriteTexture, SpriteRectangle, SpriteColor);
+            if (SpriteTexture != null && Visible)
+                spriteBatch.Draw(SpriteTexture, SpriteRectangle, null, SpriteColor, 0f, Vector2.Zero, 0f, SpriteLevel / 20);
 
             base.Draw(spriteBatch);
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

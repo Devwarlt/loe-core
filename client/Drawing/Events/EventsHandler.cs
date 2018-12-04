@@ -1,23 +1,28 @@
 ﻿using LoESoft.Client.Drawing.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
 namespace LoESoft.Client.Drawing.Events
 {
     public partial class EventsHandler
     {
         private MouseState previousMouse;
         private MouseState currentMouse;
-
+        
         public static Rectangle MouseRectangle { get; private set; }
 
         public bool HandleMouse(SpriteNode node, Event e)
         {
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();
-
+            
             switch (e)
             {
+                case Event.HOLDLEFT:
+                    return HandleMouseLeftHold(node);
+
+                case Event.HOLDRIGHT:
+                    return HandleMouseRightHold(node);
+
                 case Event.CLICKLEFT:
                     return HandleMouseClickLeft(node);
 

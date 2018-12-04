@@ -2,8 +2,11 @@
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.Game.Map
 {
@@ -12,8 +15,8 @@ namespace LoESoft.Client.Core.Game.Map
         public static Dictionary<Point, Tile> TileMap { get; private set; }
         public static Dictionary<int, GameObject> Objects { get; private set; }
 
-        public static int WIDTH { get; private set; }
-        public static int HEIGHT { get; private set; }
+        public static int WIDTH { get; private set; } = 0;
+        public static int HEIGHT { get; private set; } = 0;
 
         public static bool MapLoaded { get; set; }
 
@@ -29,51 +32,54 @@ namespace LoESoft.Client.Core.Game.Map
 
             WIDTH = w;
             HEIGHT = h;
-
-            MapLoaded = true;
         }
 
         public static void AddOrUpdate(TileData[] tilesAddOrUpdate, ObjectData[] objAddOrUpdate, int[] removedObjects)
         {
-            foreach (var i in removedObjects)
-                Objects.Remove(i);
-
-            foreach (var i in tilesAddOrUpdate)
+            Task.Factory.StartNew(() =>
             {
-                var pos = new Point(i.X, i.Y);
-                var tile = new Tile(pos.X, pos.Y, i.Id);
+                foreach (var i in removedObjects)
+                    Objects.Remove(i);
 
-                if (TileMap.ContainsKey(pos))
-                    TileMap[pos] = tile;
-                else
-                    TileMap.Add(pos, tile);
-            }
-
-            foreach (var i in objAddOrUpdate)
-            {
-                if (Objects.ContainsKey(i.ObjectId))
+                foreach (var i in tilesAddOrUpdate)
                 {
-                    Objects[i.ObjectId].SetDistination(i.X, i.Y);
-                    Objects[i.ObjectId].ImportStat(i.Stats);
+                    var pos = new Point(i.X, i.Y);
+                    var tile = new Tile(pos.X, pos.Y, i.Id);
 
-                    if (i.LastDirection != -1)
+                    if (TileMap.ContainsKey(pos))
+                        TileMap[pos] = tile;
+                    else
+                        TileMap.Add(pos, tile);
+                }
+
+                foreach (var i in objAddOrUpdate)
+                {
+                    if (Objects.ContainsKey(i.ObjectId))
                     {
-                        if (Objects[i.ObjectId] is Player)
-                            ((Player)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
+                        Objects[i.ObjectId].SetDistination(i.X, i.Y);
+                        Objects[i.ObjectId].ImportStat(i.Stats);
+
+                        if (i.LastDirection != -1)
+                        {
+                            if (Objects[i.ObjectId] is Player)
+                                ((Player)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
+                            else
+                                ((Entity)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
+                        }
+                    }
+                    else
+                    {
+                        if (i.IsPlayer)
+                            HandlePlayer(i);
+                        else if (i.IsEntity)
+                            HandleEntity(i);
                         else
-                            ((Entity)Objects[i.ObjectId]).CurrentDirection = (Direction)i.LastDirection;
+                            HandleObject(i);
                     }
                 }
-                else
-                {
-                    if (i.IsPlayer)
-                        HandlePlayer(i);
-                    else if (i.IsEntity)
-                        HandleEntity(i);
-                    else
-                        HandleObject(i);
-                }
-            }
+            });
+
+            MapLoaded = true;
         }
 
         private static void HandleObject(ObjectData data)
@@ -131,23 +137,21 @@ namespace LoESoft.Client.Core.Game.Map
 
         public static void Update(GameTime gameTime, int x, int y)
         {
-            if (!MapLoaded)
-                return;
-
-            foreach (var i in Objects)
-                i.Value.Update(gameTime);
+            if (MapLoaded)
+                foreach (var i in Objects)
+                    i.Value.Update(gameTime);
         }
 
         public static void Draw(SpriteBatch spriteBatch, int x, int y)
         {
-            if (!MapLoaded)
-                return;
+            if (MapLoaded)
+            {
+                foreach (var i in GetTilesInSight(x, y))
+                    i.Draw(spriteBatch);
 
-            foreach (var i in GetTilesInSight(x, y))
-                i.Draw(spriteBatch);
-
-            foreach (var i in GetEntitiesInSight(x, y))
-                i.Draw(spriteBatch);
+                foreach (var i in GetEntitiesInSight(x, y))
+                    i.Draw(spriteBatch);
+            }
         }
 
         public static HashSet<Tile> GetTilesInSight(int x, int y)

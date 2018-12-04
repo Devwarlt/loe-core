@@ -15,9 +15,9 @@ namespace LoESoft.Client.Drawing.Sprites
         public int Index { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+
         public float X { get; set; }
         public float Y { get; set; }
-
         public float StageX => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageX + X : X;
         public float StageY => (ParentSprite != null && !IsZeroApplicaple) ? ParentSprite.StageY + Y : Y;
         public int SpriteLevel => ParentSprite != null ? ParentSprite.SpriteLevel + 1 : 0;
@@ -62,53 +62,40 @@ namespace LoESoft.Client.Drawing.Sprites
 
         public virtual void Update(GameTime gameTime)
         {
-            ChildList.ToArray().OrderBy(_ => _.Index).Reverse().Select(_ =>
-            {
-                _?.Update(gameTime);
-                return _;
-            }).ToList();
+            foreach (var i in ChildList.OrderBy(_ => _.Index).Reverse())
+                i.Update(gameTime);
 
             if (IsEventApplicable)
                 EventsManager.TrySet(this);
 
-            EventDictionary.Where(_ => EventsHandler.HandleMouse(this, _.Key)).Select(_ =>
-            {
-                if (_.Key == Event.CLICKOUTLEFT || _.Key == Event.MOUSEOUT || EventsManager.IsValid(this))
-                    _.Value?.Invoke(this, new EventArgs());
-
-                return _;
-            }).ToList();
+            foreach(var i in EventDictionary.Where(_ => EventsHandler.HandleMouse(this, _.Key)))
+                if (i.Key == Event.CLICKOUTLEFT|| i.Key == Event.MOUSEOVER 
+                    || i.Key == Event.MOUSEOUT || EventsManager.IsValid(this))
+                    i.Value?.Invoke(this, new EventArgs());
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (Visible)
-                ChildList.ToArray().Select(_ =>
-                {
-                    _.Draw(spriteBatch);
-
-                    return _;
-                }).ToList();
+                foreach (var i in ChildList.OrderBy(_ => _.Index))
+                    i.Draw(spriteBatch);
         }
 
         #region "Child events"
 
         public void AddChild(SpriteNode child)
         {
-            if (!ChildList.Contains(child))
-            {
-                child.ParentSprite = this;
-                child.Index = ChildList.Count();
-                ChildList.Add(child);
-            }
+            child.ParentSprite = this;
+            child.Index = ChildList.Count + 1;
+            ChildList.Add(child);
         }
 
-        public void RemoveChild(SpriteNode child)
-        {
-            if (ChildList.Contains(child))
-                ChildList.Remove(child);
-        }
+        public void RemoveChild(SpriteNode child) => ChildList.RemoveWhere(_ => _ == child);
 
+        public bool Contains(SpriteNode child) => ChildList.Contains(child);
+        public bool Contains(int index) => (ChildList.Where(_ => _.Index == index).FirstOrDefault() != null);
+
+        public void RemoveLastChild()=> ChildList.Remove(ChildList.Last());
         public void RemoveAllChild() => ChildList.Clear();
 
         #endregion "Child events"

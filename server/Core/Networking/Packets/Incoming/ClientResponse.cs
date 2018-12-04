@@ -16,7 +16,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
         {
             switch (From)
             {
-                case "Client.Character.GetUnlockedCharacters":
+                case "GetUnlockedCharacters":
                     HandleUnlockedCharacters(client);
                     break;
             }
@@ -45,7 +45,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
             client.SendPacket(new ServerResponse()
             {
-                From = "Server.Character.UnlockedCharacters",
+                From = "UnlockedCharacters",
                 Result = 0,
                 Content = JsonConvert.SerializeObject(new UnlockedCharacterData(content.ToArray())) //Id's of classes
             });

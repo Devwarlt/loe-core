@@ -17,27 +17,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
         private int _connectionLostAttempts = 0;
         private readonly int _maxConnectionListAttempts = 10;
-
-        private void testConnection()
-        {
-            if (!Client.IsConnected)
-            {
-                _connectionLostAttempts++;
-
-                App.Info($"[Attempt {_connectionLostAttempts}/{_maxConnectionListAttempts}] Client {Client.Id} dropped connection, retrying...");
-
-                if (_connectionLostAttempts == _maxConnectionListAttempts)
-                {
-                    Client.Disconnect();
-                    return;
-                }
-
-                return;
-            }
-            else
-                _connectionLostAttempts = 0;
-        }
-
+        
         public override void Update()
         {
             testConnection();
@@ -75,7 +55,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
                 var player = Manager.Core.Map.GetPlayer(i.X, i.Y);
 
-                if (player != null)
+                if (player != null && player.ObjectId != ObjectId)
                 {
                     if ((_addedObjects.Contains(player) && player.UpdateCount > 0) || !_addedObjects.Contains(player))
                         _objectsToUpdateOrAdd.Add(player);
@@ -87,7 +67,19 @@ namespace LoESoft.Server.Core.World.Entities.Player
                 }
             }
 
+            sendGamePlayerUpdate();
             sendAndClear();
+        }
+
+        private void sendGamePlayerUpdate()
+        {
+            if (UpdateCount > 0)
+                Client.SendPacket(new GamePlayerUpdate()
+                {
+                    Id = Id,
+                    ObjectId = ObjectId,
+                    Stats = ExportStat()
+                });
         }
 
         private void sendAndClear()
@@ -103,6 +95,26 @@ namespace LoESoft.Server.Core.World.Entities.Player
             _tilesToUpdateOrAdd.Clear();
             _objectsToUpdateOrAdd.Clear();
             _removedObjects.Clear();
+        }
+
+        private void testConnection()
+        {
+            if (!Client.IsConnected)
+            {
+                _connectionLostAttempts++;
+
+                App.Info($"[Attempt {_connectionLostAttempts}/{_maxConnectionListAttempts}] Client {Client.Id} dropped connection, retrying...");
+
+                if (_connectionLostAttempts == _maxConnectionListAttempts)
+                {
+                    Client.Disconnect();
+                    return;
+                }
+
+                return;
+            }
+            else
+                _connectionLostAttempts = 0;
         }
     }
 }

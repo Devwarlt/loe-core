@@ -221,10 +221,12 @@
     <Compile Include="Core\Networking\Packets\Incoming\ClientResponse.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\CreateNewCharacter.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\IncomingPacket.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\InventorySwap.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Load.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ClientMove.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Register.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Login.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\GamePlayerUpdate.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\LoadMap.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Ping.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\OutgoingPacket.cs" />
@@ -241,7 +243,6 @@
     <Compile Include="Core\World\Entities\Interfaces\Comparable.cs" />
     <Compile Include="Core\World\Entities\Interfaces\IUpdatable.cs" />
     <Compile Include="Core\World\Entities\Item.cs" />
-    <Compile Include="Core\World\Entities\Player\Attribute\Inventory.cs" />
     <Compile Include="Core\World\Entities\Player\Player.Export.cs" />
     <Compile Include="Core\World\Entities\Player\Player.Sight.cs" />
     <Compile Include="Core\World\Entities\Player\Player.Update.cs" />
@@ -258,7 +259,6 @@
     <Compile Include="Core\World\Map\Structure\MapSize.cs" />
     <Compile Include="Core\World\Map\WorldMap.cs" />
     <Compile Include="Core\World\Map\Chunk.cs" />
-    <Compile Include="Core\World\Stats\Stat.cs" />
     <Compile Include="Core\World\Stats\StatExportManager.cs" />
     <Compile Include="Core\World\Stats\StatType.cs" />
     <Compile Include="Core\World\WorldManager.cs" />

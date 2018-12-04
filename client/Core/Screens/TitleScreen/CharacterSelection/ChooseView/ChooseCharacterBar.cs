@@ -33,11 +33,11 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
 
             int spriteX = 10;
 
-            _meleeClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[5]));
+            _meleeClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[5], 0, 1));
             spriteX += 130;
-            _rangeClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[6]));
+            _rangeClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[6], 0, 1));
             spriteX += 130;
-            _defenseClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[7]));
+            _defenseClass = new Sprite(spriteX, 10, 120, 120, XmlLibrary.GetSpriteFromContent(XmlLibrary.ObjectsXml[7], 0, 1));
 
             _meleeClass.AddEventListener(Event.CLICKLEFT, delegate
             {
