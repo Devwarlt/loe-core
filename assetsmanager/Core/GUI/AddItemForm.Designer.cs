@@ -53,6 +53,14 @@
             this.ObjectsButton = new System.Windows.Forms.RadioButton();
             this.ItemXml = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.SkyButton = new System.Windows.Forms.RadioButton();
+            this.ObjectButton = new System.Windows.Forms.RadioButton();
+            this.ItemGroup = new LoESoft.AssetsManager.Core.GUI.HUD.CustomTextBox();
+            this.GroundButton = new System.Windows.Forms.RadioButton();
+            this.UndergroundButton = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.ItemAnimated = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemId)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -61,6 +69,7 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // ItemName
@@ -68,9 +77,9 @@
             this.ItemName.BackColor = System.Drawing.SystemColors.Info;
             this.ItemName.BorderColor = System.Drawing.Color.DarkGray;
             this.ItemName.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.ItemName.Location = new System.Drawing.Point(64, 150);
+            this.ItemName.Location = new System.Drawing.Point(97, 249);
             this.ItemName.Name = "ItemName";
-            this.ItemName.Size = new System.Drawing.Size(234, 20);
+            this.ItemName.Size = new System.Drawing.Size(195, 20);
             this.ItemName.TabIndex = 18;
             this.ItemName.TabStop = false;
             this.ItemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -89,13 +98,14 @@
             this.SaveButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.SaveButton.TabIndex = 17;
             this.SaveButton.TabStop = false;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(19, 153);
+            this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label2.Location = new System.Drawing.Point(52, 252);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
@@ -119,7 +129,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label1.Location = new System.Drawing.Point(38, 126);
+            this.label1.Location = new System.Drawing.Point(71, 225);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 13);
@@ -132,20 +142,21 @@
             this.ItemId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ItemId.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItemId.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.ItemId.Location = new System.Drawing.Point(64, 124);
+            this.ItemId.Location = new System.Drawing.Point(97, 223);
             this.ItemId.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
             this.ItemId.Name = "ItemId";
-            this.ItemId.Size = new System.Drawing.Size(234, 20);
+            this.ItemId.Size = new System.Drawing.Size(195, 20);
             this.ItemId.TabIndex = 13;
             this.ItemId.TabStop = false;
             this.ItemId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ItemAnimated);
             this.groupBox2.Controls.Add(this.ItemSprite);
             this.groupBox2.Controls.Add(this.ItemFile);
             this.groupBox2.Controls.Add(this.label5);
@@ -156,9 +167,9 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox2.Location = new System.Drawing.Point(12, 176);
+            this.groupBox2.Location = new System.Drawing.Point(12, 275);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(286, 79);
+            this.groupBox2.Size = new System.Drawing.Size(286, 107);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Texture Data";
@@ -166,6 +177,7 @@
             // ItemSprite
             // 
             this.ItemSprite.Action = null;
+            this.ItemSprite.Cursor = System.Windows.Forms.Cursors.Cross;
             this.ItemSprite.Id = 0;
             this.ItemSprite.Image = null;
             this.ItemSprite.ItemControl = null;
@@ -181,7 +193,8 @@
             // 
             this.ItemFile.BackColor = System.Drawing.SystemColors.Info;
             this.ItemFile.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ItemFile.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ItemFile.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.ItemFile.FormattingEnabled = true;
             this.ItemFile.Location = new System.Drawing.Point(85, 23);
             this.ItemFile.Name = "ItemFile";
@@ -281,7 +294,7 @@
             this.groupBox4.Controls.Add(this.ItemWalkable);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox4.Location = new System.Drawing.Point(12, 313);
+            this.groupBox4.Location = new System.Drawing.Point(12, 440);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(286, 46);
             this.groupBox4.TabIndex = 10;
@@ -306,7 +319,7 @@
             this.groupBox3.Controls.Add(this.ItemBlocked);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.groupBox3.Location = new System.Drawing.Point(12, 261);
+            this.groupBox3.Location = new System.Drawing.Point(12, 388);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(286, 46);
             this.groupBox3.TabIndex = 11;
@@ -350,6 +363,7 @@
             this.TilesButton.TabIndex = 0;
             this.TilesButton.Text = "Tiles";
             this.TilesButton.UseVisualStyleBackColor = true;
+            this.TilesButton.CheckedChanged += new System.EventHandler(this.TilesButton_CheckedChanged);
             // 
             // ItemsButton
             // 
@@ -361,6 +375,7 @@
             this.ItemsButton.TabIndex = 0;
             this.ItemsButton.Text = "Items";
             this.ItemsButton.UseVisualStyleBackColor = true;
+            this.ItemsButton.CheckedChanged += new System.EventHandler(this.ItemsButton_CheckedChanged);
             // 
             // ObjectsButton
             // 
@@ -372,6 +387,7 @@
             this.ObjectsButton.TabIndex = 0;
             this.ObjectsButton.Text = "Objects";
             this.ObjectsButton.UseVisualStyleBackColor = true;
+            this.ObjectsButton.CheckedChanged += new System.EventHandler(this.ObjectsButton_CheckedChanged);
             // 
             // ItemXml
             // 
@@ -379,9 +395,9 @@
             this.ItemXml.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItemXml.ForeColor = System.Drawing.SystemColors.Desktop;
             this.ItemXml.FormattingEnabled = true;
-            this.ItemXml.Location = new System.Drawing.Point(64, 45);
+            this.ItemXml.Location = new System.Drawing.Point(97, 45);
             this.ItemXml.Name = "ItemXml";
-            this.ItemXml.Size = new System.Drawing.Size(234, 21);
+            this.ItemXml.Size = new System.Drawing.Size(195, 21);
             this.ItemXml.TabIndex = 19;
             // 
             // label8
@@ -389,19 +405,118 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label8.Location = new System.Drawing.Point(26, 48);
+            this.label8.Location = new System.Drawing.Point(59, 48);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(32, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "XML";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.SkyButton);
+            this.groupBox5.Controls.Add(this.ObjectButton);
+            this.groupBox5.Controls.Add(this.ItemGroup);
+            this.groupBox5.Controls.Add(this.GroundButton);
+            this.groupBox5.Controls.Add(this.UndergroundButton);
+            this.groupBox5.Controls.Add(this.label9);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.groupBox5.Location = new System.Drawing.Point(12, 124);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(286, 93);
+            this.groupBox5.TabIndex = 20;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Layer";
+            // 
+            // SkyButton
+            // 
+            this.SkyButton.AutoSize = true;
+            this.SkyButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SkyButton.Location = new System.Drawing.Point(158, 42);
+            this.SkyButton.Name = "SkyButton";
+            this.SkyButton.Size = new System.Drawing.Size(43, 17);
+            this.SkyButton.TabIndex = 0;
+            this.SkyButton.Text = "Sky";
+            this.SkyButton.UseVisualStyleBackColor = true;
+            // 
+            // ObjectButton
+            // 
+            this.ObjectButton.AutoSize = true;
+            this.ObjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ObjectButton.Location = new System.Drawing.Point(158, 19);
+            this.ObjectButton.Name = "ObjectButton";
+            this.ObjectButton.Size = new System.Drawing.Size(56, 17);
+            this.ObjectButton.TabIndex = 0;
+            this.ObjectButton.Text = "Object";
+            this.ObjectButton.UseVisualStyleBackColor = true;
+            // 
+            // ItemGroup
+            // 
+            this.ItemGroup.BackColor = System.Drawing.SystemColors.Info;
+            this.ItemGroup.BorderColor = System.Drawing.Color.DarkGray;
+            this.ItemGroup.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.ItemGroup.Location = new System.Drawing.Point(85, 65);
+            this.ItemGroup.Name = "ItemGroup";
+            this.ItemGroup.Size = new System.Drawing.Size(195, 20);
+            this.ItemGroup.TabIndex = 6;
+            this.ItemGroup.TabStop = false;
+            this.ItemGroup.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // GroundButton
+            // 
+            this.GroundButton.AutoSize = true;
+            this.GroundButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GroundButton.Location = new System.Drawing.Point(23, 42);
+            this.GroundButton.Name = "GroundButton";
+            this.GroundButton.Size = new System.Drawing.Size(60, 17);
+            this.GroundButton.TabIndex = 0;
+            this.GroundButton.Text = "Ground";
+            this.GroundButton.UseVisualStyleBackColor = true;
+            // 
+            // UndergroundButton
+            // 
+            this.UndergroundButton.AutoSize = true;
+            this.UndergroundButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UndergroundButton.Location = new System.Drawing.Point(23, 19);
+            this.UndergroundButton.Name = "UndergroundButton";
+            this.UndergroundButton.Size = new System.Drawing.Size(87, 17);
+            this.UndergroundButton.TabIndex = 0;
+            this.UndergroundButton.Text = "Underground";
+            this.UndergroundButton.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label9.Location = new System.Drawing.Point(38, 68);
+            this.label9.Margin = new System.Windows.Forms.Padding(3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(41, 13);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Group";
+            // 
+            // ItemAnimated
+            // 
+            this.ItemAnimated.AutoSize = true;
+            this.ItemAnimated.Enabled = false;
+            this.ItemAnimated.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ItemAnimated.Location = new System.Drawing.Point(23, 80);
+            this.ItemAnimated.Name = "ItemAnimated";
+            this.ItemAnimated.Size = new System.Drawing.Size(70, 17);
+            this.ItemAnimated.TabIndex = 0;
+            this.ItemAnimated.TabStop = false;
+            this.ItemAnimated.Text = "Animated";
+            this.ItemAnimated.UseVisualStyleBackColor = true;
+            // 
             // AddItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(310, 369);
+            this.ClientSize = new System.Drawing.Size(310, 497);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.ItemXml);
             this.Controls.Add(this.ItemName);
             this.Controls.Add(this.SaveButton);
@@ -434,6 +549,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -466,5 +583,13 @@
         private System.Windows.Forms.RadioButton ObjectsButton;
         private System.Windows.Forms.ComboBox ItemXml;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton SkyButton;
+        private System.Windows.Forms.RadioButton ObjectButton;
+        private HUD.CustomTextBox ItemGroup;
+        private System.Windows.Forms.RadioButton GroundButton;
+        private System.Windows.Forms.RadioButton UndergroundButton;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox ItemAnimated;
     }
 }

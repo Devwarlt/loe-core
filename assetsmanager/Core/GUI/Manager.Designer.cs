@@ -41,6 +41,7 @@
             this.SplitPanels = new System.Windows.Forms.SplitContainer();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MainTab = new System.Windows.Forms.TabPage();
+            this.SaveButton = new System.Windows.Forms.PictureBox();
             this.AddButton = new System.Windows.Forms.PictureBox();
             this.FolderButton = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -54,6 +55,7 @@
             this.SplitPanels.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.MainTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FolderButton)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -121,7 +123,7 @@
             this.LoadAssetsButton.ForeColor = System.Drawing.Color.Transparent;
             this.LoadAssetsButton.Location = new System.Drawing.Point(550, 6);
             this.LoadAssetsButton.Name = "LoadAssetsButton";
-            this.LoadAssetsButton.Size = new System.Drawing.Size(160, 24);
+            this.LoadAssetsButton.Size = new System.Drawing.Size(130, 24);
             this.LoadAssetsButton.TabIndex = 0;
             this.LoadAssetsButton.TabStop = false;
             this.LoadAssetsButton.Text = "Load Assets";
@@ -193,6 +195,7 @@
             // MainTab
             // 
             this.MainTab.BackColor = System.Drawing.SystemColors.Control;
+            this.MainTab.Controls.Add(this.SaveButton);
             this.MainTab.Controls.Add(this.AddButton);
             this.MainTab.Controls.Add(this.FolderButton);
             this.MainTab.Controls.Add(this.groupBox2);
@@ -208,13 +211,27 @@
             this.MainTab.TabIndex = 0;
             this.MainTab.Text = "Main";
             // 
+            // SaveButton
+            // 
+            this.SaveButton.BackColor = System.Drawing.SystemColors.Desktop;
+            this.SaveButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SaveButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SaveButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_save;
+            this.SaveButton.Location = new System.Drawing.Point(716, 6);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(24, 24);
+            this.SaveButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.SaveButton.TabIndex = 0;
+            this.SaveButton.TabStop = false;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
             // AddButton
             // 
             this.AddButton.BackColor = System.Drawing.SystemColors.Desktop;
             this.AddButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AddButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AddButton.Image = global::LoESoft.AssetsManager.Properties.Resources.hud_plus;
-            this.AddButton.Location = new System.Drawing.Point(716, 6);
+            this.AddButton.Location = new System.Drawing.Point(686, 6);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(24, 24);
             this.AddButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -301,6 +318,7 @@
             this.SplitPanels.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.MainTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SaveButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FolderButton)).EndInit();
             this.groupBox3.ResumeLayout(false);
@@ -329,6 +347,7 @@
         private System.Windows.Forms.Label WorkingContentLabel;
         private System.Windows.Forms.Label WorkingTitleLabel;
         private System.Windows.Forms.PictureBox AddButton;
+        private System.Windows.Forms.PictureBox SaveButton;
     }
 }
 

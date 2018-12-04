@@ -153,6 +153,16 @@ namespace LoESoft.AssetsManager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hud_save_inactive {
+            get {
+                object obj = ResourceManager.GetObject("hud_save_inactive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hud_xml {
             get {
                 object obj = ResourceManager.GetObject("hud_xml", resourceCulture);

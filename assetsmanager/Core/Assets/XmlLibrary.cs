@@ -9,6 +9,7 @@ namespace LoESoft.AssetsManager.Core.Assets
 {
     public static class XmlLibrary
     {
+        public static List<string> RemovedXmls = new List<string>();
         public static Dictionary<string, KeyValuePair<string, XElement>> Xmls = new Dictionary<string, KeyValuePair<string, XElement>>();
         public static Dictionary<int, ObjectsContent> ObjectsXml = new Dictionary<int, ObjectsContent>();
         public static Dictionary<int, ItemsContent> ItemsXml = new Dictionary<int, ItemsContent>();
@@ -62,5 +63,62 @@ namespace LoESoft.AssetsManager.Core.Assets
                     }
                 }
         }
+
+        public static XDocument ToXml(this ObjectsContent content)
+            => new XDocument(
+                new XDeclaration("1.0", "utf-8", "no"),
+                new XElement("Object",
+                    new XAttribute("type", (int)ContentType.Objects),
+                    new XAttribute("id", content.Id),
+                    new XAttribute("name", content.Name),
+                    content.Blocked ? new XElement("Blocked") : null,
+                    content.LayerData != null ? new XElement("Layer",
+                        new XAttribute("type", (int)content.LayerData.Type),
+                        new XAttribute("group", content.LayerData.Group)
+                        ) : null,
+                    content.TextureData != null ? new XElement("Texture",
+                        new XAttribute("x", content.TextureData.X),
+                        new XAttribute("y", content.TextureData.Y),
+                        new XElement("FileName", content.TextureData.File),
+                        content.TextureData.Animated ? new XElement("Animated") : null
+                        ) : null
+                    )
+                );
+
+        public static XDocument ToXml(this ItemsContent content)
+            => new XDocument(
+                new XDeclaration("1.0", "utf-8", "no"),
+                new XElement("Object",
+                    new XAttribute("type", (int)ContentType.Items),
+                    new XAttribute("id", content.Id),
+                    new XAttribute("name", content.Name),
+                    content.TextureData != null ? new XElement("Texture",
+                        new XAttribute("x", content.TextureData.X),
+                        new XAttribute("y", content.TextureData.Y),
+                        new XElement("FileName", content.TextureData.File),
+                        content.TextureData.Animated ? new XElement("Animated") : null
+                        ) : null
+                    )
+                );
+
+        public static XDocument ToXml(this TilesContent content)
+            => new XDocument(
+                new XDeclaration("1.0", "utf-8", "no"),
+                new XElement("Object",
+                    new XAttribute("type", (int)ContentType.Tiles),
+                    new XAttribute("id", content.Id),
+                    new XAttribute("name", content.Name),
+                    content.Walkable ? new XElement("Walkable") : null,
+                    content.LayerData != null ? new XElement("Layer",
+                        new XAttribute("type", (int)content.LayerData.Type),
+                        new XAttribute("group", content.LayerData.Group)
+                        ) : null,
+                    content.TextureData != null ? new XElement("Texture",
+                        new XAttribute("x", content.TextureData.X),
+                        new XAttribute("y", content.TextureData.Y),
+                        new XElement("FileName", content.TextureData.File)
+                        ) : null
+                    )
+                );
     }
 }

@@ -26,7 +26,7 @@ namespace LoESoft.AssetsManager.Core.GUI
         private void SaveButton_Click(object sender, EventArgs e)
         {
             XmlLibrary.Xmls.Add(XmlName.Text, new KeyValuePair<string, XElement>("<new>", null));
-            Manager.UpdateXmlPanel(-1, XmlName.Text);
+            Manager.AddOrRemoveXml(-1, XmlName.Text);
 
             DialogResult = DialogResult.OK;
 

@@ -86,6 +86,7 @@
             this.AddItem.TabStop = false;
             this.AddItem.Text = "Add";
             this.AddItem.UseVisualStyleBackColor = false;
+            this.AddItem.Click += new System.EventHandler(this.AddItem_Click);
             // 
             // AddForm
             // 

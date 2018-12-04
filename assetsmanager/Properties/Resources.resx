@@ -145,6 +145,9 @@
   <data name="hud_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\core\assets\sprites\hud-save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="hud_save_inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\core\assets\sprites\hud-save-inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="hud_xml" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\core\assets\sprites\hud-xml.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
