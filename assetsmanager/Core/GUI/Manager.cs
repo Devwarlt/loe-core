@@ -121,21 +121,17 @@ namespace LoESoft.AssetsManager.Core.GUI
                 File.Move(oldpath, newpath);
             }
 
-            var xmls = new Dictionary<string, List<XDocument>>();
+            var xmls = new List<XmlData>();
 
-            foreach (var xml in XmlLibrary.Xmls)
-                xmls.Add(xml.Key, new List<XDocument>());
+            foreach (var xml in XmlLibrary.Xmls.Keys)
+                xmls.Add(new XmlData(xml, XmlObjects[xml], XmlItems[xml], XmlTiles[xml]));
 
-            foreach (var xmlobject in XmlObjects)
-            {
-                XDocument xmlobjects = null;
+            foreach (var xml in xmls)
+                xml.ToXml().Save(Path.Combine(XmlDir, $"{xml.Name}.xml"));
 
-                foreach (var objectscontent in xmlobject.Value)
-                    ;
+            LoadAssetsButton_Click(null, null);
 
-                if (xmlobjects != null)
-                    xmls[xmlobject.Key].Add(xmlobjects);
-            }
+            MessageBox.Show($"All {xmls.Count} XML{(xmls.Count > 1 ? "s have" : " has")} been saved!");
         }
 
         private void FolderButton_Click(object sender, EventArgs e) => Process.Start($"{Path.Combine(BaseDir)}");
