@@ -12,11 +12,14 @@ namespace LoESoft.Client.Assets
 
         public int MaxX { get; private set; }
         public int MaxY { get; private set; }
-        public int SpriteSize { get; private set; }
 
-        public SpriteSet(string fileName, int spriteSize)
+        public int SpriteWidth { get; private set; }
+        public int SpriteHeight { get; private set; }
+
+        public SpriteSet(string fileName, int spriteWidth, int spriteHeight)
         {
-            SpriteSize = spriteSize;
+            SpriteWidth = spriteWidth;
+            SpriteHeight = spriteHeight;
             Initialize(fileName);
         }
 
@@ -46,8 +49,8 @@ namespace LoESoft.Client.Assets
         {
             var asset = AssetLoader.LoadAsset<Texture2D>("sprites/" + fileName);
 
-            MaxX = asset.Width / SpriteSize;
-            MaxY = asset.Height / SpriteSize;
+            MaxX = asset.Width / SpriteWidth;
+            MaxY = asset.Height / SpriteHeight;
 
             Textures = new Texture2D[MaxX, MaxY];
 
@@ -55,10 +58,10 @@ namespace LoESoft.Client.Assets
             {
                 for (var y = 0; y < MaxY; y++)
                 {
-                    var data = new Color[SpriteSize * SpriteSize];
-                    asset.GetData(0, new Rectangle(x * SpriteSize, y * SpriteSize, SpriteSize, SpriteSize), data, 0, SpriteSize * SpriteSize);
+                    var data = new Color[SpriteWidth * SpriteHeight];
+                    asset.GetData(0, new Rectangle(x * SpriteWidth, y * SpriteHeight, SpriteWidth, SpriteHeight), data, 0, SpriteWidth * SpriteHeight);
 
-                    var texture = new Texture2D(asset.GraphicsDevice, SpriteSize, SpriteSize);
+                    var texture = new Texture2D(asset.GraphicsDevice, SpriteWidth, SpriteHeight);
                     texture.SetData(data);
 
                     Textures[x, y] = texture;
@@ -66,7 +69,7 @@ namespace LoESoft.Client.Assets
             }
         }
 
-        public static SpriteSet LoadSet(string assetName, int spriteSize = 8) =>
-            new SpriteSet(assetName, spriteSize);
+        public static SpriteSet LoadSet(string assetName, int spriteWidth = 8, int spriteHeight = 8) =>
+            new SpriteSet(assetName, spriteWidth, spriteHeight);
     }
 }

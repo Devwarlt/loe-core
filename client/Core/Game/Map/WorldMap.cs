@@ -2,10 +2,8 @@
 using LoESoft.Client.Core.Game.Objects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.Game.Map
@@ -34,8 +32,13 @@ namespace LoESoft.Client.Core.Game.Map
             HEIGHT = h;
         }
 
+        public static void Start() => MapLoaded = true;
+
         public static void AddOrUpdate(TileData[] tilesAddOrUpdate, ObjectData[] objAddOrUpdate, int[] removedObjects)
         {
+            if (!MapLoaded)
+                AddOrUpdate(tilesAddOrUpdate, objAddOrUpdate, removedObjects);
+
             Task.Factory.StartNew(() =>
             {
                 foreach (var i in removedObjects)
@@ -78,8 +81,6 @@ namespace LoESoft.Client.Core.Game.Map
                     }
                 }
             });
-
-            MapLoaded = true;
         }
 
         private static void HandleObject(ObjectData data)

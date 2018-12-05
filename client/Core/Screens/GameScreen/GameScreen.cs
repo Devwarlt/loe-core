@@ -24,11 +24,12 @@ namespace LoESoft.Client.Core.Screens
             GameUser = gameUser;
             Controller = new GamePlayer(GameUser, objId, classType);
             Camera = new GameCamera();
-            Camera.Update(Controller.Player);
         }
         
         public override void OnScreenCreate()
         {
+            WorldMap.Start();
+            Camera.Update(Controller.Player);
         }
 
         public override void OnScreenDispatch() => GameUser.Disconnect();

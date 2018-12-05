@@ -38,7 +38,8 @@ namespace LoESoft.Client.Core.Game.Objects
             Id = id;
             if (Id != -1)
                 Content = XmlLibrary.ObjectsXml[Id];
-            Size = 8;
+            Size = 16;
+            Color = Color.White;
         }
 
         public virtual void Init()
@@ -91,6 +92,6 @@ namespace LoESoft.Client.Core.Game.Objects
             DistinationY = y;
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color.White);
+        public virtual void Draw(SpriteBatch spriteBatch) => spriteBatch.Draw(Texture, new Rectangle((int)DrawX, (int)DrawY, Size, Size), Color);
     }
 }

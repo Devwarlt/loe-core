@@ -12,7 +12,7 @@ namespace LoESoft.Client.Core.Game.Animation
         private int preDirection;
 
         public ObjectAnimation()
-            : base(0.1f, AnimationType.Forward)
+            : base(500f, AnimationType.Forward)
         {
             curDirection = 1;
             preDirection = curDirection;
