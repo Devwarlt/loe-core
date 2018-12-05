@@ -517,6 +517,16 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         {
             _type[1] = ContentType.Objects;
 
+            UndergroundButton.Enabled = true;
+            UndergroundButton.Checked = true;
+            GroundButton.Enabled = true;
+            GroundButton.Checked = true;
+            ObjectButton.Enabled = true;
+            ObjectButton.Checked = true;
+            SkyButton.Enabled = true;
+            SkyButton.Checked = true;
+            ItemGroup.Enabled = true;
+            ItemGroup.Text = _group[0];
             ItemAnimated.Enabled = true;
             ItemAnimated.Checked = false;
             ItemBlocked.Enabled = true;
@@ -529,6 +539,16 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         {
             _type[1] = ContentType.Items;
 
+            UndergroundButton.Enabled = false;
+            UndergroundButton.Checked = false;
+            GroundButton.Enabled = false;
+            GroundButton.Checked = false;
+            ObjectButton.Enabled = false;
+            ObjectButton.Checked = false;
+            SkyButton.Enabled = false;
+            SkyButton.Checked = false;
+            ItemGroup.Enabled = false;
+            ItemGroup.Text = string.Empty;
             ItemAnimated.Enabled = false;
             ItemAnimated.Checked = false;
             ItemBlocked.Enabled = false;
@@ -541,6 +561,16 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         {
             _type[1] = ContentType.Tiles;
 
+            UndergroundButton.Enabled = true;
+            UndergroundButton.Checked = true;
+            GroundButton.Enabled = true;
+            GroundButton.Checked = true;
+            ObjectButton.Enabled = true;
+            ObjectButton.Checked = true;
+            SkyButton.Enabled = true;
+            SkyButton.Checked = true;
+            ItemGroup.Enabled = true;
+            ItemGroup.Text = _group[0];
             ItemAnimated.Enabled = false;
             ItemAnimated.Checked = false;
             ItemBlocked.Enabled = false;
