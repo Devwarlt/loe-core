@@ -12,8 +12,8 @@ using System.Runtime.InteropServices;
 using LoESoft.AssetsManager.Core.GUI;
 using System;
 using System.Reflection;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace LoESoft.AssetsManager
 {
@@ -81,7 +81,6 @@ namespace LoESoft.AssetsManager
 
             RollbarLocator.RollbarInstance.Configure(new RollbarConfig(RollbarId));
 #endif
-
             Info("Game Xml Manager is loading...");
 
             try
@@ -100,9 +99,10 @@ namespace LoESoft.AssetsManager
 
                 Warn("Press 'ESC' to close...");
 
+#if DEBUG
                 while (Console.ReadKey(true).Key != ConsoleKey.Escape)
                     ;
-
+#endif
                 Environment.Exit(0);
             }
         }
@@ -130,9 +130,7 @@ namespace LoESoft.AssetsManager
         {
         }
 
-        public static void Error(Exception e, string data = null)
-        {
-        }
+        public static void Error(Exception e, string data = null) => MessageBox.Show("An error occurred, report to LoESoft Games developers:\n\n", "Error!");
 
 #endif
     }

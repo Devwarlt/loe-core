@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LoESoft.MapEditor</RootNamespace>
     <AssemblyName>BRMEMapEditor</AssemblyName>
@@ -38,13 +38,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>loesoft-new.ico</ApplicationIcon>
+    <ApplicationIcon>Core\Assets\Sprite\loesoft-new.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
@@ -287,7 +288,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="Icon.ico" />
-    <Content Include="loesoft-new.ico" />
+    <Content Include="Core\Assets\Sprite\loesoft-new.ico" />
     <EmbeddedResource Include="Core\GUI\HUD\HUD.resx">
       <DependentUpon>HUD.cs</DependentUpon>
     </EmbeddedResource>
