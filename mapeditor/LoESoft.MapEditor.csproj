@@ -259,34 +259,22 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Core\GUI\HUD\Assets\sample-grid.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Tiles.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\TestObjects.xml" />
     <EmbeddedResource Include="Core\Assets\Sprite\objectsEmbed.png" />
     <EmbeddedResource Include="Core\Assets\Sprite\tilesEmbed.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U1-DeepWater.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Sprite\Testing\tileSet16x16.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U2-Water.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U3-Grass.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U4-Dirty.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U5-Stones.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Object\O1-Nature.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Object\O2-Building.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Assets\Sprite\tileSet16x16.png" />
+    <EmbeddedResource Include="Core\Assets\Xml\G1-DeepWater.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\G2-Water.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\G3-Dirty.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\O1-Nature.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\O2-Building.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\TestingXml.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\TestObjects.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\Tiles.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U1-DeepWater.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U2-Water.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U3-Grass.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U4-Dirty.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U5-Stones.xml" />
     <Content Include="Icon.ico" />
     <Content Include="Core\Assets\Sprite\loesoft-new.ico" />
     <EmbeddedResource Include="Core\GUI\HUD\HUD.resx">
