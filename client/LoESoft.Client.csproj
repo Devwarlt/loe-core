@@ -448,6 +448,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Assets\Xml\Embeds\TestObjects.xml" />
     <EmbeddedResource Include="Assets\Xml\Embeds\Items.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\G1-DeepWater.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\G2-Water.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\G3-Dirty.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\O1-Nature.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\O2-Building.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\TestingXml.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\U1-DeepWater.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\U2-Water.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\U3-Grass.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\U4-Dirty.xml" />
+    <EmbeddedResource Include="Assets\Xml\Embeds\U5-Stones.xml" />
     <Content Include="loesoft-new-expanded-shadows-closer.png" />
     <Content Include="loesoft-new.ico" />
     <Content Include="loesoft.ico" />
