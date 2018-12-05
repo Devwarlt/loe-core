@@ -124,10 +124,7 @@ namespace LoESoft.Server
         {
             Log.Error($"{data}{(data == null ? "" : "\n")}{e.ToString()}");
 
-#if DEBUG
-            // Rollbar error analytics for developers only.
-            RollbarLocator.RollbarInstance.Error(e);
-#endif
+            RollbarLocator.RollbarInstance.Error(e); // Rollbar error analytics for developers only.
         }
     }
 }

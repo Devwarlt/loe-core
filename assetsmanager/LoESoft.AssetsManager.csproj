@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3155B7B4-98CE-435B-9F19-ED476BE03757}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>LoESoft.AssetsManager</RootNamespace>
     <AssemblyName>BRMEAssetsManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -175,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Assets\SpriteLibrary.cs" />
+    <Compile Include="Core\Assets\Structure\Exclusive\LayerData.cs" />
+    <Compile Include="Core\Assets\Structure\Exclusive\LayerData.MapLayer.cs" />
     <Compile Include="Core\Assets\Structure\Exclusive\TextureData.cs" />
     <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
     <Compile Include="Core\Assets\Structure\ObjectsContent.cs" />
@@ -267,6 +269,7 @@
       <DependentUpon>SpritesheetForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Structure\HelpHint.cs" />
+    <Compile Include="Core\Structure\XmlData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Core\GUI\HUD\HelpObject.resx">
       <DependentUpon>HelpObject.cs</DependentUpon>
@@ -310,15 +313,10 @@
     <Content Include="Core\Assets\Sprites\hud-minus.png" />
     <Content Include="Core\Assets\Sprites\hud-plus-inactive.png" />
     <Content Include="Core\Assets\Sprites\hud-plus.png" />
+    <Content Include="Core\Assets\Sprites\hud-save-inactive.png" />
     <Content Include="Core\Assets\Sprites\hud-save.png" />
     <Content Include="Core\Assets\Sprites\hud-xml.png" />
     <Content Include="Core\Assets\Sprites\loesoft.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\server\LoESoft.Server.csproj">
-      <Project>{728A3882-9A81-4556-862D-C5F356679289}</Project>
-      <Name>LoESoft.Server</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

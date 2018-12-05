@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EED1B24F-C2DC-47CC-9395-9F39AC90C8E7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LoESoft.MapEditor</RootNamespace>
     <AssemblyName>BRMEMapEditor</AssemblyName>
@@ -38,13 +38,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>loesoft-new.ico</ApplicationIcon>
+    <ApplicationIcon>Core\Assets\Sprite\loesoft-new.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Core\Assets\Structure\ItemsContent.cs" />
@@ -258,36 +259,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Core\GUI\HUD\Assets\sample-grid.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Tiles.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\TestObjects.xml" />
     <EmbeddedResource Include="Core\Assets\Sprite\objectsEmbed.png" />
     <EmbeddedResource Include="Core\Assets\Sprite\tilesEmbed.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U1-DeepWater.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Sprite\Testing\tileSet16x16.png" />
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U2-Water.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U3-Grass.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U4-Dirty.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Underground\U5-Stones.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Object\O1-Nature.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Core\Assets\Xml\Testing\Object\O2-Building.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Assets\Sprite\tileSet16x16.png" />
+    <EmbeddedResource Include="Core\Assets\Xml\G1-DeepWater.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\G2-Water.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\G3-Dirty.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\O1-Nature.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\O2-Building.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\TestingXml.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\TestObjects.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\Tiles.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U1-DeepWater.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U2-Water.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U3-Grass.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U4-Dirty.xml" />
+    <EmbeddedResource Include="Core\Assets\Xml\U5-Stones.xml" />
     <Content Include="Icon.ico" />
-    <Content Include="loesoft-new.ico" />
+    <Content Include="Core\Assets\Sprite\loesoft-new.ico" />
     <EmbeddedResource Include="Core\GUI\HUD\HUD.resx">
       <DependentUpon>HUD.cs</DependentUpon>
     </EmbeddedResource>

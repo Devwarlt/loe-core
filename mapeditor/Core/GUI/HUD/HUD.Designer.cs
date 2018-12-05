@@ -165,12 +165,14 @@
             // 
             // PalleteComboBox
             // 
+            this.PalleteComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.PalleteComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PalleteComboBox.FormattingEnabled = true;
             this.PalleteComboBox.Location = new System.Drawing.Point(54, 62);
             this.PalleteComboBox.Name = "PalleteComboBox";
             this.PalleteComboBox.Size = new System.Drawing.Size(131, 21);
             this.PalleteComboBox.TabIndex = 0;
-            this.PalleteComboBox.Text = "---";
+            this.PalleteComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.PalleteComboBox_DrawItem);
             this.PalleteComboBox.SelectedIndexChanged += new System.EventHandler(this.PalleteComboBox_SelectedIndexChanged);
             // 
             // PalletePanel

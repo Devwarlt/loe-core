@@ -8,7 +8,7 @@ namespace LoESoft.AssetsManager.Core.GUI
 {
     public partial class AddXmlForm : Form
     {
-        public Manager Manager { get; set; }
+        public string Xml { get; set; }
 
         public AddXmlForm() => InitializeComponent();
 
@@ -25,12 +25,11 @@ namespace LoESoft.AssetsManager.Core.GUI
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            XmlLibrary.Xmls.Add(XmlName.Text, new KeyValuePair<string, XElement>("<new>", null));
-            Manager.UpdateXmlPanel(-1, XmlName.Text);
+            Xml = XmlName.Text;
+
+            XmlLibrary.Xmls.Add(Xml, new KeyValuePair<string, XElement>("<new>", null));
 
             DialogResult = DialogResult.OK;
-
-            Close();
         }
     }
 }

@@ -11,11 +11,28 @@ namespace LoESoft.AssetsManager.Core.GUI
 
         private void AddXml_Click(object sender, EventArgs e)
         {
-            var newxmlform = new AddXmlForm() { Manager = Manager };
+            var newxmlform = new AddXmlForm();
             newxmlform.ShowDialog();
 
             if (newxmlform.DialogResult == DialogResult.OK)
+            {
+                Manager.AddOrRemoveXml(-1, newxmlform.Xml);
+
                 Close();
+            }
+        }
+
+        private void AddItem_Click(object sender, EventArgs e)
+        {
+            var newitemform = new AddItemForm();
+            newitemform.ShowDialog();
+
+            if (newitemform.DialogResult == DialogResult.OK)
+            {
+                Manager.RefreshXmls();
+
+                Close();
+            }
         }
     }
 }

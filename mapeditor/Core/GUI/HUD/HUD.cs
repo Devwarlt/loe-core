@@ -3,6 +3,7 @@ using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Point = System.Drawing.Point;
@@ -162,6 +163,32 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                 MessageBox.Show("Map saved!");
 
             MEGameControl.MapState = MapState.Active;
+        }
+
+        private void PalleteComboBox_DrawItem(object sender, DrawItemEventArgs e) => CenterComboBoxItems(sender, e);
+
+        public static void CenterComboBoxItems(object sender, DrawItemEventArgs e)
+        {
+            if (sender is ComboBox cbx)
+            {
+                e.DrawBackground();
+
+                if (e.Index >= 0)
+                {
+                    var sf = new StringFormat
+                    {
+                        LineAlignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Center
+                    };
+
+                    var brush = new SolidBrush(cbx.ForeColor);
+
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                        brush = (SolidBrush)SystemBrushes.HighlightText;
+
+                    e.Graphics.DrawString(cbx.Items[e.Index].ToString(), cbx.Font, brush, e.Bounds, sf);
+                }
+            }
         }
     }
 }

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LoESoft.AssetsManager.Properties {
-    using System;
-    
-    
+namespace LoESoft.AssetsManager.Properties
+{
+
+
     /// <summary>
     ///   Uma classe de recurso de tipo de alta segurança, para pesquisar cadeias de caracteres localizadas etc.
     /// </summary>
@@ -146,6 +146,16 @@ namespace LoESoft.AssetsManager.Properties {
         internal static System.Drawing.Bitmap hud_save {
             get {
                 object obj = ResourceManager.GetObject("hud_save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hud_save_inactive {
+            get {
+                object obj = ResourceManager.GetObject("hud_save_inactive", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
