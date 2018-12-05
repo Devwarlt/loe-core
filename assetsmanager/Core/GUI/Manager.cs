@@ -20,6 +20,8 @@ namespace LoESoft.AssetsManager.Core.GUI
 {
     public partial class Manager : Form
     {
+        public static int LastUid = 0;
+
         public static Dictionary<string, SpritesContent> Spritesheets { get; set; }
         public static Dictionary<string, List<ObjectsContent>> XmlObjects { get; set; }
         public static Dictionary<string, List<ItemsContent>> XmlItems { get; set; }
@@ -430,6 +432,10 @@ namespace LoESoft.AssetsManager.Core.GUI
                     WorkingContentLabel.Text = "This XML document is empty!";
                 };
 
+                XmlObjects.Add(name, new List<ObjectsContent>());
+                XmlItems.Add(name, new List<ItemsContent>());
+                XmlTiles.Add(name, new List<TilesContent>());
+
                 xmlobjects.Add(xmlobject);
             }
 
@@ -500,15 +506,16 @@ namespace LoESoft.AssetsManager.Core.GUI
                 var name = xml.Key;
                 var xmlcontent = xml.Value.Value;
 
-                foreach (var elem in xmlcontent.XPathSelectElements("//Object"))
-                {
-                    switch ((ContentType)int.Parse(elem.Attribute("type").Value))
+                if (xmlcontent != null)
+                    foreach (var elem in xmlcontent.XPathSelectElements("//Object"))
                     {
-                        case ContentType.Objects: objects.Add(new ObjectsContent(elem)); break;
-                        case ContentType.Items: items.Add(new ItemsContent(elem)); break;
-                        case ContentType.Tiles: tiles.Add(new TilesContent(elem)); break;
+                        switch ((ContentType)int.Parse(elem.Attribute("type").Value))
+                        {
+                            case ContentType.Objects: objects.Add(new ObjectsContent(elem)); break;
+                            case ContentType.Items: items.Add(new ItemsContent(elem)); break;
+                            case ContentType.Tiles: tiles.Add(new TilesContent(elem)); break;
+                        }
                     }
-                }
 
                 if (!XmlObjects.ContainsKey(name))
                     XmlObjects.Add(name, objects);
@@ -629,6 +636,7 @@ namespace LoESoft.AssetsManager.Core.GUI
                 xmlobject.Action = () =>
                 {
                     SplitPanels.Panel1.Controls.Clear();
+                    SplitPanels.Panel2.Controls.Clear();
 
                     foreach (var pallete in xmlobject.Palletes)
                     {

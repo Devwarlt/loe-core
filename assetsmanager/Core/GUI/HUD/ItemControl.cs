@@ -19,6 +19,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         private ControlState _state { get; set; }
         private Timer _clock { get; set; }
         private SpritePallete _spritePallete { get; set; }
+        private int _uid { get; set; }
         private string _origin { get; set; }
         private ContentType[] _type { get; set; }
         private MapLayer[] _layer { get; set; }
@@ -33,28 +34,32 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
         private bool[] _walkable { get; set; }
 
         public ItemControl(SpritePallete spritePallete, string origin, ObjectsContent objectsContent)
-            : this(spritePallete, origin, ContentType.Objects, objectsContent.LayerData?.Type ?? MapLayer.ABSTRACT, objectsContent.LayerData?.Group ?? string.Empty,
-                  objectsContent.Id, objectsContent.Name, objectsContent.TextureData.File, objectsContent.TextureData.X,
-                  objectsContent.TextureData.Y, objectsContent.TextureData?.Animated ?? false, objectsContent.Blocked, false)
+            : this(spritePallete, origin, objectsContent.Uid, ContentType.Objects, objectsContent.LayerData?.Type ?? MapLayer.ABSTRACT,
+                  objectsContent.LayerData?.Group ?? string.Empty, objectsContent.Id, objectsContent.Name,
+                  objectsContent.TextureData.File, objectsContent.TextureData.X, objectsContent.TextureData.Y,
+                  objectsContent.TextureData?.Animated ?? false, objectsContent.Blocked, false)
             => ObjectsContent = objectsContent;
 
         public ItemControl(SpritePallete spritePallete, string origin, ItemsContent itemsContent)
-            : this(spritePallete, origin, ContentType.Items, MapLayer.ABSTRACT, string.Empty,
-                  itemsContent.Id, itemsContent.Name, itemsContent.TextureData.File, itemsContent.TextureData.X,
-                  itemsContent.TextureData.Y, false, false, false)
+            : this(spritePallete, origin, itemsContent.Uid, ContentType.Items, MapLayer.ABSTRACT,
+                  string.Empty, itemsContent.Id, itemsContent.Name,
+                  itemsContent.TextureData.File, itemsContent.TextureData.X, itemsContent.TextureData.Y,
+                  false, false, false)
             => ItemsContent = ItemsContent;
 
         public ItemControl(SpritePallete spritePallete, string origin, TilesContent tilesContent)
-            : this(spritePallete, origin, ContentType.Tiles, tilesContent.LayerData?.Type ?? MapLayer.ABSTRACT, tilesContent.LayerData?.Group ?? string.Empty,
-                  tilesContent.Id, tilesContent.Name, tilesContent.TextureData.File, tilesContent.TextureData.X,
-                  tilesContent.TextureData.Y, false, false, tilesContent.Walkable)
+            : this(spritePallete, origin, tilesContent.Uid, ContentType.Tiles, tilesContent.LayerData?.Type ?? MapLayer.ABSTRACT,
+                  tilesContent.LayerData?.Group ?? string.Empty, tilesContent.Id, tilesContent.Name,
+                  tilesContent.TextureData.File, tilesContent.TextureData.X, tilesContent.TextureData.Y,
+                  false, false, tilesContent.Walkable)
             => TilesContent = tilesContent;
 
-        private ItemControl(SpritePallete spritePallete, string origin, ContentType type, MapLayer layer, string group, int id, string name,
+        private ItemControl(SpritePallete spritePallete, string origin, int uid, ContentType type, MapLayer layer, string group, int id, string name,
             string file, int x, int y, bool animated, bool blocked, bool walkable)
         {
             _state = ControlState.Normal;
             _spritePallete = spritePallete;
+            _uid = uid;
             _origin = origin;
             _type = new ContentType[] { type, type };
             _layer = new MapLayer[] { layer, layer };
@@ -160,6 +165,12 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
                         DefaultButton.Enabled = changes;
                         DefaultButton.Image = changes ? Properties.Resources.hud_cross : Properties.Resources.hud_cross_inactive;
+
+                        if (changes)
+                            changes = _id[1] >= 0 && _id[1] <= int.MaxValue && !string.IsNullOrWhiteSpace(_name[1]) &&
+                            ItemFile.SelectedIndex != -1 && _x[1] >= 0 && _x[1] <= int.MaxValue && _y[1] >= 0 &&
+                            _y[1] <= int.MaxValue;
+
                         SaveButton.Enabled = changes;
                         SaveButton.Image = changes ? Properties.Resources.hud_check : Properties.Resources.hud_check_inactive;
                     });
@@ -247,13 +258,32 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            var type = _type[1];
+            var group = _group[1];
+            var id = _id[1];
+            var name = _name[1];
+            var layerdata = new LayerData()
+            {
+                Type = _layer[1],
+                Group = _group[1]
+            };
+            var texturedata = new TextureData()
+            {
+                File = _file[1],
+                X = _x[1],
+                Y = _y[1],
+                Animated = _animated[1]
+            };
+            var blocked = _blocked[1];
+            var walkable = _walkable[1];
+
             ObjectsContent sampleobject = null;
             ItemsContent sampleitem = null;
             TilesContent sampletile = null;
 
             foreach (var samples in Manager.XmlObjects.Values.Select(values => values).ToList())
                 foreach (var sample in samples)
-                    if (sample.Id == _id[1])
+                    if (sample.Id == id && sample.Uid != _uid)
                     {
                         sampleobject = sample;
                         break;
@@ -261,7 +291,7 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
             foreach (var samples in Manager.XmlItems.Values.Select(values => values).ToList())
                 foreach (var sample in samples)
-                    if (sample.Id == _id[1])
+                    if (sample.Id == id && sample.Uid != _uid)
                     {
                         sampleitem = sample;
                         break;
@@ -269,112 +299,57 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
             foreach (var samples in Manager.XmlTiles.Values.Select(values => values).ToList())
                 foreach (var sample in samples)
-                    if (sample.Id == _id[1])
+                    if (sample.Id == id && sample.Uid != _uid)
                     {
                         sampletile = sample;
                         break;
                     }
 
-            if (_id[1] <= 0 || _id[1] >= int.MaxValue)
-            {
-                MessageBox.Show("Invalid ID, consider to change.", "Error!");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(_name[1]))
-            {
-                MessageBox.Show("Name must be not null or empty, consider to change.", "Error!");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(_file[1]))
-            {
-                MessageBox.Show("Invalid File, consider to change.", "Error!");
-                return;
-            }
-
-            if (_x[1] <= 0 || _x[1] >= int.MaxValue)
-            {
-                MessageBox.Show("Invalid X coordinate, consider to change.", "Error!");
-                return;
-            }
-
-            if (_y[1] <= 0 || _y[1] >= int.MaxValue)
-            {
-                MessageBox.Show("Invalid Y coordinate, consider to change.", "Error!");
-                return;
-            }
-
             if (sampleobject != null)
             {
-                if (sampleobject.Name != _name[1])
-                {
-                    MessageBox.Show($"Object '{sampleobject.Name}' has same ID '{sampleobject.Id}', consider to change.", "Error!");
-                    return;
-                }
+                MessageBox.Show($"Object '{sampleobject.Name}' has same ID '{sampleobject.Id}', consider to change.", "Error!");
+                return;
             }
 
             if (sampleitem != null)
             {
-                if (sampleitem.Name != _name[1])
-                {
-                    MessageBox.Show($"Item '{sampleitem.Name}' has same ID '{sampleitem.Id}', consider to change.", "Error!");
-                    return;
-                }
+                MessageBox.Show($"Item '{sampleitem.Name}' has same ID '{sampleitem.Id}', consider to change.", "Error!");
+                return;
             }
 
             if (sampletile != null)
             {
-                if (sampletile.Name != _name[1])
-                {
-                    MessageBox.Show($"Tile '{sampletile.Name}' has same ID '{sampletile.Id}', consider to change.", "Error!");
-                    return;
-                }
+                MessageBox.Show($"Tile '{sampletile.Name}' has same ID '{sampletile.Id}', consider to change.", "Error!");
+                return;
             }
-
-            var layerdata = new LayerData()
-            {
-                Type = _layer[1],
-                Group = _group[1]
-            };
-
-            var texturedata = new TextureData()
-            {
-                File = _file[1],
-                X = _x[1],
-                Y = _y[1]
-            };
-
-            if (_type[1] == ContentType.Objects)
-                texturedata.Animated = _animated[1];
 
             switch (_type[0])
             {
                 case ContentType.Objects:
                     {
-                        var xmlobject = Manager.XmlObjects[_origin].FirstOrDefault(sample => sample.Id == _id[0]);
+                        var xmlobject = Manager.XmlObjects[_origin].FirstOrDefault(sample => sample.Id == id);
 
-                        switch (_type[1])
+                        switch (type)
                         {
                             case ContentType.Objects:
                                 {
-                                    xmlobject.Id = _id[1];
-                                    xmlobject.Name = _name[1];
+                                    xmlobject.Id = id;
+                                    xmlobject.Name = name;
 
-                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                    if (layerdata.Type != MapLayer.ABSTRACT)
                                         xmlobject.LayerData = layerdata;
 
                                     xmlobject.TextureData = texturedata;
-                                    xmlobject.Blocked = _blocked[1];
+                                    xmlobject.Blocked = blocked;
                                 }
-                                return;
+                                break;
 
                             case ContentType.Items:
                                 Manager.XmlItems[_origin].Add(new ItemsContent()
                                 {
-                                    Type = _type[1],
-                                    Id = _id[1],
-                                    Name = _name[1],
+                                    Type = type,
+                                    Id = id,
+                                    Name = name,
                                     TextureData = texturedata
                                 });
                                 break;
@@ -383,14 +358,14 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                                 {
                                     var xmltile = new TilesContent()
                                     {
-                                        Type = _type[1],
-                                        Id = _id[1],
-                                        Name = _name[1],
+                                        Type = type,
+                                        Id = id,
+                                        Name = name,
                                         TextureData = texturedata,
-                                        Walkable = _walkable[1],
+                                        Walkable = walkable,
                                     };
 
-                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                    if (layerdata.Type != MapLayer.ABSTRACT)
                                         xmltile.LayerData = layerdata;
 
                                     Manager.XmlTiles[_origin].Add(xmltile);
@@ -398,28 +373,29 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                                 break;
                         }
 
-                        Manager.XmlObjects[_origin].Remove(xmlobject);
+                        if (type != ContentType.Objects)
+                            Manager.XmlObjects[_origin].Remove(xmlobject);
                     }
                     break;
 
                 case ContentType.Items:
                     {
-                        var xmlitem = Manager.XmlItems[_origin].FirstOrDefault(sample => sample.Id == _id[0]);
+                        var xmlitem = Manager.XmlItems[_origin].FirstOrDefault(sample => sample.Id == id);
 
-                        switch (_type[1])
+                        switch (type)
                         {
                             case ContentType.Objects:
                                 {
                                     var xmlobject = new ObjectsContent()
                                     {
-                                        Type = _type[1],
-                                        Id = _id[1],
-                                        Name = _name[1],
+                                        Type = type,
+                                        Id = id,
+                                        Name = name,
                                         TextureData = texturedata,
-                                        Blocked = _blocked[1]
+                                        Blocked = blocked
                                     };
 
-                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                    if (layerdata.Type != MapLayer.ABSTRACT)
                                         xmlobject.LayerData = layerdata;
 
                                     Manager.XmlObjects[_origin].Add(xmlobject);
@@ -428,24 +404,24 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
 
                             case ContentType.Items:
                                 {
-                                    xmlitem.Id = _id[1];
-                                    xmlitem.Name = _name[1];
+                                    xmlitem.Id = id;
+                                    xmlitem.Name = name;
                                     xmlitem.TextureData = texturedata;
                                 }
-                                return;
+                                break;
 
                             case ContentType.Tiles:
                                 {
                                     var xmltile = new TilesContent()
                                     {
-                                        Type = _type[1],
-                                        Id = _id[1],
-                                        Name = _name[1],
+                                        Type = type,
+                                        Id = id,
+                                        Name = name,
                                         TextureData = texturedata,
-                                        Walkable = _walkable[1],
+                                        Walkable = walkable,
                                     };
 
-                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                    if (layerdata.Type != MapLayer.ABSTRACT)
                                         xmltile.LayerData = layerdata;
 
                                     Manager.XmlTiles[_origin].Add(xmltile);
@@ -453,7 +429,8 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                                 break;
                         }
 
-                        Manager.XmlItems[_origin].Remove(xmlitem);
+                        if (type != ContentType.Items)
+                            Manager.XmlItems[_origin].Remove(xmlitem);
                     }
                     break;
 
@@ -461,20 +438,20 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                     {
                         var xmltile = Manager.XmlTiles[_origin].FirstOrDefault(sample => sample.Id == _id[0]);
 
-                        switch (_type[1])
+                        switch (type)
                         {
                             case ContentType.Objects:
                                 {
                                     var xmlobject = new ObjectsContent()
                                     {
-                                        Type = _type[1],
-                                        Id = _id[1],
-                                        Name = _name[1],
+                                        Type = type,
+                                        Id = id,
+                                        Name = name,
                                         TextureData = texturedata,
-                                        Blocked = _blocked[1]
+                                        Blocked = blocked
                                     };
 
-                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                    if (layerdata.Type != MapLayer.ABSTRACT)
                                         xmlobject.LayerData = layerdata;
 
                                     Manager.XmlObjects[_origin].Add(xmlobject);
@@ -484,43 +461,45 @@ namespace LoESoft.AssetsManager.Core.GUI.HUD
                             case ContentType.Items:
                                 Manager.XmlItems[_origin].Add(new ItemsContent()
                                 {
-                                    Type = _type[1],
-                                    Id = _id[1],
-                                    Name = _name[1],
+                                    Type = type,
+                                    Id = id,
+                                    Name = name,
                                     TextureData = texturedata
                                 });
                                 break;
 
                             case ContentType.Tiles:
                                 {
-                                    xmltile.Id = _id[1];
-                                    xmltile.Name = _name[1];
+                                    xmltile.Id = id;
+                                    xmltile.Name = name;
 
-                                    if (_layer[1] != MapLayer.ABSTRACT)
+                                    if (layerdata.Type != MapLayer.ABSTRACT)
                                         xmltile.LayerData = layerdata;
 
                                     xmltile.TextureData = texturedata;
-                                    xmltile.Walkable = _walkable[1];
+                                    xmltile.Walkable = walkable;
                                 }
-                                return;
+                                break;
                         }
 
-                        Manager.XmlTiles[_origin].Remove(xmltile);
+                        if (type != ContentType.Tiles)
+                            Manager.XmlTiles[_origin].Remove(xmltile);
                     }
                     break;
             }
 
-            _type[0] = _type[1];
-            _layer[0] = _layer[1];
-            _group[0] = _group[1];
-            _id[0] = _id[1];
-            _name[0] = _name[1];
-            _file[0] = _file[1];
-            _x[0] = _x[1];
-            _y[0] = _x[1];
-            _animated[0] = _animated[1];
-            _blocked[0] = _blocked[1];
-            _walkable[0] = _walkable[1];
+            _type[0] = type;
+            _layer[0] = layerdata.Type;
+            _group[0] = layerdata.Group;
+            _id[0] = id;
+            _name[0] = name;
+            _file[0] = texturedata.File;
+            _x[0] = texturedata.X;
+            _y[0] = texturedata.Y;
+            _animated[0] = texturedata.Animated;
+            _blocked[0] = blocked;
+            _walkable[0] = walkable;
+            _spritePallete.Image = Manager.Spritesheets[texturedata.File].Image[texturedata.X, texturedata.Y];
             _spritePallete.ItemControl = this;
 
             MessageBox.Show("You have been saved your progress!", "Success!");

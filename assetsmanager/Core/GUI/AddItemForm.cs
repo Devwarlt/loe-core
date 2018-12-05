@@ -13,8 +13,6 @@ namespace LoESoft.AssetsManager.Core.GUI
 {
     public partial class AddItemForm : Form
     {
-        public Manager Manager { get; set; }
-
         private Timer _clock { get; set; }
 
         public AddItemForm()
@@ -272,8 +270,6 @@ namespace LoESoft.AssetsManager.Core.GUI
                     });
                     break;
             }
-
-            Manager.RefreshXmls();
 
             DialogResult = DialogResult.OK;
         }
