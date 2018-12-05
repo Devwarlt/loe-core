@@ -29,15 +29,15 @@ namespace LoESoft.Client.Assets
         private static void InitSprites()
         {
             AddSprites("iconSprites");
-            AddSprites("playersEmbed");
+            AddSprites("playersEmbed", 32, 32);
             AddSprites("tilesEmbed");
             AddSprites("objectsEmbed");
             AddSprites("itemsEmbed");
             AddSprites("tileSet16x16");
         }
 
-        public static void AddSprites(string filename) =>
-            Sprites.Add(filename, SpriteSet.LoadSet(filename));
+        public static void AddSprites(string filename, int w = 8, int h = 8) =>
+            Sprites.Add(filename, SpriteSet.LoadSet(filename, w, h));
 
         public static void AddImage(string file) =>
             Images.Add(file, AssetLoader.LoadAsset<Texture2D>("images/" + file));

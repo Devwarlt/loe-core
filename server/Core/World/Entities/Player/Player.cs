@@ -25,6 +25,8 @@ namespace LoESoft.Server.Core.World.Entities.Player
             X = Character.Position.X;
             Y = Character.Position.Y;
 
+            Size = 16;
+
             Inventory = new Item[32];
             for (var i = 0; i < Character.Inventory.Length; i++)
                 Inventory[i] = Character.Inventory[i];

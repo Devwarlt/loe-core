@@ -12,7 +12,7 @@ namespace LoESoft.Client.Core.Game.Animation
         private int preDirection;
 
         public PlayerAnimation()
-            : base(0.1f, AnimationType.Forward)
+            : base(500f, AnimationType.Forward)
         {
             curDirection = 1;
             preDirection = curDirection;
@@ -24,8 +24,8 @@ namespace LoESoft.Client.Core.Game.Animation
 
             AddAnimation(AnimationType.Forward, animation[0]);
             AddAnimation(AnimationType.Backward, animation[1]);
-            AddAnimation(AnimationType.Left, animation[2]);
-            AddAnimation(AnimationType.Right, animation[3]);
+            AddAnimation(AnimationType.Left, animation[3]);
+            AddAnimation(AnimationType.Right, animation[2]);
         }
 
         public override void Update(GameTime gameTime, GameObject basicObject)
