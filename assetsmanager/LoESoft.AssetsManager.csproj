@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3155B7B4-98CE-435B-9F19-ED476BE03757}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>LoESoft.AssetsManager</RootNamespace>
     <AssemblyName>BRMEAssetsManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -317,12 +317,6 @@
     <Content Include="Core\Assets\Sprites\hud-save.png" />
     <Content Include="Core\Assets\Sprites\hud-xml.png" />
     <Content Include="Core\Assets\Sprites\loesoft.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\server\LoESoft.Server.csproj">
-      <Project>{728A3882-9A81-4556-862D-C5F356679289}</Project>
-      <Name>LoESoft.Server</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

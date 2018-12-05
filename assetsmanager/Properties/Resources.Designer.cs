@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LoESoft.AssetsManager.Properties {
-    using System;
-    
-    
+namespace LoESoft.AssetsManager.Properties
+{
+
+
     /// <summary>
     ///   Uma classe de recurso de tipo de alta segurança, para pesquisar cadeias de caracteres localizadas etc.
     /// </summary>
