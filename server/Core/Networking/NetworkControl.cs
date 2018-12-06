@@ -50,7 +50,7 @@ namespace LoESoft.Server.Core.Networking
                 PacketID = outgoingPacket.PacketID,
                 Content = Regex.Replace(IO.ExportPacket(outgoingPacket), @"\r\n?|\n", string.Empty)
             }));
-            
+
             try
             {
                 TcpSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, result =>
@@ -114,7 +114,8 @@ namespace LoESoft.Server.Core.Networking
                     {
                         if (!Disconnected)
                         {
-                            App.Warn("Something went wrong!" + ex.ToString());
+                            if (!(ex is SocketException))
+                                App.Warn("Something went wrong!\n" + ex);
 
                             ReceivePacket();
                         }
@@ -125,7 +126,7 @@ namespace LoESoft.Server.Core.Networking
             {
                 if (!Disconnected)
                 {
-                    App.Warn("Something went wrong!" + ex.ToString());
+                    App.Warn("Something went wrong!\n" + ex);
 
                     ReceivePacket();
                 }
