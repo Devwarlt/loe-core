@@ -5,6 +5,7 @@ using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using MonoGame.Forms.Controls;
 using System;
 using System.Collections.Generic;
@@ -165,7 +166,7 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                         }
                     }
                 }
-
+            
             Map.Update();
 
             base.Update(gameTime);
