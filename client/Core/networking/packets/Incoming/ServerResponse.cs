@@ -3,7 +3,9 @@ using LoESoft.Client.Core.Screens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {
@@ -74,20 +76,22 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public void HandleCharacterLoad(GameUser user)
         {
-            if (Result == 0)
-            {
-                if (ScreenManager.ActiveScreen == GameApplication.CharacterScreen)
-                {
-                    var content = Content.Split(',');
-                    var id = int.Parse(content[0]);
-                    var type = int.Parse(content[1]);
+            var loading = new ConcurrentQueue<Action>();
 
-                    ScreenManager.DispatchScreen(new LoadingScreen(new ConcurrentQueue<Action>(),
-                    GameApplication.GameScreen = new GameScreen(user, id, type)));
-                }
+            switch(Result)
+            {
+                case 0:
+                    {
+                        var content = Content.Split(',');
+
+                        ScreenManager.DispatchScreen(new LoadingScreen(loading,
+                            GameApplication.GameScreen = new GameScreen(user, int.Parse(content[0]), int.Parse(content[1]))));
+                    } break;
+                case -1:
+                    {
+                        ScreenManager.DispatchScreen(GameApplication.CharacterScreen);
+                    } break;
             }
-            else
-                App.Warn("Unable To Load Character");
         }
 
         public void CreateNewCharacter()

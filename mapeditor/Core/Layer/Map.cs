@@ -57,44 +57,53 @@ namespace LoESoft.MapEditor.Core.Layer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            try
+            foreach (var layer in Layers.OrderBy(layer => layer.MapLayer))
             {
-                Layers.OrderBy(layer => layer.MapLayer).Select(layer =>
-                {
+                if (layer.MapLayer == MapLayer.UNDERGROUND && !MEGameControl.ShowUndergroundLayer || layer.MapLayer == MapLayer.GROUND && !MEGameControl.ShowGroundLayer
+                            || layer.MapLayer == MapLayer.OBJECT && !MEGameControl.ShowObjectLayer || layer.MapLayer == MapLayer.SKY && !MEGameControl.ShowSkyLayer)
+                    break;
+
+                if (layer.MapLayer == MapLayer.ABSTRACT && MEGameControl.ShowGrid)
                     for (var x = 0; x < Width; x++)
                         for (var y = 0; y < Height; y++)
                         {
-                            var chunk = layer.Chunk[y, x];
-
-                            if (layer.MapLayer == MapLayer.UNDERGROUND && !MEGameControl.ShowUndergroundLayer)
-                                break;
-
-                            if (layer.MapLayer == MapLayer.GROUND && !MEGameControl.ShowGroundLayer)
-                                break;
-
-                            if (layer.MapLayer == MapLayer.OBJECT && !MEGameControl.ShowObjectLayer)
-                                break;
-
-                            if (layer.MapLayer == MapLayer.SKY && !MEGameControl.ShowSkyLayer)
-                                break;
-
-                            if (chunk != null)
-                                spriteBatch.Draw(MEGameControl.Textures[chunk.Group], new Vector2(
-                                    (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,
-                                    (x - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE
-                                    ), Utils.JamesBounds(chunk.BoundX, chunk.BoundY), Color.White);
-
                             if (layer.MapLayer == MapLayer.ABSTRACT && MEGameControl.ShowGrid)
                                 spriteBatch.Draw(MEGameControl.GridTexture, new Vector2(
                                     (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,
                                     (x - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE
                                     ), Utils.JamesBounds(0, 0), Color.White);
                         }
-
-                    return layer;
-                }).ToList();
+                else
+                    foreach (var i in layer.Chunk)
+                    {
+                        if (i != null)
+                            spriteBatch.Draw(MEGameControl.Textures[i.Group], i.Vector, Utils.JamesBounds(i.BoundX, i.BoundY), Color.White);
+                    }
             }
-            catch { }
+
         }
+
+        #region oldDrawingMethod justincase
+        //if (layer.Chunk.Length > 0)
+        //{
+        //    for (var x = 0; x < Width; x++)
+        //        for (var y = 0; y < Height; y++)
+        //        {
+        //            var chunk = layer.Chunk[y, x];
+
+        //            if (chunk != null)
+        //                spriteBatch.Draw(MEGameControl.Textures[chunk.Group], new Vector2(
+        //                    (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,
+        //                    (x - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE
+        //                    ), Utils.JamesBounds(chunk.BoundX, chunk.BoundY), Color.White);
+
+        //            if (layer.MapLayer == MapLayer.ABSTRACT && MEGameControl.ShowGrid)
+        //                spriteBatch.Draw(MEGameControl.GridTexture, new Vector2(
+        //                    (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,
+        //                    (x - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE
+        //                    ), Utils.JamesBounds(0, 0), Color.White);
+        //        }
+        //}
+        #endregion oldDrawingMethod justincase
     }
 }

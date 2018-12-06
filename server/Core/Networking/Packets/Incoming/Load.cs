@@ -42,14 +42,23 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
                 client.Player = new Player(client.Manager, client, getCharacterData);
 
-                client.SendPacket(new ServerResponse()
+                if (client.Manager.TryAddPlayer(client))
                 {
-                    From = "LoadCharacter",
-                    Result = 0,
-                    Content = $"{client.Player.ObjectId},{getCharacterData.Class.ToString()}",
-                });
-
-                client.Manager.TryAddPlayer(client);
+                    client.SendPacket(new ServerResponse()
+                    {
+                        From = "LoadCharacter",
+                        Result = 0,
+                        Content = $"{client.Player.ObjectId},{getCharacterData.Class.ToString()}",
+                    });
+                } else
+                {
+                    client.SendPacket(new ServerResponse()
+                    {
+                        From = "LoadCharacter",
+                        Result = -1,
+                        Content = $"Server is currently full! Retrying in 5 seconds!"
+                    });
+                }
             }
         }
     }

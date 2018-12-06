@@ -37,8 +37,8 @@ namespace LoESoft.Client.Core.Screens
         public override void Update(GameTime gameTime)
         {
             Controller.Update(gameTime);
-            WorldMap.Update(gameTime, (int)Controller.Player.X, (int)Controller.Player.Y);
             Camera.Update(Controller.Player);
+            WorldMap.Update(gameTime, (int)Controller.Player.X, (int)Controller.Player.Y);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -51,7 +51,6 @@ namespace LoESoft.Client.Core.Screens
                 if (GameUser.IsConnected)
                 {
                     WorldMap.Draw(spriteBatch, (int)Controller.Player.X, (int)Controller.Player.Y);
-
                     Controller.Draw(spriteBatch);
                 }
             }

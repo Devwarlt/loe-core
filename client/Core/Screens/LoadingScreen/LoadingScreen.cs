@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using System;
 using System.Collections.Concurrent;
+using System.Timers;
 
 namespace LoESoft.Client.Core.Screens
 {
@@ -28,19 +29,22 @@ namespace LoESoft.Client.Core.Screens
             }
         }
 
+        public int TotalLoadCount { get; set; }
+        
+        protected bool StaticLoadingText { get; set; }
+
         public TextDisplay Display { get; set; }
 
         public ConcurrentQueue<Action> LoadFunctions { get; set; }
         public Screen ToLoadScreen { get; set; }
 
-        public int TotalLoadCount { get; set; }
-
-        public LoadingScreen(ConcurrentQueue<Action> toDo, Screen changeScreen, string initText = "")
+        public LoadingScreen(ConcurrentQueue<Action> toDo, Screen changeScreen, string initText = "", bool staticText = false)
         {
             TotalLoadCount = toDo.Count;
-            LoadingText = initText = $"Loading: 0/{TotalLoadCount}";
+            LoadingText = initText;
             LoadFunctions = toDo;
             ToLoadScreen = changeScreen;
+            StaticLoadingText = staticText;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -58,7 +62,9 @@ namespace LoESoft.Client.Core.Screens
             get => _amount;
             set
             {
-                LoadingText = $"Loading: {value}/{TotalLoadCount}";
+                if (!StaticLoadingText)
+                    LoadingText = $"Loading:[{value}/{TotalLoadCount}]";
+                
                 _amount = value;
             }
         }
@@ -73,10 +79,8 @@ namespace LoESoft.Client.Core.Screens
                     Amount++;
                 }
             }
-            else
-            {
+            else if (ToLoadScreen != null)
                 ScreenManager.DispatchScreen(ToLoadScreen);
-            }
         }
 
         public override void OnScreenCreate()

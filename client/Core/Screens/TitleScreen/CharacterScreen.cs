@@ -46,10 +46,7 @@ namespace LoESoft.Client.Core.Screens
         private void OnPlay(object sender, EventArgs e)
         {
             if (CharacterSettings.CurrentCharacterId != -1)
-            {
                 _gameUser.SendPacket(new Load() { CharacterIndex = CharacterSettings.CurrentCharacterId });
-                App.Warn("Send Load");
-            }
         }
 
         private void OnExit(object sender, EventArgs e) => ScreenManager.Close();

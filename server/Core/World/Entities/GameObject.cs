@@ -81,7 +81,7 @@ namespace LoESoft.Server.Core.World.Entities
         public Chunk GetChunk() => Manager.Core.Map.Chunks[new Point(ChunkX, ChunkY)];
             
         public virtual void Dispose() =>
-            Manager.Core.Map.Chunks[new Point(ChunkX, ChunkY)].Remove(this);
+            GetChunk().Remove(this);
 
         public virtual void OnUpdate() => UpdateCount = 0;
     }

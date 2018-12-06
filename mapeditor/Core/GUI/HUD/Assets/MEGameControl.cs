@@ -153,7 +153,10 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                                 Id = InteractiveObject.Id,
                                 Group = InteractiveObject.LayerData.Group,
                                 BoundX = InteractiveObject.TextureData.X,
-                                BoundY = InteractiveObject.TextureData.Y
+                                BoundY = InteractiveObject.TextureData.Y,
+                                GridX = (int)mx,
+                                GridY = (int)my,
+                                Vector = new Vector2(((int)mx - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE, ((int)my - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE)
                             });
                         }
                         else if (MouseState.RightButton == ButtonState.Pressed)
