@@ -38,17 +38,6 @@ namespace LoESoft.Client
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Length - 2);
 
 #if DEBUG
-        private const UInt32 StdOutputHandle = 0xFFFFFFF5;
-
-        [DllImport("kernel32.dll")]
-        private static extern IntPtr GetStdHandle(UInt32 nStdHandle);
-
-        [DllImport("kernel32.dll")]
-        private static extern void SetStdHandle(UInt32 nStdHandle, IntPtr handle);
-
-        [DllImport("kernel32.dll")]
-        private static extern bool AllocConsole();
-
         // Log
         private static Logger Log => LogManager.GetLogger(Name);
 
@@ -71,14 +60,6 @@ namespace LoESoft.Client
         public static void Main(string[] args)
         {
 #if DEBUG
-            AllocConsole();
-
-            var defaultStdout = new IntPtr(7);
-
-            if (GetStdHandle(StdOutputHandle) != defaultStdout)
-                SetStdHandle(StdOutputHandle, defaultStdout);
-
-            Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = true });
             Console.Title = $"{Name} - Build: {Version}";
 
             var config = new LoggingConfiguration();
