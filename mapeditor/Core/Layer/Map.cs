@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace LoESoft.MapEditor.Core.Layer
@@ -57,30 +58,32 @@ namespace LoESoft.MapEditor.Core.Layer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var layer in Layers.OrderBy(layer => layer.MapLayer))
+            Task.Factory.StartNew(() =>
             {
-                if (layer.MapLayer == MapLayer.UNDERGROUND && !MEGameControl.ShowUndergroundLayer || layer.MapLayer == MapLayer.GROUND && !MEGameControl.ShowGroundLayer
-                            || layer.MapLayer == MapLayer.OBJECT && !MEGameControl.ShowObjectLayer || layer.MapLayer == MapLayer.SKY && !MEGameControl.ShowSkyLayer)
-                    break;
+                foreach (var layer in Layers.OrderBy(layer => layer.MapLayer))
+                {
+                    if (layer.MapLayer == MapLayer.UNDERGROUND && !MEGameControl.ShowUndergroundLayer || layer.MapLayer == MapLayer.GROUND && !MEGameControl.ShowGroundLayer
+                                || layer.MapLayer == MapLayer.OBJECT && !MEGameControl.ShowObjectLayer || layer.MapLayer == MapLayer.SKY && !MEGameControl.ShowSkyLayer)
+                        break;
 
-                if (layer.MapLayer == MapLayer.ABSTRACT && MEGameControl.ShowGrid)
-                    for (var x = 0; x < Width; x++)
-                        for (var y = 0; y < Height; y++)
+                    if (layer.MapLayer == MapLayer.ABSTRACT && MEGameControl.ShowGrid)
+                        for (var x = 0; x < Width; x++)
+                            for (var y = 0; y < Height; y++)
+                            {
+                                if (layer.MapLayer == MapLayer.ABSTRACT && MEGameControl.ShowGrid)
+                                    spriteBatch.Draw(MEGameControl.GridTexture, new Vector2(
+                                        (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,
+                                        (x - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE
+                                        ), Utils.JamesBounds(0, 0), Color.White);
+                            }
+                    else
+                        foreach (var i in layer.Chunk)
                         {
-                            if (layer.MapLayer == MapLayer.ABSTRACT && MEGameControl.ShowGrid)
-                                spriteBatch.Draw(MEGameControl.GridTexture, new Vector2(
-                                    (y - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE,
-                                    (x - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE
-                                    ), Utils.JamesBounds(0, 0), Color.White);
+                            if (i != null)
+                                spriteBatch.Draw(MEGameControl.Textures[i.Group], i.Vector, Utils.JamesBounds(i.BoundX, i.BoundY), Color.White);
                         }
-                else
-                    foreach (var i in layer.Chunk)
-                    {
-                        if (i != null)
-                            spriteBatch.Draw(MEGameControl.Textures[i.Group], i.Vector, Utils.JamesBounds(i.BoundX, i.BoundY), Color.White);
-                    }
-            }
-
+                }
+            });
         }
 
         #region oldDrawingMethod justincase
