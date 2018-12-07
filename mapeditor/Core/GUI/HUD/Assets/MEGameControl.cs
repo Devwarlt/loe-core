@@ -150,7 +150,10 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             if (scrollValue != Camera.Zoom && scrollValue >= 1)
                 Camera.SetZoomToPosition(scrollValue, new Vector2(MouseState.X, MouseState.Y));
             else if (scrollValue < 1)
+            {
                 scrollValue = 1;
+                Camera.Position = Vector2.Zero;
+            }
             
             if (MapState == MapState.Active && InteractiveObject != null && InteractiveObjects != null)
                 if (InteractiveObject.LayerData.Type != MapLayer.ABSTRACT && Focused)
