@@ -1,5 +1,6 @@
 ﻿using LoESoft.Dlls.MapEditor;
 using LoESoft.MapEditor.Core.Assets;
+using LoESoft.MapEditor.Core.GUI.HUD.Assets;
 using LoESoft.MapEditor.Core.Layer;
 using LoESoft.MapEditor.Core.Util;
 using Microsoft.Xna.Framework;
@@ -41,6 +42,8 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
         public static Vector2 DrawOffset = Vector2.Zero;
 
         private static MouseState MouseState { get; set; }
+
+        protected LoECamera Camera { get; set; }
 
         protected override void Initialize()
         {
@@ -126,6 +129,11 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
             base.Initialize();
 
             Editor.Content.RootDirectory = "Content";
+
+            Editor.ShowFPS = true;
+            
+            
+            Camera = new LoECamera(609, 600);
         }
 
         protected override void Update(GameTime gameTime)
@@ -137,11 +145,19 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
 
             MouseState = Mouse.GetState();
 
+            float scrollValue = ((MouseState.ScrollWheelValue) / 1000f) + 1;
+
+            if (scrollValue != Camera.Zoom && scrollValue >= 1)
+                Camera.SetZoomToPosition(scrollValue, new Vector2(MouseState.X, MouseState.Y));
+            else if (scrollValue < 1)
+                scrollValue = 1;
+            
             if (MapState == MapState.Active && InteractiveObject != null && InteractiveObjects != null)
                 if (InteractiveObject.LayerData.Type != MapLayer.ABSTRACT && Focused)
                 {
-                    var mx = (MouseState.X / Utils.TILE_SIZE) + DrawOffset.X;
-                    var my = (MouseState.Y / Utils.TILE_SIZE) + DrawOffset.Y;
+                    var vector = Camera.ScreenToWorld(new Vector2((MouseState.X) + DrawOffset.X, (MouseState.Y) + DrawOffset.Y));
+                    var mx = vector.X / Utils.TILE_SIZE;
+                    var my = vector.Y / Utils.TILE_SIZE;
 
                     if (MouseState.X < App.MapControl.Width && MouseState.X >= 0
                         && MouseState.Y < App.MapControl.Height && MouseState.Y >= 0)
@@ -157,13 +173,11 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
                                 BoundY = InteractiveObject.TextureData.Y,
                                 GridX = (int)mx,
                                 GridY = (int)my,
-                                Vector = new Vector2(((int)mx - MEGameControl.DrawOffset.X) * Utils.TILE_SIZE, ((int)my - MEGameControl.DrawOffset.Y) * Utils.TILE_SIZE)
+                                Vector = new Vector2(((int)mx - DrawOffset.X) * Utils.TILE_SIZE, ((int)my - DrawOffset.Y) * Utils.TILE_SIZE)
                             });
                         }
                         else if (MouseState.RightButton == ButtonState.Pressed)
-                        {
                             Map.Layers[(int)InteractiveObject.LayerData.Type].RemoveTiles(mx, my);
-                        }
                     }
                 }
             
@@ -175,7 +189,7 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
         protected override void Draw()
         {
             GraphicsDevice.Clear(Color.DarkGreen);
-            Editor.spriteBatch.Begin();
+            Editor.spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
 
             Map.Draw(Editor.spriteBatch);
 
@@ -189,9 +203,12 @@ namespace LoESoft.MapEditor.Core.GUI.HUD
         }
 
         private void DrawSpriteOnCursor()
-            => Editor.spriteBatch.Draw(Textures[InteractiveObject.LayerData.Group], new Vector2(
+        {
+            var vector = Camera.ScreenToWorld(new Vector2(
                 MouseState.X - Utils.TILE_SIZE / 2,
                 MouseState.Y - Utils.TILE_SIZE / 2
-                ), Utils.JamesBounds(InteractiveObject.TextureData.X, InteractiveObject.TextureData.Y), Color.White);
+                ));
+            Editor.spriteBatch.Draw(Textures[InteractiveObject.LayerData.Group], vector, Utils.JamesBounds(InteractiveObject.TextureData.X, InteractiveObject.TextureData.Y), Color.White);
+        }
     }
 }

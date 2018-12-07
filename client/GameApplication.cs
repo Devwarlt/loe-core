@@ -34,9 +34,8 @@ namespace LoESoft.Client
 
             Window.AllowUserResizing = false;
             Window.ClientSizeChanged += Window_ClientSizeChanged;
-
+            
             IsMouseVisible = true;
-
             Content.RootDirectory = "Content";
         }
 

@@ -72,6 +72,7 @@
     <Compile Include="Core\Assets\Structure\XmlContent.cs" />
     <Compile Include="Core\Assets\XmlLibrary.cs" />
     <Compile Include="Core\Assets\XmlLoader.cs" />
+    <Compile Include="Core\GUI\HUD\Assets\LoECamera.cs" />
     <Compile Include="Core\GUI\HUD\HUD.cs">
       <SubType>UserControl</SubType>
     </Compile>
