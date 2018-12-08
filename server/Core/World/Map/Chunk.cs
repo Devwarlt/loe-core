@@ -52,12 +52,10 @@ namespace LoESoft.Server.Core.World.Map
             return null;
         }
 
-        private Random rand = new Random();
-
         public void RandomGen()
         {
             for (var i = 0; i < 1; i++)
-                Add(EntityManager.CreateEntity(Manager, StartX + rand.Next(0, 20), StartY + rand.Next(0, 20), 8));
+                Add(EntityManager.CreateEntity(Manager, StartX + LoERandom.Next(0, 20), StartY + LoERandom.Next(0, 20), 8));
         }
 
         #endregion METHODS

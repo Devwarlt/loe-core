@@ -1,4 +1,5 @@
-﻿using LoESoft.Client.Assets.Xml;
+﻿using LoESoft.Client.Assets;
+using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Assets.Xml.Structure;
 using LoESoft.Client.Core.Game.User.GUI.UI.Elements.UI;
 using LoESoft.Client.Drawing;
@@ -12,7 +13,7 @@ using System.Diagnostics;
 
 namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
 {
-    public class ItemCell : FilledRectangle
+    public class ItemCell : Sprite
     {
         public static bool Dragging = false;
         public static int DraggedIndex = -1;
@@ -29,20 +30,21 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
 
         public Action OnDropped { get; set; }
 
-        public ItemCell(int id, int itemidx, int x, int y) 
-            : base (x, y, 50, 50, new RGBColor(Color.Gray.R, Color.Gray.G, Color.Gray.B))
+        public ItemCell(int id, int itemidx, int x, int y)
+            : base(x, y, 50, 50, AssetLibrary.Images["itemDisplayRect"])
         {
             Id = id;
             ItemIndex = itemidx;
-            XmlContent = XmlLibrary.ItemsXml[Id];
+            if (Id != -1)
+                XmlContent = XmlLibrary.ItemsXml[Id];
 
-            ItemSprite = new Sprite(5, 5, 40, 40, XmlLibrary.GetSpriteFromContent(XmlContent));
+            ItemSprite = new Sprite(10, 10, 30, 30, (XmlContent == null) ? null : XmlLibrary.GetSpriteFromContent(XmlContent));
 
-            DescriptionBox = new DescriptionPanel(DrawHelper.CenteredToScreenWidth(300), DrawHelper.CenteredToScreenHeight(400), XmlContent.Name);
-            DescriptionBox.IsZeroApplicaple = true;
+            //DescriptionBox = new DescriptionPanel(DrawHelper.CenteredToScreenWidth(300), DrawHelper.CenteredToScreenHeight(400), XmlContent.Name);
+            //DescriptionBox.IsZeroApplicaple = true;
 
             ActiveDescription = new ActiveDescriptionBox(0, 0);
-            ActiveDescription.Reload(XmlContent);
+            ActiveDescription.Reload((XmlContent == null) ? null : XmlContent);
             ActiveDescription.Visible = false;
             ActiveDescription.IsZeroApplicaple = true;
             ActiveDescription.IsEventApplicable = false;
@@ -86,7 +88,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
                 AddChild(ItemSprite);
             } else
             {
-                ItemSprite = new Sprite(5, 5, 40, 40, XmlLibrary.GetSpriteFromContent(XmlContent));
+                ItemSprite = new Sprite(5, 5, 30, 30, XmlLibrary.GetSpriteFromContent(XmlContent));
                 AddChild(ItemSprite);
             }
 

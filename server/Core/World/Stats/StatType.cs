@@ -4,11 +4,11 @@
     {
         public const int HEALTH = 0;
         public const int SIZE = 1;
-        public const int INVENTORY_0 = 2;
-        public const int INVENTORY_1 = 3;
-        public const int INVENTORY_2 = 4;
-        public const int INVENTORY_3 = 5;
-        public const int INVENTORY_4 = 6;
+        public const int INVENTORY_0 = 2; //Weapon
+        public const int INVENTORY_1 = 3; //Armor
+        public const int INVENTORY_2 = 4; //Gloves
+        public const int INVENTORY_3 = 5; //Legging
+        public const int INVENTORY_4 = 6; //Accessory
         public const int INVENTORY_5 = 7;
         public const int INVENTORY_6 = 8;
         public const int INVENTORY_7 = 9;
@@ -36,5 +36,10 @@
         public const int INVENTORY_29 = 31;
         public const int INVENTORY_30 = 32;
         public const int INVENTORY_31 = 33;
+        public const int INVENTORY_32 = 34;
+        public const int INVENTORY_33 = 35;
+        public const int INVENTORY_34 = 36;
+        public const int INVENTORY_35 = 37;
+        public const int INVENTORY_36 = 38;
     }
 }

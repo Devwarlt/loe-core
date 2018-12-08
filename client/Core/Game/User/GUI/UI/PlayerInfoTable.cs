@@ -13,21 +13,18 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
         public StatView StatsView { get; set; }
 
         public PlayerInfoTable(GameUser user)
-            : base(DrawHelper.CenteredToScreenWidth(800), DrawHelper.CenteredToScreenHeight(600), "PlayerInfo", 800, 600, new RGBColor(25, 150, 155), 0.5f)
+            : base(DrawHelper.CenteredToScreenWidth(600), DrawHelper.CenteredToScreenHeight(600), "PlayerInfo", 600, 600, new RGBColor(255, 255, 255), 0.95f)
         {
             IsZeroApplicaple = true;
 
-            Inventory = new InventoryView(user, 350, 50);
-            StatsView = new StatView(5, 50);
-
-            AddChild(StatsView);
+            Inventory = new InventoryView(user, 100, 325);
+            //StatsView = new StatView(50, 555);
+            //AddChild(StatsView);
             AddChild(Inventory);
         }
 
-        public void Load(Item[] inventory)
-        {
-            Inventory.ReloadInventory(inventory);
-        }
+        public void ReloadInventory(Item[] inventory) => Inventory.ReloadInventory(inventory);
+        public void ReloadInventoryPlayer(GamePlayer player) => Inventory.LoadPlayerSprite(player);
 
         public override void Draw(SpriteBatch spriteBatch)
         {

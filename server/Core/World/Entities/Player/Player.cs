@@ -27,7 +27,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
             Size = 16;
 
-            Inventory = new Item[32];
+            Inventory = new Item[37];
             for (var i = 0; i < Character.Inventory.Length; i++)
                 Inventory[i] = Character.Inventory[i];
         }

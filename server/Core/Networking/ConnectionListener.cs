@@ -1,7 +1,5 @@
 ﻿using LoESoft.Server.Core.World;
 using System;
-using System.Collections.Concurrent;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -10,8 +8,6 @@ namespace LoESoft.Server.Core.Networking
 {
     public class ConnectionListener
     {
-        public static ConcurrentDictionary<int, Client> Clients = new ConcurrentDictionary<int, Client>();
-
         private IPEndPoint TcpEndPoint => new IPEndPoint(IPAddress.Any, 7171);
 
         private WorldManager Manager { get; set; }
@@ -48,8 +44,7 @@ namespace LoESoft.Server.Core.Networking
                             TcpSocket = tcpSocket
                         };
 
-                        if (Clients.TryAdd(client.Id, client))
-                            client.Handle();
+                        client.Handle();
                     }
 
                     StartAccept();
@@ -60,8 +55,6 @@ namespace LoESoft.Server.Core.Networking
 
         public void EndAccept()
         {
-            Clients.Select(client => { client.Value.Disconnect(); return client; }).ToList();
-
             TcpSocket.Close();
             TcpSocket.Dispose();
         }

@@ -33,6 +33,8 @@ namespace LoESoft.Client.Core.Game.User
             ObjectId = objId;
             Player.ObjectId = ObjectId;
             Player.Init();
+
+            HUD.InfoTable.ReloadInventoryPlayer(this);
         }
 
         public void ImportStat(string export)
@@ -43,7 +45,7 @@ namespace LoESoft.Client.Core.Game.User
                 Player.ChangeStat(i.Key, i.Value);
 
             if (stats.ToList().Exists(_ => _.Key >= StatType.INVENTORY_0 && _.Key <= StatType.INVENTORY_31))
-                HUD.InfoTable.Load(Player.Inventory);
+                HUD.InfoTable.ReloadInventory(Player.Inventory);
         }
         
         public bool CanMove { get; set; }

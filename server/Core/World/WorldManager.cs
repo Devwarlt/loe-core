@@ -1,10 +1,12 @@
 ﻿using LoESoft.Server.Core.Networking;
-using System.Linq;
+using System.Collections.Concurrent;
 
 namespace LoESoft.Server.Core.World
 {
     public class WorldManager
     {
+        public ConcurrentDictionary<int, Client> Clients = new ConcurrentDictionary<int, Client>();
+
         private GameClock _clock { get; set; }
 
         public CoreUpdate Core { get; set; }
@@ -22,27 +24,34 @@ namespace LoESoft.Server.Core.World
             _clock.Start();
         }
 
-        public bool TryAddPlayer(Client client)
+        public bool TryAddPlayer(Client client, out string error)
         {
-            if (ConnectionListener.Clients.Count >= WorldSettings.MAX_CONNECTIONS)
+            error = "";
+            if (Clients.Count >= WorldSettings.MAX_CONNECTIONS)
+            {
+                error = "Server is currently full!";
                 return false;
+            }
 
             if (client.Player != null)
             {
+                Clients.TryAdd(client.Id, client);
                 Core.Map.Add(client.Player);
 
                 return true;
             }
+
+            error = "Unable to load player!";
 
             return false;
         }
 
         public bool TryRemovePlayer(Client client)
         {
-            if (ConnectionListener.Clients.Values.Contains(client))
+            if (Clients.Values.Contains(client))
             {
-                if (ConnectionListener.Clients.TryRemove(client.Id, out var newclient))
-                    Core.Map.Remove(newclient.Player);
+                if (Clients.TryRemove(client.Id, out var outclient))
+                    Core.Map.Remove(outclient.Player);
 
                 return true;
             }
@@ -52,7 +61,10 @@ namespace LoESoft.Server.Core.World
 
         public void Stop()
         {
-            ConnectionListener.Clients.Select(client => { client.Value.Disconnect(); return client; }).ToList();
+            foreach (var i in Clients)
+                i.Value.Disconnect();
+
+            Clients.Clear();
 
             _clock.Stop();
 

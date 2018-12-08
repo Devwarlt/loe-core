@@ -1,6 +1,5 @@
 ﻿using LoESoft.Server.Core.World.Stats;
 using LoESoft.Server.Utils;
-using System;
 
 namespace LoESoft.Server.Core.World.Entities
 {
@@ -24,7 +23,7 @@ namespace LoESoft.Server.Core.World.Entities
 
             Direction = Direction.Down;
 
-            Health = new Random().Next(10, 100);
+            Health = LoERandom.Next(10, 100);
         }
 
         public override string ExportStat()

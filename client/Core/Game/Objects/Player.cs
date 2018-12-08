@@ -15,7 +15,7 @@ namespace LoESoft.Client.Core.Game.Objects
         {
             Animation = new PlayerAnimation();
 
-            Inventory = new Item[32];
+            Inventory = new Item[37];
 
             KeysToDirection = new Dictionary<Keys, Direction>()
             {
@@ -86,6 +86,11 @@ namespace LoESoft.Client.Core.Game.Objects
                 case StatType.INVENTORY_29: Inventory[29] = Item.Deserailize(value.ToString()); break;
                 case StatType.INVENTORY_30: Inventory[30] = Item.Deserailize(value.ToString()); break;
                 case StatType.INVENTORY_31: Inventory[31] = Item.Deserailize(value.ToString()); break;
+                case StatType.INVENTORY_32: Inventory[32] = Item.Deserailize(value.ToString()); break;
+                case StatType.INVENTORY_33: Inventory[33] = Item.Deserailize(value.ToString()); break;
+                case StatType.INVENTORY_34: Inventory[34] = Item.Deserailize(value.ToString()); break;
+                case StatType.INVENTORY_35: Inventory[35] = Item.Deserailize(value.ToString()); break;
+                case StatType.INVENTORY_36: Inventory[36] = Item.Deserailize(value.ToString()); break;
             }
         }
 

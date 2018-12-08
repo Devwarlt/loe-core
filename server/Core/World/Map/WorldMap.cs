@@ -30,11 +30,9 @@ namespace LoESoft.Server.Core.World
 
             Tiles = new Tile[WIDTH, HEIGHT];
 
-            var rand = new Random();
-
             for (var x = 0; x < WIDTH; x++)
                 for (var y = 0; y < HEIGHT; y++)
-                    Tiles[x, y] = new Tile(Manager, rand.Next(0, 4)) { X = x, Y = y };
+                    Tiles[x, y] = new Tile(Manager, LoERandom.Next(0, 4)) { X = x, Y = y };
 
             var entrypoint = new Point(0, 0);
 

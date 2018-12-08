@@ -34,16 +34,16 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 });
             else
             {
-                client.SendPacket(new LoadMap()
-                {
-                    MapWidth = WorldMap.WIDTH,
-                    MapHeight = WorldMap.HEIGHT
-                });
-
                 client.Player = new Player(client.Manager, client, getCharacterData);
 
-                if (client.Manager.TryAddPlayer(client))
+                if (client.Manager.TryAddPlayer(client, out var error))
                 {
+                    client.SendPacket(new LoadMap()
+                    {
+                        MapWidth = WorldMap.WIDTH,
+                        MapHeight = WorldMap.HEIGHT
+                    });
+
                     client.SendPacket(new ServerResponse()
                     {
                         From = "LoadCharacter",
@@ -56,7 +56,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                     {
                         From = "LoadCharacter",
                         Result = -1,
-                        Content = $"Server is currently full! Retrying in 5 seconds!"
+                        Content = error
                     });
                 }
             }

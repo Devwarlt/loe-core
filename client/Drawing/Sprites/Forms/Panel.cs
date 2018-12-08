@@ -1,11 +1,12 @@
-﻿using LoESoft.Client.Drawing.Sprites.Forms.Complex;
+﻿using LoESoft.Client.Assets;
+using LoESoft.Client.Drawing.Sprites.Forms.Complex;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Microsoft.Xna.Framework;
 using System;
 
 namespace LoESoft.Client.Drawing.Sprites.Forms
 {
-    public class Panel : FilledRectangle
+    public class Panel : Sprite
     {
         public TextDisplay Title { get; private set; }
 
@@ -20,11 +21,11 @@ namespace LoESoft.Client.Drawing.Sprites.Forms
         protected ExitButton ExitBtn;
 
         public Panel(int x, int y, string title, int width = 400, int height = 400, RGBColor color = null, float opacity = 1f)
-            : base(x, y, width, height, color, opacity)
+            : base(x, y, width, height, AssetLibrary.Images["panelImage"], color, opacity)
         {
-            Title = new TextDisplay(5, 5, title);
+            Title = new TextDisplay(5, 10, title);
 
-            ExitBtn = new ExitButton(width - 23, 3, 20, 20);
+            ExitBtn = new ExitButton(width - (20 + (width / 50)),(width / 50), 20, 20);
             ExitBtn.Exit += OnExit;
 
             AddChild(Title);

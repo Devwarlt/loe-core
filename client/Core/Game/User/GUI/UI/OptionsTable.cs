@@ -6,7 +6,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
     public class OptionsTable : Panel
     {
         public OptionsTable()
-            : base(DrawHelper.CenteredToScreenWidth(600), DrawHelper.CenteredToScreenHeight(600), "Options", 600, 600, new RGBColor(65, 32, 45), 0.9f)
+            : base(DrawHelper.CenteredToScreenWidth(400), DrawHelper.CenteredToScreenHeight(400), "Options", 400, 400, new RGBColor(255, 255, 255), 0.9f)
         {
             IsZeroApplicaple = true;
         }

@@ -26,8 +26,13 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements.UI
 
         public void Reload(XmlContent content)
         {
-            TitleText.Text = content.Name;
-            DescriptionText.Text = "Sample Description";
+            if (content != null)
+            {
+                TitleText.Text = content.Name;
+                DescriptionText.Text = "Sample Description";
+
+                Height = TitleText.Height + DescriptionText.Height + 20;
+            }
         }
     }
 }

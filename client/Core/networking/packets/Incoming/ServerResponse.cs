@@ -89,6 +89,8 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     } break;
                 case -1:
                     {
+                        //Error notification
+                        //Error end
                         ScreenManager.DispatchScreen(GameApplication.CharacterScreen);
                     } break;
             }

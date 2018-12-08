@@ -5,11 +5,14 @@ namespace LoESoft.Client.Assets
 {
     public static class AssetLibrary
     {
-        public static Dictionary<string, Texture2D> Images { get; set; } = new Dictionary<string, Texture2D>();
-        public static Dictionary<string, SpriteSet> Sprites { get; set; } = new Dictionary<string, SpriteSet>();
+        public static Dictionary<string, Texture2D> Images { get; set; }
+        public static Dictionary<string, SpriteSet> Sprites { get; set; }
 
         public static void Init()
         {
+            Images = new Dictionary<string, Texture2D>();
+            Sprites = new Dictionary<string, SpriteSet>();
+
             InitImages();
             InitSprites();
         }
@@ -24,6 +27,8 @@ namespace LoESoft.Client.Assets
             AddImage("characterRect");
             AddImage("panelImage");
             AddImage("titleScreenBackGround");
+            AddImage("characterDisplayRect");
+            AddImage("itemDisplayRect");
         }
 
         private static void InitSprites()

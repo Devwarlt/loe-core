@@ -130,8 +130,8 @@ namespace LoESoft.Server.Core.Database
                 return false;
             }
 
-            var inv = new Item[32];
-            for (var i = 0; i < 32; i++)
+            var inv = new Item[37];
+            for (var i = 0; i < inv.Length; i++)
                 inv[i] = new Item(LoERandom.Next(9, 11));
 
             var character = new Character()
