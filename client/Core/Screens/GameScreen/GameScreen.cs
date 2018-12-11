@@ -4,6 +4,7 @@ using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
 using LoESoft.Client.Core.Game.Map;
 using LoESoft.Client.Core.Game.User;
+using LoESoft.Client.Core.Models;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,10 +20,10 @@ namespace LoESoft.Client.Core.Screens
 
         private GameCamera Camera { get; set; }
 
-        public GameScreen(GameUser gameUser, int objId, int classType)
+        public GameScreen(GameUser gameUser, PlayerInfo info)
         {
             GameUser = gameUser;
-            Controller = new GamePlayer(GameUser, objId, classType);
+            Controller = new GamePlayer(GameUser, info);
             Camera = new GameCamera();
         }
         

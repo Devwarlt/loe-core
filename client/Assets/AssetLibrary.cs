@@ -22,13 +22,15 @@ namespace LoESoft.Client.Assets
             AddImage("btnImage");
             AddImage("exitImage");
             AddImage("rectImage");
+            AddImage("panelImage");
             AddImage("titleScreenBackground");
+            AddImage("titleScreenBackGround");
             AddImage("loeLogo");
             AddImage("characterRect");
-            AddImage("panelImage");
-            AddImage("titleScreenBackGround");
             AddImage("characterDisplayRect");
             AddImage("itemDisplayRect");
+            AddImage("titleDisplayRect");
+            AddImage("statusBarRect");
         }
 
         private static void InitSprites()

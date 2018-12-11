@@ -14,6 +14,13 @@ namespace LoESoft.Server.Core.World.Entities.Player
             get => _inventory;
             set => IncrementVar(ref _inventory, value);
         }
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set => IncrementVar(ref _name, value);
+        }
         
         public Player(WorldManager manager, Client client, Character character)
             : base(manager, character.Class)
@@ -25,6 +32,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
             X = Character.Position.X;
             Y = Character.Position.Y;
 
+            Name = client.Account.Name;
             Size = 16;
 
             Inventory = new Item[37];

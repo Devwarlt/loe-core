@@ -20,6 +20,7 @@ namespace LoESoft.Client.Core.Game.Objects
         public Direction CurrentDirection { get; set; }
 
         public int Health { get; set; }
+        public int MaximumHealth { get; set; }
 
         public Entity(int id) : base(id)
         {
@@ -28,6 +29,9 @@ namespace LoESoft.Client.Core.Game.Objects
 
             _astarPath = new Queue<Point>();
             PathFinder = new AStar();
+
+            MaximumHealth = 100;
+            Health = MaximumHealth;
             //_isPathFinding = false;
         }
 
@@ -104,6 +108,7 @@ namespace LoESoft.Client.Core.Game.Objects
             {
                 case StatType.HEALTH: Health = int.Parse(value.ToString()); break;
                 case StatType.SIZE: Size = int.Parse(value.ToString()); break;
+                case StatType.MAXIMUMHP: MaximumHealth = int.Parse(value.ToString()); break;
             }
         }
 

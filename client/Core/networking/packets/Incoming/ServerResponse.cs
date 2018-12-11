@@ -1,11 +1,11 @@
 ﻿using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Models;
+using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Core.Screens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Drawing;
-using System.Threading;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {
@@ -82,10 +82,17 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
             {
                 case 0:
                     {
-                        var content = Content.Split(',');
+                        var content = JsonConvert.DeserializeObject<PlayerInfo>(Content);
+
+                        loading.Enqueue(delegate
+                        {
+                            user.SendPacket(new Load() { });
+                        });
+
+                        App.Warn("Managing Screen!");
 
                         ScreenManager.DispatchScreen(new LoadingScreen(loading,
-                            GameApplication.GameScreen = new GameScreen(user, int.Parse(content[0]), int.Parse(content[1]))));
+                            GameApplication.GameScreen = new GameScreen(user, content)));
                     } break;
                 case -1:
                     {

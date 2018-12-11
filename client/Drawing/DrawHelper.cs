@@ -9,7 +9,7 @@ namespace LoESoft.Client.Drawing
 
         public static GraphicsDevice GraphicsDevice { get; set; }
         public static SpriteBatch SpriteBatch { get; set; }
-
+        
         public static void Setup(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
             GraphicsDevice = graphicsDevice;

@@ -36,7 +36,6 @@ namespace LoESoft.Server.Core.World
             if (client.Player != null)
             {
                 Clients.TryAdd(client.Id, client);
-                Core.Map.Add(client.Player);
 
                 return true;
             }

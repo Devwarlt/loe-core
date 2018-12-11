@@ -36,9 +36,6 @@ namespace LoESoft.Client.Core.Game.Map
 
         public static void AddOrUpdate(TileData[] tilesAddOrUpdate, ObjectData[] objAddOrUpdate, int[] removedObjects)
         {
-            if (!MapLoaded)
-                AddOrUpdate(tilesAddOrUpdate, objAddOrUpdate, removedObjects);
-
             Task.Factory.StartNew(() =>
             {
                 foreach (var i in removedObjects)

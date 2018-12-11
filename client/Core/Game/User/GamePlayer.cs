@@ -2,12 +2,12 @@
 using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Core.Game.Objects.Stats;
 using LoESoft.Client.Core.Game.User.GUI;
+using LoESoft.Client.Core.Models;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,35 +17,40 @@ namespace LoESoft.Client.Core.Game.User
     {
         public GameUser User { get; private set; }
         public Player Player { get; private set; }
+        public PlayerInfo Info { get; private set; }
+
         public PlayerHUD HUD { get; private set; }
 
         public int ObjectId { get; set; }
 
-        public GamePlayer(GameUser user, int objId, int classType)
+        public GamePlayer(GameUser user, PlayerInfo info)
         {
             User = user;
+            Info = info;
 
             HUD = new PlayerHUD(user);
-            Player = new Player(classType);
+            Player = new Player(Info.ClassId);
 
             CanMove = true;
+            ObjectId = Info.ObjectId;
+            Player.ObjectId = Info.ObjectId;
             
-            ObjectId = objId;
-            Player.ObjectId = ObjectId;
             Player.Init();
-
             HUD.InfoTable.ReloadInventoryPlayer(this);
         }
 
         public void ImportStat(string export)
         {
-            var stats = JsonConvert.DeserializeObject<IEnumerable<KeyValuePair<int, object>>>(export);
+            var stats = JsonConvert.DeserializeObject<IEnumerable<KeyValuePair<int, object>>>(export).ToList();
 
             foreach (var i in stats)
                 Player.ChangeStat(i.Key, i.Value);
 
-            if (stats.ToList().Exists(_ => _.Key >= StatType.INVENTORY_0 && _.Key <= StatType.INVENTORY_31))
+            if (stats.Exists(_ => _.Key >= StatType.INVENTORY_0 && _.Key <= StatType.INVENTORY_31))
                 HUD.InfoTable.ReloadInventory(Player.Inventory);
+
+            if (stats.Exists(_ => _.Key == StatType.NAME))
+                HUD.InfoTable.Title.Text = Player.Name;
         }
         
         public bool CanMove { get; set; }
@@ -83,6 +88,8 @@ namespace LoESoft.Client.Core.Game.User
             HandlePlayerInput();
             Player.Update(gameTime);
             HUD.Update(gameTime);
+            HUD.UpdateStatusBar(Player.Health, Player.MaximumHealth);
+            HUD.UpdateStatsView(Player.MaximumHealth);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -93,7 +100,7 @@ namespace LoESoft.Client.Core.Game.User
             spriteBatch.Begin();
 
             HUD.Draw(spriteBatch);
-            HUD.DrawMinimap(spriteBatch, this);
+            HUD.DrawMinimap(spriteBatch, (int)Player.X, (int)Player.Y);
         }
 
         private void SendMovePacket() => User.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });

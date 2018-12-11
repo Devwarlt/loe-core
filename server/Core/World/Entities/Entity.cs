@@ -7,11 +7,17 @@ namespace LoESoft.Server.Core.World.Entities
     public class Entity : GameObject
     {
         private int _hp;
-
         public int Health
         {
             get => _hp;
             set => IncrementVar<int>(ref _hp, value);
+        }
+
+        private int _maxHp;
+        public int MaximumHealth
+        {
+            get => _maxHp;
+            set => IncrementVar(ref _maxHp, value);
         }
         
         public Direction Direction { get; set; }
@@ -22,13 +28,12 @@ namespace LoESoft.Server.Core.World.Entities
             IsEntity = true;
 
             Direction = Direction.Down;
-
-            Health = LoERandom.Next(10, 100);
         }
 
         public override string ExportStat()
         {
-            Export.AddOrUpdate<int>(StatType.HEALTH, Health);
+            Export.AddOrUpdate(StatType.HEALTH, Health);
+            Export.AddOrUpdate(StatType.MAXIMUMHP, MaximumHealth);
 
             return base.ExportStat();
         }

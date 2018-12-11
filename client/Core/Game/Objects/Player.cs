@@ -31,14 +31,18 @@ namespace LoESoft.Client.Core.Game.Objects
 
         public override void Init()
         {
-            Animation.UpdateOrAdd(Content);
-            Texture = XmlLibrary.GetSpriteFromContent(Content, 0, 1);
+            if (Content != null)
+            {
+                Animation.UpdateOrAdd(Content);
+                Texture = XmlLibrary.GetSpriteFromContent(Content, 0, 1);
+            }
         }
 
         public void Override(int objId, int id)
         {
             if (objId != ObjectId)
                 ObjectId = objId;
+
             if (Id != id)
             {
                 Id = id;
@@ -91,16 +95,25 @@ namespace LoESoft.Client.Core.Game.Objects
                 case StatType.INVENTORY_34: Inventory[34] = Item.Deserailize(value.ToString()); break;
                 case StatType.INVENTORY_35: Inventory[35] = Item.Deserailize(value.ToString()); break;
                 case StatType.INVENTORY_36: Inventory[36] = Item.Deserailize(value.ToString()); break;
+                case StatType.NAME: Name = value.ToString(); break;
+                case StatType.MAXIMUMHP: MaximumHealth = int.Parse(value.ToString()); break;
             }
         }
 
         public override void Update(GameTime gameTime)
         {
-            Animation.Update(gameTime, this);
-            base.Update(gameTime);
+            if (Id != -1)
+            {
+                Animation.Update(gameTime, this);
+                base.Update(gameTime);
+            }
         }
 
-        public override void Draw(SpriteBatch spriteBatch) => Animation.Draw(spriteBatch, this);
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (Id != -1)
+                Animation.Draw(spriteBatch, this);
+        }
 
         #region "Fields"
 
@@ -111,6 +124,8 @@ namespace LoESoft.Client.Core.Game.Objects
         public Item[] Inventory { get; set; }
 
         public int Health { get; set; }
+        public int MaximumHealth { get; set; }
+        public string Name { get; set; }
 
         private PlayerAnimation Animation;
 

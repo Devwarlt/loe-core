@@ -217,9 +217,11 @@
     <Compile Include="Core\Networking\ClientData.cs" />
     <Compile Include="Core\Networking\ConnectionListener.cs" />
     <Compile Include="Core\Networking\Client.cs" />
+    <Compile Include="Core\Networking\Data\PlayerInfo.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\ClientResponse.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\CreateNewCharacter.cs" />
+    <Compile Include="Core\Networking\Packets\Incoming\Hello.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\IncomingPacket.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\InventorySwap.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\Load.cs" />

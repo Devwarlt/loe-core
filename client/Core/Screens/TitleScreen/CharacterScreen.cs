@@ -46,14 +46,14 @@ namespace LoESoft.Client.Core.Screens
         private void OnPlay(object sender, EventArgs e)
         {
             if (CharacterSettings.CurrentCharacterId != -1)
-                _gameUser.SendPacket(new Load() { CharacterIndex = CharacterSettings.CurrentCharacterId });
+                _gameUser.SendPacket(new Hello() { CharacterIndex = CharacterSettings.CurrentCharacterId });
         }
 
         private void OnExit(object sender, EventArgs e) => ScreenManager.Close();
 
         public override void OnScreenCreate()
         {
-            Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 0, 0));
+            Title = new TextDisplay(0, 0, "BRME", 30, new RGBColor(255, 105, 24));
             Title.X = DrawHelper.CenteredToScreenWidth(Title.Width);
             Title.Y = 20;
             Title.Outline = true;

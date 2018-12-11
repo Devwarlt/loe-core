@@ -41,5 +41,7 @@
         public const int INVENTORY_34 = 36;
         public const int INVENTORY_35 = 37;
         public const int INVENTORY_36 = 38;
+        public const int NAME = 39;
+        public const int MAXIMUMHP = 40;
     }
 }

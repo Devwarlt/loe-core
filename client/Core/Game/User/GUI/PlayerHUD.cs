@@ -1,6 +1,7 @@
 ﻿using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.User.GUI.Icon;
 using LoESoft.Client.Core.Game.User.GUI.UI;
+using LoESoft.Client.Core.Game.User.GUI.UI.Elements.StatusBar;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,10 +10,13 @@ namespace LoESoft.Client.Core.Game.User.GUI
 {
     public class PlayerHUD : Mask
     {
-        public PlayerInfoTable InfoTable { get; set; }
-        public OptionsTable OptionTable { get; set; }
-        public MiniMap MiniMapView { get; set; }
-        public IconTab Icons { get; set; }
+        public IconTab Icons { get; private set; }
+
+        public PlayerInfoTable InfoTable { get; private set; }
+        public OptionsTable OptionTable { get; private set; }
+        public MiniMap MiniMapView { get; private set; }
+
+        public StatusBarView HealthBar { get; private set; }
 
         public PlayerHUD(GameUser user)
             : base(new RGBColor(0, 0, 0), 0f)
@@ -20,18 +24,33 @@ namespace LoESoft.Client.Core.Game.User.GUI
             IsEventApplicable = false;
 
             Icons = new IconTab(975, 5, toggleInfoTable, toggleOptions, toggleMinimap);
+
             InfoTable = new PlayerInfoTable(user);
             OptionTable = new OptionsTable();
             MiniMapView = new MiniMap(900, 60);
 
+            HealthBar = new StatusBarView(10, 10, 150, 30, "HP", new RGBColor(255, 12, 5));
+
             AddChild(Icons);
+            AddChild(HealthBar);
         }
 
-        public void DrawMinimap(SpriteBatch spriteBatch, GamePlayer player)
+        public void DrawMinimap(SpriteBatch spriteBatch, int x, int y)
         {
             if (Icons.Contains(MiniMapView))
-                MiniMapView.DrawMap(spriteBatch, player.Player.X, player.Player.Y);
+                MiniMapView.DrawMap(spriteBatch, x, y);
         }
+
+        public void UpdateStatusBar(int curHp, int maxHp)
+        {
+            if (HealthBar.CurrentValue != curHp || HealthBar.MaximumValue != maxHp)
+            {
+                HealthBar.CurrentValue = curHp;
+                HealthBar.MaximumValue = maxHp;
+            }
+        }
+
+        public void UpdateStatsView(int hp) => InfoTable.StatsView.UpdateStat(hp);
 
         private void toggleOptions()
         {

@@ -95,10 +95,13 @@
     <Compile Include="Core\Game\PathFinder\PathNode.cs" />
     <Compile Include="Core\Game\User\Data\Item.cs" />
     <Compile Include="Core\Game\User\GamePlayer.cs" />
+    <Compile Include="Core\Game\User\GUI\Icon\IconBar.cs" />
     <Compile Include="Core\Game\User\GUI\Icon\IconTab.cs" />
     <Compile Include="Core\Game\User\GUI\PlayerHUD.cs" />
+    <Compile Include="Core\Game\User\GUI\UI\Elements\Icon\InfoIcon.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\InventoryView.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\ItemCell.cs" />
+    <Compile Include="Core\Game\User\GUI\UI\Elements\StatusBar\StatusBarView.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\UI\ActiveDescriptionBox.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\UI\DescriptionPanel.cs" />
     <Compile Include="Core\Game\User\GUI\UI\Elements\StatView.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="Core\GUI\MainScreen\RegisterBox.Designer.cs">
       <DependentUpon>RegisterBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Models\PlayerInfo.cs" />
     <Compile Include="Core\Models\Position.cs" />
     <Compile Include="Core\Networking\NetworkControl.cs" />
     <Compile Include="Core\Networking\Packets\Incoming\GamePlayerUpdate.cs" />
@@ -146,6 +150,7 @@
     <Compile Include="Core\Networking\Packets\Incoming\Update.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\CreateNewCharacter.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\ClientResponse.cs" />
+    <Compile Include="Core\Networking\Packets\Outgoing\Hello.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\InventorySwap.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\Load.cs" />
     <Compile Include="Core\Networking\Packets\Outgoing\ClientMove.cs" />

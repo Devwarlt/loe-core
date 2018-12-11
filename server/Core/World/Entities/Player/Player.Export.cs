@@ -43,6 +43,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
             Export.AddOrUpdate(StatType.INVENTORY_34, Inventory[34]);
             Export.AddOrUpdate(StatType.INVENTORY_35, Inventory[35]);
             Export.AddOrUpdate(StatType.INVENTORY_36, Inventory[36]);
+            Export.AddOrUpdate(StatType.NAME, Name);
 
             return base.ExportStat();
         }
