@@ -16,7 +16,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
         public StatView StatsView { get; set; }
 
         public PlayerInfoTable(GameUser user)
-            : base(DrawHelper.CenteredToScreenWidth(600), DrawHelper.CenteredToScreenHeight(600), "Guest", 600, 600, opacity: 0.95f)
+            : base(DrawHelper.CenteredToScreenWidth(600), DrawHelper.CenteredToScreenHeight(600), "Guest", 600, 600)
         {
             IsZeroApplicaple = true;
 

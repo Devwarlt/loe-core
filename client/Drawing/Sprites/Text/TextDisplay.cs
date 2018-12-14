@@ -1,6 +1,4 @@
-﻿using LoESoft.Client.Assets;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using System.Text;
@@ -9,16 +7,19 @@ namespace LoESoft.Client.Drawing.Sprites.Text
 {
     public class TextDisplay : Sprite
     {
-        public static SpriteFont Font { get; private set; }
-
+        public static SpriteFont Font { get; set; }
         public static int GetHeight(int size) => (int)MeasureString("I", size).Y;
+        public static Vector2 MeasureString(string text, int size = 12)
+        {
+            return new Vector2(Font.MeasureString(text).X * (size / 100f),
+                Font.MeasureString(text).Y * (size / 100f));
+        } 
 
         public float Size { get; set; }
         public bool Bold { get; set; }
         public bool Outline { get; set; }
 
         private string _text;
-
         public string Text
         {
             get => _text;
@@ -34,7 +35,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
         }
 
         private int _warpwidth;
-
         public int WrapWidth
         {
             get => _warpwidth;
@@ -57,12 +57,6 @@ namespace LoESoft.Client.Drawing.Sprites.Text
             Bold = bold;
             Text = text;
         }
-
-        public static void LoadSpriteFont(ContentManager contentManager)
-            => Font = AssetLoader.LoadAsset<SpriteFont>("fonts/font");
-
-        public static Vector2 MeasureString(string text, int size = 12)
-            => new Vector2(Font.MeasureString(text).X * (size / 100f), Font.MeasureString(text).Y * (size / 100f));
         
         public override void Update(GameTime gameTime)
         {

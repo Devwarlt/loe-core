@@ -64,7 +64,7 @@ namespace LoESoft.Client
 
             AssetLoader.Init(Content);
             DrawHelper.Setup(GraphicsDevice, SpriteBatch);
-            TextDisplay.LoadSpriteFont(Content);
+            TextDisplay.Font = AssetLoader.LoadAsset<SpriteFont>("fonts/font");
 
             ScreenManager.CloseGame += () =>
             {

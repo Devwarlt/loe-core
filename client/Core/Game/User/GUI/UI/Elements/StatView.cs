@@ -24,7 +24,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
 
         public void UpdateStat(int hp)
         {
-            HpText.Text = "Hp:" + hp.ToString();
+            HpText.Text = hp.ToString();
         }
     }
 }

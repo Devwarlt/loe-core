@@ -30,11 +30,11 @@ namespace LoESoft.Client.Core.Game.User
 
             HUD = new PlayerHUD(user);
             Player = new Player(Info.ClassId);
-
-            CanMove = true;
+            
             ObjectId = Info.ObjectId;
             Player.ObjectId = Info.ObjectId;
-            
+            CanMove = true;
+
             Player.Init();
             HUD.InfoTable.ReloadInventoryPlayer(this);
         }
@@ -48,9 +48,6 @@ namespace LoESoft.Client.Core.Game.User
 
             if (stats.Exists(_ => _.Key >= StatType.INVENTORY_0 && _.Key <= StatType.INVENTORY_31))
                 HUD.InfoTable.ReloadInventory(Player.Inventory);
-
-            if (stats.Exists(_ => _.Key == StatType.NAME))
-                HUD.InfoTable.Title.Text = Player.Name;
         }
         
         public bool CanMove { get; set; }
@@ -88,8 +85,7 @@ namespace LoESoft.Client.Core.Game.User
             HandlePlayerInput();
             Player.Update(gameTime);
             HUD.Update(gameTime);
-            HUD.UpdateStatusBar(Player.Health, Player.MaximumHealth);
-            HUD.UpdateStatsView(Player.MaximumHealth);
+            HUD.UpdateStatus(Player.Name, Player.Health, Player.MaximumHealth);
         }
 
         public void Draw(SpriteBatch spriteBatch)

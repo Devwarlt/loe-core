@@ -41,16 +41,14 @@ namespace LoESoft.Client.Core.Game.User.GUI
                 MiniMapView.DrawMap(spriteBatch, x, y);
         }
 
-        public void UpdateStatusBar(int curHp, int maxHp)
+        public void UpdateStatus(string name, int curHp, int maxHp)
         {
-            if (HealthBar.CurrentValue != curHp || HealthBar.MaximumValue != maxHp)
-            {
-                HealthBar.CurrentValue = curHp;
-                HealthBar.MaximumValue = maxHp;
-            }
-        }
+            if (!string.IsNullOrEmpty(name))
+                InfoTable.Title.Text = name;
 
-        public void UpdateStatsView(int hp) => InfoTable.StatsView.UpdateStat(hp);
+            HealthBar.UpdateStatus(maxHp, curHp);
+            InfoTable.StatsView.UpdateStat(maxHp);
+        }
 
         private void toggleOptions()
         {

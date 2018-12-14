@@ -10,7 +10,7 @@ namespace LoESoft.Server.Core.World.Entities
         public int Health
         {
             get => _hp;
-            set => IncrementVar<int>(ref _hp, value);
+            set => IncrementVar(ref _hp, value);
         }
 
         private int _maxHp;
