@@ -36,11 +36,10 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements.StatusBar
             _statusBar = new FilledRectangle(0, 0, w, h, color);
 
             int ty = DrawHelper.CenteredPosition(h, TextDisplay.GetHeight(12));
-            int tx = (int)TextDisplay.MeasureString(name).X + 15;
+            int tx = (int)TextDisplay.MeasureString(name).X + 25;
 
-            BarText = new TextDisplay(5, ty, name + ":", 10);
+            BarText = new TextDisplay(10, ty, name + ":", 10);
             ValueText = new TextDisplay(tx, ty, max.ToString(), 10);
-
             _statusImage = new Sprite(-5, -5, w + 10, h + 10, AssetLibrary.Images["statusBarRect"]);
 
             MaximumValue = max;
@@ -61,8 +60,10 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements.StatusBar
 
         public override void Update(GameTime gameTime)
         {
-            if (StaticWidth != 0 && CurrentValue != 0 && MaximumValue != 0)
-                _statusBar.Width = StaticWidth * ((CurrentValue) / (MaximumValue));
+            //Yes casting are needed! since | int < 0 / int < 0 == 0 | 
+            double width = ((double)(CurrentValue + 1) / (double)(MaximumValue + 1)) * StaticWidth;
+            _statusBar.Width = (int)width;
+
             base.Update(gameTime);
         }
 

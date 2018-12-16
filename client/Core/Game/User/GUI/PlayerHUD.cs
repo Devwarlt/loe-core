@@ -29,7 +29,7 @@ namespace LoESoft.Client.Core.Game.User.GUI
             OptionTable = new OptionsTable();
             MiniMapView = new MiniMap(900, 60);
 
-            HealthBar = new StatusBarView(10, 10, 150, 30, "HP", new RGBColor(255, 12, 5));
+            HealthBar = new StatusBarView(10, 10, 350, 50, "HP", new RGBColor(255, 12, 5));
 
             AddChild(Icons);
             AddChild(HealthBar);

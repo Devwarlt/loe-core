@@ -27,6 +27,9 @@ namespace LoESoft.Server.Core.World.Entities
         {
             IsEntity = true;
 
+            MaximumHealth = 100;
+            Health = 100;
+
             Direction = Direction.Down;
         }
 

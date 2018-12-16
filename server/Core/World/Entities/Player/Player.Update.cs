@@ -1,5 +1,6 @@
 ﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using LoESoft.Server.Core.World.Map.Data;
+using LoESoft.Server.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,8 @@ namespace LoESoft.Server.Core.World.Entities.Player
         public override void Update()
         {
             testConnection();
+
+            Health = LoERandom.Next(0, 100);
 
             var sight = GetSightPoints().Where(_ => _.X >= 0 && _.X < WorldMap.WIDTH && _.Y >= 0 && _.Y < WorldMap.HEIGHT);
             var chunk = GetChunk();
