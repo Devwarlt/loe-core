@@ -10,32 +10,23 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         public override PacketID PacketID => PacketID.CLIENTMOVE;
 
-        public override void Handle(Client client)
+        public override void Read(NetworkReader reader)
+        {
+            Direction = reader.ReadInt32();
+        }
+
+        public override void Handle(NetworkClient client)
         {
             switch (Direction)
             {
-                case 0:
-                    RepositionPlayer(client, client.Player.X, client.Player.Y - 1);
-                    return;
-
-                case 1:
-                    RepositionPlayer(client, client.Player.X, client.Player.Y + 1);
-                    return;
-
-                case 2:
-                    RepositionPlayer(client, client.Player.X - 1, client.Player.Y);
-                    return;
-
-                case 3:
-                    RepositionPlayer(client, client.Player.X + 1, client.Player.Y);
-                    return;
-
-                default:
-                    return;
+                case 0: RepositionPlayer(client, client.Player.X, client.Player.Y - 1); return;
+                case 1: RepositionPlayer(client, client.Player.X, client.Player.Y + 1); return;
+                case 2: RepositionPlayer(client, client.Player.X - 1, client.Player.Y); return;
+                case 3: RepositionPlayer(client, client.Player.X + 1, client.Player.Y); return;
             }
         }
 
-        private void RepositionPlayer(Client client, int newX, int newY)
+        private void RepositionPlayer(NetworkClient client, int newX, int newY)
         {
             if (client.Player == null)
                 return;

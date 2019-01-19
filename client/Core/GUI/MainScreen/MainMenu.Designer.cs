@@ -96,7 +96,7 @@
             this.LoginButton.UseVisualStyleBackColor = false;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
-            // PlayButton
+            // LaunchButton
             // 
             this.LaunchButton.BackColor = System.Drawing.Color.DimGray;
             this.LaunchButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
@@ -104,7 +104,7 @@
             this.LaunchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LaunchButton.ForeColor = System.Drawing.Color.Gainsboro;
             this.LaunchButton.Location = new System.Drawing.Point(23, 190);
-            this.LaunchButton.Name = "PlayButton";
+            this.LaunchButton.Name = "LaunchButton";
             this.LaunchButton.Size = new System.Drawing.Size(124, 36);
             this.LaunchButton.TabIndex = 5;
             this.LaunchButton.TabStop = false;
@@ -157,7 +157,7 @@
             this.LoginBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.LoginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LoginBox.Enabled = false;
-            this.LoginBox.Location = new System.Drawing.Point(200, 80);
+            this.LoginBox.Location = new System.Drawing.Point(189, 49);
             this.LoginBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.LoginBox.Name = "LoginBox";
             this.LoginBox.Size = new System.Drawing.Size(325, 227);
@@ -169,9 +169,9 @@
             this.RegisterBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.RegisterBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RegisterBox.Enabled = false;
-            this.RegisterBox.Location = new System.Drawing.Point(200, 80);
+            this.RegisterBox.Location = new System.Drawing.Point(188, 48);
             this.RegisterBox.Name = "RegisterBox";
-            this.RegisterBox.Size = new System.Drawing.Size(325, 275);
+            this.RegisterBox.Size = new System.Drawing.Size(325, 333);
             this.RegisterBox.TabIndex = 8;
             this.RegisterBox.Visible = false;
             // 
@@ -179,7 +179,7 @@
             // 
             this.GameDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.GameDialog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.GameDialog.Location = new System.Drawing.Point(200, 80);
+            this.GameDialog.Location = new System.Drawing.Point(189, 49);
             this.GameDialog.Name = "GameDialog";
             this.GameDialog.Settings = null;
             this.GameDialog.Size = new System.Drawing.Size(325, 265);

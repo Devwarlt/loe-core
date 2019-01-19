@@ -12,7 +12,14 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         public override PacketID PacketID => PacketID.CLIENT_REPONSE;
 
-        public override void Handle(Client client)
+        public override void Read(NetworkReader reader)
+        {
+            From = reader.ReadUTF();
+            Result = reader.ReadInt32();
+            Content = reader.ReadUTF();
+        }
+
+        public override void Handle(NetworkClient client)
         {
             switch (From)
             {
@@ -29,7 +36,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
             public UnlockedCharacterData(int[] arr) => UnlockedClassTypes = arr;
         }
 
-        private void HandleUnlockedCharacters(Client client)
+        private void HandleUnlockedCharacters(NetworkClient client)
         {
             var characters = App.Database.GetCharactersByAccountId(client.Account.Id, out string error);
 

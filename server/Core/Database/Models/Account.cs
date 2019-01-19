@@ -4,6 +4,7 @@
     {
         public long Id { get; set; }
         public int CurrentCharacterId { get; set; }
+        public string Gmail { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public int Rank { get; set; }

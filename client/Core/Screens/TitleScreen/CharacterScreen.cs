@@ -1,6 +1,6 @@
 using LoESoft.Client.Assets;
-using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
+using LoESoft.Client.Core.Networking;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Core.Screens.TitleScreen;
 using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection;
@@ -28,11 +28,8 @@ namespace LoESoft.Client.Core.Screens
 
         private CharacterSelectHUD CharacterSelect { get; set; }
 
-        private GameUser _gameUser;
-
-        public CharacterScreen(GameUser gameUser)
+        public CharacterScreen()
         {
-            _gameUser = gameUser;
         }
 
         private void OnPlayButtonOver(object sender, EventArgs e) => PlayButton.TextDisplay.SpriteColor = Color.Yellow;
@@ -46,7 +43,7 @@ namespace LoESoft.Client.Core.Screens
         private void OnPlay(object sender, EventArgs e)
         {
             if (CharacterSettings.CurrentCharacterId != -1)
-                _gameUser.SendPacket(new Hello() { CharacterIndex = CharacterSettings.CurrentCharacterId });
+                NetworkClient.SendPacket(new Hello() { CharacterIndex = CharacterSettings.CurrentCharacterId });
         }
 
         private void OnExit(object sender, EventArgs e) => ScreenManager.Close();
@@ -76,7 +73,7 @@ namespace LoESoft.Client.Core.Screens
             Background.AddChild(Title);
             Background.AddChild(PlayButton);
 
-            _gameUser.SendPacket(new ClientResponse()
+            NetworkClient.SendPacket(new ClientResponse()
             {
                 From = "GetUnlockedCharacters",
                 Result = 0,
@@ -87,7 +84,7 @@ namespace LoESoft.Client.Core.Screens
         public void AddCharacterSelection(string response)
         {
             CharacterSelect = new CharacterSelectHUD(DrawHelper.CenteredToScreenWidth(720), 400);
-            CharacterSelect.Init(_gameUser, response);
+            CharacterSelect.Init(response);
 
             Background.AddChild(CharacterSelect);
         }

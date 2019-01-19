@@ -35,7 +35,7 @@ namespace LoESoft.Server.Core.World
 
                 while (_canpdate)
                 {
-                    _worldTime.TotalElapsedMs = (int)_watch.Elapsed.TotalMilliseconds;
+                    _worldTime.TotalElapsedMs = _watch.Elapsed.TotalMilliseconds;
                     _worldTime.TickCount = tickCount;
 
                     Map.Update(_worldTime);

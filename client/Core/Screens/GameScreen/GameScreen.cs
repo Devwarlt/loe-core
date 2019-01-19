@@ -1,10 +1,10 @@
 #define TEMP_DISABLE
 
-using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game;
 using LoESoft.Client.Core.Game.Map;
 using LoESoft.Client.Core.Game.User;
 using LoESoft.Client.Core.Models;
+using LoESoft.Client.Core.Networking;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,30 +16,26 @@ namespace LoESoft.Client.Core.Screens
     {
         public GamePlayer Controller { get; set; }
 
-        private GameUser GameUser { get; set; }
-
         private GameCamera Camera { get; set; }
 
-        public GameScreen(GameUser gameUser, PlayerInfo info)
+        public GameScreen(PlayerInfo info)
         {
-            GameUser = gameUser;
-            Controller = new GamePlayer(GameUser, info);
+            Controller = new GamePlayer(info);
             Camera = new GameCamera();
         }
         
         public override void OnScreenCreate()
         {
-            WorldMap.Start();
             Camera.Update(Controller.Player);
         }
 
-        public override void OnScreenDispatch() => GameUser.Disconnect();
+        public override void OnScreenDispatch() => NetworkClient.Dispose();
 
         public override void Update(GameTime gameTime)
         {
             Controller.Update(gameTime);
             Camera.Update(Controller.Player);
-            WorldMap.Update(gameTime, (int)Controller.Player.X, (int)Controller.Player.Y);
+            WorldMap.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -49,11 +45,8 @@ namespace LoESoft.Client.Core.Screens
                 spriteBatch.Clear();
                 spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetMatrix());
 
-                if (GameUser.IsConnected)
-                {
-                    WorldMap.Draw(spriteBatch, (int)Controller.Player.X, (int)Controller.Player.Y);
-                    Controller.Draw(spriteBatch);
-                }
+                WorldMap.Draw(spriteBatch, (int)Controller.Player.X, (int)Controller.Player.Y);
+                Controller.Draw(spriteBatch);
             }
             catch (InvalidOperationException) { }
 

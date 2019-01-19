@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using LoESoft.Server.Core.Networking.Data;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,17 +21,21 @@ namespace LoESoft.Server.Core.World.Stats
                 StatsToExport.Add(type, value);
         }
 
-        public string Serialize()
+        public Stat[] GetStats()
         {
-            string val = JsonConvert.SerializeObject(StatsToExport.Select(_ =>
+            var val = StatsToExport.Select(_ =>
             {
                 if (!ExportedStats.ContainsKey(_.Key))
                     ExportedStats.Add(_.Key, _.Value);
                 else
                     ExportedStats[_.Key] = _.Value;
 
-                return _;
-            }));
+                return new Stat()
+                {
+                    StatType = _.Key,
+                    Data = _.Value
+                };
+            }).ToArray();
 
             StatsToExport.Clear();
 

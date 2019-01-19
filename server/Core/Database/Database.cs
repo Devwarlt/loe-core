@@ -47,7 +47,7 @@ namespace LoESoft.Server.Core.Database
                 var account = Load<Account>(AccountsDir, Path.GetFileNameWithoutExtension(new FileInfo(file).Name));
 
                 if (account != null)
-                    Accounts.TryAdd(new KeyValuePair<string, string>(account.Name, account.Password), account);
+                    Accounts.TryAdd(new KeyValuePair<string, string>(account.Gmail, account.Password), account);
 
                 return file;
             }).ToList();
@@ -75,9 +75,10 @@ namespace LoESoft.Server.Core.Database
                 Save(CharactersDir, $"character.{i.Id}", i);
         }
 
-        public Account GetAccountByCredentials(string name, string password)
-            => Accounts.TryGetValue(new KeyValuePair<string, string>(name, password), out Account account) ? account : null;
-
+        public Account GetAccountByCredentials(string mail, string password) =>
+         Accounts.TryGetValue(new KeyValuePair<string, string>(mail, password), out Account account)
+            ? account : null;
+        
         public Character GetCharacterByAccountId(long accountId, long characterId)
             => Characters.TryGetValue(new KeyValuePair<long, long>(accountId, characterId), out Character character) ? character : null;
 
@@ -98,14 +99,15 @@ namespace LoESoft.Server.Core.Database
         public bool CheckAccountNameIfExists(string name)
             => Accounts.Keys.Select(names => names.Key).ToList().FirstOrDefault(data => data == name) != null;
 
-        public bool CreateNewAccount(string name, string password, out string token)
+        public bool CreateNewAccount(string gmail, string name, string password, out string token)
         {
             token = Cipher.Encode($"{Cipher.LoESoftHash}+{name}+{password}+{Cipher.LoESoftHash}");
 
-            return Accounts.TryAdd(new KeyValuePair<string, string>(name, password), new Account()
+            return Accounts.TryAdd(new KeyValuePair<string, string>(gmail, password), new Account()
             {
                 Id = Interlocked.Increment(ref LastAccountId),
                 CurrentCharacterId = 0,
+                Gmail = gmail,
                 Name = name,
                 Password = password,
                 Rank = 0,

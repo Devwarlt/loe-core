@@ -35,7 +35,6 @@
             // MainMenu
             // 
             this.MainMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.MainMenu.GameUser = null;
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.LoggedIn = false;
             this.MainMenu.Name = "MainMenu";

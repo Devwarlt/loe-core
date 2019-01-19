@@ -1,4 +1,5 @@
-﻿using LoESoft.Server.Core.World.Stats;
+﻿using LoESoft.Server.Core.Networking.Data;
+using LoESoft.Server.Core.World.Stats;
 using LoESoft.Server.Utils;
 
 namespace LoESoft.Server.Core.World.Entities
@@ -28,12 +29,25 @@ namespace LoESoft.Server.Core.World.Entities
             IsEntity = true;
 
             MaximumHealth = 100;
-            Health = 100;
+            Health = MaximumHealth;
 
             Direction = Direction.Down;
         }
 
-        public override string ExportStat()
+        public void Damage(int amount)
+        {
+            if (Health - amount > 0)
+                Health -= amount;
+            else
+            {
+                Health = 0;
+                Death();
+            }
+        }
+
+        public void Death() => Dispose();
+
+        public override Stat[] ExportStat()
         {
             Export.AddOrUpdate(StatType.HEALTH, Health);
             Export.AddOrUpdate(StatType.MAXIMUMHP, MaximumHealth);

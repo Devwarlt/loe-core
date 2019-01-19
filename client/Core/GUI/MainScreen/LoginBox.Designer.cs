@@ -59,12 +59,12 @@
             this.AccountNameLabel.AutoSize = true;
             this.AccountNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameLabel.ForeColor = System.Drawing.Color.Gainsboro;
-            this.AccountNameLabel.Location = new System.Drawing.Point(24, 56);
+            this.AccountNameLabel.Location = new System.Drawing.Point(22, 50);
             this.AccountNameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.AccountNameLabel.Name = "AccountNameLabel";
-            this.AccountNameLabel.Size = new System.Drawing.Size(114, 20);
+            this.AccountNameLabel.Size = new System.Drawing.Size(48, 20);
             this.AccountNameLabel.TabIndex = 5;
-            this.AccountNameLabel.Text = "Account Name";
+            this.AccountNameLabel.Text = "Email";
             // 
             // AccountNameCapsLockLabel
             // 
@@ -72,7 +72,7 @@
             this.AccountNameCapsLockLabel.Enabled = false;
             this.AccountNameCapsLockLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AccountNameCapsLockLabel.ForeColor = System.Drawing.Color.Red;
-            this.AccountNameCapsLockLabel.Location = new System.Drawing.Point(239, 59);
+            this.AccountNameCapsLockLabel.Location = new System.Drawing.Point(239, 54);
             this.AccountNameCapsLockLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.AccountNameCapsLockLabel.Name = "AccountNameCapsLockLabel";
             this.AccountNameCapsLockLabel.Size = new System.Drawing.Size(81, 16);
@@ -149,7 +149,7 @@
             this.PasswordTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordTextBox.ForeColor = System.Drawing.Color.Gainsboro;
-            this.PasswordTextBox.Location = new System.Drawing.Point(26, 125);
+            this.PasswordTextBox.Location = new System.Drawing.Point(26, 130);
             this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.PasswordTextBox.MaxLength = 32;
             this.PasswordTextBox.Name = "PasswordTextBox";
@@ -163,7 +163,7 @@
             this.PasswordCapsLockLabel.Enabled = false;
             this.PasswordCapsLockLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordCapsLockLabel.ForeColor = System.Drawing.Color.Red;
-            this.PasswordCapsLockLabel.Location = new System.Drawing.Point(239, 108);
+            this.PasswordCapsLockLabel.Location = new System.Drawing.Point(239, 110);
             this.PasswordCapsLockLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PasswordCapsLockLabel.Name = "PasswordCapsLockLabel";
             this.PasswordCapsLockLabel.Size = new System.Drawing.Size(81, 16);

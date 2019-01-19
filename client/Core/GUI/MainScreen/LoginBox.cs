@@ -1,4 +1,5 @@
-﻿using LoESoft.Client.Core.Networking.Packets.Outgoing;
+﻿using LoESoft.Client.Core.Networking;
+using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using System;
 using System.Windows.Forms;
 
@@ -57,9 +58,9 @@ namespace LoESoft.Client.Core.GUI.MainScreen
         }
 
         private void LoginOKButton_Click(object sender, EventArgs e)
-            => ((MainMenu)Parent).GameUser.SendPacket(new Login()
+            => NetworkClient.SendPacket(new Login()
             {
-                Name = AccountNameTextBox.Text,
+                Email = AccountNameTextBox.Text.ToLower(),
                 Password = PasswordTextBox.Text
             });
 

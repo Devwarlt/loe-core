@@ -5,7 +5,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
 {
     public partial class Player : Entity
     {
-        public Client Client { get; private set; }
+        public NetworkClient Client { get; private set; }
         public Character Character { get; private set; }
 
         private Item[] _inventory;
@@ -22,7 +22,7 @@ namespace LoESoft.Server.Core.World.Entities.Player
             set => IncrementVar(ref _name, value);
         }
         
-        public Player(WorldManager manager, Client client, Character character)
+        public Player(WorldManager manager, NetworkClient client, Character character)
             : base(manager, character.Class)
         {
             IsPlayer = true;

@@ -4,20 +4,26 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 {
     public class Login : IncomingPacket
     {
-        public string Name { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
 
         public override PacketID PacketID => PacketID.LOGIN;
 
-        public override void Handle(Client client)
+        public override void Read(NetworkReader reader)
         {
-            if (string.IsNullOrWhiteSpace(Name))
+            Email = reader.ReadUTF();
+            Password = reader.ReadUTF();
+        }
+
+        public override void Handle(NetworkClient client)
+        {
+            if (string.IsNullOrWhiteSpace(Email) && !Email.Contains("@"))
             {
                 client.SendPacket(new ServerResponse()
                 {
                     From = $"Login",
                     Result = -1,
-                    Content = "Account name is empty."
+                    Content = "Please enter a valid Email!"
                 });
                 return;
             }
@@ -33,29 +39,7 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
                 return;
             }
 
-            if (Name.Length < 6)
-            {
-                client.SendPacket(new ServerResponse()
-                {
-                    From = $"Login",
-                    Result = -1,
-                    Content = "Account name minimum length is 6."
-                });
-                return;
-            }
-
-            if (Password.Length < 8)
-            {
-                client.SendPacket(new ServerResponse()
-                {
-                    From = $"Login",
-                    Result = -1,
-                    Content = "Account password minimum length is 8."
-                });
-                return;
-            }
-
-            var account = App.Database.GetAccountByCredentials(Name, Password);
+            var account = App.Database.GetAccountByCredentials(Email, Password);
 
             if (account == null)
             {

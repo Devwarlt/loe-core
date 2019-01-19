@@ -33,14 +33,7 @@ namespace LoESoft.Server.Core.World.Map.Structure
         public static Map GetMapByName(string name)
         {
             if (BinaryMapsCache.TryGetValue(name, out KeyValuePair<bool, byte[]> binaryData))
-            {
-                var map = GetMapFromBytes(binaryData.Key, binaryData.Value);
-
-                foreach (var layer in map.Layers)
-                    layer.UpdateChunksToObject();
-
-                return map;
-            }
+                return GetMapFromBytes(binaryData.Key, binaryData.Value);
 
             throw new Exception($"Map {name} not found!");
         }

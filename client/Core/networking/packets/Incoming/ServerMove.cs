@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Screens;
+﻿using LoESoft.Client.Core.Screens;
 
 namespace LoESoft.Client.Core.Networking.Packets.Incoming
 {
@@ -10,7 +9,13 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
         public override PacketID PacketID => PacketID.SERVERMOVE;
 
-        public override void Handle(GameUser gameUser)
+        public override void Read(NetworkReader reader)
+        {
+            X = reader.ReadInt32();
+            Y = reader.ReadInt32();
+        }
+
+        public override void Handle()
         {
             if (ScreenManager.ActiveScreen == GameApplication.GameScreen)
                 GameApplication.GameScreen.Controller?.SetDistination(X, Y);

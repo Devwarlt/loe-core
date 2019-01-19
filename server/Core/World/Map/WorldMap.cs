@@ -2,7 +2,6 @@
 using LoESoft.Server.Core.World.Entities.Player;
 using LoESoft.Server.Core.World.Map;
 using LoESoft.Server.Utils;
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
@@ -10,8 +9,8 @@ namespace LoESoft.Server.Core.World
 {
     public class WorldMap
     {
-        public const int WIDTH = 256;
-        public const int HEIGHT = 256;
+        public const int WIDTH = 128;
+        public const int HEIGHT = 128;
 
         public WorldManager Manager { get; set; }
 
@@ -28,11 +27,13 @@ namespace LoESoft.Server.Core.World
             Chunks = new Dictionary<Point, Chunk>();
             Players = new ConcurrentDictionary<int, Player>();
 
+            //var map = Map.Structure.Map.GetMapByName("loemap.lsmap");
+
             Tiles = new Tile[WIDTH, HEIGHT];
 
             for (var x = 0; x < WIDTH; x++)
                 for (var y = 0; y < HEIGHT; y++)
-                    Tiles[x, y] = new Tile(Manager, LoERandom.Next(0, 4)) { X = x, Y = y };
+                    Tiles[x, y] = new Tile(Manager, 1016) { X = x, Y = y };
 
             var entrypoint = new Point(0, 0);
 
@@ -52,8 +53,8 @@ namespace LoESoft.Server.Core.World
                 foreach (var i in Chunks.Values)
                     i.Update(time);
 
-                foreach (var i in Players.ToArray())
-                    i.Value.Update();
+                foreach (var i in Players.Values)
+                    i.Update();
             }
         }
 

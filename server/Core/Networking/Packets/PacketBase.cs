@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using System.Text;
+﻿using System.Text;
 
 namespace LoESoft.Server.Core.Networking.Packets
 {
     public abstract class PacketBase
     {
-        [JsonIgnore]
         public abstract PacketID PacketID { get; }
 
         public override string ToString()

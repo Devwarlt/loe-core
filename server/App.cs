@@ -4,8 +4,6 @@ using LoESoft.Server.Core.Database;
 using LoESoft.Server.Core.Networking;
 using LoESoft.Server.Core.World;
 using LoESoft.Server.Core.World.Map.Structure;
-using LoESoft.Server.Settings;
-using LoESoft.Server.Utils;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
@@ -30,10 +28,7 @@ namespace LoESoft.Server
         private static Logger Log => LogManager.GetLogger(Name);
 
         private static string RollbarId => "ca02c5d9fb834c33880af31a6407fa18";
-
-        // Settings
-        public static ServerSettings Settings => IO.Import<ServerSettings>("../../", "Settings");
-
+        
         // Database
         public static Database Database { get; set; }
 
@@ -78,9 +73,10 @@ namespace LoESoft.Server
                 Map.LoadEmbeddedMaps();
 
                 var manager = new WorldManager();
-                var connection = new ConnectionListener(manager);
+                var connection = new NetworkListener(manager);
+                NetworkProccessor.Start();
 
-                connection.StartAccept();
+                connection.Listen();
 
                 manager.BeginUpdate();
 
@@ -90,8 +86,6 @@ namespace LoESoft.Server
                     ;
 
                 Database.Dispose();
-
-                connection.EndAccept();
 
                 Info("Game Server has been stopped.");
 

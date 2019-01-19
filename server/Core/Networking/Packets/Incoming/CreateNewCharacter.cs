@@ -10,7 +10,14 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         public override PacketID PacketID => PacketID.CREATE_NEW_CHARACTER;
 
-        public override void Handle(Client client)
+        public override void Read(NetworkReader reader)
+        {
+            World = reader.ReadInt32();
+            ClassType = reader.ReadInt32();
+            CharacterIndex = reader.ReadInt32();
+        }
+
+        public override void Handle(NetworkClient client)
         {
             if (client.Account.Id == -1)
             {

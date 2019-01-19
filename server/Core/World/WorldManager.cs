@@ -5,7 +5,7 @@ namespace LoESoft.Server.Core.World
 {
     public class WorldManager
     {
-        public ConcurrentDictionary<int, Client> Clients = new ConcurrentDictionary<int, Client>();
+        public ConcurrentDictionary<int, NetworkClient> Clients = new ConcurrentDictionary<int, NetworkClient>();
 
         private GameClock _clock { get; set; }
 
@@ -24,7 +24,7 @@ namespace LoESoft.Server.Core.World
             _clock.Start();
         }
 
-        public bool TryAddPlayer(Client client, out string error)
+        public bool TryAddPlayer(NetworkClient client, out string error)
         {
             error = "";
             if (Clients.Count >= WorldSettings.MAX_CONNECTIONS)
@@ -35,7 +35,7 @@ namespace LoESoft.Server.Core.World
 
             if (client.Player != null)
             {
-                Clients.TryAdd(client.Id, client);
+                Clients.TryAdd(client.ClientId, client);
 
                 return true;
             }
@@ -45,11 +45,11 @@ namespace LoESoft.Server.Core.World
             return false;
         }
 
-        public bool TryRemovePlayer(Client client)
+        public bool TryRemovePlayer(NetworkClient client)
         {
             if (Clients.Values.Contains(client))
             {
-                if (Clients.TryRemove(client.Id, out var outclient))
+                if (Clients.TryRemove(client.ClientId, out var outclient))
                     Core.Map.Remove(outclient.Player);
 
                 return true;

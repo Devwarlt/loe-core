@@ -52,12 +52,10 @@ namespace LoESoft.Client.Core.Game.Objects
             HandleMovement(1f / gameTime.ElapsedGameTime.Milliseconds);
         }
 
-        public virtual void ImportStat(string export)
+        public virtual void ImportStat(Stat[] stats)
         {
-            var stats = JsonConvert.DeserializeObject<IEnumerable<KeyValuePair<int, object>>>(export);
-
             foreach (var i in stats)
-                ChangeStat(i.Key, i.Value);
+                ChangeStat(i.StatType, i.Data);
         }
 
         public virtual void ChangeStat(int type, object value)

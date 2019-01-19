@@ -4,6 +4,11 @@
     {
         public int ObjectId { get; set; }
 
+        public Comparable()
+        {
+            ObjectId = EntityManager.GetNextId();
+        }
+
         public override bool Equals(object obj) => ObjectId == ((Comparable)obj).ObjectId;
 
         public override int GetHashCode() => 34855695 + ObjectId.GetHashCode();

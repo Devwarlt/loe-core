@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Game.User.Data;
+﻿using LoESoft.Client.Core.Game.User.Data;
 using LoESoft.Client.Core.Game.User.GUI.UI.Elements;
 using LoESoft.Client.Core.Game.User.GUI.UI.Elements.Icon;
 using LoESoft.Client.Drawing;
@@ -15,14 +14,14 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI
         public InventoryView Inventory { get; set; }
         public StatView StatsView { get; set; }
 
-        public PlayerInfoTable(GameUser user)
+        public PlayerInfoTable()
             : base(DrawHelper.CenteredToScreenWidth(600), DrawHelper.CenteredToScreenHeight(600), "Guest", 600, 600)
         {
             IsZeroApplicaple = true;
 
             Icons = new InfoIcon(265, 45, onInventory, onStats);
 
-            Inventory = new InventoryView(user, 100, 325);
+            Inventory = new InventoryView(100, 325);
             StatsView = new StatView(50, 125);
 
             AddChild(Inventory);

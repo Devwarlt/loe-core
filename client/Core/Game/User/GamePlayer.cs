@@ -1,21 +1,18 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Game.Objects;
+﻿using LoESoft.Client.Core.Game.Objects;
 using LoESoft.Client.Core.Game.Objects.Stats;
 using LoESoft.Client.Core.Game.User.GUI;
 using LoESoft.Client.Core.Models;
+using LoESoft.Client.Core.Networking;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace LoESoft.Client.Core.Game.User
 {
     public class GamePlayer
     {
-        public GameUser User { get; private set; }
         public Player Player { get; private set; }
         public PlayerInfo Info { get; private set; }
 
@@ -23,12 +20,11 @@ namespace LoESoft.Client.Core.Game.User
 
         public int ObjectId { get; set; }
 
-        public GamePlayer(GameUser user, PlayerInfo info)
+        public GamePlayer(PlayerInfo info)
         {
-            User = user;
             Info = info;
 
-            HUD = new PlayerHUD(user);
+            HUD = new PlayerHUD();
             Player = new Player(Info.ClassId);
             
             ObjectId = Info.ObjectId;
@@ -39,14 +35,12 @@ namespace LoESoft.Client.Core.Game.User
             HUD.InfoTable.ReloadInventoryPlayer(this);
         }
 
-        public void ImportStat(string export)
+        public void ImportStat(Stat[] stats)
         {
-            var stats = JsonConvert.DeserializeObject<IEnumerable<KeyValuePair<int, object>>>(export).ToList();
-
             foreach (var i in stats)
-                Player.ChangeStat(i.Key, i.Value);
+                Player.ChangeStat(i.StatType, i.Data);
 
-            if (stats.Exists(_ => _.Key >= StatType.INVENTORY_0 && _.Key <= StatType.INVENTORY_31))
+            if (stats.ToList().Exists(_ => _.StatType >= StatType.INVENTORY_0 && _.StatType <= StatType.INVENTORY_31))
                 HUD.InfoTable.ReloadInventory(Player.Inventory);
         }
         
@@ -99,6 +93,7 @@ namespace LoESoft.Client.Core.Game.User
             HUD.DrawMinimap(spriteBatch, (int)Player.X, (int)Player.Y);
         }
 
-        private void SendMovePacket() => User.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });
+        private void SendMovePacket() => 
+            NetworkClient.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });
     }
 }

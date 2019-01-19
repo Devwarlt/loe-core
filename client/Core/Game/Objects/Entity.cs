@@ -29,9 +29,6 @@ namespace LoESoft.Client.Core.Game.Objects
 
             _astarPath = new Queue<Point>();
             PathFinder = new AStar();
-
-            MaximumHealth = 100;
-            Health = MaximumHealth;
             //_isPathFinding = false;
         }
 

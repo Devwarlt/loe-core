@@ -1,17 +1,9 @@
-﻿namespace LoESoft.Server.Settings
-{
-    public class ServerSettings
-    {
-        public TCPServerSettings TcpServerSettings { get; set; }
+﻿using System.Net;
 
-        public static ServerSettings DefaultServerSettings =>
-            new ServerSettings()
-            {
-                TcpServerSettings = new TCPServerSettings()
-                {
-                    Port = -1,
-                    MaxClients = -1
-                }
-            };
+namespace LoESoft.Server.Settings
+{
+    public static class ServerSettings
+    {
+        public static IPEndPoint ServerEndPoint = new IPEndPoint(IPAddress.Any, 6969);
     }
 }

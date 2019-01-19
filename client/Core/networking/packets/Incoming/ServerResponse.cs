@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Models;
+﻿using LoESoft.Client.Core.Models;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Core.Screens;
 using Newtonsoft.Json;
@@ -14,11 +13,17 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
         public string From { get; set; }
         public int Result { get; set; }
         public string Content { get; set; }
-
-        [JsonIgnore]
-        public override PacketID PacketID => PacketID.SERVER_RESPONSE;
         
-        public override void Handle(GameUser gameUser)
+        public override PacketID PacketID => PacketID.SERVER_RESPONSE;
+
+        public override void Read(NetworkReader reader)
+        {
+            From = reader.ReadUTF();
+            Result = reader.ReadInt32();
+            Content = reader.ReadUTF();
+        }
+
+        public override void Handle()
         {
             App.Info($"({From} [{Result}]) {Content}");
 
@@ -37,7 +42,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                     break;
 
                 case "LoadCharacter":
-                    HandleCharacterLoad(gameUser);
+                    HandleCharacterLoad();
                     break;
 
                 case "UnlockedCharacters":
@@ -74,7 +79,7 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
                 },
                 Result == 0, ContentAlignment.MiddleCenter);
 
-        public void HandleCharacterLoad(GameUser user)
+        public void HandleCharacterLoad()
         {
             var loading = new ConcurrentQueue<Action>();
 
@@ -86,13 +91,13 @@ namespace LoESoft.Client.Core.Networking.Packets.Incoming
 
                         loading.Enqueue(delegate
                         {
-                            user.SendPacket(new Load() { });
+                            NetworkClient.SendPacket(new Load() { });
                         });
 
                         App.Warn("Managing Screen!");
 
                         ScreenManager.DispatchScreen(new LoadingScreen(loading,
-                            GameApplication.GameScreen = new GameScreen(user, content)));
+                            GameApplication.GameScreen = new GameScreen(content)));
                     } break;
                 case -1:
                     {

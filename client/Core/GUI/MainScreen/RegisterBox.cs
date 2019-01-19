@@ -1,4 +1,5 @@
-﻿using LoESoft.Client.Core.Networking.Packets.Outgoing;
+﻿using LoESoft.Client.Core.Networking;
+using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using System;
 using System.Windows.Forms;
 
@@ -26,8 +27,10 @@ namespace LoESoft.Client.Core.GUI.MainScreen
                 Invoke(OnToggle);
             else
             {
-                AccountNameTextBox.Text = null;
-                PasswordTextBox.Text = null;
+                EmailBox.Text = string.Empty;
+                AccountNameTextBox.Text = string.Empty;
+                PasswordTextBox.Text = string.Empty;
+                ConfirmPasswordTextBox.Text = string.Empty;
 
                 Enabled = !Enabled;
                 Visible = !Visible;
@@ -36,14 +39,17 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 
         private void RegisterBox_Load(object sender, EventArgs e)
         {
+            EmailBox.KeyDown += GmailBox_KeyDown;
+            EmailBox.Text = string.Empty;
+
             AccountNameTextBox.KeyDown += AccountNameTextBox_KeyDown;
-            AccountNameTextBox.Text = null;
+            AccountNameTextBox.Text = string.Empty;
 
             PasswordTextBox.KeyDown += PasswordTextBox_KeyDown;
-            PasswordTextBox.Text = null;
+            PasswordTextBox.Text = string.Empty; 
 
             ConfirmPasswordTextBox.KeyDown += ConfirmPasswordTextBox_KeyDown;
-            ConfirmPasswordTextBox.Text = null;
+            ConfirmPasswordTextBox.Text = string.Empty; 
         }
 
         private void AccountNameTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -69,10 +75,19 @@ namespace LoESoft.Client.Core.GUI.MainScreen
             ConfirmPasswordCapsLockLabel.Enabled = isCaps;
             ConfirmPasswordCapsLockLabel.Visible = isCaps;
         }
+        
+        private void GmailBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            var isCaps = IsKeyLocked(Keys.CapsLock);
+
+            confirmEmailCapsLabel.Enabled = isCaps;
+            confirmEmailCapsLabel.Visible = isCaps;
+        }
 
         private void RegisterCreateButton_Click(object sender, EventArgs e)
-            => ((MainMenu)Parent).GameUser.SendPacket(new Register()
+            => NetworkClient.SendPacket(new Register()
             {
+                Email = EmailBox.Text.ToLower(),
                 Name = AccountNameTextBox.Text,
                 Password = PasswordTextBox.Text,
                 ConfirmPassword = ConfirmPasswordTextBox.Text
@@ -80,9 +95,10 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 
         private void RegisterCancelButton_Click(object sender, EventArgs e)
         {
-            AccountNameTextBox.Text = null;
-            PasswordTextBox.Text = null;
-            ConfirmPasswordTextBox.Text = null;
+            EmailBox.Text = string.Empty;
+            AccountNameTextBox.Text = string.Empty;
+            PasswordTextBox.Text = string.Empty;
+            ConfirmPasswordTextBox.Text = string.Empty;
 
             Toggle();
 

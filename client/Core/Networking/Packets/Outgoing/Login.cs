@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
-
-namespace LoESoft.Client.Core.Networking.Packets.Outgoing
+﻿namespace LoESoft.Client.Core.Networking.Packets.Outgoing
 {
     public class Login : OutgoingPacket
     {
-        public string Name { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
-
-        [JsonIgnore]
+        
         public override PacketID PacketID => PacketID.LOGIN;
+
+        public override void Write(NetworkWriter writer)
+        {
+            writer.WriteUTF(Email);
+            writer.WriteUTF(Password);
+        }
     }
 }

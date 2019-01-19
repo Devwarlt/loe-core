@@ -5,7 +5,7 @@ namespace LoESoft.Client.Core.Game
 {
     public class GameCamera
     {
-        public const float SCALE = 8;
+        public const float SCALE = 6.5f;
 
         public GameObject Focus { get; set; }
 
@@ -16,7 +16,10 @@ namespace LoESoft.Client.Core.Game
         {
             Focus = focus;
         }
-        
+
+        public Vector2 ScreenToWorld(Vector2 location) => Vector2.Transform(location, Matrix.Invert(GetMatrix()));
+        public Vector2 WorldToScreen(Vector2 location) => Vector2.Transform(location, GetMatrix());
+
         public Matrix GetMatrix()
         {
             if (Focus == null)
@@ -24,10 +27,9 @@ namespace LoESoft.Client.Core.Game
 
             X = (int)Focus.DrawX;
             Y = (int)Focus.DrawY;
-            var size = Focus.Size;
 
             return
-                Matrix.CreateTranslation(-(X + (size / 2)), -(Y + (size / 2)), 0) *
+                Matrix.CreateTranslation(-(X + 4), -(Y + 4), 0) *
                 Matrix.CreateScale(SCALE) *
                 Matrix.CreateTranslation(GameApplication.WIDTH / 2, GameApplication.HEIGHT / 2, 0);
         }

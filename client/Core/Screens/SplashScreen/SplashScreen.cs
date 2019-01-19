@@ -1,6 +1,5 @@
 ﻿using LoESoft.Client.Assets;
 using LoESoft.Client.Assets.Xml;
-using LoESoft.Client.Core.Client;
 using LoESoft.Client.Drawing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,9 +19,8 @@ namespace LoESoft.Client.Core.Screens
         private float TextureToDrawAlpha { get; set; }
         private Texture2D TextureToDraw { get; set; }
         private Queue<Texture2D> TexturesToDisplay { get; set; }
-        private GameUser GameUser { get; set; }
 
-        public SplashScreen(GameUser gameUser) => GameUser = gameUser;
+        public SplashScreen() { }
 
         public override void OnScreenCreate()
         {
@@ -51,7 +49,8 @@ namespace LoESoft.Client.Core.Screens
                     loading.Enqueue(delegate { XmlLibrary.Init(); });
                     loading.Enqueue(delegate { AudioManager.Init(); });
 
-                    ScreenManager.DispatchScreen(new LoadingScreen(loading, GameApplication.CharacterScreen = new CharacterScreen(GameUser)));
+                    ScreenManager.DispatchScreen(new LoadingScreen(loading, 
+                        GameApplication.CharacterScreen = new CharacterScreen()));
                     return;
                 }
 

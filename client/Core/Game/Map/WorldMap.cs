@@ -15,24 +15,15 @@ namespace LoESoft.Client.Core.Game.Map
 
         public static int WIDTH { get; private set; } = 0;
         public static int HEIGHT { get; private set; } = 0;
-
-        public static bool MapLoaded { get; set; }
-
-        static WorldMap()
-        {
-            Objects = new Dictionary<int, GameObject>();
-            MapLoaded = false;
-        }
-
+        
         public static void Initialize(int w, int h)
         {
             TileMap = new Dictionary<Point, Tile>(w * h);
+            Objects = new Dictionary<int, GameObject>();
 
             WIDTH = w;
             HEIGHT = h;
         }
-
-        public static void Start() => MapLoaded = true;
 
         public static void AddOrUpdate(TileData[] tilesAddOrUpdate, ObjectData[] objAddOrUpdate, int[] removedObjects)
         {
@@ -133,53 +124,45 @@ namespace LoESoft.Client.Core.Game.Map
             Objects.Add(data.ObjectId, player);
         }
 
-        public static void Update(GameTime gameTime, int x, int y)
+        public static void Update(GameTime gameTime)
         {
-            if (MapLoaded)
-                foreach (var i in Objects)
-                    i.Value.Update(gameTime);
+            foreach (var i in Objects)
+                i.Value.Update(gameTime);
         }
 
         public static void Draw(SpriteBatch spriteBatch, int x, int y)
         {
-            if (MapLoaded)
-            {
-                foreach (var i in GetTilesInSight(x, y))
-                    i.Draw(spriteBatch);
+            foreach (var i in GetSightPoints(x, y))
+                if (TileMap.ContainsKey(i))
+                    TileMap[i].Draw(spriteBatch);
 
-                foreach (var i in GetEntitiesInSight(x, y))
-                    i.Draw(spriteBatch);
-            }
-        }
-
-        public static HashSet<Tile> GetTilesInSight(int x, int y)
-        {
-            var sight = GetSightPoints(x, y);
-
-            return TileMap.Where(_ => sight.Contains(_.Key)).Select(_ => _.Value).ToHashSet();
+            foreach (var i in GetEntitiesInSight(x, y))
+                i.Draw(spriteBatch);
         }
 
         public static HashSet<GameObject> GetEntitiesInSight(int x, int y) =>
             Objects.Where(_ => _.Value.X > x - SightRadius && _.Value.X < x + SightRadius
             && _.Value.Y > y - SightRadius && _.Value.Y < y + SightRadius).Select(_ => _.Value).ToHashSet();
-        
 
-        public static int SightRadius = 8;
-        public static int SightBound = SightRadius * 2;
 
-        public static HashSet<Point> GetSightPoints(int X, int Y)
+        public static int SightDiameter = 21;
+        public static int SightRadius = (SightDiameter - 1) / 2;
+
+        public static HashSet<Point> GetSightPoints(int px, int py)
         {
             var points = new HashSet<Point>();
 
-            for (var x = -SightRadius; x < SightRadius; x++)
-                for (var y = -SightRadius; y < SightRadius; y++)
+            for (var x = 0; x < SightDiameter; x++)
+            {
+                for (var y = 0; y < SightDiameter; y++)
                 {
-                    var px = (X + 1) + x;
-                    var py = (Y + 1) + y;
+                    var newX = px + (x - SightRadius);
+                    var newY = py + (y - SightRadius);
 
                     if (px >= 0 && px <= WIDTH && py >= 0 && py <= HEIGHT)
-                        points.Add(new Point(px, py));
+                        points.Add(new Point(newX, newY));
                 }
+            }
 
             return points;
         }

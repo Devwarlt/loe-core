@@ -1,10 +1,11 @@
-﻿using LoESoft.Server.Core.World.Stats;
+﻿using LoESoft.Server.Core.Networking.Data;
+using LoESoft.Server.Core.World.Stats;
 
 namespace LoESoft.Server.Core.World.Entities.Player
 {
     public partial class Player
     {
-        public override string ExportStat()
+        public override Stat[] ExportStat()
         {
             Export.AddOrUpdate(StatType.INVENTORY_0, Inventory[0]);
             Export.AddOrUpdate(StatType.INVENTORY_1, Inventory[1]);

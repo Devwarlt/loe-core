@@ -1,7 +1,7 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.Game.User.GUI.Icon;
+﻿using LoESoft.Client.Core.Game.User.GUI.Icon;
 using LoESoft.Client.Core.Game.User.GUI.UI;
 using LoESoft.Client.Core.Game.User.GUI.UI.Elements.StatusBar;
+using LoESoft.Client.Core.Networking;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,18 +18,18 @@ namespace LoESoft.Client.Core.Game.User.GUI
 
         public StatusBarView HealthBar { get; private set; }
 
-        public PlayerHUD(GameUser user)
+        public PlayerHUD()
             : base(new RGBColor(0, 0, 0), 0f)
         {
             IsEventApplicable = false;
 
             Icons = new IconTab(975, 5, toggleInfoTable, toggleOptions, toggleMinimap);
 
-            InfoTable = new PlayerInfoTable(user);
+            InfoTable = new PlayerInfoTable();
             OptionTable = new OptionsTable();
-            MiniMapView = new MiniMap(900, 60);
+            MiniMapView = new MiniMap(950, 60);
 
-            HealthBar = new StatusBarView(10, 10, 350, 50, "HP", new RGBColor(255, 12, 5));
+            HealthBar = new StatusBarView(10, 10, 350, 40, "HP", new RGBColor(255, 12, 5));
 
             AddChild(Icons);
             AddChild(HealthBar);

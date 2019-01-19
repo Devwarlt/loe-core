@@ -1,5 +1,5 @@
 ﻿using LoESoft.Client.Assets.Xml;
-using LoESoft.Client.Core.Client;
+using LoESoft.Client.Core.Networking;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
@@ -23,12 +23,10 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
             _mask = new Mask(new RGBColor(26, 13, 2), 0.75f);
         }
 
-        private GameUser _gameUser;
         private CharacterRect _parent;
 
-        public void Init(GameUser user, CharacterRect parent)
+        public void Init(CharacterRect parent)
         {
-            _gameUser = user;
             _parent = parent;
 
             int spriteX = 10;
@@ -71,7 +69,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView
 
         private void CreateCharacter(int classType)
         {
-            _gameUser.SendPacket(new CreateNewCharacter()
+            NetworkClient.SendPacket(new CreateNewCharacter()
             {
                 World = 0,
                 ClassType = classType,

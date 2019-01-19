@@ -7,7 +7,11 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
     {
         public override PacketID PacketID => PacketID.LOAD;
 
-        public override void Handle(Client client)
+        public override void Read(NetworkReader reader)
+        {
+        }
+
+        public override void Handle(NetworkClient client)
         {
             var world = client.Manager.Core.Map;
 

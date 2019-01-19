@@ -7,7 +7,13 @@
         public int ParentItemIndex { get; set; }
         public int TargetItemIndex { get; set; }
 
-        public override void Handle(Client client)
+        public override void Read(NetworkReader reader)
+        {
+            ParentItemIndex = reader.ReadInt32();
+            TargetItemIndex = reader.ReadInt32();
+        }
+
+        public override void Handle(NetworkClient client)
         {
             var target = client.Player.Inventory[TargetItemIndex];
             var parent = client.Player.Inventory[ParentItemIndex];

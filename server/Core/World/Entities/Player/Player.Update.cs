@@ -1,6 +1,5 @@
-﻿using LoESoft.Server.Core.Networking.Packets.Outgoing;
-using LoESoft.Server.Core.World.Map.Data;
-using LoESoft.Server.Utils;
+﻿using LoESoft.Server.Core.Networking.Data;
+using LoESoft.Server.Core.Networking.Packets.Outgoing;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,23 +7,16 @@ namespace LoESoft.Server.Core.World.Entities.Player
 {
     public partial class Player
     {
-        private HashSet<Tile> _addedTile = new HashSet<Tile>();
-        private HashSet<GameObject> _addedObjects = new HashSet<GameObject>();
+        private HashSet<int> _addedTile = new HashSet<int>();
+        private HashSet<int> _addedObjects = new HashSet<int>();
 
         private HashSet<GameObject> _objectsToUpdateOrAdd = new HashSet<GameObject>();
         private HashSet<Tile> _tilesToUpdateOrAdd = new HashSet<Tile>();
         
         private HashSet<int> _removedObjects = new HashSet<int>();
-
-        private int _connectionLostAttempts = 0;
-        private readonly int _maxConnectionListAttempts = 10;
         
         public override void Update()
         {
-            testConnection();
-
-            Health = LoERandom.Next(0, 100);
-
             var sight = GetSightPoints().Where(_ => _.X >= 0 && _.X < WorldMap.WIDTH && _.Y >= 0 && _.Y < WorldMap.HEIGHT);
             var chunk = GetChunk();
             
@@ -35,11 +27,12 @@ namespace LoESoft.Server.Core.World.Entities.Player
             {
                 var tile = Manager.Core.Map.Tiles[i.X, i.Y];
 
-                if ((_addedTile.Contains(tile) && tile.UpdateCount > 0) || !_addedTile.Contains(tile))
+                if ((_addedTile.Contains(tile.ObjectId) && tile.UpdateCount > 0) 
+                    || !_addedTile.Contains(tile.ObjectId))
                     _tilesToUpdateOrAdd.Add(tile);
 
-                if (!_addedTile.Contains(tile))
-                    _addedTile.Add(tile);
+                if (!_addedTile.Contains(tile.ObjectId))
+                    _addedTile.Add(tile.ObjectId);
 
                 tile.OnUpdate();
 
@@ -47,11 +40,12 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
                 if (entity != null)
                 {
-                    if ((_addedObjects.Contains(entity) && entity.UpdateCount > 0) || !_addedObjects.Contains(entity))
+                    if ((_addedObjects.Contains(entity.ObjectId) && entity.UpdateCount > 0) 
+                        || !_addedObjects.Contains(entity.ObjectId))
                         _objectsToUpdateOrAdd.Add(entity);
 
-                    if (!_addedObjects.Contains(entity))
-                        _addedObjects.Add(entity);
+                    if (!_addedObjects.Contains(entity.ObjectId))
+                        _addedObjects.Add(entity.ObjectId);
 
                     entity.OnUpdate();
                 }
@@ -60,11 +54,12 @@ namespace LoESoft.Server.Core.World.Entities.Player
 
                 if (player != null && player.ObjectId != ObjectId)
                 {
-                    if ((_addedObjects.Contains(player) && player.UpdateCount > 0) || !_addedObjects.Contains(player))
+                    if ((_addedObjects.Contains(player.ObjectId) && player.UpdateCount > 0) 
+                        || !_addedObjects.Contains(player.ObjectId))
                         _objectsToUpdateOrAdd.Add(player);
 
-                    if (!_addedObjects.Contains(player))
-                        _addedObjects.Add(player);
+                    if (!_addedObjects.Contains(player.ObjectId))
+                        _addedObjects.Add(player.ObjectId);
 
                     player.OnUpdate();
                 }
@@ -98,26 +93,6 @@ namespace LoESoft.Server.Core.World.Entities.Player
             _tilesToUpdateOrAdd.Clear();
             _objectsToUpdateOrAdd.Clear();
             _removedObjects.Clear();
-        }
-
-        private void testConnection()
-        {
-            if (!Client.IsConnected)
-            {
-                _connectionLostAttempts++;
-
-                App.Info($"[Attempt {_connectionLostAttempts}/{_maxConnectionListAttempts}] Client {Client.Id} dropped connection, retrying...");
-
-                if (_connectionLostAttempts == _maxConnectionListAttempts)
-                {
-                    Client.Disconnect();
-                    return;
-                }
-
-                return;
-            }
-            else
-                _connectionLostAttempts = 0;
         }
     }
 }

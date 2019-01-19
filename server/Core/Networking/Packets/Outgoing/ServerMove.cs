@@ -6,5 +6,11 @@
         public int Y { get; set; }
 
         public override PacketID PacketID => PacketID.SERVERMOVE;
+
+        public override void Write(NetworkWriter writer)
+        {
+            writer.Write(X);
+            writer.Write(Y);
+        }
     }
 }

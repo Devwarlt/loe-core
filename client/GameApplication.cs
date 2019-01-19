@@ -1,5 +1,4 @@
 using LoESoft.Client.Assets;
-using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Screens;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
@@ -19,13 +18,9 @@ namespace LoESoft.Client
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
-
-        public GameUser GameUser { get; set; }
-
-        public GameApplication(GameUser gameUser)
+        
+        public GameApplication()
         {
-            GameUser = gameUser;
-
             GraphicsDeviceManager = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = WIDTH,
@@ -53,7 +48,7 @@ namespace LoESoft.Client
             App.UpdateRPC();
 
             //No point in making it a variable as it'll only be used in initial launch
-            ScreenManager.DispatchScreen(new SplashScreen(GameUser));
+            ScreenManager.DispatchScreen(new SplashScreen());
 
             App.Info("Game Client is initializing... OK!");
         }

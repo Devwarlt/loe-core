@@ -1,10 +1,9 @@
 ﻿using LoESoft.Client.Assets;
 using LoESoft.Client.Assets.Xml;
-using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Game.User.Data;
+using LoESoft.Client.Core.Networking;
 using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using LoESoft.Client.Drawing.Sprites;
-using LoESoft.Client.Drawing.Sprites.Forms;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,17 +24,15 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
                 AddChild(CharacterSprite);
             }
         }
+
         public Dictionary<int, ItemCell> InventoryItems { get; set; }
-        
-        protected GameUser User;
 
         protected CharacterView PlayerSprite;
         
-        public InventoryView(GameUser user, int x, int y)
+        public InventoryView(int x, int y)
             : base(x, y, 400, 200)
         {
             InventoryItems = new Dictionary<int, ItemCell>();
-            User = user;
 
             Init();
         }
@@ -106,7 +103,7 @@ namespace LoESoft.Client.Core.Game.User.GUI.UI.Elements
             var target = InventoryItems.Values.Where(_ => _.Selected).FirstOrDefault();
 
             if (target != null)
-                User.SendPacket(new InventorySwap()
+                NetworkClient.SendPacket(new InventorySwap()
                 {
                     ParentItemIndex = ItemCell.DraggedIndex,
                     TargetItemIndex = target.ItemIndex

@@ -1,7 +1,6 @@
 ﻿using LoESoft.Client.Assets;
 using LoESoft.Client.Assets.Xml;
 using LoESoft.Client.Assets.Xml.Structure;
-using LoESoft.Client.Core.Client;
 using LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection.ChooseView;
 using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Events;
@@ -42,12 +41,9 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
                 SpriteColor = Color.RoyalBlue;
             });
         }
-
-        private GameUser _gameUser;
-
-        public void Init(GameUser user, int idx, int cidx)
+        
+        public void Init(int idx, int cidx)
         {
-            _gameUser = user;
             ClassIndex = idx;
             CharacterIndex = cidx;
 
@@ -87,7 +83,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
         {
             if (ClassIndex == -1)
             {
-                _chooseCharacterBar.Init(_gameUser, this);
+                _chooseCharacterBar.Init(this);
 
                 ParentSprite.AddChild(_chooseCharacterBar);
             }

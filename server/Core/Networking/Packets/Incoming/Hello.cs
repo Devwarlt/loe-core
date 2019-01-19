@@ -11,7 +11,12 @@ namespace LoESoft.Server.Core.Networking.Packets.Incoming
 
         public override PacketID PacketID => PacketID.HELLO;
 
-        public override void Handle(Client client)
+        public override void Read(NetworkReader reader)
+        {
+            CharacterIndex = reader.ReadInt32();
+        }
+
+        public override void Handle(NetworkClient client)
         {
             if (client.Account.Id == -1)
             {

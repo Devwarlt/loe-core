@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Core.GUI.GameDialog;
+﻿using LoESoft.Client.Core.GUI.GameDialog;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,7 +11,6 @@ namespace LoESoft.Client.Core.GUI.MainScreen
         public Queue<Action> ToggleActions;
 
         public bool LoggedIn { get; set; }
-        public GameUser GameUser { get; set; }
         public InternalClock Clock { get; set; }
 
         private SetGameDialogDelegate SetDialog { get; set; }
@@ -188,7 +186,7 @@ namespace LoESoft.Client.Core.GUI.MainScreen
 
             try
             {
-                using (var game = new GameApplication(GameUser))
+                using (var game = new GameApplication())
                     game.Run();
             }
             catch (Exception ex) { App.Error(ex); }

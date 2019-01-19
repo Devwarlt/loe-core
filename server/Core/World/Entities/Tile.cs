@@ -2,7 +2,7 @@
 
 namespace LoESoft.Server.Core.World.Entities
 {
-    public class Tile : IUpdatable
+    public class Tile : Comparable, IUpdatable
     {
         public int UpdateCount { get; set; }
 

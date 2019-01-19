@@ -1,5 +1,4 @@
-﻿using LoESoft.Client.Core.Client;
-using LoESoft.Client.Drawing;
+﻿using LoESoft.Client.Drawing;
 using LoESoft.Client.Drawing.Sprites.Forms;
 using LoESoft.Client.Drawing.Sprites.Text;
 using Newtonsoft.Json;
@@ -25,14 +24,12 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
             _unlockedClasses = new List<int>();
         }
 
-        private GameUser _gameUser;
-
-        public void Init(GameUser user, string result)
+        public void Init(string result)
         {
-            _gameUser = user;
-
             _chooseACharacter = new TextDisplay(20, 0, "Choose a character", 24, new RGBColor(105, 225, 125));
             _chooseACharacter.Outline = true;
+
+            App.Warn(result);
 
             var data = JsonConvert.DeserializeObject<UnlockedCharacterData>(result);
 
@@ -42,7 +39,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
                 int x = (i * 250) + (15 * i) + 5;
                 var character = new CharacterRect(x, 20);
 
-                character.Init(user, idx, i);
+                character.Init(idx, i);
 
                 _classView.Add(character);
                 AddChild(character);
@@ -60,7 +57,7 @@ namespace LoESoft.Client.Core.Screens.TitleScreen.CharacterSelection
 
         public void ReloadView(int index, int classType)
         {
-            _classView[index].Init(_gameUser, classType, index);
+            _classView[index].Init(classType, index);
         }
     }
 }
