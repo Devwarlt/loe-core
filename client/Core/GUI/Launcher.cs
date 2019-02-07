@@ -14,7 +14,7 @@ namespace LoESoft.Client.Core.GUI
 
         private void Launcher_Load(object sender, EventArgs e)
         {
-            NetworkClient.Listen();
+            NetworkClient.Connect();
 
             Display += OnDisplay;
 

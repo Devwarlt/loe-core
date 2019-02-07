@@ -10,15 +10,16 @@ namespace LoESoft.Client
 {
     public class GameApplication : Game
     {
-        public static int WIDTH { get; set; } = 1200;
-        public static int HEIGHT { get; set; } = 900;
+        public const int WIDTH = 1200;
+        public const int HEIGHT = 900;
 
+        public static bool Initialized { get; set; }
         public static GameScreen GameScreen { get; set; }
         public static CharacterScreen CharacterScreen { get; set; }
 
         protected GraphicsDeviceManager GraphicsDeviceManager { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
-        
+
         public GameApplication()
         {
             GraphicsDeviceManager = new GraphicsDeviceManager(this)
@@ -28,14 +29,9 @@ namespace LoESoft.Client
             };
 
             Window.AllowUserResizing = false;
-            Window.ClientSizeChanged += Window_ClientSizeChanged;
-            
+
             IsMouseVisible = true;
             Content.RootDirectory = "Content";
-        }
-
-        private void Window_ClientSizeChanged(object sender, System.EventArgs e)
-        {
         }
 
         protected override void Initialize()

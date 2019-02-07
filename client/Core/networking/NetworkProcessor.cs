@@ -7,11 +7,13 @@ namespace LoESoft.Client.Core.Networking
     public class NetworkProcessor
     {
         public delegate void packetProcessed(byte[] buffer);
+
         public packetProcessed OnPacketProcessed { get; set; }
 
         public void ProcessPacket(OutgoingPacket packet)
         {
             var ms = new MemoryStream();
+
             using (var wtr = new NetworkWriter(ms))
             {
                 packet.Write(wtr);

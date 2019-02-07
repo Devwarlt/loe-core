@@ -20,7 +20,9 @@ namespace LoESoft.Client.Core.Screens
         private Texture2D TextureToDraw { get; set; }
         private Queue<Texture2D> TexturesToDisplay { get; set; }
 
-        public SplashScreen() { }
+        public SplashScreen()
+        {
+        }
 
         public override void OnScreenCreate()
         {
@@ -49,8 +51,9 @@ namespace LoESoft.Client.Core.Screens
                     loading.Enqueue(delegate { XmlLibrary.Init(); });
                     loading.Enqueue(delegate { AudioManager.Init(); });
 
-                    ScreenManager.DispatchScreen(new LoadingScreen(loading, 
+                    ScreenManager.DispatchScreen(new LoadingScreen(loading,
                         GameApplication.CharacterScreen = new CharacterScreen()));
+
                     return;
                 }
 

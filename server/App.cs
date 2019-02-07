@@ -28,7 +28,7 @@ namespace LoESoft.Server
         private static Logger Log => LogManager.GetLogger(Name);
 
         private static string RollbarId => "ca02c5d9fb834c33880af31a6407fa18";
-        
+
         // Database
         public static Database Database { get; set; }
 
@@ -48,7 +48,7 @@ namespace LoESoft.Server
             var developerFile = new FileTarget()
             {
                 Name = "developer-file",
-                FileName = "../../../logs/server/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
+                FileName = "../../../logs/server/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy}.txt",
                 Layout = @"[${date:format=HH\:mm\:ss}] [${level}] ${message} ${exception}"
             };
             config.AddTarget(developerLog);

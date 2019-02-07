@@ -15,10 +15,15 @@ namespace LoESoft.Client.Assets.Xml
         {
             App.Info("Loading embedded files...");
 
-            LoadContents();
-            DisplayFormattedAmount(ObjectsXml, "object", "objects");
-            DisplayFormattedAmount(ItemsXml, "item", "items");
-            DisplayFormattedAmount(TilesXml, "tile", "tiles");
+            if (!GameApplication.Initialized)
+            {
+                LoadContents();
+                DisplayFormattedAmount(ObjectsXml, "object", "objects");
+                DisplayFormattedAmount(ItemsXml, "item", "items");
+                DisplayFormattedAmount(TilesXml, "tile", "tiles");
+
+                GameApplication.Initialized = true;
+            }
 
             App.Info("Loading embedded files... OK!");
         }

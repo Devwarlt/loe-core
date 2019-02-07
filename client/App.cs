@@ -4,7 +4,6 @@ using NLog;
 using NLog.Config;
 using NLog.Targets;
 using Rollbar;
-using System.IO;
 
 #endif
 
@@ -38,6 +37,7 @@ namespace LoESoft.Client
             $"{Assembly.GetExecutingAssembly().GetName().Version}".Length - 2);
 
 #if DEBUG
+
         // Log
         private static Logger Log => LogManager.GetLogger(Name);
 
@@ -71,7 +71,7 @@ namespace LoESoft.Client
             var developerFile = new FileTarget()
             {
                 Name = "developer-file",
-                FileName = "../../../../../logs/client/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy HH.mm.ss}.txt",
+                FileName = "../../../../../logs/client/Build ${assembly-version}/${level}/${date:format=dd-MM-yyyy}.txt",
                 Layout = @"[${date:format=HH\:mm\:ss}] [${level}] ${message} ${exception}"
             };
             config.AddTarget(developerLog);

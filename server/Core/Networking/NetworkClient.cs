@@ -5,9 +5,7 @@ using LoESoft.Server.Core.World;
 using LoESoft.Server.Core.World.Entities.Player;
 using System;
 using System.IO;
-using System.Net;
 using System.Net.Sockets;
-using System.Text;
 
 namespace LoESoft.Server.Core.Networking
 {
@@ -32,11 +30,12 @@ namespace LoESoft.Server.Core.Networking
         {
             ClientSocket = skt;
             Manager = manager;
-            
+
             Disposed = false;
         }
 
         #region send/recieve
+
         public void Start()
         {
             beginRecieve();
@@ -53,7 +52,8 @@ namespace LoESoft.Server.Core.Networking
                 return;
             }
 
-            ClientSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, onPacketSend, ClientSocket);
+            try { ClientSocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, onPacketSend, ClientSocket); }
+            catch { Disconnect(); }
         }
 
         private void onPacketSend(IAsyncResult result)
@@ -94,7 +94,8 @@ namespace LoESoft.Server.Core.Networking
 
                 packet.Handle(this);
                 beginRecieve();
-            } catch
+            }
+            catch
             {
                 if (!ClientSocket.Connected)
                     Disconnect();
@@ -110,6 +111,7 @@ namespace LoESoft.Server.Core.Networking
                     OnPacketProcessed = onPacketProcessed
                 });
         }
+
         #endregion send/recieve
 
         public void Disconnect()
@@ -117,7 +119,7 @@ namespace LoESoft.Server.Core.Networking
             Disposed = true;
             ClientSocket.Disconnect(false);
             ClientSocket.Dispose();
-            Player.Dispose();
+            Player?.Dispose();
         }
     }
 }

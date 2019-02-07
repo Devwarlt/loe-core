@@ -7,7 +7,11 @@ using LoESoft.Client.Core.Networking.Packets.Outgoing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Concurrent;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LoESoft.Client.Core.Game.User
 {
@@ -26,13 +30,63 @@ namespace LoESoft.Client.Core.Game.User
 
             HUD = new PlayerHUD();
             Player = new Player(Info.ClassId);
-            
+
             ObjectId = Info.ObjectId;
             Player.ObjectId = Info.ObjectId;
             CanMove = true;
 
+            // for debug purposes
+            var moveTask = new Task(() => MoveMonitor(), TaskCreationOptions.LongRunning);
+            moveTask.ContinueWith(mt => App.Error(mt.Exception.InnerException),
+                TaskContinuationOptions.OnlyOnFaulted);
+            moveTask.Start();
+
             Player.Init();
             HUD.InfoTable.ReloadInventoryPlayer(this);
+        }
+
+        public int MoveEntryId = 0;
+
+        private enum MoveState
+        {
+            Awaiting,
+            Complete
+        }
+
+        private ConcurrentDictionary<int, (MoveState state, DateTime get, DateTime set)> MoveEntries
+            = new ConcurrentDictionary<int, (MoveState state, DateTime get, DateTime set)>();
+
+        private void AddMoveEntry()
+            => MoveEntries.TryAdd(Interlocked.Increment(ref MoveEntryId),
+                (MoveState.Awaiting, DateTime.Now, default));
+
+        private void UpdateMoveEntry()
+            => MoveEntries[MoveEntryId] = (MoveState.Complete, MoveEntries[MoveEntryId].get, DateTime.Now);
+
+        private string GetMoveEntryElapsedTime()
+            => $"- Response Time: {(MoveEntries[MoveEntryId].set - MoveEntries[MoveEntryId].get).TotalMilliseconds} ms";
+
+        private async void MoveMonitor()
+        {
+            App.Warn($"- Can move? {CanMove}");
+            App.Warn($"- Is moving? {Player.IsMoving}");
+            App.Warn($"- Total move entries: {MoveEntries.Keys.Count}");
+
+            if (MoveEntries.Keys.Count != 0)
+            {
+                var (state, get, set) = MoveEntries[MoveEntryId];
+
+                App.Warn($"- Move ID {MoveEntryId}: {state} " +
+                    $"- get: {get.ToString("MM/dd/yyyy hh:mm tt")}" +
+                    $"{(set == default ? "" : $" - set: {set.ToString("MM/dd/yyyy hh:mm tt")}")}");
+
+                if (set != default)
+                    App.Warn(GetMoveEntryElapsedTime());
+            }
+
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            MoveMonitor();
         }
 
         public void ImportStat(Stat[] stats)
@@ -43,7 +97,7 @@ namespace LoESoft.Client.Core.Game.User
             if (stats.ToList().Exists(_ => _.StatType >= StatType.INVENTORY_0 && _.StatType <= StatType.INVENTORY_31))
                 HUD.InfoTable.ReloadInventory(Player.Inventory);
         }
-        
+
         public bool CanMove { get; set; }
 
         private void HandlePlayerInput()
@@ -72,6 +126,8 @@ namespace LoESoft.Client.Core.Game.User
             Player.DistinationY = y;
 
             CanMove = true;
+
+            UpdateMoveEntry();
         }
 
         public void Update(GameTime gameTime)
@@ -93,7 +149,10 @@ namespace LoESoft.Client.Core.Game.User
             HUD.DrawMinimap(spriteBatch, (int)Player.X, (int)Player.Y);
         }
 
-        private void SendMovePacket() => 
+        private void SendMovePacket()
+        {
+            AddMoveEntry();
             NetworkClient.SendPacket(new ClientMove() { Direction = (int)Player.CurrentDirection });
+        }
     }
 }
